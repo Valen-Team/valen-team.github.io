@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "动态与发布",
+    "description": "The title for the blog used in SEO"
+  },
+  "description": {
+    "message": "万澜团队的模型、评测工具、数据集与研究进展。",
+    "description": "The description for the blog used in SEO"
+  },
+  "sidebar.title": {
+    "message": "近期动态",
+    "description": "The label for the left sidebar"
+  }
+}

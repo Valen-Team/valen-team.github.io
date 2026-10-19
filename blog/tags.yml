@@ -1,0 +1,17 @@
+release:
+  permalink: /release
+  label: Release
+  description: New releases from Valen Team
+models:
+  permalink: /models
+  label: Models
+  description: Open decision models
+tooling:
+  permalink: /tooling
+  label: Tooling
+  description: Evaluation and developer tools
+data:
+  permalink: /data
+  label: Data
+  description: Benchmarks and datasets
+

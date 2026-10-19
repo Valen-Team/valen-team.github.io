@@ -1,0 +1,29 @@
+/* Valen v0.2.0 — Infima adapter. Page layout stays in the consumer. */
+:root {
+  --ifm-color-primary:var(--v-color-action);
+  --ifm-color-primary-dark:var(--v-color-blue-700);
+  --ifm-color-primary-darker:var(--v-color-blue-700);
+  --ifm-color-primary-darkest:var(--v-color-blue-900);
+  --ifm-color-primary-light:var(--v-color-blue-500);
+  --ifm-color-primary-lighter:var(--v-color-blue-500);
+  --ifm-color-primary-lightest:var(--v-color-cyan-500);
+  --ifm-background-color:var(--v-color-surface);
+  --ifm-font-color-base:var(--v-color-ink);
+  --ifm-heading-color:var(--v-color-ink);
+  --ifm-font-family-base:var(--v-font-body);
+  --ifm-font-family-monospace:var(--v-font-mono);
+  --ifm-heading-font-weight:500;
+  --ifm-line-height-base:1.75;
+  --ifm-code-font-size:88%;
+  --ifm-navbar-height:80px;
+  --ifm-navbar-shadow:none;
+  --ifm-global-radius:var(--v-radius-control);
+  --ifm-link-hover-decoration:none;
+  --ifm-footer-background-color:var(--v-color-paper);
+  --ifm-footer-color:var(--v-color-muted);
+  --ifm-menu-color:var(--v-color-muted);
+  --ifm-menu-color-active:var(--v-color-action);
+  --ifm-menu-color-background-active:var(--v-color-tint);
+  --ifm-toc-border-color:var(--v-color-line);
+  --docusaurus-highlighted-code-line-bg:var(--v-color-tint);
+}

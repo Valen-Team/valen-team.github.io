@@ -1,0 +1,34 @@
+{
+  "title": {
+    "message": "VALEN",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "万澜团队",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Docs": {
+    "message": "文档",
+    "description": "Navbar item with label Docs"
+  },
+  "item.label.Projects": {
+    "message": "项目",
+    "description": "Navbar item with label Projects"
+  },
+  "item.label.News": {
+    "message": "动态",
+    "description": "Navbar item with label News"
+  },
+  "item.label.About": {
+    "message": "关于",
+    "description": "Navbar item with label About"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  },
+  "item.label.Hugging Face": {
+    "message": "Hugging Face",
+    "description": "Navbar item with label Hugging Face"
+  }
+}

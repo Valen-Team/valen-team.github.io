@@ -1,0 +1,17 @@
+release:
+  permalink: /release
+  label: 发布
+  description: 万澜团队的新版本
+models:
+  permalink: /models
+  label: 模型
+  description: 开放决策模型
+tooling:
+  permalink: /tooling
+  label: 工具
+  description: 评测与开发工具
+data:
+  permalink: /data
+  label: 数据
+  description: Benchmark 与数据集
+

@@ -1,0 +1,23 @@
+{
+  "name": "@valen-team/design-system",
+  "version": "0.2.0",
+  "source": "Valen-Team/design-system",
+  "files": {
+    "adapters/docusaurus.css": "7be54b2b1f8a453fe3dc7cd125a2395dec6417a09b8784fcfedf4bfed19a9295",
+    "assets/brand/EDITING.md": "d96c3f54048318811ae8abdee6a575f6c7892b76f3c0c4252d38ae7907b246b0",
+    "assets/brand/SOURCES.md": "3d6a26d892cfe1977f112d0e406077f3a126af30d22bb2d09c80e6ff490152e2",
+    "assets/brand/jevalkit-dark.svg": "bf8b50e60ede696ac831c1324c553c5040dd7f9504a48bea352b59755dd33cb9",
+    "assets/brand/jevalkit-light.svg": "c79ea4550efe5ae8c32124d59be0cffbd8e297f23d85526b0a13fe72bb1c3760",
+    "assets/brand/valen-mark-white.png": "657c4be26bbe1a08e450afef47d1859acd771cb049a0847ede05b621865d2583",
+    "assets/brand/valen-mark.png": "82b3dd288ddbd2f83bdcbaf851187dec224d08643f05080e16b0afc5a2821b2d",
+    "assets/fonts/OFL.txt": "56c64fa0f5ec4b0b627546ef7f80be19ce6779143e079d912fb7fc87df694d6a",
+    "assets/fonts/dmsans.woff2": "9fea608a947e67020c33cad9a6fe3d60c54119dfb8cff87768a8117a15ed7543",
+    "assets/fonts/spacegrotesk.woff2": "0640890476fc1198ab4de571fb658de443c4d85b66466ec09534a8737ab1ce9d",
+    "assets/illustrations/decision-orbits.svg": "ec99ae70662c2bd31ae25e66b1592fba8abe7b4bf1432a9450cb3d37eedd8575",
+    "styles/components.css": "242df59683b49967e036a4547db4d6c901b0472f06f195ccc7ec56e712b7b7c3",
+    "styles/editorial.css": "ea3ddb413b069097a66fa02c40692ea026895b51f479950295a0fbea81c42b60",
+    "styles/fonts.css": "4a86328b6fd4dc79f43adb2afdb17e3fa5bf274cbb89fdbc6f085c07cc1ffa33",
+    "styles/tokens.css": "6e3144de008c7be99a5cf40d2e9b8e302aca48974338e489493aef4ec22db85f",
+    "tokens/tokens.json": "1f3f7bdd8b2d0b5790ecd6d581ecf8403b7ac1078e3c040fc57978e8b0d07227"
+  }
+}

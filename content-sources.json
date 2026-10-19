@@ -1,0 +1,133 @@
+{
+  "retrieved": "2026-10-19",
+  "files": [
+    {
+      "repository": "Valen-Team/Valen",
+      "path": "docs/architecture.md",
+      "blobSha": "5682c68b2e684baeef793151c412052a49077e91",
+      "destination": "docs/valen/architecture.md",
+      "title": "Model architecture",
+      "locale": "en"
+    },
+    {
+      "repository": "Valen-Team/Valen",
+      "path": "docs/data-format.md",
+      "blobSha": "ae6a98530274ff08288f3c6474d22656b7d11963",
+      "destination": "docs/valen/data-format.md",
+      "title": "Data format",
+      "locale": "en"
+    },
+    {
+      "repository": "Valen-Team/Valen",
+      "path": "docs/evaluation.md",
+      "blobSha": "4bcf8c4dfdf4b7561e59bb0a42651b44cf8e20db",
+      "destination": "docs/valen/evaluation.md",
+      "title": "Evaluation",
+      "locale": "en"
+    },
+    {
+      "repository": "Valen-Team/Valen",
+      "path": "docs/configuration.md",
+      "blobSha": "c8c0ccda00ef06c1c2f0bcf9b01b293ea81a45e9",
+      "destination": "docs/valen/configuration.md",
+      "title": "Configuration",
+      "locale": "en"
+    },
+    {
+      "repository": "Valen-Team/Valen",
+      "path": "docs/qwen-shared-state.md",
+      "blobSha": "69f925efa15aa467757c5ad55c8a0667241b262c",
+      "destination": "docs/valen/qwen-shared-state.md",
+      "title": "Shared-state execution",
+      "locale": "en"
+    },
+    {
+      "repository": "Valen-Team/JevalKit",
+      "path": "docs/quickstart.md",
+      "blobSha": "a79358c2000bf37b1642725ffdbaa2964301d2c1",
+      "destination": "docs/jevalkit/quickstart.md",
+      "title": "Run your first evaluation",
+      "locale": "en"
+    },
+    {
+      "repository": "Valen-Team/JevalKit",
+      "path": "docs/benchmarks.md",
+      "blobSha": "f3f8916ef5df89d59982e04fa3fb476bc87cf4d7",
+      "destination": "docs/jevalkit/benchmarks.md",
+      "title": "Benchmark protocols",
+      "locale": "en"
+    },
+    {
+      "repository": "Valen-Team/JevalKit",
+      "path": "docs/models.md",
+      "blobSha": "e6466defd004f55bbd547b0925e560a82fe1ec84",
+      "destination": "docs/jevalkit/models.md",
+      "title": "Model integrations",
+      "locale": "en"
+    },
+    {
+      "repository": "Valen-Team/Valen",
+      "path": "docs/architecture_zh.md",
+      "blobSha": "7940a90289aa7849da24638d2164e8681127d24a",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs/current/valen/architecture.md",
+      "title": "模型架构",
+      "locale": "zh-Hans"
+    },
+    {
+      "repository": "Valen-Team/Valen",
+      "path": "docs/data-format_zh.md",
+      "blobSha": "1477501b428f9ce4e7c2da1885dd34a84d867201",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs/current/valen/data-format.md",
+      "title": "数据格式",
+      "locale": "zh-Hans"
+    },
+    {
+      "repository": "Valen-Team/Valen",
+      "path": "docs/evaluation_zh.md",
+      "blobSha": "1d74d8dd69cc06cfe4b344567bcfeb818252fed6",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs/current/valen/evaluation.md",
+      "title": "评测指南",
+      "locale": "zh-Hans"
+    },
+    {
+      "repository": "Valen-Team/Valen",
+      "path": "docs/configuration_zh.md",
+      "blobSha": "a954175c3bc33787448edacc443d96ff35b77ade",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs/current/valen/configuration.md",
+      "title": "配置参考",
+      "locale": "zh-Hans"
+    },
+    {
+      "repository": "Valen-Team/Valen",
+      "path": "docs/qwen-shared-state_zh.md",
+      "blobSha": "6fda30caa128255889909f007777aa9ab3087df2",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs/current/valen/qwen-shared-state.md",
+      "title": "共享状态执行",
+      "locale": "zh-Hans"
+    },
+    {
+      "repository": "Valen-Team/JevalKit",
+      "path": "docs/quickstart_zh-CN.md",
+      "blobSha": "41e0dddcfa51c372380d628b9b19d1cd2774e434",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs/current/jevalkit/quickstart.md",
+      "title": "运行首次评测",
+      "locale": "zh-Hans"
+    },
+    {
+      "repository": "Valen-Team/JevalKit",
+      "path": "docs/models_zh-CN.md",
+      "blobSha": "befd188e5747dce01f7c0dcba646ef357b26dfe7",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs/current/jevalkit/models.md",
+      "title": "接入模型",
+      "locale": "zh-Hans"
+    },
+    {
+      "repository": "Valen-Team/JevalKit",
+      "path": "docs/benchmarks_zh-CN.md",
+      "blobSha": "774476fee1933e9f1d16969be785191447c8be7a",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs/current/jevalkit/benchmarks.md",
+      "title": "Benchmark 评分协议",
+      "locale": "zh-Hans"
+    }
+  ]
+}

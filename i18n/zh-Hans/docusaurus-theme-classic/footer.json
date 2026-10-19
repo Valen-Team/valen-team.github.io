@@ -1,0 +1,54 @@
+{
+  "link.title.Build": {
+    "message": "构建",
+    "description": "The title of the footer links column with title=Build in the footer"
+  },
+  "link.title.Explore": {
+    "message": "探索",
+    "description": "The title of the footer links column with title=Explore in the footer"
+  },
+  "link.title.Connect": {
+    "message": "参与",
+    "description": "The title of the footer links column with title=Connect in the footer"
+  },
+  "link.item.label.Documentation": {
+    "message": "文档中心",
+    "description": "The label of footer link with label=Documentation linking to /docs/"
+  },
+  "link.item.label.Projects": {
+    "message": "项目",
+    "description": "The label of footer link with label=Projects linking to /projects/"
+  },
+  "link.item.label.Leaderboard": {
+    "message": "排行榜",
+    "description": "The label of footer link with label=Leaderboard linking to https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard"
+  },
+  "link.item.label.News": {
+    "message": "动态",
+    "description": "The label of footer link with label=News linking to /news/"
+  },
+  "link.item.label.Models & datasets": {
+    "message": "模型与数据",
+    "description": "The label of footer link with label=Models & datasets linking to https://huggingface.co/Valen-Team"
+  },
+  "link.item.label.About Valen Team": {
+    "message": "关于万澜",
+    "description": "The label of footer link with label=About Valen Team linking to /about/"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/Valen-Team"
+  },
+  "link.item.label.Contribute": {
+    "message": "参与贡献",
+    "description": "The label of footer link with label=Contribute linking to https://github.com/Valen-Team/Valen/issues"
+  },
+  "link.item.label.RSS": {
+    "message": "RSS",
+    "description": "The label of footer link with label=RSS linking to pathname:///news/rss.xml"
+  },
+  "copyright": {
+    "message": "© 2026 万澜团队 · Valen Team。快速决策，持续进化。",
+    "description": "The footer copyright"
+  }
+}

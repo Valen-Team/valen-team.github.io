@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 510" fill="none" role="img" aria-labelledby="title"><title id="title">Valen decision wave with orbital paths</title><defs>
+<linearGradient id="front" x1="152" y1="180" x2="425" y2="345" gradientUnits="userSpaceOnUse"><stop stop-color="#329BD0"/><stop offset=".52" stop-color="#176EAF"/><stop offset="1" stop-color="#123F70"/></linearGradient>
+<linearGradient id="back" x1="300" y1="100" x2="380" y2="290" gradientUnits="userSpaceOnUse"><stop stop-color="#A6D1E8"/><stop offset="1" stop-color="#4B9AC9"/></linearGradient>
+<pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0v28" stroke="#195F9D" stroke-opacity=".06"/></pattern>
+<filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="20" stdDeviation="12" flood-color="#123F70" flood-opacity=".16"/></filter></defs>
+<rect x="10" y="10" width="540" height="490" fill="url(#grid)"/>
+<circle cx="280" cy="245" r="183" stroke="#83A7C1" stroke-width=".8" stroke-dasharray="3 7"/>
+<circle cx="280" cy="245" r="142" stroke="#B5C9D8" stroke-width=".7"/>
+<ellipse cx="280" cy="245" rx="228" ry="76" transform="rotate(-29 280 245)" stroke="#83A7C1" stroke-width=".8"/>
+<ellipse cx="280" cy="245" rx="228" ry="76" transform="rotate(35 280 245)" stroke="#B5C9D8" stroke-width=".7"/>
+<path d="M40 245h67m346 0h67M280 15v47m0 366v55" stroke="#83A7C1" stroke-dasharray="3 4"/>
+<g filter="url(#shadow)" transform="rotate(-2 291 255)">
+<path d="M133 215c62-21 104 1 139 64 21 38 38 69 53 40 41-82 97-76 127-139-4 57-29 90-67 125-46 43-63 100-100 82-29-15-47-64-76-102-23-31-47-54-76-70Z" fill="url(#front)"/>
+<path d="M276 281c22-74 53-103 105-129 34-17 58-35 69-66-3 59-32 85-66 105-50 28-79 45-108 90Z" fill="url(#back)"/>
+<path d="M285 298c33-63 66-83 110-104 23-11 36-19 46-30-15 41-35 53-69 69-34 16-59 35-87 65Z" fill="#197DB7"/>
+<path d="M133 215c68-19 107 10 143 73" stroke="#C1E1F0" stroke-opacity=".7"/></g>
+<circle cx="118" cy="184" r="4" fill="#195F9D"/><circle cx="457" cy="189" r="4" fill="#195F9D"/><circle cx="280" cy="428" r="4" fill="#195F9D"/>
+<path d="m112 178-28-24H46m417 40 25 22h30" stroke="#83A7C1" stroke-width=".8"/>
+<text x="37" y="144" fill="#607281" font-size="10" font-family="monospace">INPUT</text><text x="432" y="233" fill="#607281" font-size="10" font-family="monospace">DECISION</text></svg>

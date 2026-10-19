@@ -1,0 +1,14 @@
+{
+  "Valen-Team/Valen/docs/architecture.md": [
+    "```mermaid\nflowchart LR\n    A[JSONL record] --> B[read_jsonl / validate_record]\n    B --> C[Compiler.compile]\n    C --> D[CompiledState / Question / Branch]\n    D --> E[ValenQwen.forward]\n    E --> F[Candidate logits]\n    F --> G[SFT or RLCD loss]\n    F --> H[answer / question_metrics]\n```"
+  ],
+  "Valen-Team/Valen/docs/qwen-shared-state.md": [
+    "```mermaid\nflowchart TD\n    S[State: text, image or video] --> I[State + all questions and candidates]\n    Q[Question schemas] --> I\n    I --> B[One Qwen3.5 backbone forward]\n    B --> C[Shared state hidden states]\n    B --> R[Instruction, candidate and Decision readouts per question]\n    C --> H[Shared Mixer head]\n    R --> H\n    H --> P[Candidate logits and probabilities per question]\n```"
+  ],
+  "Valen-Team/Valen/docs/architecture_zh.md": [
+    "```mermaid\nflowchart LR\n    A[JSONL record] --> B[read_jsonl / validate_record]\n    B --> C[Compiler.compile]\n    C --> D[CompiledState / Question / Branch]\n    D --> E[ValenQwen.forward]\n    E --> F[Candidate logits]\n    F --> G[SFT or RLCD loss]\n    F --> H[answer / question_metrics]\n```"
+  ],
+  "Valen-Team/Valen/docs/qwen-shared-state_zh.md": [
+    "```mermaid\nflowchart TD\n    S[State：文本、图像或视频] --> I[State + 全部问题与候选]\n    Q[问题 schema] --> I\n    I --> B[一次 Qwen3.5 backbone 前向]\n    B --> C[共享 state 隐状态]\n    B --> R[各题的指令、候选与 Decision 读出]\n    C --> H[共享 Mixer 头]\n    R --> H\n    H --> P[各题的候选 logits 与概率]\n```"
+  ]
+}

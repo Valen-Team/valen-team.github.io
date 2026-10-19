@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.main.category.Valen": {
+    "message": "Valen",
+    "description": "The label for category 'Valen' in sidebar 'main'"
+  },
+  "sidebar.main.category.JevalKit": {
+    "message": "JevalKit",
+    "description": "The label for category 'JevalKit' in sidebar 'main'"
+  }
+}

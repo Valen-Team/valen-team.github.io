@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="150" viewBox="0 0 900 150" role="img" aria-labelledby="title desc">
+  <title id="title">JevalKit</title>
+  <desc id="desc">A decision evaluation toolkit: probability bars and a verification check beside the JevalKit wordmark.</desc>
+  <g transform="translate(186 24)">
+    <rect x="1.5" y="1.5" width="93" height="93" rx="23" fill="#143D35" stroke="#5DD7BE" stroke-width="3"/>
+    <g fill="#5DD7BE">
+      <circle cx="22" cy="27" r="4"/><rect x="34" y="23" width="40" height="8" rx="4"/>
+      <circle cx="22" cy="47" r="4"/><rect x="34" y="43" width="27" height="8" rx="4" opacity=".7"/>
+      <circle cx="22" cy="67" r="4"/><rect x="34" y="63" width="16" height="8" rx="4" opacity=".45"/>
+      <circle cx="79" cy="79" r="18"/>
+    </g>
+    <path d="m71 79 5.5 5.5L87 73" fill="none" stroke="#143D35" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="123" y="78" fill="#EDF7F3" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="80" font-weight="750" letter-spacing="-3">JevalKit</text>
+  </g>
+</svg>

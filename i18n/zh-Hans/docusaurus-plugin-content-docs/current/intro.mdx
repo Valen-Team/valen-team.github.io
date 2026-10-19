@@ -1,0 +1,42 @@
+---
+title: 文档中心
+slug: /
+sidebar_label: 从这里开始
+description: Valen 模型、JevalKit 评测与多模态决策 Benchmark 的使用指南。
+---
+
+import Link from '@docusaurus/Link';
+
+# 使用万澜团队的开放项目
+
+面向快速多模态决策的开放模型、评测工具与数据。选择一个项目，开始构建。
+
+<div className="doc-cards">
+<Link className="doc-card" to="/docs/valen/"><strong>Valen ↗</strong><p>运行多模态决策模型。理解文本、图片与视频，输出结构化的决策概率。</p></Link>
+<Link className="doc-card" to="/docs/jevalkit/"><strong>JevalKit ↗</strong><p>通过统一接口、即用数据集与可复现评分协议，评测和比较决策模型。</p></Link>
+</div>
+
+## 找到你的起点
+
+| 我想要…… | 从这里开始 |
+| --- | --- |
+| 在本地运行 Valen | [本地推理入门](/zh-Hans/docs/valen/quickstart/) |
+| 调用托管的 Valen 模型 | [API 入门](/zh-Hans/docs/valen/api/) |
+| 理解输入数据格式 | [数据格式](/zh-Hans/docs/valen/data-format/) |
+| 评测决策模型 | [运行首次评测](/zh-Hans/docs/jevalkit/quickstart/) |
+| 将模型接入 JevalKit | [接入模型](/zh-Hans/docs/jevalkit/models/) |
+| 理解 Benchmark 分数 | [评分协议](/zh-Hans/docs/jevalkit/benchmarks/) |
+| 查找模型权重与数据 | [资源](/zh-Hans/docs/resources/) |
+
+## 统一的决策接口
+
+**文本、图像与视频 → 任务要求与候选项 → 概率。**
+
+Valen 支持三类问题：**Choice** 用于命名候选项，**Noul** 用于真假判断，**Score** 用于有序等级。JevalKit 按照各 Benchmark 的既定协议评测输出。
+
+## 探索开放生态
+
+[项目](/zh-Hans/projects/) · [动态](/zh-Hans/news/) · [GitHub](https://github.com/Valen-Team) · [Hugging Face](https://huggingface.co/Valen-Team)
+
+欢迎贡献模型、数据、评测与文档，详见[贡献指南](/zh-Hans/docs/contributing/)。
+

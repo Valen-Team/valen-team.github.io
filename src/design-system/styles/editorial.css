@@ -1,0 +1,13 @@
+/* Marketing expression: retained from the original Valen homepage. */
+.v-editorial-title {font-family:var(--v-font-body);font-weight:600;letter-spacing:-.055em;line-height:1.04;}
+.v-editorial-accent {font-family:var(--v-font-editorial);font-style:italic;font-weight:400;color:var(--v-color-editorial);letter-spacing:-.045em;}
+.v-orbit-figure {position:relative;}
+.v-orbit-figure>img {width:100%;height:auto;display:block;}
+.v-orbit-label {position:absolute;display:flex;align-items:center;gap:10px;padding:12px 15px;border:1px solid var(--v-color-line);border-radius:var(--v-radius-small);background:var(--v-color-surface);color:var(--v-color-ink);font-size:12px;box-shadow:0 6px 18px #18364d05;}
+.v-orbit-label small {display:block;color:var(--v-color-muted);font:9px/1.5 var(--v-font-mono);letter-spacing:.6px;margin-top:5px;}
+.v-orbit-label--input {top:19%;left:2%;}
+.v-orbit-label--output {bottom:14%;right:0;}
+.v-orbit-icon {background:var(--v-color-tint);color:var(--v-color-action);font-size:22px;line-height:1;padding:8px;}
+html[lang^='zh'] .v-editorial-title {letter-spacing:-.025em;line-height:1.22;}
+html[lang^='zh'] .v-editorial-accent {font-style:normal;}
+@media(max-width:700px){.v-orbit-label{padding:10px 12px;font-size:11px}.v-orbit-label small{font-size:8px}}
