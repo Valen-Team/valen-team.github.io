@@ -13,7 +13,7 @@ function field(frontmatter, name) {
 }
 for (const locale of ['en', 'zh-Hans']) {
   const prefix = locale === 'en' ? '' : '/zh-Hans';
-  for (const type of ['docs', 'blog']) {
+  for (const type of ['docs']) {
     const dir = join(root, locale === 'en' ? type : `i18n/zh-Hans/docusaurus-plugin-content-${type === 'docs' ? 'docs/current' : 'blog'}`);
     for (const file of walk(dir)) {
       const raw = readFileSync(file, 'utf8');
@@ -27,15 +27,7 @@ for (const locale of ['en', 'zh-Hans']) {
       entries.push({title, path, locale, section, text});
     }
   }
-  for (const [path,title,text] of locale === 'en' ? [
-    ['/projects/', 'Projects', 'Valen decision models JevalKit toolkit VisualDecisionBench datasets'],
-    ['/benchmarks/', 'VisualDecisionBench', 'Image video multimodal decision evaluation dataset benchmark'],
-    ['/about/', 'About Valen Team', 'Fast Decisions Continuous Evolution multimodal open source research Leigh Van Valen Red Queen'],
-  ] : [
-    ['/projects/', '项目', 'Valen 决策模型 JevalKit 评测工具 VisualDecisionBench 数据集'],
-    ['/benchmarks/', 'VisualDecisionBench', '图像 视频 多模态 决策 评测 数据集 Benchmark'],
-    ['/about/', '关于万澜', '快速决策 持续进化 多模态 开源 研究 红皇后'],
-  ]) entries.push({title,path:prefix+path,locale,section:locale === 'en' ? 'Explore' : '探索',text});
+
 }
 writeFileSync(join(root,'static/search-index.json'), JSON.stringify(entries));
 console.log(`Generated local search index: ${entries.length} pages, 2 languages.`);

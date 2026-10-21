@@ -39,3 +39,5 @@ The same state can be shared by multiple questions. Read the [data format](/docs
 
 [Source repository](https://github.com/Valen-Team/Valen) · [Cookbook](https://github.com/Valen-Team/Valen/tree/main/cookbook) · [Try the demo](https://huggingface.co/spaces/yuhangzang/Valen-Preview-0923)
 
+
+The hosted API names true/false questions `predicate` and returns `probability`; local inference and evaluation retain the `noul` naming. Use the [API reference](/docs/valen/api/) for hosted request and response fields.

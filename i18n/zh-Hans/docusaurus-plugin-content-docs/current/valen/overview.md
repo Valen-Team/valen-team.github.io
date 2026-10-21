@@ -39,3 +39,5 @@ Valen（万澜）为 System One 决策引入视觉感知。受 [Jev](https://typ
 
 [源码仓库](https://github.com/Valen-Team/Valen) · [Cookbook](https://github.com/Valen-Team/Valen/tree/main/cookbook) · [体验 Demo](https://huggingface.co/spaces/yuhangzang/Valen-Preview-0923)
 
+
+托管 API 使用 `predicate` 和返回字段 `probability` 表达是非判断；本地模型和评测文档沿用 `noul` 命名。调用托管服务时请以 [API 文档](/docs/valen/api/) 的请求与响应结构为准。

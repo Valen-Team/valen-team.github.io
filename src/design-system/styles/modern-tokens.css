@@ -1,0 +1,29 @@
+/* Generated from tokens/modern.json. Optional modern profile. */
+:root {
+  --primary: #3964FE;
+  --primary-soft: #E8EEFF;
+  --text: #1E232C;
+  --heading: #152443;
+  --text-muted: rgba(0,0,0,.55);
+  --text-faint: rgba(0,0,0,.40);
+  --bg: #F9F8F8;
+  --bg-doc: #FFFFFF;
+  --surface: #F5F6F7;
+  --border: rgba(9,45,78,.12);
+  --border-strong: rgba(9,45,78,.18);
+  --code-bg: #1B1B1D;
+  --green-bg: #E6FAED;
+  --green: #15803D;
+  --blue-bg: #E8F0FF;
+  --blue: #2563EB;
+  --red-bg: #FDECEC;
+  --red: #DC2626;
+  --r-pill: 100px;
+  --r-card: 20px;
+  --r-sm: 8px;
+  --r-xs: 6px;
+  --font-display: 'Montserrat', sans-serif;
+  --font-body: 'DM Sans', 'Inter', system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-doc: 'Inter', system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}

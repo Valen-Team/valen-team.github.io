@@ -4,6 +4,7 @@ import {themes} from 'prism-react-renderer';
 
 const config: Config = {
   title: 'Valen Team',
+  customFields: {decisionProxyUrl: process.env.VALEN_DEMO_PROXY_URL || 'https://api.valen-team.workers.dev/v1/decisions'},
   tagline: 'Fast Decisions. Continuous Evolution.',
   favicon: 'img/valen-mark.png',
   url: 'https://valen-team.github.io',
@@ -20,16 +21,7 @@ const config: Config = {
   },
   presets: [['classic', {
     docs: {sidebarPath: './sidebars.ts', showLastUpdateTime: false},
-    blog: {
-      routeBasePath: 'news',
-      blogTitle: 'News & releases',
-      blogDescription: 'Models, benchmarks, tools, and research from Valen Team.',
-      blogSidebarCount: 0,
-      postsPerPage: 10,
-      showReadingTime: true,
-      feedOptions: {type: ['rss', 'atom'], title: 'Valen Team — News'},
-      onUntruncatedBlogPosts: 'throw',
-    },
+    blog: false,
     theme: {customCss: './src/css/custom.css'},
   } satisfies Preset.Options]],
   themeConfig: {
@@ -40,12 +32,9 @@ const config: Config = {
       logo: {alt: 'Valen Team', src: 'img/valen-mark.png', width: 38, height: 38},
       hideOnScroll: false,
       items: [
-        {to: '/docs/', label: 'Docs', position: 'left', activeBaseRegex: '/docs/'},
-        {to: '/projects/', label: 'Projects', position: 'left'},
-        {to: '/news/', label: 'News', position: 'left'},
-        {to: '/about/', label: 'About', position: 'left'},
+        {to: '/', label: 'Chat', position: 'left'},
+        {to: '/docs/', label: 'Documentation', position: 'left'},
         {href: 'https://github.com/Valen-Team', label: 'GitHub', position: 'right'},
-        {href: 'https://huggingface.co/Valen-Team', label: 'Hugging Face', position: 'right'},
         {type: 'localeDropdown', position: 'right'},
         {type: 'search', position: 'right'},
       ],
@@ -53,9 +42,8 @@ const config: Config = {
     footer: {
       style: 'light',
       links: [
-        {title: 'Build', items: [{label: 'Documentation', to: '/docs/'}, {label: 'Projects', to: '/projects/'}, {label: 'Leaderboard', href: 'https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard'}]},
-        {title: 'Explore', items: [{label: 'News', to: '/news/'}, {label: 'Models & datasets', href: 'https://huggingface.co/Valen-Team'}, {label: 'About Valen Team', to: '/about/'}]},
-        {title: 'Connect', items: [{label: 'GitHub', href: 'https://github.com/Valen-Team'}, {label: 'Contribute', href: 'https://github.com/Valen-Team/Valen/issues'}, {label: 'RSS', href: 'pathname:///news/rss.xml'}]},
+        {title: 'Build', items: [{label: 'Documentation', to: '/docs/'}, {label: 'Valen API', to: '/docs/valen/api/'}, {label: 'Local inference', to: '/docs/valen/quickstart/'}]},
+        {title: 'Explore', items: [{label: 'JevalKit', to: '/docs/jevalkit/'}, {label: 'Models & datasets', href: 'https://huggingface.co/Valen-Team'}, {label: 'Leaderboard', href: 'https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard'}]},
       ],
       copyright: `© ${new Date().getFullYear()} Valen Team · 万澜. Fast Decisions. Continuous Evolution.`,
     },

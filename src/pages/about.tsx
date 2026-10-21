@@ -1,15 +1,4 @@
 import React from 'react';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
+import {Redirect} from '@docusaurus/router';
 import {useChinese} from '../components/Content';
-import {Arrow} from '../components/Icons';
-
-export default function About() {
-  const zh = useChinese();
-  return <Layout title={zh ? '关于万澜' : 'About'} description={zh ? '快速决策，持续进化。了解万澜团队与我们的开放研究方向。' : 'Fast Decisions. Continuous Evolution. Meet Valen Team and our open research direction.'}><main className="site-container interior-page">
-    <header className="page-intro"><p className="eyebrow">VALEN TEAM / 万澜</p><h1>{zh ? <>快速决策。<br/><em>持续进化。</em></> : <>Fast decisions.<br/><em>Continuous evolution.</em></>}</h1><p>{zh ? '我们构建面向快速多模态决策的开放模型与工具，帮助智能体理解环境、选择有用的行动，并通过反馈改进。' : 'We build open models and tools for fast multimodal decision-making. Our goal is to help agents perceive their environment, choose useful actions, and improve through feedback.'}</p></header>
-    <section className="about-grid"><h2>{zh ? '我们在探索什么' : 'What we work on'}</h2><div><p>{zh ? '我们关注低延迟的多模态决策：从文本、图像与视频中获得信息，将任务要求转化为候选项上的概率，为智能体提供结构化决策接口。' : 'Our focus is low-latency multimodal decision-making: understanding text, images, and video, then turning task instructions into probabilities over candidates — a structured decision interface for agents.'}</p><p>{zh ? 'Valen 提供开放模型及训练与推理工具；JevalKit 通过统一接口和评分协议支持模型比较；VisualDecisionBench 为图像与视频决策提供评测数据。' : 'Valen provides open models and tools for training and inference. JevalKit supports model comparison through unified interfaces and scoring protocols. VisualDecisionBench provides evaluation data for image and video decisions.'}</p><Link className="v-link text-button" to="/projects/">{zh ? '探索我们的项目' : 'Explore our projects'}<Arrow/></Link></div></section>
-    <section className="about-grid"><h2>{zh ? '名字的由来' : 'Behind the name'}</h2><div><p className="about-callout">{zh ? '速度，与持续进化。' : 'Speed, with continuous evolution.'}</p><p>{zh ? 'Valen 得名于进化生物学家 Leigh Van Valen。他提出的“红皇后假说”认为，生物必须持续适应，才能应对周围其他物种的不断演化。其文学意象来自《爱丽丝镜中奇遇记》中的红皇后赛跑。' : 'Valen is named after evolutionary biologist Leigh Van Valen, who proposed the Red Queen hypothesis: organisms must continually adapt as the species around them evolve. Its literary inspiration comes from the Red Queen’s race in Through the Looking-Glass.'}</p><p>{zh ? '中文名“万澜”寓意无数流动的波澜。对我们而言，这个名字连接着快速决策与持续学习、不断适应。' : 'Our Chinese name, 万澜 (Wàn Lán), evokes countless waves in motion. For us, the name connects making decisions quickly with continuing to learn and adapt.'}</p></div></section>
-    <section className="about-grid"><h2>{zh ? '一起构建' : 'Build with us'}</h2><div><p>{zh ? '我们欢迎对模型、评测任务、数据、文档和智能体应用的贡献。分享可复现的结果，在相关仓库提交 Issue，或发起 Pull Request。' : 'We welcome contributions to models, evaluation tasks, data, documentation, and agent applications. Share a reproducible result, open an issue, or submit a pull request in the relevant repository.'}</p><Link className="v-button primary-button" to="/docs/contributing/">{zh ? '贡献指南' : 'Contribution guide'}<Arrow/></Link></div></section>
-  </main></Layout>;
-}
+export default function LegacyRedirect(){return <Redirect to={(useChinese()?'/zh-Hans':'')+'/docs/'}/>;}

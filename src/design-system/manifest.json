@@ -1,6 +1,6 @@
 {
   "name": "@valen-team/design-system",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "source": "Valen-Team/design-system",
   "files": {
     "adapters/docusaurus.css": "7be54b2b1f8a453fe3dc7cd125a2395dec6417a09b8784fcfedf4bfed19a9295",
@@ -13,11 +13,18 @@
     "assets/fonts/OFL.txt": "56c64fa0f5ec4b0b627546ef7f80be19ce6779143e079d912fb7fc87df694d6a",
     "assets/fonts/dmsans.woff2": "9fea608a947e67020c33cad9a6fe3d60c54119dfb8cff87768a8117a15ed7543",
     "assets/fonts/spacegrotesk.woff2": "0640890476fc1198ab4de571fb658de443c4d85b66466ec09534a8737ab1ce9d",
+    "assets/illustrations/DEPTH.md": "9193286788d0b6df7c40f65e6981129c0be42ad1a09629026c0f2e839e430243",
     "assets/illustrations/decision-orbits.svg": "ec99ae70662c2bd31ae25e66b1592fba8abe7b4bf1432a9450cb3d37eedd8575",
+    "assets/illustrations/valen-glass-scene.png": "a6c918bbf874e03f039e4baf9045dcf23b914ad814ff77e7366fee07d74b5ea6",
+    "assets/illustrations/valen-glass-scene.webp": "ca0d1880a793b1419ba9804de001b4e1a8eab4a1b8eff076c8a8161d3e111afc",
     "styles/components.css": "242df59683b49967e036a4547db4d6c901b0472f06f195ccc7ec56e712b7b7c3",
     "styles/editorial.css": "ea3ddb413b069097a66fa02c40692ea026895b51f479950295a0fbea81c42b60",
     "styles/fonts.css": "4a86328b6fd4dc79f43adb2afdb17e3fa5bf274cbb89fdbc6f085c07cc1ffa33",
-    "styles/tokens.css": "6e3144de008c7be99a5cf40d2e9b8e302aca48974338e489493aef4ec22db85f",
-    "tokens/tokens.json": "1f3f7bdd8b2d0b5790ecd6d581ecf8403b7ac1078e3c040fc57978e8b0d07227"
+    "styles/immersive.css": "324599641ff913d8a95bd363e790c4d88471492d3206642ff675f4fc68c72522",
+    "styles/modern-tokens.css": "c1577156c6b106a78b29667e8af83aad28b3df1d4c310b84280738dc9da79eec",
+    "styles/modern.css": "247e4fad97730abdca6048aa67a21e399037e5f559a3ea7efb50457e6650398b",
+    "styles/tokens.css": "44b3498c575af8f190a4689ee8edf811eeb0f26547246f96743840c8ec12cd47",
+    "tokens/modern.json": "5317aacf6c72f496e59f467d8369e2bf0986a90923d06f5b9ad967a718603d3b",
+    "tokens/tokens.json": "8c239ca5a080397dfa284f7faa23ad79ee3ffcc418ef136112cad8d3b90d3a06"
   }
 }

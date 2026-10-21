@@ -14,4 +14,5 @@ for(const [file,expected] of Object.entries(manifest.files)) {
 if(hash(resolve(root,'static/img/valen-mark.png'))!==hash(resolve(snapshot,'assets/brand/valen-mark-white.png'))) throw new Error('Static Valen logo differs from shared brand source');
 if(hash(resolve(root,'static/img/jevalkit-light.svg'))!==hash(resolve(snapshot,'assets/brand/jevalkit-light.svg'))) throw new Error('Static JevalKit logo differs from shared brand source');
 if(hash(resolve(root,'static/img/decision-orbits.svg'))!==hash(resolve(snapshot,'assets/illustrations/decision-orbits.svg'))) throw new Error('Static editorial illustration differs from shared source');
+if(hash(resolve(root,'static/img/valen-glass-scene.webp'))!==hash(resolve(snapshot,'assets/illustrations/valen-glass-scene.webp'))) throw new Error('Static concept scene differs from shared source');
 console.log(`Verified ${manifest.name} ${manifest.version}: ${Object.keys(manifest.files).length} files${source?' and local source':''}.`);

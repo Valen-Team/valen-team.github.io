@@ -11,13 +11,16 @@
     "typecheck": "tsc --noEmit",
     "check-links": "node scripts/check-links.mjs",
     "design:check": "node scripts/check-design.mjs",
-    "design:verify-source": "node scripts/check-design.mjs --source ../design-system"
+    "design:verify-source": "node scripts/check-design.mjs --source ../design-system",
+    "preview:local": "node scripts/preview-local.mjs",
+    "test:ask": "node --test tests/ask-decision.test.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.1.1",
+    "lucide-react": "^1.59.0",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

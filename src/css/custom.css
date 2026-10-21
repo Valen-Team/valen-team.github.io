@@ -4,6 +4,9 @@
 @import '../design-system/styles/editorial.css';
 @import '../design-system/adapters/docusaurus.css';
 @import './search.css';
+@import '../design-system/styles/immersive.css';
+@import '../design-system/styles/modern-tokens.css';
+@import '../design-system/styles/modern.css';
 
 /* Page composition. Shared visual values live in design-system/tokens. */
 :root {--ink:var(--v-color-ink);--muted:var(--v-color-muted);--paper:var(--v-color-paper);--line:var(--v-color-line);--ifm-container-width-xl:1216px;}

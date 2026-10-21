@@ -1,0 +1,76 @@
+/* Optional dimensional presentation. Scoped to /concept/; editorial remains the default. */
+.home--immersive {background:#f6f7f9;color:#142e46;}
+.immersive-intro {padding-top:36px;padding-bottom:28px;}
+.immersive-intro .eyebrow {font-size:10px;letter-spacing:1.3px;margin-bottom:14px;}
+.immersive-intro h1 {font-size:clamp(30px,3.4vw,48px);line-height:1.18;font-weight:500;letter-spacing:-1.9px;margin:0;}
+.immersive-intro h1 em {font-family:var(--v-font-editorial);font-weight:400;color:#577d9d;}
+html[lang='zh-CN'] .immersive-intro h1 em {font-style:normal;margin-left:12px;}
+.immersive-stage {position:relative;min-height:510px;border-radius:28px;overflow:hidden;isolation:isolate;background:#e6eef7;}
+.immersive-scene {position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transform:translate3d(var(--scene-x,0px),var(--scene-y,0px),0) scale(1.025);transition:transform 850ms cubic-bezier(.2,.7,.25,1);will-change:transform;}
+.immersive-shade {position:absolute;inset:0;background:linear-gradient(90deg,#f5f8fcdc 0%,#f5f8fc80 26%,#f5f8fc00 53%);}
+.immersive-product-copy {position:relative;z-index:1;max-width:46%;padding:65px 0 110px 48px;}
+.immersive-overline {font:11px/1.5 var(--v-font-mono);letter-spacing:1.2px;color:#355a78;margin-bottom:24px;}
+.immersive-product-copy h2 {font-size:86px;letter-spacing:-5px;line-height:1;font-weight:500;margin:0 0 22px;}
+.immersive-product-copy>p:not(.immersive-overline) {font-size:18px;line-height:1.65;white-space:pre-line;color:#36556e;margin:0 0 26px;}
+.immersive-actions {display:flex;gap:12px;flex-wrap:wrap;}
+.immersive-actions a {display:inline-flex;align-items:center;gap:12px;min-height:44px;padding:11px 18px;border-radius:999px;border:1px solid #8096ac;color:#18364d;font-size:13px;background:#ffffff38;backdrop-filter:blur(12px);transition:background 180ms,transform 180ms;}
+.immersive-actions a:first-child {background:#18364d;color:white;border-color:#18364d;}
+.immersive-actions a:hover {background:#fff;transform:translateY(-2px);color:#18364d;}
+.immersive-actions a:first-child:hover {background:#265875;color:white;}
+.immersive-stage-meta {position:absolute;z-index:1;bottom:26px;left:48px;right:36px;display:flex;justify-content:space-between;align-items:center;gap:20px;color:#2c5477;font:10px/1.8 var(--v-font-mono);letter-spacing:1px;}
+.immersive-stage-meta strong {font-weight:500;margin-left:14px;}
+.immersive-entry-rail {display:grid;grid-template-columns:repeat(3,1fr);gap:30px;padding:25px 0 0;}
+.immersive-entry-rail a {display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 2px;color:#1c354b;border-bottom:1px solid #d6e0e9;}
+.immersive-entry-rail strong {font-size:15px;font-weight:500;}
+.immersive-entry-rail small {display:block;font-size:12px;color:#637687;margin-top:6px;}
+.immersive-entry-rail a:hover {border-color:#195f9d;color:#195f9d;}
+.home--immersive .section {padding-block:100px;}
+.home--immersive .section h2,.home--immersive .demo-copy h2 {font-size:clamp(30px,3.2vw,44px);font-weight:500;letter-spacing:-1.4px;}
+.home--immersive .project-grid {gap:28px;}
+.home--immersive .project-card {background:#fff;border:0;border-radius:20px;padding:0 30px;box-shadow:0 12px 40px #16365004;transition:box-shadow 250ms,transform 250ms;}
+.home--immersive .project-card:hover {box-shadow:0 18px 55px #16365010;transform:translateY(-4px);}
+.project-visual {height:250px;margin:0 -30px 25px;position:relative;overflow:hidden;}
+.project-visual--model {background:#dbe9f6;}
+.project-visual--model>img {width:100%;height:100%;object-fit:cover;object-position:78% 52%;transform:scale(1.12);transition:transform 900ms;}
+.project-visual--model>span {position:absolute;left:28px;bottom:22px;color:#18364d;font:10px var(--v-font-mono);letter-spacing:1px;}
+.project-card:hover .project-visual--model>img {transform:scale(1.16);}
+.project-visual--tool {background:radial-gradient(ellipse at 45% 45%,#fff,#e8f2ee);perspective:700px;display:grid;place-items:center;}
+.tool-surface {width:70%;height:110px;border:1px solid #ffffffcc;border-radius:14px;background:linear-gradient(160deg,#ffffffed,#d9eee5);box-shadow:-15px 24px 32px #36736320,0 1px 0 #fff inset;transform:rotateX(27deg) rotateZ(-8deg);display:grid;place-items:center;}
+.tool-surface>img {width:94%;height:auto;}
+.tool-orbit {position:absolute;width:80%;height:140px;border:1px solid #9fc9bb88;border-radius:50%;transform:rotateX(50deg) rotateZ(-25deg);}
+.tool-orbit-2 {width:94%;height:210px;transform:rotateX(50deg) rotateZ(25deg);opacity:.6;}
+.tool-pill {position:absolute;background:#ffffffb8;backdrop-filter:blur(8px);padding:9px 12px;border:1px solid #fff;border-radius:8px;color:#416a5e;font:9px/1.5 var(--v-font-mono);letter-spacing:.6px;box-shadow:0 8px 25px #436c5910;}
+.tool-pill--top {top:32px;left:28px;}
+.tool-pill--bottom {bottom:28px;right:26px;}
+.home--immersive .project-card h3 {font-size:32px;font-weight:500;}
+.home--immersive .project-card-top {margin-bottom:16px;}
+.home--immersive .project-number {font:12px var(--v-font-mono);color:#607281;}
+.home--immersive .project-detail {font-size:14px;}
+.home--immersive .project-description {font-size:16px;}
+.home--immersive .dataset-strip {margin-top:28px;background:transparent;border:0;border-bottom:1px solid #d6e0e9;border-radius:0;padding:20px 0;}
+.home--immersive .demo-section {background:#fff;border:0;padding-block:90px;}
+.home--immersive .demo-visual {background:linear-gradient(145deg,#213d58,#101c2d);padding:38px 36px 0;border:0;border-radius:24px;box-shadow:0 28px 70px #173a571a;}
+.home--immersive .demo-visual-caption {color:#d4e3ee;font-size:10px;}
+.home--immersive .demo-visual img {height:360px;}
+.home--immersive .demo-visual .status-dot {background:#91caef;}
+.home--immersive .decision-steps li {border-color:#e7ebf1;}
+.home--immersive .news-list {display:grid;grid-template-columns:1fr 1fr;gap:20px;border:0;}
+.home--immersive .news-row {display:grid;grid-template-columns:100px 1fr 18px;grid-template-rows:1fr auto;gap:12px 20px;border:0;border-radius:16px;padding:20px;background:#fff;transition:transform 220ms,box-shadow 220ms;}
+.home--immersive .news-row:hover {box-shadow:0 12px 35px #1739570b;transform:translateY(-3px);}
+.news-thumbnail {width:100px;height:100px;object-fit:cover;border-radius:10px;grid-column:1;grid-row:1/3;align-self:center;background:#eef3f7;}
+.news-thumbnail-0 {object-fit:contain;background:#edf7f1;}
+.news-thumbnail-1 {object-position:80% center;}
+.news-thumbnail-2 {object-fit:cover;object-position:15% center;}
+.home--immersive .news-row time {grid-column:2;grid-row:2;font-size:11px;}
+.home--immersive .news-row>div {grid-column:2;grid-row:1;}
+.home--immersive .news-row>svg {grid-column:3;grid-row:1/3;}
+.home--immersive .news-row h3 {font-size:17px;line-height:1.45;font-weight:500;letter-spacing:-.25px;}
+.home--immersive .news-row p {display:none;}
+.home--immersive .news-type {font-size:9px;margin-bottom:8px;}
+.home--immersive .quickstart-section {background:#eaf0f7;border:0;padding-block:100px;}
+.home--immersive .code-panel {border-radius:16px;box-shadow:0 22px 60px #1c3d5b18;}
+.home--immersive .community-section {padding-block:90px;}
+@media(max-width:996px){.immersive-intro h1{font-size:36px}.immersive-stage{min-height:470px}.immersive-product-copy{padding-left:32px;max-width:49%}.immersive-product-copy h2{font-size:72px}.immersive-product-copy>p:not(.immersive-overline){font-size:16px}.immersive-stage-meta{left:32px;right:26px}.immersive-entry-rail{gap:20px}.immersive-entry-rail small{font-size:11px}.project-visual{height:210px}.home--immersive .news-row{grid-template-columns:78px 1fr 14px;gap:12px;padding:16px}.news-thumbnail{width:78px;height:86px}.home--immersive .news-row h3{font-size:15px}.home--immersive .demo-visual{padding:24px 24px 0}}
+@media(max-width:700px){.immersive-intro{padding-top:30px;padding-bottom:22px}.immersive-intro h1{font-size:36px;line-height:1.2;letter-spacing:-1.3px}.immersive-intro h1 em{display:block}html[lang='zh-CN'] .immersive-intro h1 em{margin-left:0;margin-top:6px}.immersive-intro .eyebrow{font-size:9px;letter-spacing:.8px}.immersive-stage{min-height:650px;border-radius:20px;display:flex;align-items:start}.immersive-scene{object-fit:cover;object-position:69% center;top:200px;height:450px;transform:none}.immersive-shade{background:linear-gradient(180deg,#f4f8fc 0%,#f4f8fc 28%,#f4f8fc00 55%)}.immersive-product-copy{max-width:100%;padding:30px 26px 0}.immersive-overline{font-size:10px;letter-spacing:.8px;margin-bottom:18px}.immersive-product-copy h2{font-size:64px;letter-spacing:-3px;margin-bottom:16px}.immersive-product-copy>p:not(.immersive-overline){font-size:16px;line-height:1.65;margin-bottom:20px}.immersive-actions{gap:10px}.immersive-actions a{font-size:12px;padding:10px 14px}.immersive-stage-meta{bottom:18px;left:22px;right:22px;font-size:9px;letter-spacing:.4px}.immersive-stage-meta>span:last-child{display:none}.immersive-entry-rail{grid-template-columns:1fr;gap:0;padding-top:18px}.immersive-entry-rail a{padding:14px 4px}.immersive-entry-rail small{display:inline;margin-left:12px;font-size:11px}.immersive-entry-rail strong{font-size:13px}.home--immersive .section{padding-block:58px}.home--immersive .section h2,.home--immersive .demo-copy h2{font-size:30px}.home--immersive .project-card{padding-inline:24px;border-radius:16px}.project-visual{margin-inline:-24px;height:240px}.home--immersive .project-card h3{font-size:30px}.home--immersive .dataset-strip{padding-block:18px}.home--immersive .demo-section{padding-block:58px}.home--immersive .demo-visual img{height:300px}.home--immersive .news-list{grid-template-columns:1fr}.home--immersive .news-row{grid-template-columns:80px 1fr 14px;gap:10px 14px;padding:16px}.home--immersive .news-row time{grid-column:2;margin:0}.home--immersive .news-row h3{font-size:16px}.home--immersive .news-row>svg{margin:0;align-self:center}.news-thumbnail{width:80px;height:90px}.home--immersive .quickstart-section{padding-block:58px}.home--immersive .community-section{padding-block:58px}.tool-pill{font-size:8px}}
+@media(max-width:360px){.immersive-stage{min-height:670px}.immersive-product-copy{padding-inline:22px}.immersive-actions{gap:8px}.immersive-actions a{padding-inline:12px;font-size:11px}.immersive-entry-rail small{display:block;margin:5px 0 0}.home--immersive .news-row{grid-template-columns:66px 1fr 12px;gap:10px}.news-thumbnail{width:66px;height:86px}.home--immersive .news-row h3{font-size:15px}}
+@media(prefers-reduced-motion:reduce){.immersive-scene{transform:none;transition:none;will-change:auto}.project-visual--model>img{transition:none}.project-card:hover .project-visual--model>img{transform:scale(1.12)}.home--immersive .project-card,.home--immersive .news-row,.immersive-actions a{transition:none}.home--immersive .project-card:hover,.home--immersive .news-row:hover,.immersive-actions a:hover{transform:none}}
