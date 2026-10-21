@@ -6,7 +6,14 @@ description: 安装 Valen，并运行第一个结构化决策示例。
 
 # 在本地运行 Valen
 
-本指南使用 Hugging Face 模型接口，运行已经发布的 Valen 检查点。
+根据使用方式选择本地推理入口：
+
+| 方式 | 适用场景 |
+| --- | --- |
+| [SGLang 镜像](/zh-Hans/docs/valen/sglang/) | 启动文本和图片决策的本地 HTTP 服务，无需配置宿主机 Python |
+| Transformers（下文） | 直接使用 Python 推理，包括视频和 `question` 模式 |
+
+SGLang 镜像支持单 GPU 的 `shared_state` 推理。下面的步骤使用 Hugging Face Transformers 模型接口。
 
 ## 准备环境
 

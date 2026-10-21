@@ -6,7 +6,14 @@ description: Install Valen and run a first structured decision.
 
 # Run Valen locally
 
-This guide runs a published Valen checkpoint with its Hugging Face model interface.
+Choose a local inference route:
+
+| Route | Use it for |
+| --- | --- |
+| [SGLang container](/docs/valen/sglang/) | A local HTTP service for text and image decisions; no host Python setup |
+| Transformers (below) | Direct Python inference, including video and `question` execution |
+
+The SGLang image supports single-GPU `shared_state` execution. The steps below use the Hugging Face Transformers model interface.
 
 ## Prepare the environment
 

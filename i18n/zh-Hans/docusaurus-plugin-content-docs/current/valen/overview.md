@@ -32,7 +32,7 @@ Valen（万澜）为 System One 决策引入视觉感知。受 [Jev](https://typ
 
 ## 开始使用
 
-1. 阅读[本地推理入门](/zh-Hans/docs/valen/quickstart/)或 [API 入门](/zh-Hans/docs/valen/api/)。
+1. 使用 [SGLang 镜像](/zh-Hans/docs/valen/sglang/)、[本地 Transformers](/zh-Hans/docs/valen/quickstart/)，或阅读[托管 API 入门](/zh-Hans/docs/valen/api/)。
 2. 理解[图像与视频数据格式](/zh-Hans/docs/valen/data-format/)。
 3. 阅读[模型架构](/zh-Hans/docs/valen/architecture/)与[配置参考](/zh-Hans/docs/valen/configuration/)。
 4. [评测检查点](/zh-Hans/docs/valen/evaluation/)，或通过 [JevalKit](/zh-Hans/docs/jevalkit/) 比较模型。
@@ -40,4 +40,4 @@ Valen（万澜）为 System One 决策引入视觉感知。受 [Jev](https://typ
 [源码仓库](https://github.com/Valen-Team/Valen) · [Cookbook](https://github.com/Valen-Team/Valen/tree/main/cookbook) · [体验 Demo](https://huggingface.co/spaces/yuhangzang/Valen-Preview-0923)
 
 
-托管 API 使用 `predicate` 和返回字段 `probability` 表达是非判断；本地模型和评测文档沿用 `noul` 命名。调用托管服务时请以 [API 文档](/docs/valen/api/) 的请求与响应结构为准。
+托管 API 使用 `predicate` 和返回字段 `probability` 表达是非判断；本地模型和评测文档沿用 `noul` 命名。调用托管服务时请以 [API 文档](/zh-Hans/docs/valen/api/) 的请求与响应结构为准。
