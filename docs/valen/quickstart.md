@@ -1,19 +1,14 @@
 ---
-title: Run Valen locally
-sidebar_label: Local quickstart
+title: Transformers local inference
+sidebar_label: Transformers inference
 description: Install Valen and run a first structured decision.
 ---
 
-# Run Valen locally
+# Local inference with Transformers
 
-Choose a local inference route:
+Run a published Valen checkpoint directly in Python with Hugging Face Transformers. This route supports text, images, video, and both `shared_state` and `question` execution.
 
-| Route | Use it for |
-| --- | --- |
-| [SGLang container](/docs/valen/sglang/) | A local HTTP service for text and image decisions; no host Python setup |
-| Transformers (below) | Direct Python inference, including video and `question` execution |
-
-The SGLang image supports single-GPU `shared_state` execution. The steps below use the Hugging Face Transformers model interface.
+For a local HTTP service using the prebuilt container, follow the [SGLang inference guide](/docs/valen/sglang/).
 
 ## Prepare the environment
 

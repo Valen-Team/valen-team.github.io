@@ -1,19 +1,14 @@
 ---
-title: 在本地运行 Valen
-sidebar_label: 本地推理入门
+title: Transformers 本地推理
+sidebar_label: Transformers 推理
 description: 安装 Valen，并运行第一个结构化决策示例。
 ---
 
-# 在本地运行 Valen
+# 使用 Transformers 在本地推理
 
-根据使用方式选择本地推理入口：
+使用 Hugging Face Transformers，在 Python 中直接加载已发布的 Valen 检查点。支持文本、图片、视频，以及 `shared_state` 和 `question` 两种执行模式。
 
-| 方式 | 适用场景 |
-| --- | --- |
-| [SGLang 镜像](/zh-Hans/docs/valen/sglang/) | 启动文本和图片决策的本地 HTTP 服务，无需配置宿主机 Python |
-| Transformers（下文） | 直接使用 Python 推理，包括视频和 `question` 模式 |
-
-SGLang 镜像支持单 GPU 的 `shared_state` 推理。下面的步骤使用 Hugging Face Transformers 模型接口。
+如果需要通过预构建镜像启动本地 HTTP 服务，请阅读 [SGLang 推理指南](/zh-Hans/docs/valen/sglang/)。
 
 ## 准备环境
 
