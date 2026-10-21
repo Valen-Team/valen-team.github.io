@@ -47,6 +47,11 @@ The public endpoint is `https://api.valen-team.workers.dev/v1/decisions`.
 `valen-preview-0923`, `valen-2b`, `valen-4b`, and `valen-0-8b`.
 Higher quotas can be requested from liuziyu77@sjtu.edu.cn.
 
+The static [Valen API Space](https://huggingface.co/spaces/Valen-Team/Valen-API)
+calls the same endpoint from the browser. Worker `ALLOWED_ORIGINS` must retain both
+`https://valen-team.github.io` and `https://valen-team-valen-api.static.hf.space`.
+Run `node --test tests/api-cors.test.mjs` to verify the exact origin allowlist.
+
 `api-proxy/worker-dashboard.mjs` requires only the `VALEN_API_KEY` Worker Secret
 and uses a best-effort per-instance limiter. `api-proxy/worker.mjs` uses the
 `PER_IP` and `SHARED_BUDGET` bindings configured in `wrangler.jsonc`.

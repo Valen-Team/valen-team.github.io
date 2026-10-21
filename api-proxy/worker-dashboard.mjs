@@ -25,7 +25,7 @@ const recentRequests = new Map();
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin');
-    const allowed = (env.ALLOWED_ORIGINS || 'https://valen-team.github.io').split(',').map(x => x.trim());
+    const allowed = (env.ALLOWED_ORIGINS || 'https://valen-team.github.io,https://valen-team-valen-api.static.hf.space').split(',').map(x => x.trim());
     const headers = {'Content-Type': 'application/json', 'Cache-Control': 'no-store', 'Vary': 'Origin'};
     if (origin && allowed.includes(origin)) headers['Access-Control-Allow-Origin'] = origin;
     const reply = (body, status = 200) => new Response(JSON.stringify(body), {status, headers});
