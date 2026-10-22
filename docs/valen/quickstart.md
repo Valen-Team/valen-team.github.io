@@ -8,7 +8,7 @@ description: Install Valen and run a first structured decision.
 
 Run a published Valen checkpoint directly in Python with Hugging Face Transformers. This route supports text, images, video, and both `shared_state` and `question` execution.
 
-For a local HTTP service using the prebuilt container, follow the [SGLang inference guide](/docs/valen/sglang-image/).
+For a local HTTP service, use [SGLang](/docs/valen/sglang/) or the [vLLM plugin](/docs/valen/vllm-plugin/).
 
 ## Prepare the environment
 

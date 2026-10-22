@@ -9,8 +9,8 @@ sidebar_label: 参与贡献
 
 ## 选择对应仓库
 
-- **[Valen](https://github.com/Valen-Team/Valen)：**模型实现、推理、训练、视觉决策与相关文档。
-- **[JevalKit](https://github.com/Valen-Team/JevalKit)：**模型适配器、Benchmark 集成、评分与评测结果。
+- **[Valen](https://github.com/Valen-Team/Valen)**：模型实现、推理、训练、视觉决策与相关文档。
+- **[JevalKit](https://github.com/Valen-Team/JevalKit)**：模型适配器、Benchmark 集成、评分与评测结果。
 
 ## 报告问题
 

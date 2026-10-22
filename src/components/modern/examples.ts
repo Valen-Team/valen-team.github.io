@@ -25,3 +25,6 @@ export const videoExampleZh = "import base64\nimport io\n\nimport av\nimport req
 
 export const sglangStartExample = "IMAGE=ghcr.io/valen-team/sglang:valen-v0.1.0\nHF_CACHE=$HOME/.cache/huggingface\n\ndocker pull \"$IMAGE\"\ndocker run --rm --gpus device=0 \\\n  --ipc=host \\\n  -p 127.0.0.1:30000:30000 \\\n  -v \"$HF_CACHE:/root/.cache/huggingface\" \\\n  \"$IMAGE\" \\\n  --model-path Valen-Team/Valen-2B \\\n  --served-model-name valen \\\n  --host 0.0.0.0 --port 30000";
 export const sglangRequestExample = "curl http://localhost:30000/v1/systemone \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"model\": \"valen\",\n    \"state\": \"A cat is on the sofa.\",\n    \"questions\": {\n      \"animal\": {\n        \"type\": \"choice\",\n        \"instructions\": \"Which animal?\",\n        \"criteria\": {\n          \"cat\": \"A cat\",\n          \"dog\": \"A dog\"\n        }\n      }\n    }\n  }'";
+
+export const vllmStartExample = "bash /path/to/vllm-kit/install.sh\nMODEL=/path/to/Valen-2B CUDA_VISIBLE_DEVICES=0 \\\n  bash /path/to/vllm-kit/serve.sh";
+export const vllmRequestExample = sglangRequestExample.replace('http://localhost:30000', 'http://127.0.0.1:8000');

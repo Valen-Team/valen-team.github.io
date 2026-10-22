@@ -24,15 +24,15 @@ Valen（万澜）为 System One 决策引入视觉感知。受 [Jev](https://typ
 
 ## 三类决策问题
 
-- **Choice：**在命名候选项之间分配概率。
-- **Noul：**估计命题为真或假的概率。
-- **Score：**在有序等级上输出概率分布。
+- **Choice**：在命名候选项之间分配概率。
+- **Noul**：估计命题为真或假的概率。
+- **Score**：在有序等级上输出概率分布。
 
 同一个状态可以由多个问题共享。完整语义见[数据格式](/zh-Hans/docs/valen/data-format/)与[共享状态执行](/zh-Hans/docs/valen/qwen-shared-state/)。
 
 ## 开始使用
 
-1. 使用 [SGLang 镜像](/zh-Hans/docs/valen/sglang-image/)、[本地 Transformers](/zh-Hans/docs/valen/quickstart/)，或阅读[托管 API 入门](/zh-Hans/docs/valen/api/)。
+1. 通过 [SGLang](/zh-Hans/docs/valen/sglang/) 或 [vLLM](/zh-Hans/docs/valen/vllm/) 部署服务，使用 [本地 Transformers](/zh-Hans/docs/valen/quickstart/)，或阅读[托管 API 入门](/zh-Hans/docs/valen/api/)。
 2. 理解[图像与视频数据格式](/zh-Hans/docs/valen/data-format/)。
 3. 阅读[模型架构](/zh-Hans/docs/valen/architecture/)与[配置参考](/zh-Hans/docs/valen/configuration/)。
 4. [评测检查点](/zh-Hans/docs/valen/evaluation/)，或通过 [JevalKit](/zh-Hans/docs/jevalkit/) 比较模型。

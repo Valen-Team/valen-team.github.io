@@ -32,7 +32,7 @@ The same state can be shared by multiple questions. Read the [data format](/docs
 
 ## Get started
 
-1. Run the [SGLang container](/docs/valen/sglang-image/), use [Transformers locally](/docs/valen/quickstart/), or follow the [hosted API quickstart](/docs/valen/api/).
+1. Serve with [SGLang](/docs/valen/sglang/) or [vLLM](/docs/valen/vllm/), use [Transformers locally](/docs/valen/quickstart/), or follow the [hosted API quickstart](/docs/valen/api/).
 2. Explore [image and video inputs](/docs/valen/data-format/#images-and-video).
 3. Read the [architecture](/docs/valen/architecture/) and [configuration reference](/docs/valen/configuration/).
 4. [Evaluate a checkpoint](/docs/valen/evaluation/) or compare models with [JevalKit](/docs/jevalkit/).
