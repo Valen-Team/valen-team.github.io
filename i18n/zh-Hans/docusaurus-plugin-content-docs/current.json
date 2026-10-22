@@ -10,5 +10,9 @@
   "sidebar.main.category.JevalKit": {
     "message": "JevalKit",
     "description": "The label for category 'JevalKit' in sidebar 'main'"
+  },
+  "sidebar.main.category.SGLang deployment": {
+    "message": "SGLang 部署",
+    "description": "The label for category 'SGLang deployment' in sidebar 'main'"
   }
 }

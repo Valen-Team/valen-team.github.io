@@ -8,7 +8,7 @@ description: 安装 Valen，并运行第一个结构化决策示例。
 
 使用 Hugging Face Transformers，在 Python 中直接加载已发布的 Valen 检查点。支持文本、图片、视频，以及 `shared_state` 和 `question` 两种执行模式。
 
-如果需要通过预构建镜像启动本地 HTTP 服务，请阅读 [SGLang 推理指南](/zh-Hans/docs/valen/sglang/)。
+如果需要通过预构建镜像启动本地 HTTP 服务，请阅读 [SGLang 推理指南](/zh-Hans/docs/valen/sglang-image/)。
 
 ## 准备环境
 
