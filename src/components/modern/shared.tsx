@@ -21,7 +21,7 @@ const deploymentChildren: Record<string, string[][]> = {
   ['valen/sglang-plugin', 'Plugin', '插件部署'],
   ['valen/sglang-image', 'Image', '镜像部署'],
  ],
- 'valen/vllm': [['valen/vllm-plugin', 'Plugin', '插件部署']],
+ 'valen/vllm': [['valen/vllm-plugin', 'Plugin', '插件部署'], ['valen/vllm-image', 'Image', '镜像部署']],
 };
 
 export function ModernSidebar({onNavigate}: {onNavigate?:()=>void}) {

@@ -28,3 +28,5 @@ export const sglangRequestExample = "curl http://localhost:30000/v1/systemone \\
 
 export const vllmStartExample = "bash /path/to/vllm-kit/install.sh\nMODEL=/path/to/Valen-2B CUDA_VISIBLE_DEVICES=0 \\\n  bash /path/to/vllm-kit/serve.sh";
 export const vllmRequestExample = sglangRequestExample.replace('http://localhost:30000', 'http://127.0.0.1:8000');
+
+export const vllmImageStartExample = sglangStartExample.replaceAll('ghcr.io/valen-team/sglang', 'ghcr.io/valen-team/vllm').replaceAll('30000', '8000').replace('--served-model-name valen', '--served-model-name valen --revision fb9205c2541abc97ce276670e66f79b78d9068fc');
