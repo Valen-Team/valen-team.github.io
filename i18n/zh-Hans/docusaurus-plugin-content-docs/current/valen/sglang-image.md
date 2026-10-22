@@ -84,5 +84,3 @@ print(response.json()["answers"])
 ```
 
 </details>
-
-支持单 GPU 的文本/图片 choice、noul、score 决策，TP=PP=1。完整请求格式、离线权重挂载和验证记录见[镜像说明](https://github.com/Valen-Team/sglang/tree/main/docker/valen)。

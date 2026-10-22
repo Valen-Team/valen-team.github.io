@@ -84,5 +84,3 @@ print(response.json()["answers"])
 ```
 
 </details>
-
-Supports single-GPU text/image choice, noul, and score decisions, TP=PP=1. See the [image documentation](https://github.com/Valen-Team/sglang/tree/main/docker/valen) for the full request format, offline weight mounts, and validation record.
