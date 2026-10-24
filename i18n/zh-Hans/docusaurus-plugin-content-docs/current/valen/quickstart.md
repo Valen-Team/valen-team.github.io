@@ -29,31 +29,32 @@ source .venv/bin/activate
 import torch
 from transformers import AutoModel
 
-model = AutoModel.from_pretrained(
-    "Valen-Team/Valen-0.8B",
-    trust_remote_code=True,
-    dtype="auto",
-    attn_implementation="sdpa",
-).to("cuda").eval()
-
+model = (
+    AutoModel.from_pretrained(
+        "Valen-Team/Valen-0.8B",
+        trust_remote_code=True,
+        dtype="auto",
+        attn_implementation="sdpa",
+    )
+    .to("cuda")
+    .eval()
+)
 torch.set_float32_matmul_precision("highest")
 torch.backends.cudnn.allow_tf32 = False
-
-answer = model.predict({
-    "state": "A cat is sitting on the sofa.",
-    "questions": {
-        "animal": {
-            "type": "choice",
-            "instructions": "Which animal is present?",
-            "criteria": {"cat": "A cat", "dog": "A dog"},
-        },
-        "on_sofa": {
-            "type": "noul",
-            "instructions": "The cat is on the sofa.",
+answer = model.predict(
+    {
+        "state": "A cat is sitting on the sofa.",
+        "questions": {
+            "animal": {
+                "type": "choice",
+                "instructions": "Which animal is present?",
+                "criteria": {"cat": "A cat", "dog": "A dog"},
+            },
+            "on_sofa": {"type": "noul", "instructions": "The cat is on the sofa."},
         },
     },
-}, execution="shared_state")
-
+    execution="shared_state",
+)
 print(answer)
 ```
 
@@ -79,4 +80,3 @@ print(answer)
 [调用 API](/zh-Hans/docs/valen/api/) · [配置训练](/zh-Hans/docs/valen/configuration/) · [使用 JevalKit 评测](/zh-Hans/docs/jevalkit/quickstart/)
 
 来源：[Valen README](https://github.com/Valen-Team/Valen#quick-start)。
-

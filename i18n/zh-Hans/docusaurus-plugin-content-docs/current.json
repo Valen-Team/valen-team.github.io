@@ -14,5 +14,9 @@
   "sidebar.main.category.SGLang deployment": {
     "message": "SGLang 部署",
     "description": "The label for category 'SGLang deployment' in sidebar 'main'"
+  },
+  "sidebar.main.category.API calls": {
+    "message": "API 调用",
+    "description": "The label for category 'API calls' in sidebar 'main'"
   }
 }

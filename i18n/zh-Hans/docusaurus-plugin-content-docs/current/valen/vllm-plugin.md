@@ -1,61 +1,247 @@
 ---
+mdx:
+  format: mdx
 title: vLLM 插件部署
-sidebar_label: 插件部署
+sidebar_label: vLLM 插件
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # 使用 vLLM 插件部署
 
-`valen-vllm` 通过 `/v1/systemone` 提供 Valen 决策服务。
+在官方 vLLM 环境中安装 Valen 插件，启动本地 HTTP 推理服务。
 
 ## 环境要求
 
-Linux x86-64、Python 3.12、glibc 2.34 及以上、CUDA 13，以及官方 vLLM `0.32.1rc1.dev253+g30aded62d`。安装插件前，先按[固定版本环境说明](https://github.com/Valen-Team/Valen/blob/main/serving/vllm/README_zh.md#安装并启动)准备 vLLM。
-
-支持单 GPU、`shared_state` 和文本/图片 Choice、Noul、Score，已在 H200 上测试 Valen-2B。直接视频推理请使用 [Transformers](./quickstart.md)。
+Linux x86-64、NVIDIA GPU、兼容的 CUDA 驱动，以及安装 NVIDIA Container Toolkit 的 Docker。已有 vLLM Python 环境时，也可以直接在该环境中安装插件。
 
 ## 构建部署包
 
-在 Valen 仓库根目录运行：
+获取 [Valen 源码](https://github.com/Valen-Team/Valen)，在仓库根目录构建 wheel 和部署包。将 `serving-kit/vllm/` 与完整模型目录复制到 GPU 服务器。
 
 ```bash
 python -m pip install build
 python -m build --wheel serving/vllm
 python serving/vllm/build_kit.py \
-  serving/vllm/dist/valen_vllm-0.1.0.dev1-py3-none-any.whl ./vllm-kit
+  serving/vllm/dist/valen_vllm-0.1.0.dev2-py3-none-any.whl \
+  ./serving-kit/vllm
 ```
 
-将 `vllm-kit/` 和完整模型目录复制到 GPU 服务器。
+## 准备运行环境
+
+使用官方 vLLM 镜像。替换下面的部署包和模型目录路径：
+
+```bash
+docker run --rm -it --gpus device=0 --ipc=host \
+  -p 127.0.0.1:8000:8000 \
+  -v /absolute/path/to/serving-kit/vllm:/opt/valen-kit:ro \
+  -v /absolute/path/to/Valen-2B:/models/Valen-2B:ro \
+  --entrypoint bash \
+  docker.io/vllm/vllm-openai:nightly
+```
+
+容器内的 `/opt/valen-kit` 和 `/models/Valen-2B` 对应这两个挂载目录。使用已有 Python 环境时，将下文路径替换为实际目录。
 
 ## 安装并启动
 
-在上述 vLLM 环境中运行：
+在容器内安装插件并启动服务：
 
 ```bash
-bash /path/to/vllm-kit/install.sh
-MODEL=/path/to/Valen-2B CUDA_VISIBLE_DEVICES=0 \
-  bash /path/to/vllm-kit/serve.sh
+bash /opt/valen-kit/install.sh
+MODEL=/models/Valen-2B MODEL_NAME=valen HOST=0.0.0.0 \
+  CUDA_VISIBLE_DEVICES=0 bash /opt/valen-kit/serve.sh
 ```
 
-默认地址 `127.0.0.1:8000`，模型名 `valen`。可通过 `HOST`、`PORT`、`MODEL_NAME` 修改。
+| 参数 | 示例 | 用途 |
+| --- | --- | --- |
+| `MODEL` | `/models/Valen-2B` | 完整模型目录 |
+| `MODEL_NAME` | `valen` | 请求中的模型名 |
+| `HOST` / `PORT` | `0.0.0.0` / `8000` | 容器内监听地址与端口 |
+
+服务启动后，从宿主机访问 `http://127.0.0.1:8000`。
 
 ## 发送请求
 
-等待模型加载完成，在另一个终端运行：
+选择 SystemOne 或 Decisions 发送文本请求：
+
+| 协议 | 请求结构 | 示例中的命题概率 |
+| --- | --- | --- |
+| SystemOne | `state` + 按 ID 索引的 `questions` | `answers.on_sofa.noul` |
+| Decisions | `input` + 问题列表 | `answers[0].probability` |
+
+请求中的 `model` 必须与启动时配置的模型名一致。`temperature` 默认为 `1.0`，必须是大于零的有限数值。
+
+<Tabs groupId="inference-protocol">
+<TabItem value="decisions" label="Decisions" default>
+
+```bash
+curl http://127.0.0.1:8000/v1/decisions \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "model": "valen",
+  "input": "A cat is on the sofa.",
+  "questions": [
+    {
+      "name": "on_sofa",
+      "type": "predicate",
+      "instructions": "The cat is on the sofa."
+    }
+  ],
+  "temperature": 1
+}'
+```
+
+</TabItem>
+<TabItem value="systemone" label="SystemOne">
 
 ```bash
 curl http://127.0.0.1:8000/v1/systemone \
   -H 'Content-Type: application/json' \
-  -d '{"model":"valen","state":"A cat is on the sofa.","questions":{"on_sofa":{"type":"noul","instructions":"The cat is on the sofa."}}}'
+  -d '{
+  "model": "valen",
+  "state": "A cat is on the sofa.",
+  "questions": {
+    "on_sofa": {
+      "type": "noul",
+      "instructions": "The cat is on the sofa."
+    }
+  },
+  "temperature": 1
+}'
 ```
 
-`answers.on_sofa.noul` 表示该陈述为真的概率。请求格式与 SGLang 本地接口相同，与托管 `/v1/decisions` 不同。
+</TabItem>
+</Tabs>
 
 ## 发送图片请求
 
-客户端会将本地 PNG/JPEG/WebP 编码成 data URL：
+在客户端运行 `python -m pip install requests`，将示例中的 `cat.jpg` 替换为本地 PNG、JPEG 或 WebP 图片。Python 示例会读取图片，按文件名识别 MIME 类型，并编码为 data URL。
 
-```bash
-python /path/to/vllm-kit/example_client.py --image /path/to/cat.jpg
+SystemOne 使用 `state.messages` 中的 `image_url` 内容块；Decisions 使用 `input` 中的 `input_image` 内容块。请求中的模型名均为 `valen`。
+
+<Tabs groupId="inference-protocol">
+<TabItem value="decisions" label="Decisions" default>
+
+```python
+import base64
+import mimetypes
+from pathlib import Path
+
+import requests
+
+image_path = Path("cat.jpg")
+mime_type = mimetypes.guess_type(image_path.name)[0]
+image_b64 = base64.b64encode(image_path.read_bytes()).decode("ascii")
+image_url = f"data:{mime_type};base64,{image_b64}"
+
+response = requests.post(
+    "http://127.0.0.1:8000/v1/decisions",
+    json={
+        "model": "valen",
+        "input": [
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "input_image",
+                        "image_url": image_url
+                    },
+                    {
+                        "type": "input_text",
+                        "text": "Inspect this image."
+                    }
+                ]
+            }
+        ],
+        "questions": [
+            {
+                "name": "animal",
+                "type": "choice",
+                "instructions": "Which animal is visible?",
+                "choices": [
+                    {
+                        "value": "cat",
+                        "description": "A cat"
+                    },
+                    {
+                        "value": "dog",
+                        "description": "A dog"
+                    }
+                ]
+            }
+        ],
+        "temperature": 1
+    },
+    timeout=120,
+)
+response.raise_for_status()
+print(response.json()["answers"])
 ```
 
-启动参数和输入限制见[部署包说明](https://github.com/Valen-Team/Valen/blob/main/serving/vllm/README_zh.md)。
+</TabItem>
+<TabItem value="systemone" label="SystemOne">
+
+```python
+import base64
+import mimetypes
+from pathlib import Path
+
+import requests
+
+image_path = Path("cat.jpg")
+mime_type = mimetypes.guess_type(image_path.name)[0]
+image_b64 = base64.b64encode(image_path.read_bytes()).decode("ascii")
+image_url = f"data:{mime_type};base64,{image_b64}"
+
+response = requests.post(
+    "http://127.0.0.1:8000/v1/systemone",
+    json={
+        "model": "valen",
+        "state": {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": image_url
+                            }
+                        },
+                        {
+                            "type": "text",
+                            "text": "Inspect this image."
+                        }
+                    ]
+                }
+            ]
+        },
+        "questions": {
+            "animal": {
+                "type": "choice",
+                "instructions": "Which animal is visible?",
+                "criteria": {
+                    "cat": "A cat",
+                    "dog": "A dog"
+                }
+            }
+        },
+        "temperature": 1
+    },
+    timeout=120,
+)
+response.raise_for_status()
+print(response.json()["answers"])
+```
+
+</TabItem>
+</Tabs>
+
+## 支持范围
+
+完整 Valen Qwen3.5 Mixer 检查点，`shared_state` 执行，单 GPU，TP=PP=1。默认最大输入长度为 8192，可通过 `--max-model-len` 调整。支持文本和图片判断、选择与评分：Choice 为 1–255 个候选，Score 为 2–255 个有序等级。视频可先提取画面帧，再作为图片输入。
+
+每请求最多 16 张图片，每张编码后不超过 24 MiB、3200 万像素。
+
+问题与答案结构见 [SystemOne](./api/systemone.md) 和 [Decisions](./api/decisions.md)。

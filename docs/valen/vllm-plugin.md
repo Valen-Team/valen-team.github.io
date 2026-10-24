@@ -1,61 +1,247 @@
 ---
+mdx:
+  format: mdx
 title: vLLM plugin deployment
-sidebar_label: Plugin
+sidebar_label: vLLM plugin
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Deploy with the vLLM plugin
 
-`valen-vllm` serves Valen decisions through `/v1/systemone`.
+Install the Valen plugin in an official vLLM environment and start a local HTTP inference service.
 
 ## Requirements
 
-Linux x86-64, Python 3.12, glibc 2.34+, CUDA 13, and official vLLM `0.32.1rc1.dev253+g30aded62d`. Follow the [pinned environment setup](https://github.com/Valen-Team/Valen/blob/main/serving/vllm/README.md#install-and-start) before installing the plugin.
-
-The plugin supports single-GPU text/image Choice, Noul and Score with `shared_state` execution. Tested with Valen-2B on H200. For direct video inference, use [Transformers](./quickstart.md).
+Linux x86-64, an NVIDIA GPU, a compatible CUDA driver, and Docker with NVIDIA Container Toolkit. You can also install the plugin directly in an existing vLLM Python environment.
 
 ## Build the kit
 
-Run from the Valen repository root:
+Get the [Valen source](https://github.com/Valen-Team/Valen) and build the wheel and kit from the repository root. Copy `serving-kit/vllm/` and a complete checkpoint to the GPU host.
 
 ```bash
 python -m pip install build
 python -m build --wheel serving/vllm
 python serving/vllm/build_kit.py \
-  serving/vllm/dist/valen_vllm-0.1.0.dev1-py3-none-any.whl ./vllm-kit
+  serving/vllm/dist/valen_vllm-0.1.0.dev2-py3-none-any.whl \
+  ./serving-kit/vllm
 ```
 
-Copy `vllm-kit/` and a complete checkpoint to the GPU host.
+## Prepare the runtime
+
+Use the official vLLM image. Replace the kit and checkpoint paths below:
+
+```bash
+docker run --rm -it --gpus device=0 --ipc=host \
+  -p 127.0.0.1:8000:8000 \
+  -v /absolute/path/to/serving-kit/vllm:/opt/valen-kit:ro \
+  -v /absolute/path/to/Valen-2B:/models/Valen-2B:ro \
+  --entrypoint bash \
+  docker.io/vllm/vllm-openai:nightly
+```
+
+Inside the container, `/opt/valen-kit` and `/models/Valen-2B` refer to those mounts. In an existing Python environment, substitute the actual paths below.
 
 ## Install and start
 
-Inside the required vLLM environment:
+Install the plugin and start the service inside the container:
 
 ```bash
-bash /path/to/vllm-kit/install.sh
-MODEL=/path/to/Valen-2B CUDA_VISIBLE_DEVICES=0 \
-  bash /path/to/vllm-kit/serve.sh
+bash /opt/valen-kit/install.sh
+MODEL=/models/Valen-2B MODEL_NAME=valen HOST=0.0.0.0 \
+  CUDA_VISIBLE_DEVICES=0 bash /opt/valen-kit/serve.sh
 ```
 
-Defaults: `127.0.0.1:8000`, model name `valen`. Override with `HOST`, `PORT` and `MODEL_NAME`.
+| Setting | Example | Purpose |
+| --- | --- | --- |
+| `MODEL` | `/models/Valen-2B` | Complete checkpoint directory |
+| `MODEL_NAME` | `valen` | Model name sent in requests |
+| `HOST` / `PORT` | `0.0.0.0` / `8000` | Listen address and port inside the container |
+
+After startup, access the service from the host at `http://127.0.0.1:8000`.
 
 ## Send a request
 
-Once the model is ready, run in another terminal:
+Send a text request using SystemOne or Decisions:
+
+| Protocol | Request structure | Predicate probability in the example |
+| --- | --- | --- |
+| SystemOne | `state` + questions keyed by ID | `answers.on_sofa.noul` |
+| Decisions | `input` + question list | `answers[0].probability` |
+
+The request `model` must match the configured served model name. `temperature` defaults to `1.0` and must be a finite number greater than zero.
+
+<Tabs groupId="inference-protocol">
+<TabItem value="decisions" label="Decisions" default>
+
+```bash
+curl http://127.0.0.1:8000/v1/decisions \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "model": "valen",
+  "input": "A cat is on the sofa.",
+  "questions": [
+    {
+      "name": "on_sofa",
+      "type": "predicate",
+      "instructions": "The cat is on the sofa."
+    }
+  ],
+  "temperature": 1
+}'
+```
+
+</TabItem>
+<TabItem value="systemone" label="SystemOne">
 
 ```bash
 curl http://127.0.0.1:8000/v1/systemone \
   -H 'Content-Type: application/json' \
-  -d '{"model":"valen","state":"A cat is on the sofa.","questions":{"on_sofa":{"type":"noul","instructions":"The cat is on the sofa."}}}'
+  -d '{
+  "model": "valen",
+  "state": "A cat is on the sofa.",
+  "questions": {
+    "on_sofa": {
+      "type": "noul",
+      "instructions": "The cat is on the sofa."
+    }
+  },
+  "temperature": 1
+}'
 ```
 
-`answers.on_sofa.noul` is the probability that the statement is true. This uses the same local request format as SGLang; the hosted `/v1/decisions` format is different.
+</TabItem>
+</Tabs>
 
 ## Send an image request
 
-The client encodes a local PNG/JPEG/WebP as a data URL:
+Run `python -m pip install requests` in the client environment and replace `cat.jpg` with a local PNG, JPEG, or WebP image. The Python example reads the file, infers its MIME type from the filename, and encodes it as a data URL.
 
-```bash
-python /path/to/vllm-kit/example_client.py --image /path/to/cat.jpg
+SystemOne uses `image_url` content blocks in `state.messages`; Decisions uses `input_image` content blocks in `input`. Both examples send the model name `valen`.
+
+<Tabs groupId="inference-protocol">
+<TabItem value="decisions" label="Decisions" default>
+
+```python
+import base64
+import mimetypes
+from pathlib import Path
+
+import requests
+
+image_path = Path("cat.jpg")
+mime_type = mimetypes.guess_type(image_path.name)[0]
+image_b64 = base64.b64encode(image_path.read_bytes()).decode("ascii")
+image_url = f"data:{mime_type};base64,{image_b64}"
+
+response = requests.post(
+    "http://127.0.0.1:8000/v1/decisions",
+    json={
+        "model": "valen",
+        "input": [
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "input_image",
+                        "image_url": image_url
+                    },
+                    {
+                        "type": "input_text",
+                        "text": "Inspect this image."
+                    }
+                ]
+            }
+        ],
+        "questions": [
+            {
+                "name": "animal",
+                "type": "choice",
+                "instructions": "Which animal is visible?",
+                "choices": [
+                    {
+                        "value": "cat",
+                        "description": "A cat"
+                    },
+                    {
+                        "value": "dog",
+                        "description": "A dog"
+                    }
+                ]
+            }
+        ],
+        "temperature": 1
+    },
+    timeout=120,
+)
+response.raise_for_status()
+print(response.json()["answers"])
 ```
 
-See the [kit guide](https://github.com/Valen-Team/Valen/blob/main/serving/vllm/README.md) for launch options and input limits.
+</TabItem>
+<TabItem value="systemone" label="SystemOne">
+
+```python
+import base64
+import mimetypes
+from pathlib import Path
+
+import requests
+
+image_path = Path("cat.jpg")
+mime_type = mimetypes.guess_type(image_path.name)[0]
+image_b64 = base64.b64encode(image_path.read_bytes()).decode("ascii")
+image_url = f"data:{mime_type};base64,{image_b64}"
+
+response = requests.post(
+    "http://127.0.0.1:8000/v1/systemone",
+    json={
+        "model": "valen",
+        "state": {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": image_url
+                            }
+                        },
+                        {
+                            "type": "text",
+                            "text": "Inspect this image."
+                        }
+                    ]
+                }
+            ]
+        },
+        "questions": {
+            "animal": {
+                "type": "choice",
+                "instructions": "Which animal is visible?",
+                "criteria": {
+                    "cat": "A cat",
+                    "dog": "A dog"
+                }
+            }
+        },
+        "temperature": 1
+    },
+    timeout=120,
+)
+response.raise_for_status()
+print(response.json()["answers"])
+```
+
+</TabItem>
+</Tabs>
+
+## Supported scope
+
+Full Valen Qwen3.5 Mixer checkpoints, `shared_state` execution, one GPU, TP=PP=1. The default maximum input length is 8192; adjust it with `--max-model-len`. Text and images support predicate, choice, and score questions: choice has 1–255 candidates; score has 2–255 ordered levels. For video, extract frames and submit them as image inputs.
+
+Each request supports up to 16 images, each up to 24 MiB encoded and 32 megapixels.
+
+See [SystemOne](./api/systemone.md) and [Decisions](./api/decisions.md) for question and answer structures.

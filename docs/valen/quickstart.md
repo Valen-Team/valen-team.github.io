@@ -29,31 +29,32 @@ For an existing environment or a different installation, follow the [upstream se
 import torch
 from transformers import AutoModel
 
-model = AutoModel.from_pretrained(
-    "Valen-Team/Valen-0.8B",
-    trust_remote_code=True,
-    dtype="auto",
-    attn_implementation="sdpa",
-).to("cuda").eval()
-
+model = (
+    AutoModel.from_pretrained(
+        "Valen-Team/Valen-0.8B",
+        trust_remote_code=True,
+        dtype="auto",
+        attn_implementation="sdpa",
+    )
+    .to("cuda")
+    .eval()
+)
 torch.set_float32_matmul_precision("highest")
 torch.backends.cudnn.allow_tf32 = False
-
-answer = model.predict({
-    "state": "A cat is sitting on the sofa.",
-    "questions": {
-        "animal": {
-            "type": "choice",
-            "instructions": "Which animal is present?",
-            "criteria": {"cat": "A cat", "dog": "A dog"},
-        },
-        "on_sofa": {
-            "type": "noul",
-            "instructions": "The cat is on the sofa.",
+answer = model.predict(
+    {
+        "state": "A cat is sitting on the sofa.",
+        "questions": {
+            "animal": {
+                "type": "choice",
+                "instructions": "Which animal is present?",
+                "criteria": {"cat": "A cat", "dog": "A dog"},
+            },
+            "on_sofa": {"type": "noul", "instructions": "The cat is on the sofa."},
         },
     },
-}, execution="shared_state")
-
+    execution="shared_state",
+)
 print(answer)
 ```
 
@@ -79,4 +80,3 @@ See [shared-state execution](/docs/valen/qwen-shared-state/) for the compute and
 [Use the API](/docs/valen/api/) · [Configure training](/docs/valen/configuration/) · [Evaluate with JevalKit](/docs/jevalkit/quickstart/)
 
 Source: [Valen README](https://github.com/Valen-Team/Valen#quick-start).
-

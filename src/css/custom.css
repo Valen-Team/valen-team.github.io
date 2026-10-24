@@ -207,3 +207,102 @@ article[itemprop='blogPost'] [class*='blogPostInfo'] {font-size:13px;color:var(-
 .modern-sidebar-nav .modern-doc-list,
 .modern-sidebar-nav .modern-doc-children {list-style:none;margin:0;padding:0;}
 .modern-sidebar-nav .modern-doc-children {margin:2px 0 8px 24px;padding-left:8px;border-left:1px solid var(--border);}
+
+/* Documentation code blocks: override inline-code padding at block scope. */
+.modern-doc-content .theme-doc-markdown [class*='codeBlockContainer'] {
+  margin-block: 18px 24px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: none;
+}
+.modern-doc-content .theme-doc-markdown pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font: 13px/1.75 var(--font-mono);
+  tab-size: 4;
+}
+.modern-doc-content .theme-doc-markdown pre code {
+  display: block;
+  padding: 18px 20px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.modern-doc-content .theme-doc-markdown pre code[class*='WithNumbering'] {
+  display: table;
+  padding: 18px 0;
+}
+.modern-doc-content .theme-doc-markdown [class*='codeBlockTitle'] {
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  font: 12px/1.5 var(--font-mono);
+}
+@media (max-width: 600px) {
+  .modern-doc-content .theme-doc-markdown pre code {padding: 14px 16px;}
+  .modern-doc-content .theme-doc-markdown pre code[class*='WithNumbering'] {padding: 14px 0;}
+}
+
+/* Numbered examples with a visible copy control. */
+.modern-doc-content .theme-doc-markdown [class*='codeLineNumber'] {
+  width: 1%;
+  padding: 0 16px 0 20px;
+  background: var(--surface);
+  user-select: none;
+}
+.modern-doc-content .theme-doc-markdown [class*='codeLineNumber']::before {
+  color: var(--text-faint);
+  opacity: 1;
+}
+.modern-doc-content .theme-doc-markdown [class*='codeLineContent'] {
+  padding-right: 48px;
+}
+.modern-doc-content .theme-doc-markdown [class*='buttonGroup'] {
+  top: 12px;
+  right: 12px;
+}
+.modern-doc-content .theme-doc-markdown [class*='buttonGroup'] button {
+  opacity: 1 !important;
+  border: 0;
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text-muted);
+  padding: 6px;
+}
+.modern-doc-content .theme-doc-markdown [class*='buttonGroup'] button:hover {
+  background: var(--border);
+  color: var(--heading);
+}
+.modern-doc-content .theme-doc-markdown .token.property {color: #075fc8 !important;}
+.modern-doc-content .theme-doc-markdown .token.string {color: #12395c !important;}
+
+.modern-sidebar-free {
+  margin-left: auto;
+  padding: 1px 7px;
+  border: 1px solid #fed7aa;
+  border-radius: 999px;
+  background: #fff7ed;
+  color: #c2410c;
+  font: 600 10px/1.6 var(--font-doc);
+  white-space: nowrap;
+}
+
+[data-theme='dark'] .modern-sidebar-free {
+  border-color: #9a4c1b;
+  background: #422514;
+  color: #fdba74;
+}
+
+/* Documentation keeps instructions and examples in one reading column. */
+.modern-doc-grid {display:block;max-width:1120px;}
+.modern-doc-content {width:100%;max-width:none;}

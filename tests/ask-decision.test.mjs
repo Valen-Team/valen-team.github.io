@@ -61,7 +61,7 @@ test('rating uses the returned zero-based score and numeric level indices', () =
   assert.deepEqual(answer.raw,raw);
 });
 test('all documented models are forwarded without substitution', () => {
-  for (const model of ['valen-2b','valen-4b','valen-0-8b','valen-preview-0923']) assert.equal(buildPayload({...base,model}).model,model);
+  for (const model of ['valen-2b','valen-4b','valen-0.8b']) assert.equal(buildPayload({...base,model}).model,model);
   assert.throws(()=>buildPayload({...base,model:'unknown'}));
 });
 test('file selection enforces advertised extensions, MIME types and size limits', () => {
