@@ -1,29 +1,29 @@
 ---
+mdx:
+  format: mdx
 title: Transformers 本地推理
 sidebar_label: Transformers 推理
-description: 安装 Valen，并运行第一个结构化决策示例。
+description: 安装依赖并使用两种协议运行 Valen。
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # 使用 Transformers 在本地推理
 
-使用 Hugging Face Transformers，在 Python 中直接加载已发布的 Valen 检查点。支持文本、图片、视频，以及 `shared_state` 和 `question` 两种执行模式。
+在 Python 中加载 Valen，使用 SystemOne 或 Decisions 对文本、图片和视频进行判断、选择与评分。
 
-本地 HTTP 服务可使用 [SGLang](/zh-Hans/docs/valen/sglang/) 或 [vLLM 插件](/zh-Hans/docs/valen/vllm-plugin/)。
+本页使用 PyTorch 与原生 Hugging Face 权重，不需要安装 Valen SDK。需要 CPU、ONNX Runtime 或浏览器推理时，请阅读 [ONNX 与 SDK](./onnx.md)。
 
-## 准备环境
+## 安装依赖
 
-使用 Python 3.10+ 和 CUDA GPU。在新克隆的仓库中运行安装脚本：
+使用 Python 3.10+ 和支持 BF16 的 CUDA GPU：
 
 ```bash
-git clone https://github.com/Valen-Team/Valen.git
-cd Valen
-bash scripts/setup/bootstrap.sh
-source .venv/bin/activate
+python -m pip install torch torchvision transformers pillow av
 ```
 
-已有环境或其他安装方式请参考[上游安装说明](https://github.com/Valen-Team/Valen/blob/main/scripts/README.md#installation)。当前环境应满足所选模型的依赖要求。
-
-## 运行文本决策
+## 加载模型
 
 ```python
 import torch
@@ -41,6 +41,20 @@ model = (
 )
 torch.set_float32_matmul_precision("highest")
 torch.backends.cudnn.allow_tf32 = False
+```
+
+将模型名替换为 `Valen-Team/Valen-2B` 或 `Valen-Team/Valen-4B`，可以切换规模。`dtype="auto"` 保留各模型的存储精度，Mixer 决策头使用 FP32。
+
+首次加载会下载并缓存原生模型权重。已有缓存后，在 `AutoModel.from_pretrained(...)` 中加入 `local_files_only=True` 可禁止下载；也可以将模型 ID 换成本地模型目录。请使用原生 `Valen-*B` 仓库，ONNX 图由 [SDK](./onnx.md) 加载。
+
+## 文本推理与结果读取
+
+先运行上方加载模型的代码，再选择下面一个协议标签执行示例。两个标签表达相同任务，选择其中一种即可；图片和视频示例复用同一个已加载的 `model`。
+
+<Tabs groupId="hf-inference-protocol">
+<TabItem value="systemone" label="SystemOne" default>
+
+```python
 answer = model.predict(
     {
         "state": "A cat is sitting on the sofa.",
@@ -51,32 +65,206 @@ answer = model.predict(
                 "criteria": {"cat": "A cat", "dog": "A dog"},
             },
             "on_sofa": {"type": "noul", "instructions": "The cat is on the sofa."},
+            "clarity": {
+                "type": "score",
+                "instructions": "How clear is the evidence?",
+                "criteria": ["Unclear", "Partly clear", "Clear"],
+            },
         },
     },
     execution="shared_state",
+    temperature=1.0,
 )
-print(answer)
+print(answer["answers"]["animal"]["choice"])
+print(answer["answers"]["animal"]["probabilities"])
+print(answer["answers"]["on_sofa"]["noul"])
+print(answer["answers"]["clarity"]["score"])
 ```
 
-模型会针对每个问题返回结构化决策。请读取返回的概率，而不是将其视为生成式文本。
+</TabItem>
+<TabItem value="decisions" label="Decisions">
 
-将模型名替换为 `Valen-Team/Valen-2B` 或 `Valen-Team/Valen-4B`，可以切换到其他规模。
+```python
+answer = model.predict(
+    {
+        "input": "A cat is sitting on the sofa.",
+        "questions": [
+            {
+                "name": "animal",
+                "type": "choice",
+                "instructions": "Which animal is present?",
+                "choices": [
+                    {"value": "cat", "description": "A cat"},
+                    {"value": "dog", "description": "A dog"},
+                ],
+            },
+            {
+                "name": "on_sofa",
+                "type": "predicate",
+                "instructions": "The cat is on the sofa.",
+            },
+            {
+                "name": "clarity",
+                "type": "score",
+                "instructions": "How clear is the evidence?",
+                "levels": [
+                    {"label": "0", "description": "Unclear"},
+                    {"label": "1", "description": "Partly clear"},
+                    {"label": "2", "description": "Clear"},
+                ],
+            },
+        ],
+    },
+    execution="shared_state",
+    temperature=1.0,
+)
+print(answer["answers"][0]["choice"])
+print(answer["answers"][0]["probabilities"])
+print(answer["answers"][1]["probability"])
+print(answer["answers"][2]["score"])
+```
 
-## 使用图像与视频
+</TabItem>
+</Tabs>
 
-将文本状态替换为包含媒体内容的消息对象。[数据格式指南](/zh-Hans/docs/valen/data-format/)定义了完整的输入结构、媒体路径与视频约定。
+SystemOne 的 `answers` 按问题 ID 索引；Decisions 的 `answers` 按请求顺序返回，并保留问题名。`score` 是从 0 开始的等级索引的概率加权平均值，以上三档范围为 0–2。
 
-需要可执行示例、输入预览与保存结果时，打开[本地推理 Notebook](https://github.com/Valen-Team/Valen/blob/main/cookbook/local_inference_zh.ipynb)。
+## 图片推理
 
-## 选择执行模式
+将 `cat.jpg` 替换为本地 PNG、JPEG 或 WebP 图片。相对路径通过 `media_root` 解析，也可以使用绝对路径。
 
-- `shared_state`：将所有问题和候选项放入共享序列。
-- `question`：按照架构约定逐问题或逐分支执行。
+<Tabs groupId="hf-inference-protocol">
+<TabItem value="systemone" label="SystemOne" default>
 
-计算与数据分组细节见[共享状态执行](/zh-Hans/docs/valen/qwen-shared-state/)。
+```python
+answer = model.predict(
+    {
+        "state": {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [{"type": "image_url", "image_url": {"url": "cat.jpg"}}],
+                }
+            ]
+        },
+        "questions": {
+            "animal": {
+                "type": "choice",
+                "instructions": "Which animal is present?",
+                "criteria": {"cat": "A cat", "dog": "A dog"},
+            }
+        },
+    },
+    execution="shared_state",
+    temperature=1.0,
+    media_root=".",
+)
+print(answer["answers"])
+```
 
-## 下一步
+</TabItem>
+<TabItem value="decisions" label="Decisions">
 
-[调用 API](/zh-Hans/docs/valen/api/) · [配置训练](/zh-Hans/docs/valen/configuration/) · [使用 JevalKit 评测](/zh-Hans/docs/jevalkit/quickstart/)
+```python
+answer = model.predict(
+    {
+        "input": [
+            {
+                "role": "user",
+                "content": [{"type": "input_image", "image_url": "cat.jpg"}],
+            }
+        ],
+        "questions": [
+            {
+                "name": "animal",
+                "type": "choice",
+                "instructions": "Which animal is present?",
+                "choices": [
+                    {"value": "cat", "description": "A cat"},
+                    {"value": "dog", "description": "A dog"},
+                ],
+            }
+        ],
+    },
+    execution="shared_state",
+    temperature=1.0,
+    media_root=".",
+)
+print(answer["answers"])
+```
 
-来源：[Valen README](https://github.com/Valen-Team/Valen#quick-start)。
+</TabItem>
+</Tabs>
+
+## 视频推理
+
+将 `clip.mp4` 替换为本地视频。模型配置默认采样 16 帧。
+
+<Tabs groupId="hf-inference-protocol">
+<TabItem value="systemone" label="SystemOne" default>
+
+```python
+answer = model.predict(
+    {
+        "state": {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "video_url", "video_url": {"url": "clip.mp4"}}
+                    ],
+                }
+            ]
+        },
+        "questions": {
+            "walking": {"type": "noul", "instructions": "A person is walking."}
+        },
+    },
+    execution="shared_state",
+    temperature=1.0,
+    media_root=".",
+)
+print(answer["answers"])
+```
+
+</TabItem>
+<TabItem value="decisions" label="Decisions">
+
+```python
+answer = model.predict(
+    {
+        "input": [
+            {
+                "role": "user",
+                "content": [{"type": "input_video", "video_url": "clip.mp4"}],
+            }
+        ],
+        "questions": [
+            {
+                "name": "walking",
+                "type": "predicate",
+                "instructions": "A person is walking.",
+            }
+        ],
+    },
+    execution="shared_state",
+    temperature=1.0,
+    media_root=".",
+)
+print(answer["answers"])
+```
+
+</TabItem>
+</Tabs>
+
+## 执行方式与温度
+
+- `shared_state`：多个问题和候选项共享一个序列。
+- `question`：逐问题或分支执行。
+- `temperature`：默认为 `1.0`，接受大于零的有限数值，用于缩放候选 logits 后计算概率。
+
+两种协议均可通过 `model.predict(request, execution="question", temperature=0.5)` 调整。请求体中的 `temperature` 优先于同名调用参数。
+
+真实输入预览与完整示例见[本地推理 Notebook](https://github.com/Valen-Team/Valen/blob/main/cookbook/local_inference_zh.ipynb)。
+
+本地 HTTP 服务： [SGLang](/zh-Hans/docs/valen/sglang/) · [vLLM](/zh-Hans/docs/valen/vllm/)

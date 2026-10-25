@@ -20,7 +20,8 @@ Open models, benchmarks, and tools for fast multimodal decision-making. Choose a
 
 | I want to… | Start here |
 | --- | --- |
-| Run a Valen model locally | [Local quickstart](/docs/valen/quickstart/) |
+| Run the native PyTorch model locally | [Transformers inference](/docs/valen/quickstart/) |
+| Run ONNX in Python, Node.js or the browser | [ONNX & SDKs](/docs/valen/onnx/) |
 | Serve a local HTTP API | [SGLang](/docs/valen/sglang/) · [vLLM](/docs/valen/vllm/) |
 | Call a hosted Valen model | [API quickstart](/docs/valen/api/) |
 | Understand the request format | [Data format](/docs/valen/data-format/) |
@@ -44,4 +45,4 @@ Valen supports three question types: **Choice** for named candidates, **Noul** f
 Found a documentation issue, a missing integration, or a useful new task? Read the [contribution guide](/docs/contributing/).
 
 
-The hosted API names true/false questions `predicate` and returns `probability`; local inference and evaluation retain the `noul` naming. Use the [API reference](/docs/valen/api/) for hosted request and response fields.
+SystemOne names true/false questions `noul` and returns the same field; Decisions uses `predicate` and returns `probability`. Both Transformers and ONNX SDKs support these protocols. See the [API reference](/docs/valen/api/) for HTTP endpoint schemas.

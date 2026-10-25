@@ -14,11 +14,11 @@ The repository includes the model implementation, data processing, SFT and exper
 
 ## Choose a model
 
-| Model | Weights |
-| --- | --- |
-| Valen 0.8B | [Valen-0.8B](https://huggingface.co/Valen-Team/Valen-0.8B) |
-| Valen 2B | [Valen-2B](https://huggingface.co/Valen-Team/Valen-2B) |
-| Valen 4B | [Valen-4B](https://huggingface.co/Valen-Team/Valen-4B) |
+| Model | Native weights / Transformers | ONNX Runtime |
+| --- | --- | --- |
+| Valen 0.8B | [Valen-0.8B](https://huggingface.co/Valen-Team/Valen-0.8B) | [Valen-0.8B-ONNX](https://huggingface.co/Valen-Team/Valen-0.8B-ONNX) |
+| Valen 2B | [Valen-2B](https://huggingface.co/Valen-Team/Valen-2B) | [Valen-2B-ONNX](https://huggingface.co/Valen-Team/Valen-2B-ONNX) |
+| Valen 4B | [Valen-4B](https://huggingface.co/Valen-Team/Valen-4B) | [Valen-4B-ONNX](https://huggingface.co/Valen-Team/Valen-4B-ONNX) |
 
 Released formats and earlier checkpoints are listed in the [Hugging Face organization](https://huggingface.co/Valen-Team).
 
@@ -30,9 +30,19 @@ Released formats and earlier checkpoints are listed in the [Hugging Face organiz
 
 The same state can be shared by multiple questions. Read the [data format](/docs/valen/data-format/) and [shared-state execution guide](/docs/valen/qwen-shared-state/) for the full semantics.
 
+## Choose a runtime
+
+| Goal | Integration |
+| --- | --- |
+| Native PyTorch model and CUDA inference | [Transformers](/docs/valen/quickstart/) |
+| In-app CPU / CUDA, Node.js or browser inference | [ONNX and Python / JavaScript SDKs](/docs/valen/onnx/) |
+| Native C++ text integration | [C++ example](https://github.com/Valen-Team/valen-sdk-cpp) |
+| Serve a GPU HTTP API | [SGLang](/docs/valen/sglang/) · [vLLM](/docs/valen/vllm/) |
+| Call an existing service without local weights | [HTTP API](/docs/valen/api/) |
+
 ## Get started
 
-1. Serve with [SGLang](/docs/valen/sglang/) or [vLLM](/docs/valen/vllm/), use [Transformers locally](/docs/valen/quickstart/), or follow the [hosted API quickstart](/docs/valen/api/).
+1. Serve with [SGLang](/docs/valen/sglang/) or [vLLM](/docs/valen/vllm/), use [Transformers locally](/docs/valen/quickstart/) or the [ONNX SDKs](/docs/valen/onnx/), or follow the [hosted API quickstart](/docs/valen/api/).
 2. Explore [image and video inputs](/docs/valen/data-format/#images-and-video).
 3. Read the [architecture](/docs/valen/architecture/) and [configuration reference](/docs/valen/configuration/).
 4. [Evaluate a checkpoint](/docs/valen/evaluation/) or compare models with [JevalKit](/docs/jevalkit/).
@@ -40,4 +50,4 @@ The same state can be shared by multiple questions. Read the [data format](/docs
 [Source repository](https://github.com/Valen-Team/Valen) · [Cookbook](https://github.com/Valen-Team/Valen/tree/main/cookbook) · [Try the demo](https://huggingface.co/spaces/yuhangzang/Valen-Preview-0923)
 
 
-The hosted API names true/false questions `predicate` and returns `probability`; local inference and evaluation retain the `noul` naming. Use the [API reference](/docs/valen/api/) for hosted request and response fields.
+SystemOne names true/false questions `noul` and returns the same field; Decisions uses `predicate` and returns `probability`. Both Transformers and ONNX SDKs support these protocols. See the [API reference](/docs/valen/api/) for HTTP endpoint schemas.

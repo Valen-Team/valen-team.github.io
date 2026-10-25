@@ -42,7 +42,7 @@ const config: Config = {
     footer: {
       style: 'light',
       links: [
-        {title: 'Build', items: [{label: 'Documentation', to: '/docs/'}, {label: 'Valen API', to: '/docs/valen/api/'}, {label: 'Local inference', to: '/docs/valen/quickstart/'}]},
+        {title: 'Build', items: [{label: 'Documentation', to: '/docs/'}, {label: 'Valen API', to: '/docs/valen/api/'}, {label: 'Local inference', to: '/docs/valen/quickstart/'}, {label: 'ONNX & SDKs', to: '/docs/valen/onnx/'}]},
         {title: 'Explore', items: [{label: 'JevalKit', to: '/docs/jevalkit/'}, {label: 'Models & datasets', href: 'https://huggingface.co/Valen-Team'}, {label: 'Leaderboard', href: 'https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard'}]},
       ],
       copyright: `© ${new Date().getFullYear()} Valen Team · 万澜. Fast Decisions. Continuous Evolution.`,

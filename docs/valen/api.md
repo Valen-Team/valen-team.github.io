@@ -28,3 +28,5 @@ The hosted service also exposes a model list endpoint:
 For an API key or higher quotas, contact [liuziyu77@sjtu.edu.cn](mailto:liuziyu77@sjtu.edu.cn).
 
 For local model names and image input formats, see: [SGLang](./sglang.md) · [vLLM](./vllm.md) · [Transformers](./quickstart.md).
+
+For in-app integration, see [ONNX & SDKs](./onnx.md), including the Python local ONNX service and Python / JavaScript HTTP clients.

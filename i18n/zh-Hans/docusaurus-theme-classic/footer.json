@@ -50,5 +50,9 @@
   "copyright": {
     "message": "© 2026 万澜团队 · Valen Team。快速决策，持续进化。",
     "description": "The footer copyright"
+  },
+  "link.item.label.ONNX & SDKs": {
+    "message": "ONNX 与 SDK",
+    "description": "The label of footer link with label=ONNX & SDKs linking to /docs/valen/onnx/"
   }
 }

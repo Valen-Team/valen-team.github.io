@@ -16,6 +16,14 @@ sidebar_label: 资源
 
 可用导出格式见 [Hugging Face 组织](https://huggingface.co/Valen-Team)。
 
+## ONNX 模型与 SDK
+
+通过 [ONNX 推理指南](/zh-Hans/docs/valen/onnx/) 选择 CPU、CUDA 或浏览器变体；下载体积、内存和质量对比见各模型卡片。
+
+[Valen-0.8B-ONNX](https://huggingface.co/Valen-Team/Valen-0.8B-ONNX) · [Valen-2B-ONNX](https://huggingface.co/Valen-Team/Valen-2B-ONNX) · [Valen-4B-ONNX](https://huggingface.co/Valen-Team/Valen-4B-ONNX)
+
+[Python SDK](https://github.com/Valen-Team/valen-sdk-python) · [JavaScript / TypeScript SDK](https://github.com/Valen-Team/valen-sdk-js) · [C++ 文本集成](https://github.com/Valen-Team/valen-sdk-cpp)
+
 ## 数据集
 
 | 数据集 | 用途 |

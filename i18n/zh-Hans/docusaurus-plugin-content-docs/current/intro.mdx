@@ -20,7 +20,8 @@ import Link from '@docusaurus/Link';
 
 | 我想要…… | 从这里开始 |
 | --- | --- |
-| 在本地运行 Valen | [本地推理入门](/zh-Hans/docs/valen/quickstart/) |
+| 通过原生 PyTorch 模型在本地运行 Valen | [Transformers 推理](/zh-Hans/docs/valen/quickstart/) |
+| 在 Python、Node.js 或浏览器中运行 ONNX | [ONNX 与 SDK](/zh-Hans/docs/valen/onnx/) |
 | 部署本地 HTTP 服务 | [SGLang](/zh-Hans/docs/valen/sglang/) · [vLLM](/zh-Hans/docs/valen/vllm/) |
 | 调用托管的 Valen 模型 | [API 入门](/zh-Hans/docs/valen/api/) |
 | 理解输入数据格式 | [数据格式](/zh-Hans/docs/valen/data-format/) |
@@ -42,4 +43,4 @@ Valen 支持三类问题：**Choice** 用于命名候选项，**Noul** 用于真
 欢迎贡献模型、数据、评测与文档，详见[贡献指南](/zh-Hans/docs/contributing/)。
 
 
-托管 API 使用 `predicate` 和返回字段 `probability` 表达是非判断；本地模型和评测文档沿用 `noul` 命名。调用托管服务时请以 [API 文档](/docs/valen/api/) 的请求与响应结构为准。
+SystemOne 使用 `noul` 表达是非判断并返回同名字段；Decisions 使用 `predicate` 并返回 `probability`。Transformers 与 ONNX SDK 均支持两种协议，HTTP 端点结构见 [API 文档](/zh-Hans/docs/valen/api/)。

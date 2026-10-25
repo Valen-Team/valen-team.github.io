@@ -16,6 +16,14 @@ sidebar_label: Resources
 
 Explore the [organization's model collection](https://huggingface.co/Valen-Team) for available export formats.
 
+## ONNX models and SDKs
+
+Use the [ONNX inference guide](/docs/valen/onnx/) to choose a CPU, CUDA or browser variant. Model cards include download sizes, memory and quality comparisons.
+
+[Valen-0.8B-ONNX](https://huggingface.co/Valen-Team/Valen-0.8B-ONNX) · [Valen-2B-ONNX](https://huggingface.co/Valen-Team/Valen-2B-ONNX) · [Valen-4B-ONNX](https://huggingface.co/Valen-Team/Valen-4B-ONNX)
+
+[Python SDK](https://github.com/Valen-Team/valen-sdk-python) · [JavaScript / TypeScript SDK](https://github.com/Valen-Team/valen-sdk-js) · [C++ text integration](https://github.com/Valen-Team/valen-sdk-cpp)
+
 ## Datasets
 
 | Dataset | Purpose |
