@@ -1,7 +1,9 @@
 ---
-title: "共享状态执行"
-sidebar_label: "共享状态执行"
+title: 多问题共享计算
+sidebar_label: 多问题共享计算
 ---
+
+同一段文本、图片或视频可以同时回答多个问题。Valen 将它们放进一个共享序列，用一次骨干前向计算得到各题的候选评分。
 
 `model.qwen_execution = "shared_state"` 让同一条记录中的全部问题共用一条 Qwen backbone 序列。
 `share_state` 作为拼写别名同样可用，保存时统一记为 `shared_state`。单题记录走完全相同的执行路径。

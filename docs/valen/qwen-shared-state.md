@@ -1,7 +1,9 @@
 ---
-title: "Shared-state execution"
-sidebar_label: "Shared-state execution"
+title: Multi-question inference
+sidebar_label: Multi-question inference
 ---
+
+Ask several questions about the same text, image or video. Valen puts them in one shared sequence and scores their candidates with one backbone forward pass.
 
 `model.qwen_execution = "shared_state"` enables one Qwen backbone sequence for
 all questions in a record. `share_state` is accepted as a spelling alias and saved

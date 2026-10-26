@@ -13,7 +13,7 @@ export function ModernFooter(){const zh=useChinese();const footer=useRef<HTMLEle
 export const docGroups = [
  {title:['Getting started','开始使用'],items:[['','Documentation overview','文档总览'],['valen','What is Valen?','Valen 是什么'],['valen/getting-started','First call','第一次调用'],['valen/choosing','Choose a version','版本选择']]},
  {title:['Integrations','接入方式'],items:[['valen/api','API calls','API 调用','','Free'],['valen/sglang','SGLang deployment','SGLang 部署'],['valen/vllm','vLLM deployment','vLLM 部署'],['valen/quickstart','Transformers inference','Transformers 推理'],['valen/onnx','ONNX & SDKs','ONNX 与 SDK'],['valen/gguf','GGUF local service','GGUF 本地服务']]},
- {title:['Model concepts','模型介绍'],items:[['valen/architecture','Released architecture','发布模型架构'],['valen/qwen-shared-state','Shared-state execution','Shared-state 执行'],['valen/probabilities','Using probabilities','如何使用概率']]},
+ {title:['Model concepts','模型介绍'],items:[['valen/architecture','Released architecture','发布模型架构'],['valen/qwen-shared-state','Multi-question inference','多问题共享计算'],['valen/probabilities','Using probabilities','如何使用概率']]},
  {title:['Training and fine-tuning','训练与微调'],items:[['valen/training','Fine-tuning','模型微调'],['valen/data-format','Data preparation and format','数据准备与格式'],['valen/configuration','Training configuration','训练配置'],['valen/checkpoints','Save, resume and export','保存、恢复与导出']]},
  {title:['Evaluation','评测'],items:[['valen/decision-index','Jev Decision Index','Jev Decision Index'],['jevalkit','JevalKit toolkit','JevalKit 工具']]},
  {title:['Resources','资源'],items:[['resources','Links and resources','链接与资源'],['contributing','Contributing','参与贡献']]},

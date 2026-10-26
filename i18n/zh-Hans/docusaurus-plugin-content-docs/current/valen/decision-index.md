@@ -1,11 +1,17 @@
 ---
-title: "Jev Decision Index"
+title: Jev Decision Index
 ---
 
-# Jev Decision Index
+# Valen 在 Jev Decision Index 上的成绩
 
-Decision Index 是按 edition 定义的基准，与 JevBench 任务集、通用平均准确率不同。JevalKit 固定的 edition 0.3 公开套件保留上游问题 ID、候选顺序、结构化 state、标签、排除规则和权重。其 43 个组成数据集按该准备协议得到 140,178 个公开请求，公开分数不包含私有榜单部分。
+三个发布模型均已收录，结果如下（2026-10-22 榜单快照）。
 
-使用基准自身的机会校正加权 scorer，不应替换成无权重准确率平均。记录 edition、准备数据哈希、模型 revision、engine、失败与不支持的情况。子集 smoke 或协议检查不能作为完整 Decision Index 结果。
+| 模型 | 综合得分 Full ↑ | 公开得分 Public ↑ |
+| --- | ---: | ---: |
+| Valen-0.8B | 16.55 | 20.71 |
+| Valen-2B | 22.20 | 27.20 |
+| Valen-4B | 37.57 | 38.54 |
 
-[JevalKit 环境与评分依赖](/zh-Hans/docs/jevalkit/quickstart/) · [基准协议及来源](/zh-Hans/docs/jevalkit/benchmarks/) · [模型接入](/zh-Hans/docs/jevalkit/models/)。数据集实现继续在 [JevalKit](https://github.com/Valen-Team/JevalKit/tree/main/jevalkit/datasets)维护。
+分数范围为 0–100，越高越好，不是准确率百分比。Full 包含私有测试，Public 仅含公开测试。
+
+[查看榜单](https://huggingface.co/spaces/multimodalart/jev-decision-index) · [数据来源](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/0b5ecaf2396891e76c13a19aa17b874b59abcc37/data/index.json)

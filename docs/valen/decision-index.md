@@ -1,11 +1,17 @@
 ---
-title: "Jev Decision Index"
+title: Jev Decision Index
 ---
 
-# Jev Decision Index
+# Valen on Jev Decision Index
 
-Decision Index is an edition-specific benchmark, distinct from the JevBench task suite and from a generic average accuracy. JevalKit's frozen edition 0.3 public suite preserves the upstream question IDs, candidate order, structured state, gold labels, exclusions and weighting. Its 43 constituent datasets yield 140,178 public requests under that preparation protocol. Public scores do not include private leaderboard components.
+All three released models are listed. Results below are from the 22 October 2026 snapshot.
 
-Use the benchmark-owned chance-corrected weighted scorer; do not replace it with an unweighted accuracy average. Record edition, prepared data hashes, model revision, engine, failures and unsupported cases. A subset smoke or protocol check is not a full Decision Index result.
+| Model | Full score ↑ | Public score ↑ |
+| --- | ---: | ---: |
+| Valen-0.8B | 16.55 | 20.71 |
+| Valen-2B | 22.20 | 27.20 |
+| Valen-4B | 37.57 | 38.54 |
 
-[JevalKit setup and scoring dependencies](/docs/jevalkit/quickstart/) · [benchmark protocol and provenance](/docs/jevalkit/benchmarks/) · [model engines](/docs/jevalkit/models/). The dataset implementation remains in [JevalKit](https://github.com/Valen-Team/JevalKit/tree/main/jevalkit/datasets).
+Scores range from 0 to 100; higher is better. They are normalized index scores, not accuracy percentages. Full includes private tests; Public covers the public suite.
+
+[Leaderboard](https://huggingface.co/spaces/multimodalart/jev-decision-index) · [Source data](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/0b5ecaf2396891e76c13a19aa17b874b59abcc37/data/index.json)
