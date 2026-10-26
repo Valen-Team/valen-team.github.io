@@ -6,7 +6,7 @@ description: Run Valen with Python, Node.js, browser WebGPU or a native C++ text
 
 # ONNX inference and SDKs
 
-Python SDK 0.2.0 is published on [PyPI](https://pypi.org/project/valen-sdk/0.2.0/). JavaScript SDK 0.2.0 installs from its GitHub release/tag; npm publication is still pending. For a first trial and format selection, see [version selection](https://valen-team.github.io/docs/valen/choosing/).
+Python SDK 0.2.0 is published on [PyPI](https://pypi.org/project/valen-sdk/0.2.0/). JavaScript SDK 0.2.0 is published on [npm as @valen-team/sdk](https://www.npmjs.com/package/@valen-team/sdk/v/0.2.0): `npm install @valen-team/sdk@0.2.0`. For a first trial and format selection, see [version selection](https://valen-team.github.io/docs/valen/choosing/).
 
 Run Valen decisions in your application with ONNX Runtime. The SDKs use the published Valen ONNX components, including the trained vision tower and Mixer decision head. Local SDK inference does not require PyTorch or Transformers.
 
@@ -142,7 +142,7 @@ The examples use Decisions messages with `input_image` / `input_video` and sampl
 Use Node.js 22.12+ or 24 and Git:
 
 ```bash
-git clone --branch v0.2.0 --depth 1 https://github.com/Valen-Team/valen-sdk-js.git
+git clone --branch npm-v0.2.0 --depth 1 https://github.com/Valen-Team/valen-sdk-js.git
 cd valen-sdk-js
 npm ci --ignore-scripts
 node examples/local.mjs
@@ -155,7 +155,7 @@ The example runs the same three CPU decisions. TypeScript declarations are inclu
 The browser example can be used independently. In a fresh terminal, clone the JavaScript SDK and enter its example directory. If already cloned, go directly to `valen-sdk-js/examples/browser`:
 
 ```bash
-git clone --branch v0.2.0 --depth 1 https://github.com/Valen-Team/valen-sdk-js.git
+git clone --branch npm-v0.2.0 --depth 1 https://github.com/Valen-Team/valen-sdk-js.git
 cd valen-sdk-js/examples/browser
 npm install
 npm run dev
