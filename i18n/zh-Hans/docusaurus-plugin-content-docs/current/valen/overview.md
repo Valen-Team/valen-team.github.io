@@ -4,17 +4,13 @@ slug: /valen/
 description: 开放的多模态 System One 决策模型。
 ---
 
-# Valen
+# Valen 是什么
 
-**输入文本、图片与视频，输出候选决策的概率。**
+Valen 是一个用于分类、判断和评分的多模态模型。你提供文本、图片或视频，以及问题和候选答案，模型返回每个候选答案的概率。
 
-Valen（万澜）为 System One 决策引入视觉感知。受 [Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev) 启发，模型依据任务要求评估共享状态，对给定候选项输出概率。
+例如：给一条客户消息，判断它是在修改地址还是取消订单；给一张商品图片，判断它是否符合要求。
 
-仓库包含模型实现、数据处理、SFT 与实验性 RLCD 训练、推理和评测工具。
-
-## 最新动态
-
-- **2026-10-26**：三尺寸 F32/Q8_0 GGUF 已发布，新增[无需编译的 CPU 文本服务](/zh-Hans/docs/valen/gguf/)与[统一版本选择](/zh-Hans/docs/valen/choosing/)。[Python](https://github.com/Valen-Team/valen-sdk-python/releases/tag/v0.2.0)/[JavaScript](https://github.com/Valen-Team/valen-sdk-js/releases/tag/npm-v0.2.0) SDK 0.2.0 提供 GitHub 稳定包；Python 已发布到 [PyPI](https://pypi.org/project/valen-sdk/0.2.0/)，JavaScript 已发布到 [npm，包名 @valen-team/sdk](https://www.npmjs.com/package/@valen-team/sdk/v/0.2.0)。
+[第一次调用](./getting-started.md)无需下载模型。[Cookbook](/zh-Hans/cookbook/)提供完整应用示例。
 
 ## 选择模型
 
@@ -32,7 +28,7 @@ Valen（万澜）为 System One 决策引入视觉感知。受 [Jev](https://typ
 - **Noul**：估计命题为真或假的概率。
 - **Score**：在有序等级上输出概率分布。
 
-同一个状态可以由多个问题共享。完整语义见[数据格式](/zh-Hans/docs/valen/data-format/)与[共享状态执行](/zh-Hans/docs/valen/qwen-shared-state/)。
+同一个状态可以由多个问题共享。完整语义见[数据格式](/zh-Hans/docs/valen/data-format/)与[多问题共享计算](/zh-Hans/docs/valen/qwen-shared-state/)。
 
 ## 选择运行方式
 
@@ -62,3 +58,5 @@ SystemOne 使用 `noul` 表达是非判断并返回同名字段；Decisions 使�
 [版本选择 / Version selection](/zh-Hans/docs/valen/choosing/) · [GGUF](/zh-Hans/docs/valen/gguf/)
 
 [第一次调用](./getting-started.md) · [Cookbook](/zh-Hans/cookbook/)
+
+<a id="最新动态"></a>

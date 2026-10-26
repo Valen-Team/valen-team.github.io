@@ -4,9 +4,9 @@ title: Fine-tuning
 
 # Fine-tune Valen on your data
 
-Start with **complete Valen-0.8B and LoRA**. This keeps the trained Mixer and updates a small set of language adapters, the decision head and visual merger.
+Fine-tuning uses your labeled examples to adapt an existing model—for example, to your company’s support-ticket categories. Start with Valen-0.8B and LoRA, which updates a small subset of parameters for an initial experiment.
 
-The [domain fine-tuning Cookbook](/cookbook/domain-finetuning/) provides a small licensed data template and runnable preparation, training, resume and before/after evaluation commands.
+The [domain fine-tuning Cookbook](/cookbook/domain-finetuning/) includes a data template and runnable steps.
 
 ## Prepare your run
 

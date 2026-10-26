@@ -4,17 +4,13 @@ slug: /valen/
 description: An open multimodal System One decision model.
 ---
 
-# Valen
+# What is Valen?
 
-**Text, images, and video in. Decision probabilities out.**
+Valen is a multimodal model for classification, yes/no decisions and ratings. Give it text, images or video, a question and possible answers; it returns a probability for each answer.
 
-Valen (万澜) brings visual perception to System One decision-making. Inspired by [Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev), it evaluates a shared state against task instructions and returns probabilities over supplied candidates.
+For example, classify a customer message as an address change or cancellation, or check whether a product image meets your requirements.
 
-The repository includes the model implementation, data processing, SFT and experimental RLCD training, inference, and evaluation tools.
-
-## News
-
-- **2026-10-26**: F32/Q8_0 GGUFs are available in all three sizes, with a [prebuilt CPU text service](/docs/valen/gguf/) and [shared version selection](/docs/valen/choosing/). [Python](https://github.com/Valen-Team/valen-sdk-python/releases/tag/v0.2.0)/[JavaScript](https://github.com/Valen-Team/valen-sdk-js/releases/tag/npm-v0.2.0) SDK 0.2.0 provides stable GitHub packages. Python is also published on [PyPI](https://pypi.org/project/valen-sdk/0.2.0/); JavaScript is published on [npm as @valen-team/sdk](https://www.npmjs.com/package/@valen-team/sdk/v/0.2.0).
+[Try your first call](./getting-started.md) without downloading a model, or build from a complete [Cookbook example](/cookbook/).
 
 ## Choose a model
 
@@ -62,3 +58,5 @@ SystemOne names true/false questions `noul` and returns the same field; Decision
 [版本选择 / Version selection](/docs/valen/choosing/) · [GGUF](/docs/valen/gguf/)
 
 [First call](./getting-started.md) · [Cookbook](/cookbook/)
+
+<a id="news"></a>

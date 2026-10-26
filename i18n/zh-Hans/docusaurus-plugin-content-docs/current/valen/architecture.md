@@ -2,11 +2,9 @@
 title: "发布模型架构"
 ---
 
-# 先理解实际发布模型
+# 模型如何做决策
 
-发布的原生 Valen-0.8B、Valen-2B、Valen-4B 使用 Qwen3.5 多模态骨干、**Mixer** 候选评分头和 **shared_state** 执行。发布配置为 `model_type="valen_qwen"`、`qwen_execution="shared_state"`、`valen_head.head_type="mixer"`。Mixer 宽度 256、两层 block、角色混合隐藏宽度 16、通道混合隐藏宽度 1024。`valen_max_length=32768` 限制完整序列，不代表每种后端都接受这一预算。
-
-这些是发布配置，不能用通用构建器的 `bilinear` / `question` fallback 替代。加载完整模型时继承已保存架构，拒绝不兼容的评分头尺寸，并保留训练后的评分头。
+Valen 先用 Qwen3.5 理解输入的文本、图片或视频，再用 Mixer 给每个候选答案打分，最后把分数转换成概率。一次输入可以同时回答多个问题，共用同一次骨干计算。
 
 ## 候选评分
 
@@ -39,3 +37,12 @@ Bilinear 使用两投影的缩放点积；MLP、role-MLP、dual-encoder 仍是�
 <a id="分布式训练"></a>
 <a id="冻结特征复用"></a>
 <a id="保存加载和输出"></a>
+
+<details>
+<summary>发布配置</summary>
+
+发布的原生 Valen-0.8B、Valen-2B、Valen-4B 使用 Qwen3.5 多模态骨干、**Mixer** 候选评分头和 **shared_state** 执行。发布配置为 `model_type="valen_qwen"`、`qwen_execution="shared_state"`、`valen_head.head_type="mixer"`。Mixer 宽度 256、两层 block、角色混合隐藏宽度 16、通道混合隐藏宽度 1024。`valen_max_length=32768` 限制完整序列，不代表每种后端都接受这一预算。
+
+这些是发布配置，不能用通用构建器的 `bilinear` / `question` fallback 替代。加载完整模型时继承已保存架构，拒绝不兼容的评分头尺寸，并保留训练后的评分头。
+
+</details>
