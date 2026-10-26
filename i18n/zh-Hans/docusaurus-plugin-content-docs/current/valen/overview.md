@@ -14,7 +14,7 @@ Valen（万澜）为 System One 决策引入视觉感知。受 [Jev](https://typ
 
 ## 最新动态
 
-- **2026-10-26**：三尺寸 F32/Q8_0 GGUF 已发布，新增[无需编译的 CPU 文本服务](/zh-Hans/docs/valen/gguf/)与[统一版本选择](/zh-Hans/docs/valen/choosing/)。[Python](https://github.com/Valen-Team/valen-sdk-python/releases/tag/v0.2.0)/[JavaScript](https://github.com/Valen-Team/valen-sdk-js/releases/tag/v0.2.0) SDK 0.2.0 提供 GitHub 稳定包，尚未发布到 PyPI/npm。
+- **2026-10-26**：三尺寸 F32/Q8_0 GGUF 已发布，新增[无需编译的 CPU 文本服务](/zh-Hans/docs/valen/gguf/)与[统一版本选择](/zh-Hans/docs/valen/choosing/)。[Python](https://github.com/Valen-Team/valen-sdk-python/releases/tag/v0.2.0)/[JavaScript](https://github.com/Valen-Team/valen-sdk-js/releases/tag/v0.2.0) SDK 0.2.0 提供 GitHub 稳定包；Python 已发布到 [PyPI](https://pypi.org/project/valen-sdk/0.2.0/)，npm 发布仍待授权。
 
 ## 选择模型
 

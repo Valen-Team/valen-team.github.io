@@ -6,7 +6,7 @@ description: 通过 Python、Node.js、浏览器 WebGPU 或原生 C++ 文本集�
 
 # ONNX 推理与 SDK
 
-稳定 SDK 0.2.0 使用 GitHub release/tag 安装；当前并未发布到 PyPI/npm。首次体验与格式选择见[版本选择](https://valen-team.github.io/zh-Hans/docs/valen/choosing/)。
+Python SDK 0.2.0 已发布到 [PyPI](https://pypi.org/project/valen-sdk/0.2.0/)；JavaScript SDK 0.2.0 使用 GitHub release/tag 安装，尚未发布到 npm。首次体验与格式选择见[版本选择](https://valen-team.github.io/zh-Hans/docs/valen/choosing/)。
 
 通过 ONNX Runtime 将 Valen 决策接入自己的应用。SDK 使用已发布的 Valen ONNX 组件，包含训练后的视觉主干与 Mixer 决策头；本地 SDK 推理无需安装 PyTorch 或 Transformers。
 

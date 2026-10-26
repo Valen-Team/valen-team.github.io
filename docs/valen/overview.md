@@ -14,7 +14,7 @@ The repository includes the model implementation, data processing, SFT and exper
 
 ## News
 
-- **2026-10-26**: F32/Q8_0 GGUFs are available in all three sizes, with a [prebuilt CPU text service](/docs/valen/gguf/) and [shared version selection](/docs/valen/choosing/). [Python](https://github.com/Valen-Team/valen-sdk-python/releases/tag/v0.2.0)/[JavaScript](https://github.com/Valen-Team/valen-sdk-js/releases/tag/v0.2.0) SDK 0.2.0 provides stable GitHub packages; PyPI/npm publication is pending.
+- **2026-10-26**: F32/Q8_0 GGUFs are available in all three sizes, with a [prebuilt CPU text service](/docs/valen/gguf/) and [shared version selection](/docs/valen/choosing/). [Python](https://github.com/Valen-Team/valen-sdk-python/releases/tag/v0.2.0)/[JavaScript](https://github.com/Valen-Team/valen-sdk-js/releases/tag/v0.2.0) SDK 0.2.0 provides stable GitHub packages. Python is also published on [PyPI](https://pypi.org/project/valen-sdk/0.2.0/); npm publication remains pending.
 
 ## Choose a model
 
