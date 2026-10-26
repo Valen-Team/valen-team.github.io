@@ -60,3 +60,5 @@ SystemOne 使用 `noul` 表达是非判断并返回同名字段；Decisions 使�
 ## 版本选择
 
 [版本选择 / Version selection](/zh-Hans/docs/valen/choosing/) · [GGUF](/zh-Hans/docs/valen/gguf/)
+
+[第一次调用](./getting-started.md) · [Cookbook](/zh-Hans/cookbook/)

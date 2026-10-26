@@ -121,7 +121,3 @@ register its import path in `jevalkit/config.py`. Size variants can share the sa
 implementation. Keep author imports inside initialization so other models remain
 usable without that SDK. Reuse `_http.py` or `_hf.py` for matching calling conventions.
 Run `jeval check --model <name> --output check.json` and the relevant adapter tests.
-
----
-
-Synchronized from [JevalKit / docs/models.md](https://github.com/Valen-Team/JevalKit/blob/main/docs/models.md) · Source blob `e6466de` · 2026-10-19.

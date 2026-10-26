@@ -105,7 +105,3 @@ Implement `prepare(root=None, source=None, **options)` and, when required,
 package name, family and modality in `jevalkit/datasets/__init__.py`; the CLI and
 runner dispatch through that entry. Use `_shared.commit_dataset` for validated TSVs
 and add fixtures checking the source projection and scoring rules.
-
----
-
-Synchronized from [JevalKit / docs/benchmarks.md](https://github.com/Valen-Team/JevalKit/blob/main/docs/benchmarks.md) · Source blob `f3f8916` · 2026-10-19.

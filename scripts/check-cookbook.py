@@ -68,6 +68,19 @@ class Policies(unittest.TestCase):
             self.assertEqual(hashlib.sha256((CODE / filename).read_bytes()).hexdigest(), digest,
                              'Code changed after real-model validation: ' + filename)
 
+    def test_domain_recipe_is_bound_to_real_training_smoke(self):
+        report = json.loads((ROOT / 'static/cookbook/validation/p2-finetuning.json').read_text())
+        self.assertEqual(report['status'], 'passed')
+        self.assertEqual(report['validation_kind'], 'real_model_smoke')
+        self.assertEqual(report['before']['step'], 0)
+        self.assertEqual(report['after']['step'], 2)
+        self.assertFalse(report['quality_improvement_claimed'])
+        self.assertFalse(report['export_validated'])
+        for filename, digest in report['tested_sources'].items():
+            self.assertEqual(hashlib.sha256((CODE / filename).read_bytes()).hexdigest(), digest)
+        for locale in [ROOT / 'cookbook', ROOT / 'i18n/zh-Hans/docusaurus-plugin-content-docs-cookbook/current']:
+            self.assertIn('/static/cookbook/code/domain_finetuning.py', (locale / 'domain-finetuning.mdx').read_text())
+
     def test_failures_and_backend_scope_remain_visible(self):
         validation = ROOT / 'static/cookbook/validation'
         release = json.loads((validation / 'release-checks.json').read_text())

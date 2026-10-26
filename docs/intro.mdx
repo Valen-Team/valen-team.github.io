@@ -1,50 +1,20 @@
 ---
 title: Documentation
 slug: /
-sidebar_label: Start here
-description: Guides for Valen models, JevalKit evaluation, and multimodal decision benchmarks.
 ---
 
-import Link from '@docusaurus/Link';
+# Build decision applications with Valen
 
-# Build with Valen Team
+Provide text, images or video, define a question, and get probabilities over your candidates.
 
-Open models, benchmarks, and tools for fast multimodal decision-making. Choose a project to get started.
+1. [First call](/docs/valen/getting-started/): try the API without downloading a model.
+2. [Choose a version](/docs/valen/choosing/): pick online or local inference.
+3. [Cookbook](/cookbook/): build from complete routing and screening examples.
 
-<div className="doc-cards">
-<Link className="doc-card" to="/docs/valen/"><strong>Valen ↗</strong><p>Run a multimodal decision model. Work with text, images, and video, and get structured probabilities.</p></Link>
-<Link className="doc-card" to="/docs/jevalkit/"><strong>JevalKit ↗</strong><p>Evaluate decision models through a common interface, prepared datasets, and reproducible scoring protocols.</p></Link>
-</div>
+[Using probabilities](/docs/valen/probabilities/) · [Fine-tuning](/docs/valen/training/) · [JevalKit evaluation](/docs/jevalkit/)
 
-## Find your starting point
-
-| I want to… | Start here |
-| --- | --- |
-| First try without downloading weights | [Web experience](/) · [Free API](/docs/valen/api/) · [Choose a version](/docs/valen/choosing/) |
-| C++ Linux CPU service without compiling | [GGUF custom runtime](/docs/valen/gguf/) |
-| Run the native PyTorch model locally | [Transformers inference](/docs/valen/quickstart/) |
-| Run ONNX in Python, Node.js or the browser | [ONNX & SDKs](/docs/valen/onnx/) |
-| Serve a local HTTP API | [SGLang](/docs/valen/sglang/) · [vLLM](/docs/valen/vllm/) |
-| Call a hosted Valen model | [API quickstart](/docs/valen/api/) |
-| Understand the request format | [Data format](/docs/valen/data-format/) |
-| Evaluate a decision model | [Run your first evaluation](/docs/jevalkit/quickstart/) |
-| Add a model to JevalKit | [Model integrations](/docs/jevalkit/models/) |
-| Understand benchmark scores | [Benchmark protocols](/docs/jevalkit/benchmarks/) |
-| Find model weights and datasets | [Resources](/docs/resources/) |
-
-## The decision interface
-
-**Text, images, and video → task instructions and candidates → probabilities.**
-
-Valen supports three question types: **Choice** for named candidates, **Noul** for true/false decisions, and **Score** for ordered grades. JevalKit evaluates these outputs using each benchmark's documented protocol.
-
-## Explore the ecosystem
-
-[GitHub](https://github.com/Valen-Team) · [Hugging Face](https://huggingface.co/Valen-Team)
-
-## Contribute
-
-Found a documentation issue, a missing integration, or a useful new task? Read the [contribution guide](/docs/contributing/).
-
-
-SystemOne names true/false questions `noul` and returns the same field; Decisions uses `predicate` and returns `probability`. Both Transformers and ONNX SDKs support these protocols. See the [API reference](/docs/valen/api/) for HTTP endpoint schemas.
+<a id="build-with-valen-team"></a>
+<a id="find-your-starting-point"></a>
+<a id="the-decision-interface"></a>
+<a id="explore-the-ecosystem"></a>
+<a id="contribute"></a>

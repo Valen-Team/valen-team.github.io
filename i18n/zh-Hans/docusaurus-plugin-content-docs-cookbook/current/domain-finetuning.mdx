@@ -1,0 +1,44 @@
+---
+title: 领域微调
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/domain_finetuning.py?cookbook-source';
+
+# 用 Valen-0.8B 微调客服分类
+
+这个小例子把请求分为“修改地址”“取消订单”“其他”，跑通数据检查、LoRA 训练、恢复和前后评测。
+
+需要已有 Valen 训练环境和缓存的**完整 Valen-0.8B**。18 条原创合成数据采用 CC0-1.0：训练 12 条、validation 3 条、test 3 条。按独立情境划分；检查脚本会拒绝跨划分重复 group_id 或规范化文本。真实数据还需按客户、会话和近重复来源检查泄漏。
+
+```bash
+# Run from the existing Valen code checkout and prepared training environment.
+# Download this small script; use a complete model already cached on compute.
+curl -fLo domain_finetuning.py https://valen-team.github.io/cookbook/code/domain_finetuning.py
+python domain_finetuning.py prepare --model /existing/cache/Valen-0.8B --output output/domain
+python domain_finetuning.py check --output output/domain
+python domain_finetuning.py baseline --config output/domain/config.json --output output/domain/baseline
+python -m valen.evaluate --checkpoint output/domain/baseline --data output/domain/test.jsonl --output output/domain/before
+python -m valen.train --config output/domain/config.json
+python -m valen.train --config output/domain/resume.json --resume output/domain/run/latest
+python -m valen.evaluate --checkpoint output/domain/run/latest --data output/domain/test.jsonl --output output/domain/after
+python -m valen.inference --checkpoint output/domain/run/latest --data output/domain/test.jsonl --output output/domain/predictions.jsonl
+python domain_finetuning.py compare --before output/domain/before/metrics.json --after output/domain/after/metrics.json --output output/domain/comparison.json
+```
+
+## 看结果
+
+`comparison.json` 包含同一 test 上的前后指标；逐题结果在 `predictions.jsonl`。这个两步 smoke 只证明流程可运行，三条合成测试不能证明领域效果提升。
+
+默认使用 rank 8 的 LoRA、SDPA/BF16 和单卡，仍需容纳完整骨干。实际项目请换成授权领域数据，用 validation 调参，固定后再比较独立 test。
+
+`latest/` 会覆盖旧保存；恢复时保留原模型、数据和进程数。部署导出另见[保存、恢复与导出](/zh-Hans/docs/valen/checkpoints/)。本例未验证自定义导出。
+
+[执行结果](https://valen-team.github.io/cookbook/validation/p2-finetuning.json) · [训练配置](/zh-Hans/docs/valen/configuration/) · [概率与阈值](/zh-Hans/docs/valen/probabilities/)
+
+<details>
+<summary>查看完整代码（Apache-2.0）</summary>
+
+<CodeBlock language="python" title="domain_finetuning.py">{source}</CodeBlock>
+
+</details>

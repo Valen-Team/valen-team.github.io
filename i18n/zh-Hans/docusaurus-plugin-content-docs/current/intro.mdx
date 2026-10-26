@@ -1,48 +1,19 @@
 ---
-title: 文档中心
+title: 开发者文档
 slug: /
-sidebar_label: 从这里开始
-description: Valen 模型、JevalKit 评测与多模态决策 Benchmark 的使用指南。
 ---
 
-import Link from '@docusaurus/Link';
+# 用 Valen 构建决策应用
 
-# 使用万澜团队的开放项目
+给出文本、图片或视频，定义要判断的问题，得到候选概率。
 
-面向快速多模态决策的开放模型、评测工具与数据。选择一个项目，开始构建。
+1. [第一次调用](/zh-Hans/docs/valen/getting-started/)：无需下载模型，先试一次 API。
+2. [版本选择](/zh-Hans/docs/valen/choosing/)：确定本地或在线接入方式。
+3. [Cookbook](/zh-Hans/cookbook/)：从工单分流、图片筛选等完整案例开始。
 
-<div className="doc-cards">
-<Link className="doc-card" to="/docs/valen/"><strong>Valen ↗</strong><p>运行多模态决策模型。理解文本、图片与视频，输出结构化的决策概率。</p></Link>
-<Link className="doc-card" to="/docs/jevalkit/"><strong>JevalKit ↗</strong><p>通过统一接口、即用数据集与可复现评分协议，评测和比较决策模型。</p></Link>
-</div>
+[如何使用概率](/zh-Hans/docs/valen/probabilities/) · [模型微调](/zh-Hans/docs/valen/training/) · [JevalKit 评测](/zh-Hans/docs/jevalkit/)
 
-## 找到你的起点
-
-| 我想要…… | 从这里开始 |
-| --- | --- |
-| 首次体验，无需下载模型 | [网页](/zh-Hans/) · [免费 API](/zh-Hans/docs/valen/api/) · [版本选择](/zh-Hans/docs/valen/choosing/) |
-| C++ Linux CPU 本地服务，无需编译 | [GGUF 定制运行包](/zh-Hans/docs/valen/gguf/) |
-| 通过原生 PyTorch 模型在本地运行 Valen | [Transformers 推理](/zh-Hans/docs/valen/quickstart/) |
-| 在 Python、Node.js 或浏览器中运行 ONNX | [ONNX 与 SDK](/zh-Hans/docs/valen/onnx/) |
-| 部署本地 HTTP 服务 | [SGLang](/zh-Hans/docs/valen/sglang/) · [vLLM](/zh-Hans/docs/valen/vllm/) |
-| 调用托管的 Valen 模型 | [API 入门](/zh-Hans/docs/valen/api/) |
-| 理解输入数据格式 | [数据格式](/zh-Hans/docs/valen/data-format/) |
-| 评测决策模型 | [运行首次评测](/zh-Hans/docs/jevalkit/quickstart/) |
-| 将模型接入 JevalKit | [接入模型](/zh-Hans/docs/jevalkit/models/) |
-| 理解 Benchmark 分数 | [评分协议](/zh-Hans/docs/jevalkit/benchmarks/) |
-| 查找模型权重与数据 | [资源](/zh-Hans/docs/resources/) |
-
-## 统一的决策接口
-
-**文本、图像与视频 → 任务要求与候选项 → 概率。**
-
-Valen 支持三类问题：**Choice** 用于命名候选项，**Noul** 用于真假判断，**Score** 用于有序等级。JevalKit 按照各 Benchmark 的既定协议评测输出。
-
-## 探索开放生态
-
-[GitHub](https://github.com/Valen-Team) · [Hugging Face](https://huggingface.co/Valen-Team)
-
-欢迎贡献模型、数据、评测与文档，详见[贡献指南](/zh-Hans/docs/contributing/)。
-
-
-SystemOne 使用 `noul` 表达是非判断并返回同名字段；Decisions 使用 `predicate` 并返回 `probability`。Transformers 与 ONNX SDK 均支持两种协议，HTTP 端点结构见 [API 文档](/zh-Hans/docs/valen/api/)。
+<a id="使用万澜团队的开放项目"></a>
+<a id="找到你的起点"></a>
+<a id="统一的决策接口"></a>
+<a id="探索开放生态"></a>

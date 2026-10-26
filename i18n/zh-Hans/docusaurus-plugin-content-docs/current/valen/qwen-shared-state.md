@@ -5,7 +5,7 @@ sidebar_label: "共享状态执行"
 
 `model.qwen_execution = "shared_state"` 让同一条记录中的全部问题共用一条 Qwen backbone 序列。
 `share_state` 作为拼写别名同样可用，保存时统一记为 `shared_state`。单题记录走完全相同的执行路径。
-默认值 `question` 保留旧模型的输入和 Score 分支。
+发布的完整 Valen 默认保存 `shared_state`；通用基座构建器 fallback 的 `question` 保留旧模型的输入和 Score 分支。
 
 ## 模型与特征
 
@@ -128,7 +128,3 @@ CPU 测试检查以下内容：四种头在一次前向/反向下的梯度、部
 和合成视频 patch 的微型真实 Qwen3.5。GPU 命令检查预训练模型加载、联合训练梯度、保存/恢复、
 阶段间初始化、RLCD 和所配置的注意力后端。这些检查不衡量独立验证集上的任务质量，
 也不衡量吞吐提升。
-
----
-
-本文同步自 [Valen / docs/qwen-shared-state_zh.md](https://github.com/Valen-Team/Valen/blob/main/docs/qwen-shared-state_zh.md) · 源文件 `6fda30c` · 2026-10-19.

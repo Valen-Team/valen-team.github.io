@@ -1,0 +1,44 @@
+---
+title: Domain fine-tuning
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/domain_finetuning.py?cookbook-source';
+
+# Fine-tune Valen-0.8B for support requests
+
+Classify requests as address changes, cancellations or other requests. This small example covers data checks, LoRA training, resume and before/after evaluation.
+
+Use a prepared Valen training environment and a cached **complete Valen-0.8B** model. The 18 authored synthetic examples are CC0-1.0: 12 train, 3 validation and 3 test. The checker rejects overlapping group IDs and normalized text; real data also needs customer, conversation and near-duplicate leakage checks.
+
+```bash
+# Run from the existing Valen code checkout and prepared training environment.
+# Download this small script; use a complete model already cached on compute.
+curl -fLo domain_finetuning.py https://valen-team.github.io/cookbook/code/domain_finetuning.py
+python domain_finetuning.py prepare --model /existing/cache/Valen-0.8B --output output/domain
+python domain_finetuning.py check --output output/domain
+python domain_finetuning.py baseline --config output/domain/config.json --output output/domain/baseline
+python -m valen.evaluate --checkpoint output/domain/baseline --data output/domain/test.jsonl --output output/domain/before
+python -m valen.train --config output/domain/config.json
+python -m valen.train --config output/domain/resume.json --resume output/domain/run/latest
+python -m valen.evaluate --checkpoint output/domain/run/latest --data output/domain/test.jsonl --output output/domain/after
+python -m valen.inference --checkpoint output/domain/run/latest --data output/domain/test.jsonl --output output/domain/predictions.jsonl
+python domain_finetuning.py compare --before output/domain/before/metrics.json --after output/domain/after/metrics.json --output output/domain/comparison.json
+```
+
+## Read the results
+
+comparison.json contains before/after metrics on the same test; predictions.jsonl contains each answer. This two-step smoke checks the pipeline. Three synthetic test records cannot establish domain improvement.
+
+Defaults are rank-8 LoRA, SDPA/BF16 and one GPU; the complete backbone must still fit in memory. Replace the examples with authorized domain data, select settings on validation and compare on independent test data.
+
+Saving overwrites latest/. Resume with the same base, data and process count. See [save, resume and export](/docs/valen/checkpoints/) for deployment; this example does not validate custom export.
+
+[Execution results](https://valen-team.github.io/cookbook/validation/p2-finetuning.json) · [Training configuration](/docs/valen/configuration/) · [Probabilities and thresholds](/docs/valen/probabilities/)
+
+<details>
+<summary>Complete code (Apache-2.0)</summary>
+
+<CodeBlock language="python" title="domain_finetuning.py">{source}</CodeBlock>
+
+</details>

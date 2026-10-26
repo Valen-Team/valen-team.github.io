@@ -117,7 +117,3 @@ python -m jevalkit leaderboard "$JEVALKIT_DATA_ROOT/results" --output "$JEVALKIT
 or browse the generated Markdown, TSV and JSON. Compare matching dataset hashes
 and protocols; latency also requires matching hardware. The latest eligible full
 run is selected for each model and benchmark, rather than the best repeated score.
-
----
-
-Synchronized from [JevalKit / docs/quickstart.md](https://github.com/Valen-Team/JevalKit/blob/main/docs/quickstart.md) · Source blob `a79358c` · 2026-10-19.

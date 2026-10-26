@@ -60,3 +60,5 @@ SystemOne names true/false questions `noul` and returns the same field; Decision
 ## Choose a version
 
 [版本选择 / Version selection](/docs/valen/choosing/) · [GGUF](/docs/valen/gguf/)
+
+[First call](./getting-started.md) · [Cookbook](/cookbook/)

@@ -58,7 +58,7 @@ Every question needs a lowercase `type` and a non-empty string `instructions`. T
 | `noul` | Not needed; if provided, it is not used to build candidates | `"true"`, `"false"` | Fixed, true first |
 | `score` | List of 2–255 non-empty grade descriptions | `"0"` to `"K-1"` | Keeps the list order, starting at 0 |
 
-Choice candidate names are also part of the input text; question IDs are not. In the default `question` mode, each Score branch only sees its own grade description; in `shared_state` mode, all grade descriptions appear in one sequence and every grade is scored in a single forward pass. In both modes the output value is computed from list indices, in the range `[0, K-1]`. If your application needs a 1–5 or 0–100 scale, convert on the caller side.
+Choice candidate names are also part of the input text; question IDs are not. In the legacy `question` mode, each Score branch only sees its own grade description; in `shared_state` mode, all grade descriptions appear in one sequence and every grade is scored in a single forward pass. In both modes the output value is computed from list indices, in the range `[0, K-1]`. If your application needs a 1–5 or 0–100 scale, convert on the caller side.
 
 ## Labels and missing values
 

@@ -18,5 +18,26 @@
   "sidebar.main.category.API calls": {
     "message": "API 调用",
     "description": "The label for category 'API calls' in sidebar 'main'"
+  },
+  "sidebar.main.category.Getting started": {
+    "message": "开始使用"
+  },
+  "sidebar.main.category.Integrations": {
+    "message": "接入方式"
+  },
+  "sidebar.main.category.Model concepts": {
+    "message": "模型介绍"
+  },
+  "sidebar.main.category.Training and fine-tuning": {
+    "message": "训练与微调"
+  },
+  "sidebar.main.category.Evaluation": {
+    "message": "评测"
+  },
+  "sidebar.main.category.Protocol reference": {
+    "message": "协议参考"
+  },
+  "sidebar.main.category.vLLM deployment": {
+    "message": "vLLM 部署"
   }
 }

@@ -73,7 +73,7 @@ import {PerformanceTable, ServerTimingTable, BackendCapabilities, NumericalTable
 | 真实模型 + 完整教程 | 5 个维护脚本；本地 ONNX/原版基础教程、4 个 HTTP 脚本分别连接 ONNX/GGUF，共 10 次成功 CLI 执行 | 样例的端到端流程与真实业务输出 |
 | 线上发布 | 部署后单独验证 | 不能用构建或本地测试冒充上线通过 |
 
-快速构造响应检查接入主仓库 CI，固定稳定 SDK 源码 commit。官网 CI 检查源文件/输出哈希、双语构建和链接。代码或样例变更后，真实执行哈希失效，须补跑。相关模型/运行时/SDK 发布前，必须在集群缓存上执行真实检查，并校验固定的发布证据；CI 不下载权重。详见[发布与复现流程](https://github.com/Valen-Team/Valen/blob/main/docs/backend-validation.md)。
+快速构造响应检查接入主仓库 CI，固定稳定 SDK 源码 commit。官网 CI 检查源文件/输出哈希、双语构建和链接。代码或样例变更后，真实执行哈希失效，须补跑。相关模型/运行时/SDK 发布前，必须在集群缓存上执行真实检查，并校验固定的发布证据；CI 不下载权重。详见[发布与复现流程](https://github.com/Valen-Team/Valen/blob/main/scripts/validation/README.md)。
 
 首轮四个 HTTP 教程因测量适配器的模型名为 `Valen-0.8B`、命令使用部署别名 `valen` 而失败。别名已修正，受影响检查在生产 SDK 服务上补跑通过；首轮失败和替代结果均保留。没有通过改称源码构建来“修复”预编译包的视频失败。
 

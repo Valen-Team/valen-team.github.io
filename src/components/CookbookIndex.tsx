@@ -3,6 +3,7 @@ import Link from '@docusaurus/Link';
 import {useChinese} from './Content';
 
 const entries = [
+  {id:'domain-finetuning', category:'applications', modality:'text', title:['Domain LoRA fine-tuning', '领域 LoRA 微调'], summary:['Prepare independent splits, fine-tune complete 0.8B, resume and compare on one held-out test.', '从完整 0.8B 准备独立划分、微调、恢复并在同一测试集比较。']},
   {id:'api-quickstart', category:'foundations', modality:'text image video', title:['API basics', 'API 入门'], summary:['Run the three original notebook examples through an HTTP service.', '通过 HTTP 服务运行旧 Notebook 的文本、图片和视频帧示例。']},
   {id:'local-inference', category:'foundations', modality:'text image video', title:['Local inference basics', '本地推理基础'], summary:['Use both protocols with an offline native or ONNX model, including direct video.', '使用离线原版或 ONNX 模型运行两种协议，包括直接视频输入。']},
   {id:'ticket-routing', category:'applications', modality:'text', title:['Route support tickets', '工单分流'], summary:['Turn intent probabilities and explicitness scores into a queue and review priority.', '用意图概率和明确程度评分生成处理队列与人工审核优先级。']},

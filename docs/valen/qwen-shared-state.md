@@ -6,7 +6,7 @@ sidebar_label: "Shared-state execution"
 `model.qwen_execution = "shared_state"` enables one Qwen backbone sequence for
 all questions in a record. `share_state` is accepted as a spelling alias and saved
 as `shared_state`. One-question records use exactly the same execution path.
-The default `question` preserves the inputs and Score branches of older models.
+Released complete Valen models save `shared_state`; the generic base builder fallback `question` preserves older inputs and Score branches.
 
 ## Model and features
 
@@ -145,7 +145,3 @@ and tiny real Qwen3.5 with DeltaNet, full attention and synthetic video patches.
 The GPU command checks pretrained loading, joint gradients, saving/restoring,
 stage initialization, RLCD and the configured attention backend. These checks do
 not measure held-out task quality or a throughput gain.
-
----
-
-Synchronized from [Valen / docs/qwen-shared-state.md](https://github.com/Valen-Team/Valen/blob/main/docs/qwen-shared-state.md) · Source blob `69f925e` · 2026-10-19.

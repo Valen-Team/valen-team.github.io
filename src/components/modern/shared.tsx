@@ -11,18 +11,20 @@ export function ModernMark(){const id=useId().replaceAll(':','');return <svg wid
 export function ModernBrand(){return <Link className="modern-brand" to="/"><ModernMark/><span>valen</span></Link>;}
 export function ModernFooter(){const zh=useChinese();const footer=useRef<HTMLElement>(null);useEffect(()=>{const el=footer.current;if(!el||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;el.classList.add('will-reveal');const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){el.classList.add('in-view');observer.disconnect();}},{threshold:.08});observer.observe(el);return()=>observer.disconnect();},[]);return <footer className="modern-footer" ref={footer}><div className="modern-footer-brand"><ModernBrand/><p>© 2026 Valen Team / 万澜</p><p>{zh?'快速决策，持续进化。':'Fast decisions. Continuous evolution.'}</p><div className="modern-social"><a aria-label="GitHub" href="https://github.com/Valen-Team"><GitBranch size={17}/></a><a aria-label="Hugging Face" href="https://huggingface.co/Valen-Team"><ArrowUpRight size={18}/></a></div></div>{[[zh?'构建':'Build',[[zh?'文档':'Documentation','/docs/'],['Cookbook','/cookbook/'],['Valen API','/docs/valen/api/'],[zh?'Transformers 推理':'Transformers inference','/docs/valen/quickstart/'],[zh?'ONNX 与 SDK':'ONNX & SDKs','/docs/valen/onnx/']]],[zh?'探索':'Explore',[['JevalKit','/docs/jevalkit/'],[zh?'模型与数据':'Models & datasets','https://huggingface.co/Valen-Team'],[zh?'排行榜':'Leaderboard','https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard']]]].map(([title,items])=><div className="modern-footer-column" key={title as string}><h2>{title as string}</h2>{(items as string[][]).map(([label,to])=><Link key={label} to={to}>{label}</Link>)}</div>)}</footer>;}
 export const docGroups = [
- {title:['GET STARTED','开始使用'],items:[['','Project introduction','项目介绍'],['valen','Model overview','模型介绍'],['valen/choosing','Choose a version','版本选择']]},
- {title:['INTEGRATION','接入方式'],items:[['valen/api','API calls','API 调用','','Free'],['valen/sglang','SGLang deployment','SGLang 部署'],['valen/vllm','vLLM deployment','vLLM 部署'],['valen/quickstart','Transformers inference','Transformers 推理'],['valen/onnx','ONNX & SDKs','ONNX 与 SDK'],['valen/gguf','GGUF local service','GGUF 本地服务']]},
- {title:['REFERENCE','参考'],items:[['valen/data-format','Data format','数据格式'],['valen/architecture','Architecture','模型架构'],['valen/qwen-shared-state','Shared state','共享状态'],['valen/configuration','Configuration','配置参数'],['valen/evaluation','Evaluation','模型评测']]},
- {title:['JEVALKIT','JEVALKIT'],items:[['jevalkit','Overview','概览'],['jevalkit/quickstart','Quickstart','快速开始'],['jevalkit/models','Model interfaces','模型接口'],['jevalkit/benchmarks','Benchmarks','评测任务']]},
- {title:['RESOURCES','资源'],items:[['resources','Links & resources','链接与资源'],['contributing','Contributing','参与贡献']]},
+ {title:['Getting started','开始使用'],items:[['','Documentation overview','文档总览'],['valen','What is Valen?','Valen 是什么'],['valen/getting-started','First call','第一次调用'],['valen/choosing','Choose a version','版本选择']]},
+ {title:['Integrations','接入方式'],items:[['valen/api','API calls','API 调用','','Free'],['valen/sglang','SGLang deployment','SGLang 部署'],['valen/vllm','vLLM deployment','vLLM 部署'],['valen/quickstart','Transformers inference','Transformers 推理'],['valen/onnx','ONNX & SDKs','ONNX 与 SDK'],['valen/gguf','GGUF local service','GGUF 本地服务']]},
+ {title:['Model concepts','模型介绍'],items:[['valen/architecture','Released architecture','发布模型架构'],['valen/qwen-shared-state','Shared-state execution','Shared-state 执行'],['valen/probabilities','Using probabilities','如何使用概率']]},
+ {title:['Training and fine-tuning','训练与微调'],items:[['valen/training','Fine-tuning','模型微调'],['valen/data-format','Data preparation and format','数据准备与格式'],['valen/configuration','Training configuration','训练配置'],['valen/checkpoints','Save, resume and export','保存、恢复与导出']]},
+ {title:['Evaluation','评测'],items:[['valen/decision-index','Jev Decision Index','Jev Decision Index'],['jevalkit','JevalKit toolkit','JevalKit 工具']]},
+ {title:['Resources','资源'],items:[['resources','Links and resources','链接与资源'],['contributing','Contributing','参与贡献']]},
 ];
 export const cookbookGroups = [
  {title:['GET STARTED','开始使用'],items:[['','Cookbook overview','教程概览'],['api-quickstart','API basics','API 入门'],['local-inference','Local inference','本地推理']]},
- {title:['APPLICATIONS','应用教程'],items:[['ticket-routing','Route support tickets','工单分流'],['product-screening','Screen product images','商品图片筛选'],['video-tagging','Tag short videos','短视频标注']]},
+ {title:['APPLICATIONS','应用教程'],items:[['ticket-routing','Route support tickets','工单分流'],['product-screening','Screen product images','商品图片筛选'],['video-tagging','Tag short videos','短视频标注'],['domain-finetuning','Domain LoRA fine-tuning','领域 LoRA 微调']]},
  {title:['REFERENCE','参考'],items:[['validation','Validation & performance','验证、性能与版本'],['migration','Migration map','旧内容迁移表']]},
 ];
 const deploymentChildren: Record<string, string[][]> = {
+ 'jevalkit': [['jevalkit/quickstart','Quickstart','快速开始'],['jevalkit/models','Model interfaces','模型接入'],['jevalkit/benchmarks','Benchmarks and scoring','基准与评分']],
  'valen/api': [['valen/api/systemone', 'System One', 'System One', 'POST'], ['valen/api/decisions', 'Decisions', 'Decisions', 'POST'], ['valen/api/list-models', 'List Models', 'List Models', 'GET']],
  'valen/sglang': [
   ['valen/sglang-plugin', 'Plugin', '插件部署'],
@@ -55,16 +57,6 @@ export function ModernSidebar({onNavigate}: {onNavigate?:()=>void}) {
     </li>)}</ul>
   </section>;
   return <nav aria-label={zh ? '文档导航' : 'Documentation navigation'} className="modern-sidebar-nav">
-    {cookbook ? groups.map(renderGroup) : <>
-      <div className="modern-sidebar-project">
-        <h2 className="modern-sidebar-project-title">Valen</h2>
-        {docGroups.slice(0,3).map(renderGroup)}
-      </div>
-      <div className="modern-sidebar-project">
-        <h2 className="modern-sidebar-project-title">JevalKit</h2>
-        <ul className="modern-doc-list">{docGroups[3].items.map(item=><li key={item[0]}>{renderLink(item)}</li>)}</ul>
-      </div>
-      <div className="modern-sidebar-project">{renderGroup(docGroups[4])}</div>
-    </>}
+    {groups.map(renderGroup)}
   </nav>;
 }

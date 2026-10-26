@@ -107,7 +107,3 @@ Intern-Decision 每个共享请求最多接受 16 个问题，Decision1-Kai 要�
 尺寸变体可共用实现。作者包应在初始化时导入，避免其他模型因缺少该 SDK 而无法使用。
 调用约定相同的实现可复用 `_http.py` 或 `_hf.py`。
 使用 `jeval check --model <name> --output check.json` 检查接口，并运行相关适配器测试。
-
----
-
-本文同步自 [JevalKit / docs/models_zh-CN.md](https://github.com/Valen-Team/JevalKit/blob/main/docs/models_zh-CN.md) · 源文件 `befd188` · 2026-10-19.

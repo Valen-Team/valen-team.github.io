@@ -12,7 +12,7 @@ For a first try, use the [web experience](https://valen-team.github.io/) or [fre
 | Python / JavaScript applications | HTTP SDK with an existing service; for offline inference, ONNX SDK with 0.8B FP32 and cached local assets |
 | C++ local HTTP service | GGUF Q8_0 with the Valen custom llama-server Linux x86-64 CPU prebuilt package; see [GGUF](/docs/valen/gguf/) |
 | GPU deployment | Native weights with the repository SGLang/vLLM plugins, or Python ONNX `cuda-fp16`; follow each backend's measured scope |
-| Fine-tuning | Complete native Valen weights with the repository LoRA/full SFT recipes; see [training](https://github.com/Valen-Team/Valen#5-fine-tuning) |
+| Fine-tuning | Complete native Valen weights with the repository LoRA/full SFT recipes; see [training](https://valen-team.github.io/docs/valen/training/) |
 
 0.8B/2B/4B denote model size. Native weights, ONNX and GGUF are file formats. FP32/F32, Q8_0 and ONNX `q8-mlp` denote format-specific precision/quantization variants, not interchangeable names. Transformers, ONNX Runtime, custom llama.cpp/Ollama and SGLang/vLLM are execution backends. SDK `Valen.local` loads ONNX, not GGUF; access a GGUF server through HTTP.
 

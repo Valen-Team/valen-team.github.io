@@ -77,7 +77,3 @@ JevBench 和 Decision Index 使用各自基准提供的评分器。
 `evaluate(dataset, records, predictions, output)`。
 在 `jevalkit/datasets/__init__.py` 注册包名、家族和模态后，CLI 和评测器会通过该条目调用实现。
 使用 `_shared.commit_dataset` 生成经过验证的 TSV，并为来源映射和评分规则补充测试样例。
-
----
-
-本文同步自 [JevalKit / docs/benchmarks_zh-CN.md](https://github.com/Valen-Team/JevalKit/blob/main/docs/benchmarks_zh-CN.md) · 源文件 `774476f` · 2026-10-19.

@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "validation_kind": "real_model_smoke",
+  "scope": "Cached complete Valen-0.8B, one H200 CUDA GPU, LoRA rank 8, SDPA BF16, 1 training step and resume to step 2; reload/inference and same independent synthetic test before/after.",
+  "quality_improvement_claimed": false,
+  "export_validated": false,
+  "test_records": 3,
+  "train_records": 12,
+  "validation_records": 3,
+  "tested_sources": {
+    "domain_finetuning.py": "8e8c022ce604443b5555e9a070c83fc0014916eb3efa6f7e10710dac19e2beb8"
+  },
+  "test_data_sha256": "680d23bd76259f6b01e5efe9959ef9bb2b64c09b711dc6ec837080bdecfa7199",
+  "before": {
+    "step": 0,
+    "metrics": {
+      "questions": 3,
+      "metric_counts": {
+        "accuracy": 3,
+        "brier": 3,
+        "nll": 3
+      },
+      "accuracy": 1.0,
+      "brier": 0.0033288316135440255,
+      "nll": 0.02991968276910484
+    }
+  },
+  "after": {
+    "step": 2,
+    "metrics": {
+      "questions": 3,
+      "metric_counts": {
+        "accuracy": 3,
+        "brier": 3,
+        "nll": 3
+      },
+      "accuracy": 1.0,
+      "brier": 0.0019259190406349564,
+      "nll": 0.022800371089639764
+    }
+  },
+  "training_tests": {
+    "passed": 39,
+    "skipped": 1,
+    "skip": "Optional Decision Index dependency unavailable; no Decision Index result claimed"
+  },
+  "environment": {
+    "torch": "2.14.0+cu130",
+    "transformers": "5.19.0",
+    "peft": "0.18.1",
+    "cuda": true
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "result": "PEFT missing at preflight; no training updates"
+    },
+    {
+      "attempt": 2,
+      "result": "Compute-node PyPI timeout; no training updates"
+    },
+    {
+      "attempt": 3,
+      "result": "Baseline evaluation passed; training stopped before updates due to missing PyAV metadata"
+    },
+    {
+      "attempt": 4,
+      "result": "Passed using isolated small Python source packages and existing P1 cached dependencies"
+    }
+  ],
+  "raw_results": "/cookbook/validation/p2-finetuning-smoke.json"
+}

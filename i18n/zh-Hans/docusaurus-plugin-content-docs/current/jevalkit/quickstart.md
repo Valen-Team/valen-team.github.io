@@ -113,7 +113,3 @@ python -m jevalkit leaderboard "$JEVALKIT_DATA_ROOT/results" --output "$JEVALKIT
 可[打开排行榜](https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard)，也可查看本地生成的 Markdown、TSV 和 JSON。
 比较成绩时需匹配数据哈希和评分协议；比较延迟还需匹配硬件条件。
 同一模型和基准采用最近一次符合条件的完整结果，不按重复测量中的最高分选择。
-
----
-
-本文同步自 [JevalKit / docs/quickstart_zh-CN.md](https://github.com/Valen-Team/JevalKit/blob/main/docs/quickstart_zh-CN.md) · 源文件 `41e0ddd` · 2026-10-19.

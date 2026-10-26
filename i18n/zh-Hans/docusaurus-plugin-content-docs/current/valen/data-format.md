@@ -113,7 +113,3 @@ CHECK
 读取错误会带文件名和行号。media存在性、消息角色、控制 token 和长度限制在之后的 `Compiler.compile` 中检查，因此通过上述校验不代表media已可用。
 
 合成集包含 6 条记录、15 道题，其中 13 道有标签。`text.jsonl` 是 `train.jsonl` 的纯文本子集。生成方法及素材说明见[合成数据说明](https://github.com/Valen-Team/Valen/blob/main/data/smoke/README.md)。
-
----
-
-本文同步自 [Valen / docs/data-format_zh.md](https://github.com/Valen-Team/Valen/blob/main/docs/data-format_zh.md) · 源文件 `1477501` · 2026-10-19.
