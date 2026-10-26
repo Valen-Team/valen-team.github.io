@@ -1,0 +1,760 @@
+{
+  "validation_kind": "real_model_http",
+  "fixture_sha256": "12c282a0e51ef430306ccb7a9dcca62d1cb0b1e0e683872e023d4fc04a8e7e10",
+  "scope": [
+    "text",
+    "typed-choice",
+    "image",
+    "video"
+  ],
+  "records": [
+    {
+      "id": "text",
+      "temperature": 1.0,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "intent",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "address",
+                "probability": 0.9999687802227345
+              },
+              {
+                "value": "cancel",
+                "probability": 3.121977726547585e-05
+              }
+            ],
+            "confidence": 0.999937560445469,
+            "choice": "address"
+          },
+          {
+            "name": "change_address",
+            "type": "predicate",
+            "probability": 0.998255233221263
+          },
+          {
+            "name": "explicitness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "none",
+                "value": 0,
+                "probability": 0.01275024985506279
+              },
+              {
+                "label": "possible",
+                "value": 1,
+                "probability": 0.05360192816521193
+              },
+              {
+                "label": "explicit",
+                "value": 2,
+                "probability": 0.9336478219797253
+              }
+            ],
+            "confidence": 0.8813463581869938,
+            "score": 1.9208975721246626
+          }
+        ],
+        "usage": {
+          "input_tokens": 166,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 166
+        }
+      }
+    },
+    {
+      "id": "text",
+      "temperature": 0.5,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "intent",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "address",
+                "probability": 0.9999999990252646
+              },
+              {
+                "value": "cancel",
+                "probability": 9.747353526470285e-10
+              }
+            ],
+            "confidence": 0.9999999980505292,
+            "choice": "address"
+          },
+          {
+            "name": "change_address",
+            "type": "predicate",
+            "probability": 0.9999969451474767
+          },
+          {
+            "name": "explicitness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "none",
+                "value": 0,
+                "probability": 0.00018584949599269473
+              },
+              {
+                "label": "possible",
+                "value": 1,
+                "probability": 0.0032846176464923584
+              },
+              {
+                "label": "explicit",
+                "value": 2,
+                "probability": 0.996529532857515
+              }
+            ],
+            "confidence": 0.9945155250422834,
+            "score": 1.9963436833615225
+          }
+        ],
+        "usage": {
+          "input_tokens": 166,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 166
+        }
+      }
+    },
+    {
+      "id": "text",
+      "temperature": 1.0,
+      "reversed_choices": true,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "intent",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "cancel",
+                "probability": 3.649996429227637e-05
+              },
+              {
+                "value": "address",
+                "probability": 0.9999635000357078
+              }
+            ],
+            "confidence": 0.9999270000714156,
+            "choice": "address"
+          },
+          {
+            "name": "change_address",
+            "type": "predicate",
+            "probability": 0.998138142815108
+          },
+          {
+            "name": "explicitness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "none",
+                "value": 0,
+                "probability": 0.013312637551320521
+              },
+              {
+                "label": "possible",
+                "value": 1,
+                "probability": 0.05028963273088808
+              },
+              {
+                "label": "explicit",
+                "value": 2,
+                "probability": 0.9363977297177914
+              }
+            ],
+            "confidence": 0.8846276382497062,
+            "score": 1.923085092166471
+          }
+        ],
+        "usage": {
+          "input_tokens": 166,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 166
+        }
+      }
+    },
+    {
+      "id": "typed-choice",
+      "temperature": 1.0,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "animal",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": true,
+                "probability": 0.9995143580761107
+              },
+              {
+                "value": "true",
+                "probability": 0.0004421172379099738
+              },
+              {
+                "value": false,
+                "probability": 2.689618630290796e-05
+              },
+              {
+                "value": "false",
+                "probability": 1.6628499676423394e-05
+              }
+            ],
+            "confidence": 0.9993524774348143,
+            "choice": true
+          }
+        ],
+        "usage": {
+          "input_tokens": 68,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 68
+        }
+      }
+    },
+    {
+      "id": "typed-choice",
+      "temperature": 0.5,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "animal",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": true,
+                "probability": 0.9999998033415098
+              },
+              {
+                "value": "true",
+                "probability": 1.9565760654423197e-07
+              },
+              {
+                "value": false,
+                "probability": 7.24107838845509e-10
+              },
+              {
+                "value": "false",
+                "probability": 2.7677570961054653e-10
+              }
+            ],
+            "confidence": 0.9999997377886798,
+            "choice": true
+          }
+        ],
+        "usage": {
+          "input_tokens": 68,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 68
+        }
+      }
+    },
+    {
+      "id": "typed-choice",
+      "temperature": 1.0,
+      "reversed_choices": true,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "animal",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "false",
+                "probability": 4.657939890163753e-06
+              },
+              {
+                "value": false,
+                "probability": 1.612672002905918e-05
+              },
+              {
+                "value": "true",
+                "probability": 0.0013851789888089034
+              },
+              {
+                "value": true,
+                "probability": 0.998594036351272
+              }
+            ],
+            "confidence": 0.998125381801696,
+            "choice": true
+          }
+        ],
+        "usage": {
+          "input_tokens": 68,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 68
+        }
+      }
+    },
+    {
+      "id": "image",
+      "temperature": 1.0,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5182708771299855
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.07339346780254176
+              },
+              {
+                "value": "blue",
+                "probability": 0.6364808629454929
+              },
+              {
+                "value": "green",
+                "probability": 0.29012566925196537
+              }
+            ],
+            "confidence": 0.45472129441823933,
+            "choice": "blue"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.1148758963713018
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.8851241036286982
+              }
+            ],
+            "confidence": 0.7702482072573964,
+            "score": 0.8851241036286982
+          }
+        ],
+        "usage": {
+          "input_tokens": 212,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 212
+        }
+      }
+    },
+    {
+      "id": "image",
+      "temperature": 0.5,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5364930251306522
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.010889339345460181
+              },
+              {
+                "value": "blue",
+                "probability": 0.8189500537804476
+              },
+              {
+                "value": "green",
+                "probability": 0.1701606068740921
+              }
+            ],
+            "confidence": 0.7284250806706714,
+            "choice": "blue"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.016565139223128113
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.9834348607768719
+              }
+            ],
+            "confidence": 0.9668697215537437,
+            "score": 0.9834348607768719
+          }
+        ],
+        "usage": {
+          "input_tokens": 212,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 212
+        }
+      }
+    },
+    {
+      "id": "image",
+      "temperature": 1.0,
+      "reversed_choices": true,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5182809070943398
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "green",
+                "probability": 0.4106528645479961
+              },
+              {
+                "value": "blue",
+                "probability": 0.5325323093147293
+              },
+              {
+                "value": "red",
+                "probability": 0.056814826137274704
+              }
+            ],
+            "confidence": 0.2987984639720939,
+            "choice": "blue"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.1097227100890382
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.8902772899109618
+              }
+            ],
+            "confidence": 0.7805545798219236,
+            "score": 0.8902772899109618
+          }
+        ],
+        "usage": {
+          "input_tokens": 212,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 212
+        }
+      }
+    },
+    {
+      "id": "video",
+      "temperature": 1.0,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5364243699393445
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.5720720194441735
+              },
+              {
+                "value": "blue",
+                "probability": 0.42752891967786716
+              },
+              {
+                "value": "green",
+                "probability": 0.00039906087795935525
+              }
+            ],
+            "confidence": 0.3581080291662603,
+            "choice": "red"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.00010388511441724037
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.9998961148855827
+              }
+            ],
+            "confidence": 0.9997922297711656,
+            "score": 0.9998961148855827
+          }
+        ],
+        "usage": {
+          "input_tokens": 271,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 271
+        }
+      }
+    },
+    {
+      "id": "video",
+      "temperature": 0.5,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5724641769192015
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.641639014013837
+              },
+              {
+                "value": "blue",
+                "probability": 0.35836067376117536
+              },
+              {
+                "value": "green",
+                "probability": 3.1222498762565666e-07
+              }
+            ],
+            "confidence": 0.4624585210207556,
+            "choice": "red"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 1.0794359511040874e-08
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.9999999892056405
+              }
+            ],
+            "confidence": 0.999999978411281,
+            "score": 0.9999999892056405
+          }
+        ],
+        "usage": {
+          "input_tokens": 271,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 271
+        }
+      }
+    },
+    {
+      "id": "video",
+      "temperature": 1.0,
+      "reversed_choices": true,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5364496266730034
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "green",
+                "probability": 0.0016629602544766912
+              },
+              {
+                "value": "blue",
+                "probability": 0.590818982553967
+              },
+              {
+                "value": "red",
+                "probability": 0.40751805719155626
+              }
+            ],
+            "confidence": 0.38622847383095055,
+            "choice": "blue"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.0001181819344889376
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.9998818180655111
+              }
+            ],
+            "confidence": 0.9997636361310221,
+            "score": 0.9998818180655111
+          }
+        ],
+        "usage": {
+          "input_tokens": 271,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 271
+        }
+      }
+    },
+    {
+      "id": "empty-questions",
+      "passed": true,
+      "status": 400,
+      "response": {
+        "error": {
+          "type": "invalid_request",
+          "message": "questions must contain 1\u2013256 questions"
+        }
+      }
+    },
+    {
+      "id": "zero-temperature",
+      "passed": true,
+      "status": 400,
+      "response": {
+        "error": {
+          "type": "invalid_request",
+          "message": "temperature must be finite and positive"
+        }
+      }
+    },
+    {
+      "id": "boolean-temperature",
+      "passed": true,
+      "status": 400,
+      "response": {
+        "error": {
+          "type": "invalid_request",
+          "message": "temperature must be finite and positive"
+        }
+      }
+    },
+    {
+      "id": "duplicate-names",
+      "passed": true,
+      "status": 400,
+      "response": {
+        "error": {
+          "type": "invalid_request",
+          "message": "question names must be unique nonempty strings"
+        }
+      }
+    },
+    {
+      "id": "numeric-choice",
+      "passed": true,
+      "status": 400,
+      "response": {
+        "error": {
+          "type": "invalid_request",
+          "message": "choice values must be strings or booleans; level labels must be strings"
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "backend": "onnx-production",
+  "direct_video": "tested"
+}

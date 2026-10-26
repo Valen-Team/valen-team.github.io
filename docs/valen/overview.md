@@ -52,7 +52,7 @@ The same state can be shared by multiple questions. Read the [data format](/docs
 3. Read the [architecture](/docs/valen/architecture/) and [configuration reference](/docs/valen/configuration/).
 4. [Evaluate a checkpoint](/docs/valen/evaluation/) or compare models with [JevalKit](/docs/jevalkit/).
 
-[Source repository](https://github.com/Valen-Team/Valen) · [Cookbook](https://github.com/Valen-Team/Valen/tree/main/cookbook) · [Try the demo](https://huggingface.co/spaces/yuhangzang/Valen-Preview-0923)
+[Source repository](https://github.com/Valen-Team/Valen) · [Cookbook](https://valen-team.github.io/cookbook/) · [Try the demo](https://huggingface.co/spaces/yuhangzang/Valen-Preview-0923)
 
 
 SystemOne names true/false questions `noul` and returns the same field; Decisions uses `predicate` and returns `probability`. Both Transformers and ONNX SDKs support these protocols. See the [API reference](/docs/valen/api/) for HTTP endpoint schemas.

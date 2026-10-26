@@ -1,0 +1,45 @@
+{
+  "ticket": {
+    "id": "ticket-001",
+    "text": "I moved. Can you ship my order to 12 Elm Street instead of the old address?",
+    "questions": [
+      {"name": "intent", "type": "choice", "instructions": "Which intent does the user's message express?", "choices": [
+        {"value": "billing_question", "description": "Asks about a charge, invoice or payment"},
+        {"value": "cancel_order", "description": "Wants to cancel an order"},
+        {"value": "change_address", "description": "Wants to change the delivery address"},
+        {"value": "report_damage", "description": "Received an item that is broken or damaged"},
+        {"value": "track_order", "description": "Wants to know where an order is or when it arrives"}
+      ]},
+      {"name": "address_change", "type": "predicate", "instructions": "The user requests a delivery address change."},
+      {"name": "explicitness", "type": "score", "instructions": "How explicit is the request to change the delivery address?", "levels": [
+        {"label": "none", "description": "No request"},
+        {"label": "possible", "description": "Asks whether a change is possible"},
+        {"label": "explicit", "description": "Explicitly requests a change"}
+      ]}
+    ]
+  },
+  "product": {
+    "image": "sheep.jpg",
+    "listings": [
+      {"id": "print-001", "title": "Flock of sheep photographic print", "expected_group": "flock"},
+      {"id": "print-002", "title": "Clowder of cats photographic print", "expected_group": "clowder"}
+    ],
+    "question": {"name": "group", "type": "choice", "instructions": "What is a group of these animals called?", "choices": [
+      {"value": "pride", "description": "pride"}, {"value": "flock", "description": "flock"},
+      {"value": "clowder", "description": "clowder"}, {"value": "gang", "description": "gang"}
+    ]}
+  },
+  "video": {
+    "id": "clip-001", "path": "momos.mp4",
+    "question": {"name": "sauce_color", "type": "choice", "instructions": "What is the color of the sauce in the foil container on the left?", "choices": [
+      {"value": "brown", "description": "Brown"}, {"value": "white", "description": "White"},
+      {"value": "red", "description": "Red"}, {"value": "orange", "description": "Orange"}
+    ]},
+    "action_question": {"name": "action", "type": "choice", "instructions": "What action does the person perform with one of the dumplings?", "choices": [
+      {"value": "A", "description": "Breaks it open with their hands"},
+      {"value": "B", "description": "Places it back in the container"},
+      {"value": "C", "description": "Dips it in sauce"},
+      {"value": "D", "description": "Tosses it in the air"}
+    ]}
+  }
+}

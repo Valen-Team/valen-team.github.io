@@ -1,93 +1,9 @@
-// Examples and media from Valen/cookbook/api_quickstart.ipynb.
+// Interactive previews derive their English task data from the canonical recipes.
+import samples from '@site/static/cookbook/code/samples.json';
 export const cookbook = [
-  {
-    "id": "text",
-    "input": "I moved. Can you ship my order to 12 Elm Street instead of the old address?",
-    "question": {
-      "name": "q0",
-      "type": "choice",
-      "instructions": "Which intent does the user's message express?",
-      "choices": [
-        {
-          "value": "billing_question",
-          "description": "Asks about a charge, invoice or payment"
-        },
-        {
-          "value": "cancel_order",
-          "description": "Wants to cancel an order"
-        },
-        {
-          "value": "change_address",
-          "description": "Wants to change the delivery address"
-        },
-        {
-          "value": "report_damage",
-          "description": "Received an item that is broken or damaged"
-        },
-        {
-          "value": "track_order",
-          "description": "Wants to know where an order is or when it arrives"
-        }
-      ]
-    },
-    "asset": null
-  },
-  {
-    "id": "image",
-    "input": "Answer using only the visible image.",
-    "question": {
-      "name": "q0",
-      "type": "choice",
-      "instructions": "What is a group of these animals called?",
-      "choices": [
-        {
-          "value": "c0",
-          "description": "pride"
-        },
-        {
-          "value": "c1",
-          "description": "flock"
-        },
-        {
-          "value": "c2",
-          "description": "clowder"
-        },
-        {
-          "value": "c3",
-          "description": "gang"
-        }
-      ]
-    },
-    "asset": "/cookbook/sheep.jpg"
-  },
-  {
-    "id": "video",
-    "input": "Answer using only the visible image.",
-    "question": {
-      "name": "q0",
-      "type": "choice",
-      "instructions": "What is the color of the sauce in the foil container on the left?",
-      "choices": [
-        {
-          "value": "A",
-          "description": "Brown"
-        },
-        {
-          "value": "B",
-          "description": "White"
-        },
-        {
-          "value": "C",
-          "description": "Red"
-        },
-        {
-          "value": "D",
-          "description": "Orange"
-        }
-      ]
-    },
-    "asset": "/cookbook/momos-frame.jpg"
-  }
+  {id: 'text', input: samples.ticket.text, question: {...samples.ticket.questions[0], name: 'q0'}, asset: null},
+  {id: 'image', input: 'Answer using only the visible image.', question: {...samples.product.question, name: 'q0'}, asset: '/cookbook/sheep.jpg'},
+  {id: 'video', input: 'Answer using only the visible image.', question: {...samples.video.question, name: 'q0'}, asset: '/cookbook/momos-frame.jpg'},
 ] as const;
 
 // Chinese adaptations keep the same image assets and API choice identifiers.

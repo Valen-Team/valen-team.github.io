@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "canonical_site": "https://valen-team.github.io/",
+  "cookbook_source": "https://github.com/Valen-Team/valen-team.github.io/tree/main/static/cookbook/code",
+  "sdk": {
+    "python": {
+      "name": "valen-sdk",
+      "version": "0.2.0",
+      "tag": "v0.2.0",
+      "url": "https://pypi.org/project/valen-sdk/0.2.0/"
+    },
+    "javascript": {
+      "name": "@valen-team/sdk",
+      "version": "0.2.0",
+      "tag": "npm-v0.2.0",
+      "url": "https://www.npmjs.com/package/@valen-team/sdk/v/0.2.0"
+    }
+  },
+  "runtime": {
+    "name": "Valen custom llama.cpp CPU runtime",
+    "version": "0.1.0",
+    "tag": "gguf-runtime-v0.1.0",
+    "archive_sha256": "2fcc903eb853b8c04498bb4ee716c7c3662d1d07eb5c2d89c11310716ae04c0e",
+    "source_pins": {
+      "llama_cpp_base": "1a0b56cec73dac938e0602c974b21dc8e2862830",
+      "ollama_base": "d44c2581904a98430e348d89cc2af1529b1808a0",
+      "patch_sha256": "20c8fcb50920ae8e96b158c30c277ab384fb9716d8d51fb01966b562b8e57732",
+      "ollama_patch_sha256": "294f3aa7e73d3da6b9e9de40d364210d924a31af2595606ac039de4fa0428b01",
+      "status": "custom runtime; llama.cpp measured; custom Ollama Go build, tests and real F32/Q8 imports/text/image/video/protocol/isolation validated on CPU; no unmodified upstream support"
+    },
+    "direct_video": false,
+    "p1_scope": "Existing extracted published binary, Linux x86-64 CPU, cached 0.8B Q8_0 text and fixed image samples; no GPU/other sizes/platform claims",
+    "source_video_runtime_sha256": "7966d78bfe34a9f48ef6e036f0969ec79c895b41c70061c719170c282824b97c",
+    "source_video_scope": "Separate cached source build with video enabled; not the downloadable 0.1.0 binary"
+  },
+  "p1_model": {
+    "size": "0.8B",
+    "source_revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+    "native_weights": [
+      {
+        "file": "model.safetensors",
+        "bytes": 3417285852,
+        "sha256": "465714dd28702c4232d9233c2a2157d366967c541b2a27d9dadccc816304fd48"
+      }
+    ],
+    "native_config_sha256": "8a6a766acfe35a6eb3d373e90c43af0f08dbd44301251df71e18b1b5b5381c08",
+    "onnx_variant": "fp32",
+    "gguf_variant": "Q8_0 backbone; F32 Mixer and vision",
+    "gguf_weight_sha256": "930d29c39c7104bb69a028a0605fad5eba0949e1f3ad4a3a3bbca13716c4b9d6"
+  },
+  "model_catalog": [
+    {
+      "repo": "Valen-Team/Valen-0.8B",
+      "documentation_parent_revision": "ee8dc18626d751b53c47d0abfa5ce6007fbffd19",
+      "p1_real_model_tested": true,
+      "note": "0.8B CPU only in P1; existing 2B/4B qualification evidence is reused without claiming a new P1 performance measurement"
+    },
+    {
+      "repo": "Valen-Team/Valen-0.8B-ONNX",
+      "documentation_parent_revision": "0e7c5725060d844272ef468173e2fb37f70b54b0",
+      "p1_real_model_tested": true,
+      "note": "0.8B CPU only in P1; existing 2B/4B qualification evidence is reused without claiming a new P1 performance measurement"
+    },
+    {
+      "repo": "Valen-Team/Valen-0.8B-GGUF",
+      "documentation_parent_revision": "a1771ca9fd05448e96af806be5caeeae2bb8baff",
+      "p1_real_model_tested": true,
+      "note": "0.8B CPU only in P1; existing 2B/4B qualification evidence is reused without claiming a new P1 performance measurement"
+    },
+    {
+      "repo": "Valen-Team/Valen-2B",
+      "documentation_parent_revision": "9566eb116451a9607b33dd130306f4e99e4f1790",
+      "p1_real_model_tested": false,
+      "note": "0.8B CPU only in P1; existing 2B/4B qualification evidence is reused without claiming a new P1 performance measurement"
+    },
+    {
+      "repo": "Valen-Team/Valen-2B-ONNX",
+      "documentation_parent_revision": "6c9dc81e8df5788b4ebedf9ba4d3eced0c38445c",
+      "p1_real_model_tested": false,
+      "note": "0.8B CPU only in P1; existing 2B/4B qualification evidence is reused without claiming a new P1 performance measurement"
+    },
+    {
+      "repo": "Valen-Team/Valen-2B-GGUF",
+      "documentation_parent_revision": "7aeac369933421b5f36e69c1d32d7b88b638c35b",
+      "p1_real_model_tested": false,
+      "note": "0.8B CPU only in P1; existing 2B/4B qualification evidence is reused without claiming a new P1 performance measurement"
+    },
+    {
+      "repo": "Valen-Team/Valen-4B",
+      "documentation_parent_revision": "e9c81a8860ef680cea251fd6901f91d158582acc",
+      "p1_real_model_tested": false,
+      "note": "0.8B CPU only in P1; existing 2B/4B qualification evidence is reused without claiming a new P1 performance measurement"
+    },
+    {
+      "repo": "Valen-Team/Valen-4B-ONNX",
+      "documentation_parent_revision": "f76a1f1152306f0f54edd1998a0f7da94d3991ef",
+      "p1_real_model_tested": false,
+      "note": "0.8B CPU only in P1; existing 2B/4B qualification evidence is reused without claiming a new P1 performance measurement"
+    },
+    {
+      "repo": "Valen-Team/Valen-4B-GGUF",
+      "documentation_parent_revision": "6fe0c5fbd7bced5f33f4253df0211b38d6555686",
+      "p1_real_model_tested": false,
+      "note": "0.8B CPU only in P1; existing 2B/4B qualification evidence is reused without claiming a new P1 performance measurement"
+    }
+  ],
+  "measured_packages": {
+    "native": {
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "packages": {
+        "torch": "2.14.0",
+        "transformers": "5.19.0",
+        "numpy": "2.5.4",
+        "Pillow": "13.0.0",
+        "av": "19.0.2"
+      }
+    },
+    "onnx": {
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "packages": {
+        "valen-sdk": "0.2.0",
+        "onnxruntime": "1.31.0",
+        "numpy": "2.5.4",
+        "Pillow": "13.0.0",
+        "av": "19.0.2"
+      }
+    }
+  },
+  "fixture_sha256": "12c282a0e51ef430306ccb7a9dcca62d1cb0b1e0e683872e023d4fc04a8e7e10",
+  "media_budget": {
+    "images_kwargs": {
+      "size": {
+        "longest_edge": 262144,
+        "shortest_edge": 65536
+      }
+    },
+    "videos_kwargs": {
+      "fps": null,
+      "num_frames": 16,
+      "size": {
+        "longest_edge": 2097152,
+        "shortest_edge": 131072
+      }
+    }
+  },
+  "not_retested_in_p1": [
+    "2B/4B real inference",
+    "CUDA/GPU performance",
+    "browser WebGPU local inference",
+    "C++ ONNX integration",
+    "SGLang/vLLM GPU services",
+    "custom Ollama import"
+  ],
+  "validation_layers": {
+    "mock_synthetic_adapter": "16 mapping variants / 5 invalid cases; no inference",
+    "synthetic_model": "not executed; no claim",
+    "real_model": "CPU fixed fixtures and 10 Cookbook CLI executions on native/ONNX/GGUF paths"
+  },
+  "local_model_download_bytes": 0
+}

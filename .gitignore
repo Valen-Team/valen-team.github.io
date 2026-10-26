@@ -12,3 +12,6 @@ static/search-index.json
 
 .modern-docs/
 i18n/zh-Hans/docusaurus-plugin-content-docs-modern/
+
+static/cookbook/valen-cookbook.zip
+__pycache__/

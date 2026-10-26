@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "validation_kind": "synthetic_adapter",
+  "scope": "request/response mapping, candidate type/order, two scalar temperatures, invalid inputs; no model execution",
+  "fixture_sha256": "12c282a0e51ef430306ccb7a9dcca62d1cb0b1e0e683872e023d4fc04a8e7e10",
+  "valid_variants": 16,
+  "invalid_cases": 5,
+  "python_adapters": 4,
+  "javascript_adapter": true
+}

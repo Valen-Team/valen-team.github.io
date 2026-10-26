@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "notes": "Capabilities describe implementation routes; validation scope is separate. No generic upstream llama.cpp/Ollama support or direct GGUF loading in Valen.local is claimed.",
+  "backends": [
+    {"id":"native","label":["Native Transformers Python","原版 Transformers Python"],"decisions":true,"system_one":true,"text":true,"image":true,"direct_video":true,"validation":["P1: 0.8B CPU FP32, fixed fixtures + full local tutorial","P1：0.8B CPU FP32，固定夹具与完整本地教程"]},
+    {"id":"onnx-python","label":["Python ONNX local / SDK service","Python ONNX 本地 / SDK 服务"],"decisions":true,"system_one":true,"text":true,"image":true,"direct_video":true,"validation":["P1: 0.8B CPU FP32, real service and cookbook; CUDA not rerun","P1：0.8B CPU FP32，真实服务与教程；未重跑 CUDA"]},
+    {"id":"onnx-js","label":["JavaScript ONNX local / WebGPU","JavaScript ONNX 本地 / WebGPU"],"decisions":true,"system_one":true,"text":true,"image":true,"direct_video":true,"validation":["Prior qualified local path; P1 tests HTTP clients only","沿用已有本地验证；P1 仅重测 HTTP 客户端"]},
+    {"id":"cpp","label":["C++ ONNX integration","C++ ONNX 集成"],"decisions":false,"system_one":true,"text":true,"image":false,"direct_video":false,"validation":["Existing FP32 CPU text integration; not rerun in P1","已有 FP32 CPU 文本集成；P1 未重跑"]},
+    {"id":"gguf-prebuilt","label":["GGUF prebuilt 0.1.0","GGUF 预编译 0.1.0"],"decisions":true,"system_one":true,"text":true,"image":true,"direct_video":false,"validation":["P1: exact existing archive, 0.8B Q8_0 text/fixed images; video probe failed","P1：原发布包，0.8B Q8_0 文本/固定图片；视频探测失败"]},
+    {"id":"gguf-source","label":["Valen GGUF source build","Valen GGUF 源码构建"],"decisions":true,"system_one":true,"text":true,"image":true,"direct_video":true,"validation":["P1: cached video-enabled source binary, 0.8B Q8_0 fixed fixtures","P1：缓存的启用视频源码运行时，0.8B Q8_0 固定夹具"]},
+    {"id":"sglang","label":["SGLang Valen plugin","SGLang Valen 插件"],"decisions":true,"system_one":true,"text":true,"image":true,"direct_video":false,"validation":["Existing single-GPU text/image path; no new P1 GPU run","已有单 GPU 文本/图片路径；P1 无新 GPU 实测"]},
+    {"id":"vllm","label":["vLLM Valen plugin","vLLM Valen 插件"],"decisions":true,"system_one":true,"text":true,"image":true,"direct_video":false,"validation":["Existing single-GPU text/image path; no new P1 GPU run","已有单 GPU 文本/图片路径；P1 无新 GPU 实测"]},
+    {"id":"ollama","label":["Valen custom Ollama","Valen 定制 Ollama"],"decisions":true,"system_one":true,"text":true,"image":true,"direct_video":true,"validation":["Prior custom CPU import/protocol/media evidence; not rerun in P1","已有定制 CPU 导入/协议/媒体证据；P1 未重跑"]},
+    {"id":"hosted","label":["Hosted API","托管 API"],"decisions":true,"system_one":true,"text":true,"image":true,"direct_video":false,"validation":["Reference supports text/one image; P1 recipes execute on pinned local backends","参考接口支持文本/单图；P1 教程在固定本地后端执行"]}
+  ]
+}

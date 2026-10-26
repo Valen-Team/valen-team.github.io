@@ -1,0 +1,82 @@
+---
+title: 验证、性能与版本
+---
+
+import {PerformanceTable, ServerTimingTable, BackendCapabilities, NumericalTable, VersionSummary} from '@site/src/components/CookbookValidation';
+
+# 实测范围与复现
+
+验证日期：**2026 年 10 月 26 日**。本页直接读取统一版本清单、性能 JSON 和能力表，避免双语页面手工维护不同数字。性能测试使用真实 0.8B 权重、一个固定文本和合成诊断图片/视频，不是代表性业务准确率或生产负载基准。
+
+<VersionSummary />
+
+<a href="/cookbook/versions.json">完整版本与模型 revision 清单</a> · <a href="/cookbook/results.json">教程实际输出与已验证源文件哈希</a> · <a href="/cookbook/capabilities.json">机器可读能力表</a>
+
+## 同机 CPU 延迟与内存
+
+下列八项成功测量来自**同一台机器的同一次资源分配**：Intel Xeon Platinum 8558、Linux x86-64、4 个 CPU 线程、CPU affinity `[45, 46, 141, 142]`，无 GPU。原版与 ONNX 为 FP32，GGUF 为 Q8_0 backbone + FP32 Mixer/视觉模块，其内存/延迟权衡包含精度差异。原模型 revision 为 `a0a10112716f54457bad6f60b792ad334f9e89fd`。
+
+每个后端/模态使用新服务进程，先执行一次冷请求，再预热 2 次，最后顺序重复 7 次。p50/p95 在有序样本上采用线性插值。并发数为 **1**，测的是延迟，不是吞吐。启动时间包括解释器/运行时 import、模型初始化和健康就绪；ONNX 的图会话可能在首请求中才初始化。**未清空操作系统页缓存**，“冷”指新进程，不是冷磁盘。原版文本在该作业中最先执行，启动明显较长，不能将这一行的首次启动比例泛化为稳定后端比例。
+
+<PerformanceTable />
+
+峰值内存是独立服务进程 Linux `VmHWM` 的 RSS 高水位，包括驻留的 mmap 页、库及加载的模型流水线；不等于模型文件大小、资源分配上限、GPU 显存或最低内存需求。失败的视频探测不构成有效的视频内存测量。
+
+各路径使用**相同输入字节、问题、候选顺序、temperature=1.0 与媒体预算**。成功路径的输入 token 一致：文本 166、图片 212、视频 271（原版/ONNX）。图片预算为 65,536–262,144 像素；直接视频均匀采样 16 帧，总像素预算为 131,072–2,097,152。精确输入/媒体哈希及每次采样保存在 JSON。媒体字节在计时前准备，不包含远端客户端上传或网络素材下载。
+
+原版/ONNX 性能测试采用包裹真实 `predict` 的轻量本机 HTTP 测量适配器，不是 SGLang/vLLM，也不是生产 SDK HTTP 栈。后续单独对生产 ONNX SDK 服务执行了回归。修正测量服务给 Cookbook 使用的模型别名后，没有重跑已经成功的性能行。
+
+## 客户端与服务端计时
+
+客户端耗时包括 JSON 编码、本机 HTTP、服务处理与响应解码。原版/ONNX 适配器另记录 `predict` 墙钟耗时，包括编译及媒体预处理。GGUF 预编译服务没有暴露同口径数据，因此保留为空，不将 HTTP 总耗时改名为推理耗时。
+
+<ServerTimingTable />
+
+<a href="/cookbook/validation/benchmark-config.json">Benchmark config JSON</a> · <a href="/cookbook/validation/performance.json">原始性能报告（含失败探测）</a> · <a href="/cookbook/validation/preserved-failures.json">保留的失败与处理结果</a>
+
+## 在已测范围内选择
+
+| 需求 | 可优先尝试的路径 | 依据与边界 |
+| --- | --- | --- |
+| 不下载权重先体验 | 托管 API / 官网 | 独立在线服务，不与本地作业拼接速度或内存对比 |
+| 这些小型 CPU 输入的较低热延迟 | 原版 FP32 | 本次热请求最快，但 RSS 更高，依赖与首次启动较重 |
+| Python/JS 应用无需 Torch | ONNX SDK | 本次测了 Python CPU FP32；未重跑 Node/WebGPU 本地性能 |
+| 本次 CPU 输入较小的 RSS | GGUF Q8_0 + 定制运行时 | 本组 RSS 最低，但精度不同；限定文本与固定图片 |
+| 直接视频 | 原版 / Python ONNX；启用视频的 GGUF 源码构建 | 预编译 0.1.0 不支持直接视频；源码构建回归单列，不混入此性能表 |
+| CUDA、其他尺寸/设备、并发 | 按部署文档对实际负载测量 | P1 无新增性能数据，不把旧质量/设备结果拼成同机比较 |
+
+## 协议与媒体能力
+
+<BackendCapabilities />
+
+表中列出的两种协议均继续保留。Decisions 使用 `input`、有序问题列表、`predicate`、字符串/布尔型 choice 值和带标签的 score 等级。SystemOne 使用 `state`、按 ID 的问题字典、`noul`、字符串键 `criteria` 和有序评分标准。score 是从零开始的等级索引的概率加权平均。数字型 choice 值会被拒绝；JavaScript 对象中的数字外观**字符串**键遵循 JS 对象顺序规则。候选顺序重要时使用 Decisions 数组；JS HTTP 客户端拒绝 `Map`，不会静默改序。
+
+有限正数的**标量** temperature 是跨后端的公共范围。原版/ONNX 旧协议的按题型温度字典不代表 GGUF 或 Decisions 也可移植支持。一个请求内候选顺序保持一致；主动改变顺序会改变模型提示和概率，不承诺排列不变性。
+
+原版/ONNX 本地调用可读取本地素材。HTTP 按能力使用内联图片/视频 data URL；生产 ONNX 服务禁止客户端本地路径。托管 API 和 GPU 插件采用单张图片，视频标注应用会明确先抽帧。`Valen.local` 是 **ONNX** 加载器，GGUF HTTP 服务使用 `Valen.remote`。这些 SDK 不会使未修改的官方 llama.cpp/Ollama 自动兼容 Valen。
+
+本次复用实际发布的 GGUF 0.1.0 解压包及既有 SHA256，没有重新下载资产，并新增了该包的固定图片验证。其直接视频探测返回 HTTP 500，日志明确为 **video support not compiled in**，失败原样保留。请使用抽帧图片，或单独构建启用视频的运行时。源码视频结果不作为可下载预编译包的视频资格。
+
+## 固定回归与发布检查
+
+主仓库的 `tests/fixtures/backend-contract.json` 是共享协议夹具，覆盖 choice、predicate/noul、score、混合布尔/字符串候选、候选逆序、1.0/0.5 温度及异常输入。真实检查对比各后端双协议的答案、usage、候选类型/顺序和错误。实际 Python/JavaScript SDK 包也分别连接生产 ONNX 服务、预编译 GGUF 文本/图片服务以及启用视频的源码服务。
+
+<NumericalTable />
+
+数值门槛沿用此前冻结 GGUF 回归的 choice、概率与归一化 score 阈值。这个小型协议夹具不能替代此前 292 条文本/30 张图片质量集合；与原版一致也不等于对真值的准确率。对比路径的输入 token 全部一致。补跑资源分配只贡献数值检查，其耗时不与原性能作业混合。
+
+| 验证层 | P1 实际结果 | 能证明什么 |
+| --- | --- | --- |
+| Mock / 构造响应 | Python SDK 28 项、JS SDK 12 项；共享适配器 16 个有效变体 + 5 个异常输入 | 客户端/映射契约、生命周期、几何与错误处理；不证明模型质量 |
+| 合成模型 | P1 未执行 | 不以合成模型替代真实权重结果 |
+| 真实模型 + 固定诊断输入 | 原版/ONNX/GGUF 各支持范围双协议通过；6 份真实 SDK 客户端报告通过 | 小型可复现协议与数值回归 |
+| 真实模型 + 完整教程 | 5 个维护脚本；本地 ONNX/原版基础教程、4 个 HTTP 脚本分别连接 ONNX/GGUF，共 10 次成功 CLI 执行 | 样例的端到端流程与真实业务输出 |
+| 线上发布 | 部署后单独验证 | 不能用构建或本地测试冒充上线通过 |
+
+快速构造响应检查接入主仓库 CI，固定稳定 SDK 源码 commit。官网 CI 检查源文件/输出哈希、双语构建和链接。代码或样例变更后，真实执行哈希失效，须补跑。相关模型/运行时/SDK 发布前，必须在集群缓存上执行真实检查，并校验固定的发布证据；CI 不下载权重。详见[发布与复现流程](https://github.com/Valen-Team/Valen/blob/main/docs/backend-validation.md)。
+
+首轮四个 HTTP 教程因测量适配器的模型名为 `Valen-0.8B`、命令使用部署别名 `valen` 而失败。别名已修正，受影响检查在生产 SDK 服务上补跑通过；首轮失败和替代结果均保留。没有通过改称源码构建来“修复”预编译包的视频失败。
+
+<a href="/cookbook/validation/release-checks.json">发布检查摘要</a> · <a href="/cookbook/validation/cross-backend.json">数值对比</a> · <a href="/cookbook/validation/synthetic-adapters.json">构造响应检查</a> · [迁移表](../migration/)
+
+P1 未新增验证 2B/4B 推理、GPU/CUDA 性能、浏览器 WebGPU 本地执行、C++ 集成、SGLang/vLLM GPU 服务或定制 Ollama 导入。已有合格证据仍由对应部署/模型文档链接。原媒体没有独立记录原始数据集归属及许可，教程明确说明此限制并保留共享 URL。

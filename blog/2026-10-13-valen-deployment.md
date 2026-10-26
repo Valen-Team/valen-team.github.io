@@ -14,7 +14,7 @@ ONNX and GGUF releases are available through the Valen Team Hugging Face organiz
 
 ## Use a hosted model
 
-The [API cookbook](https://github.com/Valen-Team/Valen/blob/main/cookbook/api_quickstart.ipynb) contains executable examples with input previews and saved outputs. Start with the [API quickstart](/docs/valen/api/) for the request schema.
+The [API cookbook](https://valen-team.github.io/cookbook/api-quickstart/) contains executable examples with input previews and saved outputs. Start with the [API quickstart](/docs/valen/api/) for the request schema.
 
 ## Run an exported model
 

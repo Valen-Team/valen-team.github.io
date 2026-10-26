@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "validation_kind": "real_model_execution",
+  "tested_sources": {
+    "local_inference.py": "fef799ea6e23b9f88d319ffd904bc9d647400068a91a1f1c5b21a6ca7e872de0",
+    "video_tagging.py": "96fcb8ebe5ed3d215958988e1ac215cc7db4e172bf272a52053c5e2fb24be4ea",
+    "requirements.txt": "98bb3f831215f8b3b7db6a80b250df025c4b4fcecf55750031e900dd2b7117e2",
+    "product_screening.py": "3d74988fd8e716be82ca0474aad4691d5b8bd32ac8ce26dd0ecf8e03d6d17a64",
+    "LICENSE.txt": "a5149b34d460bb6cc884edce31801808973543f065c3a67de728e0f615ef8cfb",
+    "common.py": "9217eeeb63f4102b11655d54f481c2cc36b6f806f4e29508bfdabcb5a3f0379f",
+    "ticket_routing.py": "f8e9f8227b6398a717e5d3f8a3b4e03447aca164d1dbb5df0ca873ddd2eb39a8",
+    "api_quickstart.py": "30c083c4d5e4104d2866140f960123e82d92a5df3ca2b58211e3c18001cb44e5",
+    "samples.json": "fbb388e593a82de72d4d9dff2175309790af7471d8c9f88a205ae83c803d520c"
+  },
+  "recipes": {
+    "api-quickstart": {
+      "status": "verified",
+      "date": "2026-10-26",
+      "model": "Valen-0.8B / ONNX FP32",
+      "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+      "sdk": "0.2.0",
+      "backend": "ONNX Runtime 1.31.0 / CPU / SDK HTTP service",
+      "result": {
+        "text": {
+          "intent": {
+            "name": "intent",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "billing_question",
+                "probability": 1.4444915728188846e-06
+              },
+              {
+                "value": "cancel_order",
+                "probability": 0.00013284262147016516
+              },
+              {
+                "value": "change_address",
+                "probability": 0.9997590278141875
+              },
+              {
+                "value": "report_damage",
+                "probability": 4.776970793180753e-06
+              },
+              {
+                "value": "track_order",
+                "probability": 0.00010190810197642957
+              }
+            ],
+            "confidence": 0.9996987847677343,
+            "choice": "change_address"
+          },
+          "address_change": {
+            "name": "address_change",
+            "type": "predicate",
+            "probability": 0.9862781119951404
+          },
+          "explicitness": {
+            "name": "explicitness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "none",
+                "value": 0,
+                "probability": 0.015131870978155534
+              },
+              {
+                "label": "possible",
+                "value": 1,
+                "probability": 0.1913538155432454
+              },
+              {
+                "label": "explicit",
+                "value": 2,
+                "probability": 0.7935143134785991
+              }
+            ],
+            "confidence": 0.6675736637506653,
+            "score": 1.7783824425004437
+          }
+        },
+        "image": {
+          "group": {
+            "name": "group",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "pride",
+                "probability": 0.00028894281584105957
+              },
+              {
+                "value": "flock",
+                "probability": 0.9960099221422577
+              },
+              {
+                "value": "clowder",
+                "probability": 0.002903469483494964
+              },
+              {
+                "value": "gang",
+                "probability": 0.0007976655584062285
+              }
+            ],
+            "confidence": 0.9946798961896769,
+            "choice": "flock"
+          }
+        },
+        "video_frame": {
+          "sauce_color": {
+            "name": "sauce_color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "brown",
+                "probability": 0.012937617960974548
+              },
+              {
+                "value": "white",
+                "probability": 0.9773176758616222
+              },
+              {
+                "value": "red",
+                "probability": 0.006636453849260038
+              },
+              {
+                "value": "orange",
+                "probability": 0.0031082523281432115
+              }
+            ],
+            "confidence": 0.9697569011488296,
+            "choice": "white"
+          }
+        },
+        "sampling": {
+          "frame_index": 98,
+          "total_frames": 196,
+          "timestamp_seconds": 3.2666666666666666
+        }
+      }
+    },
+    "ticket-routing": {
+      "status": "verified",
+      "date": "2026-10-26",
+      "model": "Valen-0.8B / ONNX FP32",
+      "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+      "sdk": "0.2.0",
+      "backend": "ONNX Runtime 1.31.0 / CPU / SDK HTTP service",
+      "result": {
+        "ticket_id": "ticket-001",
+        "queue": "change_address",
+        "confidence": 0.9997590278141875,
+        "address_change_probability": 0.9862781119951404,
+        "explicitness_score": 1.7783824425004437,
+        "review_priority": 0.87699,
+        "action": "review_request_before_changing_order",
+        "answers": [
+          {
+            "name": "intent",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "billing_question",
+                "probability": 1.4444915728188846e-06
+              },
+              {
+                "value": "cancel_order",
+                "probability": 0.00013284262147016516
+              },
+              {
+                "value": "change_address",
+                "probability": 0.9997590278141875
+              },
+              {
+                "value": "report_damage",
+                "probability": 4.776970793180753e-06
+              },
+              {
+                "value": "track_order",
+                "probability": 0.00010190810197642957
+              }
+            ],
+            "confidence": 0.9996987847677343,
+            "choice": "change_address"
+          },
+          {
+            "name": "address_change",
+            "type": "predicate",
+            "probability": 0.9862781119951404
+          },
+          {
+            "name": "explicitness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "none",
+                "value": 0,
+                "probability": 0.015131870978155534
+              },
+              {
+                "label": "possible",
+                "value": 1,
+                "probability": 0.1913538155432454
+              },
+              {
+                "label": "explicit",
+                "value": 2,
+                "probability": 0.7935143134785991
+              }
+            ],
+            "confidence": 0.6675736637506653,
+            "score": 1.7783824425004437
+          }
+        ]
+      }
+    },
+    "product-screening": {
+      "status": "verified",
+      "date": "2026-10-26",
+      "model": "Valen-0.8B / ONNX FP32",
+      "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+      "sdk": "0.2.0",
+      "backend": "ONNX Runtime 1.31.0 / CPU / SDK HTTP service",
+      "result": {
+        "listings": [
+          {
+            "id": "print-001",
+            "title": "Flock of sheep photographic print",
+            "expected_group": "flock",
+            "status": "accept",
+            "category_match_probability": 0.9960099221422577
+          },
+          {
+            "id": "print-002",
+            "title": "Clowder of cats photographic print",
+            "expected_group": "clowder",
+            "status": "category_mismatch",
+            "category_match_probability": 0.002903469483494964
+          }
+        ],
+        "predicted_group": "flock",
+        "confidence": 0.9960099221422577,
+        "answer": {
+          "name": "group",
+          "type": "choice",
+          "probabilities": [
+            {
+              "value": "pride",
+              "probability": 0.00028894281584105957
+            },
+            {
+              "value": "flock",
+              "probability": 0.9960099221422577
+            },
+            {
+              "value": "clowder",
+              "probability": 0.002903469483494964
+            },
+            {
+              "value": "gang",
+              "probability": 0.0007976655584062285
+            }
+          ],
+          "confidence": 0.9946798961896769,
+          "choice": "flock"
+        }
+      }
+    },
+    "video-tagging": {
+      "status": "verified",
+      "date": "2026-10-26",
+      "model": "Valen-0.8B / ONNX FP32",
+      "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+      "sdk": "0.2.0",
+      "backend": "ONNX Runtime 1.31.0 / CPU / SDK HTTP service",
+      "result": {
+        "clip_id": "clip-001",
+        "tags": {
+          "sauce_color": "white"
+        },
+        "status": "tagged",
+        "confidence": 0.9773176758616222,
+        "sampling": {
+          "frame_index": 98,
+          "total_frames": 196,
+          "timestamp_seconds": 3.2666666666666666
+        },
+        "scope": "single_frame_visual_attribute_only",
+        "answer": {
+          "name": "sauce_color",
+          "type": "choice",
+          "probabilities": [
+            {
+              "value": "brown",
+              "probability": 0.012937617960974548
+            },
+            {
+              "value": "white",
+              "probability": 0.9773176758616222
+            },
+            {
+              "value": "red",
+              "probability": 0.006636453849260038
+            },
+            {
+              "value": "orange",
+              "probability": 0.0031082523281432115
+            }
+          ],
+          "confidence": 0.9697569011488296,
+          "choice": "white"
+        }
+      }
+    },
+    "local-inference": {
+      "status": "verified",
+      "date": "2026-10-26",
+      "model": "Valen-0.8B / ONNX FP32",
+      "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+      "sdk": "0.2.0",
+      "backend": "ONNX Runtime 1.31.0 / CPU direct local",
+      "result": {
+        "decisions": {
+          "model": "Valen-0.8B",
+          "answers": [
+            {
+              "name": "intent",
+              "type": "choice",
+              "probabilities": [
+                {
+                  "value": "billing_question",
+                  "probability": 1.4444915728188846e-06
+                },
+                {
+                  "value": "cancel_order",
+                  "probability": 0.00013284262147016516
+                },
+                {
+                  "value": "change_address",
+                  "probability": 0.9997590278141875
+                },
+                {
+                  "value": "report_damage",
+                  "probability": 4.776970793180753e-06
+                },
+                {
+                  "value": "track_order",
+                  "probability": 0.00010190810197642957
+                }
+              ],
+              "confidence": 0.9996987847677343,
+              "choice": "change_address"
+            },
+            {
+              "name": "address_change",
+              "type": "predicate",
+              "probability": 0.9862781119951404
+            },
+            {
+              "name": "explicitness",
+              "type": "score",
+              "probabilities": [
+                {
+                  "label": "none",
+                  "value": 0,
+                  "probability": 0.015131870978155534
+                },
+                {
+                  "label": "possible",
+                  "value": 1,
+                  "probability": 0.1913538155432454
+                },
+                {
+                  "label": "explicit",
+                  "value": 2,
+                  "probability": 0.7935143134785991
+                }
+              ],
+              "confidence": 0.6675736637506653,
+              "score": 1.7783824425004437
+            }
+          ],
+          "usage": {
+            "input_tokens": 225,
+            "output_tokens": 0
+          },
+          "internal_usage": {
+            "compute_tokens": 225
+          }
+        },
+        "system_one": {
+          "model": "Valen-0.8B",
+          "answers": {
+            "intent": {
+              "type": "choice",
+              "probabilities": {
+                "billing_question": 1.4444915728188846e-06,
+                "cancel_order": 0.00013284262147016516,
+                "change_address": 0.9997590278141875,
+                "report_damage": 4.776970793180753e-06,
+                "track_order": 0.00010190810197642957
+              },
+              "choice": "change_address",
+              "confidence": 0.9996987847677343
+            },
+            "address_change": {
+              "type": "noul",
+              "noul": 0.9862781119951404
+            },
+            "explicitness": {
+              "type": "score",
+              "probabilities": {
+                "0": 0.015131870978155534,
+                "1": 0.1913538155432454,
+                "2": 0.7935143134785991
+              },
+              "score": 1.7783824425004437,
+              "legend": {
+                "0": "No request",
+                "1": "Asks whether a change is possible",
+                "2": "Explicitly requests a change"
+              },
+              "confidence": 0.6675736637506653
+            }
+          },
+          "usage": {
+            "input_tokens": 225,
+            "output_tokens": 0
+          },
+          "internal_usage": {
+            "compute_tokens": 225
+          }
+        },
+        "image": {
+          "group": {
+            "name": "group",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "pride",
+                "probability": 0.0006759448829023258
+              },
+              {
+                "value": "flock",
+                "probability": 0.9923460443802665
+              },
+              {
+                "value": "clowder",
+                "probability": 0.0058704688188683804
+              },
+              {
+                "value": "gang",
+                "probability": 0.001107541917962753
+              }
+            ],
+            "confidence": 0.9897947258403553,
+            "choice": "flock"
+          }
+        },
+        "video": {
+          "sauce_color": {
+            "name": "sauce_color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "brown",
+                "probability": 0.039694426657567713
+              },
+              {
+                "value": "white",
+                "probability": 0.9325758148359371
+              },
+              {
+                "value": "red",
+                "probability": 0.01581158949841234
+              },
+              {
+                "value": "orange",
+                "probability": 0.011918169008082881
+              }
+            ],
+            "confidence": 0.9101010864479161,
+            "choice": "white"
+          },
+          "action": {
+            "name": "action",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "A",
+                "probability": 0.9996676220259049
+              },
+              {
+                "value": "B",
+                "probability": 6.066860086765039e-05
+              },
+              {
+                "value": "C",
+                "probability": 0.0002527517367929761
+              },
+              {
+                "value": "D",
+                "probability": 1.8957636434528354e-05
+              }
+            ],
+            "confidence": 0.9995568293678732,
+            "choice": "A"
+          }
+        }
+      }
+    }
+  },
+  "additional_verified_backends": {
+    "local-inference": [
+      "native Transformers CPU FP32"
+    ],
+    "api-quickstart": [
+      "GGUF prebuilt 0.1.0 Q8_0 text/image; sampled video frame is an image"
+    ],
+    "applications": [
+      "GGUF prebuilt 0.1.0 Q8_0 text/image"
+    ]
+  },
+  "assets": {
+    "sheep.jpg": {
+      "sha256": "5aca67b6f53fb2c17d6bff138ee8f03583d05282f9853ea8f46e0a060cb63edf",
+      "bytes": 58867,
+      "url": "https://raw.githubusercontent.com/Valen-Team/Valen/main/assets/cookbook/sheep.jpg",
+      "license": "Original media provenance/license not separately recorded by the old notebooks; not relicensed here"
+    },
+    "momos.mp4": {
+      "sha256": "1b51c243276e7016ddce3643891400570a079660ccf02b3bac7afe94827e2e6a",
+      "bytes": 395352,
+      "url": "https://raw.githubusercontent.com/Valen-Team/Valen/main/assets/cookbook/momos.mp4",
+      "license": "Original media provenance/license not separately recorded by the old notebooks; not relicensed here"
+    }
+  }
+}

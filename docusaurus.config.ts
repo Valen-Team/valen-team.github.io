@@ -24,6 +24,10 @@ const config: Config = {
     blog: false,
     theme: {customCss: './src/css/custom.css'},
   } satisfies Preset.Options]],
+  plugins: ['./plugins/cookbook-redirects.cjs', ['@docusaurus/plugin-content-docs', {
+    id: 'cookbook', path: 'cookbook', routeBasePath: 'cookbook',
+    sidebarPath: './cookbook-sidebars.ts', showLastUpdateTime: false,
+  }]],
   themeConfig: {
     image: 'img/social-card.png',
     colorMode: {defaultMode: 'light', disableSwitch: true, respectPrefersColorScheme: false},
@@ -34,6 +38,7 @@ const config: Config = {
       items: [
         {to: '/', label: 'Chat', position: 'left'},
         {to: '/docs/', label: 'Documentation', position: 'left'},
+        {to: '/cookbook/', label: 'Cookbook', position: 'left'},
         {href: 'https://github.com/Valen-Team', label: 'GitHub', position: 'right'},
         {type: 'localeDropdown', position: 'right'},
         {type: 'search', position: 'right'},

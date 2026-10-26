@@ -1,0 +1,70 @@
+---
+title: 商品图片筛选
+description: 检查摄影挂画商品的图片与分类是否一致。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/product_screening.py?cookbook-source';
+import shared from '@site/static/cookbook/code/common.py?cookbook-source';
+import CookbookEvidence, {CookbookSample} from '@site/src/components/CookbookEvidence';
+
+一个市场出售动物摄影挂画。两个商品记录使用同一张羊群照片：第一个声明为羊群，第二个声明为猫群。这个小样例不伪造第二张图片，同时覆盖分类匹配与不匹配两条业务分支。
+
+复用旧 Notebook 的动物群体问题，每张图片只推理一次。程序将识别结果与商品声明分类对比，并按声明分类的匹配概率排序，输出 `accept`、`category_mismatch` 或 `manual_review`，不会删除商品。选中概率至少为 0.8 且前两名概率差至少为 0.2 才自动判断；结果不确定时两个商品均进入人工复核。
+
+本例验证该素材的分类一致性，不验证商品质量、版权归属、图片安全性或真实市场准确率。这里将羊群照片当作挂画商品展示，并非完整商品数据集。扩展前应使用自有标注商品集和实际业务分类体系。
+
+## 安装与输入
+
+Python 3.11+。先下载小型源文件包并解压，然后安装所需依赖：
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook
+python -m pip install -r requirements.txt
+```
+
+明确执行后才获取以下小素材（图片约 58 KB，视频约 395 KB）；也可将有权使用的同名文件放在 `--asset-dir` 指定目录。
+
+```bash
+curl -fL https://raw.githubusercontent.com/Valen-Team/Valen/main/assets/cookbook/sheep.jpg -o sheep.jpg
+```
+
+<CookbookSample id="product" />
+
+## 运行
+
+```bash
+python product_screening.py --backend remote --model valen-2b --asset-dir . --output result.json
+# An existing local HTTP deployment instead:
+python product_screening.py --backend remote --base-url http://127.0.0.1:8000/v1 --model valen --asset-dir . --output result.json
+```
+
+本地 ONNX 也可直接运行：把参数改为 `--backend onnx --model /path/to/Valen-0.8B-ONNX`，并先安装 `valen-sdk[onnx,video]==0.2.0`。GGUF 服务通过 `--backend remote` 接入；不能把 GGUF 文件传给 `Valen.local`。
+
+## 完整可执行代码
+
+<CodeBlock language="python" title="product_screening.py">{source}</CodeBlock>
+
+共享运行器与 `samples.json` 已包含在下载包中，与网页展示内容使用同一个维护源。
+
+<details>
+
+<summary>common.py</summary>
+
+<CodeBlock language="python" title="common.py">{shared}</CodeBlock>
+
+</details>
+
+## 真实验证结果
+
+<CookbookEvidence id="product-screening" />
+
+这里记录的是指定版本与后端的实测，不意味着默认公共服务的模型版本、分数或速度完全相同。业务阈值单元测试使用构造响应，真实模型执行单独记录，二者不互相替代。
+
+## 素材、许可与相关文档
+
+代码与作者编写的 JSON 文本样例采用 <a href="/cookbook/code/LICENSE.txt">Apache-2.0</a>。工单为虚构示例。`sheep.jpg` 与 `momos.mp4` 沿用旧 Notebook 的评测片段和稳定素材 URL；旧目录未提供原始数据集归属及单独的媒体许可记录，因此这里不授予媒体再分发或商业使用许可。生产或再分发时请替换为有权使用的素材，勿把代码许可视为媒体许可。官网不额外复制这些媒体文件。
+
+[Decisions API](/zh-Hans/docs/valen/api/decisions/) · [SystemOne API](/zh-Hans/docs/valen/api/systemone/) · [ONNX / SDK](/zh-Hans/docs/valen/onnx/) · [Native deployment](/zh-Hans/docs/valen/quickstart/) · [GGUF deployment](/zh-Hans/docs/valen/gguf/) · [Evaluation](/zh-Hans/docs/valen/evaluation/) · [Validation and performance](../validation/)

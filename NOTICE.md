@@ -14,3 +14,7 @@ Project and news copy is based on the linked public READMEs. New site layout, co
 The Apache License 2.0 text for upstream material is in `LICENSE-UPSTREAM.txt`.
 
 DM Sans and Space Grotesk are bundled under the SIL Open Font License. Copyright notices and license texts are retained in `src/design-system/assets/fonts/OFL.txt`. Shared design-system release metadata and asset sources are included alongside the snapshot.
+
+## Cookbook migration (2026-10-26)
+
+The Cookbook adapts the two bilingual notebooks formerly maintained in Valen, Apache-2.0. Executable code and authored JSON samples are maintained only in `static/cookbook/code/` under the included Apache-2.0 notice. Pages import those source files; the ZIP is generated. The old media URLs stay in `Valen/assets/cookbook/`; the migration creates no new media copies. Their original dataset attribution and separate media license were not recorded in the old notebooks, so the code license does not relicense them. See each recipe's provenance section.

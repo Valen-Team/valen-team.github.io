@@ -1,0 +1,256 @@
+{
+  "passed": true,
+  "validation_kind": "real_model_javascript_sdk_http",
+  "sdk_name": "@valen-team/sdk",
+  "sdk_version": "0.2.0",
+  "records": [
+    {
+      "id": "text",
+      "passed": true,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "intent",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "address",
+                "probability": 0.9999687802227345
+              },
+              {
+                "value": "cancel",
+                "probability": 0.00003121977726547585
+              }
+            ],
+            "confidence": 0.999937560445469,
+            "choice": "address"
+          },
+          {
+            "name": "change_address",
+            "type": "predicate",
+            "probability": 0.998255233221263
+          },
+          {
+            "name": "explicitness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "none",
+                "value": 0,
+                "probability": 0.01275024985506279
+              },
+              {
+                "label": "possible",
+                "value": 1,
+                "probability": 0.05360192816521193
+              },
+              {
+                "label": "explicit",
+                "value": 2,
+                "probability": 0.9336478219797253
+              }
+            ],
+            "confidence": 0.8813463581869938,
+            "score": 1.9208975721246626
+          }
+        ],
+        "usage": {
+          "input_tokens": 166,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 166
+        }
+      }
+    },
+    {
+      "id": "typed-choice",
+      "passed": true,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "animal",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": true,
+                "probability": 0.9995143580761107
+              },
+              {
+                "value": "true",
+                "probability": 0.0004421172379099738
+              },
+              {
+                "value": false,
+                "probability": 0.00002689618630290796
+              },
+              {
+                "value": "false",
+                "probability": 0.000016628499676423394
+              }
+            ],
+            "confidence": 0.9993524774348143,
+            "choice": true
+          }
+        ],
+        "usage": {
+          "input_tokens": 68,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 68
+        }
+      }
+    },
+    {
+      "id": "image",
+      "passed": true,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5182708771299855
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.07339346780254176
+              },
+              {
+                "value": "blue",
+                "probability": 0.6364808629454929
+              },
+              {
+                "value": "green",
+                "probability": 0.29012566925196537
+              }
+            ],
+            "confidence": 0.45472129441823933,
+            "choice": "blue"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.1148758963713018
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.8851241036286982
+              }
+            ],
+            "confidence": 0.7702482072573964,
+            "score": 0.8851241036286982
+          }
+        ],
+        "usage": {
+          "input_tokens": 212,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 212
+        }
+      }
+    },
+    {
+      "id": "video",
+      "passed": true,
+      "response": {
+        "model": "valen",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5364243699393445
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.5720720194441735
+              },
+              {
+                "value": "blue",
+                "probability": 0.42752891967786716
+              },
+              {
+                "value": "green",
+                "probability": 0.00039906087795935525
+              }
+            ],
+            "confidence": 0.3581080291662603,
+            "choice": "red"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.00010388511441724037
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.9998961148855827
+              }
+            ],
+            "confidence": 0.9997922297711656,
+            "score": 0.9998961148855827
+          }
+        ],
+        "usage": {
+          "input_tokens": 271,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 271
+        }
+      }
+    },
+    {
+      "id": "empty-questions",
+      "passed": true,
+      "status": 400,
+      "error": "ValenAPIError: {\"type\":\"invalid_request\",\"message\":\"questions must contain 1–256 questions\"}"
+    },
+    {
+      "id": "zero-temperature",
+      "passed": true,
+      "status": 400,
+      "error": "ValenAPIError: {\"type\":\"invalid_request\",\"message\":\"temperature must be finite and positive\"}"
+    },
+    {
+      "id": "boolean-temperature",
+      "passed": true,
+      "status": 400,
+      "error": "ValenAPIError: {\"type\":\"invalid_request\",\"message\":\"temperature must be finite and positive\"}"
+    },
+    {
+      "id": "duplicate-names",
+      "passed": true,
+      "status": 400,
+      "error": "ValenAPIError: {\"type\":\"invalid_request\",\"message\":\"question names must be unique nonempty strings\"}"
+    },
+    {
+      "id": "numeric-choice",
+      "passed": true,
+      "status": 400,
+      "error": "ValenAPIError: {\"type\":\"invalid_request\",\"message\":\"choice values must be strings or booleans; level labels must be strings\"}"
+    }
+  ]
+}

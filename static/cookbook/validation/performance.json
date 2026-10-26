@@ -1,0 +1,1194 @@
+{
+  "schema_version": 1,
+  "completed": true,
+  "passed": false,
+  "validation_kind": "real_model_cpu_http",
+  "date_utc": "2026-10-26T09:34:19.263774+00:00",
+  "config_sha256": "b5ba5d62c8425bed9a36170ef86abde0bc270c3c0502a48de8c951d9859d01d6",
+  "hardware": {
+    "host": "rjob-7c39ca3b6d5ef431-8d40ed70322922d2-0",
+    "platform": "Linux-5.15.0-174-generic-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8558",
+    "affinity": [
+      45,
+      46,
+      141,
+      142
+    ]
+  },
+  "runs": 7,
+  "warmup_requests": 2,
+  "concurrency": 1,
+  "cold_definition": "fresh server process; OS page cache not cleared",
+  "percentile_method": "linear interpolation on sorted samples",
+  "memory_definition": "server process VmHWM RSS; includes resident mapped pages; not model file size or GPU VRAM",
+  "client_timing": "localhost JSON encode + HTTP + server + JSON decode; media fixture bytes already prepared",
+  "server_timing": "native/onnx predict wall time including compiler and preprocessing; GGUF not exposed, null",
+  "input_sha256": {
+    "text": "5729d70a43ae3817aa1daf3a5addbfb6cb6398fd277cf698624c5d45306f2f14",
+    "image": "f93f3d8d76c16f041e1e639f48147bb48fe0d6a552bb5330ab0fca7088c0e8e9",
+    "video": "1cb561e45f280549b59c241b47da8e532a2e562763cd06bb83e65b6cd655e440"
+  },
+  "media_sha256": {
+    "image": "d43aedfae98df54193821cfb0458ee17fd65996ed973eb16cb5ab5dbaef9901d",
+    "video": "1068bda0743884ff4ed4f788305a9edf0ccf1beb0fd6f2cd1b5b4988b699dc61"
+  },
+  "versions": {
+    "native": {
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "packages": {
+        "torch": "2.14.0",
+        "transformers": "5.19.0",
+        "numpy": "2.5.4",
+        "Pillow": "13.0.0",
+        "av": "19.0.2"
+      }
+    },
+    "onnx": {
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "packages": {
+        "valen-sdk": "0.2.0",
+        "onnxruntime": "1.31.0",
+        "numpy": "2.5.4",
+        "Pillow": "13.0.0",
+        "av": "19.0.2"
+      }
+    },
+    "gguf": {
+      "version": "0.1.0",
+      "platform": "Linux-5.10.25-nvidia-gpu-x86_64-with-glibc2.35",
+      "compiler": "c++ (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0",
+      "source": {
+        "llama_cpp_base": "1a0b56cec73dac938e0602c974b21dc8e2862830",
+        "ollama_base": "d44c2581904a98430e348d89cc2af1529b1808a0",
+        "patch_sha256": "20c8fcb50920ae8e96b158c30c277ab384fb9716d8d51fb01966b562b8e57732",
+        "ollama_patch_sha256": "294f3aa7e73d3da6b9e9de40d364210d924a31af2595606ac039de4fa0428b01",
+        "status": "custom runtime; llama.cpp measured; custom Ollama Go build, tests and real F32/Q8 imports/text/image/video/protocol/isolation validated on CPU; no unmodified upstream support"
+      },
+      "cmake_flags": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "GGML_ACCELERATE:BOOL": "ON",
+        "GGML_ALL_WARNINGS_3RD_PARTY:BOOL": "OFF",
+        "GGML_AMX_BF16:BOOL": "OFF",
+        "GGML_AMX_INT8:BOOL": "OFF",
+        "GGML_AMX_TILE:BOOL": "OFF",
+        "GGML_AVX:BOOL": "ON",
+        "GGML_AVX2:BOOL": "ON",
+        "GGML_AVX512:BOOL": "OFF",
+        "GGML_AVX512_BF16:BOOL": "OFF",
+        "GGML_AVX512_VBMI:BOOL": "OFF",
+        "GGML_AVX512_VNNI:BOOL": "OFF",
+        "GGML_AVX_VNNI:BOOL": "OFF",
+        "GGML_BACKEND_DIR:PATH": "",
+        "GGML_BACKEND_DL:BOOL": "OFF",
+        "GGML_BIN_INSTALL_DIR:PATH": "bin",
+        "GGML_BLAS:BOOL": "OFF",
+        "GGML_BLAS_VENDOR:STRING": "Generic",
+        "GGML_BMI2:BOOL": "ON",
+        "GGML_BUILD_EXAMPLES:BOOL": "OFF",
+        "GGML_BUILD_TESTS:BOOL": "OFF",
+        "GGML_CCACHE:BOOL": "ON",
+        "GGML_CCACHE_FOUND:FILEPATH": "GGML_CCACHE_FOUND-NOTFOUND",
+        "GGML_CPU:BOOL": "ON",
+        "GGML_CPU_ALL_VARIANTS:BOOL": "OFF",
+        "GGML_CPU_ARM_ARCH:STRING": "",
+        "GGML_CPU_HBM:BOOL": "OFF",
+        "GGML_CPU_KLEIDIAI:BOOL": "OFF",
+        "GGML_CPU_POWERPC_CPUTYPE:STRING": "",
+        "GGML_CPU_REPACK:BOOL": "ON",
+        "GGML_CUDA:BOOL": "OFF",
+        "GGML_CUDA_CCCL_VERSION:STRING": "",
+        "GGML_CUDA_COMPRESSION_MODE:STRING": "size",
+        "GGML_CUDA_FA:BOOL": "ON",
+        "GGML_CUDA_FA_ALL_QUANTS:BOOL": "OFF",
+        "GGML_CUDA_FA_QUANTS:STRING": "q4_0-q4_0;q8_0-q8_0;f16-f16;bf16-bf16",
+        "GGML_CUDA_FORCE_CUBLAS:BOOL": "OFF",
+        "GGML_CUDA_FORCE_MMQ:BOOL": "OFF",
+        "GGML_CUDA_GRAPHS:BOOL": "ON",
+        "GGML_CUDA_NCCL:BOOL": "ON",
+        "GGML_CUDA_NO_PEER_COPY:BOOL": "OFF",
+        "GGML_CUDA_NO_VMM:BOOL": "OFF",
+        "GGML_ET:BOOL": "OFF",
+        "GGML_ET_SYSEMU:BOOL": "OFF",
+        "GGML_F16C:BOOL": "ON",
+        "GGML_FMA:BOOL": "ON",
+        "GGML_GPROF:BOOL": "OFF",
+        "GGML_HEXAGON:BOOL": "OFF",
+        "GGML_HIP:BOOL": "OFF",
+        "GGML_HIP_EXPORT_METRICS:BOOL": "OFF",
+        "GGML_HIP_GRAPHS:BOOL": "ON",
+        "GGML_HIP_MMQ_MFMA:BOOL": "ON",
+        "GGML_HIP_NO_VMM:BOOL": "ON",
+        "GGML_HIP_RCCL:BOOL": "OFF",
+        "GGML_INCLUDE_INSTALL_DIR:PATH": "include",
+        "GGML_LASX:BOOL": "ON",
+        "GGML_LIB_INSTALL_DIR:PATH": "lib",
+        "GGML_LLAMAFILE:BOOL": "ON",
+        "GGML_LSX:BOOL": "ON",
+        "GGML_LTO:BOOL": "OFF",
+        "GGML_METAL:BOOL": "OFF",
+        "GGML_METAL_EMBED_LIBRARY:BOOL": "OFF",
+        "GGML_METAL_MACOSX_VERSION_MIN:STRING": "",
+        "GGML_METAL_NDEBUG:BOOL": "OFF",
+        "GGML_METAL_SHADER_DEBUG:BOOL": "OFF",
+        "GGML_METAL_STD:STRING": "",
+        "GGML_METAL_TARGET_OS:STRING": "macos",
+        "GGML_MUSA:BOOL": "OFF",
+        "GGML_MUSA_GRAPHS:BOOL": "OFF",
+        "GGML_MUSA_MUDNN_COPY:BOOL": "OFF",
+        "GGML_NATIVE:BOOL": "OFF",
+        "GGML_OPENCL:BOOL": "OFF",
+        "GGML_OPENCL_EMBED_KERNELS:BOOL": "ON",
+        "GGML_OPENCL_PROFILING:BOOL": "OFF",
+        "GGML_OPENCL_TARGET_VERSION:STRING": "300",
+        "GGML_OPENCL_USE_ADRENO_KERNELS:BOOL": "ON",
+        "GGML_OPENMP:BOOL": "ON",
+        "GGML_OPENMP_FETCH:BOOL": "OFF",
+        "GGML_OPENVINO:BOOL": "OFF",
+        "GGML_RPC:BOOL": "OFF",
+        "GGML_RVV:BOOL": "ON",
+        "GGML_RV_ZFH:BOOL": "ON",
+        "GGML_RV_ZICBOP:BOOL": "ON",
+        "GGML_RV_ZIHINTPAUSE:BOOL": "ON",
+        "GGML_RV_ZVFBFWMA:BOOL": "OFF",
+        "GGML_RV_ZVFH:BOOL": "ON",
+        "GGML_SANITIZE_ADDRESS:BOOL": "OFF",
+        "GGML_SANITIZE_THREAD:BOOL": "OFF",
+        "GGML_SANITIZE_UNDEFINED:BOOL": "OFF",
+        "GGML_SCCACHE_FOUND:FILEPATH": "GGML_SCCACHE_FOUND-NOTFOUND",
+        "GGML_SCHED_MAX_COPIES:STRING": "4",
+        "GGML_SCHED_NO_REALLOC:BOOL": "OFF",
+        "GGML_SSE42:BOOL": "ON",
+        "GGML_STATIC:BOOL": "OFF",
+        "GGML_SYCL:BOOL": "OFF",
+        "GGML_SYCL_DEVICE_ARCH:STRING": "",
+        "GGML_SYCL_DNN:BOOL": "ON",
+        "GGML_SYCL_F16:BOOL": "OFF",
+        "GGML_SYCL_GRAPH:BOOL": "ON",
+        "GGML_SYCL_HOST_MEM_FALLBACK:BOOL": "ON",
+        "GGML_SYCL_SUPPORT_LEVEL_ZERO_API:BOOL": "ON",
+        "GGML_SYCL_TARGET:STRING": "INTEL",
+        "GGML_VIRTGPU:BOOL": "OFF",
+        "GGML_VIRTGPU_BACKEND:BOOL": "OFF",
+        "GGML_VULKAN:BOOL": "OFF",
+        "GGML_VULKAN_CHECK_RESULTS:BOOL": "OFF",
+        "GGML_VULKAN_DEBUG:BOOL": "OFF",
+        "GGML_VULKAN_MEMORY_DEBUG:BOOL": "OFF",
+        "GGML_VULKAN_RUN_TESTS:BOOL": "OFF",
+        "GGML_VULKAN_SHADERS_GEN_TOOLCHAIN:FILEPATH": "",
+        "GGML_VULKAN_SHADER_DEBUG_INFO:BOOL": "OFF",
+        "GGML_VULKAN_VALIDATE:BOOL": "OFF",
+        "GGML_VXE:BOOL": "OFF",
+        "GGML_WEBGPU:BOOL": "OFF",
+        "GGML_WEBGPU_CPU_PROFILE:BOOL": "OFF",
+        "GGML_WEBGPU_DEBUG:BOOL": "OFF",
+        "GGML_WEBGPU_GPU_PROFILE:BOOL": "OFF",
+        "GGML_WEBGPU_JSPI:BOOL": "ON",
+        "GGML_XTHEADVECTOR:BOOL": "OFF",
+        "GGML_ZDNN:BOOL": "OFF",
+        "GGML_ZENDNN:BOOL": "OFF",
+        "LLAMA_ALL_WARNINGS:BOOL": "ON",
+        "LLAMA_ALL_WARNINGS_3RD_PARTY:BOOL": "OFF",
+        "LLAMA_BIN_INSTALL_DIR:PATH": "bin",
+        "LLAMA_BUILD_APP:BOOL": "ON",
+        "LLAMA_BUILD_COMMON:BOOL": "ON",
+        "LLAMA_BUILD_EXAMPLES:BOOL": "OFF",
+        "LLAMA_BUILD_IS_DEV:BOOL": "ON",
+        "LLAMA_BUILD_MTMD:BOOL": "OFF",
+        "LLAMA_BUILD_SERVER:BOOL": "ON",
+        "LLAMA_BUILD_TESTS:BOOL": "OFF",
+        "LLAMA_BUILD_TOOLS:BOOL": "ON",
+        "LLAMA_BUILD_UI:BOOL": "OFF",
+        "LLAMA_CONNECT:BOOL": "OFF",
+        "LLAMA_CURL:UNINITIALIZED": "OFF",
+        "LLAMA_FATAL_WARNINGS:BOOL": "OFF",
+        "LLAMA_INCLUDE_INSTALL_DIR:PATH": "include",
+        "LLAMA_LIB_INSTALL_DIR:PATH": "lib",
+        "LLAMA_LLGUIDANCE:BOOL": "OFF",
+        "LLAMA_OPENSSL:BOOL": "ON",
+        "LLAMA_SANITIZE_ADDRESS:BOOL": "OFF",
+        "LLAMA_SANITIZE_THREAD:BOOL": "OFF",
+        "LLAMA_SANITIZE_UNDEFINED:BOOL": "OFF",
+        "LLAMA_SUBPROCESS:BOOL": "ON",
+        "LLAMA_TESTS_INSTALL:BOOL": "ON",
+        "LLAMA_TOOLS_INSTALL:BOOL": "ON",
+        "LLAMA_UI_GZIP:BOOL": "ON",
+        "LLAMA_UI_HF_BUCKET:STRING": "ggml-org/llama-ui",
+        "LLAMA_USE_PREBUILT_UI:BOOL": "OFF",
+        "LLAMA_USE_SYSTEM_GGML:BOOL": "OFF",
+        "LLAMA_WASM_MEM64:BOOL": "ON",
+        "MTMD_VIDEO:BOOL": "OFF",
+        "GGML_AVAILABLE_BACKENDS:INTERNAL": "ggml-cpu",
+        "GGML_CUDA_COMPRESSION_MODE-STRINGS:INTERNAL": "none;speed;balance;size",
+        "GGML_OPENMP_ENABLED:INTERNAL": "ON"
+      },
+      "validated_scope": "Linux x86-64 CPU text; no GPU, Windows, image or video claims for this package"
+    }
+  },
+  "records": [
+    {
+      "backend": "native-fp32",
+      "modality": "text",
+      "model_size": "0.8B",
+      "precision": "FP32; native autocast disabled",
+      "threads": 4,
+      "model_provenance": {
+        "model": "Valen-Team/Valen-0.8B",
+        "config_sha256": "8a6a766acfe35a6eb3d373e90c43af0f08dbd44301251df71e18b1b5b5381c08",
+        "weight_files": [
+          {
+            "file": "model.safetensors",
+            "bytes": 3417285852,
+            "sha256": "465714dd28702c4232d9233c2a2157d366967c541b2a27d9dadccc816304fd48"
+          }
+        ],
+        "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+        "published_weight_hashes_verified": true,
+        "local_checkout_revision": "4c858f2e26f4978640fa3f6d0de26a75b790b661"
+      },
+      "media_budget": {
+        "images_kwargs": {
+          "size": {
+            "longest_edge": 262144,
+            "shortest_edge": 65536
+          }
+        },
+        "videos_kwargs": {
+          "fps": null,
+          "num_frames": 16,
+          "size": {
+            "longest_edge": 2097152,
+            "shortest_edge": 131072
+          }
+        }
+      },
+      "passed": true,
+      "startup_to_ready_seconds": 28.47131683025509,
+      "cold_request_seconds": 3.9000582238659263,
+      "cold_server_predict_seconds": 3.8992853350937366,
+      "response": {
+        "model": "Valen",
+        "answers": [
+          {
+            "name": "intent",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "address",
+                "probability": 0.9999687818378548
+              },
+              {
+                "value": "cancel",
+                "probability": 3.121816214531977e-05
+              }
+            ],
+            "confidence": 0.9999375636757095,
+            "choice": "address"
+          },
+          {
+            "name": "change_address",
+            "type": "predicate",
+            "probability": 0.9982550828650772
+          },
+          {
+            "name": "explicitness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "none",
+                "value": 0,
+                "probability": 0.012752776931251689
+              },
+              {
+                "label": "possible",
+                "value": 1,
+                "probability": 0.053609925285683875
+              },
+              {
+                "label": "explicit",
+                "value": 2,
+                "probability": 0.9336372977830645
+              }
+            ],
+            "confidence": 0.8813267812777191,
+            "score": 1.9208845208518128
+          }
+        ],
+        "usage": {
+          "input_tokens": 166,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 166
+        }
+      },
+      "input_tokens": 166,
+      "warm_samples_seconds": [
+        0.6367886140942574,
+        0.6398877575993538,
+        0.6295426040887833,
+        0.6565144658088684,
+        0.6524407640099525,
+        0.6397958304733038,
+        0.64494464173913
+      ],
+      "warm_p50_seconds": 0.6398877575993538,
+      "warm_p95_seconds": 0.6552923552691936,
+      "server_predict_samples_seconds": [
+        0.6357675334438682,
+        0.6389385806396604,
+        0.6286293547600508,
+        0.6556317051872611,
+        0.6515762815251946,
+        0.638913887552917,
+        0.6440240442752838
+      ],
+      "server_predict_p50_seconds": 0.6389385806396604,
+      "server_predict_p95_seconds": 0.6544150780886412,
+      "peak_rss_bytes": 2929020928
+    },
+    {
+      "backend": "native-fp32",
+      "modality": "image",
+      "model_size": "0.8B",
+      "precision": "FP32; native autocast disabled",
+      "threads": 4,
+      "model_provenance": {
+        "model": "Valen-Team/Valen-0.8B",
+        "config_sha256": "8a6a766acfe35a6eb3d373e90c43af0f08dbd44301251df71e18b1b5b5381c08",
+        "weight_files": [
+          {
+            "file": "model.safetensors",
+            "bytes": 3417285852,
+            "sha256": "465714dd28702c4232d9233c2a2157d366967c541b2a27d9dadccc816304fd48"
+          }
+        ],
+        "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+        "published_weight_hashes_verified": true,
+        "local_checkout_revision": "4c858f2e26f4978640fa3f6d0de26a75b790b661"
+      },
+      "media_budget": {
+        "images_kwargs": {
+          "size": {
+            "longest_edge": 262144,
+            "shortest_edge": 65536
+          }
+        },
+        "videos_kwargs": {
+          "fps": null,
+          "num_frames": 16,
+          "size": {
+            "longest_edge": 2097152,
+            "shortest_edge": 131072
+          }
+        }
+      },
+      "passed": true,
+      "startup_to_ready_seconds": 6.010561116039753,
+      "cold_request_seconds": 1.3625540100038052,
+      "cold_server_predict_seconds": 1.3615660518407822,
+      "response": {
+        "model": "Valen",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5192185979412005
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.07336667612658915
+              },
+              {
+                "value": "blue",
+                "probability": 0.6368053277271555
+              },
+              {
+                "value": "green",
+                "probability": 0.2898279961462555
+              }
+            ],
+            "confidence": 0.4552079915907332,
+            "choice": "blue"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.11513695844977895
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.8848630415502211
+              }
+            ],
+            "confidence": 0.7697260831004421,
+            "score": 0.8848630415502211
+          }
+        ],
+        "usage": {
+          "input_tokens": 212,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 212
+        }
+      },
+      "input_tokens": 212,
+      "warm_samples_seconds": [
+        0.998833972029388,
+        1.0414539705961943,
+        0.9803944416344166,
+        0.992220351472497,
+        1.0063326926901937,
+        1.061335749924183,
+        0.9596974365413189
+      ],
+      "warm_p50_seconds": 0.998833972029388,
+      "warm_p95_seconds": 1.0553712161257862,
+      "server_predict_samples_seconds": [
+        0.997731146402657,
+        1.0402968507260084,
+        0.9793901462107897,
+        0.9912383249029517,
+        1.0053106313571334,
+        1.060347211547196,
+        0.958742605522275
+      ],
+      "server_predict_p50_seconds": 0.997731146402657,
+      "server_predict_p95_seconds": 1.0543321033008397,
+      "peak_rss_bytes": 3358375936
+    },
+    {
+      "backend": "native-fp32",
+      "modality": "video",
+      "model_size": "0.8B",
+      "precision": "FP32; native autocast disabled",
+      "threads": 4,
+      "model_provenance": {
+        "model": "Valen-Team/Valen-0.8B",
+        "config_sha256": "8a6a766acfe35a6eb3d373e90c43af0f08dbd44301251df71e18b1b5b5381c08",
+        "weight_files": [
+          {
+            "file": "model.safetensors",
+            "bytes": 3417285852,
+            "sha256": "465714dd28702c4232d9233c2a2157d366967c541b2a27d9dadccc816304fd48"
+          }
+        ],
+        "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+        "published_weight_hashes_verified": true,
+        "local_checkout_revision": "4c858f2e26f4978640fa3f6d0de26a75b790b661"
+      },
+      "media_budget": {
+        "images_kwargs": {
+          "size": {
+            "longest_edge": 262144,
+            "shortest_edge": 65536
+          }
+        },
+        "videos_kwargs": {
+          "fps": null,
+          "num_frames": 16,
+          "size": {
+            "longest_edge": 2097152,
+            "shortest_edge": 131072
+          }
+        }
+      },
+      "passed": true,
+      "startup_to_ready_seconds": 6.11265067756176,
+      "cold_request_seconds": 1.77218025829643,
+      "cold_server_predict_seconds": 1.7713090498000383,
+      "response": {
+        "model": "Valen",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.536397097200203
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.5720908087214187
+              },
+              {
+                "value": "blue",
+                "probability": 0.4275100890342099
+              },
+              {
+                "value": "green",
+                "probability": 0.0003991022443714584
+              }
+            ],
+            "confidence": 0.35813621308212806,
+            "choice": "red"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.00010389873637274066
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.9998961012636272
+              }
+            ],
+            "confidence": 0.9997922025272545,
+            "score": 0.9998961012636272
+          }
+        ],
+        "usage": {
+          "input_tokens": 271,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 271
+        }
+      },
+      "input_tokens": 271,
+      "warm_samples_seconds": [
+        1.28466616012156,
+        1.1908420966938138,
+        1.19535056874156,
+        1.1866005444899201,
+        1.183456820435822,
+        1.1597024127840996,
+        1.1943764835596085
+      ],
+      "warm_p50_seconds": 1.1908420966938138,
+      "warm_p95_seconds": 1.2578714827075599,
+      "server_predict_samples_seconds": [
+        1.2835971480235457,
+        1.1897244323045015,
+        1.1944171115756035,
+        1.1856546280905604,
+        1.1824296033009887,
+        1.1588251069188118,
+        1.1934242062270641
+      ],
+      "server_predict_p50_seconds": 1.1897244323045015,
+      "server_predict_p95_seconds": 1.256843137089163,
+      "peak_rss_bytes": 3379920896
+    },
+    {
+      "backend": "onnx-fp32",
+      "modality": "text",
+      "model_size": "0.8B",
+      "precision": "FP32; native autocast disabled",
+      "threads": 4,
+      "model_provenance": {
+        "model": "Valen-Team/Valen-0.8B",
+        "config_sha256": "8a6a766acfe35a6eb3d373e90c43af0f08dbd44301251df71e18b1b5b5381c08",
+        "weight_files": [
+          {
+            "file": "model.safetensors",
+            "bytes": 3417285852,
+            "sha256": "465714dd28702c4232d9233c2a2157d366967c541b2a27d9dadccc816304fd48"
+          }
+        ],
+        "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+        "published_weight_hashes_verified": true,
+        "local_checkout_revision": "4c858f2e26f4978640fa3f6d0de26a75b790b661"
+      },
+      "media_budget": {
+        "images_kwargs": {
+          "size": {
+            "longest_edge": 262144,
+            "shortest_edge": 65536
+          }
+        },
+        "videos_kwargs": {
+          "fps": null,
+          "num_frames": 16,
+          "size": {
+            "longest_edge": 2097152,
+            "shortest_edge": 131072
+          }
+        }
+      },
+      "passed": true,
+      "startup_to_ready_seconds": 1.2038754662498832,
+      "cold_request_seconds": 3.147052333690226,
+      "cold_server_predict_seconds": 3.1462379414588213,
+      "response": {
+        "model": "Valen-0.8B",
+        "answers": [
+          {
+            "name": "intent",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "address",
+                "probability": 0.9999687802227345
+              },
+              {
+                "value": "cancel",
+                "probability": 3.121977726547585e-05
+              }
+            ],
+            "confidence": 0.999937560445469,
+            "choice": "address"
+          },
+          {
+            "name": "change_address",
+            "type": "predicate",
+            "probability": 0.998255233221263
+          },
+          {
+            "name": "explicitness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "none",
+                "value": 0,
+                "probability": 0.01275024985506279
+              },
+              {
+                "label": "possible",
+                "value": 1,
+                "probability": 0.05360192816521193
+              },
+              {
+                "label": "explicit",
+                "value": 2,
+                "probability": 0.9336478219797253
+              }
+            ],
+            "confidence": 0.8813463581869938,
+            "score": 1.9208975721246626
+          }
+        ],
+        "usage": {
+          "input_tokens": 166,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 166
+        }
+      },
+      "input_tokens": 166,
+      "warm_samples_seconds": [
+        1.6054002838209271,
+        1.5834573628380895,
+        1.533308956772089,
+        1.558045258745551,
+        1.5674989176914096,
+        1.6038932111114264,
+        1.561084303073585
+      ],
+      "warm_p50_seconds": 1.5674989176914096,
+      "warm_p95_seconds": 1.604948162008077,
+      "server_predict_samples_seconds": [
+        1.604447421617806,
+        1.5825200378894806,
+        1.5324199926108122,
+        1.55714042019099,
+        1.5665973825380206,
+        1.6030096039175987,
+        1.5601688167080283
+      ],
+      "server_predict_p50_seconds": 1.5665973825380206,
+      "server_predict_p95_seconds": 1.6040160763077438,
+      "peak_rss_bytes": 2263121920
+    },
+    {
+      "backend": "onnx-fp32",
+      "modality": "image",
+      "model_size": "0.8B",
+      "precision": "FP32; native autocast disabled",
+      "threads": 4,
+      "model_provenance": {
+        "model": "Valen-Team/Valen-0.8B",
+        "config_sha256": "8a6a766acfe35a6eb3d373e90c43af0f08dbd44301251df71e18b1b5b5381c08",
+        "weight_files": [
+          {
+            "file": "model.safetensors",
+            "bytes": 3417285852,
+            "sha256": "465714dd28702c4232d9233c2a2157d366967c541b2a27d9dadccc816304fd48"
+          }
+        ],
+        "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+        "published_weight_hashes_verified": true,
+        "local_checkout_revision": "4c858f2e26f4978640fa3f6d0de26a75b790b661"
+      },
+      "media_budget": {
+        "images_kwargs": {
+          "size": {
+            "longest_edge": 262144,
+            "shortest_edge": 65536
+          }
+        },
+        "videos_kwargs": {
+          "fps": null,
+          "num_frames": 16,
+          "size": {
+            "longest_edge": 2097152,
+            "shortest_edge": 131072
+          }
+        }
+      },
+      "passed": true,
+      "startup_to_ready_seconds": 1.1033165333792567,
+      "cold_request_seconds": 4.956086965277791,
+      "cold_server_predict_seconds": 4.955268332734704,
+      "response": {
+        "model": "Valen-0.8B",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5182708771299855
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.07339346780254176
+              },
+              {
+                "value": "blue",
+                "probability": 0.6364808629454929
+              },
+              {
+                "value": "green",
+                "probability": 0.29012566925196537
+              }
+            ],
+            "confidence": 0.45472129441823933,
+            "choice": "blue"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.1148758963713018
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.8851241036286982
+              }
+            ],
+            "confidence": 0.7702482072573964,
+            "score": 0.8851241036286982
+          }
+        ],
+        "usage": {
+          "input_tokens": 212,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 212
+        }
+      },
+      "input_tokens": 212,
+      "warm_samples_seconds": [
+        2.874999581836164,
+        2.9603260131552815,
+        2.8549596639350057,
+        2.71735205873847,
+        2.8375983852893114,
+        2.9096272345632315,
+        2.7901357766240835
+      ],
+      "warm_p50_seconds": 2.8549596639350057,
+      "warm_p95_seconds": 2.9451163795776667,
+      "server_predict_samples_seconds": [
+        2.873980635777116,
+        2.959402742795646,
+        2.8539783023297787,
+        2.716244808398187,
+        2.8365217708051205,
+        2.9085701014846563,
+        2.7891808301210403
+      ],
+      "server_predict_p50_seconds": 2.8539783023297787,
+      "server_predict_p95_seconds": 2.944152950402349,
+      "peak_rss_bytes": 2664386560
+    },
+    {
+      "backend": "onnx-fp32",
+      "modality": "video",
+      "model_size": "0.8B",
+      "precision": "FP32; native autocast disabled",
+      "threads": 4,
+      "model_provenance": {
+        "model": "Valen-Team/Valen-0.8B",
+        "config_sha256": "8a6a766acfe35a6eb3d373e90c43af0f08dbd44301251df71e18b1b5b5381c08",
+        "weight_files": [
+          {
+            "file": "model.safetensors",
+            "bytes": 3417285852,
+            "sha256": "465714dd28702c4232d9233c2a2157d366967c541b2a27d9dadccc816304fd48"
+          }
+        ],
+        "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+        "published_weight_hashes_verified": true,
+        "local_checkout_revision": "4c858f2e26f4978640fa3f6d0de26a75b790b661"
+      },
+      "media_budget": {
+        "images_kwargs": {
+          "size": {
+            "longest_edge": 262144,
+            "shortest_edge": 65536
+          }
+        },
+        "videos_kwargs": {
+          "fps": null,
+          "num_frames": 16,
+          "size": {
+            "longest_edge": 2097152,
+            "shortest_edge": 131072
+          }
+        }
+      },
+      "passed": true,
+      "startup_to_ready_seconds": 1.2031623208895326,
+      "cold_request_seconds": 5.031416974961758,
+      "cold_server_predict_seconds": 5.030619283206761,
+      "response": {
+        "model": "Valen-0.8B",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5364243699393445
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.5720720194441735
+              },
+              {
+                "value": "blue",
+                "probability": 0.42752891967786716
+              },
+              {
+                "value": "green",
+                "probability": 0.00039906087795935525
+              }
+            ],
+            "confidence": 0.3581080291662603,
+            "choice": "red"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.00010388511441724037
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.9998961148855827
+              }
+            ],
+            "confidence": 0.9997922297711656,
+            "score": 0.9998961148855827
+          }
+        ],
+        "usage": {
+          "input_tokens": 271,
+          "output_tokens": 0
+        },
+        "internal_usage": {
+          "compute_tokens": 271
+        }
+      },
+      "input_tokens": 271,
+      "warm_samples_seconds": [
+        2.6731047770008445,
+        2.798372413031757,
+        2.810626622289419,
+        2.750745694153011,
+        2.63635222427547,
+        2.806144764646888,
+        2.898505167104304
+      ],
+      "warm_p50_seconds": 2.798372413031757,
+      "warm_p95_seconds": 2.872141603659838,
+      "server_predict_samples_seconds": [
+        2.6721859825775027,
+        2.7974879229441285,
+        2.80970308650285,
+        2.7498185569420457,
+        2.635481889359653,
+        2.805206445977092,
+        2.897439212538302
+      ],
+      "server_predict_p50_seconds": 2.7974879229441285,
+      "server_predict_p95_seconds": 2.8711183747276663,
+      "peak_rss_bytes": 2705149952
+    },
+    {
+      "backend": "gguf-q8",
+      "modality": "text",
+      "model_size": "0.8B",
+      "precision": "Q8_0 backbone; F32 Mixer and vision",
+      "threads": 4,
+      "model_provenance": {
+        "model": "Valen-Team/Valen-0.8B-GGUF",
+        "source_revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+        "cached_file": "Valen-0.8B-Q8_0.gguf",
+        "runtime_archive_sha256": "2fcc903eb853b8c04498bb4ee716c7c3662d1d07eb5c2d89c11310716ae04c0e"
+      },
+      "media_budget": {
+        "images_kwargs": {
+          "size": {
+            "longest_edge": 262144,
+            "shortest_edge": 65536
+          }
+        },
+        "videos_kwargs": {
+          "fps": null,
+          "num_frames": 16,
+          "size": {
+            "longest_edge": 2097152,
+            "shortest_edge": 131072
+          }
+        }
+      },
+      "passed": true,
+      "startup_to_ready_seconds": 2.0107805458828807,
+      "cold_request_seconds": 1.262923339381814,
+      "cold_server_predict_seconds": null,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "intent",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "address",
+                "probability": 0.9999678587251428
+              },
+              {
+                "value": "cancel",
+                "probability": 3.214127485722157e-05
+              }
+            ],
+            "confidence": 0.9999357174502856,
+            "choice": "address"
+          },
+          {
+            "name": "change_address",
+            "type": "predicate",
+            "probability": 0.9982443468457173
+          },
+          {
+            "name": "explicitness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "none",
+                "value": 0,
+                "probability": 0.012675093613854499
+              },
+              {
+                "label": "possible",
+                "value": 1,
+                "probability": 0.05436870874501274
+              },
+              {
+                "label": "explicit",
+                "value": 2,
+                "probability": 0.9329561976411327
+              }
+            ],
+            "confidence": 0.8804216560409174,
+            "score": 1.920281104027278
+          }
+        ],
+        "usage": {
+          "input_tokens": 166,
+          "output_tokens": 0
+        }
+      },
+      "input_tokens": 166,
+      "warm_samples_seconds": [
+        1.2850133096799254,
+        1.2590236784890294,
+        1.296737514436245,
+        1.285086577758193,
+        1.2847708463668823,
+        1.270035688765347,
+        1.3027706649154425
+      ],
+      "warm_p50_seconds": 1.2850133096799254,
+      "warm_p95_seconds": 1.3009607197716833,
+      "server_predict_samples_seconds": null,
+      "server_predict_p50_seconds": null,
+      "server_predict_p95_seconds": null,
+      "peak_rss_bytes": 1492242432
+    },
+    {
+      "backend": "gguf-q8",
+      "modality": "image",
+      "model_size": "0.8B",
+      "precision": "Q8_0 backbone; F32 Mixer and vision",
+      "threads": 4,
+      "model_provenance": {
+        "model": "Valen-Team/Valen-0.8B-GGUF",
+        "source_revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+        "cached_file": "Valen-0.8B-Q8_0.gguf",
+        "runtime_archive_sha256": "2fcc903eb853b8c04498bb4ee716c7c3662d1d07eb5c2d89c11310716ae04c0e"
+      },
+      "media_budget": {
+        "images_kwargs": {
+          "size": {
+            "longest_edge": 262144,
+            "shortest_edge": 65536
+          }
+        },
+        "videos_kwargs": {
+          "fps": null,
+          "num_frames": 16,
+          "size": {
+            "longest_edge": 2097152,
+            "shortest_edge": 131072
+          }
+        }
+      },
+      "passed": true,
+      "startup_to_ready_seconds": 1.306293155066669,
+      "cold_request_seconds": 2.3268446223810315,
+      "cold_server_predict_seconds": null,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5312669345185959
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.07323888801551497
+              },
+              {
+                "value": "blue",
+                "probability": 0.6443186009304713
+              },
+              {
+                "value": "green",
+                "probability": 0.2824425110540137
+              }
+            ],
+            "confidence": 0.466477901395707,
+            "choice": "blue"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.11672786158042753
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.8832721384195724
+              }
+            ],
+            "confidence": 0.766544276839145,
+            "score": 0.8832721384195724
+          }
+        ],
+        "usage": {
+          "input_tokens": 212,
+          "output_tokens": 0
+        }
+      },
+      "input_tokens": 212,
+      "warm_samples_seconds": [
+        2.2757111666724086,
+        2.2853696504607797,
+        2.2465913761407137,
+        2.2793058501556516,
+        2.247772315517068,
+        2.2672183103859425,
+        2.4103169087320566
+      ],
+      "warm_p50_seconds": 2.2757111666724086,
+      "warm_p95_seconds": 2.3728327312506736,
+      "server_predict_samples_seconds": null,
+      "server_predict_p50_seconds": null,
+      "server_predict_p95_seconds": null,
+      "peak_rss_bytes": 1513885696
+    },
+    {
+      "backend": "gguf-q8",
+      "modality": "video",
+      "model_size": "0.8B",
+      "precision": "Q8_0 backbone; F32 Mixer and vision",
+      "threads": 4,
+      "model_provenance": {
+        "model": "Valen-Team/Valen-0.8B-GGUF",
+        "source_revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+        "cached_file": "Valen-0.8B-Q8_0.gguf",
+        "runtime_archive_sha256": "2fcc903eb853b8c04498bb4ee716c7c3662d1d07eb5c2d89c11310716ae04c0e"
+      },
+      "media_budget": {
+        "images_kwargs": {
+          "size": {
+            "longest_edge": 262144,
+            "shortest_edge": 65536
+          }
+        },
+        "videos_kwargs": {
+          "fps": null,
+          "num_frames": 16,
+          "size": {
+            "longest_edge": 2097152,
+            "shortest_edge": 131072
+          }
+        }
+      },
+      "passed": false,
+      "startup_to_ready_seconds": 1.4055270468816161,
+      "error": "AssertionError({'error': {'code': 500, 'message': 'Failed to load image or audio file', 'type': 'server_error'}})",
+      "peak_rss_bytes": 1390297088
+    }
+  ],
+  "matching_input_tokens": {
+    "text": true,
+    "image": true,
+    "video": true
+  }
+}

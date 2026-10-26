@@ -1,0 +1,38 @@
+{
+  "clip_id": "clip-001",
+  "tags": {
+    "sauce_color": "white"
+  },
+  "status": "tagged",
+  "confidence": 0.9752438526923451,
+  "sampling": {
+    "frame_index": 98,
+    "total_frames": 196,
+    "timestamp_seconds": 3.2666666666666666
+  },
+  "scope": "single_frame_visual_attribute_only",
+  "answer": {
+    "name": "sauce_color",
+    "type": "choice",
+    "probabilities": [
+      {
+        "value": "brown",
+        "probability": 0.014343334878796554
+      },
+      {
+        "value": "white",
+        "probability": 0.9752438526923451
+      },
+      {
+        "value": "red",
+        "probability": 0.007025658192234735
+      },
+      {
+        "value": "orange",
+        "probability": 0.0033871542366235487
+      }
+    ],
+    "confidence": 0.9669918035897935,
+    "choice": "white"
+  }
+}

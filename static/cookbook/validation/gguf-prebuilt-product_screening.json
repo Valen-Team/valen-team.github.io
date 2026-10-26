@@ -1,0 +1,44 @@
+{
+  "listings": [
+    {
+      "id": "print-001",
+      "title": "Flock of sheep photographic print",
+      "expected_group": "flock",
+      "status": "accept",
+      "category_match_probability": 0.9963105297996027
+    },
+    {
+      "id": "print-002",
+      "title": "Clowder of cats photographic print",
+      "expected_group": "clowder",
+      "status": "category_mismatch",
+      "category_match_probability": 0.002749012194385354
+    }
+  ],
+  "predicted_group": "flock",
+  "confidence": 0.9963105297996027,
+  "answer": {
+    "name": "group",
+    "type": "choice",
+    "probabilities": [
+      {
+        "value": "pride",
+        "probability": 0.00024266329295405555
+      },
+      {
+        "value": "flock",
+        "probability": 0.9963105297996027
+      },
+      {
+        "value": "clowder",
+        "probability": 0.002749012194385354
+      },
+      {
+        "value": "gang",
+        "probability": 0.0006977947130579646
+      }
+    ],
+    "confidence": 0.9950807063994702,
+    "choice": "flock"
+  }
+}

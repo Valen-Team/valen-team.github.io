@@ -1,0 +1,82 @@
+---
+title: Validation, performance and versions
+---
+
+import {PerformanceTable, ServerTimingTable, BackendCapabilities, NumericalTable, VersionSummary} from '@site/src/components/CookbookValidation';
+
+# Measured scope, not a generic speed promise
+
+Validated on **26 October 2026**. This page reads the version manifest, performance rows and capability matrix directly from their machine-readable sources. The benchmark uses real 0.8B model weights with a small fixed text case and synthetic diagnostic image/video inputs. These are not representative task-accuracy or production-load benchmarks.
+
+<VersionSummary />
+
+<a href="/cookbook/versions.json">Full version and model-revision manifest</a> · <a href="/cookbook/results.json">Executed tutorial outputs and tested source hashes</a> · <a href="/cookbook/capabilities.json">Capability manifest</a>
+
+## Same-worker CPU measurements
+
+All eight successful rows below came from **one allocation on one machine**: Intel Xeon Platinum 8558, Linux x86-64, four CPU threads, CPU affinity `[45, 46, 141, 142]`, no GPU. Native and ONNX use FP32; GGUF uses Q8_0 backbone weights with FP32 Mixer/vision, so its memory/latency tradeoff includes a precision difference. The source model revision is `a0a10112716f54457bad6f60b792ad334f9e89fd`.
+
+Each backend/modality gets a fresh server process, one cold request, two additional warmups and seven measured sequential requests. p50/p95 use linear interpolation on sorted samples. Concurrency is **one**; this is latency, not throughput. Startup includes interpreter/runtime imports, model initialization and health readiness; ONNX can initialize graph sessions during the first request. OS page caches were **not cleared**: “cold” means process-cold, not disk-cold. Native text was first in the allocation and had a longer startup; do not treat its first startup as a stable backend ratio.
+
+<PerformanceTable />
+
+Peak memory is the isolated server process's Linux `VmHWM` resident-memory high-water mark, including resident mapped pages, libraries and the loaded model pipeline. It is not the model file size, the allocation limit, GPU memory, or a minimum RAM specification. The failed video probe does not provide a usable video-memory measurement.
+
+The three backends receive the **same bytes, questions, candidate order, temperature 1.0 and media budgets**. Successful token counts match: text 166, image 212, video 271 (native/ONNX). Image budgets are 65,536–262,144 pixels; direct video uses 16 uniform frames with a 131,072–2,097,152 total-pixel budget. Exact input/media hashes and raw samples are in the JSON. Media bytes are prepared before the request timer; upload from a remote client or network asset fetch is not included.
+
+The native/ONNX latency server is a small localhost measurement adapter around real `predict`, not SGLang/vLLM or the production SDK HTTP stack. Follow-up checks separately exercised the production ONNX SDK service. The original benchmark was not rerun after fixing the measurement service's model alias for Cookbook checks.
+
+## Client time versus server time
+
+Client time includes JSON encoding, localhost HTTP, service work and response decoding. The native/ONNX adapter additionally measures the `predict` call, including compilation and media preprocessing. The prebuilt GGUF server does not expose an equivalent measurement, so the table leaves it unavailable rather than relabeling HTTP time as inference.
+
+<ServerTimingTable />
+
+<a href="/cookbook/validation/benchmark-config.json">Benchmark config JSON</a> · <a href="/cookbook/validation/performance.json">Raw performance report (including the failed probe)</a> · <a href="/cookbook/validation/preserved-failures.json">Preserved failures and resolutions</a>
+
+## Choose within the measured scope
+
+| Need | A useful starting path | Evidence and limits |
+| --- | --- | --- |
+| Try without downloading weights | Hosted API / website | Separate online service; no speed or memory comparison with the local worker |
+| Lower warm latency on these small CPU inputs | Native FP32 | Fastest measured warm requests here, with higher RSS and heavier startup/dependencies |
+| Python/JS integration without Torch | ONNX SDK | Python CPU FP32 measured here; Node/WebGPU local performance not rerun |
+| Smaller RSS on the measured CPU cases | GGUF Q8_0 + custom runtime | Lowest RSS in these rows; lower precision; CPU text/fixed images qualified |
+| Direct video | Native / Python ONNX; video-enabled GGUF source build | Prebuilt 0.1.0 has no direct video support; source-build regression is separate and its times are not pooled into this table |
+| CUDA, other model sizes/devices, concurrency | Use the deployment guide and measure your workload | No new P1 performance data; earlier quality/device evidence must not be mixed into this same-worker comparison |
+
+## Interface and media capabilities
+
+<BackendCapabilities />
+
+Both protocols remain supported where listed. Decisions uses `input`, an ordered question list, `predicate`, typed string/boolean choice values and labeled score levels. SystemOne uses `state`, an ID-keyed question mapping, `noul`, a string-keyed `criteria` mapping and ordered score criteria. Scores are probability-weighted zero-based level indices. Numeric choice values are rejected; numeric-looking **string** keys in JavaScript objects follow JavaScript object-order rules. Use Decisions arrays when candidate order is significant; the JS HTTP client rejects `Map` rather than silently changing it.
+
+A finite positive **scalar** temperature is the portable intersection. Native/ONNX legacy per-type temperature mappings are not a GGUF or Decisions portability guarantee. Candidate order is preserved within a request; changing the order can change the model's prompt and probabilities. No permutation-invariance promise is made.
+
+Local native/ONNX calls can read local files. HTTP media uses inline image/video data URLs where supported; the production ONNX service disables client-local paths. The hosted API and GPU plugins use a single image, so extract a frame explicitly for the video-tagging application. `Valen.local` is an **ONNX** loader; use `Valen.remote` for GGUF HTTP services. Generic upstream llama.cpp/Ollama does not become compatible through these SDKs.
+
+The exact downloadable GGUF 0.1.0 binary was reused and checked against its existing SHA256; no asset was downloaded again. It now has additional P1 fixed-image evidence. Its direct video probe returned HTTP 500, and the log states **video support not compiled in**. This failure remains published; use a sampled image or a separately built video-enabled runtime. The source-build video result is not qualification of the downloadable binary.
+
+## Fixed regression and release checks
+
+One fixture in the main repository, `tests/fixtures/backend-contract.json`, covers choice, predicate/noul, score, mixed boolean/string candidates, reversed candidate order, temperatures 1.0/0.5 and invalid requests. Real checks compare each backend's Decisions and SystemOne answers, usage, candidate types/order and errors. The raw Python and JavaScript SDK packages are also exercised against the production ONNX service, the prebuilt GGUF text/image service and the video-enabled source service.
+
+<NumericalTable />
+
+The numerical gates reuse the previous frozen GGUF regression's choice/probability/normalized-score thresholds. This small protocol fixture is not a replacement for the earlier 292-text/30-image quality set, and consistency with the native model is not accuracy against ground truth. All compared input token counts match. The follow-up allocation contributes numerical checks only; its timings are not merged with the earlier performance worker.
+
+| Validation layer | Actual P1 result | What it proves |
+| --- | --- | --- |
+| Mock / constructed answers | Python SDK 28 tests, JavaScript SDK 12 tests; shared adapter check: 16 valid variants + 5 invalid cases | Client/adapter contracts, lifecycle, geometry and failure handling; no model quality claim |
+| Synthetic model | Not executed for P1 | No synthetic-model result substitutes for real weights |
+| Real model, fixed diagnostic fixtures | Native/ONNX/GGUF supported scopes passed both protocols; six live SDK-client reports passed | Small reproducible protocol and numerical regression, with real weights |
+| Real model, complete tutorials | Five maintained scripts: direct local ONNX/native basics and four HTTP scripts on ONNX and GGUF; 10 successful CLI executions | End-to-end sample workflows and actual business outputs |
+| Publication | Checked separately after deployment | A build or local test alone is not a live-publication pass |
+
+Fast synthetic mapping checks run in the main repository CI, pinned to the stable SDK source commits. Website CI tests source/output hashes, builds both languages and checks links. Code/sample changes invalidate the stored real-execution hashes until rerun. Before a relevant model/runtime/SDK release, run the real checks on cluster caches and validate the pinned release evidence; CI does not download model weights. See the [release and reproduction procedure](https://github.com/Valen-Team/Valen/blob/main/docs/backend-validation.md).
+
+The first four HTTP tutorial attempts failed because the benchmark adapter served `Valen-0.8B` while the commands requested the deployment alias `valen`. The alias was corrected and affected checks rerun against the production SDK service. Both original failures and the successful replacement checks are retained. The prebuilt video failure was not “fixed” by relabeling a source build.
+
+<a href="/cookbook/validation/release-checks.json">Release check summary</a> · <a href="/cookbook/validation/cross-backend.json">Numerical comparison</a> · <a href="/cookbook/validation/synthetic-adapters.json">Synthetic adapter check</a> · [Migration map](../migration/)
+
+P1 does not newly qualify 2B/4B, GPU/CUDA performance, browser WebGPU local execution, the C++ integration, SGLang/vLLM GPU serving or custom Ollama import. Existing qualified evidence remains linked from their deployment/model references. The original media lacks a separately recorded dataset/license attribution; the tutorials state that limitation and preserve the shared URLs.

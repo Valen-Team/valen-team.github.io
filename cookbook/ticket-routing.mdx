@@ -1,0 +1,64 @@
+---
+title: Route support tickets
+description: Produce a queue, review decision and priority from a customer message.
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/ticket_routing.py?cookbook-source';
+import shared from '@site/static/cookbook/code/common.py?cookbook-source';
+import CookbookEvidence, {CookbookSample} from '@site/src/components/CookbookEvidence';
+
+An incoming support ticket needs a processing queue. The input is the original notebook's fictional delivery-address message; the output is a ticket ID, intent queue, address-change probability, explicitness score (0–2), and review priority. The program only proposes a queue: it does not modify an order.
+
+Ask all three questions about the same input. A choice needs selected probability ≥ 0.8 and a top-two gap ≥ 0.2 to route automatically. A predicted address change also needs its independent predicate probability ≥ 0.8; disagreement goes to `human_review`. Rank review work by `address_change_probability × explicitness_score / 2`. A score near 2 indicates a more explicit request, not a 100% likelihood of successful fulfillment.
+
+These thresholds illustrate a workflow. They are **not calibrated accuracy guarantees**. Measure false routing costs on your own labeled tickets and tune thresholds before operational use. Ambiguous, novel and low-confidence messages remain reviewable.
+
+## Install and prepare inputs
+
+Use Python 3.11+. Download the small source bundle, extract it, then install its dependencies:
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook
+python -m pip install -r requirements.txt
+```
+
+<CookbookSample id="ticket" />
+
+## Run
+
+```bash
+python ticket_routing.py --backend remote --model valen-2b --asset-dir . --output result.json
+# An existing local HTTP deployment instead:
+python ticket_routing.py --backend remote --base-url http://127.0.0.1:8000/v1 --model valen --asset-dir . --output result.json
+```
+
+For direct ONNX execution, use `--backend onnx --model /path/to/Valen-0.8B-ONNX` and first install `valen-sdk[onnx,video]==0.2.0`. Connect a GGUF service through `--backend remote`; a GGUF file is not a `Valen.local` model.
+
+## Complete executable code
+
+<CodeBlock language="python" title="ticket_routing.py">{source}</CodeBlock>
+
+The shared runner and `samples.json` are included in the download bundle, from the same maintained source as this page.
+
+<details>
+
+<summary>common.py</summary>
+
+<CodeBlock language="python" title="common.py">{shared}</CodeBlock>
+
+</details>
+
+## Real validation results
+
+<CookbookEvidence id="ticket-routing" />
+
+Results belong to the recorded model and backend; they do not imply identical versions, scores or speed on the default public service. Policy unit tests use constructed answers. Real-model execution is recorded separately and is not replaced by those tests.
+
+## Sources, licensing and related documentation
+
+Code and authored JSON text samples use <a href="/cookbook/code/LICENSE.txt">Apache-2.0</a>. The ticket is fictional. `sheep.jpg` and `momos.mp4` reuse the original notebooks' evaluation excerpts and stable asset URLs. The old directory did not record their original dataset attribution or a separate media license; this page does not grant redistribution or commercial media rights. Use your own authorized media for production or redistribution. The code license does not relicense the media, and this migration creates no additional media copies.
+
+[Decisions API](/docs/valen/api/decisions/) · [SystemOne API](/docs/valen/api/systemone/) · [ONNX / SDK](/docs/valen/onnx/) · [Native deployment](/docs/valen/quickstart/) · [GGUF deployment](/docs/valen/gguf/) · [Evaluation](/docs/valen/evaluation/) · [Validation and performance](../validation/)

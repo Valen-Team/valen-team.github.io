@@ -1,0 +1,37 @@
+{
+  "completed": true,
+  "passed": true,
+  "fixture_sha256": "12c282a0e51ef430306ccb7a9dcca62d1cb0b1e0e683872e023d4fc04a8e7e10",
+  "real_contracts": {
+    "native-fp32": true,
+    "onnx-fp32": true,
+    "onnx-production": true,
+    "gguf-prebuilt": true,
+    "gguf-source-video": true
+  },
+  "real_sdk_http": {
+    "onnx-production-python-sdk": true,
+    "onnx-production-javascript-sdk": true,
+    "gguf-prebuilt-python-sdk": true,
+    "gguf-prebuilt-javascript-sdk": true,
+    "gguf-source-video-python-sdk": true,
+    "gguf-source-video-javascript-sdk": true
+  },
+  "cross_backend_numerical": true,
+  "cookbook_recipes": [
+    "api-quickstart",
+    "ticket-routing",
+    "product-screening",
+    "video-tagging",
+    "local-inference"
+  ],
+  "performance": {
+    "completed": true,
+    "initial_report_passed": false,
+    "successful_combinations": 8,
+    "expected_unsupported_prebuilt_video_probe_preserved": true,
+    "scope": "Eight supported same-worker combinations; prebuilt video is excluded from positive qualification, not turned into a pass"
+  },
+  "publication": "not yet verified; check publication.json after deployment",
+  "source_of_truth": "versions.json, results.json and immutable JSON validation records in the website repository"
+}

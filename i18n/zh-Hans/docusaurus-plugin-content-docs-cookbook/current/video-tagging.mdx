@@ -1,0 +1,70 @@
+---
+title: 短视频标注
+description: 输出带抽帧位置和不确定性处理的视觉属性标签。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/video_tagging.py?cookbook-source';
+import shared from '@site/static/cookbook/code/common.py?cookbook-source';
+import CookbookEvidence, {CookbookSample} from '@site/src/components/CookbookEvidence';
+
+视频索引需要可检索的视觉标签。读取旧教程的饺子短视频，抽取中间帧，复用酱汁颜色问题，生成包含片段 ID、颜色标签、置信度、帧索引、时间戳与总解码帧数的 JSON 标注。
+
+本例只输出**单帧视觉属性**，不推断整段视频的动作，也不把标签赋给所有时刻。直接视频及原动作问题保留在本地推理教程中。解码器最多计数 1800 帧、限制单帧为 4K、分两遍解码，只保留目标图像；提交前将该帧转换为最长边不超过 512 像素的 JPEG，后端仅收到一张图片。
+
+选中概率至少为 0.8 且前两名概率差至少为 0.2 时才输出标签，否则输出空标签并进入 `manual_review`。置信度可用于安排审核优先级，但不是经过校准的正确率。需要覆盖整段视频时，应抽取多个时间片段并验证时间覆盖率。
+
+## 安装与输入
+
+Python 3.11+。先下载小型源文件包并解压，然后安装所需依赖：
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook
+python -m pip install -r requirements.txt
+```
+
+明确执行后才获取以下小素材（图片约 58 KB，视频约 395 KB）；也可将有权使用的同名文件放在 `--asset-dir` 指定目录。
+
+```bash
+curl -fL https://raw.githubusercontent.com/Valen-Team/Valen/main/assets/cookbook/momos.mp4 -o momos.mp4
+```
+
+<CookbookSample id="video" />
+
+## 运行
+
+```bash
+python video_tagging.py --backend remote --model valen-2b --asset-dir . --output result.json
+# An existing local HTTP deployment instead:
+python video_tagging.py --backend remote --base-url http://127.0.0.1:8000/v1 --model valen --asset-dir . --output result.json
+```
+
+本地 ONNX 也可直接运行：把参数改为 `--backend onnx --model /path/to/Valen-0.8B-ONNX`，并先安装 `valen-sdk[onnx,video]==0.2.0`。GGUF 服务通过 `--backend remote` 接入；不能把 GGUF 文件传给 `Valen.local`。
+
+## 完整可执行代码
+
+<CodeBlock language="python" title="video_tagging.py">{source}</CodeBlock>
+
+共享运行器与 `samples.json` 已包含在下载包中，与网页展示内容使用同一个维护源。
+
+<details>
+
+<summary>common.py</summary>
+
+<CodeBlock language="python" title="common.py">{shared}</CodeBlock>
+
+</details>
+
+## 真实验证结果
+
+<CookbookEvidence id="video-tagging" />
+
+这里记录的是指定版本与后端的实测，不意味着默认公共服务的模型版本、分数或速度完全相同。业务阈值单元测试使用构造响应，真实模型执行单独记录，二者不互相替代。
+
+## 素材、许可与相关文档
+
+代码与作者编写的 JSON 文本样例采用 <a href="/cookbook/code/LICENSE.txt">Apache-2.0</a>。工单为虚构示例。`sheep.jpg` 与 `momos.mp4` 沿用旧 Notebook 的评测片段和稳定素材 URL；旧目录未提供原始数据集归属及单独的媒体许可记录，因此这里不授予媒体再分发或商业使用许可。生产或再分发时请替换为有权使用的素材，勿把代码许可视为媒体许可。官网不额外复制这些媒体文件。
+
+[Decisions API](/zh-Hans/docs/valen/api/decisions/) · [SystemOne API](/zh-Hans/docs/valen/api/systemone/) · [ONNX / SDK](/zh-Hans/docs/valen/onnx/) · [Native deployment](/zh-Hans/docs/valen/quickstart/) · [GGUF deployment](/zh-Hans/docs/valen/gguf/) · [Evaluation](/zh-Hans/docs/valen/evaluation/) · [Validation and performance](../validation/)

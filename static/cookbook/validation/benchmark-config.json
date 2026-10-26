@@ -1,0 +1,472 @@
+{
+  "threads": 4,
+  "versions": {
+    "native": {
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "packages": {
+        "torch": "2.14.0",
+        "transformers": "5.19.0",
+        "numpy": "2.5.4",
+        "Pillow": "13.0.0",
+        "av": "19.0.2"
+      }
+    },
+    "onnx": {
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "packages": {
+        "valen-sdk": "0.2.0",
+        "onnxruntime": "1.31.0",
+        "numpy": "2.5.4",
+        "Pillow": "13.0.0",
+        "av": "19.0.2"
+      }
+    },
+    "gguf": {
+      "version": "0.1.0",
+      "platform": "Linux-5.10.25-nvidia-gpu-x86_64-with-glibc2.35",
+      "compiler": "c++ (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0",
+      "source": {
+        "llama_cpp_base": "1a0b56cec73dac938e0602c974b21dc8e2862830",
+        "ollama_base": "d44c2581904a98430e348d89cc2af1529b1808a0",
+        "patch_sha256": "20c8fcb50920ae8e96b158c30c277ab384fb9716d8d51fb01966b562b8e57732",
+        "ollama_patch_sha256": "294f3aa7e73d3da6b9e9de40d364210d924a31af2595606ac039de4fa0428b01",
+        "status": "custom runtime; llama.cpp measured; custom Ollama Go build, tests and real F32/Q8 imports/text/image/video/protocol/isolation validated on CPU; no unmodified upstream support"
+      },
+      "cmake_flags": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "GGML_ACCELERATE:BOOL": "ON",
+        "GGML_ALL_WARNINGS_3RD_PARTY:BOOL": "OFF",
+        "GGML_AMX_BF16:BOOL": "OFF",
+        "GGML_AMX_INT8:BOOL": "OFF",
+        "GGML_AMX_TILE:BOOL": "OFF",
+        "GGML_AVX:BOOL": "ON",
+        "GGML_AVX2:BOOL": "ON",
+        "GGML_AVX512:BOOL": "OFF",
+        "GGML_AVX512_BF16:BOOL": "OFF",
+        "GGML_AVX512_VBMI:BOOL": "OFF",
+        "GGML_AVX512_VNNI:BOOL": "OFF",
+        "GGML_AVX_VNNI:BOOL": "OFF",
+        "GGML_BACKEND_DIR:PATH": "",
+        "GGML_BACKEND_DL:BOOL": "OFF",
+        "GGML_BIN_INSTALL_DIR:PATH": "bin",
+        "GGML_BLAS:BOOL": "OFF",
+        "GGML_BLAS_VENDOR:STRING": "Generic",
+        "GGML_BMI2:BOOL": "ON",
+        "GGML_BUILD_EXAMPLES:BOOL": "OFF",
+        "GGML_BUILD_TESTS:BOOL": "OFF",
+        "GGML_CCACHE:BOOL": "ON",
+        "GGML_CCACHE_FOUND:FILEPATH": "GGML_CCACHE_FOUND-NOTFOUND",
+        "GGML_CPU:BOOL": "ON",
+        "GGML_CPU_ALL_VARIANTS:BOOL": "OFF",
+        "GGML_CPU_ARM_ARCH:STRING": "",
+        "GGML_CPU_HBM:BOOL": "OFF",
+        "GGML_CPU_KLEIDIAI:BOOL": "OFF",
+        "GGML_CPU_POWERPC_CPUTYPE:STRING": "",
+        "GGML_CPU_REPACK:BOOL": "ON",
+        "GGML_CUDA:BOOL": "OFF",
+        "GGML_CUDA_CCCL_VERSION:STRING": "",
+        "GGML_CUDA_COMPRESSION_MODE:STRING": "size",
+        "GGML_CUDA_FA:BOOL": "ON",
+        "GGML_CUDA_FA_ALL_QUANTS:BOOL": "OFF",
+        "GGML_CUDA_FA_QUANTS:STRING": "q4_0-q4_0;q8_0-q8_0;f16-f16;bf16-bf16",
+        "GGML_CUDA_FORCE_CUBLAS:BOOL": "OFF",
+        "GGML_CUDA_FORCE_MMQ:BOOL": "OFF",
+        "GGML_CUDA_GRAPHS:BOOL": "ON",
+        "GGML_CUDA_NCCL:BOOL": "ON",
+        "GGML_CUDA_NO_PEER_COPY:BOOL": "OFF",
+        "GGML_CUDA_NO_VMM:BOOL": "OFF",
+        "GGML_ET:BOOL": "OFF",
+        "GGML_ET_SYSEMU:BOOL": "OFF",
+        "GGML_F16C:BOOL": "ON",
+        "GGML_FMA:BOOL": "ON",
+        "GGML_GPROF:BOOL": "OFF",
+        "GGML_HEXAGON:BOOL": "OFF",
+        "GGML_HIP:BOOL": "OFF",
+        "GGML_HIP_EXPORT_METRICS:BOOL": "OFF",
+        "GGML_HIP_GRAPHS:BOOL": "ON",
+        "GGML_HIP_MMQ_MFMA:BOOL": "ON",
+        "GGML_HIP_NO_VMM:BOOL": "ON",
+        "GGML_HIP_RCCL:BOOL": "OFF",
+        "GGML_INCLUDE_INSTALL_DIR:PATH": "include",
+        "GGML_LASX:BOOL": "ON",
+        "GGML_LIB_INSTALL_DIR:PATH": "lib",
+        "GGML_LLAMAFILE:BOOL": "ON",
+        "GGML_LSX:BOOL": "ON",
+        "GGML_LTO:BOOL": "OFF",
+        "GGML_METAL:BOOL": "OFF",
+        "GGML_METAL_EMBED_LIBRARY:BOOL": "OFF",
+        "GGML_METAL_MACOSX_VERSION_MIN:STRING": "",
+        "GGML_METAL_NDEBUG:BOOL": "OFF",
+        "GGML_METAL_SHADER_DEBUG:BOOL": "OFF",
+        "GGML_METAL_STD:STRING": "",
+        "GGML_METAL_TARGET_OS:STRING": "macos",
+        "GGML_MUSA:BOOL": "OFF",
+        "GGML_MUSA_GRAPHS:BOOL": "OFF",
+        "GGML_MUSA_MUDNN_COPY:BOOL": "OFF",
+        "GGML_NATIVE:BOOL": "OFF",
+        "GGML_OPENCL:BOOL": "OFF",
+        "GGML_OPENCL_EMBED_KERNELS:BOOL": "ON",
+        "GGML_OPENCL_PROFILING:BOOL": "OFF",
+        "GGML_OPENCL_TARGET_VERSION:STRING": "300",
+        "GGML_OPENCL_USE_ADRENO_KERNELS:BOOL": "ON",
+        "GGML_OPENMP:BOOL": "ON",
+        "GGML_OPENMP_FETCH:BOOL": "OFF",
+        "GGML_OPENVINO:BOOL": "OFF",
+        "GGML_RPC:BOOL": "OFF",
+        "GGML_RVV:BOOL": "ON",
+        "GGML_RV_ZFH:BOOL": "ON",
+        "GGML_RV_ZICBOP:BOOL": "ON",
+        "GGML_RV_ZIHINTPAUSE:BOOL": "ON",
+        "GGML_RV_ZVFBFWMA:BOOL": "OFF",
+        "GGML_RV_ZVFH:BOOL": "ON",
+        "GGML_SANITIZE_ADDRESS:BOOL": "OFF",
+        "GGML_SANITIZE_THREAD:BOOL": "OFF",
+        "GGML_SANITIZE_UNDEFINED:BOOL": "OFF",
+        "GGML_SCCACHE_FOUND:FILEPATH": "GGML_SCCACHE_FOUND-NOTFOUND",
+        "GGML_SCHED_MAX_COPIES:STRING": "4",
+        "GGML_SCHED_NO_REALLOC:BOOL": "OFF",
+        "GGML_SSE42:BOOL": "ON",
+        "GGML_STATIC:BOOL": "OFF",
+        "GGML_SYCL:BOOL": "OFF",
+        "GGML_SYCL_DEVICE_ARCH:STRING": "",
+        "GGML_SYCL_DNN:BOOL": "ON",
+        "GGML_SYCL_F16:BOOL": "OFF",
+        "GGML_SYCL_GRAPH:BOOL": "ON",
+        "GGML_SYCL_HOST_MEM_FALLBACK:BOOL": "ON",
+        "GGML_SYCL_SUPPORT_LEVEL_ZERO_API:BOOL": "ON",
+        "GGML_SYCL_TARGET:STRING": "INTEL",
+        "GGML_VIRTGPU:BOOL": "OFF",
+        "GGML_VIRTGPU_BACKEND:BOOL": "OFF",
+        "GGML_VULKAN:BOOL": "OFF",
+        "GGML_VULKAN_CHECK_RESULTS:BOOL": "OFF",
+        "GGML_VULKAN_DEBUG:BOOL": "OFF",
+        "GGML_VULKAN_MEMORY_DEBUG:BOOL": "OFF",
+        "GGML_VULKAN_RUN_TESTS:BOOL": "OFF",
+        "GGML_VULKAN_SHADERS_GEN_TOOLCHAIN:FILEPATH": "",
+        "GGML_VULKAN_SHADER_DEBUG_INFO:BOOL": "OFF",
+        "GGML_VULKAN_VALIDATE:BOOL": "OFF",
+        "GGML_VXE:BOOL": "OFF",
+        "GGML_WEBGPU:BOOL": "OFF",
+        "GGML_WEBGPU_CPU_PROFILE:BOOL": "OFF",
+        "GGML_WEBGPU_DEBUG:BOOL": "OFF",
+        "GGML_WEBGPU_GPU_PROFILE:BOOL": "OFF",
+        "GGML_WEBGPU_JSPI:BOOL": "ON",
+        "GGML_XTHEADVECTOR:BOOL": "OFF",
+        "GGML_ZDNN:BOOL": "OFF",
+        "GGML_ZENDNN:BOOL": "OFF",
+        "LLAMA_ALL_WARNINGS:BOOL": "ON",
+        "LLAMA_ALL_WARNINGS_3RD_PARTY:BOOL": "OFF",
+        "LLAMA_BIN_INSTALL_DIR:PATH": "bin",
+        "LLAMA_BUILD_APP:BOOL": "ON",
+        "LLAMA_BUILD_COMMON:BOOL": "ON",
+        "LLAMA_BUILD_EXAMPLES:BOOL": "OFF",
+        "LLAMA_BUILD_IS_DEV:BOOL": "ON",
+        "LLAMA_BUILD_MTMD:BOOL": "OFF",
+        "LLAMA_BUILD_SERVER:BOOL": "ON",
+        "LLAMA_BUILD_TESTS:BOOL": "OFF",
+        "LLAMA_BUILD_TOOLS:BOOL": "ON",
+        "LLAMA_BUILD_UI:BOOL": "OFF",
+        "LLAMA_CONNECT:BOOL": "OFF",
+        "LLAMA_CURL:UNINITIALIZED": "OFF",
+        "LLAMA_FATAL_WARNINGS:BOOL": "OFF",
+        "LLAMA_INCLUDE_INSTALL_DIR:PATH": "include",
+        "LLAMA_LIB_INSTALL_DIR:PATH": "lib",
+        "LLAMA_LLGUIDANCE:BOOL": "OFF",
+        "LLAMA_OPENSSL:BOOL": "ON",
+        "LLAMA_SANITIZE_ADDRESS:BOOL": "OFF",
+        "LLAMA_SANITIZE_THREAD:BOOL": "OFF",
+        "LLAMA_SANITIZE_UNDEFINED:BOOL": "OFF",
+        "LLAMA_SUBPROCESS:BOOL": "ON",
+        "LLAMA_TESTS_INSTALL:BOOL": "ON",
+        "LLAMA_TOOLS_INSTALL:BOOL": "ON",
+        "LLAMA_UI_GZIP:BOOL": "ON",
+        "LLAMA_UI_HF_BUCKET:STRING": "ggml-org/llama-ui",
+        "LLAMA_USE_PREBUILT_UI:BOOL": "OFF",
+        "LLAMA_USE_SYSTEM_GGML:BOOL": "OFF",
+        "LLAMA_WASM_MEM64:BOOL": "ON",
+        "MTMD_VIDEO:BOOL": "OFF",
+        "GGML_AVAILABLE_BACKENDS:INTERNAL": "ggml-cpu",
+        "GGML_CUDA_COMPRESSION_MODE-STRINGS:INTERNAL": "none;speed;balance;size",
+        "GGML_OPENMP_ENABLED:INTERNAL": "ON"
+      },
+      "validated_scope": "Linux x86-64 CPU text; no GPU, Windows, image or video claims for this package"
+    }
+  },
+  "media_budget": {
+    "images_kwargs": {
+      "size": {
+        "longest_edge": 262144,
+        "shortest_edge": 65536
+      }
+    },
+    "videos_kwargs": {
+      "fps": null,
+      "num_frames": 16,
+      "size": {
+        "longest_edge": 2097152,
+        "shortest_edge": 131072
+      }
+    }
+  },
+  "backends": [
+    {
+      "name": "native-fp32",
+      "precision": "FP32; native autocast disabled",
+      "model_provenance": {
+        "model": "Valen-Team/Valen-0.8B",
+        "config_sha256": "8a6a766acfe35a6eb3d373e90c43af0f08dbd44301251df71e18b1b5b5381c08",
+        "weight_files": [
+          {
+            "file": "model.safetensors",
+            "bytes": 3417285852,
+            "sha256": "465714dd28702c4232d9233c2a2157d366967c541b2a27d9dadccc816304fd48"
+          }
+        ],
+        "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+        "published_weight_hashes_verified": true,
+        "local_checkout_revision": "4c858f2e26f4978640fa3f6d0de26a75b790b661"
+      },
+      "command": [
+        "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-vllm-check-261022-092527/env/bin/python",
+        "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/Valen/scripts/validation/benchmark_server.py",
+        "--backend",
+        "native",
+        "--model",
+        "/mnt/shared-storage-user/mllm/liuziyu/share_data/Valen_Data/models/Valen-0.8B",
+        "--threads",
+        "4",
+        "--port",
+        "18992"
+      ],
+      "env": {
+        "PYTHONPATH": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-onnx-v2-261024-171030/deps:/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-hf-transformers-261024-135321/deps:/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "base_url": "http://127.0.0.1:18992/v1",
+      "health_url": "http://127.0.0.1:18992/health"
+    },
+    {
+      "name": "onnx-fp32",
+      "precision": "FP32; native autocast disabled",
+      "model_provenance": {
+        "model": "Valen-Team/Valen-0.8B",
+        "config_sha256": "8a6a766acfe35a6eb3d373e90c43af0f08dbd44301251df71e18b1b5b5381c08",
+        "weight_files": [
+          {
+            "file": "model.safetensors",
+            "bytes": 3417285852,
+            "sha256": "465714dd28702c4232d9233c2a2157d366967c541b2a27d9dadccc816304fd48"
+          }
+        ],
+        "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+        "published_weight_hashes_verified": true,
+        "local_checkout_revision": "4c858f2e26f4978640fa3f6d0de26a75b790b661"
+      },
+      "command": [
+        "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-onnx-v2-261024-171030/runtime-env/bin/python",
+        "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/Valen/scripts/validation/benchmark_server.py",
+        "--backend",
+        "onnx",
+        "--model",
+        "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-onnx-v2-261024-171030/Valen-0.8B-ONNX-v2",
+        "--threads",
+        "4",
+        "--port",
+        "18992"
+      ],
+      "env": {
+        "PYTHONPATH": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "base_url": "http://127.0.0.1:18992/v1",
+      "health_url": "http://127.0.0.1:18992/health",
+      "after_checks": [
+        {
+          "name": "cookbook-api_quickstart",
+          "command": [
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-onnx-v2-261024-171030/runtime-env/bin/python",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/api_quickstart.py",
+            "--backend",
+            "remote",
+            "--base-url",
+            "http://127.0.0.1:18992/v1",
+            "--model",
+            "valen",
+            "--asset-dir",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-hf-transformers-261024-135321/.valen-cookbook",
+            "--output",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/api_quickstart-result.json"
+          ],
+          "env": {
+            "PYTHONPATH": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python",
+            "HF_HUB_OFFLINE": "1",
+            "TRANSFORMERS_OFFLINE": "1",
+            "OMP_NUM_THREADS": "4",
+            "MKL_NUM_THREADS": "4",
+            "OPENBLAS_NUM_THREADS": "4",
+            "TOKENIZERS_PARALLELISM": "false"
+          }
+        },
+        {
+          "name": "cookbook-ticket_routing",
+          "command": [
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-onnx-v2-261024-171030/runtime-env/bin/python",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/ticket_routing.py",
+            "--backend",
+            "remote",
+            "--base-url",
+            "http://127.0.0.1:18992/v1",
+            "--model",
+            "valen",
+            "--asset-dir",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-hf-transformers-261024-135321/.valen-cookbook",
+            "--output",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/ticket_routing-result.json"
+          ],
+          "env": {
+            "PYTHONPATH": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python",
+            "HF_HUB_OFFLINE": "1",
+            "TRANSFORMERS_OFFLINE": "1",
+            "OMP_NUM_THREADS": "4",
+            "MKL_NUM_THREADS": "4",
+            "OPENBLAS_NUM_THREADS": "4",
+            "TOKENIZERS_PARALLELISM": "false"
+          }
+        },
+        {
+          "name": "cookbook-product_screening",
+          "command": [
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-onnx-v2-261024-171030/runtime-env/bin/python",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/product_screening.py",
+            "--backend",
+            "remote",
+            "--base-url",
+            "http://127.0.0.1:18992/v1",
+            "--model",
+            "valen",
+            "--asset-dir",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-hf-transformers-261024-135321/.valen-cookbook",
+            "--output",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/product_screening-result.json"
+          ],
+          "env": {
+            "PYTHONPATH": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python",
+            "HF_HUB_OFFLINE": "1",
+            "TRANSFORMERS_OFFLINE": "1",
+            "OMP_NUM_THREADS": "4",
+            "MKL_NUM_THREADS": "4",
+            "OPENBLAS_NUM_THREADS": "4",
+            "TOKENIZERS_PARALLELISM": "false"
+          }
+        },
+        {
+          "name": "cookbook-video_tagging",
+          "command": [
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-onnx-v2-261024-171030/runtime-env/bin/python",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/video_tagging.py",
+            "--backend",
+            "remote",
+            "--base-url",
+            "http://127.0.0.1:18992/v1",
+            "--model",
+            "valen",
+            "--asset-dir",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-hf-transformers-261024-135321/.valen-cookbook",
+            "--output",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/video_tagging-result.json"
+          ],
+          "env": {
+            "PYTHONPATH": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python",
+            "HF_HUB_OFFLINE": "1",
+            "TRANSFORMERS_OFFLINE": "1",
+            "OMP_NUM_THREADS": "4",
+            "MKL_NUM_THREADS": "4",
+            "OPENBLAS_NUM_THREADS": "4",
+            "TOKENIZERS_PARALLELISM": "false"
+          }
+        },
+        {
+          "name": "cookbook-local_inference",
+          "command": [
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-onnx-v2-261024-171030/runtime-env/bin/python",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/local_inference.py",
+            "--backend",
+            "onnx",
+            "--model",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-onnx-v2-261024-171030/Valen-0.8B-ONNX-v2",
+            "--asset-dir",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-hf-transformers-261024-135321/.valen-cookbook",
+            "--output",
+            "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/local_inference-result.json"
+          ],
+          "env": {
+            "PYTHONPATH": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python",
+            "HF_HUB_OFFLINE": "1",
+            "TRANSFORMERS_OFFLINE": "1",
+            "OMP_NUM_THREADS": "4",
+            "MKL_NUM_THREADS": "4",
+            "OPENBLAS_NUM_THREADS": "4",
+            "TOKENIZERS_PARALLELISM": "false"
+          }
+        }
+      ]
+    },
+    {
+      "name": "gguf-q8",
+      "precision": "Q8_0 backbone; F32 Mixer and vision",
+      "model_provenance": {
+        "model": "Valen-Team/Valen-0.8B-GGUF",
+        "source_revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+        "cached_file": "Valen-0.8B-Q8_0.gguf",
+        "runtime_archive_sha256": "2fcc903eb853b8c04498bb4ee716c7c3662d1d07eb5c2d89c11310716ae04c0e"
+      },
+      "command": [
+        "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/extracted-smoke/valen-gguf-runtime-0.1.0-linux-x86_64/serve",
+        "-m",
+        "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "--mmproj",
+        "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/vision-native-limits-F32.gguf",
+        "--load-mode",
+        "none",
+        "--device",
+        "none",
+        "--no-mmproj-offload",
+        "-ngl",
+        "0",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "18992",
+        "-c",
+        "4096",
+        "-b",
+        "4096",
+        "-ub",
+        "4096",
+        "-t",
+        "4",
+        "--parallel",
+        "1",
+        "--no-warmup",
+        "--image-min-tokens",
+        "64",
+        "--image-max-tokens",
+        "256"
+      ],
+      "base_url": "http://127.0.0.1:18992/v1",
+      "health_url": "http://127.0.0.1:18992/health"
+    }
+  ],
+  "image": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-onnx-v2-261024-171030/fixtures/gradient.png",
+  "video": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-onnx-v2-261024-171030/fixtures/colors.mp4"
+}

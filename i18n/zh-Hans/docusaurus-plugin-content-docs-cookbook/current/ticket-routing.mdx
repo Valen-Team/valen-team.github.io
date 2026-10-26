@@ -1,0 +1,64 @@
+---
+title: 工单分流
+description: 从客户消息生成处理队列、审核决策和优先级。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/ticket_routing.py?cookbook-source';
+import shared from '@site/static/cookbook/code/common.py?cookbook-source';
+import CookbookEvidence, {CookbookSample} from '@site/src/components/CookbookEvidence';
+
+客服系统收到工单，需要生成处理队列。输入复用旧 Notebook 中虚构的收货地址变更消息；输出包括工单 ID、意图队列、地址变更概率、明确程度评分（0–2）及审核优先级。程序只提出分流建议，不修改订单。
+
+对同一输入同时提问三道题。选择题的选中概率至少为 0.8、前两名概率差至少为 0.2 才自动分流。若选择“修改地址”，独立判断题的地址变更概率还须至少为 0.8；两个答案冲突时进入 `human_review`。审核优先级按 `地址变更概率 × 明确程度评分 / 2` 排序。score 接近 2 表示请求更明确，不表示业务必然能成功执行。
+
+这些阈值仅演示流程，**不是经过校准的准确率保证**。上线前须在自有标注工单上衡量错误分流成本并调整阈值；含糊、新颖或置信度不足的消息进入人工复核。
+
+## 安装与输入
+
+Python 3.11+。先下载小型源文件包并解压，然后安装所需依赖：
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook
+python -m pip install -r requirements.txt
+```
+
+<CookbookSample id="ticket" />
+
+## 运行
+
+```bash
+python ticket_routing.py --backend remote --model valen-2b --asset-dir . --output result.json
+# An existing local HTTP deployment instead:
+python ticket_routing.py --backend remote --base-url http://127.0.0.1:8000/v1 --model valen --asset-dir . --output result.json
+```
+
+本地 ONNX 也可直接运行：把参数改为 `--backend onnx --model /path/to/Valen-0.8B-ONNX`，并先安装 `valen-sdk[onnx,video]==0.2.0`。GGUF 服务通过 `--backend remote` 接入；不能把 GGUF 文件传给 `Valen.local`。
+
+## 完整可执行代码
+
+<CodeBlock language="python" title="ticket_routing.py">{source}</CodeBlock>
+
+共享运行器与 `samples.json` 已包含在下载包中，与网页展示内容使用同一个维护源。
+
+<details>
+
+<summary>common.py</summary>
+
+<CodeBlock language="python" title="common.py">{shared}</CodeBlock>
+
+</details>
+
+## 真实验证结果
+
+<CookbookEvidence id="ticket-routing" />
+
+这里记录的是指定版本与后端的实测，不意味着默认公共服务的模型版本、分数或速度完全相同。业务阈值单元测试使用构造响应，真实模型执行单独记录，二者不互相替代。
+
+## 素材、许可与相关文档
+
+代码与作者编写的 JSON 文本样例采用 <a href="/cookbook/code/LICENSE.txt">Apache-2.0</a>。工单为虚构示例。`sheep.jpg` 与 `momos.mp4` 沿用旧 Notebook 的评测片段和稳定素材 URL；旧目录未提供原始数据集归属及单独的媒体许可记录，因此这里不授予媒体再分发或商业使用许可。生产或再分发时请替换为有权使用的素材，勿把代码许可视为媒体许可。官网不额外复制这些媒体文件。
+
+[Decisions API](/zh-Hans/docs/valen/api/decisions/) · [SystemOne API](/zh-Hans/docs/valen/api/systemone/) · [ONNX / SDK](/zh-Hans/docs/valen/onnx/) · [Native deployment](/zh-Hans/docs/valen/quickstart/) · [GGUF deployment](/zh-Hans/docs/valen/gguf/) · [Evaluation](/zh-Hans/docs/valen/evaluation/) · [Validation and performance](../validation/)

@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "fixture_sha256": "12c282a0e51ef430306ccb7a9dcca62d1cb0b1e0e683872e023d4fc04a8e7e10",
+  "validation_kind": "real_model_numerical_regression",
+  "reference": "native FP32 CPU, source revision a0a10112716f54457bad6f60b792ad334f9e89fd",
+  "gates": {
+    "choice_agreement_min": 0.98,
+    "probability_mae_max": 0.02,
+    "probability_max_error_max": 0.08,
+    "normalized_score_mae_max": 0.05,
+    "normalized_score_max_error_max": 0.15
+  },
+  "gate_origin": "Reuse existing gguf-v2 fixed-set choice/probability/score gates; no Brier gate without labeled predicate truth",
+  "scope": "Small fixed protocol/diagnostic fixtures including synthetic image/video inputs; numerical consistency, not task accuracy or representative media quality",
+  "performance_note": "Follow-up numerical checks are independent of the original same-worker performance allocation; their timings are not pooled",
+  "records": [
+    {
+      "backend": "onnx-production",
+      "compared_variants": 12,
+      "choice_agreement": 1,
+      "probability_mae": 0.00011417405724405982,
+      "probability_max_error": 0.001887466721190112,
+      "normalized_score_mae": 6.920155317171852e-05,
+      "normalized_score_max_error": 0.0002651179791687275,
+      "input_tokens_match": true,
+      "passed": true
+    },
+    {
+      "backend": "gguf-prebuilt",
+      "compared_variants": 9,
+      "choice_agreement": 1,
+      "probability_mae": 0.0023105455172639255,
+      "probability_max_error": 0.02390979197868992,
+      "normalized_score_mae": 0.0005912215139872538,
+      "normalized_score_max_error": 0.001590903130648691,
+      "input_tokens_match": true,
+      "passed": true
+    },
+    {
+      "backend": "gguf-source-video",
+      "compared_variants": 12,
+      "choice_agreement": 1,
+      "probability_mae": 0.0032997771081165733,
+      "probability_max_error": 0.035390111370509736,
+      "normalized_score_mae": 0.0003960853935337023,
+      "normalized_score_max_error": 0.001590903130648691,
+      "input_tokens_match": true,
+      "passed": true
+    }
+  ]
+}

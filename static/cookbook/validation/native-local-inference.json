@@ -1,0 +1,189 @@
+{
+  "decisions": {
+    "model": "Valen",
+    "answers": [
+      {
+        "name": "intent",
+        "type": "choice",
+        "probabilities": [
+          {
+            "value": "billing_question",
+            "probability": 1.4445425504914543e-06
+          },
+          {
+            "value": "cancel_order",
+            "probability": 0.00013284468077506543
+          },
+          {
+            "value": "change_address",
+            "probability": 0.9997590323240797
+          },
+          {
+            "value": "report_damage",
+            "probability": 4.777007260263608e-06
+          },
+          {
+            "value": "track_order",
+            "probability": 0.00010190144533449549
+          }
+        ],
+        "confidence": 0.9996987904050997,
+        "choice": "change_address"
+      },
+      {
+        "name": "address_change",
+        "type": "predicate",
+        "probability": 0.9862779417877234
+      },
+      {
+        "name": "explicitness",
+        "type": "score",
+        "probabilities": [
+          {
+            "label": "none",
+            "value": 0,
+            "probability": 0.015134646278710251
+          },
+          {
+            "label": "possible",
+            "value": 1,
+            "probability": 0.19136079345642146
+          },
+          {
+            "label": "explicit",
+            "value": 2,
+            "probability": 0.7935045602648684
+          }
+        ],
+        "confidence": 0.667554870979237,
+        "score": 1.7783699139861582
+      }
+    ],
+    "usage": {
+      "input_tokens": 225,
+      "output_tokens": 0
+    },
+    "internal_usage": {
+      "compute_tokens": 225
+    }
+  },
+  "system_one": {
+    "model": "Valen",
+    "answers": {
+      "intent": {
+        "type": "choice",
+        "probabilities": {
+          "billing_question": 1.4445425504914543e-06,
+          "cancel_order": 0.00013284468077506543,
+          "change_address": 0.9997590323240797,
+          "report_damage": 4.777007260263608e-06,
+          "track_order": 0.00010190144533449549
+        },
+        "choice": "change_address",
+        "confidence": 0.9996987904050997
+      },
+      "address_change": {
+        "type": "noul",
+        "noul": 0.9862779417877234
+      },
+      "explicitness": {
+        "type": "score",
+        "probabilities": {
+          "0": 0.015134646278710251,
+          "1": 0.19136079345642146,
+          "2": 0.7935045602648684
+        },
+        "score": 1.7783699139861582,
+        "legend": {
+          "0": "No request",
+          "1": "Asks whether a change is possible",
+          "2": "Explicitly requests a change"
+        },
+        "confidence": 0.667554870979237
+      }
+    },
+    "usage": {
+      "input_tokens": 225,
+      "output_tokens": 0
+    },
+    "internal_usage": {
+      "compute_tokens": 225
+    }
+  },
+  "image": {
+    "group": {
+      "name": "group",
+      "type": "choice",
+      "probabilities": [
+        {
+          "value": "pride",
+          "probability": 0.0006719858528235091
+        },
+        {
+          "value": "flock",
+          "probability": 0.9922966228909615
+        },
+        {
+          "value": "clowder",
+          "probability": 0.005923186852985659
+        },
+        {
+          "value": "gang",
+          "probability": 0.0011082044032292516
+        }
+      ],
+      "confidence": 0.989728830521282,
+      "choice": "flock"
+    }
+  },
+  "video": {
+    "sauce_color": {
+      "name": "sauce_color",
+      "type": "choice",
+      "probabilities": [
+        {
+          "value": "brown",
+          "probability": 0.03969335428360696
+        },
+        {
+          "value": "white",
+          "probability": 0.9306038681713573
+        },
+        {
+          "value": "red",
+          "probability": 0.01715957803853401
+        },
+        {
+          "value": "orange",
+          "probability": 0.012543199506501672
+        }
+      ],
+      "confidence": 0.9074718242284764,
+      "choice": "white"
+    },
+    "action": {
+      "name": "action",
+      "type": "choice",
+      "probabilities": [
+        {
+          "value": "A",
+          "probability": 0.9996876486769716
+        },
+        {
+          "value": "B",
+          "probability": 5.892494966597974e-05
+        },
+        {
+          "value": "C",
+          "probability": 0.00023450956581385997
+        },
+        {
+          "value": "D",
+          "probability": 1.891680754857678e-05
+        }
+      ],
+      "confidence": 0.9995835315692955,
+      "choice": "A"
+    }
+  }
+}

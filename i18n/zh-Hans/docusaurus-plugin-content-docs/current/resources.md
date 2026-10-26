@@ -37,8 +37,8 @@ sidebar_label: 资源
 
 - [Valen Demo](https://huggingface.co/spaces/yuhangzang/Valen-Preview-0923)
 - [JevalKit Leaderboard](https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard)
-- [API Cookbook](https://github.com/Valen-Team/Valen/blob/main/cookbook/api_quickstart_zh.ipynb)
-- [本地推理 Cookbook](https://github.com/Valen-Team/Valen/blob/main/cookbook/local_inference_zh.ipynb)
+- [API Cookbook](https://valen-team.github.io/zh-Hans/cookbook/api-quickstart/)
+- [本地推理 Cookbook](https://valen-team.github.io/zh-Hans/cookbook/local-inference/)
 
 ## 源码仓库
 

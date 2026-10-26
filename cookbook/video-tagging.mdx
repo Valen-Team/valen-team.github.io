@@ -1,0 +1,70 @@
+---
+title: Tag short videos
+description: Produce a visual attribute tag with frame provenance and uncertainty handling.
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/video_tagging.py?cookbook-source';
+import shared from '@site/static/cookbook/code/common.py?cookbook-source';
+import CookbookEvidence, {CookbookSample} from '@site/src/components/CookbookEvidence';
+
+A clip index needs a searchable visual tag. Read the original short dumpling clip, extract its middle frame, ask the original sauce-color question, and emit a JSON annotation containing the clip ID, tag, confidence, frame index, timestamp and total decoded frames.
+
+This recipe deliberately produces a **single-frame visual attribute**. It does not infer the clip's action or assign the tag to every moment. Direct video and the original action question are retained in the local-inference tutorial. The bounded decoder counts at most 1800 frames, limits frame dimensions to 4K, decodes in two passes, and holds only one selected image. It converts the selected frame to a JPEG with longest edge ≤ 512 pixels before sending one image to the backend.
+
+Emit the tag only when its selected probability ≥ 0.8 and the top-two gap ≥ 0.2. Otherwise emit no tag and set `manual_review`. Confidence can prioritize the review queue, but it is not a calibrated correctness estimate. Sample multiple time segments and validate temporal coverage if your application needs clip-wide labels.
+
+## Install and prepare inputs
+
+Use Python 3.11+. Download the small source bundle, extract it, then install its dependencies:
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook
+python -m pip install -r requirements.txt
+```
+
+Fetch only these small assets when you choose to run (image ≈58 KB, clip ≈395 KB), or provide authorized files with the same names through `--asset-dir`.
+
+```bash
+curl -fL https://raw.githubusercontent.com/Valen-Team/Valen/main/assets/cookbook/momos.mp4 -o momos.mp4
+```
+
+<CookbookSample id="video" />
+
+## Run
+
+```bash
+python video_tagging.py --backend remote --model valen-2b --asset-dir . --output result.json
+# An existing local HTTP deployment instead:
+python video_tagging.py --backend remote --base-url http://127.0.0.1:8000/v1 --model valen --asset-dir . --output result.json
+```
+
+For direct ONNX execution, use `--backend onnx --model /path/to/Valen-0.8B-ONNX` and first install `valen-sdk[onnx,video]==0.2.0`. Connect a GGUF service through `--backend remote`; a GGUF file is not a `Valen.local` model.
+
+## Complete executable code
+
+<CodeBlock language="python" title="video_tagging.py">{source}</CodeBlock>
+
+The shared runner and `samples.json` are included in the download bundle, from the same maintained source as this page.
+
+<details>
+
+<summary>common.py</summary>
+
+<CodeBlock language="python" title="common.py">{shared}</CodeBlock>
+
+</details>
+
+## Real validation results
+
+<CookbookEvidence id="video-tagging" />
+
+Results belong to the recorded model and backend; they do not imply identical versions, scores or speed on the default public service. Policy unit tests use constructed answers. Real-model execution is recorded separately and is not replaced by those tests.
+
+## Sources, licensing and related documentation
+
+Code and authored JSON text samples use <a href="/cookbook/code/LICENSE.txt">Apache-2.0</a>. The ticket is fictional. `sheep.jpg` and `momos.mp4` reuse the original notebooks' evaluation excerpts and stable asset URLs. The old directory did not record their original dataset attribution or a separate media license; this page does not grant redistribution or commercial media rights. Use your own authorized media for production or redistribution. The code license does not relicense the media, and this migration creates no additional media copies.
+
+[Decisions API](/docs/valen/api/decisions/) · [SystemOne API](/docs/valen/api/systemone/) · [ONNX / SDK](/docs/valen/onnx/) · [Native deployment](/docs/valen/quickstart/) · [GGUF deployment](/docs/valen/gguf/) · [Evaluation](/docs/valen/evaluation/) · [Validation and performance](../validation/)

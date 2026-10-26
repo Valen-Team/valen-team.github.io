@@ -1,0 +1,729 @@
+{
+  "validation_kind": "real_model_http",
+  "fixture_sha256": "12c282a0e51ef430306ccb7a9dcca62d1cb0b1e0e683872e023d4fc04a8e7e10",
+  "scope": [
+    "text",
+    "typed-choice",
+    "image",
+    "video"
+  ],
+  "records": [
+    {
+      "id": "text",
+      "temperature": 1.0,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "intent",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "address",
+                "probability": 0.9999678587251428
+              },
+              {
+                "value": "cancel",
+                "probability": 3.214127485722157e-05
+              }
+            ],
+            "confidence": 0.9999357174502856,
+            "choice": "address"
+          },
+          {
+            "name": "change_address",
+            "type": "predicate",
+            "probability": 0.9982443468457173
+          },
+          {
+            "name": "explicitness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "none",
+                "value": 0,
+                "probability": 0.012675093613854499
+              },
+              {
+                "label": "possible",
+                "value": 1,
+                "probability": 0.05436870874501274
+              },
+              {
+                "label": "explicit",
+                "value": 2,
+                "probability": 0.9329561976411327
+              }
+            ],
+            "confidence": 0.8804216560409174,
+            "score": 1.920281104027278
+          }
+        ],
+        "usage": {
+          "input_tokens": 166,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "text",
+      "temperature": 0.5,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "intent",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "address",
+                "probability": 0.999999998966872
+              },
+              {
+                "value": "cancel",
+                "probability": 1.0331279594123057e-09
+              }
+            ],
+            "confidence": 0.999999997933744,
+            "choice": "address"
+          },
+          {
+            "name": "change_address",
+            "type": "predicate",
+            "probability": 0.9999969068400381
+          },
+          {
+            "name": "explicitness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "none",
+                "value": 0,
+                "probability": 0.00018391941145125848
+              },
+              {
+                "label": "possible",
+                "value": 1,
+                "probability": 0.0033839446799324305
+              },
+              {
+                "label": "explicit",
+                "value": 2,
+                "probability": 0.9964321359086163
+              }
+            ],
+            "confidence": 0.9943723247457475,
+            "score": 1.996248216497165
+          }
+        ],
+        "usage": {
+          "input_tokens": 166,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "text",
+      "temperature": 1.0,
+      "reversed_choices": true,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "intent",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "cancel",
+                "probability": 3.687731236337655e-05
+              },
+              {
+                "value": "address",
+                "probability": 0.9999631226876367
+              }
+            ],
+            "confidence": 0.9999262453752733,
+            "choice": "address"
+          },
+          {
+            "name": "change_address",
+            "type": "predicate",
+            "probability": 0.9981082293424618
+          },
+          {
+            "name": "explicitness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "none",
+                "value": 0,
+                "probability": 0.012794876328817381
+              },
+              {
+                "label": "possible",
+                "value": 1,
+                "probability": 0.04960570406383279
+              },
+              {
+                "label": "explicit",
+                "value": 2,
+                "probability": 0.9375994196073499
+              }
+            ],
+            "confidence": 0.8872068149177987,
+            "score": 1.9248045432785326
+          }
+        ],
+        "usage": {
+          "input_tokens": 166,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "typed-choice",
+      "temperature": 1.0,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "animal",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": true,
+                "probability": 0.9994861905090054
+              },
+              {
+                "value": "true",
+                "probability": 0.00046916907450602116
+              },
+              {
+                "value": false,
+                "probability": 2.7967900605188707e-05
+              },
+              {
+                "value": "false",
+                "probability": 1.6672515883296103e-05
+              }
+            ],
+            "confidence": 0.9993149206786739,
+            "choice": true
+          }
+        ],
+        "usage": {
+          "input_tokens": 68,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "typed-choice",
+      "temperature": 0.5,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "animal",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": true,
+                "probability": 0.9999997785927883
+              },
+              {
+                "value": "true",
+                "probability": 2.2034594524132728e-07
+              },
+              {
+                "value": false,
+                "probability": 7.830077179560536e-10
+              },
+              {
+                "value": "false",
+                "probability": 2.7825859468706075e-10
+              }
+            ],
+            "confidence": 0.9999997047903845,
+            "choice": true
+          }
+        ],
+        "usage": {
+          "input_tokens": 68,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "typed-choice",
+      "temperature": 1.0,
+      "reversed_choices": true,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "animal",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "false",
+                "probability": 4.573626588512529e-06
+              },
+              {
+                "value": false,
+                "probability": 1.6474841348179563e-05
+              },
+              {
+                "value": "true",
+                "probability": 0.0013674311202585454
+              },
+              {
+                "value": true,
+                "probability": 0.9986115204118047
+              }
+            ],
+            "confidence": 0.9981486938824062,
+            "choice": true
+          }
+        ],
+        "usage": {
+          "input_tokens": 68,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "image",
+      "temperature": 1.0,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5312669345185959
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.07323888801551497
+              },
+              {
+                "value": "blue",
+                "probability": 0.6443186009304713
+              },
+              {
+                "value": "green",
+                "probability": 0.2824425110540137
+              }
+            ],
+            "confidence": 0.466477901395707,
+            "choice": "blue"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.11672786158042753
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.8832721384195724
+              }
+            ],
+            "confidence": 0.766544276839145,
+            "score": 0.8832721384195724
+          }
+        ],
+        "usage": {
+          "input_tokens": 212,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "image",
+      "temperature": 0.5,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5622902838305323
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.010721775901297389
+              },
+              {
+                "value": "blue",
+                "probability": 0.8298213045548493
+              },
+              {
+                "value": "green",
+                "probability": 0.15945691954385321
+              }
+            ],
+            "confidence": 0.7447319568322739,
+            "choice": "blue"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.017164875777174134
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.9828351242228259
+              }
+            ],
+            "confidence": 0.9656702484456517,
+            "score": 0.9828351242228259
+          }
+        ],
+        "usage": {
+          "input_tokens": 212,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "image",
+      "temperature": 1.0,
+      "reversed_choices": true,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5312985794352146
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "green",
+                "probability": 0.4024709113780155
+              },
+              {
+                "value": "blue",
+                "probability": 0.5419100724634107
+              },
+              {
+                "value": "red",
+                "probability": 0.055619016158573814
+              }
+            ],
+            "confidence": 0.3128651086951161,
+            "choice": "blue"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.10976162722772698
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.8902383727722731
+              }
+            ],
+            "confidence": 0.780476745544546,
+            "score": 0.8902383727722731
+          }
+        ],
+        "usage": {
+          "input_tokens": 212,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "video",
+      "temperature": 1.0,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5545416706163718
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.5752652337541827
+              },
+              {
+                "value": "blue",
+                "probability": 0.42429803919349923
+              },
+              {
+                "value": "green",
+                "probability": 0.0004367270523179882
+              }
+            ],
+            "confidence": 0.36289785063127405,
+            "choice": "red"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.00011669501876827695
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.9998833049812318
+              }
+            ],
+            "confidence": 0.9997666099624635,
+            "score": 0.9998833049812318
+          }
+        ],
+        "usage": {
+          "input_tokens": 271,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "video",
+      "temperature": 0.5,
+      "reversed_choices": false,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.6078006029569938
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.6476645299125326
+              },
+              {
+                "value": "blue",
+                "probability": 0.3523350968080483
+              },
+              {
+                "value": "green",
+                "probability": 3.732794190406453e-07
+              }
+            ],
+            "confidence": 0.471496794868799,
+            "choice": "red"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 1.362090601812379e-08
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.999999986379094
+              }
+            ],
+            "confidence": 0.999999972758188,
+            "score": 0.999999986379094
+          }
+        ],
+        "usage": {
+          "input_tokens": 271,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "video",
+      "temperature": 1.0,
+      "reversed_choices": true,
+      "passed": true,
+      "protocol_max_probability_delta": 0.0,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5546137279896781
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "green",
+                "probability": 0.0018554582235097519
+              },
+              {
+                "value": "blue",
+                "probability": 0.5989831343990174
+              },
+              {
+                "value": "red",
+                "probability": 0.3991614073774728
+              }
+            ],
+            "confidence": 0.3984747015985261,
+            "choice": "blue"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.00011355330345121858
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.9998864466965487
+              }
+            ],
+            "confidence": 0.9997728933930976,
+            "score": 0.9998864466965487
+          }
+        ],
+        "usage": {
+          "input_tokens": 271,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "empty-questions",
+      "passed": true,
+      "status": 400,
+      "response": {
+        "error": {
+          "code": 400,
+          "message": "Invalid Valen Decisions request",
+          "type": "invalid_request_error"
+        }
+      }
+    },
+    {
+      "id": "zero-temperature",
+      "passed": true,
+      "status": 400,
+      "response": {
+        "error": {
+          "code": 400,
+          "message": "temperature must be finite and positive",
+          "type": "invalid_request_error"
+        }
+      }
+    },
+    {
+      "id": "boolean-temperature",
+      "passed": true,
+      "status": 400,
+      "response": {
+        "error": {
+          "code": 400,
+          "message": "Invalid Valen Decisions request",
+          "type": "invalid_request_error"
+        }
+      }
+    },
+    {
+      "id": "duplicate-names",
+      "passed": true,
+      "status": 400,
+      "response": {
+        "error": {
+          "code": 400,
+          "message": "Invalid Valen Decisions request",
+          "type": "invalid_request_error"
+        }
+      }
+    },
+    {
+      "id": "numeric-choice",
+      "passed": true,
+      "status": 400,
+      "response": {
+        "error": {
+          "code": 400,
+          "message": "Invalid Valen Decisions request",
+          "type": "invalid_request_error"
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "backend": "gguf-source-video",
+  "direct_video": "tested"
+}

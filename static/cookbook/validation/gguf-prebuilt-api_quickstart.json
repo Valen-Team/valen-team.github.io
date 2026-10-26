@@ -1,0 +1,117 @@
+{
+  "text": {
+    "intent": {
+      "name": "intent",
+      "type": "choice",
+      "probabilities": [
+        {
+          "value": "billing_question",
+          "probability": 1.4187833178380963e-06
+        },
+        {
+          "value": "cancel_order",
+          "probability": 0.0001391700124825059
+        },
+        {
+          "value": "change_address",
+          "probability": 0.9997408789006862
+        },
+        {
+          "value": "report_damage",
+          "probability": 5.028781379401193e-06
+        },
+        {
+          "value": "track_order",
+          "probability": 0.00011350352213417096
+        }
+      ],
+      "confidence": 0.9996760986258576,
+      "choice": "change_address"
+    },
+    "address_change": {
+      "name": "address_change",
+      "type": "predicate",
+      "probability": 0.9861217309837942
+    },
+    "explicitness": {
+      "name": "explicitness",
+      "type": "score",
+      "probabilities": [
+        {
+          "label": "none",
+          "value": 0,
+          "probability": 0.015179489959193966
+        },
+        {
+          "label": "possible",
+          "value": 1,
+          "probability": 0.19359439621808508
+        },
+        {
+          "label": "explicit",
+          "value": 2,
+          "probability": 0.7912261138227209
+        }
+      ],
+      "confidence": 0.6640699357952904,
+      "score": 1.7760466238635269
+    }
+  },
+  "image": {
+    "group": {
+      "name": "group",
+      "type": "choice",
+      "probabilities": [
+        {
+          "value": "pride",
+          "probability": 0.00024266329295405555
+        },
+        {
+          "value": "flock",
+          "probability": 0.9963105297996027
+        },
+        {
+          "value": "clowder",
+          "probability": 0.002749012194385354
+        },
+        {
+          "value": "gang",
+          "probability": 0.0006977947130579646
+        }
+      ],
+      "confidence": 0.9950807063994702,
+      "choice": "flock"
+    }
+  },
+  "video_frame": {
+    "sauce_color": {
+      "name": "sauce_color",
+      "type": "choice",
+      "probabilities": [
+        {
+          "value": "brown",
+          "probability": 0.014343334878796554
+        },
+        {
+          "value": "white",
+          "probability": 0.9752438526923451
+        },
+        {
+          "value": "red",
+          "probability": 0.007025658192234735
+        },
+        {
+          "value": "orange",
+          "probability": 0.0033871542366235487
+        }
+      ],
+      "confidence": 0.9669918035897935,
+      "choice": "white"
+    }
+  },
+  "sampling": {
+    "frame_index": 98,
+    "total_frames": 196,
+    "timestamp_seconds": 3.2666666666666666
+  }
+}

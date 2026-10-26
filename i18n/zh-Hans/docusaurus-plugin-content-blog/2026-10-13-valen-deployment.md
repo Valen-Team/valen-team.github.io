@@ -14,7 +14,7 @@ ONNX 与 GGUF 版本已发布到 Valen Team 的 Hugging Face 组织。API Cookbo
 
 ## 调用托管模型
 
-[API Cookbook](https://github.com/Valen-Team/Valen/blob/main/cookbook/api_quickstart_zh.ipynb) 包含可执行示例、输入预览和保存结果。可以先通过 [API 入门](/zh-Hans/docs/valen/api/)了解请求结构。
+[API Cookbook](https://valen-team.github.io/zh-Hans/cookbook/api-quickstart/) 包含可执行示例、输入预览和保存结果。可以先通过 [API 入门](/zh-Hans/docs/valen/api/)了解请求结构。
 
 ## 运行导出模型
 

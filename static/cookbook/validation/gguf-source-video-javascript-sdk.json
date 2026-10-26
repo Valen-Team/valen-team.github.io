@@ -1,0 +1,244 @@
+{
+  "passed": true,
+  "validation_kind": "real_model_javascript_sdk_http",
+  "sdk_name": "@valen-team/sdk",
+  "sdk_version": "0.2.0",
+  "records": [
+    {
+      "id": "text",
+      "passed": true,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "intent",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "address",
+                "probability": 0.9999678587251428
+              },
+              {
+                "value": "cancel",
+                "probability": 0.00003214127485722157
+              }
+            ],
+            "confidence": 0.9999357174502856,
+            "choice": "address"
+          },
+          {
+            "name": "change_address",
+            "type": "predicate",
+            "probability": 0.9982443468457173
+          },
+          {
+            "name": "explicitness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "none",
+                "value": 0,
+                "probability": 0.012675093613854499
+              },
+              {
+                "label": "possible",
+                "value": 1,
+                "probability": 0.05436870874501274
+              },
+              {
+                "label": "explicit",
+                "value": 2,
+                "probability": 0.9329561976411327
+              }
+            ],
+            "confidence": 0.8804216560409174,
+            "score": 1.920281104027278
+          }
+        ],
+        "usage": {
+          "input_tokens": 166,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "typed-choice",
+      "passed": true,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "animal",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": true,
+                "probability": 0.9994861905090054
+              },
+              {
+                "value": "true",
+                "probability": 0.00046916907450602116
+              },
+              {
+                "value": false,
+                "probability": 0.000027967900605188707
+              },
+              {
+                "value": "false",
+                "probability": 0.000016672515883296103
+              }
+            ],
+            "confidence": 0.9993149206786739,
+            "choice": true
+          }
+        ],
+        "usage": {
+          "input_tokens": 68,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "image",
+      "passed": true,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5312669345185959
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.07323888801551497
+              },
+              {
+                "value": "blue",
+                "probability": 0.6443186009304713
+              },
+              {
+                "value": "green",
+                "probability": 0.2824425110540137
+              }
+            ],
+            "confidence": 0.466477901395707,
+            "choice": "blue"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.11672786158042753
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.8832721384195724
+              }
+            ],
+            "confidence": 0.766544276839145,
+            "score": 0.8832721384195724
+          }
+        ],
+        "usage": {
+          "input_tokens": 212,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "video",
+      "passed": true,
+      "response": {
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "answers": [
+          {
+            "name": "red",
+            "type": "predicate",
+            "probability": 0.5545416706163718
+          },
+          {
+            "name": "color",
+            "type": "choice",
+            "probabilities": [
+              {
+                "value": "red",
+                "probability": 0.5752652337541827
+              },
+              {
+                "value": "blue",
+                "probability": 0.42429803919349923
+              },
+              {
+                "value": "green",
+                "probability": 0.0004367270523179882
+              }
+            ],
+            "confidence": 0.36289785063127405,
+            "choice": "red"
+          },
+          {
+            "name": "brightness",
+            "type": "score",
+            "probabilities": [
+              {
+                "label": "dark",
+                "value": 0,
+                "probability": 0.00011669501876827695
+              },
+              {
+                "label": "bright",
+                "value": 1,
+                "probability": 0.9998833049812318
+              }
+            ],
+            "confidence": 0.9997666099624635,
+            "score": 0.9998833049812318
+          }
+        ],
+        "usage": {
+          "input_tokens": 271,
+          "output_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "empty-questions",
+      "passed": true,
+      "status": 400,
+      "error": "ValenAPIError: {\"code\":400,\"message\":\"Invalid Valen Decisions request\",\"type\":\"invalid_request_error\"}"
+    },
+    {
+      "id": "zero-temperature",
+      "passed": true,
+      "status": 400,
+      "error": "ValenAPIError: {\"code\":400,\"message\":\"temperature must be finite and positive\",\"type\":\"invalid_request_error\"}"
+    },
+    {
+      "id": "boolean-temperature",
+      "passed": true,
+      "status": 400,
+      "error": "ValenAPIError: {\"code\":400,\"message\":\"Invalid Valen Decisions request\",\"type\":\"invalid_request_error\"}"
+    },
+    {
+      "id": "duplicate-names",
+      "passed": true,
+      "status": 400,
+      "error": "ValenAPIError: {\"code\":400,\"message\":\"Invalid Valen Decisions request\",\"type\":\"invalid_request_error\"}"
+    },
+    {
+      "id": "numeric-choice",
+      "passed": true,
+      "status": 400,
+      "error": "ValenAPIError: {\"code\":400,\"message\":\"Invalid Valen Decisions request\",\"type\":\"invalid_request_error\"}"
+    }
+  ]
+}

@@ -37,8 +37,8 @@ Use the [ONNX inference guide](/docs/valen/onnx/) to choose a CPU, CUDA or brows
 
 - [Valen demo](https://huggingface.co/spaces/yuhangzang/Valen-Preview-0923)
 - [JevalKit Leaderboard](https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard)
-- [API cookbook](https://github.com/Valen-Team/Valen/blob/main/cookbook/api_quickstart.ipynb)
-- [Local inference cookbook](https://github.com/Valen-Team/Valen/blob/main/cookbook/local_inference.ipynb)
+- [API cookbook](https://valen-team.github.io/cookbook/api-quickstart/)
+- [Local inference cookbook](https://valen-team.github.io/cookbook/local-inference/)
 
 ## Source repositories
 

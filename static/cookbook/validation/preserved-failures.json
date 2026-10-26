@@ -1,0 +1,65 @@
+{
+  "preserved": true,
+  "prebuilt_video_probe": {
+    "backend": "gguf-q8",
+    "modality": "video",
+    "model_size": "0.8B",
+    "precision": "Q8_0 backbone; F32 Mixer and vision",
+    "threads": 4,
+    "model_provenance": {
+      "model": "Valen-Team/Valen-0.8B-GGUF",
+      "source_revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
+      "cached_file": "Valen-0.8B-Q8_0.gguf",
+      "runtime_archive_sha256": "2fcc903eb853b8c04498bb4ee716c7c3662d1d07eb5c2d89c11310716ae04c0e"
+    },
+    "media_budget": {
+      "images_kwargs": {
+        "size": {
+          "longest_edge": 262144,
+          "shortest_edge": 65536
+        }
+      },
+      "videos_kwargs": {
+        "fps": null,
+        "num_frames": 16,
+        "size": {
+          "longest_edge": 2097152,
+          "shortest_edge": 131072
+        }
+      }
+    },
+    "passed": false,
+    "startup_to_ready_seconds": 1.4055270468816161,
+    "error": "AssertionError({'error': {'code': 500, 'message': 'Failed to load image or audio file', 'type': 'server_error'}})",
+    "peak_rss_bytes": 1390297088
+  },
+  "prebuilt_video_log_tail": "warning: no usable GPU found, --gpu-layers option will be ignored\nwarning: one possible reason is that llama.cpp was compiled without GPU support\nwarning: consult docs/build.md for compilation instructions\n0.00.065.820 I srv  llama_server: initializing ...\n0.00.065.835 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)\n0.00.066.284 W srv  server_setup: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)\n0.00.067.943 I srv    load_model: loading model '/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf'\n0.00.986.137 I decision model reads the embeddings output, enabling embedding mode\n0.00.988.010 W llama_init_from_model: model default pooling_type is [-1], but [0] was specified\n0.01.018.361 I cmn          init: llama threadpool init, n_threads = 4\n0.01.023.049 I srv          init: decision model type: valen\n0.01.024.047 W load_hparams: Qwen-VL models require at minimum 1024 image tokens to function correctly on grounding tasks\n0.01.024.050 W load_hparams: if you encounter problems with accuracy, try adding --image-min-tokens 1024\n0.01.024.051 W load_hparams: more info: https://github.com/ggml-org/llama.cpp/issues/16842\n\n0.01.281.022 I srv    load_model: loaded multimodal model, '/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/vision-native-limits-F32.gguf'\n0.01.281.050 W srv    load_model: speculative decoding not supported by this context\n0.01.281.051 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 4096, kv_unified = 'false'\n0.01.281.115 I srv    load_model: decision model: prompt cache disabled by default, use `--cache-ram N` to enable it\n0.01.284.982 I srv  server_run_i: model loaded\n0.01.284.991 I srv  server_on_li: listening on http://127.0.0.1:18992\n0.01.367.750 E mtmd_helper_bitmap_init_from_buf: failed to decode buffer as either image or audio (video support not compiled in)\n0.01.367.949 W srv    operator(): got exception: {\"error\":{\"code\":500,\"message\":\"Failed to load image or audio file\",\"type\":\"server_error\"}}\n0.01.368.307 I srv    operator(): operator(): cleaning up before exit...",
+  "initial_cookbook_http": [
+    {
+      "exit_code": 1,
+      "passed": false,
+      "validation_kind": "real_model_cookbook_cli",
+      "error": "Traceback (most recent call last):\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/product_screening.py\", line 24, in <module>\n    main()\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/product_screening.py\", line 20, in main\n    emit(run(predict, samples()[\"product\"], args.asset_dir), args)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/product_screening.py\", line 6, in run\n    answer = request(predict, image_input(image_bytes(asset_dir / sample[\"image\"])), [sample[\"question\"]])[\"group\"]\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/common.py\", line 110, in request\n    response = predict({\"input\": source, \"questions\": questions, \"temperature\": 1.0})\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python/valen_sdk/client.py\", line 57, in predict\n    return self._backend.predict(body, \"decisions\" if \"input\" in body else \"system_one\", **options)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python/valen_sdk/client.py\", line 115, in predict\n    raise ValenAPIError(\nvalen_sdk.errors.ValenAPIError: Unknown model; this instance serves 'Valen-0.8B'\n"
+    },
+    {
+      "exit_code": 1,
+      "passed": false,
+      "validation_kind": "real_model_cookbook_cli",
+      "error": "Traceback (most recent call last):\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/ticket_routing.py\", line 28, in <module>\n    main()\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/ticket_routing.py\", line 24, in main\n    emit(run(predict, samples()[\"ticket\"]), args)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/ticket_routing.py\", line 6, in run\n    answers = request(predict, sample[\"text\"], sample[\"questions\"])\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/common.py\", line 110, in request\n    response = predict({\"input\": source, \"questions\": questions, \"temperature\": 1.0})\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python/valen_sdk/client.py\", line 57, in predict\n    return self._backend.predict(body, \"decisions\" if \"input\" in body else \"system_one\", **options)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python/valen_sdk/client.py\", line 115, in predict\n    raise ValenAPIError(\nvalen_sdk.errors.ValenAPIError: Unknown model; this instance serves 'Valen-0.8B'\n"
+    },
+    {
+      "exit_code": 1,
+      "passed": false,
+      "validation_kind": "real_model_cookbook_cli",
+      "error": "Traceback (most recent call last):\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/api_quickstart.py\", line 17, in <module>\n    main()\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/api_quickstart.py\", line 9, in main\n    text = request(predict, data[\"ticket\"][\"text\"], data[\"ticket\"][\"questions\"])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/common.py\", line 110, in request\n    response = predict({\"input\": source, \"questions\": questions, \"temperature\": 1.0})\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python/valen_sdk/client.py\", line 57, in predict\n    return self._backend.predict(body, \"decisions\" if \"input\" in body else \"system_one\", **options)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python/valen_sdk/client.py\", line 115, in predict\n    raise ValenAPIError(\nvalen_sdk.errors.ValenAPIError: Unknown model; this instance serves 'Valen-0.8B'\n"
+    },
+    {
+      "exit_code": 1,
+      "passed": false,
+      "validation_kind": "real_model_cookbook_cli",
+      "error": "Traceback (most recent call last):\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/video_tagging.py\", line 21, in <module>\n    main()\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/video_tagging.py\", line 17, in main\n    emit(run(predict, samples()[\"video\"], args.asset_dir), args)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/video_tagging.py\", line 7, in run\n    answer = request(predict, image_input(payload), [sample[\"question\"]])[\"sauce_color\"]\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-p1-261026-173234/website/static/cookbook/code/common.py\", line 110, in request\n    response = predict({\"input\": source, \"questions\": questions, \"temperature\": 1.0})\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python/valen_sdk/client.py\", line 57, in predict\n    return self._backend.predict(body, \"decisions\" if \"input\" in body else \"system_one\", **options)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/p0-release/sdk-python/valen_sdk/client.py\", line 115, in predict\n    raise ValenAPIError(\nvalen_sdk.errors.ValenAPIError: Unknown model; this instance serves 'Valen-0.8B'\n"
+    }
+  ],
+  "resolution": "Benchmark service alias fixed. Four affected CLI checks rerun successfully against the production ONNX SDK service and GGUF. No successful benchmark rows rerun. Direct video remains unsupported in the prebuilt binary.",
+  "synthetic_model_checks": "not executed in P1; synthetic adapter responses are labeled separately"
+}

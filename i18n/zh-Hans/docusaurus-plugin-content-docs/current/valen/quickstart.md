@@ -6,9 +6,6 @@ sidebar_label: Transformers 推理
 description: 安装依赖并使用两种协议运行 Valen。
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # 使用 Transformers 在本地推理
 
 在 Python 中加载 Valen，使用 SystemOne 或 Decisions 对文本、图片和视频进行判断、选择与评分。
@@ -47,224 +44,24 @@ torch.backends.cudnn.allow_tf32 = False
 
 首次加载会下载并缓存原生模型权重。已有缓存后，在 `AutoModel.from_pretrained(...)` 中加入 `local_files_only=True` 可禁止下载；也可以将模型 ID 换成本地模型目录。请使用原生 `Valen-*B` 仓库，ONNX 图由 [SDK](./onnx.md) 加载。
 
-## 文本推理与结果读取
+## 最短调用
 
-先运行上方加载模型的代码，再选择下面一个协议标签执行示例。两个标签表达相同任务，选择其中一种即可；图片和视频示例复用同一个已加载的 `model`。
-
-<Tabs groupId="hf-inference-protocol">
-<TabItem value="systemone" label="SystemOne" default>
+模型加载后，用一个判断题检查推理通路：
 
 ```python
-answer = model.predict(
-    {
-        "state": "A cat is sitting on the sofa.",
-        "questions": {
-            "animal": {
-                "type": "choice",
-                "instructions": "Which animal is present?",
-                "criteria": {"cat": "A cat", "dog": "A dog"},
-            },
-            "on_sofa": {"type": "noul", "instructions": "The cat is on the sofa."},
-            "clarity": {
-                "type": "score",
-                "instructions": "How clear is the evidence?",
-                "criteria": ["Unclear", "Partly clear", "Clear"],
-            },
-        },
-    },
-    execution="shared_state",
-    temperature=1.0,
-)
-print(answer["answers"]["animal"]["choice"])
-print(answer["answers"]["animal"]["probabilities"])
-print(answer["answers"]["on_sofa"]["noul"])
-print(answer["answers"]["clarity"]["score"])
+result = model.predict({
+    "input": "A cat is on the sofa.",
+    "questions": [{"name": "cat", "type": "predicate", "instructions": "A cat is present."}],
+}, execution="shared_state", temperature=1.0)
+print(result["answers"][0]["probability"])
 ```
 
-</TabItem>
-<TabItem value="decisions" label="Decisions">
+## 输入与参数
 
-```python
-answer = model.predict(
-    {
-        "input": "A cat is sitting on the sofa.",
-        "questions": [
-            {
-                "name": "animal",
-                "type": "choice",
-                "instructions": "Which animal is present?",
-                "choices": [
-                    {"value": "cat", "description": "A cat"},
-                    {"value": "dog", "description": "A dog"},
-                ],
-            },
-            {
-                "name": "on_sofa",
-                "type": "predicate",
-                "instructions": "The cat is on the sofa.",
-            },
-            {
-                "name": "clarity",
-                "type": "score",
-                "instructions": "How clear is the evidence?",
-                "levels": [
-                    {"label": "0", "description": "Unclear"},
-                    {"label": "1", "description": "Partly clear"},
-                    {"label": "2", "description": "Clear"},
-                ],
-            },
-        ],
-    },
-    execution="shared_state",
-    temperature=1.0,
-)
-print(answer["answers"][0]["choice"])
-print(answer["answers"][0]["probabilities"])
-print(answer["answers"][1]["probability"])
-print(answer["answers"][2]["score"])
-```
+- `shared_state`：问题与候选共享一个序列。
+- `question`：分别执行问题或分支。
+- `temperature` 默认 `1.0`，须为有限正数，用于缩放候选 logits；请求体中的值优先于关键字参数。
+- 原版模型可读取本地图片/视频路径；相对路径基于 `media_root`，默认为当前目录。
+- 单 GPU HTTP 插件的图片与视频能力不等同于原版 Python 模型，见后端能力表。
 
-</TabItem>
-</Tabs>
-
-SystemOne 的 `answers` 按问题 ID 索引；Decisions 的 `answers` 按请求顺序返回，并保留问题名。`score` 是从 0 开始的等级索引的概率加权平均值，以上三档范围为 0–2。
-
-## 图片推理
-
-将 `cat.jpg` 替换为本地 PNG、JPEG 或 WebP 图片。相对路径通过 `media_root` 解析，也可以使用绝对路径。
-
-<Tabs groupId="hf-inference-protocol">
-<TabItem value="systemone" label="SystemOne" default>
-
-```python
-answer = model.predict(
-    {
-        "state": {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": [{"type": "image_url", "image_url": {"url": "cat.jpg"}}],
-                }
-            ]
-        },
-        "questions": {
-            "animal": {
-                "type": "choice",
-                "instructions": "Which animal is present?",
-                "criteria": {"cat": "A cat", "dog": "A dog"},
-            }
-        },
-    },
-    execution="shared_state",
-    temperature=1.0,
-    media_root=".",
-)
-print(answer["answers"])
-```
-
-</TabItem>
-<TabItem value="decisions" label="Decisions">
-
-```python
-answer = model.predict(
-    {
-        "input": [
-            {
-                "role": "user",
-                "content": [{"type": "input_image", "image_url": "cat.jpg"}],
-            }
-        ],
-        "questions": [
-            {
-                "name": "animal",
-                "type": "choice",
-                "instructions": "Which animal is present?",
-                "choices": [
-                    {"value": "cat", "description": "A cat"},
-                    {"value": "dog", "description": "A dog"},
-                ],
-            }
-        ],
-    },
-    execution="shared_state",
-    temperature=1.0,
-    media_root=".",
-)
-print(answer["answers"])
-```
-
-</TabItem>
-</Tabs>
-
-## 视频推理
-
-将 `clip.mp4` 替换为本地视频。模型配置默认采样 16 帧。
-
-<Tabs groupId="hf-inference-protocol">
-<TabItem value="systemone" label="SystemOne" default>
-
-```python
-answer = model.predict(
-    {
-        "state": {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "video_url", "video_url": {"url": "clip.mp4"}}
-                    ],
-                }
-            ]
-        },
-        "questions": {
-            "walking": {"type": "noul", "instructions": "A person is walking."}
-        },
-    },
-    execution="shared_state",
-    temperature=1.0,
-    media_root=".",
-)
-print(answer["answers"])
-```
-
-</TabItem>
-<TabItem value="decisions" label="Decisions">
-
-```python
-answer = model.predict(
-    {
-        "input": [
-            {
-                "role": "user",
-                "content": [{"type": "input_video", "video_url": "clip.mp4"}],
-            }
-        ],
-        "questions": [
-            {
-                "name": "walking",
-                "type": "predicate",
-                "instructions": "A person is walking.",
-            }
-        ],
-    },
-    execution="shared_state",
-    temperature=1.0,
-    media_root=".",
-)
-print(answer["answers"])
-```
-
-</TabItem>
-</Tabs>
-
-## 执行方式与温度
-
-- `shared_state`：多个问题和候选项共享一个序列。
-- `question`：逐问题或分支执行。
-- `temperature`：默认为 `1.0`，接受大于零的有限数值，用于缩放候选 logits 后计算概率。
-
-两种协议均可通过 `model.predict(request, execution="question", temperature=0.5)` 调整。请求体中的 `temperature` 优先于同名调用参数。
-
-真实输入预览与完整示例见[本地推理 Notebook](https://github.com/Valen-Team/Valen/blob/main/cookbook/local_inference_zh.ipynb)。
-
-本地 HTTP 服务： [SGLang](/zh-Hans/docs/valen/sglang/) · [vLLM](/zh-Hans/docs/valen/vllm/)
+[完整文本、图片、直接视频与双协议教程](/zh-Hans/cookbook/local-inference/) · [API](/zh-Hans/docs/valen/api/) · [ONNX / SDK](/zh-Hans/docs/valen/onnx/) · [SGLang](/zh-Hans/docs/valen/sglang/) · [vLLM](/zh-Hans/docs/valen/vllm/) · [验证范围](/zh-Hans/cookbook/validation/)
