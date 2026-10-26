@@ -12,13 +12,17 @@ Valen（万澜）为 System One 决策引入视觉感知。受 [Jev](https://typ
 
 仓库包含模型实现、数据处理、SFT 与实验性 RLCD 训练、推理和评测工具。
 
+## 最新动态
+
+- **2026-10-26**：三尺寸 F32/Q8_0 GGUF 已发布，新增[无需编译的 CPU 文本服务](/zh-Hans/docs/valen/gguf/)与[统一版本选择](/zh-Hans/docs/valen/choosing/)。[Python](https://github.com/Valen-Team/valen-sdk-python/releases/tag/v0.2.0)/[JavaScript](https://github.com/Valen-Team/valen-sdk-js/releases/tag/v0.2.0) SDK 0.2.0 提供 GitHub 稳定包，尚未发布到 PyPI/npm。
+
 ## 选择模型
 
-| 模型 | 原生权重 / Transformers | ONNX Runtime |
-| --- | --- | --- |
-| Valen 0.8B | [Valen-0.8B](https://huggingface.co/Valen-Team/Valen-0.8B) | [Valen-0.8B-ONNX](https://huggingface.co/Valen-Team/Valen-0.8B-ONNX) |
-| Valen 2B | [Valen-2B](https://huggingface.co/Valen-Team/Valen-2B) | [Valen-2B-ONNX](https://huggingface.co/Valen-Team/Valen-2B-ONNX) |
-| Valen 4B | [Valen-4B](https://huggingface.co/Valen-Team/Valen-4B) | [Valen-4B-ONNX](https://huggingface.co/Valen-Team/Valen-4B-ONNX) |
+| 模型 | 原生权重 / Transformers | ONNX Runtime | GGUF / 定制运行时 |
+| --- | --- | --- | --- |
+| Valen 0.8B | [Valen-0.8B](https://huggingface.co/Valen-Team/Valen-0.8B) | [Valen-0.8B-ONNX](https://huggingface.co/Valen-Team/Valen-0.8B-ONNX) | [Valen-0.8B-GGUF](https://huggingface.co/Valen-Team/Valen-0.8B-GGUF) |
+| Valen 2B | [Valen-2B](https://huggingface.co/Valen-Team/Valen-2B) | [Valen-2B-ONNX](https://huggingface.co/Valen-Team/Valen-2B-ONNX) | [Valen-2B-GGUF](https://huggingface.co/Valen-Team/Valen-2B-GGUF) |
+| Valen 4B | [Valen-4B](https://huggingface.co/Valen-Team/Valen-4B) | [Valen-4B-ONNX](https://huggingface.co/Valen-Team/Valen-4B-ONNX) | [Valen-4B-GGUF](https://huggingface.co/Valen-Team/Valen-4B-GGUF) |
 
 导出格式与历史版本见 [Hugging Face 组织](https://huggingface.co/Valen-Team)。
 
@@ -34,6 +38,7 @@ Valen（万澜）为 System One 决策引入视觉感知。受 [Jev](https://typ
 
 | 需求 | 接入方式 |
 | --- | --- |
+| C++ Linux CPU HTTP / GGUF | [Valen custom llama-server](/zh-Hans/docs/valen/gguf/) |
 | 原生 PyTorch 模型与 CUDA 推理 | [Transformers](/zh-Hans/docs/valen/quickstart/) |
 | 应用内 CPU / CUDA、Node.js 或浏览器推理 | [ONNX 与 Python / JavaScript SDK](/zh-Hans/docs/valen/onnx/) |
 | 原生 C++ 文本集成 | [C++ 示例](https://github.com/Valen-Team/valen-sdk-cpp) |
@@ -51,3 +56,7 @@ Valen（万澜）为 System One 决策引入视觉感知。受 [Jev](https://typ
 
 
 SystemOne 使用 `noul` 表达是非判断并返回同名字段；Decisions 使用 `predicate` 并返回 `probability`。Transformers 与 ONNX SDK 均支持两种协议，HTTP 端点结构见 [API 文档](/zh-Hans/docs/valen/api/)。
+
+## 版本选择
+
+[版本选择 / Version selection](/zh-Hans/docs/valen/choosing/) · [GGUF](/zh-Hans/docs/valen/gguf/)
