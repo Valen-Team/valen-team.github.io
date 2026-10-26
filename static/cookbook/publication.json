@@ -1,0 +1,271 @@
+{
+  "date": "2026-10-26",
+  "completed": true,
+  "website_content_commit": "82c887cd9defca1fe7ff53aba5eb0fcfa2543b4f",
+  "github": {
+    "main-prepare": {
+      "repo": "Valen",
+      "base": "3cc30c05d1373bcc74a6a91dc49e868db0e1a340",
+      "commit": "d9048f3370b364a032ce40efdc739dd5a6b876c4",
+      "paths": [
+        "README.md",
+        "README_zh.md",
+        "docs/data-format.md",
+        "docs/data-format_zh.md",
+        "docs/gguf.md",
+        "docs/gguf_zh.md",
+        "docs/inference.md",
+        "docs/inference_zh.md",
+        "docs/onnx.md",
+        "docs/onnx_zh.md",
+        "docs/backend-validation.md",
+        "scripts/validation",
+        "tests/fixtures/backend-contract.json",
+        ".github/workflows/backend-contract.yml",
+        ".github/workflows/release-evidence.yml"
+      ],
+      "pushed": true,
+      "tags_moved": false
+    },
+    "website": {
+      "repo": "valen-team.github.io",
+      "base": "d07f852652346283066d476f4df39fe97841d1f6",
+      "commit": "82c887cd9defca1fe7ff53aba5eb0fcfa2543b4f",
+      "paths": [
+        ".gitignore",
+        "NOTICE.md",
+        "README.md",
+        "blog/2026-10-13-valen-deployment.md",
+        "docs/resources.md",
+        "docs/valen/gguf.md",
+        "docs/valen/onnx.md",
+        "docs/valen/overview.md",
+        "docs/valen/quickstart.md",
+        "docusaurus.config.ts",
+        "package.json",
+        "i18n/zh-Hans/docusaurus-plugin-content-blog/2026-10-13-valen-deployment.md",
+        "i18n/zh-Hans/docusaurus-plugin-content-docs/current/resources.md",
+        "i18n/zh-Hans/docusaurus-plugin-content-docs/current/valen/gguf.md",
+        "i18n/zh-Hans/docusaurus-plugin-content-docs/current/valen/onnx.md",
+        "i18n/zh-Hans/docusaurus-plugin-content-docs/current/valen/overview.md",
+        "i18n/zh-Hans/docusaurus-plugin-content-docs/current/valen/quickstart.md",
+        "i18n/zh-Hans/docusaurus-theme-classic/navbar.json",
+        "i18n/zh-Hans/docusaurus-plugin-content-docs-cookbook",
+        "cookbook-sidebars.ts",
+        "cookbook",
+        "plugins/cookbook-redirects.cjs",
+        "scripts/check-cookbook.py",
+        "scripts/search-index.mjs",
+        "src/components/CookbookEvidence.tsx",
+        "src/components/CookbookIndex.tsx",
+        "src/components/CookbookValidation.tsx",
+        "src/components/modern/Navbar.tsx",
+        "src/components/modern/shared.tsx",
+        "src/components/modern/cookbook.ts",
+        "static/cookbook/code",
+        "static/cookbook/results.json",
+        "static/cookbook/versions.json",
+        "static/cookbook/capabilities.json",
+        "static/cookbook/validation"
+      ],
+      "pushed": true,
+      "tags_moved": false
+    },
+    "sdk-python": {
+      "repo": "valen-sdk-python",
+      "base": "2194dcf5fdf548ca52298842071721602ff5b125",
+      "commit": "979b2af3f35efb9e58d82ec0fd9f73dd604cff5e",
+      "paths": [
+        "README.md",
+        "README_zh.md"
+      ],
+      "pushed": true,
+      "tags_moved": false
+    },
+    "sdk-javascript": {
+      "repo": "valen-sdk-js",
+      "base": "2e4972d2d3c9a522b2a376361a74f05744f071c5",
+      "commit": "83fe7b0ee3fa0a7e118a323d70d1e815947f3e3c",
+      "paths": [
+        "README.md",
+        "README_zh.md"
+      ],
+      "pushed": true,
+      "tags_moved": false
+    },
+    "sdk-cpp": {
+      "repo": "valen-sdk-cpp",
+      "base": "ac4f584316810847a43a2a697ba9316b3e347aac",
+      "commit": "14621684a595eacaf597e8634532cf1c28e43952",
+      "paths": [
+        "README.md",
+        "README_zh.md"
+      ],
+      "pushed": true,
+      "tags_moved": false
+    },
+    "main-final": {
+      "repo": "Valen",
+      "base": "b2a0caf22e512f3c967254a8e61c6812e1b907da",
+      "commit": "342bef037403c87a2e4126eaafbf563ec538ac26",
+      "paths": [
+        "cookbook",
+        "validation/release-gate.json"
+      ],
+      "pushed": true,
+      "tags_moved": false
+    }
+  },
+  "huggingface": {
+    "passed": true,
+    "repositories": [
+      {
+        "repo": "Valen-Team/Valen-0.8B",
+        "kind": "model",
+        "commit": "e7ff23edc3ecd06004558e3ca36f60cd6f54153a",
+        "url": "https://huggingface.co/Valen-Team/Valen-0.8B/commit/e7ff23edc3ecd06004558e3ca36f60cd6f54153a",
+        "passed": true,
+        "changed": [
+          "README.md"
+        ],
+        "all_other_files_unchanged": true,
+        "unchanged_lfs_files": 2
+      },
+      {
+        "repo": "Valen-Team/Valen-0.8B-ONNX",
+        "kind": "model",
+        "commit": "24619612b96a80b76829cb38ad7f62137671eed2",
+        "url": "https://huggingface.co/Valen-Team/Valen-0.8B-ONNX/commit/24619612b96a80b76829cb38ad7f62137671eed2",
+        "passed": true,
+        "changed": [
+          "README.md",
+          "README_zh.md"
+        ],
+        "all_other_files_unchanged": true,
+        "unchanged_lfs_files": 21
+      },
+      {
+        "repo": "Valen-Team/Valen-0.8B-GGUF",
+        "kind": "model",
+        "commit": "4ab2cbd3daa8d362e3795db69b9bc3af42352e87",
+        "url": "https://huggingface.co/Valen-Team/Valen-0.8B-GGUF/commit/4ab2cbd3daa8d362e3795db69b9bc3af42352e87",
+        "passed": true,
+        "changed": [
+          "README.md",
+          "README_zh.md",
+          "SHA256SUMS"
+        ],
+        "all_other_files_unchanged": true,
+        "unchanged_lfs_files": 3
+      },
+      {
+        "repo": "Valen-Team/Valen-2B",
+        "kind": "model",
+        "commit": "b9b724af30eb3e17371b54e8ad5a43c9d4bfa722",
+        "url": "https://huggingface.co/Valen-Team/Valen-2B/commit/b9b724af30eb3e17371b54e8ad5a43c9d4bfa722",
+        "passed": true,
+        "changed": [
+          "README.md"
+        ],
+        "all_other_files_unchanged": true,
+        "unchanged_lfs_files": 4
+      },
+      {
+        "repo": "Valen-Team/Valen-2B-ONNX",
+        "kind": "model",
+        "commit": "86401a3d76a7a43b058a4eb578ee69354ff625e3",
+        "url": "https://huggingface.co/Valen-Team/Valen-2B-ONNX/commit/86401a3d76a7a43b058a4eb578ee69354ff625e3",
+        "passed": true,
+        "changed": [
+          "README.md",
+          "README_zh.md"
+        ],
+        "all_other_files_unchanged": true,
+        "unchanged_lfs_files": 17
+      },
+      {
+        "repo": "Valen-Team/Valen-2B-GGUF",
+        "kind": "model",
+        "commit": "b70c4c03e101d9f4fae0b7f72e154b87f78bc238",
+        "url": "https://huggingface.co/Valen-Team/Valen-2B-GGUF/commit/b70c4c03e101d9f4fae0b7f72e154b87f78bc238",
+        "passed": true,
+        "changed": [
+          "README.md",
+          "README_zh.md",
+          "SHA256SUMS"
+        ],
+        "all_other_files_unchanged": true,
+        "unchanged_lfs_files": 3
+      },
+      {
+        "repo": "Valen-Team/Valen-4B",
+        "kind": "model",
+        "commit": "bbc2a037320ef35a004cc8adc28946b05e289bd3",
+        "url": "https://huggingface.co/Valen-Team/Valen-4B/commit/bbc2a037320ef35a004cc8adc28946b05e289bd3",
+        "passed": true,
+        "changed": [
+          "README.md"
+        ],
+        "all_other_files_unchanged": true,
+        "unchanged_lfs_files": 4
+      },
+      {
+        "repo": "Valen-Team/Valen-4B-ONNX",
+        "kind": "model",
+        "commit": "405d58dd252f366fd605d386bfc39d20a02cd2be",
+        "url": "https://huggingface.co/Valen-Team/Valen-4B-ONNX/commit/405d58dd252f366fd605d386bfc39d20a02cd2be",
+        "passed": true,
+        "changed": [
+          "README.md",
+          "README_zh.md"
+        ],
+        "all_other_files_unchanged": true,
+        "unchanged_lfs_files": 17
+      },
+      {
+        "repo": "Valen-Team/Valen-4B-GGUF",
+        "kind": "model",
+        "commit": "f8f2334b3be7dc93743bc69cc730eca5ff1d857d",
+        "url": "https://huggingface.co/Valen-Team/Valen-4B-GGUF/commit/f8f2334b3be7dc93743bc69cc730eca5ff1d857d",
+        "passed": true,
+        "changed": [
+          "README.md",
+          "README_zh.md",
+          "SHA256SUMS"
+        ],
+        "all_other_files_unchanged": true,
+        "unchanged_lfs_files": 3
+      },
+      {
+        "repo": "Valen-Team/Valen-API",
+        "kind": "space",
+        "commit": "fd474f7cbe9baade4f7d011e32536d3d67c1f02e",
+        "url": "https://huggingface.co/spaces/Valen-Team/Valen-API/commit/fd474f7cbe9baade4f7d011e32536d3d67c1f02e",
+        "passed": true,
+        "changed": [
+          "NOTICE.md",
+          "README.md"
+        ],
+        "all_other_files_unchanged": true,
+        "unchanged_lfs_files": 2
+      }
+    ],
+    "model_download_bytes": 0
+  },
+  "live_checks": {
+    "passed": true,
+    "checks": 48,
+    "local_fallback_bytes": 57873
+  },
+  "model_download_bytes": 0,
+  "limitations": [
+    "Prebuilt GGUF 0.1.0 direct video unavailable; failed probe preserved; source-build video verified separately.",
+    "Measurements cover 0.8B CPU fixed fixtures; no larger-model, GPU or concurrency performance claim."
+  ],
+  "versions": {
+    "python": "0.2.0",
+    "javascript": "@valen-team/sdk@0.2.0",
+    "runtime": "gguf-runtime-v0.1.0",
+    "existing_tags_moved": false
+  }
+}
