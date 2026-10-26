@@ -3,8 +3,9 @@ import {useLocation} from '@docusaurus/router';
 import Link from '@docusaurus/Link';
 import {useChinese} from '../Content';
 import {ArrowUpRight, GitBranch} from 'lucide-react';
-export const isModern = (path: string) => /^\/(?:zh-Hans\/?)?$/.test(path) || /\/(?:minimal|docs)(?:\/|$)/.test(path);
-export const isModernDoc = (path: string) => path.includes('/docs');
+export const isModern = (path: string) => /^\/(?:zh-Hans\/?)?$/.test(path) || /\/(?:minimal|docs|cookbook)(?:\/|$)/.test(path);
+export const isCookbook = (path: string) => /^\/(?:zh-Hans\/)?cookbook(?:\/|$)/.test(path);
+export const isModernDoc = (path: string) => /^\/(?:zh-Hans\/)?(?:docs|cookbook)(?:\/|$)/.test(path);
 // The supplied Valen mark, rendered as a monochrome SVG mask; source image is unchanged.
 export function ModernMark(){const id=useId().replaceAll(':','');return <svg width="30" height="26" viewBox="140 210 740 580" fill="none" aria-hidden="true"><defs><filter id={`mark-filter-${id}`} colorInterpolationFilters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 -.2126 -.7152 -.0722 1 0"/><feComponentTransfer><feFuncA type="table" tableValues="0 1 1"/></feComponentTransfer></filter><mask id={`mark-mask-${id}`} maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1000"><image href="/img/valen-mark.png" width="1000" height="1000" filter={`url(#mark-filter-${id})`}/></mask></defs><path fill="currentColor" mask={`url(#mark-mask-${id})`} d="M0 0h1000v1000H0z"/></svg>;}
 export function ModernBrand(){return <Link className="modern-brand" to="/"><ModernMark/><span>valen</span></Link>;}
@@ -15,6 +16,11 @@ export const docGroups = [
  {title:['REFERENCE','参考'],items:[['valen/data-format','Data format','数据格式'],['valen/architecture','Architecture','模型架构'],['valen/qwen-shared-state','Shared state','共享状态'],['valen/configuration','Configuration','配置参数'],['valen/evaluation','Evaluation','模型评测']]},
  {title:['JEVALKIT','JEVALKIT'],items:[['jevalkit','Overview','概览'],['jevalkit/quickstart','Quickstart','快速开始'],['jevalkit/models','Model interfaces','模型接口'],['jevalkit/benchmarks','Benchmarks','评测任务']]},
  {title:['RESOURCES','资源'],items:[['resources','Links & resources','链接与资源'],['contributing','Contributing','参与贡献']]},
+];
+export const cookbookGroups = [
+ {title:['GET STARTED','开始使用'],items:[['','Cookbook overview','教程概览'],['api-quickstart','API basics','API 入门'],['local-inference','Local inference','本地推理']]},
+ {title:['APPLICATIONS','应用教程'],items:[['ticket-routing','Route support tickets','工单分流'],['product-screening','Screen product images','商品图片筛选'],['video-tagging','Tag short videos','短视频标注']]},
+ {title:['REFERENCE','参考'],items:[['validation','Validation & performance','验证、性能与版本'],['migration','Migration map','旧内容迁移表']]},
 ];
 const deploymentChildren: Record<string, string[][]> = {
  'valen/api': [['valen/api/systemone', 'System One', 'System One', 'POST'], ['valen/api/decisions', 'Decisions', 'Decisions', 'POST'], ['valen/api/list-models', 'List Models', 'List Models', 'GET']],
@@ -29,23 +35,36 @@ export function ModernSidebar({onNavigate}: {onNavigate?:()=>void}) {
   const zh = useChinese();
   const {pathname} = useLocation();
   const currentPath = pathname.replace(/^\/zh-Hans/, '');
+  const cookbook = isCookbook(pathname);
+  const groups = cookbook ? cookbookGroups : docGroups;
   const renderLink = ([id, en, cn, badge, trailingBadge]: string[]) => {
-    const path = `/docs/${id ? `${id}/` : ''}`;
+    const path = `/${cookbook ? 'cookbook' : 'docs'}/${id ? `${id}/` : ''}`;
     return <Link to={path} className={currentPath === path ? 'active' : ''}
       aria-current={currentPath === path ? 'page' : undefined} onClick={onNavigate}>
       {badge && <span className={`modern-badge ${badge === 'POST' ? 'blue' : 'green'}`}>{badge}</span>}<span>{zh ? cn : en}</span>
       {trailingBadge && <span className="modern-sidebar-free">{zh && trailingBadge === 'Free' ? '免费' : trailingBadge}</span>}
     </Link>;
   };
+  const renderGroup = (group: typeof docGroups[number]) => <section key={group.title[0]}>
+    <h2>{group.title[zh ? 1 : 0]}</h2>
+    <ul className="modern-doc-list">{group.items.map(item => <li key={item[0]}>
+      {renderLink(item)}
+      {deploymentChildren[item[0]] && <ul className="modern-doc-children">
+        {deploymentChildren[item[0]].map(child => <li key={child[0]}>{renderLink(child)}</li>)}
+      </ul>}
+    </li>)}</ul>
+  </section>;
   return <nav aria-label={zh ? '文档导航' : 'Documentation navigation'} className="modern-sidebar-nav">
-    {docGroups.map(group => <section key={group.title[0]}>
-      <h2>{group.title[zh ? 1 : 0]}</h2>
-      <ul className="modern-doc-list">{group.items.map(item => <li key={item[0]}>
-        {renderLink(item)}
-        {deploymentChildren[item[0]] && <ul className="modern-doc-children">
-          {deploymentChildren[item[0]].map(child => <li key={child[0]}>{renderLink(child)}</li>)}
-        </ul>}
-      </li>)}</ul>
-    </section>)}
+    {cookbook ? groups.map(renderGroup) : <>
+      <div className="modern-sidebar-project">
+        <h2 className="modern-sidebar-project-title">Valen</h2>
+        {docGroups.slice(0,3).map(renderGroup)}
+      </div>
+      <div className="modern-sidebar-project">
+        <h2 className="modern-sidebar-project-title">JevalKit</h2>
+        <ul className="modern-doc-list">{docGroups[3].items.map(item=><li key={item[0]}>{renderLink(item)}</li>)}</ul>
+      </div>
+      <div className="modern-sidebar-project">{renderGroup(docGroups[4])}</div>
+    </>}
   </nav>;
 }

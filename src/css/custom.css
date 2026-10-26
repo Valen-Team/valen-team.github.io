@@ -306,3 +306,30 @@ article[itemprop='blogPost'] [class*='blogPostInfo'] {font-size:13px;color:var(-
 /* Documentation keeps instructions and examples in one reading column. */
 .modern-doc-grid {display:block;max-width:1120px;}
 .modern-doc-content {width:100%;max-width:none;}
+
+/* Cookbook uses the documentation shell and its visual tokens. */
+.cookbook-directory {margin-top:32px;}
+.cookbook-filters {display:flex;gap:16px;align-items:end;margin-bottom:20px;}
+.cookbook-filters label {display:flex;flex-direction:column;gap:8px;font-size:13px;font-weight:500;color:var(--text-muted);}
+.cookbook-filters label:first-child {flex:1;}
+.cookbook-filters input,.cookbook-filters select {width:100%;min-height:44px;padding:10px 14px;border:1px solid var(--border-strong);border-radius:8px;background:var(--surface);color:var(--text);font:14px var(--font-doc);}
+.cookbook-filters select {min-width:144px;}
+.cookbook-filters input::placeholder {color:var(--text-faint);}
+.cookbook-count {font-size:13px!important;color:var(--text-muted);}
+.cookbook-cards {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+.cookbook-card {padding:24px;border:1px solid var(--border);border-radius:12px;background:var(--bg-doc);transition:border-color .2s,background .2s;}
+.cookbook-card:hover {border-color:var(--primary);background:var(--primary-soft);}
+.cookbook-card small {font-size:11px;font-weight:500;letter-spacing:.04em;color:var(--text-muted);}
+.modern-doc-content .cookbook-card h2 {font-size:19px;margin:12px 0 10px;border:0;padding:0;line-height:1.4;}
+.modern-doc-content .cookbook-card h2 a {color:var(--heading);text-decoration:none;}
+.modern-doc-content .cookbook-card p {font-size:14px;line-height:1.75;color:var(--text-muted);margin:0;}
+@media(max-width:600px) {
+ .cookbook-filters {flex-direction:column;align-items:stretch;}
+ .cookbook-cards {grid-template-columns:1fr;}
+ .cookbook-card {padding:20px;}
+}
+
+/* The header describes content type; project names belong in the sidebar. */
+.modern-nav--docs .modern-brand:after {content:'Docs';font-size:15px;}
+.modern-sidebar-project + .modern-sidebar-project {margin-top:28px;padding-top:22px;border-top:1px solid var(--border);}
+.modern-sidebar-nav .modern-sidebar-project-title {font-size:14px;font-weight:600;color:var(--heading);letter-spacing:0;margin:0 12px 20px;}

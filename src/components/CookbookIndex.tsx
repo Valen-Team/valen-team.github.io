@@ -13,20 +13,21 @@ const entries = [
 export default function CookbookIndex() {
   const zh=useChinese(), [query,setQuery]=useState(''), [category,setCategory]=useState('all');
   const rows=entries.filter(e=>(category==='all'||e.category===category||e.modality.includes(category)) && `${e.title.join(' ')} ${e.summary.join(' ')} ${e.modality}`.toLowerCase().includes(query.trim().toLowerCase()));
-  return <section aria-label={zh?'教程目录':'Tutorial directory'}>
-    <div style={{display:'flex',gap:'1rem',flexWrap:'wrap',marginBottom:'1.5rem'}}>
-      <label>{zh?'搜索教程':'Search tutorials'}<input type="search" value={query} onChange={e=>setQuery(e.target.value)} style={{display:'block',padding:'.6rem',minWidth:'14rem'}}/></label>
-      <label>{zh?'分类':'Category'}<select value={category} onChange={e=>setCategory(e.target.value)} style={{display:'block',padding:'.6rem'}}>
+  return <section className="cookbook-directory" aria-label={zh?'教程目录':'Tutorial directory'}>
+    <div className="cookbook-filters">
+      <label>{zh?'搜索教程':'Search tutorials'}<input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder={zh?'搜索任务、输入或教程…':'Search tasks, inputs or tutorials…'}/></label>
+      <label>{zh?'分类':'Category'}<select value={category} onChange={e=>setCategory(e.target.value)}>
         {[['all','All','全部'],['foundations','Foundations','基础'],['applications','Applications','应用'],['text','Text','文本'],['image','Image','图片'],['video','Video','视频']].map(([v,en,cn])=><option key={v} value={v}>{zh?cn:en}</option>)}
       </select></label>
     </div>
-    <p role="status">{zh?`${rows.length} 篇教程`:`${rows.length} tutorial${rows.length===1?'':'s'}`}</p>
-    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,260px),1fr))',gap:'1rem'}}>
-      {rows.map(e=><article key={e.id} style={{border:'1px solid var(--ifm-color-emphasis-300)',borderRadius:12,padding:'1.25rem'}}>
-        <small>{e.category==='foundations'?(zh?'基础':'FOUNDATIONS'):(zh?'应用':'APPLICATIONS')} · {e.modality}</small>
-        <h2 style={{fontSize:'1.3rem',marginTop:'.5rem'}}><Link to={`/cookbook/${e.id}/`}>{e.title[zh?1:0]}</Link></h2>
+    <p className="cookbook-count" role="status">{zh?`${rows.length} 篇教程`:`${rows.length} tutorial${rows.length===1?'':'s'}`}</p>
+    <div className="cookbook-cards">
+      {rows.map(e=><article key={e.id} className="cookbook-card">
+        <small>{e.category==='foundations'?(zh?'基础':'FOUNDATIONS'):(zh?'应用':'APPLICATIONS')} · {e.modality.split(' ').map(m=>zh?({text:'文本',image:'图片',video:'视频'}[m]):m).join(' / ')}</small>
+        <h2><Link to={`/cookbook/${e.id}/`}>{e.title[zh?1:0]}</Link></h2>
         <p>{e.summary[zh?1:0]}</p>
       </article>)}
     </div>
+    {rows.length===0&&<p>{zh?'没有匹配的教程，请尝试其他关键词。':'No tutorials found. Try another search.'}</p>}
   </section>;
 }
