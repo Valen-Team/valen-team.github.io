@@ -18,6 +18,8 @@ The hosted service also exposes a model list endpoint:
 |---|---|---|---|
 | List Models | GET | `/v1/models` | [API reference](./api/list-models.md) |
 
+For details on training, data uses, and retention, see [API data handling and retention](./api/data-handling.md).
+
 ## Base URLs
 
 | Access | Base URL | Headers |

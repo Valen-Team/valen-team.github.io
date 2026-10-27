@@ -18,6 +18,8 @@ sidebar_label: API 调用
 |---|---|---|---|
 | List Models | GET | `/v1/models` | [接口参考](./api/list-models.md) |
 
+有关训练、数据用途及保留的说明，请参阅 [API 数据处理与保留](./api/data-handling.md)。
+
 ## 服务地址
 
 | 入口 | Base URL | 请求头 |
