@@ -6,6 +6,6 @@ const sidebars: SidebarsConfig = {main: [
  {type:'category',label:'Training and fine-tuning',items:['valen/training','valen/data-format','valen/configuration','valen/checkpoints']},
  {type:'category',label:'Probability reliability',collapsed:false,items:['valen/reliability','valen/calibration']},
  {type:'category',label:'Evaluation',items:['valen/evaluation','valen/decision-index',{type:'category',label:'JevalKit',link:{type:'doc',id:'jevalkit/overview'},items:['jevalkit/quickstart','jevalkit/models','jevalkit/benchmarks']}]},
- 'resources','contributing'
+ 'resources',{type:'link',label:'Community projects',href:'/#community-projects'},'contributing'
 ]};
 export default sidebars;

@@ -17,7 +17,7 @@ export const docGroups = [
  {title:['Training and fine-tuning','训练与微调'],items:[['valen/training','Fine-tuning','模型微调'],['valen/data-format','Data preparation and format','数据准备与格式'],['valen/configuration','Training configuration','训练配置'],['valen/checkpoints','Save, resume and export','保存、恢复与导出']]},
  {title:['Probability reliability','概率可靠性'],items:[['valen/reliability','Released-model evidence','发布模型实测'],['valen/calibration','Calibrate and automate','校准与自动处理']]},
  {title:['Evaluation','评测'],items:[['valen/decision-index','Jev Decision Index','Jev Decision Index'],['jevalkit','JevalKit toolkit','JevalKit 工具']]},
- {title:['Resources','资源'],items:[['resources','Links and resources','链接与资源'],['contributing','Contributing','参与贡献']]},
+ {title:['Resources','资源'],items:[['resources','Links and resources','链接与资源'],['/#community-projects','Community projects','社区项目'],['contributing','Contributing','参与贡献']]},
 ];
 export const cookbookGroups = [
  {title:['GET STARTED','开始使用'],items:[['','Cookbook overview','教程概览'],['api-quickstart','API basics','API 入门'],['local-inference','Local inference','本地推理']]},
