@@ -6,6 +6,8 @@ title: "Use probabilities in applications"
 
 **Choice** distributes probability over the supplied mutually exclusive candidates and selects the maximum. **Predicate / Noul** gives `P(true)` for one statement; separate predicates are not mutually exclusive. **Score** distributes probability over ordered grade descriptions and returns `sum(i*p[i])`, with zero-based indices. Labels do not create numeric business values: low/medium/high need not mean equally spaced cost. Use your own explicit utility mapping `sum(utility[i]*p[i])` when appropriate; validate that mapping separately.
 
+**What if no option fits?** Choice still distributes probability among the supplied options. Add a clearly described `none` choice and route its selections for review. Validate the policy on your own data. [See measured unknown-category examples and review policies](/cookbook/unknown-categories/).
+
 Candidate membership, wording, descriptions, keys and order affect the problem. Shared-state also exposes other questions and their order to the causal backbone. Adding an “other” option can change all probabilities; it must be meaningfully defined and tested. A single-candidate Choice always has probability **1** and confidence **1**; it cannot demonstrate correctness or detect an out-of-set input. Use a predicate or a validated rejection mechanism instead.
 
 ## What confidence actually measures
@@ -41,5 +43,3 @@ A positive scalar temperature rescales fixed logits before softmax; it preserves
 Revalidate thresholds after changing model, adapter, precision/backend, prompts, candidate set/order, question grouping, sampling/media budgets, label definition, class prevalence or input domain. Monitor production drift and review workload; do not assume last month's threshold transfers.
 
 Complete policy examples: [ticket routing](/cookbook/ticket-routing/) and [product screening](/cookbook/product-screening/). Their illustrative thresholds are not calibrated recommendations. [Evaluation and metrics](./evaluation.md) · [protocol reference](./api.md). Formula source: [inference.py](https://github.com/Valen-Team/Valen/blob/main/valen/evaluation/inference.py).
-
-For incomplete candidate sets, see [handling unknown categories](/cookbook/unknown-categories/) for explicit none choices and measured review policies.
