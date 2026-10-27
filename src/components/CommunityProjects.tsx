@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {ArrowUpRight, Star} from 'lucide-react';
+import {ArrowLeft, ArrowRight, ArrowUpRight, Star} from 'lucide-react';
 import {useChinese} from './Content';
 import './community-projects.css';
 
 const projects = [
+  {name: 'Jev-ToM', repo: 'HKUST-KnowComp/Jev-ToM', stars: 1, url: 'https://github.com/HKUST-KnowComp/Jev-ToM', kind: ['RESEARCH EVALUATION', '研究评测'], description: ['Evaluates Valen-Preview-0923 on Theory of Mind benchmarks and cites its model card in the paper.', '在心智理论基准上评测 Valen-Preview-0923，并在论文中引用其模型卡。'], license: ['CC BY 4.0; source data has separate terms', 'CC BY 4.0；源数据另有条款']},
   {name: 'vLLM Jev', repo: 'mode-io/vllm-jev', stars: 780, url: 'https://github.com/mode-io/vllm-jev', kind: ['MODEL SERVING', '模型部署'], description: ['Serves Valen-Preview-0923 for text, images and short video on documented Linux and Mac paths.', '在其说明的 Linux 和 Mac 路径中，为 Valen-Preview-0923 提供文本、图片与短视频决策服务。'], license: ['Apache-2.0', 'Apache-2.0']},
   {name: 'System1-Omni', repo: 'InferMatrixLab/system1-omni', stars: 61, url: 'https://github.com/InferMatrixLab/system1-omni/blob/main/recipe/valen/reference.md', kind: ['REFERENCE SERVING', '参考推理服务'], description: ['A Python reference worker for Valen-Preview-0923 with text and single-image inputs.', 'Valen-Preview-0923 的 Python 参考 worker，支持文本和单张图片。'], license: ['License not specified', '未注明许可证']},
   {name: 'JevLight', repo: 'usail-hkust/JevLight', stars: 10, url: 'https://github.com/usail-hkust/JevLight/tree/main/config/valen-2b', kind: ['SIMULATION CONFIGURATION', '仿真配置'], description: ['Traffic-signal simulation with configurations for Valen models.', '交通信号仿真项目，提供 Valen 模型配置。'], license: ['License not specified', '未注明许可证']},
@@ -16,6 +17,9 @@ export default function CommunityProjects() {
   const zh = useChinese();
   const lang = zh ? 1 : 0;
   const [liveStars, setLiveStars] = useState<Record<string, number>>({});
+  const [page, setPage] = useState(0);
+  const pageSize = 6;
+  const pageCount = Math.ceil(projects.length / pageSize);
   useEffect(() => {
     const controller = new AbortController();
     projects.forEach(async project => {
@@ -39,7 +43,7 @@ export default function CommunityProjects() {
       <p>{zh ? '社区项目通过模型部署、实验和数据集探索 Valen。请查看各项目的版本、许可证与适用范围。' : 'Community projects explore Valen through serving, experiments and datasets. Check each project’s version, license and scope.'}</p>
     </div>
     <div className="community-projects-grid">
-      {projects.map(project => <article className="community-project" key={project.name}>
+      {projects.slice(page * pageSize, (page + 1) * pageSize).map(project => <article className="community-project" key={project.name}>
         <div className="community-project-top">
           <span className="community-project-kind">{project.kind[lang]}</span>
           <a className="community-project-stars" href={`https://github.com/${project.repo}`} aria-label={`${project.name}: ${liveStars[project.repo] ?? project.stars} GitHub stars${liveStars[project.repo] === undefined ? (zh ? '，2026 年 10 月 27 日快照' : ', snapshot from October 27, 2026') : ''}`} title={liveStars[project.repo] === undefined ? (zh ? '2026 年 10 月 27 日快照' : 'Snapshot from October 27, 2026') : (zh ? 'GitHub 当前星标数' : 'Current GitHub stars')}><svg className="community-project-github" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg><Star size={15} aria-hidden="true"/><span>{(liveStars[project.repo] ?? project.stars).toLocaleString('en-US')}</span>{liveStars[project.repo] === undefined && <span className="community-project-snapshot">{zh ? '快照' : 'snapshot'}</span>}</a>
@@ -49,6 +53,11 @@ export default function CommunityProjects() {
         <small>{project.license[lang]}</small>
       </article>)}
     </div>
+    <nav className="community-projects-pagination" aria-label={zh ? '社区项目分页' : 'Community projects pages'}>
+      <button type="button" onClick={() => setPage(page - 1)} disabled={page === 0} aria-label={zh ? '上一页' : 'Previous page'}><ArrowLeft size={17} aria-hidden="true" /></button>
+      <span aria-live="polite">{zh ? `第 ${page + 1} / ${pageCount} 页` : `${page + 1} / ${pageCount}`}</span>
+      <button type="button" onClick={() => setPage(page + 1)} disabled={page === pageCount - 1} aria-label={zh ? '下一页' : 'Next page'}><ArrowRight size={17} aria-hidden="true" /></button>
+    </nav>
     <p className="community-projects-note">{zh ? '以上项目由各自作者维护；收录不代表合作、背书或已独立复现。' : 'These projects are maintained by their respective authors; inclusion does not imply affiliation, endorsement or independent reproduction.'}</p>
   </section>;
 }

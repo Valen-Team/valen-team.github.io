@@ -12,3 +12,8 @@
 .community-project-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 .community-project-stars{display:inline-flex;align-items:center;gap:5px;flex-shrink:0;color:var(--text-muted);font-size:12px;line-height:1.3;text-decoration:none}
 .community-project-stars:hover{color:var(--primary);text-decoration:none}.community-project-stars svg{stroke-width:1.7}.community-project-snapshot{font-size:10px;color:var(--text-faint)}
+.community-projects-pagination{display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:18px;color:var(--text-muted);font-size:12px}
+.community-projects-pagination button{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:50%;background:var(--bg-doc);color:var(--heading);cursor:pointer}
+.community-projects-pagination button:hover:not(:disabled){border-color:var(--primary);color:var(--primary)}
+.community-projects-pagination button:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.community-projects-pagination button:disabled{opacity:.4;cursor:default}
