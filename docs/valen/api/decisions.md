@@ -30,7 +30,7 @@ Install `requests` in the client environment to run the Python example, or switc
 | Field | Description |
 |---|---|
 | `Content-Type` | Required: `application/json` |
-| `Origin` | Optional; sent automatically by browsers. |
+| `Origin` | Browsers send this automatically; the free API uses an allowlist for browser origins. Non-browser clients may omit it. |
 | `Authorization` | Required on the keyed endpoint: `Bearer $VALEN_API_KEY` |
 
 ## Body

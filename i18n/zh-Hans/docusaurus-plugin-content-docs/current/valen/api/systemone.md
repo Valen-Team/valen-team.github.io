@@ -30,7 +30,7 @@ POST /v1/systemone
 | 字段 | 说明 |
 |---|---|
 | `Content-Type` | 必填，`application/json` |
-| `Origin` | 可选；浏览器跨域请求自动携带。 |
+| `Origin` | 浏览器自动携带；免费 API 对浏览器来源使用允许列表。非浏览器客户端可省略。 |
 | `Authorization` | Key 入口必填，`Bearer $VALEN_API_KEY` |
 | `TypeSafe-Danger-Zone-Images` | 图片请求必填，`true` |
 

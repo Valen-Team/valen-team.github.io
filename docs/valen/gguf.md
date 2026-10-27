@@ -6,6 +6,8 @@ title: GGUF local service
 
 These models require the Valen-patched llama.cpp/Ollama. Support in official unmodified releases is not claimed. For the quickest online trial, see [version selection](/docs/valen/choosing/).
 
+All three sizes provide F32 and Q8_0. Q4_K_M and Q5_K_M did not pass the fixed quality gates and are not provided. See the [quality report](https://huggingface.co/Valen-Team/Valen-0.8B-GGUF/blob/main/validation/quality-summary.json) in each model repository.
+
 ## Linux x86-64 CPU prebuilt package
 
 Runtime version **0.1.0** targets Ubuntu 22.04+, glibc 2.35+ and AVX2/FMA/F16C/BMI2 CPUs. See the [release manifest](https://github.com/Valen-Team/Valen/releases/tag/gguf-runtime-v0.1.0) for validation scope and SHA256. No compilation is required. Download the runtime and checksum file:

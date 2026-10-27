@@ -6,6 +6,8 @@ title: GGUF 本地服务
 
 这些 GGUF 需要 Valen 补丁版 llama.cpp/Ollama；官方未修改版本不能直接视为支持。首次在线体验见[版本选择](/zh-Hans/docs/valen/choosing/)。
 
+三个尺寸发布 F32 和 Q8_0；Q4_K_M 和 Q5_K_M 未通过固定质量门槛，因此不提供。各模型卡记录了[质量报告](https://huggingface.co/Valen-Team/Valen-0.8B-GGUF/blob/main/validation/quality-summary.json)。
+
 ## Linux x86-64 CPU 预编译包
 
 运行包版本 **0.1.0**，目标 Ubuntu 22.04+、glibc 2.35+、AVX2/FMA/F16C/BMI2 CPU。验证范围与 SHA256 见[发布清单](https://github.com/Valen-Team/Valen/releases/tag/gguf-runtime-v0.1.0)。无需编译。先下载运行包和校验文件：
