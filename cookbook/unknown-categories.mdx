@@ -1,0 +1,161 @@
+---
+title: "When no option fits: handling unknown categories"
+description: Compare explicit none choices and review thresholds on Valen support-ticket decisions, with reproducible predictions and failure cases.
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/unknown_categories.py?cookbook-source';
+import UnknownCategoryResults from '@site/src/components/UnknownCategoryResults';
+
+Your ticket router handles refunds, shipment tracking and invoices. A customer asks to change their delivery address before dispatch. That needs a person: **a tracking queue cannot change an address.**
+
+In a recorded Valen test, the message was nevertheless assigned to shipment tracking with **99.3% probability**. It passed even a 99% acceptance threshold.
+
+## Give the model a “none of these” option
+
+Keep the message and business categories unchanged, add a `none` candidate, and run the request again:
+
+<UnknownCategoryResults section="example" />
+
+The model now chooses `none`, and the application sends the request to a person. Valen still returns a structured choice and candidate probabilities; your code provides a fallback path for that choice.
+
+Choice distributes probability across the candidates you supply. When the correct category is missing, the highest-probability candidate can still be wrong. `none` gives the model a way to express that case. Add it as an ordinary Choice candidate in your existing flow.
+
+## Fewer wrong assignments, more human review
+
+We compared the original threshold policy with an explicit `none` option on Valen-0.8B. These are the results on **200 held-out test requests**:
+
+<UnknownCategoryResults section="takeaway" />
+
+Outside requests accepted in error fell from eight to one, while three normal requests were sent to review. Whether that trade is worthwhile depends on the cost of a wrong assignment and the review capacity you have.
+
+We also tested `none` with probability and margin gates. Validation selected zero additional gates, so it matched the none-only policy. **This test showed no extra benefit from adding thresholds.**
+
+`none` still makes mistakes. Append “Please let me know the next step.” to the opening address-change message, and the model accepts it as a tracking request again. A legitimate question about a parcel held at customs was sent to review. Those failures remain in the records below.
+
+The test requests are surface variants of 40 fictional scenarios. Grouping and evaluation details are available below.
+
+## Connect it to your own router
+
+Define what `none` means. Here it covers requests outside refunds, tracking and invoices, plus messages with too little information to choose. Give it a meaningful description. If “other” is a real queue that your business can handle automatically, define it separately.
+
+<a href="/cookbook/valen-cookbook.zip">Download the example bundle (about 22 KB)</a>. Use Python 3.11+ and an existing Valen service; no model download is needed:
+
+```bash
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook
+python -m pip install valen-sdk==0.2.0
+python unknown_categories.py demo --backend remote \
+  --base-url http://127.0.0.1:8000/v1 --model valen \
+  --text "Please change the delivery address before you ship my order."
+```
+
+Replace the URL and model name. Supply `VALEN_API_KEY` through the environment for an authenticated service. This command demonstrates the none-only policy and prints the choice, candidate probabilities and routing outcome.
+
+The essential logic for an existing call is:
+
+```python
+from unknown_categories import question, route
+
+response = predict({
+    "input": message,
+    "questions": [question(with_none=True)],
+    "temperature": 1.0,
+})
+result = route(response["answers"][0], "B_none")
+# none → human review; a normal category → its business queue
+```
+
+The complete runner also validates probabilities, routes request failures to review, and can load validation-selected probability/margin gates. Gates use candidate probabilities rather than the concentration measure `confidence`. For fitted probability calibration, continue with [calibrated routing](../calibrated-routing/).
+
+Before deployment, check both sides on your own tickets: **unknown requests accepted in error, and normal requests unnecessarily sent to review.** Label unsupported categories separately from insufficient information, so you can decide whether to add a business category or ask a follow-up question.
+
+## Evidence and complete implementation
+
+Expand the parts you need. Source, samples and original predictions are downloadable; replay makes no additional model calls.
+
+<details>
+<summary>Full policy comparison, metric definitions and evaluation method</summary>
+
+## Compare three policies
+
+The evaluation uses fictional English messages with a single intent.
+
+| Strategy | Candidate set | Automatic acceptance |
+| --- | --- | --- |
+| A: thresholds | Three business categories | Selected probability and top-two gap meet frozen validation thresholds |
+| B: none | Three categories + `none` | Selected category is not `none`; no probability threshold |
+| C: none + thresholds | Three categories + `none` | Selected category is not `none`, and both frozen gates pass |
+
+A and C select their gates independently on validation data, then apply them to the test set.
+
+<UnknownCategoryResults section="metrics" />
+
+<details>
+<summary>Full threshold-selection rule</summary>
+
+A and C independently search the same declared grid: probability thresholds `0, .5, .6, .7, .8, .85, .9, .95, .98, .99, 1` and margin thresholds `0, .1, .2, .3, .4, .5`. Choose maximum validation coverage subject to **observed accepted error ≤ 5%** and at least five accepted source groups; break ties by fewer errors, then lower threshold and margin. If no rule qualifies, route everything for review.
+
+</details>
+
+Definitions use **all test requests** as the coverage denominator. Outside miss rate is outside requests automatically assigned a normal class / all outside requests. In-scope review rate is in-scope requests sent to review / all in-scope requests. Accepted error rate counts incorrect normal labels, outside requests and insufficient-information requests among automatic acceptances. With no acceptances it is undefined, displayed as “—”.
+
+Outside detection rate counts semantic/policy review decisions and **excludes request failures**. A failed request is still in every applicable denominator and in the review volume; it earns no credit as a successful detection. Insufficient-information review rate includes operational fallbacks, so inspect the error count alongside it.
+
+
+</details>
+
+<details>
+<summary>Successes and failures, including paired decisions on the same message</summary>
+
+<UnknownCategoryResults section="cases" />
+
+Every test decision remains available in the complete report, including messages whose wrappers change the result. The examples are selected by a fixed rule. Selection prefers C, then B, then A; within each strategy it prefers the unwrapped message and then row ID. An additional pair shows the first outside miss under A (preferring an unwrapped message, then row ID) and C on that exact input.
+
+
+</details>
+
+<details>
+<summary>Download predictions, replay offline, or evaluate your own data</summary>
+
+The set contains **100 validation requests from 20 source scenarios and 200 test requests from 40 different scenarios**. Half the requests are in scope; the rest are outside or underspecified. Each scenario has five surface variants, all kept in the same split. Intervals use a seeded source-group bootstrap.
+
+<a href="/cookbook/code/unknown_categories_data.json">Download labeled data</a> · <a href="/cookbook/validation/unknown-categories/predictions.jsonl.gz">Recorded predictions, gzip</a> · <a href="/cookbook/validation/unknown-categories/report.json.gz">Complete report, gzip</a> · <a href="/cookbook/validation/unknown-categories/runtime.json">Runtime and artifact hashes</a> · <a href="/cookbook/validation/unknown-categories/run_cached.py">Recorded execution harness</a>
+
+Download and decompress the predictions, then replay locally with Python's standard library:
+
+```bash
+python -c "import gzip,pathlib; pathlib.Path('unknown-predictions.jsonl').write_bytes(gzip.open('predictions.jsonl.gz','rb').read())"
+python unknown_categories.py report --cache unknown-predictions.jsonl --output replay.json
+```
+
+To evaluate your own data, edit a copy of `unknown_categories_data.json`. Keep unique row IDs, stable `group_id`, `validation`/`test` splits and separate `in_scope`, `outside` and `insufficient` labels. Put the ordinary category in `gold` only for in-scope requests, otherwise use JSON `null`. Labels never enter the model request. Replacing categories also requires updating `CHOICES`, `NONE` and their descriptions in the script; the protocol hash changes and old caches are rejected.
+
+Collect two predictions per request, then replay all three policies locally. B and C reuse the same predictions. The recorded run used an existing native 0.8B model on CPU (eight threads) in FP32; replace the paths below with your own existing model directory:
+
+```bash
+python unknown_categories.py collect --backend native --device cpu --threads 8 \
+  --model /path/to/Valen-0.8B --revision YOUR_PINNED_ARTIFACT_ID \
+  --dataset my-data.json --cache my-predictions.jsonl
+python unknown_categories.py report --dataset my-data.json \
+  --cache my-predictions.jsonl --output my-report.json
+python unknown_categories.py demo --backend native --device cpu --threads 8 \
+  --model /path/to/Valen-0.8B --revision YOUR_PINNED_ARTIFACT_ID \
+  --policy my-report.json --text "Please send my invoice."
+```
+
+Use a native model directory with Decisions-compatible export code. Collection resumes missing requests from the same cache; recorded failures are retained rather than automatically retried. The first request failure stops collection to avoid wasting calls. A remote run uses `--backend remote --base-url ... --model ... --revision ...` instead. Use `--revision` to record the deployment version. Demo policy loading checks the model path/name, backend, declared revision, native device, thread count and protocol; use the same settings as collection.
+
+This example fixes temperature at 1. Use your own tickets to select fresh gates after changing candidates, descriptions, models or backends. For probability calibration, see [calibrated routing](../calibrated-routing/).
+
+
+</details>
+
+<details>
+<summary>unknown_categories.py — collection, routing, policy selection and offline report</summary>
+
+<CodeBlock language="python" title="unknown_categories.py">{source}</CodeBlock>
+
+</details>
+
+The bundle includes `common.py` and the labeled JSON. Code and authored fictional text use <a href="/cookbook/code/LICENSE.txt">Apache-2.0</a>.

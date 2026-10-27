@@ -1,0 +1,161 @@
+---
+title: "候选项都不对: 未知类别处理"
+description: 用 Valen 的显式 none 候选和人工复核阈值处理未知工单，对比真实预测、漏检、误报及自动处理覆盖率。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/unknown_categories.py?cookbook-source';
+import UnknownCategoryResults from '@site/src/components/UnknownCategoryResults';
+
+你的自动工单系统能处理退款、查物流和开发票。客户要求“发货前修改收货地址”时，应该转给人工：**查物流的队列并不负责修改地址。**
+
+但在一次真实的 Valen 测试中，这条请求被分给了物流查询，选中概率达到 **99.3%**。即使应用要求概率至少为 99%，它也会通过。
+
+## 给模型一个“都不适用”的选项
+
+我们保持消息和三个业务类别不变，增加一个 `none` 候选，再运行一次：
+
+<UnknownCategoryResults section="example" />
+
+这次，模型选择了 `none`，应用把请求交给人工。Valen 仍然返回结构化选择和候选概率；你的代码只需要为这个选择安排一条兜底路径。
+
+原因很直接：Choice 总会在你提供的候选中分配概率。当正确类别缺席时，“最可能的选项”仍可能是错误的。`none` 给了模型一个可表达的出口。把它作为普通 Choice 候选，就能接入现有流程。
+
+## 少一些错分，也会多一些人工
+
+我们用 Valen-0.8B 比较了原来的阈值策略和增加 `none` 后的处理方式。下面是 **200 条未参与选门槛的测试请求**的结果：
+
+<UnknownCategoryResults section="takeaway" />
+
+这组测试里，不属于这些类别、却被自动接收的请求从 8 条降到 1 条，代价是 3 条原本可以处理的正常请求被送给人工。是否值得，取决于你更在意错误派单，还是人工处理量。
+
+我们也测试了 `none` 加概率／差值门槛。验证集选出的额外门槛为零，因此它与仅使用 `none` 的结果相同；**本次测试没有显示叠加门槛的额外收益**。
+
+`none` 也会选错。给开头那条改地址请求加上 “Please let me know the next step.”，模型又把它分给了物流查询。一条询问包裹为何滞留海关的正常请求，则被判为 `none`。下面保留了这些失败记录。
+
+测试集由 40 个虚构场景的表述变体组成，完整分组和评测方法见文末。
+
+## 接到自己的工单系统
+
+先把 `none` 的含义写清楚。在这个示例中，它表示“退款、物流查询、发票都不适用，或者消息不足以判断”。业务中的“其他”队列可以保留自己的类别和处理流程。
+
+<a href="/cookbook/valen-cookbook.zip">下载示例源码包（约 22 KB）</a>，使用 Python 3.11+ 和已有的 Valen 服务即可运行，不需要下载模型：
+
+```bash
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook
+python -m pip install valen-sdk==0.2.0
+python unknown_categories.py demo --backend remote \
+  --base-url http://127.0.0.1:8000/v1 --model valen \
+  --text "Please change the delivery address before you ship my order."
+```
+
+替换服务地址和模型名；鉴权服务通过环境变量 `VALEN_API_KEY` 提供凭证。上面的命令演示仅使用 `none` 的策略，输出选中类别、候选概率以及最终处理路径。
+
+放进现有调用时，核心逻辑是：
+
+```python
+from unknown_categories import question, route
+
+response = predict({
+    "input": message,
+    "questions": [question(with_none=True)],
+    "temperature": 1.0,
+})
+result = route(response["answers"][0], "B_none")
+# none → 人工复核；普通类别 → 对应业务队列
+```
+
+完整脚本还会检查概率格式，把请求失败交给人工，并支持加载验证集选定的概率／差值规则。门槛使用候选概率，不使用衡量分布集中程度的 `confidence` 字段。若要拟合概率校准，继续阅读[校准工单分流](../calibrated-routing/)。
+
+上线前，用自己的工单同时检查两件事：**未知请求是否仍被错误接收，正常请求是否被过多送给人工。** 把“类别不支持”和“信息不足”分别标注，之后才能决定是补充业务类别，还是让人工追问。
+
+## 查看证据和完整实现
+
+以下内容按需展开。代码、样本和原始预测都可以下载；复算报告不会再次调用模型。
+
+<details>
+<summary>完整策略对比、指标定义和评测方法</summary>
+
+## 对比三种策略
+
+评测使用单意图的英文虚构消息。
+
+| 策略 | 候选集合 | 自动处理条件 |
+| --- | --- | --- |
+| A：阈值 | 三个业务类别 | 选中概率与前两项差值均达到验证集冻结门槛 |
+| B：none | 三个类别＋none | 选中普通类别，不额外检查概率 |
+| C：none＋阈值 | 三个类别＋none | 选中普通类别，并满足两个冻结门槛 |
+
+A、C 分别在验证集选定门槛，再用于测试集。
+
+<UnknownCategoryResults section="metrics" />
+
+<details>
+<summary>门槛选择的完整规则</summary>
+
+A、C 分别扫描同一组预先声明的门槛：概率 `0, .5, .6, .7, .8, .85, .9, .95, .98, .99, 1`，差值 `0, .1, .2, .3, .4, .5`。在**验证集已接受样本观测错误率不超过 5%**、且至少接受五个来源场景组的条件下，选择覆盖率最高的规则；并列时依次选择错误更少、概率门槛更低、差值门槛更低的规则。没有可行规则就全部转人工。
+
+</details>
+
+覆盖率分母是全部测试请求。候选外漏检率＝候选外请求中被自动分入普通类别的数量／全部候选外请求。候选内误转人工率＝正常请求中转人工的数量／全部正常请求。自动处理错误率同时计入普通类别选错、错误接受候选外请求和信息不足请求；没有自动接受样本时无定义，显示“—”。
+
+候选外检测率只统计语义／策略判断产生的转人工，**请求失败不算成功检测**。失败仍保留在对应分母及人工量中。信息不足转人工率包含运行失败兜底，因此须同时查看错误数量。
+
+
+</details>
+
+<details>
+<summary>成功与失败案例，包括同一输入的前后对比</summary>
+
+<UnknownCategoryResults section="cases" />
+
+完整报告保留每条测试决策，包括只改变表述就改变结果的情况。案例按固定规则从实测记录中选出。选择时依次优先 C、B、A；同一策略中优先无包装的原始消息，再按行 ID 排序。另外补充 A 中首个候选外漏检（优先原始消息，再按行 ID）及同一输入在 C 下的结果。
+
+
+</details>
+
+<details>
+<summary>下载原始预测、离线复算，或评测自己的数据</summary>
+
+数据包括 **100 条验证请求（20 个来源场景）和 200 条测试请求（另外 40 个场景）**。一半请求属于候选内，另一半属于候选外或信息不足。每个场景有五种表述变体，同一场景保留在同一个划分中。区间通过固定随机种子的来源组 bootstrap 计算。
+
+<a href="/cookbook/code/unknown_categories_data.json">标注数据</a> · <a href="/cookbook/validation/unknown-categories/predictions.jsonl.gz">原始预测 gzip</a> · <a href="/cookbook/validation/unknown-categories/report.json.gz">完整报告 gzip</a> · <a href="/cookbook/validation/unknown-categories/runtime.json">运行环境和模型文件哈希</a> · <a href="/cookbook/validation/unknown-categories/run_cached.py">实测执行脚本</a>
+
+下载并解压预测文件后，用 Python 标准库离线复算：
+
+```bash
+python -c "import gzip,pathlib; pathlib.Path('unknown-predictions.jsonl').write_bytes(gzip.open('predictions.jsonl.gz','rb').read())"
+python unknown_categories.py report --cache unknown-predictions.jsonl --output replay.json
+```
+
+评测自己的数据时，复制并编辑 `unknown_categories_data.json`。保持唯一行 ID、稳定 `group_id`、`validation`／`test` 划分，以及 `in_scope`、`outside`、`insufficient` 标签。候选内的 `gold` 填普通类别，其余填 JSON `null`。真值不进入模型请求。替换类别还需修改脚本中的 `CHOICES`、`NONE` 及描述；协议哈希会改变，旧缓存会被拒绝。
+
+每条请求采集两份预测，离线比较三种策略。B、C 复用相同预测。记录中的实测使用已有原版 0.8B 模型、CPU（八线程）和 FP32；以下路径需替换为自己的已有模型目录：
+
+```bash
+python unknown_categories.py collect --backend native --device cpu --threads 8 \
+  --model /path/to/Valen-0.8B --revision YOUR_PINNED_ARTIFACT_ID \
+  --dataset my-data.json --cache my-predictions.jsonl
+python unknown_categories.py report --dataset my-data.json \
+  --cache my-predictions.jsonl --output my-report.json
+python unknown_categories.py demo --backend native --device cpu --threads 8 \
+  --model /path/to/Valen-0.8B --revision YOUR_PINNED_ARTIFACT_ID \
+  --policy my-report.json --text "Please send my invoice."
+```
+
+原版运行使用支持 Decisions 的模型目录。采集支持从同一缓存补齐缺失请求，已记录的失败不会自动重试。首条请求失败会停止，避免浪费调用。远端运行改用 `--backend remote --base-url ... --model ... --revision ...`。`--revision` 用于记录部署版本。加载策略时会检查模型路径／名称、后端、声明的版本、原版运行设备、线程数及协议，使用与采集时一致的配置。
+
+本例固定 temperature=1。更换候选、描述、模型或后端后，可用自己的工单重新选择门槛；概率校准方法见[校准工单分流](../calibrated-routing/)。
+
+
+</details>
+
+<details>
+<summary>unknown_categories.py：采集、路由、规则选择和离线报告</summary>
+
+<CodeBlock language="python" title="unknown_categories.py">{source}</CodeBlock>
+
+</details>
+
+下载包包含 `common.py` 和标注 JSON。代码及虚构文本使用 <a href="/cookbook/code/LICENSE.txt">Apache-2.0</a>。

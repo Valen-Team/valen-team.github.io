@@ -122,6 +122,7 @@ def main():
     p.add_argument('--bundle', action='store_true')
     args = p.parse_args()
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(Policies)
+    suite.addTests(unittest.defaultTestLoader.discover(str(ROOT / 'tests'), pattern='test_unknown_categories.py'))
     result = unittest.TextTestRunner(verbosity=2).run(suite)
     if not result.wasSuccessful():
         raise SystemExit(1)

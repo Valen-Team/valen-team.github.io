@@ -46,3 +46,5 @@ Predicate 可设双阈值：低于下阈值拒绝，高于上阈值接受，中�
 ## 可复现的校准与分流
 
 推理 CLI 保留旧版 `{"temperature":1.0}` 文件支持。推理和评测均可加载版本化 `--calibration`，并用 `--protocol` 校验身份；评测默认 T=1。参见[完整校准流程](./calibration.md)，拟合与保存参数、冻结人工复核规则并查看独立测试证据。
+
+候选集合可能不完整时，见 [候选项都不对: 未知类别处理](/zh-Hans/cookbook/unknown-categories/)，对比显式 none 与人工复核规则。

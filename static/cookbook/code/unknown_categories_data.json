@@ -1,0 +1,2408 @@
+{
+  "schema_version": 1,
+  "license": "Apache-2.0",
+  "language": "en",
+  "description": "Authored fictional stress set: 60 source scenarios with five mechanical surface variants each, not 300 independent intents. Split before variants; groups never cross splits. No external dataset or customer data.",
+  "rows": [
+    {
+      "id": "refund-00-plain",
+      "group_id": "refund-00",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "I returned the unopened kettle yesterday. Please refund the payment."
+    },
+    {
+      "id": "refund-00-greeting",
+      "group_id": "refund-00",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Hello support. I returned the unopened kettle yesterday. Please refund the payment."
+    },
+    {
+      "id": "refund-00-polite",
+      "group_id": "refund-00",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "I returned the unopened kettle yesterday. Please refund the payment. Thank you for your help."
+    },
+    {
+      "id": "refund-00-handoff",
+      "group_id": "refund-00",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Customer message: I returned the unopened kettle yesterday. Please refund the payment."
+    },
+    {
+      "id": "refund-00-followup",
+      "group_id": "refund-00",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "I returned the unopened kettle yesterday. Please refund the payment. Please let me know the next step."
+    },
+    {
+      "id": "refund-01-plain",
+      "group_id": "refund-01",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The same purchase was charged twice; please return the extra payment."
+    },
+    {
+      "id": "refund-01-greeting",
+      "group_id": "refund-01",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Hello support. The same purchase was charged twice; please return the extra payment."
+    },
+    {
+      "id": "refund-01-polite",
+      "group_id": "refund-01",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The same purchase was charged twice; please return the extra payment. Thank you for your help."
+    },
+    {
+      "id": "refund-01-handoff",
+      "group_id": "refund-01",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Customer message: The same purchase was charged twice; please return the extra payment."
+    },
+    {
+      "id": "refund-01-followup",
+      "group_id": "refund-01",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The same purchase was charged twice; please return the extra payment. Please let me know the next step."
+    },
+    {
+      "id": "refund-02-plain",
+      "group_id": "refund-02",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The merchant canceled my order. Send my money back."
+    },
+    {
+      "id": "refund-02-greeting",
+      "group_id": "refund-02",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Hello support. The merchant canceled my order. Send my money back."
+    },
+    {
+      "id": "refund-02-polite",
+      "group_id": "refund-02",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The merchant canceled my order. Send my money back. Thank you for your help."
+    },
+    {
+      "id": "refund-02-handoff",
+      "group_id": "refund-02",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Customer message: The merchant canceled my order. Send my money back."
+    },
+    {
+      "id": "refund-02-followup",
+      "group_id": "refund-02",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The merchant canceled my order. Send my money back. Please let me know the next step."
+    },
+    {
+      "id": "refund-03-plain",
+      "group_id": "refund-03",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The parcel never arrived and I no longer want a replacement. I want a refund."
+    },
+    {
+      "id": "refund-03-greeting",
+      "group_id": "refund-03",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Hello support. The parcel never arrived and I no longer want a replacement. I want a refund."
+    },
+    {
+      "id": "refund-03-polite",
+      "group_id": "refund-03",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The parcel never arrived and I no longer want a replacement. I want a refund. Thank you for your help."
+    },
+    {
+      "id": "refund-03-handoff",
+      "group_id": "refund-03",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Customer message: The parcel never arrived and I no longer want a replacement. I want a refund."
+    },
+    {
+      "id": "refund-03-followup",
+      "group_id": "refund-03",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The parcel never arrived and I no longer want a replacement. I want a refund. Please let me know the next step."
+    },
+    {
+      "id": "refund-04-plain",
+      "group_id": "refund-04",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The item arrived broken. Please return my money rather than replace it."
+    },
+    {
+      "id": "refund-04-greeting",
+      "group_id": "refund-04",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Hello support. The item arrived broken. Please return my money rather than replace it."
+    },
+    {
+      "id": "refund-04-polite",
+      "group_id": "refund-04",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The item arrived broken. Please return my money rather than replace it. Thank you for your help."
+    },
+    {
+      "id": "refund-04-handoff",
+      "group_id": "refund-04",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Customer message: The item arrived broken. Please return my money rather than replace it."
+    },
+    {
+      "id": "refund-04-followup",
+      "group_id": "refund-04",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The item arrived broken. Please return my money rather than replace it. Please let me know the next step."
+    },
+    {
+      "id": "refund-05-plain",
+      "group_id": "refund-05",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "I paid for express shipping but received standard shipping. Refund the shipping difference."
+    },
+    {
+      "id": "refund-05-greeting",
+      "group_id": "refund-05",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Hello support. I paid for express shipping but received standard shipping. Refund the shipping difference."
+    },
+    {
+      "id": "refund-05-polite",
+      "group_id": "refund-05",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "I paid for express shipping but received standard shipping. Refund the shipping difference. Thank you for your help."
+    },
+    {
+      "id": "refund-05-handoff",
+      "group_id": "refund-05",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Customer message: I paid for express shipping but received standard shipping. Refund the shipping difference."
+    },
+    {
+      "id": "refund-05-followup",
+      "group_id": "refund-05",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "I paid for express shipping but received standard shipping. Refund the shipping difference. Please let me know the next step."
+    },
+    {
+      "id": "refund-06-plain",
+      "group_id": "refund-06",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Only two of the three items arrived. Refund the missing item."
+    },
+    {
+      "id": "refund-06-greeting",
+      "group_id": "refund-06",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Hello support. Only two of the three items arrived. Refund the missing item."
+    },
+    {
+      "id": "refund-06-polite",
+      "group_id": "refund-06",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Only two of the three items arrived. Refund the missing item. Thank you for your help."
+    },
+    {
+      "id": "refund-06-handoff",
+      "group_id": "refund-06",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Customer message: Only two of the three items arrived. Refund the missing item."
+    },
+    {
+      "id": "refund-06-followup",
+      "group_id": "refund-06",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Only two of the three items arrived. Refund the missing item. Please let me know the next step."
+    },
+    {
+      "id": "refund-07-plain",
+      "group_id": "refund-07",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "You refunded only part of my return. Please reimburse the remaining balance."
+    },
+    {
+      "id": "refund-07-greeting",
+      "group_id": "refund-07",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Hello support. You refunded only part of my return. Please reimburse the remaining balance."
+    },
+    {
+      "id": "refund-07-polite",
+      "group_id": "refund-07",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "You refunded only part of my return. Please reimburse the remaining balance. Thank you for your help."
+    },
+    {
+      "id": "refund-07-handoff",
+      "group_id": "refund-07",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Customer message: You refunded only part of my return. Please reimburse the remaining balance."
+    },
+    {
+      "id": "refund-07-followup",
+      "group_id": "refund-07",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "You refunded only part of my return. Please reimburse the remaining balance. Please let me know the next step."
+    },
+    {
+      "id": "refund-08-plain",
+      "group_id": "refund-08",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The product does not match its description. I want to return it for a refund."
+    },
+    {
+      "id": "refund-08-greeting",
+      "group_id": "refund-08",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Hello support. The product does not match its description. I want to return it for a refund."
+    },
+    {
+      "id": "refund-08-polite",
+      "group_id": "refund-08",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The product does not match its description. I want to return it for a refund. Thank you for your help."
+    },
+    {
+      "id": "refund-08-handoff",
+      "group_id": "refund-08",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Customer message: The product does not match its description. I want to return it for a refund."
+    },
+    {
+      "id": "refund-08-followup",
+      "group_id": "refund-08",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "The product does not match its description. I want to return it for a refund. Please let me know the next step."
+    },
+    {
+      "id": "refund-09-plain",
+      "group_id": "refund-09",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "I was billed after ending my subscription. Please reverse that charge."
+    },
+    {
+      "id": "refund-09-greeting",
+      "group_id": "refund-09",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Hello support. I was billed after ending my subscription. Please reverse that charge."
+    },
+    {
+      "id": "refund-09-polite",
+      "group_id": "refund-09",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "I was billed after ending my subscription. Please reverse that charge. Thank you for your help."
+    },
+    {
+      "id": "refund-09-handoff",
+      "group_id": "refund-09",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "Customer message: I was billed after ending my subscription. Please reverse that charge."
+    },
+    {
+      "id": "refund-09-followup",
+      "group_id": "refund-09",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "refund",
+      "text": "I was billed after ending my subscription. Please reverse that charge. Please let me know the next step."
+    },
+    {
+      "id": "shipping-00-plain",
+      "group_id": "shipping-00",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Where is my parcel? The tracking page has not moved since Monday."
+    },
+    {
+      "id": "shipping-00-greeting",
+      "group_id": "shipping-00",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Hello support. Where is my parcel? The tracking page has not moved since Monday."
+    },
+    {
+      "id": "shipping-00-polite",
+      "group_id": "shipping-00",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Where is my parcel? The tracking page has not moved since Monday. Thank you for your help."
+    },
+    {
+      "id": "shipping-00-handoff",
+      "group_id": "shipping-00",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Customer message: Where is my parcel? The tracking page has not moved since Monday."
+    },
+    {
+      "id": "shipping-00-followup",
+      "group_id": "shipping-00",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Where is my parcel? The tracking page has not moved since Monday. Please let me know the next step."
+    },
+    {
+      "id": "shipping-01-plain",
+      "group_id": "shipping-01",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "When should I expect the replacement package to arrive?"
+    },
+    {
+      "id": "shipping-01-greeting",
+      "group_id": "shipping-01",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Hello support. When should I expect the replacement package to arrive?"
+    },
+    {
+      "id": "shipping-01-polite",
+      "group_id": "shipping-01",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "When should I expect the replacement package to arrive? Thank you for your help."
+    },
+    {
+      "id": "shipping-01-handoff",
+      "group_id": "shipping-01",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Customer message: When should I expect the replacement package to arrive?"
+    },
+    {
+      "id": "shipping-01-followup",
+      "group_id": "shipping-01",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "When should I expect the replacement package to arrive? Please let me know the next step."
+    },
+    {
+      "id": "shipping-02-plain",
+      "group_id": "shipping-02",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "The courier says delivered but nothing is at my door. Please locate the parcel."
+    },
+    {
+      "id": "shipping-02-greeting",
+      "group_id": "shipping-02",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Hello support. The courier says delivered but nothing is at my door. Please locate the parcel."
+    },
+    {
+      "id": "shipping-02-polite",
+      "group_id": "shipping-02",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "The courier says delivered but nothing is at my door. Please locate the parcel. Thank you for your help."
+    },
+    {
+      "id": "shipping-02-handoff",
+      "group_id": "shipping-02",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Customer message: The courier says delivered but nothing is at my door. Please locate the parcel."
+    },
+    {
+      "id": "shipping-02-followup",
+      "group_id": "shipping-02",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "The courier says delivered but nothing is at my door. Please locate the parcel. Please let me know the next step."
+    },
+    {
+      "id": "shipping-03-plain",
+      "group_id": "shipping-03",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Please tell me whether my preorder has shipped yet."
+    },
+    {
+      "id": "shipping-03-greeting",
+      "group_id": "shipping-03",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Hello support. Please tell me whether my preorder has shipped yet."
+    },
+    {
+      "id": "shipping-03-polite",
+      "group_id": "shipping-03",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Please tell me whether my preorder has shipped yet. Thank you for your help."
+    },
+    {
+      "id": "shipping-03-handoff",
+      "group_id": "shipping-03",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Customer message: Please tell me whether my preorder has shipped yet."
+    },
+    {
+      "id": "shipping-03-followup",
+      "group_id": "shipping-03",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Please tell me whether my preorder has shipped yet. Please let me know the next step."
+    },
+    {
+      "id": "shipping-04-plain",
+      "group_id": "shipping-04",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Which carrier is delivering my order, and what is its tracking number?"
+    },
+    {
+      "id": "shipping-04-greeting",
+      "group_id": "shipping-04",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Hello support. Which carrier is delivering my order, and what is its tracking number?"
+    },
+    {
+      "id": "shipping-04-polite",
+      "group_id": "shipping-04",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Which carrier is delivering my order, and what is its tracking number? Thank you for your help."
+    },
+    {
+      "id": "shipping-04-handoff",
+      "group_id": "shipping-04",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Customer message: Which carrier is delivering my order, and what is its tracking number?"
+    },
+    {
+      "id": "shipping-04-followup",
+      "group_id": "shipping-04",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Which carrier is delivering my order, and what is its tracking number? Please let me know the next step."
+    },
+    {
+      "id": "shipping-05-plain",
+      "group_id": "shipping-05",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Can you check why my package is waiting at customs?"
+    },
+    {
+      "id": "shipping-05-greeting",
+      "group_id": "shipping-05",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Hello support. Can you check why my package is waiting at customs?"
+    },
+    {
+      "id": "shipping-05-polite",
+      "group_id": "shipping-05",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Can you check why my package is waiting at customs? Thank you for your help."
+    },
+    {
+      "id": "shipping-05-handoff",
+      "group_id": "shipping-05",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Customer message: Can you check why my package is waiting at customs?"
+    },
+    {
+      "id": "shipping-05-followup",
+      "group_id": "shipping-05",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Can you check why my package is waiting at customs? Please let me know the next step."
+    },
+    {
+      "id": "shipping-06-plain",
+      "group_id": "shipping-06",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "My tracking link is broken. Please send an update on the delivery."
+    },
+    {
+      "id": "shipping-06-greeting",
+      "group_id": "shipping-06",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Hello support. My tracking link is broken. Please send an update on the delivery."
+    },
+    {
+      "id": "shipping-06-polite",
+      "group_id": "shipping-06",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "My tracking link is broken. Please send an update on the delivery. Thank you for your help."
+    },
+    {
+      "id": "shipping-06-handoff",
+      "group_id": "shipping-06",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Customer message: My tracking link is broken. Please send an update on the delivery."
+    },
+    {
+      "id": "shipping-06-followup",
+      "group_id": "shipping-06",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "My tracking link is broken. Please send an update on the delivery. Please let me know the next step."
+    },
+    {
+      "id": "shipping-07-plain",
+      "group_id": "shipping-07",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Is my order arriving today or tomorrow?"
+    },
+    {
+      "id": "shipping-07-greeting",
+      "group_id": "shipping-07",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Hello support. Is my order arriving today or tomorrow?"
+    },
+    {
+      "id": "shipping-07-polite",
+      "group_id": "shipping-07",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Is my order arriving today or tomorrow? Thank you for your help."
+    },
+    {
+      "id": "shipping-07-handoff",
+      "group_id": "shipping-07",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Customer message: Is my order arriving today or tomorrow?"
+    },
+    {
+      "id": "shipping-07-followup",
+      "group_id": "shipping-07",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Is my order arriving today or tomorrow? Please let me know the next step."
+    },
+    {
+      "id": "shipping-08-plain",
+      "group_id": "shipping-08",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "The delivery attempt failed. When will the courier try again?"
+    },
+    {
+      "id": "shipping-08-greeting",
+      "group_id": "shipping-08",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Hello support. The delivery attempt failed. When will the courier try again?"
+    },
+    {
+      "id": "shipping-08-polite",
+      "group_id": "shipping-08",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "The delivery attempt failed. When will the courier try again? Thank you for your help."
+    },
+    {
+      "id": "shipping-08-handoff",
+      "group_id": "shipping-08",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Customer message: The delivery attempt failed. When will the courier try again?"
+    },
+    {
+      "id": "shipping-08-followup",
+      "group_id": "shipping-08",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "The delivery attempt failed. When will the courier try again? Please let me know the next step."
+    },
+    {
+      "id": "shipping-09-plain",
+      "group_id": "shipping-09",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "My parcel is going to a pickup point. Where can I collect it?"
+    },
+    {
+      "id": "shipping-09-greeting",
+      "group_id": "shipping-09",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Hello support. My parcel is going to a pickup point. Where can I collect it?"
+    },
+    {
+      "id": "shipping-09-polite",
+      "group_id": "shipping-09",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "My parcel is going to a pickup point. Where can I collect it? Thank you for your help."
+    },
+    {
+      "id": "shipping-09-handoff",
+      "group_id": "shipping-09",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "Customer message: My parcel is going to a pickup point. Where can I collect it?"
+    },
+    {
+      "id": "shipping-09-followup",
+      "group_id": "shipping-09",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "shipping",
+      "text": "My parcel is going to a pickup point. Where can I collect it? Please let me know the next step."
+    },
+    {
+      "id": "invoice-00-plain",
+      "group_id": "invoice-00",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Please email me a copy of the invoice for my purchase."
+    },
+    {
+      "id": "invoice-00-greeting",
+      "group_id": "invoice-00",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Hello support. Please email me a copy of the invoice for my purchase."
+    },
+    {
+      "id": "invoice-00-polite",
+      "group_id": "invoice-00",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Please email me a copy of the invoice for my purchase. Thank you for your help."
+    },
+    {
+      "id": "invoice-00-handoff",
+      "group_id": "invoice-00",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Customer message: Please email me a copy of the invoice for my purchase."
+    },
+    {
+      "id": "invoice-00-followup",
+      "group_id": "invoice-00",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Please email me a copy of the invoice for my purchase. Please let me know the next step."
+    },
+    {
+      "id": "invoice-01-plain",
+      "group_id": "invoice-01",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "I need a tax invoice showing my company name."
+    },
+    {
+      "id": "invoice-01-greeting",
+      "group_id": "invoice-01",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Hello support. I need a tax invoice showing my company name."
+    },
+    {
+      "id": "invoice-01-polite",
+      "group_id": "invoice-01",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "I need a tax invoice showing my company name. Thank you for your help."
+    },
+    {
+      "id": "invoice-01-handoff",
+      "group_id": "invoice-01",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Customer message: I need a tax invoice showing my company name."
+    },
+    {
+      "id": "invoice-01-followup",
+      "group_id": "invoice-01",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "I need a tax invoice showing my company name. Please let me know the next step."
+    },
+    {
+      "id": "invoice-02-plain",
+      "group_id": "invoice-02",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Please correct the tax identification number on my invoice."
+    },
+    {
+      "id": "invoice-02-greeting",
+      "group_id": "invoice-02",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Hello support. Please correct the tax identification number on my invoice."
+    },
+    {
+      "id": "invoice-02-polite",
+      "group_id": "invoice-02",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Please correct the tax identification number on my invoice. Thank you for your help."
+    },
+    {
+      "id": "invoice-02-handoff",
+      "group_id": "invoice-02",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Customer message: Please correct the tax identification number on my invoice."
+    },
+    {
+      "id": "invoice-02-followup",
+      "group_id": "invoice-02",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Please correct the tax identification number on my invoice. Please let me know the next step."
+    },
+    {
+      "id": "invoice-03-plain",
+      "group_id": "invoice-03",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Can you provide an itemized invoice for the bundle?"
+    },
+    {
+      "id": "invoice-03-greeting",
+      "group_id": "invoice-03",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Hello support. Can you provide an itemized invoice for the bundle?"
+    },
+    {
+      "id": "invoice-03-polite",
+      "group_id": "invoice-03",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Can you provide an itemized invoice for the bundle? Thank you for your help."
+    },
+    {
+      "id": "invoice-03-handoff",
+      "group_id": "invoice-03",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Customer message: Can you provide an itemized invoice for the bundle?"
+    },
+    {
+      "id": "invoice-03-followup",
+      "group_id": "invoice-03",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Can you provide an itemized invoice for the bundle? Please let me know the next step."
+    },
+    {
+      "id": "invoice-04-plain",
+      "group_id": "invoice-04",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "The invoice has the wrong billing address. Please correct that document."
+    },
+    {
+      "id": "invoice-04-greeting",
+      "group_id": "invoice-04",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Hello support. The invoice has the wrong billing address. Please correct that document."
+    },
+    {
+      "id": "invoice-04-polite",
+      "group_id": "invoice-04",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "The invoice has the wrong billing address. Please correct that document. Thank you for your help."
+    },
+    {
+      "id": "invoice-04-handoff",
+      "group_id": "invoice-04",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Customer message: The invoice has the wrong billing address. Please correct that document."
+    },
+    {
+      "id": "invoice-04-followup",
+      "group_id": "invoice-04",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "The invoice has the wrong billing address. Please correct that document. Please let me know the next step."
+    },
+    {
+      "id": "invoice-05-plain",
+      "group_id": "invoice-05",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "I lost my receipt. Could you issue another copy?"
+    },
+    {
+      "id": "invoice-05-greeting",
+      "group_id": "invoice-05",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Hello support. I lost my receipt. Could you issue another copy?"
+    },
+    {
+      "id": "invoice-05-polite",
+      "group_id": "invoice-05",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "I lost my receipt. Could you issue another copy? Thank you for your help."
+    },
+    {
+      "id": "invoice-05-handoff",
+      "group_id": "invoice-05",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Customer message: I lost my receipt. Could you issue another copy?"
+    },
+    {
+      "id": "invoice-05-followup",
+      "group_id": "invoice-05",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "I lost my receipt. Could you issue another copy? Please let me know the next step."
+    },
+    {
+      "id": "invoice-06-plain",
+      "group_id": "invoice-06",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Please add the purchase order number to my invoice."
+    },
+    {
+      "id": "invoice-06-greeting",
+      "group_id": "invoice-06",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Hello support. Please add the purchase order number to my invoice."
+    },
+    {
+      "id": "invoice-06-polite",
+      "group_id": "invoice-06",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Please add the purchase order number to my invoice. Thank you for your help."
+    },
+    {
+      "id": "invoice-06-handoff",
+      "group_id": "invoice-06",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Customer message: Please add the purchase order number to my invoice."
+    },
+    {
+      "id": "invoice-06-followup",
+      "group_id": "invoice-06",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Please add the purchase order number to my invoice. Please let me know the next step."
+    },
+    {
+      "id": "invoice-07-plain",
+      "group_id": "invoice-07",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Can you issue a VAT invoice for this transaction?"
+    },
+    {
+      "id": "invoice-07-greeting",
+      "group_id": "invoice-07",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Hello support. Can you issue a VAT invoice for this transaction?"
+    },
+    {
+      "id": "invoice-07-polite",
+      "group_id": "invoice-07",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Can you issue a VAT invoice for this transaction? Thank you for your help."
+    },
+    {
+      "id": "invoice-07-handoff",
+      "group_id": "invoice-07",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Customer message: Can you issue a VAT invoice for this transaction?"
+    },
+    {
+      "id": "invoice-07-followup",
+      "group_id": "invoice-07",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Can you issue a VAT invoice for this transaction? Please let me know the next step."
+    },
+    {
+      "id": "invoice-08-plain",
+      "group_id": "invoice-08",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Please explain the tax line printed on my invoice; I am not requesting a refund."
+    },
+    {
+      "id": "invoice-08-greeting",
+      "group_id": "invoice-08",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Hello support. Please explain the tax line printed on my invoice; I am not requesting a refund."
+    },
+    {
+      "id": "invoice-08-polite",
+      "group_id": "invoice-08",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Please explain the tax line printed on my invoice; I am not requesting a refund. Thank you for your help."
+    },
+    {
+      "id": "invoice-08-handoff",
+      "group_id": "invoice-08",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Customer message: Please explain the tax line printed on my invoice; I am not requesting a refund."
+    },
+    {
+      "id": "invoice-08-followup",
+      "group_id": "invoice-08",
+      "split": "validation",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Please explain the tax line printed on my invoice; I am not requesting a refund. Please let me know the next step."
+    },
+    {
+      "id": "invoice-09-plain",
+      "group_id": "invoice-09",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "I need a paid receipt for my expense report."
+    },
+    {
+      "id": "invoice-09-greeting",
+      "group_id": "invoice-09",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Hello support. I need a paid receipt for my expense report."
+    },
+    {
+      "id": "invoice-09-polite",
+      "group_id": "invoice-09",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "I need a paid receipt for my expense report. Thank you for your help."
+    },
+    {
+      "id": "invoice-09-handoff",
+      "group_id": "invoice-09",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "Customer message: I need a paid receipt for my expense report."
+    },
+    {
+      "id": "invoice-09-followup",
+      "group_id": "invoice-09",
+      "split": "test",
+      "kind": "in_scope",
+      "gold": "invoice",
+      "text": "I need a paid receipt for my expense report. Please let me know the next step."
+    },
+    {
+      "id": "outside-00-plain",
+      "group_id": "outside-00",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please permanently delete my account and erase my personal data."
+    },
+    {
+      "id": "outside-00-greeting",
+      "group_id": "outside-00",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Please permanently delete my account and erase my personal data."
+    },
+    {
+      "id": "outside-00-polite",
+      "group_id": "outside-00",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please permanently delete my account and erase my personal data. Thank you for your help."
+    },
+    {
+      "id": "outside-00-handoff",
+      "group_id": "outside-00",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Please permanently delete my account and erase my personal data."
+    },
+    {
+      "id": "outside-00-followup",
+      "group_id": "outside-00",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please permanently delete my account and erase my personal data. Please let me know the next step."
+    },
+    {
+      "id": "outside-01-plain",
+      "group_id": "outside-01",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "I forgot my password. Help me regain access to my account."
+    },
+    {
+      "id": "outside-01-greeting",
+      "group_id": "outside-01",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. I forgot my password. Help me regain access to my account."
+    },
+    {
+      "id": "outside-01-polite",
+      "group_id": "outside-01",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "I forgot my password. Help me regain access to my account. Thank you for your help."
+    },
+    {
+      "id": "outside-01-handoff",
+      "group_id": "outside-01",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: I forgot my password. Help me regain access to my account."
+    },
+    {
+      "id": "outside-01-followup",
+      "group_id": "outside-01",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "I forgot my password. Help me regain access to my account. Please let me know the next step."
+    },
+    {
+      "id": "outside-02-plain",
+      "group_id": "outside-02",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please stop sending me marketing emails."
+    },
+    {
+      "id": "outside-02-greeting",
+      "group_id": "outside-02",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Please stop sending me marketing emails."
+    },
+    {
+      "id": "outside-02-polite",
+      "group_id": "outside-02",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please stop sending me marketing emails. Thank you for your help."
+    },
+    {
+      "id": "outside-02-handoff",
+      "group_id": "outside-02",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Please stop sending me marketing emails."
+    },
+    {
+      "id": "outside-02-followup",
+      "group_id": "outside-02",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please stop sending me marketing emails. Please let me know the next step."
+    },
+    {
+      "id": "outside-03-plain",
+      "group_id": "outside-03",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Can I change my login email address?"
+    },
+    {
+      "id": "outside-03-greeting",
+      "group_id": "outside-03",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Can I change my login email address?"
+    },
+    {
+      "id": "outside-03-polite",
+      "group_id": "outside-03",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Can I change my login email address? Thank you for your help."
+    },
+    {
+      "id": "outside-03-handoff",
+      "group_id": "outside-03",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Can I change my login email address?"
+    },
+    {
+      "id": "outside-03-followup",
+      "group_id": "outside-03",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Can I change my login email address? Please let me know the next step."
+    },
+    {
+      "id": "outside-04-plain",
+      "group_id": "outside-04",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Is the blue jacket available in a medium?"
+    },
+    {
+      "id": "outside-04-greeting",
+      "group_id": "outside-04",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Is the blue jacket available in a medium?"
+    },
+    {
+      "id": "outside-04-polite",
+      "group_id": "outside-04",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Is the blue jacket available in a medium? Thank you for your help."
+    },
+    {
+      "id": "outside-04-handoff",
+      "group_id": "outside-04",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Is the blue jacket available in a medium?"
+    },
+    {
+      "id": "outside-04-followup",
+      "group_id": "outside-04",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Is the blue jacket available in a medium? Please let me know the next step."
+    },
+    {
+      "id": "outside-05-plain",
+      "group_id": "outside-05",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Does this charger work with my laptop model?"
+    },
+    {
+      "id": "outside-05-greeting",
+      "group_id": "outside-05",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Does this charger work with my laptop model?"
+    },
+    {
+      "id": "outside-05-polite",
+      "group_id": "outside-05",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Does this charger work with my laptop model? Thank you for your help."
+    },
+    {
+      "id": "outside-05-handoff",
+      "group_id": "outside-05",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Does this charger work with my laptop model?"
+    },
+    {
+      "id": "outside-05-followup",
+      "group_id": "outside-05",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Does this charger work with my laptop model? Please let me know the next step."
+    },
+    {
+      "id": "outside-06-plain",
+      "group_id": "outside-06",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please cancel my order before dispatch; I have not paid for it."
+    },
+    {
+      "id": "outside-06-greeting",
+      "group_id": "outside-06",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Please cancel my order before dispatch; I have not paid for it."
+    },
+    {
+      "id": "outside-06-polite",
+      "group_id": "outside-06",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please cancel my order before dispatch; I have not paid for it. Thank you for your help."
+    },
+    {
+      "id": "outside-06-handoff",
+      "group_id": "outside-06",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Please cancel my order before dispatch; I have not paid for it."
+    },
+    {
+      "id": "outside-06-followup",
+      "group_id": "outside-06",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please cancel my order before dispatch; I have not paid for it. Please let me know the next step."
+    },
+    {
+      "id": "outside-07-plain",
+      "group_id": "outside-07",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please change the delivery address before you ship my order."
+    },
+    {
+      "id": "outside-07-greeting",
+      "group_id": "outside-07",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Please change the delivery address before you ship my order."
+    },
+    {
+      "id": "outside-07-polite",
+      "group_id": "outside-07",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please change the delivery address before you ship my order. Thank you for your help."
+    },
+    {
+      "id": "outside-07-handoff",
+      "group_id": "outside-07",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Please change the delivery address before you ship my order."
+    },
+    {
+      "id": "outside-07-followup",
+      "group_id": "outside-07",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please change the delivery address before you ship my order. Please let me know the next step."
+    },
+    {
+      "id": "outside-08-plain",
+      "group_id": "outside-08",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Can you replace the broken hinge under the warranty? I do not want a refund."
+    },
+    {
+      "id": "outside-08-greeting",
+      "group_id": "outside-08",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Can you replace the broken hinge under the warranty? I do not want a refund."
+    },
+    {
+      "id": "outside-08-polite",
+      "group_id": "outside-08",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Can you replace the broken hinge under the warranty? I do not want a refund. Thank you for your help."
+    },
+    {
+      "id": "outside-08-handoff",
+      "group_id": "outside-08",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Can you replace the broken hinge under the warranty? I do not want a refund."
+    },
+    {
+      "id": "outside-08-followup",
+      "group_id": "outside-08",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Can you replace the broken hinge under the warranty? I do not want a refund. Please let me know the next step."
+    },
+    {
+      "id": "outside-09-plain",
+      "group_id": "outside-09",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please send the missing instruction manual for my appliance."
+    },
+    {
+      "id": "outside-09-greeting",
+      "group_id": "outside-09",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Please send the missing instruction manual for my appliance."
+    },
+    {
+      "id": "outside-09-polite",
+      "group_id": "outside-09",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please send the missing instruction manual for my appliance. Thank you for your help."
+    },
+    {
+      "id": "outside-09-handoff",
+      "group_id": "outside-09",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Please send the missing instruction manual for my appliance."
+    },
+    {
+      "id": "outside-09-followup",
+      "group_id": "outside-09",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please send the missing instruction manual for my appliance. Please let me know the next step."
+    },
+    {
+      "id": "outside-10-plain",
+      "group_id": "outside-10",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "I want to report a security vulnerability on your website."
+    },
+    {
+      "id": "outside-10-greeting",
+      "group_id": "outside-10",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. I want to report a security vulnerability on your website."
+    },
+    {
+      "id": "outside-10-polite",
+      "group_id": "outside-10",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "I want to report a security vulnerability on your website. Thank you for your help."
+    },
+    {
+      "id": "outside-10-handoff",
+      "group_id": "outside-10",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: I want to report a security vulnerability on your website."
+    },
+    {
+      "id": "outside-10-followup",
+      "group_id": "outside-10",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "I want to report a security vulnerability on your website. Please let me know the next step."
+    },
+    {
+      "id": "outside-11-plain",
+      "group_id": "outside-11",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Can you apply my loyalty points to my next purchase?"
+    },
+    {
+      "id": "outside-11-greeting",
+      "group_id": "outside-11",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Can you apply my loyalty points to my next purchase?"
+    },
+    {
+      "id": "outside-11-polite",
+      "group_id": "outside-11",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Can you apply my loyalty points to my next purchase? Thank you for your help."
+    },
+    {
+      "id": "outside-11-handoff",
+      "group_id": "outside-11",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Can you apply my loyalty points to my next purchase?"
+    },
+    {
+      "id": "outside-11-followup",
+      "group_id": "outside-11",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Can you apply my loyalty points to my next purchase? Please let me know the next step."
+    },
+    {
+      "id": "outside-12-plain",
+      "group_id": "outside-12",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please merge my two customer accounts."
+    },
+    {
+      "id": "outside-12-greeting",
+      "group_id": "outside-12",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Please merge my two customer accounts."
+    },
+    {
+      "id": "outside-12-polite",
+      "group_id": "outside-12",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please merge my two customer accounts. Thank you for your help."
+    },
+    {
+      "id": "outside-12-handoff",
+      "group_id": "outside-12",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Please merge my two customer accounts."
+    },
+    {
+      "id": "outside-12-followup",
+      "group_id": "outside-12",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please merge my two customer accounts. Please let me know the next step."
+    },
+    {
+      "id": "outside-13-plain",
+      "group_id": "outside-13",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "What are your store opening hours this weekend?"
+    },
+    {
+      "id": "outside-13-greeting",
+      "group_id": "outside-13",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. What are your store opening hours this weekend?"
+    },
+    {
+      "id": "outside-13-polite",
+      "group_id": "outside-13",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "What are your store opening hours this weekend? Thank you for your help."
+    },
+    {
+      "id": "outside-13-handoff",
+      "group_id": "outside-13",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: What are your store opening hours this weekend?"
+    },
+    {
+      "id": "outside-13-followup",
+      "group_id": "outside-13",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "What are your store opening hours this weekend? Please let me know the next step."
+    },
+    {
+      "id": "outside-14-plain",
+      "group_id": "outside-14",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Can I exchange this shirt for a larger size without a refund?"
+    },
+    {
+      "id": "outside-14-greeting",
+      "group_id": "outside-14",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Can I exchange this shirt for a larger size without a refund?"
+    },
+    {
+      "id": "outside-14-polite",
+      "group_id": "outside-14",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Can I exchange this shirt for a larger size without a refund? Thank you for your help."
+    },
+    {
+      "id": "outside-14-handoff",
+      "group_id": "outside-14",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Can I exchange this shirt for a larger size without a refund?"
+    },
+    {
+      "id": "outside-14-followup",
+      "group_id": "outside-14",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Can I exchange this shirt for a larger size without a refund? Please let me know the next step."
+    },
+    {
+      "id": "outside-15-plain",
+      "group_id": "outside-15",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please update the phone number in my profile."
+    },
+    {
+      "id": "outside-15-greeting",
+      "group_id": "outside-15",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Please update the phone number in my profile."
+    },
+    {
+      "id": "outside-15-polite",
+      "group_id": "outside-15",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please update the phone number in my profile. Thank you for your help."
+    },
+    {
+      "id": "outside-15-handoff",
+      "group_id": "outside-15",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Please update the phone number in my profile."
+    },
+    {
+      "id": "outside-15-followup",
+      "group_id": "outside-15",
+      "split": "validation",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please update the phone number in my profile. Please let me know the next step."
+    },
+    {
+      "id": "outside-16-plain",
+      "group_id": "outside-16",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "How do I recycle the battery in this product?"
+    },
+    {
+      "id": "outside-16-greeting",
+      "group_id": "outside-16",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. How do I recycle the battery in this product?"
+    },
+    {
+      "id": "outside-16-polite",
+      "group_id": "outside-16",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "How do I recycle the battery in this product? Thank you for your help."
+    },
+    {
+      "id": "outside-16-handoff",
+      "group_id": "outside-16",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: How do I recycle the battery in this product?"
+    },
+    {
+      "id": "outside-16-followup",
+      "group_id": "outside-16",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "How do I recycle the battery in this product? Please let me know the next step."
+    },
+    {
+      "id": "outside-17-plain",
+      "group_id": "outside-17",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "I want to become a wholesale partner. Who should I contact?"
+    },
+    {
+      "id": "outside-17-greeting",
+      "group_id": "outside-17",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. I want to become a wholesale partner. Who should I contact?"
+    },
+    {
+      "id": "outside-17-polite",
+      "group_id": "outside-17",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "I want to become a wholesale partner. Who should I contact? Thank you for your help."
+    },
+    {
+      "id": "outside-17-handoff",
+      "group_id": "outside-17",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: I want to become a wholesale partner. Who should I contact?"
+    },
+    {
+      "id": "outside-17-followup",
+      "group_id": "outside-17",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "I want to become a wholesale partner. Who should I contact? Please let me know the next step."
+    },
+    {
+      "id": "outside-18-plain",
+      "group_id": "outside-18",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please enable two-factor authentication on my account."
+    },
+    {
+      "id": "outside-18-greeting",
+      "group_id": "outside-18",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Please enable two-factor authentication on my account."
+    },
+    {
+      "id": "outside-18-polite",
+      "group_id": "outside-18",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please enable two-factor authentication on my account. Thank you for your help."
+    },
+    {
+      "id": "outside-18-handoff",
+      "group_id": "outside-18",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Please enable two-factor authentication on my account."
+    },
+    {
+      "id": "outside-18-followup",
+      "group_id": "outside-18",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Please enable two-factor authentication on my account. Please let me know the next step."
+    },
+    {
+      "id": "outside-19-plain",
+      "group_id": "outside-19",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Is the material in this toy safe for a toddler?"
+    },
+    {
+      "id": "outside-19-greeting",
+      "group_id": "outside-19",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Hello support. Is the material in this toy safe for a toddler?"
+    },
+    {
+      "id": "outside-19-polite",
+      "group_id": "outside-19",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Is the material in this toy safe for a toddler? Thank you for your help."
+    },
+    {
+      "id": "outside-19-handoff",
+      "group_id": "outside-19",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Customer message: Is the material in this toy safe for a toddler?"
+    },
+    {
+      "id": "outside-19-followup",
+      "group_id": "outside-19",
+      "split": "test",
+      "kind": "outside",
+      "gold": null,
+      "text": "Is the material in this toy safe for a toddler? Please let me know the next step."
+    },
+    {
+      "id": "insufficient-00-plain",
+      "group_id": "insufficient-00",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Please help me with my order."
+    },
+    {
+      "id": "insufficient-00-greeting",
+      "group_id": "insufficient-00",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Hello support. Please help me with my order."
+    },
+    {
+      "id": "insufficient-00-polite",
+      "group_id": "insufficient-00",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Please help me with my order. Thank you for your help."
+    },
+    {
+      "id": "insufficient-00-handoff",
+      "group_id": "insufficient-00",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Customer message: Please help me with my order."
+    },
+    {
+      "id": "insufficient-00-followup",
+      "group_id": "insufficient-00",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Please help me with my order. Please let me know the next step."
+    },
+    {
+      "id": "insufficient-01-plain",
+      "group_id": "insufficient-01",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Something is wrong. Can someone assist?"
+    },
+    {
+      "id": "insufficient-01-greeting",
+      "group_id": "insufficient-01",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Hello support. Something is wrong. Can someone assist?"
+    },
+    {
+      "id": "insufficient-01-polite",
+      "group_id": "insufficient-01",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Something is wrong. Can someone assist? Thank you for your help."
+    },
+    {
+      "id": "insufficient-01-handoff",
+      "group_id": "insufficient-01",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Customer message: Something is wrong. Can someone assist?"
+    },
+    {
+      "id": "insufficient-01-followup",
+      "group_id": "insufficient-01",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Something is wrong. Can someone assist? Please let me know the next step."
+    },
+    {
+      "id": "insufficient-02-plain",
+      "group_id": "insufficient-02",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "I need to talk to support about yesterday."
+    },
+    {
+      "id": "insufficient-02-greeting",
+      "group_id": "insufficient-02",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Hello support. I need to talk to support about yesterday."
+    },
+    {
+      "id": "insufficient-02-polite",
+      "group_id": "insufficient-02",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "I need to talk to support about yesterday. Thank you for your help."
+    },
+    {
+      "id": "insufficient-02-handoff",
+      "group_id": "insufficient-02",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Customer message: I need to talk to support about yesterday."
+    },
+    {
+      "id": "insufficient-02-followup",
+      "group_id": "insufficient-02",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "I need to talk to support about yesterday. Please let me know the next step."
+    },
+    {
+      "id": "insufficient-03-plain",
+      "group_id": "insufficient-03",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Could you check this for me?"
+    },
+    {
+      "id": "insufficient-03-greeting",
+      "group_id": "insufficient-03",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Hello support. Could you check this for me?"
+    },
+    {
+      "id": "insufficient-03-polite",
+      "group_id": "insufficient-03",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Could you check this for me? Thank you for your help."
+    },
+    {
+      "id": "insufficient-03-handoff",
+      "group_id": "insufficient-03",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Customer message: Could you check this for me?"
+    },
+    {
+      "id": "insufficient-03-followup",
+      "group_id": "insufficient-03",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Could you check this for me? Please let me know the next step."
+    },
+    {
+      "id": "insufficient-04-plain",
+      "group_id": "insufficient-04",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "I have a question about my purchase."
+    },
+    {
+      "id": "insufficient-04-greeting",
+      "group_id": "insufficient-04",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Hello support. I have a question about my purchase."
+    },
+    {
+      "id": "insufficient-04-polite",
+      "group_id": "insufficient-04",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "I have a question about my purchase. Thank you for your help."
+    },
+    {
+      "id": "insufficient-04-handoff",
+      "group_id": "insufficient-04",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Customer message: I have a question about my purchase."
+    },
+    {
+      "id": "insufficient-04-followup",
+      "group_id": "insufficient-04",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "I have a question about my purchase. Please let me know the next step."
+    },
+    {
+      "id": "insufficient-05-plain",
+      "group_id": "insufficient-05",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "It is still not right. Please help."
+    },
+    {
+      "id": "insufficient-05-greeting",
+      "group_id": "insufficient-05",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Hello support. It is still not right. Please help."
+    },
+    {
+      "id": "insufficient-05-polite",
+      "group_id": "insufficient-05",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "It is still not right. Please help. Thank you for your help."
+    },
+    {
+      "id": "insufficient-05-handoff",
+      "group_id": "insufficient-05",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Customer message: It is still not right. Please help."
+    },
+    {
+      "id": "insufficient-05-followup",
+      "group_id": "insufficient-05",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "It is still not right. Please help. Please let me know the next step."
+    },
+    {
+      "id": "insufficient-06-plain",
+      "group_id": "insufficient-06",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Please fix the issue we discussed earlier."
+    },
+    {
+      "id": "insufficient-06-greeting",
+      "group_id": "insufficient-06",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Hello support. Please fix the issue we discussed earlier."
+    },
+    {
+      "id": "insufficient-06-polite",
+      "group_id": "insufficient-06",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Please fix the issue we discussed earlier. Thank you for your help."
+    },
+    {
+      "id": "insufficient-06-handoff",
+      "group_id": "insufficient-06",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Customer message: Please fix the issue we discussed earlier."
+    },
+    {
+      "id": "insufficient-06-followup",
+      "group_id": "insufficient-06",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Please fix the issue we discussed earlier. Please let me know the next step."
+    },
+    {
+      "id": "insufficient-07-plain",
+      "group_id": "insufficient-07",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "I am unhappy with the service."
+    },
+    {
+      "id": "insufficient-07-greeting",
+      "group_id": "insufficient-07",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Hello support. I am unhappy with the service."
+    },
+    {
+      "id": "insufficient-07-polite",
+      "group_id": "insufficient-07",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "I am unhappy with the service. Thank you for your help."
+    },
+    {
+      "id": "insufficient-07-handoff",
+      "group_id": "insufficient-07",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Customer message: I am unhappy with the service."
+    },
+    {
+      "id": "insufficient-07-followup",
+      "group_id": "insufficient-07",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "I am unhappy with the service. Please let me know the next step."
+    },
+    {
+      "id": "insufficient-08-plain",
+      "group_id": "insufficient-08",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Can someone get back to me?"
+    },
+    {
+      "id": "insufficient-08-greeting",
+      "group_id": "insufficient-08",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Hello support. Can someone get back to me?"
+    },
+    {
+      "id": "insufficient-08-polite",
+      "group_id": "insufficient-08",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Can someone get back to me? Thank you for your help."
+    },
+    {
+      "id": "insufficient-08-handoff",
+      "group_id": "insufficient-08",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Customer message: Can someone get back to me?"
+    },
+    {
+      "id": "insufficient-08-followup",
+      "group_id": "insufficient-08",
+      "split": "test",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Can someone get back to me? Please let me know the next step."
+    },
+    {
+      "id": "insufficient-09-plain",
+      "group_id": "insufficient-09",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "This is urgent, but I cannot explain it here."
+    },
+    {
+      "id": "insufficient-09-greeting",
+      "group_id": "insufficient-09",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Hello support. This is urgent, but I cannot explain it here."
+    },
+    {
+      "id": "insufficient-09-polite",
+      "group_id": "insufficient-09",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "This is urgent, but I cannot explain it here. Thank you for your help."
+    },
+    {
+      "id": "insufficient-09-handoff",
+      "group_id": "insufficient-09",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "Customer message: This is urgent, but I cannot explain it here."
+    },
+    {
+      "id": "insufficient-09-followup",
+      "group_id": "insufficient-09",
+      "split": "validation",
+      "kind": "insufficient",
+      "gold": null,
+      "text": "This is urgent, but I cannot explain it here. Please let me know the next step."
+    }
+  ]
+}

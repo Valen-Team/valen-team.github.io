@@ -10,6 +10,8 @@ import request from '@site/static/cookbook/code/calibration_request.json?cookboo
 
 Fit a review rule using your own labeled tickets, then return `automatic` or `human_review` for each request. This native-model example uses three candidate teams: billing, technical and account.
 
+Could the correct category be missing? See [handling unknown categories](../unknown-categories/) to compare explicit none choices and review thresholds.
+
 ## Prepare
 
 Use a Valen source environment containing the calibration tools and an already downloaded native model. See [native inference](/docs/valen/quickstart/) for environment setup. Install your local Valen source checkout with the command below (`/path/to/Valen` contains `pyproject.toml`); `valen-sdk` alone does not provide these native calibration tools. Download the <a href="/cookbook/valen-cookbook.zip">Cookbook source bundle</a>, then extract it:

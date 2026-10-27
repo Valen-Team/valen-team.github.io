@@ -41,3 +41,5 @@ A positive scalar temperature rescales fixed logits before softmax; it preserves
 Revalidate thresholds after changing model, adapter, precision/backend, prompts, candidate set/order, question grouping, sampling/media budgets, label definition, class prevalence or input domain. Monitor production drift and review workload; do not assume last month's threshold transfers.
 
 Complete policy examples: [ticket routing](/cookbook/ticket-routing/) and [product screening](/cookbook/product-screening/). Their illustrative thresholds are not calibrated recommendations. [Evaluation and metrics](./evaluation.md) · [protocol reference](./api.md). Formula source: [inference.py](https://github.com/Valen-Team/Valen/blob/main/valen/evaluation/inference.py).
+
+For incomplete candidate sets, see [handling unknown categories](/cookbook/unknown-categories/) for explicit none choices and measured review policies.

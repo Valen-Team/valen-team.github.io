@@ -10,6 +10,8 @@ import request from '@site/static/cookbook/code/calibration_request.json?cookboo
 
 用自己的带标签工单拟合复核规则，再为每条请求返回 `automatic` 或 `human_review`。本例使用原生模型，候选团队为账单、技术支持和账户服务。
 
+正确类别可能不在候选里？见[候选项都不对: 未知类别处理](../unknown-categories/)，对比显式 none 和人工复核门槛。
+
 ## 准备环境与数据
 
 使用包含校准工具的 Valen 源码环境和已经下载好的原生模型，环境配置见[原生推理](/docs/valen/quickstart/)。下载 <a href="/cookbook/valen-cookbook.zip">Cookbook 源码包</a>，然后解压：

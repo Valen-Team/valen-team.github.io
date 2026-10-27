@@ -1,0 +1,53 @@
+{
+  "model": "Valen-Team/Valen-0.8B",
+  "revision_kind": "sha256 of sorted cached model artifact hashes",
+  "revision": "27a778930396d80c88e2b18b2b1aa848fdf8c4b0b6bd5e52dc48ee832fad7075",
+  "artifacts_sha256": {
+    "COMPLETE.json": "3ba4ff3b93654886d23e5ff3589a1b0424c4be16710806e017a0424509c1ccfc",
+    "batching.py": "ea45d4724bcafca559fc5a2a18092918b633746771c19da6554c29bc5f2cef64",
+    "chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+    "compiler.py": "f35bab2e71b6beb1228daaa5b7baecdacf04eaf713aee14e8082b97090f910b4",
+    "config.json": "8a6a766acfe35a6eb3d373e90c43af0f08dbd44301251df71e18b1b5b5381c08",
+    "configuration_valen.py": "8aa80266e8c328b5251d969de80f58e706dcd15a535c877108aab452ff572279",
+    "data_types.py": "b06ce08081d8f7b2bf36abf302410a96086395e75a04f9e9b1c591db519b1641",
+    "decisions.py": "a1b382ddd52a3dac0e927ff791967af02367a26c26fe0bc63c26d5d805c79312",
+    "export_manifest.json": "9fd6020bb60dd57ff541fd63252b4467e162279b1f53a176fe16e872416bcbad",
+    "heads.py": "63b5970a8bfa121eff94d50ffd35e1fa8387f3af5abccc5f5b75381fb084fc34",
+    "model.safetensors": "465714dd28702c4232d9233c2a2157d366967c541b2a27d9dadccc816304fd48",
+    "modeling_valen.py": "5ce3ca78dcf4be4e8b2a6404ac0dc4abb52b75cd2aa871a104beb10f0b5daf7f",
+    "processor_config.json": "d89ef49ce9cd37fbf510158e13c1ef063d9286411c1ec9049932dbe0487143b1",
+    "responses.py": "bb792d312f78370101ad9da527d2876ecf1f517dcca705487d6e76f02c897166",
+    "runtime_model.py": "2ce5808373505105bedc254bd99671fbeea43c25483e6b63add77b9e32d7baaf",
+    "schema.py": "81659cc31b9673f6b9482095a4bbf6a2fb0b1415f0dfdd1c057278ecdca13595",
+    "tokenizer.json": "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4",
+    "tokenizer_config.json": "e98f1901ac6f0adff67b1d540bfa0c36ac1a0cf59eb72ed78146ef89aafa1182",
+    "validation.json": "769290cb9e601b743b4cea58b4965301d660e967a6b6c6d05d6689b24c6563a2"
+  },
+  "torch": "2.14.0+cu130",
+  "transformers": "5.19.0",
+  "device": "CPU: INTEL(R) XEON(R) PLATINUM 8558",
+  "threads": 8,
+  "cpu_affinity": [
+    88,
+    89,
+    90,
+    91,
+    184,
+    185,
+    186,
+    187
+  ],
+  "precision": "float32",
+  "attention": "eager",
+  "execution": "shared_state",
+  "temperature": 1.0,
+  "offline": true,
+  "model_downloaded": false,
+  "requests_planned": 600,
+  "tested_sources": {
+    "common.py": "9217eeeb63f4102b11655d54f481c2cc36b6f806f4e29508bfdabcb5a3f0379f",
+    "unknown_categories.py": "d9ed3606dc570384fce474072de8ef040df5a326868c982f58e70909a1e0a767",
+    "unknown_categories_data.json": "6e9214aea8434cd7b7bbe949e644b7f6b4facca50aed31974c7a1894f7234c44",
+    "run_cached.py": "2f33570ce3929bb619e7fbbc2de28a66ac211375c624538bb4559b100cda1088"
+  }
+}
