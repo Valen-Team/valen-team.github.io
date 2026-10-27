@@ -15,13 +15,14 @@ export const docGroups = [
  {title:['Integrations','接入方式'],items:[['valen/api','API calls','API 调用','','Free'],['valen/sglang','SGLang deployment','SGLang 部署'],['valen/vllm','vLLM deployment','vLLM 部署'],['valen/quickstart','Transformers inference','Transformers 推理'],['valen/onnx','ONNX & SDKs','ONNX 与 SDK'],['valen/gguf','GGUF local service','GGUF 本地服务']]},
  {title:['Model concepts','模型介绍'],items:[['valen/architecture','Released architecture','发布模型架构'],['valen/qwen-shared-state','Multi-question inference','多问题共享计算'],['valen/probabilities','Using probabilities','如何使用概率']]},
  {title:['Training and fine-tuning','训练与微调'],items:[['valen/training','Fine-tuning','模型微调'],['valen/data-format','Data preparation and format','数据准备与格式'],['valen/configuration','Training configuration','训练配置'],['valen/checkpoints','Save, resume and export','保存、恢复与导出']]},
+ {title:['Probability reliability','概率可靠性'],items:[['valen/reliability','Released-model evidence','发布模型实测'],['valen/calibration','Calibrate and automate','校准与自动处理']]},
  {title:['Evaluation','评测'],items:[['valen/decision-index','Jev Decision Index','Jev Decision Index'],['jevalkit','JevalKit toolkit','JevalKit 工具']]},
  {title:['Resources','资源'],items:[['resources','Links and resources','链接与资源'],['contributing','Contributing','参与贡献']]},
 ];
 export const cookbookGroups = [
  {title:['GET STARTED','开始使用'],items:[['','Cookbook overview','教程概览'],['api-quickstart','API basics','API 入门'],['local-inference','Local inference','本地推理']]},
- {title:['APPLICATIONS','应用教程'],items:[['ticket-routing','Route support tickets','工单分流'],['product-screening','Screen product images','商品图片筛选'],['video-tagging','Tag short videos','短视频标注'],['domain-finetuning','Domain LoRA fine-tuning','领域 LoRA 微调']]},
- {title:['REFERENCE','参考'],items:[['validation','Validation & performance','验证、性能与版本'],['migration','Migration map','旧内容迁移表']]},
+ {title:['APPLICATIONS','应用教程'],items:[['ticket-routing','Route support tickets','工单分流'],['calibrated-routing','Calibrate ticket routing','校准工单分流'],['product-screening','Screen product images','商品图片筛选'],['video-tagging','Tag short videos','短视频标注'],['domain-finetuning','Domain LoRA fine-tuning','领域 LoRA 微调']]},
+ {title:['REFERENCE','参考'],items:[['/docs/valen/reliability/','Probability reliability','概率可靠性'],['validation','Validation & performance','验证、性能与版本'],['migration','Migration map','旧内容迁移表']]},
 ];
 const deploymentChildren: Record<string, string[][]> = {
  'jevalkit': [['jevalkit/quickstart','Quickstart','快速开始'],['jevalkit/models','Model interfaces','模型接入'],['jevalkit/benchmarks','Benchmarks and scoring','基准与评分']],
@@ -40,7 +41,7 @@ export function ModernSidebar({onNavigate}: {onNavigate?:()=>void}) {
   const cookbook = isCookbook(pathname);
   const groups = cookbook ? cookbookGroups : docGroups;
   const renderLink = ([id, en, cn, badge, trailingBadge]: string[]) => {
-    const path = `/${cookbook ? 'cookbook' : 'docs'}/${id ? `${id}/` : ''}`;
+    const path = id.startsWith('/') ? id : `/${cookbook ? 'cookbook' : 'docs'}/${id ? `${id}/` : ''}`;
     return <Link to={path} className={currentPath === path ? 'active' : ''}
       aria-current={currentPath === path ? 'page' : undefined} onClick={onNavigate}>
       {badge && <span className={`modern-badge ${badge === 'POST' ? 'blue' : 'green'}`}>{badge}</span>}<span>{zh ? cn : en}</span>

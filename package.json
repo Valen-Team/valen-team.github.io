@@ -5,7 +5,7 @@
   "scripts": {
     "prestart": "node scripts/check-design.mjs && node scripts/search-index.mjs",
     "start": "docusaurus start --host 127.0.0.1",
-    "prebuild": "python3 scripts/check-cookbook.py --bundle && node scripts/check-design.mjs && node scripts/search-index.mjs",
+    "prebuild": "python3 scripts/check-cookbook.py --bundle && python3 scripts/check-reliability.py && node scripts/check-design.mjs && node scripts/search-index.mjs",
     "build": "docusaurus build",
     "serve": "docusaurus serve --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
@@ -14,7 +14,8 @@
     "design:verify-source": "node scripts/check-design.mjs --source ../design-system",
     "preview:local": "node scripts/preview-local.mjs",
     "test:ask": "node --test tests/ask-decision.test.mjs",
-    "test:cookbook": "python3 scripts/check-cookbook.py"
+    "test:cookbook": "python3 scripts/check-cookbook.py",
+    "test:reliability": "python3 scripts/check-reliability.py"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",

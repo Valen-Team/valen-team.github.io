@@ -56,6 +56,22 @@ class Policies(unittest.TestCase):
                 self.assertIn('<CookbookEvidence', text)
                 self.assertIn('valen-cookbook.zip', text)
 
+    def test_calibrated_routing_has_one_canonical_script_and_inputs(self):
+        import subprocess
+        names = ['calibrated_ticket_routing.py', 'calibration_protocol.json', 'calibration_request.json']
+        for locale in [ROOT / 'cookbook', ROOT / 'i18n/zh-Hans/docusaurus-plugin-content-docs-cookbook/current']:
+            text = (locale / 'calibrated-routing.mdx').read_text()
+            for name in names:
+                self.assertIn('/static/cookbook/code/' + name, text)
+                self.assertTrue((CODE / name).is_file())
+            self.assertIn('valen-cookbook.zip', text)
+        request = json.loads((CODE / 'calibration_request.json').read_text())
+        self.assertEqual(request['questions']['intent']['type'], 'choice')
+        result = subprocess.run([sys.executable, '-I', str(CODE / names[0]), '--help'],
+                                capture_output=True, text=True, check=True)
+        self.assertIn('--calibration', result.stdout)
+        self.assertIn('--policy', result.stdout)
+
     def test_published_code_matches_real_model_execution(self):
         evidence = json.loads((ROOT / 'static/cookbook/results.json').read_text())
         self.assertEqual(evidence['validation_kind'], 'real_model_execution')

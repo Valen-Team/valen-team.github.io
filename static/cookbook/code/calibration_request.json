@@ -1,0 +1,14 @@
+{
+  "state": "I was charged twice for the same subscription.",
+  "questions": {
+    "intent": {
+      "type": "choice",
+      "instructions": "Which team should review this ticket?",
+      "criteria": {
+        "billing": "Payments, charges, refunds and invoices",
+        "technical": "Software errors and service availability",
+        "account": "Profile, sign-in and account access"
+      }
+    }
+  }
+}

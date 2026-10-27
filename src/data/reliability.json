@@ -1,0 +1,4296 @@
+{
+  "schema_version": 1,
+  "scenario": "banking-intent-routing",
+  "models": [
+    {
+      "model": "Valen-0.8B",
+      "status": "measured",
+      "revision": "c2c481fcb319bd9ae834abc7c6373271710cf24e",
+      "questions": 1276,
+      "report_url": "/reliability/data/Valen-0.8B/report.json.gz",
+      "report_bytes": 563730,
+      "calibration_url": "/reliability/data/Valen-0.8B/calibration.json",
+      "protocol_url": "/reliability/data/Valen-0.8B/protocol.json",
+      "source_url": "https://github.com/PolyAI-LDN/task-specific-datasets/tree/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data",
+      "scope": "BANKING77 · English · 77 candidate intents · retrospective public-test replay. Not a production or vision guarantee.",
+      "before": {
+        "ece": 0.08187212441538494,
+        "nll": 1.3563672443833792,
+        "brier": 0.5062434306268746,
+        "accuracy": 0.6347962382445141,
+        "bins": [
+          {
+            "lower": 0.0,
+            "upper": 0.06666666666666667,
+            "n": 0,
+            "mean_probability": null,
+            "accuracy": null,
+            "accuracy_interval": null
+          },
+          {
+            "lower": 0.06666666666666667,
+            "upper": 0.13333333333333333,
+            "n": 7,
+            "mean_probability": 0.11588328964521699,
+            "accuracy": 0.0,
+            "accuracy_interval": [
+              5.551115123125783e-17,
+              0.35433043506668743
+            ]
+          },
+          {
+            "lower": 0.13333333333333333,
+            "upper": 0.2,
+            "n": 13,
+            "mean_probability": 0.17421756793444831,
+            "accuracy": 0.15384615384615385,
+            "accuracy_interval": [
+              0.043258178358081184,
+              0.4223463101948254
+            ]
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.26666666666666666,
+            "n": 24,
+            "mean_probability": 0.23272332638828971,
+            "accuracy": 0.375,
+            "accuracy_interval": [
+              0.21159367559548778,
+              0.5729003755732572
+            ]
+          },
+          {
+            "lower": 0.26666666666666666,
+            "upper": 0.3333333333333333,
+            "n": 51,
+            "mean_probability": 0.30399662987475135,
+            "accuracy": 0.17647058823529413,
+            "accuracy_interval": [
+              0.09572403469126317,
+              0.3025414252430807
+            ]
+          },
+          {
+            "lower": 0.3333333333333333,
+            "upper": 0.4,
+            "n": 48,
+            "mean_probability": 0.3728700904422904,
+            "accuracy": 0.20833333333333334,
+            "accuracy_interval": [
+              0.11730272957905595,
+              0.34258901272617925
+            ]
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.4666666666666667,
+            "n": 97,
+            "mean_probability": 0.43371334044278476,
+            "accuracy": 0.29896907216494845,
+            "accuracy_interval": [
+              0.21694635359423237,
+              0.39630795216362286
+            ]
+          },
+          {
+            "lower": 0.4666666666666667,
+            "upper": 0.5333333333333333,
+            "n": 92,
+            "mean_probability": 0.501786396804317,
+            "accuracy": 0.44565217391304346,
+            "accuracy_interval": [
+              0.34829808027402587,
+              0.5473629403004981
+            ]
+          },
+          {
+            "lower": 0.5333333333333333,
+            "upper": 0.6,
+            "n": 114,
+            "mean_probability": 0.565320346395414,
+            "accuracy": 0.47368421052631576,
+            "accuracy_interval": [
+              0.38438778617578623,
+              0.5646963472009949
+            ]
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.6666666666666666,
+            "n": 109,
+            "mean_probability": 0.6326796618704534,
+            "accuracy": 0.5504587155963303,
+            "accuracy_interval": [
+              0.456942160288216,
+              0.6405397414433016
+            ]
+          },
+          {
+            "lower": 0.6666666666666666,
+            "upper": 0.7333333333333333,
+            "n": 86,
+            "mean_probability": 0.6972118933747607,
+            "accuracy": 0.5697674418604651,
+            "accuracy_interval": [
+              0.46436203379906343,
+              0.6692065898354842
+            ]
+          },
+          {
+            "lower": 0.7333333333333333,
+            "upper": 0.8,
+            "n": 90,
+            "mean_probability": 0.7649752057215619,
+            "accuracy": 0.8333333333333334,
+            "accuracy_interval": [
+              0.743061136966912,
+              0.8963151126568702
+            ]
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.8666666666666667,
+            "n": 123,
+            "mean_probability": 0.8300846609254473,
+            "accuracy": 0.7886178861788617,
+            "accuracy_interval": [
+              0.708287904786181,
+              0.8514659853071769
+            ]
+          },
+          {
+            "lower": 0.8666666666666667,
+            "upper": 0.9333333333333333,
+            "n": 137,
+            "mean_probability": 0.8984826510986275,
+            "accuracy": 0.781021897810219,
+            "accuracy_interval": [
+              0.7046291889884262,
+              0.8420848300564137
+            ]
+          },
+          {
+            "lower": 0.9333333333333333,
+            "upper": 1.0,
+            "n": 285,
+            "mean_probability": 0.9741349148782764,
+            "accuracy": 0.9403508771929825,
+            "accuracy_interval": [
+              0.9065608463506125,
+              0.9624279789544654
+            ]
+          }
+        ],
+        "probability_one_questions": 0,
+        "risk_coverage": [
+          {
+            "coverage": 0,
+            "error_rate": null,
+            "accepted": 0
+          },
+          {
+            "coverage": 0.01018808777429467,
+            "error_rate": 0.0,
+            "accepted": 13
+          },
+          {
+            "coverage": 0.02037617554858934,
+            "error_rate": 0.0,
+            "accepted": 26
+          },
+          {
+            "coverage": 0.029780564263322883,
+            "error_rate": 0.0,
+            "accepted": 38
+          },
+          {
+            "coverage": 0.039968652037617555,
+            "error_rate": 0.0,
+            "accepted": 51
+          },
+          {
+            "coverage": 0.050156739811912224,
+            "error_rate": 0.0,
+            "accepted": 64
+          },
+          {
+            "coverage": 0.05956112852664577,
+            "error_rate": 0.0,
+            "accepted": 76
+          },
+          {
+            "coverage": 0.06974921630094044,
+            "error_rate": 0.011235955056179775,
+            "accepted": 89
+          },
+          {
+            "coverage": 0.07993730407523511,
+            "error_rate": 0.00980392156862745,
+            "accepted": 102
+          },
+          {
+            "coverage": 0.09012539184952978,
+            "error_rate": 0.008695652173913044,
+            "accepted": 115
+          },
+          {
+            "coverage": 0.10031347962382445,
+            "error_rate": 0.0078125,
+            "accepted": 128
+          },
+          {
+            "coverage": 0.109717868338558,
+            "error_rate": 0.007142857142857143,
+            "accepted": 140
+          },
+          {
+            "coverage": 0.11990595611285267,
+            "error_rate": 0.013071895424836602,
+            "accepted": 153
+          },
+          {
+            "coverage": 0.13009404388714735,
+            "error_rate": 0.012048192771084338,
+            "accepted": 166
+          },
+          {
+            "coverage": 0.13949843260188088,
+            "error_rate": 0.011235955056179775,
+            "accepted": 178
+          },
+          {
+            "coverage": 0.14968652037617555,
+            "error_rate": 0.015706806282722512,
+            "accepted": 191
+          },
+          {
+            "coverage": 0.15987460815047022,
+            "error_rate": 0.024509803921568627,
+            "accepted": 204
+          },
+          {
+            "coverage": 0.1700626959247649,
+            "error_rate": 0.027649769585253458,
+            "accepted": 217
+          },
+          {
+            "coverage": 0.18025078369905956,
+            "error_rate": 0.034782608695652174,
+            "accepted": 230
+          },
+          {
+            "coverage": 0.1896551724137931,
+            "error_rate": 0.03305785123966942,
+            "accepted": 242
+          },
+          {
+            "coverage": 0.19984326018808776,
+            "error_rate": 0.043137254901960784,
+            "accepted": 255
+          },
+          {
+            "coverage": 0.21003134796238246,
+            "error_rate": 0.05223880597014925,
+            "accepted": 268
+          },
+          {
+            "coverage": 0.219435736677116,
+            "error_rate": 0.060714285714285714,
+            "accepted": 280
+          },
+          {
+            "coverage": 0.22962382445141066,
+            "error_rate": 0.06143344709897611,
+            "accepted": 293
+          },
+          {
+            "coverage": 0.23981191222570533,
+            "error_rate": 0.06862745098039216,
+            "accepted": 306
+          },
+          {
+            "coverage": 0.25,
+            "error_rate": 0.08463949843260188,
+            "accepted": 319
+          },
+          {
+            "coverage": 0.2601880877742947,
+            "error_rate": 0.08734939759036145,
+            "accepted": 332
+          },
+          {
+            "coverage": 0.26959247648902823,
+            "error_rate": 0.0872093023255814,
+            "accepted": 344
+          },
+          {
+            "coverage": 0.2797805642633229,
+            "error_rate": 0.08403361344537816,
+            "accepted": 357
+          },
+          {
+            "coverage": 0.28996865203761757,
+            "error_rate": 0.0945945945945946,
+            "accepted": 370
+          },
+          {
+            "coverage": 0.2993730407523511,
+            "error_rate": 0.09424083769633508,
+            "accepted": 382
+          },
+          {
+            "coverage": 0.30956112852664575,
+            "error_rate": 0.10126582278481013,
+            "accepted": 395
+          },
+          {
+            "coverage": 0.31974921630094044,
+            "error_rate": 0.11029411764705882,
+            "accepted": 408
+          },
+          {
+            "coverage": 0.3299373040752351,
+            "error_rate": 0.11163895486935867,
+            "accepted": 421
+          },
+          {
+            "coverage": 0.3401253918495298,
+            "error_rate": 0.11059907834101383,
+            "accepted": 434
+          },
+          {
+            "coverage": 0.3495297805642633,
+            "error_rate": 0.11434977578475336,
+            "accepted": 446
+          },
+          {
+            "coverage": 0.359717868338558,
+            "error_rate": 0.11764705882352941,
+            "accepted": 459
+          },
+          {
+            "coverage": 0.36990595611285265,
+            "error_rate": 0.1228813559322034,
+            "accepted": 472
+          },
+          {
+            "coverage": 0.3793103448275862,
+            "error_rate": 0.12190082644628099,
+            "accepted": 484
+          },
+          {
+            "coverage": 0.3894984326018809,
+            "error_rate": 0.12072434607645875,
+            "accepted": 497
+          },
+          {
+            "coverage": 0.3996865203761755,
+            "error_rate": 0.12549019607843137,
+            "accepted": 510
+          },
+          {
+            "coverage": 0.4098746081504702,
+            "error_rate": 0.13001912045889102,
+            "accepted": 523
+          },
+          {
+            "coverage": 0.4200626959247649,
+            "error_rate": 0.13432835820895522,
+            "accepted": 536
+          },
+          {
+            "coverage": 0.42946708463949845,
+            "error_rate": 0.1332116788321168,
+            "accepted": 548
+          },
+          {
+            "coverage": 0.4396551724137931,
+            "error_rate": 0.13725490196078433,
+            "accepted": 561
+          },
+          {
+            "coverage": 0.4498432601880878,
+            "error_rate": 0.13763066202090593,
+            "accepted": 574
+          },
+          {
+            "coverage": 0.4592476489028213,
+            "error_rate": 0.1348122866894198,
+            "accepted": 586
+          },
+          {
+            "coverage": 0.46943573667711597,
+            "error_rate": 0.14023372287145242,
+            "accepted": 599
+          },
+          {
+            "coverage": 0.47962382445141066,
+            "error_rate": 0.1388888888888889,
+            "accepted": 612
+          },
+          {
+            "coverage": 0.4898119122257053,
+            "error_rate": 0.1376,
+            "accepted": 625
+          },
+          {
+            "coverage": 0.5,
+            "error_rate": 0.13949843260188088,
+            "accepted": 638
+          },
+          {
+            "coverage": 0.5094043887147336,
+            "error_rate": 0.14,
+            "accepted": 650
+          },
+          {
+            "coverage": 0.5195924764890282,
+            "error_rate": 0.14328808446455504,
+            "accepted": 663
+          },
+          {
+            "coverage": 0.5297805642633229,
+            "error_rate": 0.15236686390532544,
+            "accepted": 676
+          },
+          {
+            "coverage": 0.5391849529780565,
+            "error_rate": 0.16424418604651161,
+            "accepted": 688
+          },
+          {
+            "coverage": 0.549373040752351,
+            "error_rate": 0.16547788873038516,
+            "accepted": 701
+          },
+          {
+            "coverage": 0.5595611285266457,
+            "error_rate": 0.16946778711484595,
+            "accepted": 714
+          },
+          {
+            "coverage": 0.5697492163009404,
+            "error_rate": 0.17606602475928473,
+            "accepted": 727
+          },
+          {
+            "coverage": 0.5799373040752351,
+            "error_rate": 0.17702702702702702,
+            "accepted": 740
+          },
+          {
+            "coverage": 0.5893416927899686,
+            "error_rate": 0.18218085106382978,
+            "accepted": 752
+          },
+          {
+            "coverage": 0.5995297805642633,
+            "error_rate": 0.1869281045751634,
+            "accepted": 765
+          },
+          {
+            "coverage": 0.6105015673981191,
+            "error_rate": 0.19127086007702182,
+            "accepted": 779
+          },
+          {
+            "coverage": 0.6199059561128527,
+            "error_rate": 0.19216182048040456,
+            "accepted": 791
+          },
+          {
+            "coverage": 0.6300940438871473,
+            "error_rate": 0.20149253731343283,
+            "accepted": 804
+          },
+          {
+            "coverage": 0.640282131661442,
+            "error_rate": 0.20563035495716034,
+            "accepted": 817
+          },
+          {
+            "coverage": 0.6504702194357367,
+            "error_rate": 0.20963855421686747,
+            "accepted": 830
+          },
+          {
+            "coverage": 0.6606583072100314,
+            "error_rate": 0.21233689205219455,
+            "accepted": 843
+          },
+          {
+            "coverage": 0.6700626959247649,
+            "error_rate": 0.2152046783625731,
+            "accepted": 855
+          },
+          {
+            "coverage": 0.6802507836990596,
+            "error_rate": 0.22119815668202766,
+            "accepted": 868
+          },
+          {
+            "coverage": 0.6904388714733543,
+            "error_rate": 0.2224744608399546,
+            "accepted": 881
+          },
+          {
+            "coverage": 0.6998432601880877,
+            "error_rate": 0.22508398656215006,
+            "accepted": 893
+          },
+          {
+            "coverage": 0.7100313479623824,
+            "error_rate": 0.23178807947019867,
+            "accepted": 906
+          },
+          {
+            "coverage": 0.7202194357366771,
+            "error_rate": 0.23612622415669204,
+            "accepted": 919
+          },
+          {
+            "coverage": 0.7304075235109718,
+            "error_rate": 0.2446351931330472,
+            "accepted": 932
+          },
+          {
+            "coverage": 0.7405956112852664,
+            "error_rate": 0.24867724867724866,
+            "accepted": 945
+          },
+          {
+            "coverage": 0.75,
+            "error_rate": 0.25182863113897597,
+            "accepted": 957
+          },
+          {
+            "coverage": 0.7601880877742947,
+            "error_rate": 0.2556701030927835,
+            "accepted": 970
+          },
+          {
+            "coverage": 0.7703761755485894,
+            "error_rate": 0.2614445574771109,
+            "accepted": 983
+          },
+          {
+            "coverage": 0.7797805642633229,
+            "error_rate": 0.264321608040201,
+            "accepted": 995
+          },
+          {
+            "coverage": 0.7899686520376176,
+            "error_rate": 0.26785714285714285,
+            "accepted": 1008
+          },
+          {
+            "coverage": 0.8001567398119123,
+            "error_rate": 0.2713026444662096,
+            "accepted": 1021
+          },
+          {
+            "coverage": 0.8103448275862069,
+            "error_rate": 0.27562862669245647,
+            "accepted": 1034
+          },
+          {
+            "coverage": 0.8205329153605015,
+            "error_rate": 0.27889207258834764,
+            "accepted": 1047
+          },
+          {
+            "coverage": 0.8299373040752351,
+            "error_rate": 0.2842304060434372,
+            "accepted": 1059
+          },
+          {
+            "coverage": 0.8401253918495298,
+            "error_rate": 0.291044776119403,
+            "accepted": 1072
+          },
+          {
+            "coverage": 0.8503134796238244,
+            "error_rate": 0.29308755760368665,
+            "accepted": 1085
+          },
+          {
+            "coverage": 0.859717868338558,
+            "error_rate": 0.29626253418413856,
+            "accepted": 1097
+          },
+          {
+            "coverage": 0.8699059561128527,
+            "error_rate": 0.2990990990990991,
+            "accepted": 1110
+          },
+          {
+            "coverage": 0.8800940438871473,
+            "error_rate": 0.30632235084594833,
+            "accepted": 1123
+          },
+          {
+            "coverage": 0.890282131661442,
+            "error_rate": 0.3125,
+            "accepted": 1136
+          },
+          {
+            "coverage": 0.9004702194357367,
+            "error_rate": 0.3185378590078329,
+            "accepted": 1149
+          },
+          {
+            "coverage": 0.9098746081504702,
+            "error_rate": 0.32213608957795004,
+            "accepted": 1161
+          },
+          {
+            "coverage": 0.9200626959247649,
+            "error_rate": 0.32964224872231684,
+            "accepted": 1174
+          },
+          {
+            "coverage": 0.9302507836990596,
+            "error_rate": 0.33361415332771693,
+            "accepted": 1187
+          },
+          {
+            "coverage": 0.9396551724137931,
+            "error_rate": 0.33694745621351124,
+            "accepted": 1199
+          },
+          {
+            "coverage": 0.9498432601880877,
+            "error_rate": 0.3424092409240924,
+            "accepted": 1212
+          },
+          {
+            "coverage": 0.9600313479623824,
+            "error_rate": 0.34775510204081633,
+            "accepted": 1225
+          },
+          {
+            "coverage": 0.9702194357366771,
+            "error_rate": 0.35379644588045234,
+            "accepted": 1238
+          },
+          {
+            "coverage": 0.9804075235109718,
+            "error_rate": 0.354916067146283,
+            "accepted": 1251
+          },
+          {
+            "coverage": 0.9898119122257053,
+            "error_rate": 0.3586698337292161,
+            "accepted": 1263
+          },
+          {
+            "coverage": 1.0,
+            "error_rate": 0.3652037617554859,
+            "accepted": 1276
+          }
+        ]
+      },
+      "after": {
+        "ece": 0.05184135040991208,
+        "nll": 1.3240090166188334,
+        "brier": 0.49961330731699166,
+        "accuracy": 0.6347962382445141,
+        "bins": [
+          {
+            "lower": 0.0,
+            "upper": 0.06666666666666667,
+            "n": 1,
+            "mean_probability": 0.06315450949966182,
+            "accuracy": 0.0,
+            "accuracy_interval": [
+              0,
+              0.7934506856227626
+            ]
+          },
+          {
+            "lower": 0.06666666666666667,
+            "upper": 0.13333333333333333,
+            "n": 8,
+            "mean_probability": 0.10337348208237457,
+            "accuracy": 0.0,
+            "accuracy_interval": [
+              0,
+              0.32440756488388023
+            ]
+          },
+          {
+            "lower": 0.13333333333333333,
+            "upper": 0.2,
+            "n": 26,
+            "mean_probability": 0.16640613850051802,
+            "accuracy": 0.3076923076923077,
+            "accuracy_interval": [
+              0.16501315595463767,
+              0.4998825832219837
+            ]
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.26666666666666666,
+            "n": 40,
+            "mean_probability": 0.2375114145253799,
+            "accuracy": 0.25,
+            "accuracy_interval": [
+              0.14187118639096302,
+              0.40193961420768026
+            ]
+          },
+          {
+            "lower": 0.26666666666666666,
+            "upper": 0.3333333333333333,
+            "n": 60,
+            "mean_probability": 0.3006315891947665,
+            "accuracy": 0.18333333333333332,
+            "accuracy_interval": [
+              0.10557796889197638,
+              0.2991975374646805
+            ]
+          },
+          {
+            "lower": 0.3333333333333333,
+            "upper": 0.4,
+            "n": 88,
+            "mean_probability": 0.37206791735581535,
+            "accuracy": 0.2727272727272727,
+            "accuracy_interval": [
+              0.19065479899453314,
+              0.3738120494895087
+            ]
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.4666666666666667,
+            "n": 92,
+            "mean_probability": 0.4325019647216723,
+            "accuracy": 0.3804347826086957,
+            "accuracy_interval": [
+              0.28791157059835987,
+              0.48254267466559314
+            ]
+          },
+          {
+            "lower": 0.4666666666666667,
+            "upper": 0.5333333333333333,
+            "n": 118,
+            "mean_probability": 0.5028210576215415,
+            "accuracy": 0.4491525423728814,
+            "accuracy_interval": [
+              0.36242029793455255,
+              0.5390910585762096
+            ]
+          },
+          {
+            "lower": 0.5333333333333333,
+            "upper": 0.6,
+            "n": 121,
+            "mean_probability": 0.5682213817253146,
+            "accuracy": 0.5537190082644629,
+            "accuracy_interval": [
+              0.4648501506153885,
+              0.6392819231588495
+            ]
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.6666666666666666,
+            "n": 89,
+            "mean_probability": 0.6313902247401524,
+            "accuracy": 0.5842696629213483,
+            "accuracy_interval": [
+              0.4804710436601586,
+              0.6810947071427201
+            ]
+          },
+          {
+            "lower": 0.6666666666666666,
+            "upper": 0.7333333333333333,
+            "n": 99,
+            "mean_probability": 0.6990985030361905,
+            "accuracy": 0.8585858585858586,
+            "accuracy_interval": [
+              0.7765279060056491,
+              0.9138551439255049
+            ]
+          },
+          {
+            "lower": 0.7333333333333333,
+            "upper": 0.8,
+            "n": 111,
+            "mean_probability": 0.7661622379252567,
+            "accuracy": 0.7657657657657657,
+            "accuracy_interval": [
+              0.6789083976314091,
+              0.8348433485225536
+            ]
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.8666666666666667,
+            "n": 118,
+            "mean_probability": 0.8314227639962439,
+            "accuracy": 0.8050847457627118,
+            "accuracy_interval": [
+              0.7244726030031564,
+              0.8664592579322706
+            ]
+          },
+          {
+            "lower": 0.8666666666666667,
+            "upper": 0.9333333333333333,
+            "n": 116,
+            "mean_probability": 0.9020485856462694,
+            "accuracy": 0.853448275862069,
+            "accuracy_interval": [
+              0.7777948323656809,
+              0.9064424992466433
+            ]
+          },
+          {
+            "lower": 0.9333333333333333,
+            "upper": 1.0,
+            "n": 189,
+            "mean_probability": 0.9647819924872855,
+            "accuracy": 0.9841269841269841,
+            "accuracy_interval": [
+              0.954378753099871,
+              0.9945873101062531
+            ]
+          }
+        ],
+        "probability_one_questions": 0,
+        "risk_coverage": [
+          {
+            "coverage": 0,
+            "error_rate": null,
+            "accepted": 0
+          },
+          {
+            "coverage": 0.01018808777429467,
+            "error_rate": 0.0,
+            "accepted": 13
+          },
+          {
+            "coverage": 0.02037617554858934,
+            "error_rate": 0.0,
+            "accepted": 26
+          },
+          {
+            "coverage": 0.029780564263322883,
+            "error_rate": 0.0,
+            "accepted": 38
+          },
+          {
+            "coverage": 0.039968652037617555,
+            "error_rate": 0.0,
+            "accepted": 51
+          },
+          {
+            "coverage": 0.050156739811912224,
+            "error_rate": 0.015625,
+            "accepted": 64
+          },
+          {
+            "coverage": 0.05956112852664577,
+            "error_rate": 0.013157894736842105,
+            "accepted": 76
+          },
+          {
+            "coverage": 0.06974921630094044,
+            "error_rate": 0.011235955056179775,
+            "accepted": 89
+          },
+          {
+            "coverage": 0.07993730407523511,
+            "error_rate": 0.00980392156862745,
+            "accepted": 102
+          },
+          {
+            "coverage": 0.09012539184952978,
+            "error_rate": 0.008695652173913044,
+            "accepted": 115
+          },
+          {
+            "coverage": 0.10031347962382445,
+            "error_rate": 0.0078125,
+            "accepted": 128
+          },
+          {
+            "coverage": 0.109717868338558,
+            "error_rate": 0.007142857142857143,
+            "accepted": 140
+          },
+          {
+            "coverage": 0.11990595611285267,
+            "error_rate": 0.006535947712418301,
+            "accepted": 153
+          },
+          {
+            "coverage": 0.13009404388714735,
+            "error_rate": 0.012048192771084338,
+            "accepted": 166
+          },
+          {
+            "coverage": 0.13949843260188088,
+            "error_rate": 0.011235955056179775,
+            "accepted": 178
+          },
+          {
+            "coverage": 0.14968652037617555,
+            "error_rate": 0.015706806282722512,
+            "accepted": 191
+          },
+          {
+            "coverage": 0.15987460815047022,
+            "error_rate": 0.024509803921568627,
+            "accepted": 204
+          },
+          {
+            "coverage": 0.1700626959247649,
+            "error_rate": 0.027649769585253458,
+            "accepted": 217
+          },
+          {
+            "coverage": 0.18025078369905956,
+            "error_rate": 0.030434782608695653,
+            "accepted": 230
+          },
+          {
+            "coverage": 0.1896551724137931,
+            "error_rate": 0.03305785123966942,
+            "accepted": 242
+          },
+          {
+            "coverage": 0.19984326018808776,
+            "error_rate": 0.03529411764705882,
+            "accepted": 255
+          },
+          {
+            "coverage": 0.21003134796238246,
+            "error_rate": 0.04477611940298507,
+            "accepted": 268
+          },
+          {
+            "coverage": 0.219435736677116,
+            "error_rate": 0.04642857142857143,
+            "accepted": 280
+          },
+          {
+            "coverage": 0.22962382445141066,
+            "error_rate": 0.06143344709897611,
+            "accepted": 293
+          },
+          {
+            "coverage": 0.23981191222570533,
+            "error_rate": 0.06535947712418301,
+            "accepted": 306
+          },
+          {
+            "coverage": 0.25,
+            "error_rate": 0.07523510971786834,
+            "accepted": 319
+          },
+          {
+            "coverage": 0.2601880877742947,
+            "error_rate": 0.0783132530120482,
+            "accepted": 332
+          },
+          {
+            "coverage": 0.26959247648902823,
+            "error_rate": 0.0872093023255814,
+            "accepted": 344
+          },
+          {
+            "coverage": 0.2797805642633229,
+            "error_rate": 0.0896358543417367,
+            "accepted": 357
+          },
+          {
+            "coverage": 0.28996865203761757,
+            "error_rate": 0.0945945945945946,
+            "accepted": 370
+          },
+          {
+            "coverage": 0.2993730407523511,
+            "error_rate": 0.09947643979057591,
+            "accepted": 382
+          },
+          {
+            "coverage": 0.30956112852664575,
+            "error_rate": 0.09873417721518987,
+            "accepted": 395
+          },
+          {
+            "coverage": 0.31974921630094044,
+            "error_rate": 0.10049019607843138,
+            "accepted": 408
+          },
+          {
+            "coverage": 0.3299373040752351,
+            "error_rate": 0.1021377672209026,
+            "accepted": 421
+          },
+          {
+            "coverage": 0.3401253918495298,
+            "error_rate": 0.10829493087557604,
+            "accepted": 434
+          },
+          {
+            "coverage": 0.3495297805642633,
+            "error_rate": 0.10986547085201794,
+            "accepted": 446
+          },
+          {
+            "coverage": 0.359717868338558,
+            "error_rate": 0.11328976034858387,
+            "accepted": 459
+          },
+          {
+            "coverage": 0.36990595611285265,
+            "error_rate": 0.11652542372881355,
+            "accepted": 472
+          },
+          {
+            "coverage": 0.3793103448275862,
+            "error_rate": 0.11776859504132231,
+            "accepted": 484
+          },
+          {
+            "coverage": 0.3894984326018809,
+            "error_rate": 0.12072434607645875,
+            "accepted": 497
+          },
+          {
+            "coverage": 0.3996865203761755,
+            "error_rate": 0.12352941176470589,
+            "accepted": 510
+          },
+          {
+            "coverage": 0.4098746081504702,
+            "error_rate": 0.12619502868068833,
+            "accepted": 523
+          },
+          {
+            "coverage": 0.4200626959247649,
+            "error_rate": 0.1287313432835821,
+            "accepted": 536
+          },
+          {
+            "coverage": 0.42946708463949845,
+            "error_rate": 0.12956204379562045,
+            "accepted": 548
+          },
+          {
+            "coverage": 0.4396551724137931,
+            "error_rate": 0.13012477718360071,
+            "accepted": 561
+          },
+          {
+            "coverage": 0.4498432601880878,
+            "error_rate": 0.13066202090592335,
+            "accepted": 574
+          },
+          {
+            "coverage": 0.4592476489028213,
+            "error_rate": 0.1296928327645051,
+            "accepted": 586
+          },
+          {
+            "coverage": 0.46943573667711597,
+            "error_rate": 0.1302170283806344,
+            "accepted": 599
+          },
+          {
+            "coverage": 0.47962382445141066,
+            "error_rate": 0.13071895424836602,
+            "accepted": 612
+          },
+          {
+            "coverage": 0.4898119122257053,
+            "error_rate": 0.1312,
+            "accepted": 625
+          },
+          {
+            "coverage": 0.5,
+            "error_rate": 0.13166144200626959,
+            "accepted": 638
+          },
+          {
+            "coverage": 0.5094043887147336,
+            "error_rate": 0.13692307692307693,
+            "accepted": 650
+          },
+          {
+            "coverage": 0.5195924764890282,
+            "error_rate": 0.14328808446455504,
+            "accepted": 663
+          },
+          {
+            "coverage": 0.5297805642633229,
+            "error_rate": 0.15236686390532544,
+            "accepted": 676
+          },
+          {
+            "coverage": 0.5391849529780565,
+            "error_rate": 0.1569767441860465,
+            "accepted": 688
+          },
+          {
+            "coverage": 0.549373040752351,
+            "error_rate": 0.16119828815977175,
+            "accepted": 701
+          },
+          {
+            "coverage": 0.5595611285266457,
+            "error_rate": 0.16526610644257703,
+            "accepted": 714
+          },
+          {
+            "coverage": 0.5705329153605015,
+            "error_rate": 0.17032967032967034,
+            "accepted": 728
+          },
+          {
+            "coverage": 0.5807210031347962,
+            "error_rate": 0.17813765182186234,
+            "accepted": 741
+          },
+          {
+            "coverage": 0.5901253918495298,
+            "error_rate": 0.18193891102257637,
+            "accepted": 753
+          },
+          {
+            "coverage": 0.6003134796238244,
+            "error_rate": 0.1866840731070496,
+            "accepted": 766
+          },
+          {
+            "coverage": 0.6105015673981191,
+            "error_rate": 0.18870346598202825,
+            "accepted": 779
+          },
+          {
+            "coverage": 0.6199059561128527,
+            "error_rate": 0.19216182048040456,
+            "accepted": 791
+          },
+          {
+            "coverage": 0.6300940438871473,
+            "error_rate": 0.19527363184079602,
+            "accepted": 804
+          },
+          {
+            "coverage": 0.640282131661442,
+            "error_rate": 0.19951040391676866,
+            "accepted": 817
+          },
+          {
+            "coverage": 0.6504702194357367,
+            "error_rate": 0.2036144578313253,
+            "accepted": 830
+          },
+          {
+            "coverage": 0.6606583072100314,
+            "error_rate": 0.20640569395017794,
+            "accepted": 843
+          },
+          {
+            "coverage": 0.6700626959247649,
+            "error_rate": 0.21052631578947367,
+            "accepted": 855
+          },
+          {
+            "coverage": 0.6802507836990596,
+            "error_rate": 0.2119815668202765,
+            "accepted": 868
+          },
+          {
+            "coverage": 0.6904388714733543,
+            "error_rate": 0.21793416572077184,
+            "accepted": 881
+          },
+          {
+            "coverage": 0.6998432601880877,
+            "error_rate": 0.21836506159014557,
+            "accepted": 893
+          },
+          {
+            "coverage": 0.7100313479623824,
+            "error_rate": 0.2240618101545254,
+            "accepted": 906
+          },
+          {
+            "coverage": 0.7202194357366771,
+            "error_rate": 0.2295973884657236,
+            "accepted": 919
+          },
+          {
+            "coverage": 0.7304075235109718,
+            "error_rate": 0.2371244635193133,
+            "accepted": 932
+          },
+          {
+            "coverage": 0.7405956112852664,
+            "error_rate": 0.24126984126984127,
+            "accepted": 945
+          },
+          {
+            "coverage": 0.75,
+            "error_rate": 0.2476489028213166,
+            "accepted": 957
+          },
+          {
+            "coverage": 0.7601880877742947,
+            "error_rate": 0.25463917525773194,
+            "accepted": 970
+          },
+          {
+            "coverage": 0.7703761755485894,
+            "error_rate": 0.25940996948118006,
+            "accepted": 983
+          },
+          {
+            "coverage": 0.7797805642633229,
+            "error_rate": 0.2633165829145729,
+            "accepted": 995
+          },
+          {
+            "coverage": 0.7899686520376176,
+            "error_rate": 0.26785714285714285,
+            "accepted": 1008
+          },
+          {
+            "coverage": 0.8001567398119123,
+            "error_rate": 0.2722820763956905,
+            "accepted": 1021
+          },
+          {
+            "coverage": 0.8103448275862069,
+            "error_rate": 0.2775628626692456,
+            "accepted": 1034
+          },
+          {
+            "coverage": 0.8205329153605015,
+            "error_rate": 0.27793696275071633,
+            "accepted": 1047
+          },
+          {
+            "coverage": 0.8299373040752351,
+            "error_rate": 0.28328611898017,
+            "accepted": 1059
+          },
+          {
+            "coverage": 0.8401253918495298,
+            "error_rate": 0.2891791044776119,
+            "accepted": 1072
+          },
+          {
+            "coverage": 0.8503134796238244,
+            "error_rate": 0.2921658986175115,
+            "accepted": 1085
+          },
+          {
+            "coverage": 0.859717868338558,
+            "error_rate": 0.29808568824065634,
+            "accepted": 1097
+          },
+          {
+            "coverage": 0.8699059561128527,
+            "error_rate": 0.3027027027027027,
+            "accepted": 1110
+          },
+          {
+            "coverage": 0.8800940438871473,
+            "error_rate": 0.3072128227960819,
+            "accepted": 1123
+          },
+          {
+            "coverage": 0.890282131661442,
+            "error_rate": 0.3125,
+            "accepted": 1136
+          },
+          {
+            "coverage": 0.9004702194357367,
+            "error_rate": 0.3185378590078329,
+            "accepted": 1149
+          },
+          {
+            "coverage": 0.9098746081504702,
+            "error_rate": 0.32385874246339363,
+            "accepted": 1161
+          },
+          {
+            "coverage": 0.9200626959247649,
+            "error_rate": 0.32964224872231684,
+            "accepted": 1174
+          },
+          {
+            "coverage": 0.9302507836990596,
+            "error_rate": 0.33614153327716934,
+            "accepted": 1187
+          },
+          {
+            "coverage": 0.9396551724137931,
+            "error_rate": 0.3394495412844037,
+            "accepted": 1199
+          },
+          {
+            "coverage": 0.9498432601880877,
+            "error_rate": 0.3448844884488449,
+            "accepted": 1212
+          },
+          {
+            "coverage": 0.9600313479623824,
+            "error_rate": 0.3485714285714286,
+            "accepted": 1225
+          },
+          {
+            "coverage": 0.9702194357366771,
+            "error_rate": 0.3529886914378029,
+            "accepted": 1238
+          },
+          {
+            "coverage": 0.9804075235109718,
+            "error_rate": 0.35571542765787373,
+            "accepted": 1251
+          },
+          {
+            "coverage": 0.9898119122257053,
+            "error_rate": 0.3586698337292161,
+            "accepted": 1263
+          },
+          {
+            "coverage": 1.0,
+            "error_rate": 0.3652037617554859,
+            "accepted": 1276
+          }
+        ]
+      },
+      "operating_points": [
+        {
+          "validation_target": 0.01,
+          "test": {
+            "threshold": null,
+            "eligible": 1276,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "manual_review": 1276,
+            "error_rate": null,
+            "error_interval": null
+          },
+          "policy_url": "/reliability/data/Valen-0.8B/policy-0.json"
+        },
+        {
+          "validation_target": 0.02,
+          "test": {
+            "threshold": null,
+            "eligible": 1276,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "manual_review": 1276,
+            "error_rate": null,
+            "error_interval": null
+          },
+          "policy_url": "/reliability/data/Valen-0.8B/policy-1.json"
+        },
+        {
+          "validation_target": 0.05,
+          "test": {
+            "threshold": 0.9498780855727821,
+            "eligible": 1276,
+            "accepted": 147,
+            "errors": 1,
+            "coverage": 0.1152037617554859,
+            "manual_review": 1129,
+            "error_rate": 0.006802721088435374,
+            "error_interval": [
+              0.0012018583516737805,
+              0.03752395924757055
+            ]
+          },
+          "policy_url": "/reliability/data/Valen-0.8B/policy-2.json"
+        },
+        {
+          "validation_target": 0.1,
+          "test": {
+            "threshold": 0.8089398115841104,
+            "eligible": 1276,
+            "accepted": 404,
+            "errors": 40,
+            "coverage": 0.3166144200626959,
+            "manual_review": 872,
+            "error_rate": 0.09900990099009901,
+            "error_interval": [
+              0.07355490307294044,
+              0.13201875062849625
+            ]
+          },
+          "policy_url": "/reliability/data/Valen-0.8B/policy-3.json"
+        }
+      ]
+    },
+    {
+      "model": "Valen-2B",
+      "status": "measured",
+      "revision": "fb9205c2541abc97ce276670e66f79b78d9068fc",
+      "questions": 1276,
+      "report_url": "/reliability/data/Valen-2B/report.json.gz",
+      "report_bytes": 563862,
+      "calibration_url": "/reliability/data/Valen-2B/calibration.json",
+      "protocol_url": "/reliability/data/Valen-2B/protocol.json",
+      "source_url": "https://github.com/PolyAI-LDN/task-specific-datasets/tree/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data",
+      "scope": "BANKING77 · English · 77 candidate intents · retrospective public-test replay. Not a production or vision guarantee.",
+      "before": {
+        "ece": 0.07009794982870009,
+        "nll": 1.1321238315760194,
+        "brier": 0.44163227174059516,
+        "accuracy": 0.6927899686520376,
+        "bins": [
+          {
+            "lower": 0.0,
+            "upper": 0.06666666666666667,
+            "n": 0,
+            "mean_probability": null,
+            "accuracy": null,
+            "accuracy_interval": null
+          },
+          {
+            "lower": 0.06666666666666667,
+            "upper": 0.13333333333333333,
+            "n": 3,
+            "mean_probability": 0.1220863780439879,
+            "accuracy": 0.0,
+            "accuracy_interval": [
+              5.551115123125783e-17,
+              0.5614970317550454
+            ]
+          },
+          {
+            "lower": 0.13333333333333333,
+            "upper": 0.2,
+            "n": 3,
+            "mean_probability": 0.16833950123605038,
+            "accuracy": 0.3333333333333333,
+            "accuracy_interval": [
+              0.06149194472039621,
+              0.7923403991979522
+            ]
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.26666666666666666,
+            "n": 25,
+            "mean_probability": 0.23525536880338527,
+            "accuracy": 0.28,
+            "accuracy_interval": [
+              0.14283853850956563,
+              0.47576605190361576
+            ]
+          },
+          {
+            "lower": 0.26666666666666666,
+            "upper": 0.3333333333333333,
+            "n": 45,
+            "mean_probability": 0.30168289900056133,
+            "accuracy": 0.24444444444444444,
+            "accuracy_interval": [
+              0.1423547943377172,
+              0.3867338005702035
+            ]
+          },
+          {
+            "lower": 0.3333333333333333,
+            "upper": 0.4,
+            "n": 59,
+            "mean_probability": 0.3682693905522081,
+            "accuracy": 0.3050847457627119,
+            "accuracy_interval": [
+              0.20253631980116063,
+              0.4314632653194519
+            ]
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.4666666666666667,
+            "n": 62,
+            "mean_probability": 0.43376587716287396,
+            "accuracy": 0.3225806451612903,
+            "accuracy_interval": [
+              0.21954490651283892,
+              0.44631911907151905
+            ]
+          },
+          {
+            "lower": 0.4666666666666667,
+            "upper": 0.5333333333333333,
+            "n": 77,
+            "mean_probability": 0.49929351812998246,
+            "accuracy": 0.4935064935064935,
+            "accuracy_interval": [
+              0.38483020307212373,
+              0.6027999063471285
+            ]
+          },
+          {
+            "lower": 0.5333333333333333,
+            "upper": 0.6,
+            "n": 76,
+            "mean_probability": 0.5649920862744043,
+            "accuracy": 0.4342105263157895,
+            "accuracy_interval": [
+              0.32860931819217054,
+              0.5461424693164003
+            ]
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.6666666666666666,
+            "n": 59,
+            "mean_probability": 0.6311183850968154,
+            "accuracy": 0.6949152542372882,
+            "accuracy_interval": [
+              0.5685367346805482,
+              0.7974636801988394
+            ]
+          },
+          {
+            "lower": 0.6666666666666666,
+            "upper": 0.7333333333333333,
+            "n": 81,
+            "mean_probability": 0.7025129665894014,
+            "accuracy": 0.5802469135802469,
+            "accuracy_interval": [
+              0.471536601425932,
+              0.6816903725170137
+            ]
+          },
+          {
+            "lower": 0.7333333333333333,
+            "upper": 0.8,
+            "n": 89,
+            "mean_probability": 0.7632358318582992,
+            "accuracy": 0.6741573033707865,
+            "accuracy_interval": [
+              0.5713422761622178,
+              0.7625602754970651
+            ]
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.8666666666666667,
+            "n": 104,
+            "mean_probability": 0.8347560022468316,
+            "accuracy": 0.7596153846153846,
+            "accuracy_interval": [
+              0.6691888609329077,
+              0.8315462050660114
+            ]
+          },
+          {
+            "lower": 0.8666666666666667,
+            "upper": 0.9333333333333333,
+            "n": 184,
+            "mean_probability": 0.9027354860042981,
+            "accuracy": 0.8043478260869565,
+            "accuracy_interval": [
+              0.741052834473102,
+              0.8551946643653237
+            ]
+          },
+          {
+            "lower": 0.9333333333333333,
+            "upper": 1.0,
+            "n": 409,
+            "mean_probability": 0.9715635965027767,
+            "accuracy": 0.9315403422982885,
+            "accuracy_interval": [
+              0.9028363073070552,
+              0.9522134762305895
+            ]
+          }
+        ],
+        "probability_one_questions": 0,
+        "risk_coverage": [
+          {
+            "coverage": 0,
+            "error_rate": null,
+            "accepted": 0
+          },
+          {
+            "coverage": 0.01018808777429467,
+            "error_rate": 0.0,
+            "accepted": 13
+          },
+          {
+            "coverage": 0.02037617554858934,
+            "error_rate": 0.0,
+            "accepted": 26
+          },
+          {
+            "coverage": 0.029780564263322883,
+            "error_rate": 0.0,
+            "accepted": 38
+          },
+          {
+            "coverage": 0.039968652037617555,
+            "error_rate": 0.0,
+            "accepted": 51
+          },
+          {
+            "coverage": 0.050156739811912224,
+            "error_rate": 0.0,
+            "accepted": 64
+          },
+          {
+            "coverage": 0.05956112852664577,
+            "error_rate": 0.013157894736842105,
+            "accepted": 76
+          },
+          {
+            "coverage": 0.06974921630094044,
+            "error_rate": 0.011235955056179775,
+            "accepted": 89
+          },
+          {
+            "coverage": 0.07993730407523511,
+            "error_rate": 0.00980392156862745,
+            "accepted": 102
+          },
+          {
+            "coverage": 0.09012539184952978,
+            "error_rate": 0.017391304347826087,
+            "accepted": 115
+          },
+          {
+            "coverage": 0.10031347962382445,
+            "error_rate": 0.015625,
+            "accepted": 128
+          },
+          {
+            "coverage": 0.109717868338558,
+            "error_rate": 0.02857142857142857,
+            "accepted": 140
+          },
+          {
+            "coverage": 0.11990595611285267,
+            "error_rate": 0.0392156862745098,
+            "accepted": 153
+          },
+          {
+            "coverage": 0.13009404388714735,
+            "error_rate": 0.04216867469879518,
+            "accepted": 166
+          },
+          {
+            "coverage": 0.13949843260188088,
+            "error_rate": 0.03932584269662921,
+            "accepted": 178
+          },
+          {
+            "coverage": 0.14968652037617555,
+            "error_rate": 0.03664921465968586,
+            "accepted": 191
+          },
+          {
+            "coverage": 0.15987460815047022,
+            "error_rate": 0.03431372549019608,
+            "accepted": 204
+          },
+          {
+            "coverage": 0.1700626959247649,
+            "error_rate": 0.03225806451612903,
+            "accepted": 217
+          },
+          {
+            "coverage": 0.18025078369905956,
+            "error_rate": 0.034782608695652174,
+            "accepted": 230
+          },
+          {
+            "coverage": 0.1896551724137931,
+            "error_rate": 0.0371900826446281,
+            "accepted": 242
+          },
+          {
+            "coverage": 0.19984326018808776,
+            "error_rate": 0.03529411764705882,
+            "accepted": 255
+          },
+          {
+            "coverage": 0.21003134796238246,
+            "error_rate": 0.041044776119402986,
+            "accepted": 268
+          },
+          {
+            "coverage": 0.219435736677116,
+            "error_rate": 0.05,
+            "accepted": 280
+          },
+          {
+            "coverage": 0.22962382445141066,
+            "error_rate": 0.05460750853242321,
+            "accepted": 293
+          },
+          {
+            "coverage": 0.23981191222570533,
+            "error_rate": 0.05555555555555555,
+            "accepted": 306
+          },
+          {
+            "coverage": 0.25,
+            "error_rate": 0.05329153605015674,
+            "accepted": 319
+          },
+          {
+            "coverage": 0.2601880877742947,
+            "error_rate": 0.05120481927710843,
+            "accepted": 332
+          },
+          {
+            "coverage": 0.26959247648902823,
+            "error_rate": 0.055232558139534885,
+            "accepted": 344
+          },
+          {
+            "coverage": 0.2797805642633229,
+            "error_rate": 0.05322128851540616,
+            "accepted": 357
+          },
+          {
+            "coverage": 0.28996865203761757,
+            "error_rate": 0.062162162162162166,
+            "accepted": 370
+          },
+          {
+            "coverage": 0.2993730407523511,
+            "error_rate": 0.06544502617801047,
+            "accepted": 382
+          },
+          {
+            "coverage": 0.30956112852664575,
+            "error_rate": 0.06582278481012659,
+            "accepted": 395
+          },
+          {
+            "coverage": 0.31974921630094044,
+            "error_rate": 0.06862745098039216,
+            "accepted": 408
+          },
+          {
+            "coverage": 0.3299373040752351,
+            "error_rate": 0.0688836104513064,
+            "accepted": 421
+          },
+          {
+            "coverage": 0.3401253918495298,
+            "error_rate": 0.07142857142857142,
+            "accepted": 434
+          },
+          {
+            "coverage": 0.3495297805642633,
+            "error_rate": 0.07399103139013453,
+            "accepted": 446
+          },
+          {
+            "coverage": 0.359717868338558,
+            "error_rate": 0.08278867102396514,
+            "accepted": 459
+          },
+          {
+            "coverage": 0.36990595611285265,
+            "error_rate": 0.08898305084745763,
+            "accepted": 472
+          },
+          {
+            "coverage": 0.3793103448275862,
+            "error_rate": 0.08884297520661157,
+            "accepted": 484
+          },
+          {
+            "coverage": 0.3894984326018809,
+            "error_rate": 0.09054325955734406,
+            "accepted": 497
+          },
+          {
+            "coverage": 0.3996865203761755,
+            "error_rate": 0.09411764705882353,
+            "accepted": 510
+          },
+          {
+            "coverage": 0.4098746081504702,
+            "error_rate": 0.09560229445506692,
+            "accepted": 523
+          },
+          {
+            "coverage": 0.4200626959247649,
+            "error_rate": 0.09701492537313433,
+            "accepted": 536
+          },
+          {
+            "coverage": 0.42946708463949845,
+            "error_rate": 0.10218978102189781,
+            "accepted": 548
+          },
+          {
+            "coverage": 0.4396551724137931,
+            "error_rate": 0.1051693404634581,
+            "accepted": 561
+          },
+          {
+            "coverage": 0.4498432601880878,
+            "error_rate": 0.10452961672473868,
+            "accepted": 574
+          },
+          {
+            "coverage": 0.4592476489028213,
+            "error_rate": 0.10409556313993173,
+            "accepted": 586
+          },
+          {
+            "coverage": 0.46943573667711597,
+            "error_rate": 0.11018363939899833,
+            "accepted": 599
+          },
+          {
+            "coverage": 0.47962382445141066,
+            "error_rate": 0.11274509803921569,
+            "accepted": 612
+          },
+          {
+            "coverage": 0.4898119122257053,
+            "error_rate": 0.1152,
+            "accepted": 625
+          },
+          {
+            "coverage": 0.5,
+            "error_rate": 0.11598746081504702,
+            "accepted": 638
+          },
+          {
+            "coverage": 0.5094043887147336,
+            "error_rate": 0.12153846153846154,
+            "accepted": 650
+          },
+          {
+            "coverage": 0.5195924764890282,
+            "error_rate": 0.12669683257918551,
+            "accepted": 663
+          },
+          {
+            "coverage": 0.5297805642633229,
+            "error_rate": 0.12721893491124261,
+            "accepted": 676
+          },
+          {
+            "coverage": 0.5391849529780565,
+            "error_rate": 0.12790697674418605,
+            "accepted": 688
+          },
+          {
+            "coverage": 0.549373040752351,
+            "error_rate": 0.12981455064194009,
+            "accepted": 701
+          },
+          {
+            "coverage": 0.5595611285266457,
+            "error_rate": 0.13025210084033614,
+            "accepted": 714
+          },
+          {
+            "coverage": 0.5697492163009404,
+            "error_rate": 0.1361760660247593,
+            "accepted": 727
+          },
+          {
+            "coverage": 0.5799373040752351,
+            "error_rate": 0.13783783783783785,
+            "accepted": 740
+          },
+          {
+            "coverage": 0.5893416927899686,
+            "error_rate": 0.14095744680851063,
+            "accepted": 752
+          },
+          {
+            "coverage": 0.5995297805642633,
+            "error_rate": 0.1411764705882353,
+            "accepted": 765
+          },
+          {
+            "coverage": 0.609717868338558,
+            "error_rate": 0.14652956298200515,
+            "accepted": 778
+          },
+          {
+            "coverage": 0.6191222570532915,
+            "error_rate": 0.1518987341772152,
+            "accepted": 790
+          },
+          {
+            "coverage": 0.6293103448275862,
+            "error_rate": 0.15940224159402241,
+            "accepted": 803
+          },
+          {
+            "coverage": 0.6394984326018809,
+            "error_rate": 0.16299019607843138,
+            "accepted": 816
+          },
+          {
+            "coverage": 0.6496865203761756,
+            "error_rate": 0.16767189384800965,
+            "accepted": 829
+          },
+          {
+            "coverage": 0.6598746081504702,
+            "error_rate": 0.16983372921615203,
+            "accepted": 842
+          },
+          {
+            "coverage": 0.6692789968652038,
+            "error_rate": 0.1721311475409836,
+            "accepted": 854
+          },
+          {
+            "coverage": 0.6794670846394985,
+            "error_rate": 0.17531718569780855,
+            "accepted": 867
+          },
+          {
+            "coverage": 0.6896551724137931,
+            "error_rate": 0.17727272727272728,
+            "accepted": 880
+          },
+          {
+            "coverage": 0.6990595611285266,
+            "error_rate": 0.1804932735426009,
+            "accepted": 892
+          },
+          {
+            "coverage": 0.7092476489028213,
+            "error_rate": 0.18342541436464088,
+            "accepted": 905
+          },
+          {
+            "coverage": 0.719435736677116,
+            "error_rate": 0.1840958605664488,
+            "accepted": 918
+          },
+          {
+            "coverage": 0.7296238244514106,
+            "error_rate": 0.1858216970998926,
+            "accepted": 931
+          },
+          {
+            "coverage": 0.7398119122257053,
+            "error_rate": 0.1917372881355932,
+            "accepted": 944
+          },
+          {
+            "coverage": 0.7492163009404389,
+            "error_rate": 0.19769874476987448,
+            "accepted": 956
+          },
+          {
+            "coverage": 0.7601880877742947,
+            "error_rate": 0.20309278350515464,
+            "accepted": 970
+          },
+          {
+            "coverage": 0.7703761755485894,
+            "error_rate": 0.2034587995930824,
+            "accepted": 983
+          },
+          {
+            "coverage": 0.7797805642633229,
+            "error_rate": 0.20904522613065327,
+            "accepted": 995
+          },
+          {
+            "coverage": 0.7899686520376176,
+            "error_rate": 0.21329365079365079,
+            "accepted": 1008
+          },
+          {
+            "coverage": 0.8001567398119123,
+            "error_rate": 0.21743388834476005,
+            "accepted": 1021
+          },
+          {
+            "coverage": 0.8103448275862069,
+            "error_rate": 0.21953578336557059,
+            "accepted": 1034
+          },
+          {
+            "coverage": 0.8205329153605015,
+            "error_rate": 0.22349570200573066,
+            "accepted": 1047
+          },
+          {
+            "coverage": 0.8299373040752351,
+            "error_rate": 0.22568460812086874,
+            "accepted": 1059
+          },
+          {
+            "coverage": 0.8401253918495298,
+            "error_rate": 0.23134328358208955,
+            "accepted": 1072
+          },
+          {
+            "coverage": 0.8503134796238244,
+            "error_rate": 0.2359447004608295,
+            "accepted": 1085
+          },
+          {
+            "coverage": 0.859717868338558,
+            "error_rate": 0.2406563354603464,
+            "accepted": 1097
+          },
+          {
+            "coverage": 0.8699059561128527,
+            "error_rate": 0.24504504504504504,
+            "accepted": 1110
+          },
+          {
+            "coverage": 0.8800940438871473,
+            "error_rate": 0.2493321460373998,
+            "accepted": 1123
+          },
+          {
+            "coverage": 0.890282131661442,
+            "error_rate": 0.25528169014084506,
+            "accepted": 1136
+          },
+          {
+            "coverage": 0.9004702194357367,
+            "error_rate": 0.26109660574412535,
+            "accepted": 1149
+          },
+          {
+            "coverage": 0.9098746081504702,
+            "error_rate": 0.2661498708010336,
+            "accepted": 1161
+          },
+          {
+            "coverage": 0.9200626959247649,
+            "error_rate": 0.2734241908006814,
+            "accepted": 1174
+          },
+          {
+            "coverage": 0.9302507836990596,
+            "error_rate": 0.2763268744734625,
+            "accepted": 1187
+          },
+          {
+            "coverage": 0.9396551724137931,
+            "error_rate": 0.2793994995829858,
+            "accepted": 1199
+          },
+          {
+            "coverage": 0.9498432601880877,
+            "error_rate": 0.2838283828382838,
+            "accepted": 1212
+          },
+          {
+            "coverage": 0.9600313479623824,
+            "error_rate": 0.2897959183673469,
+            "accepted": 1225
+          },
+          {
+            "coverage": 0.9702194357366771,
+            "error_rate": 0.2940226171243942,
+            "accepted": 1238
+          },
+          {
+            "coverage": 0.9804075235109718,
+            "error_rate": 0.2981614708233413,
+            "accepted": 1251
+          },
+          {
+            "coverage": 0.9898119122257053,
+            "error_rate": 0.30245447347585114,
+            "accepted": 1263
+          },
+          {
+            "coverage": 1.0,
+            "error_rate": 0.3072100313479624,
+            "accepted": 1276
+          }
+        ]
+      },
+      "after": {
+        "ece": 0.033661357241636894,
+        "nll": 1.1053042962498192,
+        "brier": 0.43679336795233886,
+        "accuracy": 0.6927899686520376,
+        "bins": [
+          {
+            "lower": 0.0,
+            "upper": 0.06666666666666667,
+            "n": 0,
+            "mean_probability": null,
+            "accuracy": null,
+            "accuracy_interval": null
+          },
+          {
+            "lower": 0.06666666666666667,
+            "upper": 0.13333333333333333,
+            "n": 4,
+            "mean_probability": 0.10839225437543946,
+            "accuracy": 0.25,
+            "accuracy_interval": [
+              0.04558726080970055,
+              0.6993581574175981
+            ]
+          },
+          {
+            "lower": 0.13333333333333333,
+            "upper": 0.2,
+            "n": 11,
+            "mean_probability": 0.17803377118137068,
+            "accuracy": 0.18181818181818182,
+            "accuracy_interval": [
+              0.05136768974608513,
+              0.4769805619608442
+            ]
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.26666666666666666,
+            "n": 44,
+            "mean_probability": 0.23566008742923136,
+            "accuracy": 0.29545454545454547,
+            "accuracy_interval": [
+              0.1815552911850489,
+              0.44220200126160236
+            ]
+          },
+          {
+            "lower": 0.26666666666666666,
+            "upper": 0.3333333333333333,
+            "n": 62,
+            "mean_probability": 0.3054722102778449,
+            "accuracy": 0.2903225806451613,
+            "accuracy_interval": [
+              0.1922355728861953,
+              0.4128764573498641
+            ]
+          },
+          {
+            "lower": 0.3333333333333333,
+            "upper": 0.4,
+            "n": 61,
+            "mean_probability": 0.36766947282810974,
+            "accuracy": 0.29508196721311475,
+            "accuracy_interval": [
+              0.19555018758276055,
+              0.4188940205722037
+            ]
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.4666666666666667,
+            "n": 82,
+            "mean_probability": 0.43242200932900265,
+            "accuracy": 0.45121951219512196,
+            "accuracy_interval": [
+              0.34811270021487606,
+              0.5586922386817192
+            ]
+          },
+          {
+            "lower": 0.4666666666666667,
+            "upper": 0.5333333333333333,
+            "n": 80,
+            "mean_probability": 0.5001965782424298,
+            "accuracy": 0.4875,
+            "accuracy_interval": [
+              0.38107879540381073,
+              0.5950666578345774
+            ]
+          },
+          {
+            "lower": 0.5333333333333333,
+            "upper": 0.6,
+            "n": 69,
+            "mean_probability": 0.5685689337176855,
+            "accuracy": 0.6666666666666666,
+            "accuracy_interval": [
+              0.5492647542871832,
+              0.7664894929831328
+            ]
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.6666666666666666,
+            "n": 82,
+            "mean_probability": 0.6363673628685075,
+            "accuracy": 0.5487804878048781,
+            "accuracy_interval": [
+              0.44130776131828087,
+              0.651887299785124
+            ]
+          },
+          {
+            "lower": 0.6666666666666666,
+            "upper": 0.7333333333333333,
+            "n": 92,
+            "mean_probability": 0.6964664415913334,
+            "accuracy": 0.7065217391304348,
+            "accuracy_interval": [
+              0.6067052889274723,
+              0.789782832889336
+            ]
+          },
+          {
+            "lower": 0.7333333333333333,
+            "upper": 0.8,
+            "n": 91,
+            "mean_probability": 0.7698345653869073,
+            "accuracy": 0.7582417582417582,
+            "accuracy_interval": [
+              0.6609819026529657,
+              0.8345819634497005
+            ]
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.8666666666666667,
+            "n": 137,
+            "mean_probability": 0.8367765623002139,
+            "accuracy": 0.781021897810219,
+            "accuracy_interval": [
+              0.7046291889884262,
+              0.8420848300564137
+            ]
+          },
+          {
+            "lower": 0.8666666666666667,
+            "upper": 0.9333333333333333,
+            "n": 212,
+            "mean_probability": 0.9038345020288328,
+            "accuracy": 0.8726415094339622,
+            "accuracy_interval": [
+              0.8210429596550906,
+              0.9109758140470241
+            ]
+          },
+          {
+            "lower": 0.9333333333333333,
+            "upper": 1.0,
+            "n": 249,
+            "mean_probability": 0.9662909084169051,
+            "accuracy": 0.9598393574297188,
+            "accuracy_interval": [
+              0.9276642205216212,
+              0.9780416754501242
+            ]
+          }
+        ],
+        "probability_one_questions": 0,
+        "risk_coverage": [
+          {
+            "coverage": 0,
+            "error_rate": null,
+            "accepted": 0
+          },
+          {
+            "coverage": 0.01018808777429467,
+            "error_rate": 0.0,
+            "accepted": 13
+          },
+          {
+            "coverage": 0.02037617554858934,
+            "error_rate": 0.0,
+            "accepted": 26
+          },
+          {
+            "coverage": 0.029780564263322883,
+            "error_rate": 0.0,
+            "accepted": 38
+          },
+          {
+            "coverage": 0.039968652037617555,
+            "error_rate": 0.0,
+            "accepted": 51
+          },
+          {
+            "coverage": 0.050156739811912224,
+            "error_rate": 0.0,
+            "accepted": 64
+          },
+          {
+            "coverage": 0.05956112852664577,
+            "error_rate": 0.013157894736842105,
+            "accepted": 76
+          },
+          {
+            "coverage": 0.06974921630094044,
+            "error_rate": 0.011235955056179775,
+            "accepted": 89
+          },
+          {
+            "coverage": 0.07993730407523511,
+            "error_rate": 0.0196078431372549,
+            "accepted": 102
+          },
+          {
+            "coverage": 0.09012539184952978,
+            "error_rate": 0.017391304347826087,
+            "accepted": 115
+          },
+          {
+            "coverage": 0.10031347962382445,
+            "error_rate": 0.015625,
+            "accepted": 128
+          },
+          {
+            "coverage": 0.109717868338558,
+            "error_rate": 0.02142857142857143,
+            "accepted": 140
+          },
+          {
+            "coverage": 0.11990595611285267,
+            "error_rate": 0.032679738562091505,
+            "accepted": 153
+          },
+          {
+            "coverage": 0.13009404388714735,
+            "error_rate": 0.04216867469879518,
+            "accepted": 166
+          },
+          {
+            "coverage": 0.13949843260188088,
+            "error_rate": 0.03932584269662921,
+            "accepted": 178
+          },
+          {
+            "coverage": 0.14968652037617555,
+            "error_rate": 0.03664921465968586,
+            "accepted": 191
+          },
+          {
+            "coverage": 0.15987460815047022,
+            "error_rate": 0.03431372549019608,
+            "accepted": 204
+          },
+          {
+            "coverage": 0.1700626959247649,
+            "error_rate": 0.03686635944700461,
+            "accepted": 217
+          },
+          {
+            "coverage": 0.18025078369905956,
+            "error_rate": 0.0391304347826087,
+            "accepted": 230
+          },
+          {
+            "coverage": 0.1896551724137931,
+            "error_rate": 0.04132231404958678,
+            "accepted": 242
+          },
+          {
+            "coverage": 0.19984326018808776,
+            "error_rate": 0.043137254901960784,
+            "accepted": 255
+          },
+          {
+            "coverage": 0.21003134796238246,
+            "error_rate": 0.048507462686567165,
+            "accepted": 268
+          },
+          {
+            "coverage": 0.219435736677116,
+            "error_rate": 0.04642857142857143,
+            "accepted": 280
+          },
+          {
+            "coverage": 0.22962382445141066,
+            "error_rate": 0.04436860068259386,
+            "accepted": 293
+          },
+          {
+            "coverage": 0.23981191222570533,
+            "error_rate": 0.049019607843137254,
+            "accepted": 306
+          },
+          {
+            "coverage": 0.25,
+            "error_rate": 0.050156739811912224,
+            "accepted": 319
+          },
+          {
+            "coverage": 0.2601880877742947,
+            "error_rate": 0.05120481927710843,
+            "accepted": 332
+          },
+          {
+            "coverage": 0.26959247648902823,
+            "error_rate": 0.05232558139534884,
+            "accepted": 344
+          },
+          {
+            "coverage": 0.2797805642633229,
+            "error_rate": 0.056022408963585436,
+            "accepted": 357
+          },
+          {
+            "coverage": 0.28996865203761757,
+            "error_rate": 0.05675675675675676,
+            "accepted": 370
+          },
+          {
+            "coverage": 0.2993730407523511,
+            "error_rate": 0.060209424083769635,
+            "accepted": 382
+          },
+          {
+            "coverage": 0.30956112852664575,
+            "error_rate": 0.05822784810126582,
+            "accepted": 395
+          },
+          {
+            "coverage": 0.31974921630094044,
+            "error_rate": 0.061274509803921566,
+            "accepted": 408
+          },
+          {
+            "coverage": 0.3299373040752351,
+            "error_rate": 0.06175771971496437,
+            "accepted": 421
+          },
+          {
+            "coverage": 0.3401253918495298,
+            "error_rate": 0.06682027649769585,
+            "accepted": 434
+          },
+          {
+            "coverage": 0.3495297805642633,
+            "error_rate": 0.07399103139013453,
+            "accepted": 446
+          },
+          {
+            "coverage": 0.359717868338558,
+            "error_rate": 0.0784313725490196,
+            "accepted": 459
+          },
+          {
+            "coverage": 0.36990595611285265,
+            "error_rate": 0.0826271186440678,
+            "accepted": 472
+          },
+          {
+            "coverage": 0.3793103448275862,
+            "error_rate": 0.08471074380165289,
+            "accepted": 484
+          },
+          {
+            "coverage": 0.3894984326018809,
+            "error_rate": 0.09054325955734406,
+            "accepted": 497
+          },
+          {
+            "coverage": 0.3996865203761755,
+            "error_rate": 0.09411764705882353,
+            "accepted": 510
+          },
+          {
+            "coverage": 0.4098746081504702,
+            "error_rate": 0.09560229445506692,
+            "accepted": 523
+          },
+          {
+            "coverage": 0.4200626959247649,
+            "error_rate": 0.10074626865671642,
+            "accepted": 536
+          },
+          {
+            "coverage": 0.42946708463949845,
+            "error_rate": 0.10218978102189781,
+            "accepted": 548
+          },
+          {
+            "coverage": 0.4396551724137931,
+            "error_rate": 0.10160427807486631,
+            "accepted": 561
+          },
+          {
+            "coverage": 0.4498432601880878,
+            "error_rate": 0.10278745644599303,
+            "accepted": 574
+          },
+          {
+            "coverage": 0.4592476489028213,
+            "error_rate": 0.10921501706484642,
+            "accepted": 586
+          },
+          {
+            "coverage": 0.46943573667711597,
+            "error_rate": 0.11185308848080133,
+            "accepted": 599
+          },
+          {
+            "coverage": 0.47962382445141066,
+            "error_rate": 0.10947712418300654,
+            "accepted": 612
+          },
+          {
+            "coverage": 0.4898119122257053,
+            "error_rate": 0.1136,
+            "accepted": 625
+          },
+          {
+            "coverage": 0.5,
+            "error_rate": 0.11912225705329153,
+            "accepted": 638
+          },
+          {
+            "coverage": 0.5094043887147336,
+            "error_rate": 0.12307692307692308,
+            "accepted": 650
+          },
+          {
+            "coverage": 0.5195924764890282,
+            "error_rate": 0.12669683257918551,
+            "accepted": 663
+          },
+          {
+            "coverage": 0.5297805642633229,
+            "error_rate": 0.128698224852071,
+            "accepted": 676
+          },
+          {
+            "coverage": 0.5391849529780565,
+            "error_rate": 0.12936046511627908,
+            "accepted": 688
+          },
+          {
+            "coverage": 0.549373040752351,
+            "error_rate": 0.12981455064194009,
+            "accepted": 701
+          },
+          {
+            "coverage": 0.5595611285266457,
+            "error_rate": 0.13165266106442577,
+            "accepted": 714
+          },
+          {
+            "coverage": 0.5697492163009404,
+            "error_rate": 0.13342503438789546,
+            "accepted": 727
+          },
+          {
+            "coverage": 0.5799373040752351,
+            "error_rate": 0.13918918918918918,
+            "accepted": 740
+          },
+          {
+            "coverage": 0.5893416927899686,
+            "error_rate": 0.14627659574468085,
+            "accepted": 752
+          },
+          {
+            "coverage": 0.5995297805642633,
+            "error_rate": 0.1477124183006536,
+            "accepted": 765
+          },
+          {
+            "coverage": 0.609717868338558,
+            "error_rate": 0.14781491002570693,
+            "accepted": 778
+          },
+          {
+            "coverage": 0.6191222570532915,
+            "error_rate": 0.15569620253164557,
+            "accepted": 790
+          },
+          {
+            "coverage": 0.6293103448275862,
+            "error_rate": 0.1581569115815691,
+            "accepted": 803
+          },
+          {
+            "coverage": 0.6394984326018809,
+            "error_rate": 0.1642156862745098,
+            "accepted": 816
+          },
+          {
+            "coverage": 0.6496865203761756,
+            "error_rate": 0.1652593486127865,
+            "accepted": 829
+          },
+          {
+            "coverage": 0.6598746081504702,
+            "error_rate": 0.17220902612826602,
+            "accepted": 842
+          },
+          {
+            "coverage": 0.6692789968652038,
+            "error_rate": 0.17798594847775176,
+            "accepted": 854
+          },
+          {
+            "coverage": 0.6794670846394985,
+            "error_rate": 0.17647058823529413,
+            "accepted": 867
+          },
+          {
+            "coverage": 0.6896551724137931,
+            "error_rate": 0.17727272727272728,
+            "accepted": 880
+          },
+          {
+            "coverage": 0.6990595611285266,
+            "error_rate": 0.17825112107623317,
+            "accepted": 892
+          },
+          {
+            "coverage": 0.7092476489028213,
+            "error_rate": 0.18011049723756906,
+            "accepted": 905
+          },
+          {
+            "coverage": 0.719435736677116,
+            "error_rate": 0.18518518518518517,
+            "accepted": 918
+          },
+          {
+            "coverage": 0.7296238244514106,
+            "error_rate": 0.18904403866809882,
+            "accepted": 931
+          },
+          {
+            "coverage": 0.7405956112852664,
+            "error_rate": 0.1925925925925926,
+            "accepted": 945
+          },
+          {
+            "coverage": 0.75,
+            "error_rate": 0.19540229885057472,
+            "accepted": 957
+          },
+          {
+            "coverage": 0.7601880877742947,
+            "error_rate": 0.2,
+            "accepted": 970
+          },
+          {
+            "coverage": 0.7703761755485894,
+            "error_rate": 0.20549338758901323,
+            "accepted": 983
+          },
+          {
+            "coverage": 0.7797805642633229,
+            "error_rate": 0.20804020100502513,
+            "accepted": 995
+          },
+          {
+            "coverage": 0.7899686520376176,
+            "error_rate": 0.2123015873015873,
+            "accepted": 1008
+          },
+          {
+            "coverage": 0.8001567398119123,
+            "error_rate": 0.21645445641527913,
+            "accepted": 1021
+          },
+          {
+            "coverage": 0.8103448275862069,
+            "error_rate": 0.22147001934235977,
+            "accepted": 1034
+          },
+          {
+            "coverage": 0.8205329153605015,
+            "error_rate": 0.22636103151862463,
+            "accepted": 1047
+          },
+          {
+            "coverage": 0.8299373040752351,
+            "error_rate": 0.22946175637393768,
+            "accepted": 1059
+          },
+          {
+            "coverage": 0.8401253918495298,
+            "error_rate": 0.2332089552238806,
+            "accepted": 1072
+          },
+          {
+            "coverage": 0.8503134796238244,
+            "error_rate": 0.2368663594470046,
+            "accepted": 1085
+          },
+          {
+            "coverage": 0.859717868338558,
+            "error_rate": 0.2406563354603464,
+            "accepted": 1097
+          },
+          {
+            "coverage": 0.8699059561128527,
+            "error_rate": 0.24594594594594596,
+            "accepted": 1110
+          },
+          {
+            "coverage": 0.8800940438871473,
+            "error_rate": 0.25022261798753337,
+            "accepted": 1123
+          },
+          {
+            "coverage": 0.890282131661442,
+            "error_rate": 0.25616197183098594,
+            "accepted": 1136
+          },
+          {
+            "coverage": 0.9004702194357367,
+            "error_rate": 0.26109660574412535,
+            "accepted": 1149
+          },
+          {
+            "coverage": 0.9098746081504702,
+            "error_rate": 0.2661498708010336,
+            "accepted": 1161
+          },
+          {
+            "coverage": 0.9200626959247649,
+            "error_rate": 0.272572402044293,
+            "accepted": 1174
+          },
+          {
+            "coverage": 0.9302507836990596,
+            "error_rate": 0.2771693344566133,
+            "accepted": 1187
+          },
+          {
+            "coverage": 0.9396551724137931,
+            "error_rate": 0.28023352793994993,
+            "accepted": 1199
+          },
+          {
+            "coverage": 0.9498432601880877,
+            "error_rate": 0.2838283828382838,
+            "accepted": 1212
+          },
+          {
+            "coverage": 0.9600313479623824,
+            "error_rate": 0.2897959183673469,
+            "accepted": 1225
+          },
+          {
+            "coverage": 0.9702194357366771,
+            "error_rate": 0.2948303715670436,
+            "accepted": 1238
+          },
+          {
+            "coverage": 0.9804075235109718,
+            "error_rate": 0.29896083133493206,
+            "accepted": 1251
+          },
+          {
+            "coverage": 0.9898119122257053,
+            "error_rate": 0.30245447347585114,
+            "accepted": 1263
+          },
+          {
+            "coverage": 1.0,
+            "error_rate": 0.3072100313479624,
+            "accepted": 1276
+          }
+        ]
+      },
+      "operating_points": [
+        {
+          "validation_target": 0.01,
+          "test": {
+            "threshold": null,
+            "eligible": 1276,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "manual_review": 1276,
+            "error_rate": null,
+            "error_interval": null
+          },
+          "policy_url": "/reliability/data/Valen-2B/policy-0.json"
+        },
+        {
+          "validation_target": 0.02,
+          "test": {
+            "threshold": null,
+            "eligible": 1276,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "manual_review": 1276,
+            "error_rate": null,
+            "error_interval": null
+          },
+          "policy_url": "/reliability/data/Valen-2B/policy-1.json"
+        },
+        {
+          "validation_target": 0.05,
+          "test": {
+            "threshold": null,
+            "eligible": 1276,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "manual_review": 1276,
+            "error_rate": null,
+            "error_interval": null
+          },
+          "policy_url": "/reliability/data/Valen-2B/policy-2.json"
+        },
+        {
+          "validation_target": 0.1,
+          "test": {
+            "threshold": 0.9075173776295101,
+            "eligible": 1276,
+            "accepted": 350,
+            "errors": 19,
+            "coverage": 0.274294670846395,
+            "manual_review": 926,
+            "error_rate": 0.054285714285714284,
+            "error_interval": [
+              0.035025393263026526,
+              0.08322377674702844
+            ]
+          },
+          "policy_url": "/reliability/data/Valen-2B/policy-3.json"
+        }
+      ]
+    },
+    {
+      "model": "Valen-4B",
+      "status": "measured",
+      "revision": "22366059194719ad8c4270567569e1d559491fa3",
+      "questions": 1276,
+      "report_url": "/reliability/data/Valen-4B/report.json.gz",
+      "report_bytes": 563604,
+      "calibration_url": "/reliability/data/Valen-4B/calibration.json",
+      "protocol_url": "/reliability/data/Valen-4B/protocol.json",
+      "source_url": "https://github.com/PolyAI-LDN/task-specific-datasets/tree/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data",
+      "scope": "BANKING77 · English · 77 candidate intents · retrospective public-test replay. Not a production or vision guarantee.",
+      "before": {
+        "ece": 0.04623358848582154,
+        "nll": 1.206105065333195,
+        "brier": 0.431358088831228,
+        "accuracy": 0.7155172413793104,
+        "bins": [
+          {
+            "lower": 0.0,
+            "upper": 0.06666666666666667,
+            "n": 0,
+            "mean_probability": null,
+            "accuracy": null,
+            "accuracy_interval": null
+          },
+          {
+            "lower": 0.06666666666666667,
+            "upper": 0.13333333333333333,
+            "n": 0,
+            "mean_probability": null,
+            "accuracy": null,
+            "accuracy_interval": null
+          },
+          {
+            "lower": 0.13333333333333333,
+            "upper": 0.2,
+            "n": 6,
+            "mean_probability": 0.17465001639144107,
+            "accuracy": 0.16666666666666666,
+            "accuracy_interval": [
+              0.030053369748306635,
+              0.5635028221864702
+            ]
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.26666666666666666,
+            "n": 24,
+            "mean_probability": 0.23727098091391266,
+            "accuracy": 0.08333333333333333,
+            "accuracy_interval": [
+              0.023158815297043306,
+              0.25848802193210685
+            ]
+          },
+          {
+            "lower": 0.26666666666666666,
+            "upper": 0.3333333333333333,
+            "n": 30,
+            "mean_probability": 0.30477064101005574,
+            "accuracy": 0.23333333333333334,
+            "accuracy_interval": [
+              0.11792388144489496,
+              0.40928326158122164
+            ]
+          },
+          {
+            "lower": 0.3333333333333333,
+            "upper": 0.4,
+            "n": 54,
+            "mean_probability": 0.367510240896187,
+            "accuracy": 0.35185185185185186,
+            "accuracy_interval": [
+              0.2382301110811473,
+              0.4851516927976369
+            ]
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.4666666666666667,
+            "n": 78,
+            "mean_probability": 0.4350672129091072,
+            "accuracy": 0.5512820512820513,
+            "accuracy_interval": [
+              0.4410936914056326,
+              0.6566562768290142
+            ]
+          },
+          {
+            "lower": 0.4666666666666667,
+            "upper": 0.5333333333333333,
+            "n": 129,
+            "mean_probability": 0.5050562508091093,
+            "accuracy": 0.5426356589147286,
+            "accuracy_interval": [
+              0.45667754222201284,
+              0.62612793204523
+            ]
+          },
+          {
+            "lower": 0.5333333333333333,
+            "upper": 0.6,
+            "n": 127,
+            "mean_probability": 0.5682033835535544,
+            "accuracy": 0.5905511811023622,
+            "accuracy_interval": [
+              0.5035940877249806,
+              0.6721911733635503
+            ]
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.6666666666666666,
+            "n": 127,
+            "mean_probability": 0.6315280947085625,
+            "accuracy": 0.7480314960629921,
+            "accuracy_interval": [
+              0.6660048394714634,
+              0.815493919162339
+            ]
+          },
+          {
+            "lower": 0.6666666666666666,
+            "upper": 0.7333333333333333,
+            "n": 129,
+            "mean_probability": 0.7014142721082486,
+            "accuracy": 0.7596899224806202,
+            "accuracy_interval": [
+              0.679134924188899,
+              0.82522569180249
+            ]
+          },
+          {
+            "lower": 0.7333333333333333,
+            "upper": 0.8,
+            "n": 128,
+            "mean_probability": 0.7659613649856137,
+            "accuracy": 0.78125,
+            "accuracy_interval": [
+              0.7020157030455345,
+              0.8440947590506169
+            ]
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.8666666666666667,
+            "n": 117,
+            "mean_probability": 0.8303474379316176,
+            "accuracy": 0.8632478632478633,
+            "accuracy_interval": [
+              0.7893619458421701,
+              0.9140390295310579
+            ]
+          },
+          {
+            "lower": 0.8666666666666667,
+            "upper": 0.9333333333333333,
+            "n": 128,
+            "mean_probability": 0.9025778548053862,
+            "accuracy": 0.8828125,
+            "accuracy_interval": [
+              0.8156338413466524,
+              0.9276831765064426
+            ]
+          },
+          {
+            "lower": 0.9333333333333333,
+            "upper": 1.0,
+            "n": 199,
+            "mean_probability": 0.9741837204650087,
+            "accuracy": 0.949748743718593,
+            "accuracy_interval": [
+              0.9099839887498027,
+              0.9724786056364403
+            ]
+          }
+        ],
+        "probability_one_questions": 0,
+        "risk_coverage": [
+          {
+            "coverage": 0,
+            "error_rate": null,
+            "accepted": 0
+          },
+          {
+            "coverage": 0.01018808777429467,
+            "error_rate": 0.0,
+            "accepted": 13
+          },
+          {
+            "coverage": 0.02037617554858934,
+            "error_rate": 0.0,
+            "accepted": 26
+          },
+          {
+            "coverage": 0.029780564263322883,
+            "error_rate": 0.0,
+            "accepted": 38
+          },
+          {
+            "coverage": 0.039968652037617555,
+            "error_rate": 0.0,
+            "accepted": 51
+          },
+          {
+            "coverage": 0.050156739811912224,
+            "error_rate": 0.0,
+            "accepted": 64
+          },
+          {
+            "coverage": 0.05956112852664577,
+            "error_rate": 0.039473684210526314,
+            "accepted": 76
+          },
+          {
+            "coverage": 0.06974921630094044,
+            "error_rate": 0.033707865168539325,
+            "accepted": 89
+          },
+          {
+            "coverage": 0.07993730407523511,
+            "error_rate": 0.029411764705882353,
+            "accepted": 102
+          },
+          {
+            "coverage": 0.09012539184952978,
+            "error_rate": 0.02608695652173913,
+            "accepted": 115
+          },
+          {
+            "coverage": 0.10031347962382445,
+            "error_rate": 0.0390625,
+            "accepted": 128
+          },
+          {
+            "coverage": 0.109717868338558,
+            "error_rate": 0.04285714285714286,
+            "accepted": 140
+          },
+          {
+            "coverage": 0.11990595611285267,
+            "error_rate": 0.058823529411764705,
+            "accepted": 153
+          },
+          {
+            "coverage": 0.13009404388714735,
+            "error_rate": 0.05421686746987952,
+            "accepted": 166
+          },
+          {
+            "coverage": 0.13949843260188088,
+            "error_rate": 0.05056179775280899,
+            "accepted": 178
+          },
+          {
+            "coverage": 0.14968652037617555,
+            "error_rate": 0.05235602094240838,
+            "accepted": 191
+          },
+          {
+            "coverage": 0.15987460815047022,
+            "error_rate": 0.049019607843137254,
+            "accepted": 204
+          },
+          {
+            "coverage": 0.1700626959247649,
+            "error_rate": 0.04608294930875576,
+            "accepted": 217
+          },
+          {
+            "coverage": 0.18025078369905956,
+            "error_rate": 0.05652173913043478,
+            "accepted": 230
+          },
+          {
+            "coverage": 0.1896551724137931,
+            "error_rate": 0.05371900826446281,
+            "accepted": 242
+          },
+          {
+            "coverage": 0.19984326018808776,
+            "error_rate": 0.06274509803921569,
+            "accepted": 255
+          },
+          {
+            "coverage": 0.21003134796238246,
+            "error_rate": 0.05970149253731343,
+            "accepted": 268
+          },
+          {
+            "coverage": 0.219435736677116,
+            "error_rate": 0.06785714285714285,
+            "accepted": 280
+          },
+          {
+            "coverage": 0.22962382445141066,
+            "error_rate": 0.06825938566552901,
+            "accepted": 293
+          },
+          {
+            "coverage": 0.23981191222570533,
+            "error_rate": 0.06862745098039216,
+            "accepted": 306
+          },
+          {
+            "coverage": 0.25,
+            "error_rate": 0.07523510971786834,
+            "accepted": 319
+          },
+          {
+            "coverage": 0.2601880877742947,
+            "error_rate": 0.0783132530120482,
+            "accepted": 332
+          },
+          {
+            "coverage": 0.26959247648902823,
+            "error_rate": 0.07848837209302326,
+            "accepted": 344
+          },
+          {
+            "coverage": 0.2797805642633229,
+            "error_rate": 0.08123249299719888,
+            "accepted": 357
+          },
+          {
+            "coverage": 0.28996865203761757,
+            "error_rate": 0.07837837837837838,
+            "accepted": 370
+          },
+          {
+            "coverage": 0.2993730407523511,
+            "error_rate": 0.08115183246073299,
+            "accepted": 382
+          },
+          {
+            "coverage": 0.30956112852664575,
+            "error_rate": 0.08354430379746836,
+            "accepted": 395
+          },
+          {
+            "coverage": 0.31974921630094044,
+            "error_rate": 0.08823529411764706,
+            "accepted": 408
+          },
+          {
+            "coverage": 0.3299373040752351,
+            "error_rate": 0.09263657957244656,
+            "accepted": 421
+          },
+          {
+            "coverage": 0.3401253918495298,
+            "error_rate": 0.08986175115207373,
+            "accepted": 434
+          },
+          {
+            "coverage": 0.3495297805642633,
+            "error_rate": 0.09192825112107623,
+            "accepted": 446
+          },
+          {
+            "coverage": 0.359717868338558,
+            "error_rate": 0.0915032679738562,
+            "accepted": 459
+          },
+          {
+            "coverage": 0.36990595611285265,
+            "error_rate": 0.09533898305084745,
+            "accepted": 472
+          },
+          {
+            "coverage": 0.3793103448275862,
+            "error_rate": 0.09917355371900827,
+            "accepted": 484
+          },
+          {
+            "coverage": 0.3894984326018809,
+            "error_rate": 0.09859154929577464,
+            "accepted": 497
+          },
+          {
+            "coverage": 0.3996865203761755,
+            "error_rate": 0.10392156862745099,
+            "accepted": 510
+          },
+          {
+            "coverage": 0.4098746081504702,
+            "error_rate": 0.10707456978967496,
+            "accepted": 523
+          },
+          {
+            "coverage": 0.4200626959247649,
+            "error_rate": 0.10820895522388059,
+            "accepted": 536
+          },
+          {
+            "coverage": 0.42946708463949845,
+            "error_rate": 0.11131386861313869,
+            "accepted": 548
+          },
+          {
+            "coverage": 0.4396551724137931,
+            "error_rate": 0.11586452762923351,
+            "accepted": 561
+          },
+          {
+            "coverage": 0.4498432601880878,
+            "error_rate": 0.12020905923344948,
+            "accepted": 574
+          },
+          {
+            "coverage": 0.4592476489028213,
+            "error_rate": 0.12116040955631399,
+            "accepted": 586
+          },
+          {
+            "coverage": 0.46943573667711597,
+            "error_rate": 0.12020033388981637,
+            "accepted": 599
+          },
+          {
+            "coverage": 0.47962382445141066,
+            "error_rate": 0.12254901960784313,
+            "accepted": 612
+          },
+          {
+            "coverage": 0.4898119122257053,
+            "error_rate": 0.1248,
+            "accepted": 625
+          },
+          {
+            "coverage": 0.5,
+            "error_rate": 0.12695924764890282,
+            "accepted": 638
+          },
+          {
+            "coverage": 0.5094043887147336,
+            "error_rate": 0.13076923076923078,
+            "accepted": 650
+          },
+          {
+            "coverage": 0.5195924764890282,
+            "error_rate": 0.13273001508295626,
+            "accepted": 663
+          },
+          {
+            "coverage": 0.5297805642633229,
+            "error_rate": 0.13757396449704143,
+            "accepted": 676
+          },
+          {
+            "coverage": 0.5391849529780565,
+            "error_rate": 0.1380813953488372,
+            "accepted": 688
+          },
+          {
+            "coverage": 0.549373040752351,
+            "error_rate": 0.14265335235378032,
+            "accepted": 701
+          },
+          {
+            "coverage": 0.5603448275862069,
+            "error_rate": 0.14405594405594405,
+            "accepted": 715
+          },
+          {
+            "coverage": 0.5705329153605015,
+            "error_rate": 0.14285714285714285,
+            "accepted": 728
+          },
+          {
+            "coverage": 0.5807210031347962,
+            "error_rate": 0.14439946018893388,
+            "accepted": 741
+          },
+          {
+            "coverage": 0.5901253918495298,
+            "error_rate": 0.1460823373173971,
+            "accepted": 753
+          },
+          {
+            "coverage": 0.6003134796238244,
+            "error_rate": 0.1475195822454308,
+            "accepted": 766
+          },
+          {
+            "coverage": 0.6105015673981191,
+            "error_rate": 0.1514762516046213,
+            "accepted": 779
+          },
+          {
+            "coverage": 0.6199059561128527,
+            "error_rate": 0.15170670037926676,
+            "accepted": 791
+          },
+          {
+            "coverage": 0.6300940438871473,
+            "error_rate": 0.15671641791044777,
+            "accepted": 804
+          },
+          {
+            "coverage": 0.640282131661442,
+            "error_rate": 0.1591187270501836,
+            "accepted": 817
+          },
+          {
+            "coverage": 0.6504702194357367,
+            "error_rate": 0.1602409638554217,
+            "accepted": 830
+          },
+          {
+            "coverage": 0.6606583072100314,
+            "error_rate": 0.166073546856465,
+            "accepted": 843
+          },
+          {
+            "coverage": 0.6700626959247649,
+            "error_rate": 0.16608187134502925,
+            "accepted": 855
+          },
+          {
+            "coverage": 0.6802507836990596,
+            "error_rate": 0.16820276497695852,
+            "accepted": 868
+          },
+          {
+            "coverage": 0.6904388714733543,
+            "error_rate": 0.170261066969353,
+            "accepted": 881
+          },
+          {
+            "coverage": 0.6998432601880877,
+            "error_rate": 0.17245240761478164,
+            "accepted": 893
+          },
+          {
+            "coverage": 0.7100313479623824,
+            "error_rate": 0.17770419426048564,
+            "accepted": 906
+          },
+          {
+            "coverage": 0.7202194357366771,
+            "error_rate": 0.18063112078346028,
+            "accepted": 919
+          },
+          {
+            "coverage": 0.7304075235109718,
+            "error_rate": 0.18669527896995708,
+            "accepted": 932
+          },
+          {
+            "coverage": 0.7405956112852664,
+            "error_rate": 0.18941798941798943,
+            "accepted": 945
+          },
+          {
+            "coverage": 0.75,
+            "error_rate": 0.19331243469174503,
+            "accepted": 957
+          },
+          {
+            "coverage": 0.7601880877742947,
+            "error_rate": 0.1958762886597938,
+            "accepted": 970
+          },
+          {
+            "coverage": 0.7703761755485894,
+            "error_rate": 0.19837232960325535,
+            "accepted": 983
+          },
+          {
+            "coverage": 0.7797805642633229,
+            "error_rate": 0.2,
+            "accepted": 995
+          },
+          {
+            "coverage": 0.7899686520376176,
+            "error_rate": 0.20436507936507936,
+            "accepted": 1008
+          },
+          {
+            "coverage": 0.8001567398119123,
+            "error_rate": 0.20763956904995104,
+            "accepted": 1021
+          },
+          {
+            "coverage": 0.8103448275862069,
+            "error_rate": 0.20986460348162475,
+            "accepted": 1034
+          },
+          {
+            "coverage": 0.8205329153605015,
+            "error_rate": 0.2139446036294174,
+            "accepted": 1047
+          },
+          {
+            "coverage": 0.8299373040752351,
+            "error_rate": 0.21624173748819642,
+            "accepted": 1059
+          },
+          {
+            "coverage": 0.8401253918495298,
+            "error_rate": 0.22014925373134328,
+            "accepted": 1072
+          },
+          {
+            "coverage": 0.8503134796238244,
+            "error_rate": 0.223963133640553,
+            "accepted": 1085
+          },
+          {
+            "coverage": 0.859717868338558,
+            "error_rate": 0.22515952597994532,
+            "accepted": 1097
+          },
+          {
+            "coverage": 0.8699059561128527,
+            "error_rate": 0.22792792792792793,
+            "accepted": 1110
+          },
+          {
+            "coverage": 0.8800940438871473,
+            "error_rate": 0.22974176313446126,
+            "accepted": 1123
+          },
+          {
+            "coverage": 0.890282131661442,
+            "error_rate": 0.2306338028169014,
+            "accepted": 1136
+          },
+          {
+            "coverage": 0.9004702194357367,
+            "error_rate": 0.23324630113141862,
+            "accepted": 1149
+          },
+          {
+            "coverage": 0.9098746081504702,
+            "error_rate": 0.23858742463393626,
+            "accepted": 1161
+          },
+          {
+            "coverage": 0.9200626959247649,
+            "error_rate": 0.24190800681431004,
+            "accepted": 1174
+          },
+          {
+            "coverage": 0.9302507836990596,
+            "error_rate": 0.2451558550968829,
+            "accepted": 1187
+          },
+          {
+            "coverage": 0.9396551724137931,
+            "error_rate": 0.25020850708924103,
+            "accepted": 1199
+          },
+          {
+            "coverage": 0.9498432601880877,
+            "error_rate": 0.25577557755775576,
+            "accepted": 1212
+          },
+          {
+            "coverage": 0.9600313479623824,
+            "error_rate": 0.2612244897959184,
+            "accepted": 1225
+          },
+          {
+            "coverage": 0.9702194357366771,
+            "error_rate": 0.2665589660743134,
+            "accepted": 1238
+          },
+          {
+            "coverage": 0.9804075235109718,
+            "error_rate": 0.27258193445243806,
+            "accepted": 1251
+          },
+          {
+            "coverage": 0.9898119122257053,
+            "error_rate": 0.27790973871733965,
+            "accepted": 1263
+          },
+          {
+            "coverage": 1.0,
+            "error_rate": 0.28448275862068967,
+            "accepted": 1276
+          }
+        ]
+      },
+      "after": {
+        "ece": 0.10061474376560113,
+        "nll": 1.181381580775541,
+        "brier": 0.44126903543471396,
+        "accuracy": 0.7155172413793104,
+        "bins": [
+          {
+            "lower": 0.0,
+            "upper": 0.06666666666666667,
+            "n": 0,
+            "mean_probability": null,
+            "accuracy": null,
+            "accuracy_interval": null
+          },
+          {
+            "lower": 0.06666666666666667,
+            "upper": 0.13333333333333333,
+            "n": 2,
+            "mean_probability": 0.1238483297273043,
+            "accuracy": 0.0,
+            "accuracy_interval": [
+              0,
+              0.6576197724933469
+            ]
+          },
+          {
+            "lower": 0.13333333333333333,
+            "upper": 0.2,
+            "n": 16,
+            "mean_probability": 0.17391659884220786,
+            "accuracy": 0.0625,
+            "accuracy_interval": [
+              0.01111934476464252,
+              0.28328737570298945
+            ]
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.26666666666666666,
+            "n": 30,
+            "mean_probability": 0.23184044263553136,
+            "accuracy": 0.2,
+            "accuracy_interval": [
+              0.0950510717728987,
+              0.3730569641314825
+            ]
+          },
+          {
+            "lower": 0.26666666666666666,
+            "upper": 0.3333333333333333,
+            "n": 61,
+            "mean_probability": 0.30048130106722626,
+            "accuracy": 0.2786885245901639,
+            "accuracy_interval": [
+              0.18188543892565973,
+              0.4017143058817016
+            ]
+          },
+          {
+            "lower": 0.3333333333333333,
+            "upper": 0.4,
+            "n": 76,
+            "mean_probability": 0.3708131381137727,
+            "accuracy": 0.5131578947368421,
+            "accuracy_interval": [
+              0.4028869302897975,
+              0.6221627122084885
+            ]
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.4666666666666667,
+            "n": 112,
+            "mean_probability": 0.4362590340871241,
+            "accuracy": 0.5803571428571429,
+            "accuracy_interval": [
+              0.4877851847005556,
+              0.6675995988065428
+            ]
+          },
+          {
+            "lower": 0.4666666666666667,
+            "upper": 0.5333333333333333,
+            "n": 164,
+            "mean_probability": 0.4996178782725193,
+            "accuracy": 0.6341463414634146,
+            "accuracy_interval": [
+              0.5581417362781567,
+              0.7040104179580944
+            ]
+          },
+          {
+            "lower": 0.5333333333333333,
+            "upper": 0.6,
+            "n": 142,
+            "mean_probability": 0.5653082500392214,
+            "accuracy": 0.6338028169014085,
+            "accuracy_interval": [
+              0.5520106925393097,
+              0.7085462184191812
+            ]
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.6666666666666666,
+            "n": 160,
+            "mean_probability": 0.6332890621161216,
+            "accuracy": 0.8,
+            "accuracy_interval": [
+              0.7313149744396211,
+              0.8546173084574759
+            ]
+          },
+          {
+            "lower": 0.6666666666666666,
+            "upper": 0.7333333333333333,
+            "n": 130,
+            "mean_probability": 0.7019931242743676,
+            "accuracy": 0.8461538461538461,
+            "accuracy_interval": [
+              0.7742912713259178,
+              0.8981461093856298
+            ]
+          },
+          {
+            "lower": 0.7333333333333333,
+            "upper": 0.8,
+            "n": 90,
+            "mean_probability": 0.7675129809972421,
+            "accuracy": 0.8888888888888888,
+            "accuracy_interval": [
+              0.8074221497873896,
+              0.9385168081070229
+            ]
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.8666666666666667,
+            "n": 99,
+            "mean_probability": 0.8319658941203467,
+            "accuracy": 0.898989898989899,
+            "accuracy_interval": [
+              0.8239693643888216,
+              0.9442033249711951
+            ]
+          },
+          {
+            "lower": 0.8666666666666667,
+            "upper": 0.9333333333333333,
+            "n": 85,
+            "mean_probability": 0.8984918915770161,
+            "accuracy": 0.9176470588235294,
+            "accuracy_interval": [
+              0.839640154666247,
+              0.9595362765008394
+            ]
+          },
+          {
+            "lower": 0.9333333333333333,
+            "upper": 1.0,
+            "n": 109,
+            "mean_probability": 0.965859167867548,
+            "accuracy": 0.9724770642201835,
+            "accuracy_interval": [
+              0.9221889357113375,
+              0.9905961441383277
+            ]
+          }
+        ],
+        "probability_one_questions": 0,
+        "risk_coverage": [
+          {
+            "coverage": 0,
+            "error_rate": null,
+            "accepted": 0
+          },
+          {
+            "coverage": 0.01018808777429467,
+            "error_rate": 0.0,
+            "accepted": 13
+          },
+          {
+            "coverage": 0.02037617554858934,
+            "error_rate": 0.0,
+            "accepted": 26
+          },
+          {
+            "coverage": 0.029780564263322883,
+            "error_rate": 0.0,
+            "accepted": 38
+          },
+          {
+            "coverage": 0.039968652037617555,
+            "error_rate": 0.0,
+            "accepted": 51
+          },
+          {
+            "coverage": 0.050156739811912224,
+            "error_rate": 0.0,
+            "accepted": 64
+          },
+          {
+            "coverage": 0.05956112852664577,
+            "error_rate": 0.013157894736842105,
+            "accepted": 76
+          },
+          {
+            "coverage": 0.06974921630094044,
+            "error_rate": 0.02247191011235955,
+            "accepted": 89
+          },
+          {
+            "coverage": 0.07993730407523511,
+            "error_rate": 0.029411764705882353,
+            "accepted": 102
+          },
+          {
+            "coverage": 0.09012539184952978,
+            "error_rate": 0.02608695652173913,
+            "accepted": 115
+          },
+          {
+            "coverage": 0.10031347962382445,
+            "error_rate": 0.0390625,
+            "accepted": 128
+          },
+          {
+            "coverage": 0.109717868338558,
+            "error_rate": 0.04285714285714286,
+            "accepted": 140
+          },
+          {
+            "coverage": 0.11990595611285267,
+            "error_rate": 0.058823529411764705,
+            "accepted": 153
+          },
+          {
+            "coverage": 0.13009404388714735,
+            "error_rate": 0.05421686746987952,
+            "accepted": 166
+          },
+          {
+            "coverage": 0.13949843260188088,
+            "error_rate": 0.056179775280898875,
+            "accepted": 178
+          },
+          {
+            "coverage": 0.14968652037617555,
+            "error_rate": 0.05235602094240838,
+            "accepted": 191
+          },
+          {
+            "coverage": 0.15987460815047022,
+            "error_rate": 0.049019607843137254,
+            "accepted": 204
+          },
+          {
+            "coverage": 0.1700626959247649,
+            "error_rate": 0.05069124423963134,
+            "accepted": 217
+          },
+          {
+            "coverage": 0.18025078369905956,
+            "error_rate": 0.04782608695652174,
+            "accepted": 230
+          },
+          {
+            "coverage": 0.1896551724137931,
+            "error_rate": 0.049586776859504134,
+            "accepted": 242
+          },
+          {
+            "coverage": 0.19984326018808776,
+            "error_rate": 0.054901960784313725,
+            "accepted": 255
+          },
+          {
+            "coverage": 0.21003134796238246,
+            "error_rate": 0.05223880597014925,
+            "accepted": 268
+          },
+          {
+            "coverage": 0.219435736677116,
+            "error_rate": 0.060714285714285714,
+            "accepted": 280
+          },
+          {
+            "coverage": 0.22962382445141066,
+            "error_rate": 0.06825938566552901,
+            "accepted": 293
+          },
+          {
+            "coverage": 0.23981191222570533,
+            "error_rate": 0.0718954248366013,
+            "accepted": 306
+          },
+          {
+            "coverage": 0.25,
+            "error_rate": 0.07210031347962383,
+            "accepted": 319
+          },
+          {
+            "coverage": 0.2601880877742947,
+            "error_rate": 0.0783132530120482,
+            "accepted": 332
+          },
+          {
+            "coverage": 0.26959247648902823,
+            "error_rate": 0.0755813953488372,
+            "accepted": 344
+          },
+          {
+            "coverage": 0.2797805642633229,
+            "error_rate": 0.07563025210084033,
+            "accepted": 357
+          },
+          {
+            "coverage": 0.28996865203761757,
+            "error_rate": 0.07837837837837838,
+            "accepted": 370
+          },
+          {
+            "coverage": 0.2993730407523511,
+            "error_rate": 0.07853403141361257,
+            "accepted": 382
+          },
+          {
+            "coverage": 0.30956112852664575,
+            "error_rate": 0.0759493670886076,
+            "accepted": 395
+          },
+          {
+            "coverage": 0.31974921630094044,
+            "error_rate": 0.07352941176470588,
+            "accepted": 408
+          },
+          {
+            "coverage": 0.3299373040752351,
+            "error_rate": 0.07600950118764846,
+            "accepted": 421
+          },
+          {
+            "coverage": 0.3401253918495298,
+            "error_rate": 0.08064516129032258,
+            "accepted": 434
+          },
+          {
+            "coverage": 0.3495297805642633,
+            "error_rate": 0.08520179372197309,
+            "accepted": 446
+          },
+          {
+            "coverage": 0.359717868338558,
+            "error_rate": 0.08278867102396514,
+            "accepted": 459
+          },
+          {
+            "coverage": 0.36990595611285265,
+            "error_rate": 0.09110169491525423,
+            "accepted": 472
+          },
+          {
+            "coverage": 0.3793103448275862,
+            "error_rate": 0.09710743801652892,
+            "accepted": 484
+          },
+          {
+            "coverage": 0.3894984326018809,
+            "error_rate": 0.096579476861167,
+            "accepted": 497
+          },
+          {
+            "coverage": 0.3996865203761755,
+            "error_rate": 0.09803921568627451,
+            "accepted": 510
+          },
+          {
+            "coverage": 0.4098746081504702,
+            "error_rate": 0.0994263862332696,
+            "accepted": 523
+          },
+          {
+            "coverage": 0.4200626959247649,
+            "error_rate": 0.09888059701492537,
+            "accepted": 536
+          },
+          {
+            "coverage": 0.42946708463949845,
+            "error_rate": 0.09854014598540146,
+            "accepted": 548
+          },
+          {
+            "coverage": 0.4396551724137931,
+            "error_rate": 0.1051693404634581,
+            "accepted": 561
+          },
+          {
+            "coverage": 0.4498432601880878,
+            "error_rate": 0.10452961672473868,
+            "accepted": 574
+          },
+          {
+            "coverage": 0.4592476489028213,
+            "error_rate": 0.10921501706484642,
+            "accepted": 586
+          },
+          {
+            "coverage": 0.46943573667711597,
+            "error_rate": 0.11352253756260434,
+            "accepted": 599
+          },
+          {
+            "coverage": 0.47962382445141066,
+            "error_rate": 0.11274509803921569,
+            "accepted": 612
+          },
+          {
+            "coverage": 0.4898119122257053,
+            "error_rate": 0.1136,
+            "accepted": 625
+          },
+          {
+            "coverage": 0.5,
+            "error_rate": 0.11598746081504702,
+            "accepted": 638
+          },
+          {
+            "coverage": 0.5094043887147336,
+            "error_rate": 0.12,
+            "accepted": 650
+          },
+          {
+            "coverage": 0.5195924764890282,
+            "error_rate": 0.12066365007541478,
+            "accepted": 663
+          },
+          {
+            "coverage": 0.5297805642633229,
+            "error_rate": 0.12130177514792899,
+            "accepted": 676
+          },
+          {
+            "coverage": 0.5399686520376176,
+            "error_rate": 0.12191582002902758,
+            "accepted": 689
+          },
+          {
+            "coverage": 0.5501567398119123,
+            "error_rate": 0.13105413105413105,
+            "accepted": 702
+          },
+          {
+            "coverage": 0.5603448275862069,
+            "error_rate": 0.13286713286713286,
+            "accepted": 715
+          },
+          {
+            "coverage": 0.5705329153605015,
+            "error_rate": 0.13324175824175824,
+            "accepted": 728
+          },
+          {
+            "coverage": 0.5807210031347962,
+            "error_rate": 0.13900134952766532,
+            "accepted": 741
+          },
+          {
+            "coverage": 0.5901253918495298,
+            "error_rate": 0.14475431606905712,
+            "accepted": 753
+          },
+          {
+            "coverage": 0.6003134796238244,
+            "error_rate": 0.14490861618798956,
+            "accepted": 766
+          },
+          {
+            "coverage": 0.6105015673981191,
+            "error_rate": 0.14890885750962773,
+            "accepted": 779
+          },
+          {
+            "coverage": 0.6199059561128527,
+            "error_rate": 0.15170670037926676,
+            "accepted": 791
+          },
+          {
+            "coverage": 0.6300940438871473,
+            "error_rate": 0.15547263681592038,
+            "accepted": 804
+          },
+          {
+            "coverage": 0.640282131661442,
+            "error_rate": 0.16401468788249693,
+            "accepted": 817
+          },
+          {
+            "coverage": 0.6504702194357367,
+            "error_rate": 0.1674698795180723,
+            "accepted": 830
+          },
+          {
+            "coverage": 0.6606583072100314,
+            "error_rate": 0.16963226571767498,
+            "accepted": 843
+          },
+          {
+            "coverage": 0.6700626959247649,
+            "error_rate": 0.17192982456140352,
+            "accepted": 855
+          },
+          {
+            "coverage": 0.6802507836990596,
+            "error_rate": 0.1774193548387097,
+            "accepted": 868
+          },
+          {
+            "coverage": 0.6904388714733543,
+            "error_rate": 0.18047673098751418,
+            "accepted": 881
+          },
+          {
+            "coverage": 0.6998432601880877,
+            "error_rate": 0.18253079507278835,
+            "accepted": 893
+          },
+          {
+            "coverage": 0.7100313479623824,
+            "error_rate": 0.18432671081677704,
+            "accepted": 906
+          },
+          {
+            "coverage": 0.7202194357366771,
+            "error_rate": 0.1893362350380849,
+            "accepted": 919
+          },
+          {
+            "coverage": 0.7304075235109718,
+            "error_rate": 0.19098712446351931,
+            "accepted": 932
+          },
+          {
+            "coverage": 0.7405956112852664,
+            "error_rate": 0.19365079365079366,
+            "accepted": 945
+          },
+          {
+            "coverage": 0.75,
+            "error_rate": 0.19331243469174503,
+            "accepted": 957
+          },
+          {
+            "coverage": 0.7601880877742947,
+            "error_rate": 0.1958762886597938,
+            "accepted": 970
+          },
+          {
+            "coverage": 0.7703761755485894,
+            "error_rate": 0.19735503560528994,
+            "accepted": 983
+          },
+          {
+            "coverage": 0.7797805642633229,
+            "error_rate": 0.19899497487437187,
+            "accepted": 995
+          },
+          {
+            "coverage": 0.7899686520376176,
+            "error_rate": 0.2013888888888889,
+            "accepted": 1008
+          },
+          {
+            "coverage": 0.8001567398119123,
+            "error_rate": 0.20568070519098922,
+            "accepted": 1021
+          },
+          {
+            "coverage": 0.8103448275862069,
+            "error_rate": 0.2059961315280464,
+            "accepted": 1034
+          },
+          {
+            "coverage": 0.8205329153605015,
+            "error_rate": 0.21203438395415472,
+            "accepted": 1047
+          },
+          {
+            "coverage": 0.8299373040752351,
+            "error_rate": 0.21435316336166194,
+            "accepted": 1059
+          },
+          {
+            "coverage": 0.8401253918495298,
+            "error_rate": 0.21735074626865672,
+            "accepted": 1072
+          },
+          {
+            "coverage": 0.8503134796238244,
+            "error_rate": 0.2184331797235023,
+            "accepted": 1085
+          },
+          {
+            "coverage": 0.859717868338558,
+            "error_rate": 0.22060164083865086,
+            "accepted": 1097
+          },
+          {
+            "coverage": 0.8699059561128527,
+            "error_rate": 0.22612612612612612,
+            "accepted": 1110
+          },
+          {
+            "coverage": 0.8800940438871473,
+            "error_rate": 0.2288512911843277,
+            "accepted": 1123
+          },
+          {
+            "coverage": 0.890282131661442,
+            "error_rate": 0.2306338028169014,
+            "accepted": 1136
+          },
+          {
+            "coverage": 0.9004702194357367,
+            "error_rate": 0.23237597911227154,
+            "accepted": 1149
+          },
+          {
+            "coverage": 0.9098746081504702,
+            "error_rate": 0.2360034453057709,
+            "accepted": 1161
+          },
+          {
+            "coverage": 0.9200626959247649,
+            "error_rate": 0.24105621805792163,
+            "accepted": 1174
+          },
+          {
+            "coverage": 0.9302507836990596,
+            "error_rate": 0.2459983150800337,
+            "accepted": 1187
+          },
+          {
+            "coverage": 0.9396551724137931,
+            "error_rate": 0.2510425354462052,
+            "accepted": 1199
+          },
+          {
+            "coverage": 0.9498432601880877,
+            "error_rate": 0.25495049504950495,
+            "accepted": 1212
+          },
+          {
+            "coverage": 0.9600313479623824,
+            "error_rate": 0.2612244897959184,
+            "accepted": 1225
+          },
+          {
+            "coverage": 0.9702194357366771,
+            "error_rate": 0.2665589660743134,
+            "accepted": 1238
+          },
+          {
+            "coverage": 0.9804075235109718,
+            "error_rate": 0.2709832134292566,
+            "accepted": 1251
+          },
+          {
+            "coverage": 0.9898119122257053,
+            "error_rate": 0.27790973871733965,
+            "accepted": 1263
+          },
+          {
+            "coverage": 1.0,
+            "error_rate": 0.28448275862068967,
+            "accepted": 1276
+          }
+        ]
+      },
+      "operating_points": [
+        {
+          "validation_target": 0.01,
+          "test": {
+            "threshold": null,
+            "eligible": 1276,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "manual_review": 1276,
+            "error_rate": null,
+            "error_interval": null
+          },
+          "policy_url": "/reliability/data/Valen-4B/policy-0.json"
+        },
+        {
+          "validation_target": 0.02,
+          "test": {
+            "threshold": null,
+            "eligible": 1276,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "manual_review": 1276,
+            "error_rate": null,
+            "error_interval": null
+          },
+          "policy_url": "/reliability/data/Valen-4B/policy-1.json"
+        },
+        {
+          "validation_target": 0.05,
+          "test": {
+            "threshold": null,
+            "eligible": 1276,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "manual_review": 1276,
+            "error_rate": null,
+            "error_interval": null
+          },
+          "policy_url": "/reliability/data/Valen-4B/policy-2.json"
+        },
+        {
+          "validation_target": 0.1,
+          "test": {
+            "threshold": 0.799492155322521,
+            "eligible": 1276,
+            "accepted": 295,
+            "errors": 20,
+            "coverage": 0.23119122257053293,
+            "manual_review": 981,
+            "error_rate": 0.06779661016949153,
+            "error_interval": [
+              0.044313188363291275,
+              0.1023915526512383
+            ]
+          },
+          "policy_url": "/reliability/data/Valen-4B/policy-3.json"
+        }
+      ]
+    }
+  ]
+}

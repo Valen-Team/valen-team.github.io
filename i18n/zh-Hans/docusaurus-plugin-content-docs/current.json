@@ -39,5 +39,8 @@
   },
   "sidebar.main.category.vLLM deployment": {
     "message": "vLLM 部署"
+  },
+  "sidebar.main.category.Probability reliability": {
+    "message": "概率可靠性"
   }
 }

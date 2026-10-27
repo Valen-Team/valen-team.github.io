@@ -1,0 +1,79 @@
+---
+title: 校准工单分流
+description: 用自己的工单拟合可复用的分流规则，将未达条件的请求交给人工。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/calibrated_ticket_routing.py?cookbook-source';
+import protocol from '@site/static/cookbook/code/calibration_protocol.json?cookbook-source';
+import request from '@site/static/cookbook/code/calibration_request.json?cookbook-source';
+
+用自己的带标签工单拟合复核规则，再为每条请求返回 `automatic` 或 `human_review`。本例使用原生模型，候选团队为账单、技术支持和账户服务。
+
+## 准备环境与数据
+
+使用包含校准工具的 Valen 源码环境和已经下载好的原生模型，环境配置见[原生推理](/docs/valen/quickstart/)。下载 <a href="/cookbook/valen-cookbook.zip">Cookbook 源码包</a>，然后解压：
+
+```bash
+# /path/to/Valen 是含 pyproject.toml 的 Valen 源码目录
+# 仅安装 valen-sdk 不包含这里使用的原生校准工具
+python -m pip install -e /path/to/Valen
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook
+```
+
+下载包包含统一维护的脚本和 JSON 样本，不含权重或媒体。下列命令均在这个目录执行，沿用同一 Valen 环境。
+
+按[带标签记录格式](/docs/valen/data-format/)准备 `tickets/calibration.jsonl`、`tickets/policy.jsonl` 和 `tickets/test.jsonl`。每条记录包含稳定的来源 `group_id`、`request` 与 `targets`。同一客户或会话留在同一组，三个切分均与训练分开。候选含义与顺序应与应用一致，工作流版本记录在 `calibration_protocol.json`。
+
+## 采集一次，离线拟合
+
+```bash
+for role in calibration policy test; do
+  python -m valen.reliability_collect \
+    --model-dir /models/Valen-0.8B --device cuda \
+    --data tickets/$role.jsonl --role "$role" \
+    --protocol calibration_protocol.json \
+    --group-namespace support-customers-v1 --output cache/$role.json
+done
+
+python -m valen.calibrate pipeline \
+  --calibration-cache cache/calibration.json \
+  --policy-cache cache/policy.json --test-cache cache/test.json \
+  --output output/reliability
+```
+
+采集只读取本地权重并保留原始 logits。拟合与生成报告离线完成，无需重训模型。产物包含校准参数、分流规则，以及自动处理量、错误数和复核量的测试报告。默认 `policy-2.json` 对应验证集上的 5% 目标，采用前应查看实际测试结果。
+
+## 加载规则分流
+
+```bash
+python calibrated_ticket_routing.py \
+  --model-dir /models/Valen-0.8B --device cuda \
+  --request calibration_request.json \
+  --protocol calibration_protocol.json \
+  --calibration output/reliability/calibration.json \
+  --policy output/reliability/policy-2.json
+```
+
+脚本调用 `valen.routing.route_choice`，校验模型、校准参数和规则的关联，再给出分流建议。概率未达条件、推理失败或规则要求全部复核时，转入人工队列，不执行账户操作。本例应使用自己拟合的参数；发布的 BANKING77 参数属于另一套 77 意图任务。
+
+<details>
+<summary>查看完整脚本</summary>
+
+<CodeBlock language="python" title="calibrated_ticket_routing.py">{source}</CodeBlock>
+
+</details>
+
+<details>
+<summary>工作流声明与请求样本</summary>
+
+<CodeBlock language="json" title="calibration_protocol.json">{protocol}</CodeBlock>
+
+<CodeBlock language="json" title="calibration_request.json">{request}</CodeBlock>
+
+</details>
+
+请求样本用于说明格式，不是评测数据。页面代码与两个 JSON 均直接引用下载包中的同一份源码。
+
+[发布模型实测](/docs/valen/reliability/) · [校准概览](/docs/valen/calibration/) · [指标与缓存协议](https://github.com/Valen-Team/JevalKit/blob/main/docs/reliability.md)

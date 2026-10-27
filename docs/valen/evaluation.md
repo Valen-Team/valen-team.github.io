@@ -29,7 +29,7 @@ Aggregates are **equal-weight averages over questions**. `metric_counts` gives t
 
 Group keys include `overall`, `task/*`, `modality/*`, `task_modality/*/*`, `language/*` and `domain/*`. Modality comes from `meta.modality` when present; otherwise there are only two categories, `text` and `media`, with no automatic distinction between images and video.
 
-See [probabilities and thresholds](./probabilities.md) and [backend measurements](/cookbook/validation/). The CLI uses T=1; exact timing and aggregation are defined in [evaluate.py](https://github.com/Valen-Team/Valen/blob/main/valen/evaluation/evaluate.py).
+See [probabilities and thresholds](./probabilities.md) and [backend measurements](/cookbook/validation/). The CLI defaults to T=1 and accepts a versioned `--calibration` with `--protocol`; it reports raw and calibrated metrics from one forward pass. See [calibration and automation](./calibration.md). Exact timing and aggregation are defined in [evaluate.py](https://github.com/Valen-Team/Valen/blob/main/valen/evaluation/evaluate.py).
 
 <a id="inference-command"></a>
 <a id="answer-fields-for-the-three-types"></a>

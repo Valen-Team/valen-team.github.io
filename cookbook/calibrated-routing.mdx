@@ -1,0 +1,77 @@
+---
+title: Calibrate ticket routing
+description: Fit a reusable routing rule on your own tickets and send the rest for review.
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/calibrated_ticket_routing.py?cookbook-source';
+import protocol from '@site/static/cookbook/code/calibration_protocol.json?cookbook-source';
+import request from '@site/static/cookbook/code/calibration_request.json?cookbook-source';
+
+Fit a review rule using your own labeled tickets, then return `automatic` or `human_review` for each request. This native-model example uses three candidate teams: billing, technical and account.
+
+## Prepare
+
+Use a Valen source environment containing the calibration tools and an already downloaded native model. See [native inference](/docs/valen/quickstart/) for environment setup. Install your local Valen source checkout with the command below (`/path/to/Valen` contains `pyproject.toml`); `valen-sdk` alone does not provide these native calibration tools. Download the <a href="/cookbook/valen-cookbook.zip">Cookbook source bundle</a>, then extract it:
+
+```bash
+python -m pip install -e /path/to/Valen
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook
+```
+
+The bundle contains the maintained script and sample JSON files, without weights or media. All commands below run in that directory, using the same Valen environment.
+
+Prepare `tickets/calibration.jsonl`, `tickets/policy.jsonl` and `tickets/test.jsonl` in the [labeled record format](/docs/valen/data-format/). Each record needs a stable source `group_id`, its `request` and labeled `targets`. Keep customers/conversations together and all three splits separate from training. Use the same candidate meanings and order as your application; `calibration_protocol.json` records the workflow versions.
+
+## Collect once, fit offline
+
+```bash
+for role in calibration policy test; do
+  python -m valen.reliability_collect \
+    --model-dir /models/Valen-0.8B --device cuda \
+    --data tickets/$role.jsonl --role "$role" \
+    --protocol calibration_protocol.json \
+    --group-namespace support-customers-v1 --output cache/$role.json
+done
+
+python -m valen.calibrate pipeline \
+  --calibration-cache cache/calibration.json \
+  --policy-cache cache/policy.json --test-cache cache/test.json \
+  --output output/reliability
+```
+
+Collection reads local weights and retains raw logits. Fitting and report generation run offline without model retraining. The output includes saved calibration, routing policies and a test report showing accepted work, errors and review volume. `policy-2.json` corresponds to the default 5% validation target; inspect the actual test result before adopting it.
+
+## Apply the saved rule
+
+```bash
+python calibrated_ticket_routing.py \
+  --model-dir /models/Valen-0.8B --device cuda \
+  --request calibration_request.json \
+  --protocol calibration_protocol.json \
+  --calibration output/reliability/calibration.json \
+  --policy output/reliability/policy-2.json
+```
+
+The script uses `valen.routing.route_choice`, checks the model/calibration/policy association and proposes a route. Low probabilities, inference failures or an accept-nothing policy send the ticket to review. It does not execute account changes. Fit parameters for this workflow; the published BANKING77 artifact belongs to a different 77-intent task.
+
+<details>
+<summary>Complete maintained script</summary>
+
+<CodeBlock language="python" title="calibrated_ticket_routing.py">{source}</CodeBlock>
+
+</details>
+
+<details>
+<summary>Workflow declaration and sample request</summary>
+
+<CodeBlock language="json" title="calibration_protocol.json">{protocol}</CodeBlock>
+
+<CodeBlock language="json" title="calibration_request.json">{request}</CodeBlock>
+
+</details>
+
+The request is a schema example, not an evaluation dataset. The script and both JSON files above are imported from the same files distributed in the Cookbook bundle.
+
+[Published-model evidence](/docs/valen/reliability/) · [Calibration overview](/docs/valen/calibration/) · [Metric and cache protocol](https://github.com/Valen-Team/JevalKit/blob/main/docs/reliability.md)

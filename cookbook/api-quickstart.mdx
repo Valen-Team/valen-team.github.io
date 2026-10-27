@@ -35,7 +35,7 @@ curl -fL https://raw.githubusercontent.com/Valen-Team/Valen/main/assets/cookbook
 ## Run
 
 ```bash
-python api_quickstart.py --backend remote --model valen-2b --asset-dir . --output result.json
+python api_quickstart.py --backend remote --base-url https://api.valen-team.workers.dev/v1 --model valen-2b --asset-dir . --output result.json
 # An existing local HTTP deployment instead:
 python api_quickstart.py --backend remote --base-url http://127.0.0.1:8000/v1 --model valen --asset-dir . --output result.json
 ```

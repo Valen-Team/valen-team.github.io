@@ -14,6 +14,8 @@ Ask all three questions about the same input. A choice needs selected probabilit
 
 These thresholds illustrate a workflow. They are **not calibrated accuracy guarantees**. Measure false routing costs on your own labeled tickets and tune thresholds before operational use. Ambiguous, novel and low-confidence messages remain reviewable.
 
+To choose a routing threshold using your own labeled data, continue with [calibrated ticket routing](/cookbook/calibrated-routing/).
+
 ## Install and prepare inputs
 
 Use Python 3.11+. Download the small source bundle, extract it, then install its dependencies:
@@ -30,7 +32,7 @@ python -m pip install -r requirements.txt
 ## Run
 
 ```bash
-python ticket_routing.py --backend remote --model valen-2b --asset-dir . --output result.json
+python ticket_routing.py --backend remote --base-url https://api.valen-team.workers.dev/v1 --model valen-2b --asset-dir . --output result.json
 # An existing local HTTP deployment instead:
 python ticket_routing.py --backend remote --base-url http://127.0.0.1:8000/v1 --model valen --asset-dir . --output result.json
 ```

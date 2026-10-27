@@ -1,0 +1,8 @@
+{
+  "application": "ticket-intent-v1",
+  "candidate_schema": "billing-technical-account-v1",
+  "prompt_version": "ticket-routing-v1",
+  "label_policy": "human-adjudicated-intent-v1",
+  "media_budget": "text-only",
+  "question_grouping": "one Choice question per ticket"
+}

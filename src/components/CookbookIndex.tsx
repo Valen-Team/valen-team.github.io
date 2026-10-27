@@ -7,6 +7,7 @@ const entries = [
   {id:'api-quickstart', category:'foundations', modality:'text image video', title:['API basics', 'API 入门'], summary:['Run the three original notebook examples through an HTTP service.', '通过 HTTP 服务运行旧 Notebook 的文本、图片和视频帧示例。']},
   {id:'local-inference', category:'foundations', modality:'text image video', title:['Local inference basics', '本地推理基础'], summary:['Use both protocols with an offline native or ONNX model, including direct video.', '使用离线原版或 ONNX 模型运行两种协议，包括直接视频输入。']},
   {id:'ticket-routing', category:'applications', modality:'text', title:['Route support tickets', '工单分流'], summary:['Turn intent probabilities and explicitness scores into a queue and review priority.', '用意图概率和明确程度评分生成处理队列与人工审核优先级。']},
+  {id:'calibrated-routing', category:'applications', modality:'text', title:['Calibrate ticket routing', '校准工单分流'], summary:['Fit a reusable routing policy on your own tickets and send uncertain cases for review.', '用自己的工单拟合可复用的分流规则，将未达条件的请求交给人工。']},
   {id:'product-screening', category:'applications', modality:'image', title:['Screen product images', '商品图片筛选'], summary:['Check photographic print listings against the animals pictured and rank matches.', '检查摄影挂画商品分类是否与图片中的动物一致，并按匹配概率排序。']},
   {id:'video-tagging', category:'applications', modality:'video image', title:['Tag short videos', '短视频标注'], summary:['Sample one bounded frame and produce a reviewable sauce-color tag.', '抽取一个有界视频帧，输出可人工复核的酱汁颜色标签。']},
 ];

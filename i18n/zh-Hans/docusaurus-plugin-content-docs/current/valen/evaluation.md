@@ -29,7 +29,7 @@ python -m valen.evaluate --checkpoint output/domain/run/latest \
 
 分组key包括 `overall`、`task/*`、`modality/*`、`task_modality/*/*`、`language/*`、`domain/*`。模态优先读取 `meta.modality`；未提供时只有 `text` 和 `media` 两种分类，不自动区分图片与视频。
 
-概率含义与阈值见[概率指南](./probabilities.md)，性能与后端测量见 [Cookbook 验证](/zh-Hans/cookbook/validation/)。命令使用 T=1；完整计时和汇总实现见 [evaluate.py](https://github.com/Valen-Team/Valen/blob/main/valen/evaluation/evaluate.py)。
+概率含义与阈值见[概率指南](./probabilities.md)，性能与后端测量见 [Cookbook 验证](/zh-Hans/cookbook/validation/)。命令默认 T=1，可通过 `--calibration` 与 `--protocol` 加载参数；完整计时和汇总实现见 [evaluate.py](https://github.com/Valen-Team/Valen/blob/main/valen/evaluation/evaluate.py)。
 
 <a id="推理命令"></a>
 <a id="三种答案的字段"></a>
@@ -40,3 +40,8 @@ python -m valen.evaluate --checkpoint output/domain/run/latest \
 
 <a id="合成集只检查流程正式评估替换为独立测试集"></a>
 <a id="同一数据按记录分到四个进程不填充重复样本"></a>
+
+
+## 概率校准与自动处理
+
+评测 CLI 默认 T=1，也支持 `--calibration` 与 `--protocol`，在同一次前向推理中报告原始和校准后指标。通过 `--cache-role`、`--group-namespace` 和协议文件可保存离线校准缓存。参见[校准、冻结规则与独立测试](./calibration.md)。

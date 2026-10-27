@@ -36,8 +36,13 @@ Predicate 可设双阈值：低于下阈值拒绝，高于上阈值接受，中�
 
 ## 温度、校准与重新验证
 
-正标量温度在 softmax 前缩放固定 logits，在精确算术下保持排序和 argmax。它改变集中度和 Score 期望值，不能保证提高排序准确率。只有在独立标注校准集上按合适目标拟合，并独立测试后，才能讨论温度校准。原生预测支持按题型温度；其他后端须核对支持。请求体中的温度优先于 Python 关键字。训练 checkpoint 推理 CLI 支持 `--calibration`，文件如 `{"temperature":1.0}`；评测 CLI 固定 T=1，没有这一参数。
+正标量温度在 softmax 前缩放固定 logits，在精确算术下保持排序和 argmax。它改变集中度和 Score 期望值，不能保证提高排序准确率。只有在独立标注校准集上按合适目标拟合，并独立测试后，才能讨论温度校准。原生预测支持按题型温度；其他后端须核对支持。请求体中的温度优先于 Python 关键字。训练 checkpoint 推理 CLI 保留 `{"temperature":1.0}` 文件兼容；推理与评测均支持版本化 `--calibration`，配合 `--protocol` 校验身份，评测默认 T=1。
 
 模型、adapter、精度/后端、提示、候选集合/顺序、问题分组、媒体预算、标签定义、类别比例或输入领域改变后，重新验证阈值。监测线上漂移和人工工作量，不能默认旧阈值持续有效。
 
 完整应用见[工单分流](/zh-Hans/cookbook/ticket-routing/)与[商品筛选](/zh-Hans/cookbook/product-screening/)，示例阈值不是经过校准的推荐值。[评测与指标](./evaluation.md) · [协议参考](./api.md)。公式实现：[inference.py](https://github.com/Valen-Team/Valen/blob/main/valen/evaluation/inference.py)。
+
+
+## 可复现的校准与分流
+
+推理 CLI 保留旧版 `{"temperature":1.0}` 文件支持。推理和评测均可加载版本化 `--calibration`，并用 `--protocol` 校验身份；评测默认 T=1。参见[完整校准流程](./calibration.md)，拟合与保存参数、冻结人工复核规则并查看独立测试证据。

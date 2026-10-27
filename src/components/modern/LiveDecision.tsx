@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {useLocation} from '@docusaurus/router';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {ArrowUp, ArrowUpRight, ChevronDown, CircleHelp, Image as ImageIcon, LoaderCircle, MessageSquarePlus, Paperclip, Play, Plus, Settings2, Square, Type, Video, X} from 'lucide-react';
 import {useChinese} from '../Content';
@@ -15,6 +16,7 @@ const numberLabel = (value: number) => `${(value * 100).toFixed(1)}%`;
 
 export default function LiveDecision() {
   const zh = useChinese();
+  const {search} = useLocation();
   const {siteConfig} = useDocusaurusContext();
   const proxy = String(siteConfig.customFields?.decisionProxyUrl || '');
   const [question, setQuestion] = useState('');
@@ -62,6 +64,10 @@ export default function LiveDecision() {
     const example = getCookbook(zh).find(e => e.id === selected);
     if (example) loadExample(example.id, false);
   }, [zh]);
+
+  useEffect(() => {
+    if (new URLSearchParams(search).get('example') === 'ticket') loadExample('text', false);
+  }, [search]);
 
   function loadExample(id: string, scroll = true) {
     const example = getCookbook(zh).find(e => e.id === id);

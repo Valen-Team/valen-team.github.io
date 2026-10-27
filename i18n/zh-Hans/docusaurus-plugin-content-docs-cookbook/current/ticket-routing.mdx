@@ -14,6 +14,8 @@ import CookbookEvidence, {CookbookSample} from '@site/src/components/CookbookEvi
 
 这些阈值仅演示流程，**不是经过校准的准确率保证**。上线前须在自有标注工单上衡量错误分流成本并调整阈值；含糊、新颖或置信度不足的消息进入人工复核。
 
+要用自己的标签数据选择分流门槛，继续阅读[校准工单分流](/cookbook/calibrated-routing/)。
+
 ## 安装与输入
 
 Python 3.11+。先下载小型源文件包并解压，然后安装所需依赖：
@@ -30,7 +32,7 @@ python -m pip install -r requirements.txt
 ## 运行
 
 ```bash
-python ticket_routing.py --backend remote --model valen-2b --asset-dir . --output result.json
+python ticket_routing.py --backend remote --base-url https://api.valen-team.workers.dev/v1 --model valen-2b --asset-dir . --output result.json
 # An existing local HTTP deployment instead:
 python ticket_routing.py --backend remote --base-url http://127.0.0.1:8000/v1 --model valen --asset-dir . --output result.json
 ```
