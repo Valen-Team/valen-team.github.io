@@ -4,16 +4,25 @@ title: Choose a version
 
 # Which version should I choose?
 
-For a first try, use the [web experience](https://valen-team.github.io/) or [free HTTP API](https://valen-team.github.io/docs/valen/api/). No model download is needed. For offline use, start with 0.8B; evaluate your own task before moving to 2B or 4B.
+Choose a path for your device and task first, then choose a model size. To try Valen without downloading a model, use the [web experience](https://valen-team.github.io/) or [free API](/docs/valen/api/).
 
-| Goal | Recommended path |
+| Your goal | Start here |
 | --- | --- |
-| Online trial | Web experience or HTTP API: the shortest trial path |
-| Python / JavaScript applications | HTTP SDK with an existing service; for offline inference, ONNX SDK with 0.8B FP32 and cached local assets |
-| C++ local HTTP service | GGUF Q8_0 with the Valen custom llama-server Linux x86-64 CPU prebuilt package; see [GGUF](/docs/valen/gguf/) |
-| GPU deployment | Native weights with the repository SGLang/vLLM plugins, or Python ONNX `cuda-fp16`; follow each backend's measured scope |
-| Fine-tuning | Complete native Valen weights with the repository LoRA/full SFT recipes; see [training](https://valen-team.github.io/docs/valen/training/) |
+| Try it without installing a model | [Web experience](https://valen-team.github.io/) or [free API](/docs/valen/api/) |
+| Run locally in Python on CPU or NVIDIA GPU | [ONNX Python SDK](/docs/valen/onnx/), starting with 0.8B; supports text, images and video |
+| Run locally in JavaScript | [ONNX JavaScript SDK](/docs/valen/onnx/) on Node.js CPU or browser WebGPU; supports text, images and video |
+| Run a local HTTP service on Linux x86-64 CPU | [GGUF Q8_0 and the Valen custom runtime](/docs/valen/gguf/); start with text and see the guide for image and video validation |
+| Use an existing NVIDIA GPU serving environment | Choose [vLLM](/docs/valen/vllm-plugin/) or [SGLang](/docs/valen/sglang-plugin/) to match your environment; supports text and images, with video frames supplied as images |
+| Fine-tune a model | Use complete native weights and the [training guide](/docs/valen/training/) |
 
-0.8B/2B/4B denote model size. Native weights, ONNX and GGUF are file formats. FP32/F32, Q8_0 and ONNX `q8-mlp` denote format-specific precision/quantization variants, not interchangeable names. Transformers, ONNX Runtime, custom llama.cpp/Ollama and SGLang/vLLM are execution backends. SDK `Valen.local` loads ONNX, not GGUF; access a GGUF server through HTTP.
+Offline use requires model files or a cache prepared in advance. The initial Python ONNX 0.8B FP32 download is about 3.505 GB; the GGUF 0.8B Q8_0 text file is about 0.761 GiB. See the [ONNX](/docs/valen/onnx/) and [GGUF](/docs/valen/gguf/) guides for other variants and download sizes.
 
-All three GGUF sizes publish qualified F32, Q8_0 and matching vision modules. Q4/Q5 failed the quality gates and are not recommended. Custom llama.cpp/Ollama real-model validation covers Linux CPU, not GPU, Windows or other platforms. File sizes describe downloads/disk usage, not peak RAM. No unmeasured throughput or latency is promised.
+## 0.8B, 2B or 4B?
+
+These numbers describe model size. Start a local trial with 0.8B, then compare 2B and 4B on your own task if you need better results, considering download size and device resources. [See model evaluations](/docs/valen/evaluation/) · [Compare probability reliability](/docs/valen/reliability/)
+
+## Compare running costs
+
+[See measured 0.8B CPU latency and memory on the same machine](/cookbook/validation/). The results use a specific machine and inputs to compare the measured paths; actual speed and memory depend on your hardware and workload. ONNX model cards also provide variant measurements and quality comparisons.
+
+Native weights, ONNX and GGUF are model formats; Transformers, ONNX Runtime, custom llama.cpp/Ollama, SGLang and vLLM are execution backends. SDK `Valen.local` loads ONNX; access a GGUF server over HTTP. GGUF requires the Valen custom runtime; unmodified llama.cpp/Ollama is not supported.
