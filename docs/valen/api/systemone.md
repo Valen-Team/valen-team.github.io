@@ -39,7 +39,7 @@ Install `requests` in the client environment to run the Python example, or switc
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `model` | string | Yes | Hosted model ID, such as `valen-2b`; see [List Models](./list-models.md). |
-| `state` | string | Yes | Shared evidence for all questions. |
+| `state` | string / object | Yes | Shared evidence for all questions: text, or a JSON object with named fields that questions can reference by path, such as `message`. |
 | `questions` | object | Yes | Questions keyed by ID. |
 | `temperature` | number | No | Valen calibration extension; finite and positive, defaults to `1.0`. |
 | `assets` | object | No | Image assets keyed by reference; see Images below. |
@@ -51,7 +51,7 @@ Instructions must be nonempty text. The upstream API validates requests.
 <Tabs groupId="systemone-question-type">
 <TabItem value="noul" label="noul" default>
 
-Return the probability, from 0 to 1, that a condition holds.
+Return the probability, from 0 to 1, that a condition holds. Optional `criteria` describes both cases concretely: `{"true": "...", "false": "..."}`.
 
 Request:
 
@@ -63,7 +63,11 @@ Request:
   "questions": {
     "q0": {
       "type": "noul",
-      "instructions": "The cat is on the sofa."
+      "instructions": "The cat is on the sofa.",
+      "criteria": {
+        "true": "A cat is sitting or lying on the sofa",
+        "false": "The sofa is empty, or the cat is somewhere else"
+      }
     }
   }
 }
@@ -195,6 +199,20 @@ Successful requests return HTTP 200 with a JSON response body.
 This example encodes a local PNG, JPEG, or WebP image and sends the request. Replace `image.png` with your file; its MIME type is inferred from the filename. Images are provided through `assets` and referenced in `state`.
 
 <RequestExample protocol="systemone" image />
+
+## Limits
+
+The hosted endpoints accept, per request:
+
+| Item | Limit |
+| --- | --- |
+| Images | 1 |
+| Questions | 8 |
+| Candidates per question | 16 |
+| Characters per candidate description | 300 |
+| Characters of instructions | 2,000 |
+
+A request over a limit returns HTTP 400 with the limit in `detail`. For video, send one frame per request and combine the answers in code; for more questions, send another request with the same evidence. Local deployments set their own limits, for example `VALEN_MAX_IMAGES`.
 
 ## Errors
 

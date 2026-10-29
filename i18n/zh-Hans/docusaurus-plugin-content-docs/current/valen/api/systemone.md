@@ -39,7 +39,7 @@ POST /v1/systemone
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `model` | string | 是 | 托管模型 ID，例如 `valen-2b`；见 [List Models](./list-models.md)。 |
-| `state` | string | 是 | 所有问题共享的上下文。 |
+| `state` | string / object | 是 | 所有问题共享的上下文：文本，或带命名字段的 JSON 对象，问题中可以按路径引用，例如 `message`。 |
 | `questions` | object | 是 | 按问题 ID 索引的映射。 |
 | `temperature` | number | 否 | Valen 校准扩展；有限正数，默认 `1.0`。 |
 | `assets` | object | 否 | 按引用名索引的图片资源，见下方图片输入。 |
@@ -51,7 +51,7 @@ POST /v1/systemone
 <Tabs groupId="systemone-question-type">
 <TabItem value="noul" label="noul" default>
 
-判断条件是否成立，返回 0–1 之间的概率。
+判断条件是否成立，返回 0–1 之间的概率。可选的 `criteria` 用具体情形描述两种情况：`{"true": "...", "false": "..."}`。
 
 请求：
 
@@ -63,7 +63,11 @@ POST /v1/systemone
   "questions": {
     "q0": {
       "type": "noul",
-      "instructions": "The cat is on the sofa."
+      "instructions": "The cat is on the sofa.",
+      "criteria": {
+        "true": "A cat is sitting or lying on the sofa",
+        "false": "The sofa is empty, or the cat is somewhere else"
+      }
     }
   }
 }
@@ -195,6 +199,20 @@ POST /v1/systemone
 示例读取本地 PNG、JPEG 或 WebP 图片并完成编码和请求。将 `image.png` 替换为你的文件，MIME 类型会根据文件名自动识别。图片通过 `assets` 提供，并在 `state` 中引用。
 
 <RequestExample protocol="systemone" image />
+
+## 限制
+
+托管接口对每个请求的限制：
+
+| 项目 | 上限 |
+| --- | --- |
+| 图片 | 1 张 |
+| 问题 | 8 个 |
+| 每个问题的候选项 | 16 个 |
+| 每条候选描述 | 300 字符 |
+| 问题指令 | 2,000 字符 |
+
+超出限制会返回 HTTP 400，`detail` 中写明具体限制。视频请每个请求发送一帧，在代码里合并回答；问题更多时，用相同的证据再发一个请求。本地部署可自行设置上限，例如 `VALEN_MAX_IMAGES`。
 
 ## 错误
 

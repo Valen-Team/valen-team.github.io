@@ -1,0 +1,82 @@
+---
+title: 用 agent skill 做客服分流
+description: 装了 Valen skill 的编程 agent 根据一页需求写出客服分流器，在 60 条没见过的消息上得分 98%。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/skill_support_router.py?cookbook-source';
+
+外卖应用 Fastbite 需要把每条应用内客服消息分到六个队列之一，并打上 `safety`（安全）和 `compensation`（补偿）两个标记。我们只给了编程 agent 三样东西：[Valen skill](/docs/valen/agent-skill/)、一页需求说明和 10 条标注样本。本页展示它做出了什么，以及在 60 条它从没见过的消息上的得分。
+
+## 需求和提示词
+
+agent 的工作目录里只有 [`task.md`](https://github.com/Valen-Team/skills/blob/main/evals/tasks/delivery-support/task.md)（队列、标记和 `predict(item)` 接口）、[`labeling.md`](https://github.com/Valen-Team/skills/blob/main/evals/tasks/delivery-support/labeling.md)（12 条业务规则，例如"同时提出两个问题的消息转人工"）和 `dev.json`（10 条样本）。skill 装在 `.claude/skills/valen/`。提示词如下：
+
+```text
+Read task.md and labeling.md in this folder and build the deliverable they describe.
+1. Write your first complete version and freeze it in v1/ before running it on any labeled example.
+2. Improve it using dev.json and cases you write yourself; leave the final version in solution.py.
+3. Finish with NOTES.md: what changed between v1 and the final version, and why.
+Use Valen's free hosted API at https://api.valen-team.workers.dev (no key needed).
+```
+
+自己试一试：安装 skill，再给你的 agent 一份类似的需求说明。
+
+```bash
+claude plugin marketplace add Valen-Team/skills
+claude plugin install valen@valen-team
+```
+
+## agent 做了什么
+
+每条消息在 `valen-4b` 上发一次 System One 请求。所有判断都写成问题，所有业务规则都留在代码里：
+
+- **state 说明文本是什么**：一个 `context` 字段（"新加坡外卖应用 Fastbite 的应用内客服消息……"），再加上 `order_status` 和 `message`。
+- **队列**：五个队列加一个有描述的 `none` 组成 Choice；`none` 转为 `human_review`。
+- **两个问题**：一个 Noul，问"是否提到两类及以上的问题"；它的 `false` 描述写明，一个问题讲了很多句，或者一个问题加上抱怨态度，都不算两个问题。
+- **标记**：`safety` 和 `compensation` 都是 Noul，`true` / `false` 写成具体情形。
+- **防护**：加一个 `describes_event` Noul，让"???"这类几乎为空的消息不会触发 `safety`；再加一个 `delete_account` Noul，因为规则 5 要求删号转人工。
+- **顺序和阈值**：多问题检查放在最后，改它的措辞不会影响前面的回答；`safety` 用 0.8，因为没有问题的消息落在 0.5–0.6，真正的安全报告都在 0.95 以上。
+
+agent 用自己标注的样本，以及调参后才写的留出集做测试，并在 `NOTES.md` 里记下每次修改和原因。
+
+## 在没见过的消息上的结果
+
+在 [skill 评测集](https://github.com/Valen-Team/skills/tree/main/evals) 的 60 条隐藏测试消息上打分，每个字段用 balanced accuracy（各类召回率的平均）：
+
+| 版本 | 队列 | 安全 | 补偿 | 平均 | 三项全对 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 首版（`v1/`，看任何标注样本之前） | 94% | 98% | 100% | 97.2% | – |
+| 终版（本页代码） | 95% | 100% | 99% | 98.1% | 56 / 60 |
+
+常数答案在这个任务上得 39%。终版仍然判错的 4 条：
+
+- "wow, only 70 minutes for a 2km delivery. amazing service as always"：讽刺句被转到 `human_review`，应为 `late_order`。
+- 要求不放花生却放了花生、并出现过敏：判成 `food_quality`，应为 `missing_or_wrong_item`（`safety` 判对了）。
+- "Cancelled the order within a minute but I was still charged"：`compensation` 判为 true，但按规则 12，只报告多扣款、没有提出要求时应为 false。
+- 账号被盗并被用来下了三单：判成 `account_access`，按"两个问题"规则应为 `human_review`。
+
+在评测集的三个任务上（文本分流、图片分拣、视频打标签），带 skill 写出的首版平均分：Claude Code **92.7%**，Codex **91.2%**；不带 skill 时分别是 **80.2%** 和 **63.3%**。带 skill 的首版最低也有 86.8%。不带 skill 时，两个 agent 各有一次首版彻底失败：Claude Code 对措辞含糊的 `usable` 问题直接用 0.5 做阈值，把所有图片判成不可用；Codex 在一个请求里塞了 8 帧视频，而接口每次只收一张图。最新数字见[评测集 README](https://github.com/Valen-Team/skills/tree/main/evals#results)。
+
+## 运行
+
+只需 Python 3.11+ 和标准库。下载示例包，或直接复制下面的代码：
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook
+python skill_support_router.py --message "晚了一个小时，而且鸡翅少了两个" --order-status delivered
+```
+
+脚本会输出分流结果、返回的 `model_id`、问题集版本和每个问题的回答。`predict(item)` 就是评测打分时调用的函数。
+
+## 完整代码
+
+<CodeBlock language="python" title="skill_support_router.py">{source}</CodeBlock>
+
+agent 原本写成三个文件：`questions.py`（全部措辞和阈值）、`valen_client.py` 和 `solution.py`。这里把它们合成一个文件并加上命令行入口；逻辑没有改动，在隐藏测试集上得分相同。
+
+代码采用 <a href="/cookbook/code/LICENSE.txt">Apache-2.0</a>。消息和标签都是为评测编写的虚构内容。
+
+[Agent skill](/docs/valen/agent-skill/) · [写好问题](/docs/valen/question-design/) · [System One API](/docs/valen/api/systemone/) · [工单分流](../ticket-routing/) · [候选项都不对](../unknown-categories/)

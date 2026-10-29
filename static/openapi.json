@@ -1,0 +1,829 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Valen API",
+    "version": "1.0.0",
+    "description": "Typed decisions over text and images from Valen System One models. Documentation: https://valen-team.github.io/docs/valen/api/ Hosted limits per request: 1 image, 8 questions, 16 candidates per question, 300 characters per candidate description, 2,000 characters of instructions.",
+    "license": {
+      "name": "Apache-2.0"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.valen-team.workers.dev",
+      "description": "Free API, no key"
+    },
+    {
+      "url": "https://llm-proxy.openxxlab.com",
+      "description": "Keyed API"
+    }
+  ],
+  "security": [
+    {},
+    {
+      "bearer": []
+    }
+  ],
+  "paths": {
+    "/v1/systemone": {
+      "post": {
+        "operationId": "systemOne",
+        "summary": "System One",
+        "description": "Questions keyed by ID over shared state. Docs: https://valen-team.github.io/docs/valen/api/systemone/",
+        "parameters": [
+          {
+            "name": "TypeSafe-Danger-Zone-Images",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "const": "true"
+            },
+            "description": "Required when the request includes image assets."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SystemOneRequest"
+              },
+              "example": {
+                "model": "valen-2b",
+                "state": {
+                  "message": "I moved. Please ship my order to 12 Elm Street instead."
+                },
+                "questions": {
+                  "intent": {
+                    "type": "choice",
+                    "instructions": "What does the customer in `message` want?",
+                    "criteria": {
+                      "change_address": "Change the delivery address",
+                      "cancel": "Cancel the order",
+                      "none": "Something else, or not enough information"
+                    }
+                  },
+                  "refund": {
+                    "type": "noul",
+                    "instructions": "The customer asks for a refund."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Answers keyed by question ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemOneResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request rejected.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Field validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded; wait at least a minute."
+          }
+        }
+      }
+    },
+    "/v1/decisions": {
+      "post": {
+        "operationId": "decisions",
+        "summary": "Decisions",
+        "description": "Question list over shared input. Docs: https://valen-team.github.io/docs/valen/api/decisions/",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionsRequest"
+              },
+              "example": {
+                "model": "valen-2b",
+                "input": "A cat is on the sofa.",
+                "questions": [
+                  {
+                    "name": "cat",
+                    "type": "predicate",
+                    "instructions": "A cat is present."
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Answers in request order.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DecisionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request rejected.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Field validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded; wait at least a minute."
+          }
+        }
+      }
+    },
+    "/v1/models": {
+      "get": {
+        "operationId": "listModels",
+        "summary": "List Models",
+        "description": "Docs: https://valen-team.github.io/docs/valen/api/list-models/",
+        "responses": {
+          "200": {
+            "description": "Model list; Valen IDs start with valen-.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelList"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "VALEN_API_KEY, keyed endpoint only."
+      }
+    },
+    "schemas": {
+      "SOQuestion": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/SONoul"
+          },
+          {
+            "$ref": "#/components/schemas/SOChoice"
+          },
+          {
+            "$ref": "#/components/schemas/SOScore"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "SONoul": {
+        "type": "object",
+        "required": [
+          "type",
+          "instructions"
+        ],
+        "properties": {
+          "type": {
+            "const": "noul"
+          },
+          "instructions": {
+            "type": "string",
+            "minLength": 1,
+            "description": "A statement; the answer is the probability it is true.",
+            "maxLength": 2000
+          },
+          "criteria": {
+            "type": "object",
+            "properties": {
+              "true": {
+                "type": "string"
+              },
+              "false": {
+                "type": "string"
+              }
+            },
+            "description": "Optional concrete descriptions of the true and false cases."
+          }
+        }
+      },
+      "SOChoice": {
+        "type": "object",
+        "required": [
+          "type",
+          "instructions",
+          "criteria"
+        ],
+        "properties": {
+          "type": {
+            "const": "choice"
+          },
+          "instructions": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "criteria": {
+            "type": "object",
+            "minProperties": 2,
+            "additionalProperties": {
+              "type": "string",
+              "maxLength": 300
+            },
+            "description": "Candidate value to description. Values are sent to the model; use descriptive names.",
+            "maxProperties": 16
+          }
+        }
+      },
+      "SOScore": {
+        "type": "object",
+        "required": [
+          "type",
+          "instructions",
+          "criteria"
+        ],
+        "properties": {
+          "type": {
+            "const": "score"
+          },
+          "instructions": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "criteria": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "string",
+              "maxLength": 300
+            },
+            "description": "Ordered level descriptions, lowest first.",
+            "maxItems": 16
+          }
+        }
+      },
+      "SystemOneRequest": {
+        "type": "object",
+        "required": [
+          "model",
+          "state",
+          "questions"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Hosted model ID from GET /v1/models, such as valen-2b.",
+            "examples": [
+              "valen-2b"
+            ]
+          },
+          "state": {
+            "description": "Shared evidence for all questions: a string or a JSON object with named fields. Mention asset references here.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ]
+          },
+          "questions": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SOQuestion"
+            },
+            "description": "Questions keyed by ID. All questions share one forward pass.",
+            "maxProperties": 8
+          },
+          "assets": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "required": [
+                "type",
+                "format",
+                "data_base64"
+              ],
+              "properties": {
+                "type": {
+                  "const": "image"
+                },
+                "format": {
+                  "enum": [
+                    "png",
+                    "jpeg",
+                    "webp"
+                  ]
+                },
+                "data_base64": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Images keyed by the reference used in state. Requires the TypeSafe-Danger-Zone-Images header.",
+            "maxProperties": 1
+          },
+          "temperature": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "default": 1.0,
+            "description": "Valen calibration extension: rescales logits before softmax."
+          }
+        }
+      },
+      "SOAnswer": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "noul"
+            ],
+            "properties": {
+              "type": {
+                "const": "noul"
+              },
+              "noul": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "choice",
+              "probabilities"
+            ],
+            "properties": {
+              "type": {
+                "const": "choice"
+              },
+              "choice": {
+                "type": "string"
+              },
+              "probabilities": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "score",
+              "probabilities"
+            ],
+            "properties": {
+              "type": {
+                "const": "score"
+              },
+              "score": {
+                "type": "number",
+                "description": "Expected zero-based level index."
+              },
+              "probabilities": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "description": "Keyed by level index as a string."
+              },
+              "legend": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        ]
+      },
+      "SystemOneResponse": {
+        "type": "object",
+        "required": [
+          "model",
+          "answers"
+        ],
+        "properties": {
+          "model": {
+            "type": "string"
+          },
+          "answers": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SOAnswer"
+            }
+          },
+          "usage": {
+            "type": "object",
+            "properties": {
+              "input_tokens": {
+                "type": "integer"
+              },
+              "output_tokens": {
+                "type": "integer"
+              }
+            }
+          },
+          "model_id": {
+            "type": "string",
+            "description": "Answering model identifier."
+          },
+          "revision": {
+            "type": "string"
+          },
+          "internal_usage": {
+            "type": "object"
+          },
+          "timing": {
+            "type": "object",
+            "description": "Server timing in milliseconds."
+          },
+          "images": {
+            "type": "array",
+            "items": {}
+          }
+        }
+      },
+      "DQuestion": {
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "instructions"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "predicate",
+              "choice",
+              "score"
+            ]
+          },
+          "instructions": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "choices": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "value",
+                "description"
+              ],
+              "properties": {
+                "value": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "maxLength": 300
+                }
+              }
+            },
+            "description": "Required for choice.",
+            "maxItems": 16
+          },
+          "levels": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "label",
+                "description"
+              ],
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "maxLength": 300
+                }
+              }
+            },
+            "description": "Required for score; ordered lowest first.",
+            "maxItems": 16
+          }
+        }
+      },
+      "DecisionsRequest": {
+        "type": "object",
+        "required": [
+          "model",
+          "input",
+          "questions"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Hosted model ID from GET /v1/models, such as valen-2b.",
+            "examples": [
+              "valen-2b"
+            ]
+          },
+          "input": {
+            "description": "Shared evidence: a string, or messages whose content mixes input_text and input_image parts.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "role",
+                    "content"
+                  ],
+                  "properties": {
+                    "role": {
+                      "type": "string",
+                      "examples": [
+                        "user"
+                      ]
+                    },
+                    "content": {
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "required": [
+                              "type",
+                              "text"
+                            ],
+                            "properties": {
+                              "type": {
+                                "const": "input_text"
+                              },
+                              "text": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "type",
+                              "image_url"
+                            ],
+                            "properties": {
+                              "type": {
+                                "const": "input_image"
+                              },
+                              "image_url": {
+                                "type": "string",
+                                "description": "Data URL: data:image/png|jpeg|webp;base64,..."
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "questions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/DQuestion"
+            },
+            "maxItems": 8
+          },
+          "temperature": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "default": 1.0,
+            "description": "Valen calibration extension: rescales logits before softmax."
+          }
+        }
+      },
+      "DAnswer": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "predicate",
+              "choice",
+              "score"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "probability": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Predicate only."
+          },
+          "choice": {
+            "type": "string",
+            "description": "Choice only."
+          },
+          "score": {
+            "type": "number",
+            "description": "Score only: expected zero-based level index."
+          },
+          "probabilities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": [
+                    "string",
+                    "integer"
+                  ]
+                },
+                "label": {
+                  "type": "string"
+                },
+                "probability": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              }
+            }
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      },
+      "DecisionsResponse": {
+        "type": "object",
+        "required": [
+          "model",
+          "answers"
+        ],
+        "properties": {
+          "model": {
+            "type": "string"
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DAnswer"
+            },
+            "description": "In request order."
+          },
+          "usage": {
+            "type": "object",
+            "properties": {
+              "input_tokens": {
+                "type": "integer"
+              },
+              "output_tokens": {
+                "type": "integer"
+              }
+            }
+          },
+          "model_id": {
+            "type": "string",
+            "description": "Answering model identifier."
+          },
+          "revision": {
+            "type": "string"
+          },
+          "internal_usage": {
+            "type": "object"
+          },
+          "timing": {
+            "type": "object",
+            "description": "Server timing in milliseconds."
+          },
+          "images": {
+            "type": "array",
+            "items": {}
+          }
+        }
+      },
+      "ModelList": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "const": "list"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "object": {
+                  "const": "model"
+                },
+                "created": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "description": "Error message or a list of field errors.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

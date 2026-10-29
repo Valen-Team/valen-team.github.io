@@ -1,0 +1,82 @@
+---
+title: Build a support router with the agent skill
+description: A coding agent with the Valen skill turned a one-page brief into a support router that scores 98% on 60 unseen messages.
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/skill_support_router.py?cookbook-source';
+
+Fastbite, a food-delivery app, needs every in-app support message routed to one of six queues, with a `safety` flag and a `compensation` flag. We gave a coding agent the [Valen skill](/docs/valen/agent-skill/), a one-page brief and ten labeled examples, and nothing else. This page shows what it built and how it scored on 60 messages it never saw.
+
+## The brief and the prompt
+
+The agent's folder held only [`task.md`](https://github.com/Valen-Team/skills/blob/main/evals/tasks/delivery-support/task.md) (queues, flags and the `predict(item)` interface), [`labeling.md`](https://github.com/Valen-Team/skills/blob/main/evals/tasks/delivery-support/labeling.md) (twelve business rules, such as "a message that raises two problems goes to human review") and `dev.json` (ten examples). The skill was installed at `.claude/skills/valen/`. The prompt:
+
+```text
+Read task.md and labeling.md in this folder and build the deliverable they describe.
+1. Write your first complete version and freeze it in v1/ before running it on any labeled example.
+2. Improve it using dev.json and cases you write yourself; leave the final version in solution.py.
+3. Finish with NOTES.md: what changed between v1 and the final version, and why.
+Use Valen's free hosted API at https://api.valen-team.workers.dev (no key needed).
+```
+
+To try it yourself, install the skill and give your agent the same kind of brief:
+
+```bash
+claude plugin marketplace add Valen-Team/skills
+claude plugin install valen@valen-team
+```
+
+## What the agent built
+
+One System One request per message on `valen-4b`, with every judgment asked as a question and every business rule kept in code:
+
+- **State says what the text is**: a `context` field ("In-app support message from a customer of Fastbite, a food-delivery app in Singapore…"), plus `order_status` and `message`.
+- **Queue**: a Choice over the five queues plus a described `none`; `none` goes to `human_review`.
+- **Two problems**: one Noul, "reports problems of two or more of these kinds", whose `false` criterion says that one problem told at length, or one problem plus rudeness, does not count.
+- **Flags**: `safety` and `compensation` as Nouls with concrete `true` / `false` criteria.
+- **Guards**: a `describes_event` Noul so near-empty messages ("???") cannot raise `safety`, and a `delete_account` Noul because rule 5 sends account deletion to review.
+- **Order and thresholds**: the multi-problem check sits last so rewording it leaves earlier answers alone; `safety` uses 0.8 because messages with no problem sat at 0.5–0.6 while real reports scored above 0.95.
+
+The agent tested on its own labeled cases and a held-out set it wrote after tuning, and recorded each change and its reason in `NOTES.md`.
+
+## Results on unseen messages
+
+Scored on the 60 hidden test messages of the [skill benchmark](https://github.com/Valen-Team/skills/tree/main/evals), using balanced accuracy (mean per-class recall) per field:
+
+| Version | Queue | Safety | Compensation | Mean | All three right |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| First version (`v1/`, before any labeled example) | 94% | 98% | 100% | 97.2% | – |
+| Final version (this page's code) | 95% | 100% | 99% | 98.1% | 56 / 60 |
+
+A constant answer scores 39% on this task. The four messages it still gets wrong:
+
+- "wow, only 70 minutes for a 2km delivery. amazing service as always": sarcasm sent to `human_review` instead of `late_order`.
+- Peanuts in noodles ordered without them, with an allergic reaction: `food_quality` instead of `missing_or_wrong_item` (`safety` is right).
+- "Cancelled the order within a minute but I was still charged": `compensation` raised, though rule 12 says an overcharge report without a request is `false`.
+- A hacked account used for three card orders: `account_access` instead of `human_review` for two problems.
+
+Across all three benchmark tasks (text routing, image sorting, video tagging), first versions written with the skill averaged **92.7%** with Claude Code and **91.2%** with Codex; without the skill they averaged **80.2%** and **63.3%**. With the skill, no first version scored below 86.8%. Without it, each agent produced one first version that failed outright: Claude Code thresholded a vaguely worded `usable` question at 0.5 and marked every image unusable, and Codex sent eight video frames in a request that accepts one. The [benchmark README](https://github.com/Valen-Team/skills/tree/main/evals#results) keeps the current numbers.
+
+## Run it
+
+Python 3.11+ and the standard library only. Download the bundle or copy the code below:
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook
+python skill_support_router.py --message "Order was super late AND they forgot my drink" --order-status delivered
+```
+
+The script prints the route, the returned `model_id`, the question-set version and every answer. `predict(item)` is the function the benchmark grader calls.
+
+## Complete code
+
+<CodeBlock language="python" title="skill_support_router.py">{source}</CodeBlock>
+
+The agent wrote it as three files: `questions.py` (all wording and thresholds), `valen_client.py` and `solution.py`. They are joined here with a command line added; the logic is unchanged and scores the same on the hidden set.
+
+Code uses <a href="/cookbook/code/LICENSE.txt">Apache-2.0</a>. Messages and labels are fictional and written for the benchmark.
+
+[Agent skill](/docs/valen/agent-skill/) · [Write questions that work](/docs/valen/question-design/) · [System One API](/docs/valen/api/systemone/) · [Route support tickets](../ticket-routing/) · [When no option fits](../unknown-categories/)

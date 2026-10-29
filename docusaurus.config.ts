@@ -24,7 +24,7 @@ const config: Config = {
     blog: false,
     theme: {customCss: './src/css/custom.css'},
   } satisfies Preset.Options]],
-  plugins: ['./plugins/cookbook-redirects.cjs', ['@docusaurus/plugin-content-docs', {
+  plugins: ['./plugins/cookbook-redirects.cjs', './plugins/llms-txt.cjs', ['@docusaurus/plugin-content-docs', {
     id: 'cookbook', path: 'cookbook', routeBasePath: 'cookbook',
     sidebarPath: './cookbook-sidebars.ts', showLastUpdateTime: false,
   }]],
