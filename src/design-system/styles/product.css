@@ -1,0 +1,4 @@
+/* Default product profile. Load after the legacy .v-* foundation styles. */
+@import './modern-tokens.css';
+@import './modern.css';
+@import './conversation.css';

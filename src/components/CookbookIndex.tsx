@@ -1,18 +1,20 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import {ArrowLeft, ArrowRight} from 'lucide-react';
 import {useChinese} from './Content';
 
 // Recipes are grouped by the goal they serve; modality is a second filter.
+// Each goal's color is the paper color of its covers.
 const goals = [
-  {id:'foundations', label:['Foundations', '入门'], color:'#3964FE'},
-  {id:'route', label:['Route & triage', '路由与分流'], color:'#5B5BF5'},
-  {id:'select', label:['Select, don\'t generate', '选择而非生成'], color:'#1FA2E8'},
-  {id:'evidence', label:['Find & judge evidence', '找证据、判相关'], color:'#13A89E'},
-  {id:'verify', label:['Verify & escalate', '核查与升级'], color:'#7C5CFA'},
-  {id:'vision', label:['Images & video', '看图看视频'], color:'#1690C8'},
-  {id:'data', label:['Answers into data', '把回答变成数据'], color:'#3F51E0'},
-  {id:'adapt', label:['Adapt & ship', '适配与上线'], color:'#4A63B8'},
+  {id:'foundations', label:['Foundations', '入门'], color:'var(--paper-foundations)'},
+  {id:'route', label:['Route & triage', '路由与分流'], color:'var(--paper-route)'},
+  {id:'select', label:['Select, don\'t generate', '选择而非生成'], color:'var(--paper-select)'},
+  {id:'evidence', label:['Find & judge evidence', '找证据、判相关'], color:'var(--paper-evidence)'},
+  {id:'verify', label:['Verify & escalate', '核查与升级'], color:'var(--paper-verify)'},
+  {id:'vision', label:['Images & video', '看图看视频'], color:'var(--paper-vision)'},
+  {id:'data', label:['Answers into data', '把回答变成数据'], color:'var(--paper-data)'},
+  {id:'adapt', label:['Adapt & ship', '适配与上线'], color:'var(--paper-adapt)'},
 ];
 
 const entries = [
@@ -35,6 +37,8 @@ const entries = [
   {id:'domain-finetuning', goal:'adapt', modality:'text', date:'2026-10-26', title:['Domain LoRA fine-tuning', '领域 LoRA 微调'], summary:['Prepare independent splits, fine-tune complete 0.8B, resume and compare on one held-out test.', '从完整 0.8B 准备独立划分、微调、恢复并在同一测试集比较。']},
 ];
 
+const pageSize = 6;
+
 const modalities = [['all', 'All', '全部'], ['text', 'Text', '文本'], ['image', 'Image', '图片'], ['video', 'Video', '视频']];
 
 function Topic({goal}:{goal:string}) {
@@ -43,9 +47,9 @@ function Topic({goal}:{goal:string}) {
 }
 
 function Card({e, large}:{e:typeof entries[number]; large?:boolean}) {
-  const zh=useChinese(), cover=useBaseUrl(`/img/cookbook/${e.id}.webp`);
+  const zh=useChinese(), cover=useBaseUrl(`/img/cookbook/${e.id}.webp`), paper=goals.find(g=>g.id===e.goal)!.color;
   return <Link to={`/cookbook/${e.id}/`} className={large?'cookbook-card cookbook-card-large':'cookbook-card'}>
-    <img src={cover} alt="" loading="lazy" width={960} height={640}/>
+    <img src={cover} alt="" loading="lazy" width={960} height={640} style={{background:paper}}/>
     <Topic goal={e.goal}/>
     <h3>{e.title[zh?1:0]}</h3>
     {!large&&<p>{e.summary[zh?1:0]}</p>}
@@ -54,33 +58,41 @@ function Card({e, large}:{e:typeof entries[number]; large?:boolean}) {
 }
 
 export default function CookbookIndex() {
-  const zh=useChinese(), [query,setQuery]=useState(''), [goal,setGoal]=useState('all'), [modality,setModality]=useState('all');
+  const zh=useChinese(), [query,setQuery]=useState(''), [goal,setGoal]=useState('all'), [modality,setModality]=useState('all'), [page,setPage]=useState(0), top=useRef<HTMLDivElement>(null);
   const q=query.trim().toLowerCase();
   const rows=entries
     .filter(e=>(goal==='all'||e.goal===goal) && (modality==='all'||e.modality.includes(modality))
       && `${e.title.join(' ')} ${e.summary.join(' ')} ${e.modality}`.toLowerCase().includes(q))
     .sort((a,b)=>b.date.localeCompare(a.date));
+  const showFeatured=!q&&goal==='all'&&modality==='all';
+  const list=rows.filter(e=>!(showFeatured&&e.featured)), pageCount=Math.ceil(list.length/pageSize);
+  const turn=(n:number)=>{setPage(n); top.current?.scrollIntoView({block:'start'});};
   return <section className="cookbook-directory" aria-label={zh?'教程目录':'Tutorial directory'}>
     <label className="cookbook-search">
       <span className="sr-only">{zh?'搜索教程':'Search cookbooks'}</span>
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-      <input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder={zh?'搜索教程':'Search cookbooks'}/>
+      <input type="search" value={query} onChange={e=>{setQuery(e.target.value); setPage(0);}} placeholder={zh?'搜索教程':'Search cookbooks'}/>
     </label>
-    {!q&&goal==='all'&&modality==='all'&&<>
+    {showFeatured&&<>
       <h2 className="cookbook-heading">{zh?'精选':'Featured'}</h2>
       <div className="cookbook-featured">{entries.filter(e=>e.featured).map(e=><Card key={e.id} e={e} large/>)}</div>
     </>}
-    <div className="cookbook-bar">
+    <div className="cookbook-bar" ref={top}>
       <div className="cookbook-tabs" role="tablist">
         {[{id:'all', label:['All', '全部']}, ...goals].map(g=><button key={g.id} role="tab" aria-selected={goal===g.id}
-          onClick={()=>setGoal(g.id)}>{g.label[zh?1:0]}</button>)}
+          onClick={()=>{setGoal(g.id); setPage(0);}}>{g.label[zh?1:0]}</button>)}
       </div>
       <div className="cookbook-pills">
-        {modalities.map(([v,en,cn])=><button key={v} aria-pressed={modality===v} onClick={()=>setModality(v)}>{zh?cn:en}</button>)}
+        {modalities.map(([v,en,cn])=><button key={v} aria-pressed={modality===v} onClick={()=>{setModality(v); setPage(0);}}>{zh?cn:en}</button>)}
       </div>
     </div>
     <p className="cookbook-count" role="status">{zh?`${rows.length} 篇教程`:`${rows.length} cookbook${rows.length===1?'':'s'}`}</p>
-    <div className="cookbook-cards">{rows.map(e=><Card key={e.id} e={e}/>)}</div>
+    <div className="cookbook-cards">{list.slice(page*pageSize, (page+1)*pageSize).map(e=><Card key={e.id} e={e}/>)}</div>
+    {pageCount>1&&<nav className="cookbook-pagination" aria-label={zh?'教程分页':'Cookbook pages'}>
+      <button type="button" onClick={()=>turn(page-1)} disabled={page===0} aria-label={zh?'上一页':'Previous page'}><ArrowLeft size={17} aria-hidden="true"/></button>
+      <span aria-live="polite">{zh?`第 ${page+1} / ${pageCount} 页`:`${page+1} / ${pageCount}`}</span>
+      <button type="button" onClick={()=>turn(page+1)} disabled={page===pageCount-1} aria-label={zh?'下一页':'Next page'}><ArrowRight size={17} aria-hidden="true"/></button>
+    </nav>}
     {rows.length===0&&<p>{zh?'没有匹配的教程，请尝试其他关键词。':'No cookbooks found. Try another search.'}</p>}
   </section>;
 }
