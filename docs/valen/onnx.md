@@ -116,6 +116,23 @@ python examples/media.py /path/to/clip.mp4 --video
 
 The examples use Decisions messages with `input_image` / `input_video` and sample four video frames. See the [complete media example](https://github.com/Valen-Team/valen-sdk-python/blob/main/examples/media.py). The JavaScript SDK provides the same image/video example; Node video needs externally installed FFmpeg and ffprobe. Browser video uses WebCodecs and depends on the browser's codec support.
 
+## Compare with an LLM
+
+`Valen.llm` answers the same request with an OpenAI-compatible, Anthropic or Gemini model and returns the same typed response, so one routing rule and one test set run against both. Use it to measure decisions, tokens and latency on your own data before choosing:
+
+```python
+from valen_sdk import Choice, Valen
+
+questions = {"queue": Choice(instructions="Which team should handle this ticket?", criteria={
+    "billing": "Payments, charges and refunds", "technical": "Bugs and crashes in the app"})}
+for client in (Valen.remote("https://api.valen-team.workers.dev/v1", model="valen-2b"),
+               Valen.llm("openai", "gpt-4o-mini")):  # reads OPENAI_API_KEY
+    result = client.system_one("I was charged twice.", questions)
+    print(result.model, result.choices["queue"].choice, result.usage.input_tokens)
+```
+
+`Valen.llm` is in the base package; video inputs need `valen-sdk[video]` and are sent as frames. `usage` adds retries and latency, and `debug["llm_attempts"]` keeps every provider request for replay. Options for structured output, discrete answers and retries are in the [Python README](https://github.com/Valen-Team/valen-sdk-python#compare-with-an-llm); a runnable comparison is [`examples/llm_compare.py`](https://github.com/Valen-Team/valen-sdk-python/blob/main/examples/llm_compare.py).
+
 ## Node.js and TypeScript
 
 Use Node.js 22.12+ or 24 and Git:

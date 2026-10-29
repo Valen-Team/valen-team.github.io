@@ -25,4 +25,6 @@ title: 版本选择
 
 [查看 0.8B 同机 CPU 延迟与内存实测](/zh-Hans/cookbook/validation/)。结果来自特定机器和输入，可帮助比较已测路径；实际部署的速度和内存取决于设备与负载。ONNX 模型卡也提供各变体的测量和质量对比。
 
+想在自己的样本上比较 Valen 和通用大模型，可以用 Python SDK 的 [`Valen.llm`](./onnx.md#与大模型对比) 把两者跑在同一套问题上：返回同样的类型化答案，并分别记录 token 和延迟。
+
 原生权重、ONNX 和 GGUF 是不同的模型格式；Transformers、ONNX Runtime、定制 llama.cpp/Ollama、SGLang 和 vLLM 是运行后端。SDK 的 `Valen.local` 加载 ONNX；GGUF 服务通过 HTTP 调用。GGUF 需使用 Valen 定制运行时，未修改的 llama.cpp/Ollama 不在支持范围内。

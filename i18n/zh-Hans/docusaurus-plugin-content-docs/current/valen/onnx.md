@@ -118,6 +118,23 @@ python examples/media.py /path/to/clip.mp4 --video
 
 示例使用 Decisions 消息中的 `input_image` / `input_video`，视频采样四帧。完整代码见[媒体示例](https://github.com/Valen-Team/valen-sdk-python/blob/main/examples/media.py)。JavaScript SDK 也提供图片/视频示例；Node 视频需在系统中安装 FFmpeg 和 ffprobe。浏览器视频使用 WebCodecs，可用编码取决于浏览器支持情况。
 
+## 与大模型对比
+
+`Valen.llm` 把同一个请求交给兼容 OpenAI 的服务、Anthropic 或 Gemini 模型回答，返回同样的类型化结果，因此同一套路由规则和测试集可以同时跑两边。选型前可以用它在自己的数据上比较决策、token 和延迟：
+
+```python
+from valen_sdk import Choice, Valen
+
+questions = {"queue": Choice(instructions="Which team should handle this ticket?", criteria={
+    "billing": "Payments, charges and refunds", "technical": "Bugs and crashes in the app"})}
+for client in (Valen.remote("https://api.valen-team.workers.dev/v1", model="valen-2b"),
+               Valen.llm("openai", "gpt-4o-mini")):  # 读取 OPENAI_API_KEY
+    result = client.system_one("I was charged twice.", questions)
+    print(result.model, result.choices["queue"].choice, result.usage.input_tokens)
+```
+
+`Valen.llm` 包含在基础包中；视频输入需安装 `valen-sdk[video]`，以抽帧方式发送。`usage` 额外记录重试次数和延迟，`debug["llm_attempts"]` 保留每次请求，便于重放。结构化输出、单选答案和重试等参数见 [Python README](https://github.com/Valen-Team/valen-sdk-python/blob/main/README_zh.md#与大模型对比)；可直接运行的对比脚本见 [`examples/llm_compare.py`](https://github.com/Valen-Team/valen-sdk-python/blob/main/examples/llm_compare.py)。
+
 ## Node.js 与 TypeScript
 
 需要 Node.js 22.12+ 或 24，以及 Git：

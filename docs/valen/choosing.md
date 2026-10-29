@@ -25,4 +25,6 @@ These numbers describe model size. Start a local trial with 0.8B, then compare 2
 
 [See measured 0.8B CPU latency and memory on the same machine](/cookbook/validation/). The results use a specific machine and inputs to compare the measured paths; actual speed and memory depend on your hardware and workload. ONNX model cards also provide variant measurements and quality comparisons.
 
+To weigh Valen against a general LLM on your own cases, run both through the Python SDK with [`Valen.llm`](./onnx.md#compare-with-an-llm): same questions, same typed answers, with tokens and latency for each.
+
 Native weights, ONNX and GGUF are model formats; Transformers, ONNX Runtime, custom llama.cpp/Ollama, SGLang and vLLM are execution backends. SDK `Valen.local` loads ONNX; access a GGUF server over HTTP. GGUF requires the Valen custom runtime; unmodified llama.cpp/Ollama is not supported.
