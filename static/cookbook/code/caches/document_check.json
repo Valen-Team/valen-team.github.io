@@ -105,6 +105,15 @@
    "output_tokens": 0
   }
  },
+ "_meta": {
+  "valen-2b": {
+   "base_url": "https://api.valen-team.workers.dev/v1",
+   "model": "Valen-2B",
+   "model_id": "valen-2b",
+   "recorded": "2026-10-29",
+   "revision": "local"
+  }
+ },
  "f061c3e860c069d9c4de165b4f7c159e426f39021b4c85c29383e048bc36332a": {
   "answers": [
    {

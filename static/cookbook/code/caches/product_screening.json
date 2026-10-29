@@ -1,4 +1,13 @@
 {
+ "_meta": {
+  "valen-2b": {
+   "base_url": "https://api.valen-team.workers.dev/v1",
+   "model": "Valen-2B",
+   "model_id": "valen-2b",
+   "recorded": "2026-10-29",
+   "revision": "local"
+  }
+ },
  "e360ddb6b48d00c93ecb1a89e083ddcb8bf1bda2feddd5760eabea50e0053b43": {
   "answers": [
    {

@@ -33,10 +33,13 @@ python -m pip install -r requirements.txt
 
 ## 运行
 
+`caches/ticket_routing.json` 中录制的回答让脚本无需 API key 即可运行；加 `--replay off` 则改为调用[免费托管 API](/zh-Hans/docs/valen/api/)。
+
 ```bash
-python ticket_routing.py --backend remote --base-url https://api.valen-team.workers.dev/v1 --model valen-2b --asset-dir . --output result.json
-# An existing local HTTP deployment instead:
-python ticket_routing.py --backend remote --base-url http://127.0.0.1:8000/v1 --model valen --asset-dir . --output result.json
+python ticket_routing.py --asset-dir . --output result.json
+python ticket_routing.py --replay off --model valen-2b --asset-dir . --output result.json
+# 改用已有的本地 HTTP 部署：
+python ticket_routing.py --replay off --base-url http://127.0.0.1:8000/v1 --model valen --asset-dir . --output result.json
 ```
 
 本地 ONNX 也可直接运行：把参数改为 `--backend onnx --model /path/to/Valen-0.8B-ONNX`，并先安装 `valen-sdk[onnx,video]==0.2.0`。GGUF 服务通过 `--backend remote` 接入；不能把 GGUF 文件传给 `Valen.local`。

@@ -1,0 +1,121 @@
+{
+ "91f4d8b51cdd1b93e82d031ca5fcdbf5e21da7da081c9c6c13f36d102c08d3b9": {
+  "answers": {
+   "compensation": {
+    "noul": 0.020768978165886808,
+    "type": "noul"
+   },
+   "delete_account": {
+    "noul": 0.03255860916404362,
+    "type": "noul"
+   },
+   "describes_event": {
+    "noul": 0.9969588460112058,
+    "type": "noul"
+   },
+   "multi": {
+    "noul": 0.9299979417770641,
+    "type": "noul"
+   },
+   "queue": {
+    "choice": "missing_or_wrong_item",
+    "confidence": 0.5706318127237087,
+    "probabilities": {
+     "account_access": 1.3665282958944707e-05,
+     "food_quality": 0.00038141380567082377,
+     "late_order": 0.35721989301648555,
+     "missing_or_wrong_item": 0.6421931772697572,
+     "none": 0.00014082814864417514,
+     "payment_refund": 5.102247648324228e-05
+    },
+    "type": "choice"
+   },
+   "safety": {
+    "noul": 0.08014070302352833,
+    "type": "noul"
+   }
+  },
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 712
+  },
+  "model": "Valen-4B",
+  "model_id": "Valen-Team/Valen-4B",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 11.44,
+   "forward_ms": 50.92,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 63.85
+  },
+  "usage": {
+   "input_tokens": 712,
+   "output_tokens": 0
+  }
+ },
+ "_meta": {
+  "valen-4b": {
+   "base_url": "https://api.valen-team.workers.dev/v1/systemone",
+   "model": "Valen-4B",
+   "model_id": "Valen-Team/Valen-4B",
+   "recorded": "2026-10-29",
+   "revision": "local"
+  }
+ },
+ "ab9c4ac0ef9973f11b6cf39074f193e7a043ca5228a4bd3da160e8fcc7d5f7c5": {
+  "answers": {
+   "compensation": {
+    "noul": 0.025179420638067662,
+    "type": "noul"
+   },
+   "delete_account": {
+    "noul": 0.026583050139551426,
+    "type": "noul"
+   },
+   "describes_event": {
+    "noul": 0.9971929396858855,
+    "type": "noul"
+   },
+   "multi": {
+    "noul": 0.9490517903189972,
+    "type": "noul"
+   },
+   "queue": {
+    "choice": "missing_or_wrong_item",
+    "confidence": 0.5979974106787115,
+    "probabilities": {
+     "account_access": 1.8052661290609446e-05,
+     "food_quality": 0.0015555965164316156,
+     "late_order": 0.3331681322316753,
+     "missing_or_wrong_item": 0.6649978422322596,
+     "none": 0.00015698977887525456,
+     "payment_refund": 0.00010338657946763708
+    },
+    "type": "choice"
+   },
+   "safety": {
+    "noul": 0.06005840450960431,
+    "type": "noul"
+   }
+  },
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 711
+  },
+  "model": "Valen-4B",
+  "model_id": "Valen-Team/Valen-4B",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 11.13,
+   "forward_ms": 52.04,
+   "image_ms": 0.0,
+   "queue_ms": 0.0,
+   "total_ms": 64.68
+  },
+  "usage": {
+   "input_tokens": 711,
+   "output_tokens": 0
+  }
+ }
+}

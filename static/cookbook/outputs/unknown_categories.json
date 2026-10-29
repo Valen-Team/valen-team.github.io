@@ -1,0 +1,25 @@
+{
+  "selected": "none",
+  "probability": 0.9614564845816118,
+  "margin": 0.9303510349339065,
+  "probabilities": [
+    {
+      "value": "refund",
+      "probability": 0.0006448843097294247
+    },
+    {
+      "value": "shipping",
+      "probability": 0.03110544964770529
+    },
+    {
+      "value": "invoice",
+      "probability": 0.0067931814609534635
+    },
+    {
+      "value": "none",
+      "probability": 0.9614564845816118
+    }
+  ],
+  "route": "human_review",
+  "reason": "none_selected"
+}

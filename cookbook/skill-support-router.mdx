@@ -69,6 +69,8 @@ cd valen-cookbook
 python skill_support_router.py --message "Order was super late AND they forgot my drink" --order-status delivered
 ```
 
+The answer for this message is recorded in `caches/skill_support_router.json`, so the command runs without network access. A new message is sent to the [free hosted API](/docs/valen/api/) and recorded; `--replay off` always calls it.
+
 The script prints the route, the returned `model_id`, the question-set version and every answer. `predict(item)` is the function the benchmark grader calls.
 
 ## Complete code

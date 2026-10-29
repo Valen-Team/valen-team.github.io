@@ -17,6 +17,11 @@ sys.path.insert(0, str(CODE))
 from common import choice_status
 from ticket_routing import run as route
 
+# The command each page shows, for recipes that take more than the shared options.
+REPLAY_COMMANDS = {
+    'skill_support_router': ['--message', 'Order was super late AND they forgot my drink', '--order-status', 'delivered'],
+    'unknown_categories': ['demo', '--text', 'Please change the delivery address before you ship my order.'],
+}
 
 class Policies(unittest.TestCase):
     def choice(self, probabilities):
@@ -87,15 +92,18 @@ class Policies(unittest.TestCase):
 
     def test_recipes_replay_their_recorded_answers(self):
         import subprocess
+        evidence = json.loads((ROOT / 'static/cookbook/results.json').read_text())['recipes']
         for path in sorted((CODE / 'caches').glob('*.json')):
             with self.subTest(recipe=path.stem):
-                result = subprocess.run([sys.executable, str(CODE / (path.stem + '.py')), '--replay', 'only',
-                                         '--asset-dir', str(CODE.parent)], capture_output=True, text=True, cwd=CODE,
+                command = REPLAY_COMMANDS.get(path.stem, ['--asset-dir', str(CODE.parent)])
+                result = subprocess.run([sys.executable, str(CODE / (path.stem + '.py')), *command, '--replay', 'only'],
+                                        capture_output=True, text=True, cwd=CODE,
                                         env={'PYTHONDONTWRITEBYTECODE': '1', 'PATH': os.environ['PATH']})
                 self.assertEqual(result.returncode, 0, result.stderr)
                 published = CODE.parent / 'outputs' / (path.stem + '.json')
-                if published.exists():
-                    self.assertEqual(json.loads(result.stdout), json.loads(published.read_text()))
+                expected = (json.loads(published.read_text()) if published.exists()
+                            else evidence[path.stem.replace('_', '-')]['result'])
+                self.assertEqual(json.loads(result.stdout), expected)
 
     def test_domain_recipe_is_bound_to_real_training_smoke(self):
         report = json.loads((ROOT / 'static/cookbook/validation/p2-finetuning.json').read_text())

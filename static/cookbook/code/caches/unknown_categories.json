@@ -1,0 +1,57 @@
+{
+ "_meta": {
+  "valen-2b": {
+   "base_url": "https://api.valen-team.workers.dev/v1",
+   "model": "Valen-2B",
+   "model_id": "valen-2b",
+   "recorded": "2026-10-29",
+   "revision": "local"
+  }
+ },
+ "c465d5df3b0cc91ae028b68a7aa571b36136c3af26548dd06b3d97f461a2f122": {
+  "answers": [
+   {
+    "choice": "none",
+    "confidence": 0.9486086461088158,
+    "name": "intent",
+    "probabilities": [
+     {
+      "probability": 0.0006448843097294247,
+      "value": "refund"
+     },
+     {
+      "probability": 0.03110544964770529,
+      "value": "shipping"
+     },
+     {
+      "probability": 0.0067931814609534635,
+      "value": "invoice"
+     },
+     {
+      "probability": 0.9614564845816118,
+      "value": "none"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 137
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.84,
+   "forward_ms": 37.79,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 44.53
+  },
+  "usage": {
+   "input_tokens": 137,
+   "output_tokens": 0
+  }
+ }
+}

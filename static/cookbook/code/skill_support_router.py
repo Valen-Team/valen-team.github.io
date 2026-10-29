@@ -7,6 +7,7 @@ python skill_support_router.py --message "Order was late AND they forgot my drin
 """
 
 import argparse
+import contextlib
 import json
 import time
 import urllib.error
@@ -156,9 +157,19 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--message", required=True)
     parser.add_argument("--order-status", default="none", choices=["delivered", "on_the_way", "cancelled", "none"])
+    parser.add_argument("--replay", choices=["auto", "only", "off"], default="auto",
+                        help="auto: reuse recorded answers and record new ones; only: recorded answers only; "
+                             "off: always call the model")
     args = parser.parse_args(argv)
     item = {"message": args.message, "order_status": args.order_status}
-    body = ask(MODEL, build_state(item), QUESTIONS)
+    request = {"state": build_state(item), "questions": QUESTIONS}
+    if args.replay == "off":
+        body = ask(MODEL, request["state"], QUESTIONS)
+    else:
+        from common import recorded
+        live = lambda: contextlib.nullcontext(lambda r: ask(MODEL, r["state"], r["questions"]))
+        with recorded(live, args.replay, MODEL, BASE_URL) as predict:
+            body = predict(request)
     print(json.dumps({"route": decide(body["answers"], args.message), "model_id": body.get("model_id"),
                       "question_set": QUESTION_SET_VERSION, "answers": body["answers"]}, ensure_ascii=False, indent=2))
 

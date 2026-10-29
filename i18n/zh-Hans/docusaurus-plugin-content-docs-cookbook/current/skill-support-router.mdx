@@ -69,6 +69,8 @@ cd valen-cookbook
 python skill_support_router.py --message "晚了一个小时，而且鸡翅少了两个" --order-status delivered
 ```
 
+这条消息的回答已录制在 `caches/skill_support_router.json`，不联网也能运行。换成新消息时会调用[免费托管 API](/zh-Hans/docs/valen/api/) 并录制下来；加 `--replay off` 则每次都调用。
+
 脚本会输出分流结果、返回的 `model_id`、问题集版本和每个问题的回答。`predict(item)` 就是评测打分时调用的函数。
 
 ## 完整代码

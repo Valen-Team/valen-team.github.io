@@ -1,0 +1,44 @@
+{
+  "route": {
+    "queue": "human_review",
+    "safety": false,
+    "compensation": false
+  },
+  "model_id": "Valen-Team/Valen-4B",
+  "question_set": "v3",
+  "answers": {
+    "queue": {
+      "type": "choice",
+      "choice": "missing_or_wrong_item",
+      "confidence": 0.5706318127237087,
+      "probabilities": {
+        "late_order": 0.35721989301648555,
+        "missing_or_wrong_item": 0.6421931772697572,
+        "food_quality": 0.00038141380567082377,
+        "payment_refund": 5.102247648324228e-05,
+        "account_access": 1.3665282958944707e-05,
+        "none": 0.00014082814864417514
+      }
+    },
+    "safety": {
+      "type": "noul",
+      "noul": 0.08014070302352833
+    },
+    "compensation": {
+      "type": "noul",
+      "noul": 0.020768978165886808
+    },
+    "multi": {
+      "type": "noul",
+      "noul": 0.9299979417770641
+    },
+    "delete_account": {
+      "type": "noul",
+      "noul": 0.03255860916404362
+    },
+    "describes_event": {
+      "type": "noul",
+      "noul": 0.9969588460112058
+    }
+  }
+}

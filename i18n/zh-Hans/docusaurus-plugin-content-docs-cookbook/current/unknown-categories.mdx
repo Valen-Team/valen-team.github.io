@@ -39,18 +39,16 @@ import UnknownCategoryResults from '@site/src/components/UnknownCategoryResults'
 
 先把 `none` 的含义写清楚。在这个示例中，它表示“退款、物流查询、发票都不适用，或者消息不足以判断”。业务中的“其他”队列可以保留自己的类别和处理流程。
 
-<a href="/cookbook/valen-cookbook.zip">下载示例源码包（约 22 KB）</a>，使用 Python 3.11+ 和已有的 Valen 服务即可运行，不需要下载模型：
+<a href="/cookbook/valen-cookbook.zip">下载示例源码包（约 740 KB）</a>，使用 Python 3.11+ 即可运行，不需要下载模型：
 
 ```bash
 python -m zipfile -e valen-cookbook.zip .
 cd valen-cookbook
 python -m pip install valen-sdk==0.2.0
-python unknown_categories.py demo --backend remote \
-  --base-url http://127.0.0.1:8000/v1 --model valen \
-  --text "Please change the delivery address before you ship my order."
+python unknown_categories.py demo --text "Please change the delivery address before you ship my order."
 ```
 
-替换服务地址和模型名；鉴权服务通过环境变量 `VALEN_API_KEY` 提供凭证。上面的命令演示仅使用 `none` 的策略，输出选中类别、候选概率以及最终处理路径。
+回答已录制在 `caches/unknown_categories.json`，无需 API key 即可运行；加 `--replay off` 则调用[免费托管 API](/zh-Hans/docs/valen/api/)。换成自己的服务时加 `--replay off --base-url http://127.0.0.1:8000/v1 --model valen`，鉴权服务通过环境变量 `VALEN_API_KEY` 提供凭证。上面的命令演示仅使用 `none` 的策略，输出选中类别、候选概率以及最终处理路径。
 
 放进现有调用时，核心逻辑是：
 

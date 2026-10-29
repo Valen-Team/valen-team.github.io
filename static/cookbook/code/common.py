@@ -2,6 +2,7 @@
 import argparse
 import base64
 from contextlib import ExitStack, contextmanager
+import datetime
 import hashlib
 import json
 import math
@@ -20,7 +21,7 @@ def samples():
 def parser(description):
     p = argparse.ArgumentParser(description=description)
     p.add_argument("--backend", choices=["remote", "onnx", "native"], default="remote")
-    p.add_argument("--base-url", default=os.environ.get("VALEN_BASE_URL", "https://llm-proxy.openxxlab.com/v1"))
+    p.add_argument("--base-url", default=os.environ.get("VALEN_BASE_URL", "https://api.valen-team.workers.dev/v1"))
     p.add_argument("--model", default=os.environ.get("VALEN_MODEL"))
     p.add_argument("--threads", type=int, default=4)
     p.add_argument("--asset-dir", type=Path, default=Path("."))
@@ -39,23 +40,40 @@ def client(args):
         with live_client(args) as predict:
             yield predict
         return
+    with recorded(lambda: live_client(args), mode, args.model or "valen-2b", args.base_url) as predict:
+        yield predict
+
+
+@contextmanager
+def recorded(open_live, mode, model, base_url):
+    """Replay answers from caches/<script>.json; record new ones with the model's revision and date under _meta[model]."""
     path = CACHES / (Path(sys.argv[0]).stem + ".json")
     store = json.loads(path.read_text()) if path.exists() else {}
     with ExitStack() as stack:
-        live = []
+        live, shown = [], []
 
         def predict(body):
-            key = hashlib.sha256(json.dumps({"model": args.model or "valen-2b", **pixels(body)}, sort_keys=True,
+            key = hashlib.sha256(json.dumps({"model": model, **pixels(body)}, sort_keys=True,
                                             ensure_ascii=False).encode()).hexdigest()
-            if key not in store:
-                if mode == "only":
-                    raise KeyError(f"No recorded answer in caches/{path.name}; run with --replay auto to call the model")
-                if not live:
-                    live.append(stack.enter_context(live_client(args)))
-                store[key] = live[0](body)
-                CACHES.mkdir(exist_ok=True)
-                path.write_text(json.dumps(store, indent=1, sort_keys=True, ensure_ascii=False) + "\n")
-            return store[key]
+            if key in store:
+                if not shown:
+                    shown.append(True)
+                    meta = store["_meta"][model]
+                    print(f"Replaying caches/{path.name}: {meta['model']} ({meta['model_id']}, revision {meta['revision']}) "
+                          f"from {meta['base_url']}, recorded {meta['recorded']}. Use --replay off to call the model.",
+                          file=sys.stderr)
+                return store[key]
+            if mode == "only":
+                raise KeyError(f"No recorded answer in caches/{path.name}; run with --replay auto to call the model")
+            if not live:
+                live.append(stack.enter_context(open_live()))
+            response = store[key] = live[0](body)
+            store.setdefault("_meta", {})[model] = {"model": response.get("model"), "model_id": response.get("model_id"),
+                                                    "revision": response.get("revision"), "base_url": base_url,
+                                                    "recorded": datetime.date.today().isoformat()}
+            CACHES.mkdir(exist_ok=True)
+            path.write_text(json.dumps(store, indent=1, sort_keys=True, ensure_ascii=False) + "\n")
+            return response
         yield predict
 
 

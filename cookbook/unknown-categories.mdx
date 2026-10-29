@@ -39,18 +39,16 @@ The test requests are surface variants of 40 fictional scenarios. Grouping and e
 
 Define what `none` means. Here it covers requests outside refunds, tracking and invoices, plus messages with too little information to choose. Give it a meaningful description. If “other” is a real queue that your business can handle automatically, define it separately.
 
-<a href="/cookbook/valen-cookbook.zip">Download the example bundle (about 22 KB)</a>. Use Python 3.11+ and an existing Valen service; no model download is needed:
+<a href="/cookbook/valen-cookbook.zip">Download the example bundle (about 740 KB)</a>. Use Python 3.11+; no model download is needed:
 
 ```bash
 python -m zipfile -e valen-cookbook.zip .
 cd valen-cookbook
 python -m pip install valen-sdk==0.2.0
-python unknown_categories.py demo --backend remote \
-  --base-url http://127.0.0.1:8000/v1 --model valen \
-  --text "Please change the delivery address before you ship my order."
+python unknown_categories.py demo --text "Please change the delivery address before you ship my order."
 ```
 
-Replace the URL and model name. Supply `VALEN_API_KEY` through the environment for an authenticated service. This command demonstrates the none-only policy and prints the choice, candidate probabilities and routing outcome.
+The answer is recorded in `caches/unknown_categories.json`, so the command runs without an API key; `--replay off` calls the [free hosted API](/docs/valen/api/). For your own service, add `--replay off --base-url http://127.0.0.1:8000/v1 --model valen`, and supply `VALEN_API_KEY` through the environment for an authenticated service. This command demonstrates the none-only policy and prints the choice, candidate probabilities and routing outcome.
 
 The essential logic for an existing call is:
 

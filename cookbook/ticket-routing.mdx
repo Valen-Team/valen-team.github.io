@@ -33,10 +33,13 @@ python -m pip install -r requirements.txt
 
 ## Run
 
+The recorded answers in `caches/ticket_routing.json` let the script run without an API key; `--replay off` calls the [free hosted API](/docs/valen/api/) instead.
+
 ```bash
-python ticket_routing.py --backend remote --base-url https://api.valen-team.workers.dev/v1 --model valen-2b --asset-dir . --output result.json
+python ticket_routing.py --asset-dir . --output result.json
+python ticket_routing.py --replay off --model valen-2b --asset-dir . --output result.json
 # An existing local HTTP deployment instead:
-python ticket_routing.py --backend remote --base-url http://127.0.0.1:8000/v1 --model valen --asset-dir . --output result.json
+python ticket_routing.py --replay off --base-url http://127.0.0.1:8000/v1 --model valen --asset-dir . --output result.json
 ```
 
 For direct ONNX execution, use `--backend onnx --model /path/to/Valen-0.8B-ONNX` and first install `valen-sdk[onnx,video]==0.2.0`. Connect a GGUF service through `--backend remote`; a GGUF file is not a `Valen.local` model.
