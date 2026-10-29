@@ -1,0 +1,55 @@
+---
+title: 对检索到的段落重新排序
+description: 逐条询问检索到的帮助中心段落能否回答客户的问题，按概率排序，都不能回答时转人工。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/rerank.py?cookbook-source';
+import data from '@site/static/cookbook/code/rerank_data.json?cookbook-source';
+import output from '@site/static/cookbook/outputs/rerank.json?cookbook-source';
+
+一个共享单车客服机器人用低成本的关键词搜索检索出五段帮助中心内容，然后要决定依据哪一段作答。对于 "I was charged twice"，关键词重合度把一段关于损坏报告的内容排在了第一。Valen 结合问题逐段阅读，把正确的段落移到最前面。
+
+## 工作原理
+
+一道判断题，对每个检索到的段落各问一次，每次单独发请求，这样任何段落都不会影响对其他段落的判断：
+
+> A support agent could answer the customer's question using only this passage.
+
+（客服人员仅凭这段内容就能回答客户的问题。）
+
+代码按概率排序，最高的段落达到 0.7 时就依据它作答；低于 0.7 时，机器人把问题交给人工。这个措辞是这样选出来的：把四种写法作为不同的问题，针对同一批段落一起发送。"answers the question" 让正确段落停留在 0.5，而 "a support agent could answer … using only this passage" 把正确和错误的段落区分开了。
+
+## 运行
+
+先下载一次示例包。`caches/rerank.json` 中录制的回答让脚本无需 API key 即可运行；加 `--replay off` 则改为调用[免费托管 API](/zh-Hans/docs/valen/api/)。
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python rerank.py
+python rerank.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## 代码
+
+<CodeBlock language="python" title="rerank.py">{source}</CodeBlock>
+
+<details>
+<summary>rerank_data.json</summary>
+
+<CodeBlock language="json" title="rerank_data.json">{data}</CodeBlock>
+
+</details>
+
+## 输出
+
+按关键词排序，三个问题中有两个的正确段落排在第一；重新排序后三个都排在第一。对于站点停满的问题，最佳段落得分 0.64，所以机器人转人工，而不是直接作答。
+
+<CodeBlock language="json" title="录制的输出">{output}</CodeBlock>
+
+## 改成你自己的
+
+- 把 `retrieve` 换成你的 BM25 或向量检索；`k` 保持较小，因为每个段落都是一次请求。
+- Valen 只对检索返回的内容排序。正确段落没被检索到时，没有任何得分会达到 0.7，这正是转人工的信号。

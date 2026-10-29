@@ -1,0 +1,53 @@
+---
+title: Check scanned forms against the record
+description: Ask one question per field of a scanned loan form, then accept, reject or send the scan for review in code.
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/document_check.py?cookbook-source';
+import data from '@site/static/cookbook/code/document_check_data.json?cookbook-source';
+import output from '@site/static/cookbook/outputs/document_check.json?cookbook-source';
+
+An equipment desk scans every handwritten loan form and types the details into its system. Before a loan is closed, each scan is checked against the typed record: does the paper say the same name, serial number and return date, and is it signed?
+
+| Clean | Wrong return date | Unsigned |
+| --- | --- | --- |
+| ![Loan form for Lin Chen](/cookbook/code/media/loan-a.jpg) | ![Loan form for Omar Haddad](/cookbook/code/media/loan-b.jpg) | ![Loan form for Sara Novak](/cookbook/code/media/loan-c.jpg) |
+
+## How it works
+
+Code turns each field of the record into a statement a person could check at a glance, written the way it would appear on paper ("The return date handwritten on the form is 12 March 2026"), and adds one question about the signature box. All four predicates go in one request with the scan.
+
+| Field checks | Status |
+| --- | --- |
+| any below 0.3 | `reject`, listing the failed fields |
+| any 0.3 – 0.7 | `review` |
+| all 0.7 or above | `accept` |
+
+## Run it
+
+Download the bundle once. The recorded answers in `caches/document_check.json` let the script run without an API key; `--replay off` calls the [free hosted API](/docs/valen/api/) instead.
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python document_check.py
+python document_check.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## Code
+
+<CodeBlock language="python" title="document_check.py">{source}</CodeBlock>
+
+<CodeBlock language="json" title="document_check_data.json">{data}</CodeBlock>
+
+## Output
+
+<CodeBlock language="json" title="Recorded output">{output}</CodeBlock>
+
+## Make it yours
+
+- Ask about the record in the form's own wording: dates as they are written, names as they are signed.
+- For long documents, crop each field region in code and send the crops as separate requests.
+- The forms here are generated for this recipe with a handwriting font.

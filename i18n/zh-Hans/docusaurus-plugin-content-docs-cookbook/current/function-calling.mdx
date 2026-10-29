@@ -1,0 +1,60 @@
+---
+title: 把指令转成函数调用
+description: 一次 Valen 请求选出函数并填好每个封闭集合参数；代码只读取被选中函数的回答。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/function_calling.py?cookbook-source';
+import data from '@site/static/cookbook/code/function_calling_data.json?cookbook-source';
+import output from '@site/static/cookbook/outputs/function_calling.json?cookbook-source';
+
+一个笔记应用有命令栏。用户会输入 "send this to the design team but they shouldn't be able to change anything" 这样的话，应用应当调用 `share_note(permission="view")`。Valen 负责选择函数和每个封闭集合参数；代码维护函数表，决定何时追问，并执行调用。
+
+## 工作原理
+
+代码里的函数表是所有问题的唯一来源。一次请求包含：
+
+| 问题 | 类型 | 何时读取 |
+| --- | --- | --- |
+| `function`：用户想让应用做什么？ | 在四个函数中做选择题 | 始终读取 |
+| `is_command`：笔记应用能否完成用户的请求？ | predicate | 始终读取 |
+| 每个函数的每个参数对应一个 `<function>.<arg>` | 选择题 | 只读取被选中的函数 |
+
+预先问出所有函数的参数，就是**推测式并行提问**：问题开销很小，并且基于同一输入一起运行，所以无论最后选中哪个函数，一次往返就够了。选择题总会选出一个选项，因此“不是指令”的情况单独用一道判断题来问，而不是加一个 `none` 选项。
+
+| `is_command` | 函数选择题 | 动作 |
+| --- | --- | --- |
+| 低于 0.3 | 任意 | `not_a_command` |
+| 0.3 – 0.7 | 不确定 | `show_help`：列出应用能做的事 |
+| 0.7 及以上 | 不确定 | `clarify`：在前两名函数之间追问 |
+| 任意 | 最高 ≥ 0.8 且差距 ≥ 0.2 | `call`；某个参数不确定时为 `clarify_arguments` |
+
+## 运行
+
+先下载一次示例包。`caches/function_calling.json` 中录制的回答让脚本无需 API key 即可运行；加 `--replay off` 则改为调用[免费托管 API](/zh-Hans/docs/valen/api/)。
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python function_calling.py
+python function_calling.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## 代码
+
+<CodeBlock language="python" title="function_calling.py">{source}</CodeBlock>
+
+<CodeBlock language="json" title="function_calling_data.json">{data}</CodeBlock>
+
+## 输出
+
+五条指令变成了函数调用。"Remind me next week? actually make it a pdf" 包含两个请求，所以应用会问用户要哪一个。"What's the weather in Shanghai" 落在中间区间，得到帮助文本。
+
+<CodeBlock language="json" title="录制的输出">{output}</CodeBlock>
+
+## 改成你自己的
+
+- 在 `TOOLS` 里加一项就能新增函数，问题会自动生成。自由文本、数字和日期留给代码处理（见[选出正确的日期](../value-extraction/)）。
+- 按用户想做的事来描述每个函数（"Send or share this note with other people"），而不是用它的 API 名称。
+- `is_command` 的措辞直接点名了容易混淆的情况：需要外部信息（如天气或新闻）的请求。

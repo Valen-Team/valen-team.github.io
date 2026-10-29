@@ -1,0 +1,55 @@
+---
+title: Pick the right date from an email
+description: Code finds every date in a supplier email; Valen picks the new delivery date, and a predicate catches emails that have none.
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/value_extraction.py?cookbook-source';
+import data from '@site/static/cookbook/code/value_extraction_data.json?cookbook-source';
+import output from '@site/static/cookbook/outputs/value_extraction.json?cookbook-source';
+
+Supplier emails mention many dates: when the order was placed, the date that slipped, an invoice number that looks like a date, and somewhere the new delivery date. **Select, don't generate**: code finds every date with a regular expression and normalizes it, Valen picks which one is the new delivery date, and code copies the normalized value into the order. The model never writes a date, so it can never write a malformed one.
+
+## How it works
+
+| Question | Type | Purpose |
+| --- | --- | --- |
+| `has_new_date`: the supplier gives a new delivery date | predicate | the null case: no date at all, or the old date confirmed |
+| `delivery_date`: which date is the new delivery date? | choice over the dates code found | picks the span |
+
+Each candidate's description quotes the text around it, so the model judges the date in context. The truth table:
+
+| `has_new_date` | `delivery_date` | Action |
+| --- | --- | --- |
+| below 0.3, or no dates found | — | `no_new_date` |
+| 0.7 or above | top ≥ 0.8 and gap ≥ 0.2 | `update_order` with the normalized date |
+| otherwise | otherwise | `review` |
+
+## Run it
+
+Download the bundle once. The recorded answers in `caches/value_extraction.json` let the script run without an API key; `--replay off` calls the [free hosted API](/docs/valen/api/) instead.
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python value_extraction.py
+python value_extraction.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## Code
+
+<CodeBlock language="python" title="value_extraction.py">{source}</CodeBlock>
+
+<CodeBlock language="json" title="value_extraction_data.json">{data}</CodeBlock>
+
+## Output
+
+PO 1182 has four candidates, including the invoice number `2026-03-02`; Valen picks "16 March". PO 1190 confirms the original date, so `has_new_date` is 0.004 and the order stays as it is.
+
+<CodeBlock language="json" title="Recorded output">{output}</CodeBlock>
+
+## Make it yours
+
+- The same shape works for amounts, order numbers, names and addresses: find candidates with code, ask Valen which one the business means, normalize in code.
+- Add the year, the time zone or the sender's locale in code; the model only chooses.

@@ -1,0 +1,161 @@
+{
+ "1060fa09f33e61e02ce5536d2637a93472408b3c172d078fa7c4c50db68003ad": {
+  "answers": [
+   {
+    "name": "name",
+    "probability": 0.9986719510816103,
+    "type": "predicate"
+   },
+   {
+    "name": "serial",
+    "probability": 0.9984982673413811,
+    "type": "predicate"
+   },
+   {
+    "name": "return_date",
+    "probability": 0.007865409520616382,
+    "type": "predicate"
+   },
+   {
+    "name": "signed",
+    "probability": 0.997229301770541,
+    "type": "predicate"
+   }
+  ],
+  "images": [
+   {
+    "model_size": [
+     512,
+     382
+    ],
+    "original_size": [
+     512,
+     382
+    ]
+   }
+  ],
+  "internal_usage": {
+   "compute_tokens": 461
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 15.1,
+   "forward_ms": 52.33,
+   "image_ms": 5.0,
+   "queue_ms": 0.01,
+   "total_ms": 111.14
+  },
+  "usage": {
+   "input_tokens": 461,
+   "output_tokens": 0
+  }
+ },
+ "8dd6c76bde6e813036f56bce2b0a971a610e3e01b65c96d4dd41710b2a65b539": {
+  "answers": [
+   {
+    "name": "name",
+    "probability": 0.9992125595012277,
+    "type": "predicate"
+   },
+   {
+    "name": "serial",
+    "probability": 0.9983302126024323,
+    "type": "predicate"
+   },
+   {
+    "name": "return_date",
+    "probability": 0.9976673179646833,
+    "type": "predicate"
+   },
+   {
+    "name": "signed",
+    "probability": 0.9990492985319737,
+    "type": "predicate"
+   }
+  ],
+  "images": [
+   {
+    "model_size": [
+     512,
+     382
+    ],
+    "original_size": [
+     512,
+     382
+    ]
+   }
+  ],
+  "internal_usage": {
+   "compute_tokens": 459
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 21.21,
+   "forward_ms": 67.22,
+   "image_ms": 5.09,
+   "queue_ms": 0.01,
+   "total_ms": 136.98
+  },
+  "usage": {
+   "input_tokens": 459,
+   "output_tokens": 0
+  }
+ },
+ "f061c3e860c069d9c4de165b4f7c159e426f39021b4c85c29383e048bc36332a": {
+  "answers": [
+   {
+    "name": "name",
+    "probability": 0.9989126426472942,
+    "type": "predicate"
+   },
+   {
+    "name": "serial",
+    "probability": 0.9990923741991619,
+    "type": "predicate"
+   },
+   {
+    "name": "return_date",
+    "probability": 0.997633862429052,
+    "type": "predicate"
+   },
+   {
+    "name": "signed",
+    "probability": 0.006129618756955932,
+    "type": "predicate"
+   }
+  ],
+  "images": [
+   {
+    "model_size": [
+     512,
+     382
+    ],
+    "original_size": [
+     512,
+     382
+    ]
+   }
+  ],
+  "internal_usage": {
+   "compute_tokens": 460
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 14.45,
+   "forward_ms": 51.08,
+   "image_ms": 4.58,
+   "queue_ms": 0.01,
+   "total_ms": 106.38
+  },
+  "usage": {
+   "input_tokens": 460,
+   "output_tokens": 0
+  }
+ }
+}

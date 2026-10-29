@@ -1,0 +1,8 @@
+[
+  {"id": "d1", "customer": "My bike's chain came off halfway through the ride.", "draft": "Sorry about that! Please tap the bike number in the app and choose Report a problem so our team can fix it. You won't be charged for damage that was there before your ride."},
+  {"id": "d2", "customer": "My bike's chain came off halfway through the ride.", "draft": "So sorry! I've refunded the full ride and added 10 euros of credit to your account."},
+  {"id": "d3", "customer": "I can't log in, the code never arrives.", "draft": "Let me check. Could you reply with the six-digit code from your last SMS and your password so I can verify the account?"},
+  {"id": "d4", "customer": "The app charged me for 2 hours but I only rode 20 minutes.", "draft": "You must have forgotten to end the ride in the app. That's why you were charged."},
+  {"id": "d5", "customer": "The app charged me for 2 hours but I only rode 20 minutes.", "draft": "Our e-bikes have a range of about 60 km and come with a helmet in Lisbon and Porto."},
+  {"id": "d6", "customer": "The app charged me for 2 hours but I only rode 20 minutes.", "draft": "Thanks for flagging this. I've passed your ride to our billing team, who will look at whether an adjustment is possible."}
+]

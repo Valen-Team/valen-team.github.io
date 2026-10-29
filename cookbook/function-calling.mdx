@@ -1,0 +1,60 @@
+---
+title: Turn a command into a function call
+description: One Valen request picks the function and fills every closed-set argument; code reads only the chosen function's answers.
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/function_calling.py?cookbook-source';
+import data from '@site/static/cookbook/code/function_calling_data.json?cookbook-source';
+import output from '@site/static/cookbook/outputs/function_calling.json?cookbook-source';
+
+A notes app has a command bar. People type things like "send this to the design team but they shouldn't be able to change anything", and the app should call `share_note(permission="view")`. Valen chooses the function and each closed-set argument; code holds the function table, decides when to ask a follow-up, and makes the call.
+
+## How it works
+
+The function table in code is the single source of every question. One request carries:
+
+| Question | Type | Read when |
+| --- | --- | --- |
+| `function`: what does the user want the app to do? | choice over the four functions | always |
+| `is_command`: could a notes app do what the user asks? | predicate | always |
+| `<function>.<arg>` for every argument of every function | choice | only for the chosen function |
+
+Asking every function's arguments up front is **speculative fan-out**: questions are cheap and run together over the same input, so one round trip is enough whichever function wins. A choice always picks an option, so the null case gets its own predicate instead of a `none` option.
+
+| `is_command` | function choice | Action |
+| --- | --- | --- |
+| below 0.3 | any | `not_a_command` |
+| 0.3 – 0.7 | uncertain | `show_help`: list what the app can do |
+| 0.7 or above | uncertain | `clarify` between the top two functions |
+| any | top ≥ 0.8 and gap ≥ 0.2 | `call`, or `clarify_arguments` for an unsure argument |
+
+## Run it
+
+Download the bundle once. The recorded answers in `caches/function_calling.json` let the script run without an API key; `--replay off` calls the [free hosted API](/docs/valen/api/) instead.
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python function_calling.py
+python function_calling.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## Code
+
+<CodeBlock language="python" title="function_calling.py">{source}</CodeBlock>
+
+<CodeBlock language="json" title="function_calling_data.json">{data}</CodeBlock>
+
+## Output
+
+Five commands become calls. "Remind me next week? actually make it a pdf" holds two requests, so the app asks which one. "What's the weather in Shanghai" lands in the middle band and gets the help text.
+
+<CodeBlock language="json" title="Recorded output">{output}</CodeBlock>
+
+## Make it yours
+
+- Add a function by adding an entry to `TOOLS`; questions follow automatically. Free text, numbers and dates stay with code (see [pick the right date](../value-extraction/)).
+- Describe each function by what the user wants ("Send or share this note with other people"), not by its API name.
+- The `is_command` wording names the confusing case directly: requests that need outside information such as weather or news.

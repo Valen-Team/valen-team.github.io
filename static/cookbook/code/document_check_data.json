@@ -1,0 +1,5 @@
+[
+  {"scan": "loan-a.jpg", "name": "Lin Chen", "serial": "CAM-20417", "return_date": "2026-03-12"},
+  {"scan": "loan-b.jpg", "name": "Omar Haddad", "serial": "CAM-20562", "return_date": "2026-03-12"},
+  {"scan": "loan-c.jpg", "name": "Sara Novak", "serial": "LAP-11873", "return_date": "2026-03-19"}
+]

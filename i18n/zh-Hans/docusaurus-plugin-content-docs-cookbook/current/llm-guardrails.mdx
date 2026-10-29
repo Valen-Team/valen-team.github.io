@@ -1,0 +1,63 @@
+---
+title: 为 LLM 回复加防护
+description: 每条政策规则一道判断题，决定 LLM 起草的回复是发送、拦截、复核还是重新生成。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/llm_guardrails.py?cookbook-source';
+import data from '@site/static/cookbook/code/llm_guardrails_data.json?cookbook-source';
+import output from '@site/static/cookbook/outputs/llm_guardrails.json?cookbook-source';
+
+一个 LLM 为共享单车客户起草回复。客服政策规定：机器人不得承诺退款，不得索要密码、验证码或银行卡号，不得指责客户。每份草稿发出前都要经过 Valen，每条规则的概率会准确告诉代码草稿违反了哪一条。
+
+## 工作原理
+
+每条规则都是一道独立的判断题，针对客户消息和草稿提问，另外再加一项质量检查：
+
+| 问题 | 规则 |
+| --- | --- |
+| `promises_compensation` | 不承诺退款、抵扣或补偿 |
+| `asks_for_password`、`asks_for_code`、`asks_for_card` | 绝不索要敏感信息 |
+| `blames_customer` | 绝不说是客户的错 |
+| `answers_customer` | 回复回应了客户的问题 |
+
+第一版用一道题同时问 "a password, a one-time code or a full card number"，一份同时索要验证码和密码的草稿只得了 0.32。拆成每种敏感信息一道题后，同一份草稿分别得到 0.87 和 0.95。
+
+| 规则 | `answers_customer` | 动作 |
+| --- | --- | --- |
+| 任一规则 0.7 及以上 | 任意 | `block` |
+| 任一规则 0.3 – 0.7 | 任意 | `human_review` |
+| 全部低于 0.3 | 低于 0.3 | `regenerate` |
+| 全部低于 0.3 | 0.3 及以上 | `send` |
+
+## 运行
+
+先下载一次示例包。`caches/llm_guardrails.json` 中录制的回答让脚本无需 API key 即可运行；加 `--replay off` 则改为调用[免费托管 API](/zh-Hans/docs/valen/api/)。
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python llm_guardrails.py
+python llm_guardrails.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## 代码
+
+<CodeBlock language="python" title="llm_guardrails.py">{source}</CodeBlock>
+
+<details>
+<summary>llm_guardrails_data.json</summary>
+
+<CodeBlock language="json" title="llm_guardrails_data.json">{data}</CodeBlock>
+
+</details>
+
+## 输出
+
+<CodeBlock language="json" title="录制的输出">{output}</CodeBlock>
+
+## 改成你自己的
+
+- 在 `RULES` 里加一行就能新增规则。所有规则在同一次请求中运行，政策再长也几乎不增加耗时。
+- 每份被拦截的草稿都连同 `broken` 一起记录下来；它是改进提示词的训练信号。

@@ -1,0 +1,53 @@
+---
+title: 将扫描表单与系统记录核对
+description: 对扫描的借用单逐个字段提问，再由代码决定接受、拒绝或送人工复核。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/document_check.py?cookbook-source';
+import data from '@site/static/cookbook/code/document_check_data.json?cookbook-source';
+import output from '@site/static/cookbook/outputs/document_check.json?cookbook-source';
+
+一个设备借用台会扫描每张手写借用单，并把信息录入系统。借用结束前，每份扫描件都要与录入的记录核对：纸面上的姓名、序列号和归还日期是否一致，是否已签名？
+
+| 无误 | 归还日期错误 | 未签名 |
+| --- | --- | --- |
+| ![Lin Chen 的借用单](/cookbook/code/media/loan-a.jpg) | ![Omar Haddad 的借用单](/cookbook/code/media/loan-b.jpg) | ![Sara Novak 的借用单](/cookbook/code/media/loan-c.jpg) |
+
+## 工作原理
+
+代码把记录的每个字段转换成一句一眼就能核对的陈述，并按纸面上的写法来写（"The return date handwritten on the form is 12 March 2026"），再加一道关于签名栏的问题。四道判断题和扫描件放在同一次请求中。
+
+| 字段核对 | 状态 |
+| --- | --- |
+| 任一低于 0.3 | `reject`，列出未通过的字段 |
+| 任一在 0.3 – 0.7 | `review` |
+| 全部 0.7 及以上 | `accept` |
+
+## 运行
+
+先下载一次示例包。`caches/document_check.json` 中录制的回答让脚本无需 API key 即可运行；加 `--replay off` 则改为调用[免费托管 API](/zh-Hans/docs/valen/api/)。
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python document_check.py
+python document_check.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## 代码
+
+<CodeBlock language="python" title="document_check.py">{source}</CodeBlock>
+
+<CodeBlock language="json" title="document_check_data.json">{data}</CodeBlock>
+
+## 输出
+
+<CodeBlock language="json" title="录制的输出">{output}</CodeBlock>
+
+## 改成你自己的
+
+- 用表单自身的写法询问记录内容：日期按书写的样子，姓名按签名的样子。
+- 对于长文档，用代码裁出每个字段区域，把裁剪图作为单独的请求发送。
+- 这里的表单是用手写字体为本教程生成的。

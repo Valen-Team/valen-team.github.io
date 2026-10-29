@@ -1,0 +1,63 @@
+---
+title: 对照引用来源核查论断
+description: 每条论断用两道判断题区分有依据、被反驳和无依据三种情况；来源无法定论的交给编辑。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/citation_check.py?cookbook-source';
+import data from '@site/static/cookbook/code/citation_check_data.json?cookbook-source';
+import output from '@site/static/cookbook/outputs/citation_check.json?cookbook-source';
+
+一篇关于某城市共享单车的文章草稿提出了七条论断，每条都引用了一份报告、市议会会议记录或一项调查。发布前，每条论断都要对照它引用的段落核查。来源明确支持的论断通过；被反驳和无依据的论断退回给作者；其余的交给编辑。
+
+## 工作原理
+
+每条论断与其来源组成一个输入，配两道判断题：
+
+| 问题 | 类型 |
+| --- | --- |
+| `supported`：来源陈述了论断所说的内容 | predicate |
+| `contradicted`：来源陈述的内容与论断相冲突 | predicate |
+
+“没有依据”和“被反驳”会导向不同的动作，所以分成两道题来问。真值表：
+
+| `contradicted` | `supported` | 状态 |
+| --- | --- | --- |
+| 0.7 及以上 | 任意 | `contradicted` |
+| 低于 0.7 | 0.7 及以上 | `supported` |
+| 低于 0.3 | 低于 0.3 | `unsupported` |
+| 其他 | 其他 | `escalate` |
+
+## 运行
+
+先下载一次示例包。`caches/citation_check.json` 中录制的回答让脚本无需 API key 即可运行；加 `--replay off` 则改为调用[免费托管 API](/zh-Hans/docs/valen/api/)。
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python citation_check.py
+python citation_check.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## 代码
+
+<CodeBlock language="python" title="citation_check.py">{source}</CodeBlock>
+
+<details>
+<summary>citation_check_data.json</summary>
+
+<CodeBlock language="json" title="citation_check_data.json">{data}</CodeBlock>
+
+</details>
+
+## 输出
+
+"The average trip lasted 40 minutes" 被来源中的 "14 minutes" 反驳（0.89）。"Riders are happier than a year ago" 在调查中找不到任何依据，因此判为无依据。"Trips fell in 2025" 的 contradicted 得分为 0.62，交给编辑处理。
+
+<CodeBlock language="json" title="录制的输出">{output}</CodeBlock>
+
+## 改成你自己的
+
+- 把数量表述（"most"、"a third"、"doubled"）与来源中的数字作比较属于算术：在代码里提取数字并比较，Valen 只负责判断文本说了什么。
+- 把 `escalate` 的论断交给编辑或推理模型；其余的都在一次低成本的处理中定下来。

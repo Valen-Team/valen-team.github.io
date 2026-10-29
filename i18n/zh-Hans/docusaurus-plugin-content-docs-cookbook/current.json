@@ -1,8 +1,10 @@
 {
-  "sidebar.cookbook.category.Foundations": {
-    "message": "基础教程"
-  },
-  "sidebar.cookbook.category.Applications": {
-    "message": "完整应用"
-  }
+  "sidebar.cookbook.category.Foundations": {"message": "入门"},
+  "sidebar.cookbook.category.Route & triage": {"message": "路由与分流"},
+  "sidebar.cookbook.category.Select, don't generate": {"message": "选择而非生成"},
+  "sidebar.cookbook.category.Find & judge evidence": {"message": "找证据、判相关"},
+  "sidebar.cookbook.category.Verify & escalate": {"message": "核查与升级"},
+  "sidebar.cookbook.category.Images & video": {"message": "看图看视频"},
+  "sidebar.cookbook.category.Answers into data": {"message": "把回答变成数据"},
+  "sidebar.cookbook.category.Adapt & ship": {"message": "适配与上线"}
 }

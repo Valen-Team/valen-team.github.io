@@ -1,0 +1,83 @@
+[
+  {
+    "command": "ping me about this tomorrow morning",
+    "is_command": 0.8666370123638059,
+    "confidence": 0.8722163963755449,
+    "status": "call",
+    "call": {
+      "function": "set_reminder",
+      "kwargs": {
+        "when": "tomorrow"
+      }
+    },
+    "unsure": []
+  },
+  {
+    "command": "send this to the design team but they shouldn't be able to change anything",
+    "is_command": 0.8469533829065193,
+    "confidence": 0.9912622488466675,
+    "status": "call",
+    "call": {
+      "function": "share_note",
+      "kwargs": {
+        "permission": "view"
+      }
+    },
+    "unsure": []
+  },
+  {
+    "command": "my eyes hurt at night, can you make the screen darker",
+    "is_command": 0.8734981417655945,
+    "confidence": 0.8097805124404491,
+    "status": "call",
+    "call": {
+      "function": "change_theme",
+      "kwargs": {
+        "theme": "dark"
+      }
+    },
+    "unsure": []
+  },
+  {
+    "command": "I need this as a word file for my manager",
+    "is_command": 0.9875167965186418,
+    "confidence": 0.944616775424281,
+    "status": "call",
+    "call": {
+      "function": "export_note",
+      "kwargs": {
+        "format": "docx"
+      }
+    },
+    "unsure": []
+  },
+  {
+    "command": "can you remind me next week? actually make it a pdf instead",
+    "is_command": 0.9193248221227885,
+    "confidence": 0.5059124954600235,
+    "status": "clarify",
+    "options": [
+      "set_reminder",
+      "export_note"
+    ]
+  },
+  {
+    "command": "what's the weather in Shanghai",
+    "is_command": 0.3065500855445862,
+    "confidence": 0.4502609170856662,
+    "status": "show_help"
+  },
+  {
+    "command": "make it look like whatever my phone is set to",
+    "is_command": 0.9843640593466292,
+    "confidence": 0.9998406975518448,
+    "status": "call",
+    "call": {
+      "function": "change_theme",
+      "kwargs": {
+        "theme": "system"
+      }
+    },
+    "unsure": []
+  }
+]

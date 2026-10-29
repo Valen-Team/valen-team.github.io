@@ -1,0 +1,407 @@
+{
+ "1bae85011fafc9924a22b956280ee7926a7a0086c0d9e2814f5b234b1ff32455": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.03725921031749856,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 135
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.38,
+   "forward_ms": 34.79,
+   "image_ms": 0.0,
+   "queue_ms": 0.0,
+   "total_ms": 40.97
+  },
+  "usage": {
+   "input_tokens": 135,
+   "output_tokens": 0
+  }
+ },
+ "3cbe303a9e7d6dec57ec0f3218256c3c875e4f6e6231b07979b0254da3a0c47e": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.05538949909100312,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 138
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.38,
+   "forward_ms": 35.76,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 41.93
+  },
+  "usage": {
+   "input_tokens": 138,
+   "output_tokens": 0
+  }
+ },
+ "3d5121367f2c0afd251f7e56035ef68651c63ffaeb7125ecece0594679d7004b": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.02945133769907817,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 138
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.65,
+   "forward_ms": 36.1,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 42.6
+  },
+  "usage": {
+   "input_tokens": 138,
+   "output_tokens": 0
+  }
+ },
+ "7bb378071649262b8f358422705357993933fe614538469745bd309553ac9714": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.06563972034513534,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 135
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 6.13,
+   "forward_ms": 45.84,
+   "image_ms": 0.0,
+   "queue_ms": 0.0,
+   "total_ms": 52.86
+  },
+  "usage": {
+   "input_tokens": 135,
+   "output_tokens": 0
+  }
+ },
+ "7d34a9c1e4373930a30beaa5e2e887ebf04d73a8dc209362a90d7a275e7fdcde": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.8985652729227516,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 133
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.23,
+   "forward_ms": 35.47,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 41.5
+  },
+  "usage": {
+   "input_tokens": 133,
+   "output_tokens": 0
+  }
+ },
+ "96a4a991b6b03c1dcb8d72a5e953d9cd45e58c05acdb884d614f942d4f225b3b": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.17896146805641847,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 142
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 6.08,
+   "forward_ms": 34.99,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 41.99
+  },
+  "usage": {
+   "input_tokens": 142,
+   "output_tokens": 0
+  }
+ },
+ "a49da83092403ce744f2cbcf0f2e0b41b6add6320be3aa81d10b650d2fa07737": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.17800874742852527,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 141
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.21,
+   "forward_ms": 37.14,
+   "image_ms": 0.0,
+   "queue_ms": 0.0,
+   "total_ms": 43.15
+  },
+  "usage": {
+   "input_tokens": 141,
+   "output_tokens": 0
+  }
+ },
+ "a6e33b5412d94b6e833dc21fac81dd8fac0eb6ff68b4b55b39c38cf45056ed58": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.9774886906340852,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 142
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.07,
+   "forward_ms": 37.3,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 43.17
+  },
+  "usage": {
+   "input_tokens": 142,
+   "output_tokens": 0
+  }
+ },
+ "b0dd878de73f8e67e89b92153c3418775b75064548b79145fab0b8cb3f2659cb": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.31263142824172974,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 139
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.59,
+   "forward_ms": 36.55,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 42.99
+  },
+  "usage": {
+   "input_tokens": 139,
+   "output_tokens": 0
+  }
+ },
+ "b343de8a31531da59fbfa0af721b9b51b27a49f16f57a3c2a0bc99f65c7bc0d8": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.9611416781331417,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 142
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.67,
+   "forward_ms": 35.38,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 41.91
+  },
+  "usage": {
+   "input_tokens": 142,
+   "output_tokens": 0
+  }
+ },
+ "d0215a35f258a5fd4a64294d64746c94168a1bdf6d9c4f689240de423242633e": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.03217982716574106,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 142
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.54,
+   "forward_ms": 34.19,
+   "image_ms": 0.0,
+   "queue_ms": 0.0,
+   "total_ms": 40.53
+  },
+  "usage": {
+   "input_tokens": 142,
+   "output_tokens": 0
+  }
+ },
+ "e448c7916b1b96b1d1fea2634cb69e7b504fcce8f3b519ae465766c2ad6e9070": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.6440917657586406,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 145
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.34,
+   "forward_ms": 36.77,
+   "image_ms": 0.0,
+   "queue_ms": 0.0,
+   "total_ms": 42.95
+  },
+  "usage": {
+   "input_tokens": 145,
+   "output_tokens": 0
+  }
+ },
+ "eee4644b2ea42a824a72a03aeaba734075563460be5dd6a663c4d019bb49c7a5": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.09888336357126723,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 136
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.12,
+   "forward_ms": 34.84,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 40.79
+  },
+  "usage": {
+   "input_tokens": 136,
+   "output_tokens": 0
+  }
+ },
+ "ef81168702fd99bb33958379587fa1a2fe6971d307eb19bd6f80cedc0e0861ce": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.07181187558594625,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 140
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.73,
+   "forward_ms": 36.3,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 42.91
+  },
+  "usage": {
+   "input_tokens": 140,
+   "output_tokens": 0
+  }
+ },
+ "f527edeb67facaf5ca29824175b92f0a1eb4ab62cf98eeae75bf4e1041f9a63b": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.09392517689858818,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 145
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.3,
+   "forward_ms": 35.46,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 41.59
+  },
+  "usage": {
+   "input_tokens": 145,
+   "output_tokens": 0
+  }
+ }
+}

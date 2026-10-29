@@ -1,23 +1,33 @@
 ---
 slug: /
 title: Cookbook
-description: Tested Valen tutorials from input to business output.
+description: Tested Valen recipes from input to business output, grouped by the goal they serve.
 ---
 
 import CookbookIndex from '@site/src/components/CookbookIndex';
 
-# From input to business output
+# Cookbook
 
-The single maintained home for complete Valen application tutorials: runnable code, sample inputs, real-model outputs and uncertainty handling, organized by task. The original notebook cases are reused rather than multiplied into duplicate tutorials.
+Complete Valen applications with runnable code, sample inputs and real-model outputs, grouped by the goal they serve. Every recipe follows the same split: Valen answers typed questions, and code turns the answers into a decision.
 
 <CookbookIndex />
 
-Choosing an automation and review rule? Inspect the [released-model evidence](/docs/valen/reliability/), then [calibrate on your own data](/docs/valen/calibration/).
+## Run any recipe without an API key
+
+Each remote recipe ships with `caches/<recipe>.json`: the real answers recorded for its sample inputs, keyed by model and request. After you download the bundle, every recipe runs offline and prints the same output as the page. Change a question or an input and the runner calls the model for that request and records the new answer.
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook
+python rerank.py                       # recorded answers, no key needed
+python rerank.py --replay off           # always call the model
+```
+
+`--replay only` uses recorded answers only, which is how the site build checks every recipe.
 
 ## Reproduce and navigate
 
-[API documentation](/docs/valen/api/) owns protocols, fields, errors and minimal calls. [Deployment documentation](/docs/valen/choosing/) owns installation and backend configuration. Cookbook owns complete applications.
+[API documentation](/docs/valen/api/) owns protocols, fields, errors and minimal calls. [Deployment documentation](/docs/valen/choosing/) owns installation and backend configuration. The cookbook owns complete applications. Choosing an automation and review rule? Inspect the [released-model evidence](/docs/valen/reliability/), then [calibrate on your own data](/docs/valen/calibration/).
 
-[Validation, performance and versions](./validation/) · [Migration map](./migration/) · <a href="/cookbook/valen-cookbook.zip">Download scripts and sample data</a>
-
-Pages import the tested source files directly from the website repository. The download bundle is generated from those same files at build time. Scripts never implicitly download models. Media is read only when you explicitly run the commands; no video autoplays.
+[Validation, performance and versions](./validation/) · [Migration map](./migration/) · <a href="/cookbook/valen-cookbook.zip">Download scripts, sample data and recorded answers</a>

@@ -1,0 +1,16 @@
+{
+  "sources": {
+    "1": "City Transport Annual Report 2025, p. 12: Bike-share trips rose to 4.1 million in 2025, up from 3.4 million in 2024. E-bikes made up 38% of trips. Average trip length was 14 minutes.",
+    "2": "Council minutes, 3 February 2026: The council approved 120 new docking stations, to be installed in the eastern districts by the end of 2026. Funding comes from the regional mobility fund.",
+    "3": "Rider survey, November 2025 (n = 2,300): 61% of riders said they use the service to commute. The most requested improvement was more stations near train stations (44%)."
+  },
+  "claims": [
+    {"id": "c1", "cites": "1", "text": "Bike-share trips grew to 4.1 million in 2025."},
+    {"id": "c2", "cites": "1", "text": "The average trip lasted 40 minutes."},
+    {"id": "c3", "cites": "2", "text": "The council approved 120 new docking stations for the eastern districts."},
+    {"id": "c4", "cites": "2", "text": "The new stations will be paid for by a fare increase."},
+    {"id": "c5", "cites": "3", "text": "Most riders use bike share to get to work."},
+    {"id": "c6", "cites": "3", "text": "Riders are happier with the service than they were a year ago."},
+    {"id": "c7", "cites": "1", "text": "Bike-share trips fell in 2025 compared with 2024."}
+  ]
+}

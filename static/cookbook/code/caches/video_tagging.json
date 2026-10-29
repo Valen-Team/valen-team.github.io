@@ -1,0 +1,59 @@
+{
+ "5eeeca8af3d9d39ba4187999c1ade0adad009ae37b83b97ea9c6251795809e3b": {
+  "answers": [
+   {
+    "choice": "white",
+    "confidence": 0.964841634004897,
+    "name": "sauce_color",
+    "probabilities": [
+     {
+      "probability": 0.0012343578556515856,
+      "value": "brown"
+     },
+     {
+      "probability": 0.9736312255036728,
+      "value": "white"
+     },
+     {
+      "probability": 0.02259671367373697,
+      "value": "red"
+     },
+     {
+      "probability": 0.0025377029669386665,
+      "value": "orange"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [
+   {
+    "model_size": [
+     288,
+     512
+    ],
+    "original_size": [
+     288,
+     512
+    ]
+   }
+  ],
+  "internal_usage": {
+   "compute_tokens": 217
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 14.55,
+   "forward_ms": 49.63,
+   "image_ms": 6.67,
+   "queue_ms": 0.01,
+   "total_ms": 120.03
+  },
+  "usage": {
+   "input_tokens": 217,
+   "output_tokens": 0
+  }
+ }
+}

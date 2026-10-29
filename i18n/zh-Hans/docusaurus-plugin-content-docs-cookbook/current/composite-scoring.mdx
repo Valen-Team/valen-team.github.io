@@ -1,0 +1,58 @@
+---
+title: 照片评分一次，各店铺按需加权
+description: 对商品照片的光线、背景和构图评分一次；每个店铺在代码中用自己的权重排序。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/composite_scoring.py?cookbook-source';
+import output from '@site/static/cookbook/outputs/composite_scoring.json?cookbook-source';
+
+一个电商平台要求卖家上传一张好的主图。"Is this a good photo?" 这样的问法掩盖了照片好在哪里，而不同店铺看重的方面也不一样。Valen 对每张照片在三个维度上评分一次；代码用权重把它们组合起来，每个店铺都可以修改权重，无需再次调用模型。
+
+| 影棚 | 厨房台面 | 光线昏暗 | 被裁切 |
+| --- | --- | --- | --- |
+| ![影棚背景上的马克杯](/cookbook/code/media/mug-studio.jpg) | ![杂乱台面上的马克杯](/cookbook/code/media/mug-counter.jpg) | ![昏暗光线下的马克杯](/cookbook/code/media/mug-dim.jpg) | ![被画面边缘裁掉的马克杯](/cookbook/code/media/mug-cropped.jpg) |
+
+## 工作原理
+
+三道评分题，每道有三个等级，每个等级都描述成人一眼能认出的情形：
+
+| 维度 | 等级 |
+| --- | --- |
+| `lighting` | 差 · 一般 · 好 |
+| `background` | 杂乱 · 素净 · 影棚 |
+| `framing` | 被裁切 · 松散 · 居中 |
+
+评分题在三个等级上取值 0 到 2；代码除以 2，让每个维度落在 0–1 之间，再按店铺计算加权和：
+
+| 配置 | lighting | background | framing |
+| --- | --- | --- | --- |
+| `marketplace` | 0.3 | 0.2 | 0.5 |
+| `premium_shop` | 0.3 | 0.5 | 0.2 |
+
+## 运行
+
+先下载一次示例包。`caches/composite_scoring.json` 中录制的回答让脚本无需 API key 即可运行；加 `--replay off` 则改为调用[免费托管 API](/zh-Hans/docs/valen/api/)。
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python composite_scoring.py
+python composite_scoring.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## 代码
+
+<CodeBlock language="python" title="composite_scoring.py">{source}</CodeBlock>
+
+## 输出
+
+厨房台面那张照片光线充足、主体完整，所以电商平台把它排在第二；高端店铺更看重背景，台面杂乱让它排在最后。
+
+<CodeBlock language="json" title="录制的输出">{output}</CodeBlock>
+
+## 改成你自己的
+
+- 保存每个维度的得分，而不只是总分。以后换权重、加筛选条件或训练模型时都能直接使用，无需再次调用 Valen。
+- 这些照片是为本教程生成的。

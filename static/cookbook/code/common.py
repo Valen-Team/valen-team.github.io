@@ -1,13 +1,16 @@
 """Shared cookbook runner. Apache-2.0. No implicit model or media downloads."""
 import argparse
 import base64
-from contextlib import contextmanager
+from contextlib import ExitStack, contextmanager
+import hashlib
 import json
 import math
 import os
 from pathlib import Path
+import sys
 
 HERE = Path(__file__).resolve().parent
+CACHES = HERE / "caches"
 
 
 def samples():
@@ -22,11 +25,56 @@ def parser(description):
     p.add_argument("--threads", type=int, default=4)
     p.add_argument("--asset-dir", type=Path, default=Path("."))
     p.add_argument("--output", type=Path)
+    p.add_argument("--replay", choices=["auto", "only", "off"], default="auto",
+                   help="auto: reuse recorded answers and record new ones; only: recorded answers only; "
+                        "off: always call the model")
     return p
 
 
 @contextmanager
 def client(args):
+    """Answers for remote requests are recorded in caches/<script>.json, keyed by model and request."""
+    mode = getattr(args, "replay", "off") if args.backend == "remote" else "off"
+    if mode == "off":
+        with live_client(args) as predict:
+            yield predict
+        return
+    path = CACHES / (Path(sys.argv[0]).stem + ".json")
+    store = json.loads(path.read_text()) if path.exists() else {}
+    with ExitStack() as stack:
+        live = []
+
+        def predict(body):
+            key = hashlib.sha256(json.dumps({"model": args.model or "valen-2b", **pixels(body)}, sort_keys=True,
+                                            ensure_ascii=False).encode()).hexdigest()
+            if key not in store:
+                if mode == "only":
+                    raise KeyError(f"No recorded answer in caches/{path.name}; run with --replay auto to call the model")
+                if not live:
+                    live.append(stack.enter_context(live_client(args)))
+                store[key] = live[0](body)
+                CACHES.mkdir(exist_ok=True)
+                path.write_text(json.dumps(store, indent=1, sort_keys=True, ensure_ascii=False) + "\n")
+            return store[key]
+        yield predict
+
+
+def pixels(value):
+    """Key images by their decoded pixels, so another zlib or Pillow build finds the same recorded answer."""
+    if isinstance(value, dict):
+        return {k: pixels(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [pixels(v) for v in value]
+    if isinstance(value, str) and value.startswith("data:image/"):
+        import io
+        from PIL import Image
+        with Image.open(io.BytesIO(base64.b64decode(value.split(",", 1)[1]))) as image:
+            return f"image {image.size} " + hashlib.sha256(image.convert("RGB").tobytes()).hexdigest()
+    return value
+
+
+@contextmanager
+def live_client(args):
     if args.threads < 1:
         raise ValueError("--threads must be positive")
     if args.backend == "native":
@@ -62,26 +110,30 @@ def image_input(payload):
     """Inline media works across HTTP services; never send a client-local path."""
     return [{"role": "user", "content": [
         {"type": "input_text", "text": "Answer using only the visible image."},
-        {"type": "input_image", "image_url": "data:image/jpeg;base64," + base64.b64encode(payload).decode("ascii")},
+        {"type": "input_image", "image_url": "data:image/png;base64," + base64.b64encode(payload).decode("ascii")},
     ]}]
 
 
-def image_bytes(path):
+def png(image):
+    """Lossless 512px PNG: the pixels sent are exactly the pixels decoded, on any machine."""
     import io
-    from PIL import Image, ImageOps
+    from PIL import ImageOps
+    image = ImageOps.exif_transpose(image).convert("RGB")
+    image.thumbnail((512, 512))
+    buffer = io.BytesIO()
+    image.save(buffer, format="PNG")
+    return buffer.getvalue()
+
+
+def image_bytes(path):
+    from PIL import Image
     with Image.open(path) as image:
-        image = ImageOps.exif_transpose(image).convert("RGB")
-        image.thumbnail((512, 512))
-        buffer = io.BytesIO()
-        image.save(buffer, format="JPEG", quality=95)
-        return buffer.getvalue()
+        return png(image)
 
 
 def middle_frame(path):
     """Decode a bounded clip twice: count first, then keep only its middle frame."""
     import av
-    import io
-    from PIL import ImageOps
     with av.open(str(path)) as video:
         stream = video.streams.video[0]
         if stream.width * stream.height > 4096 * 2160:
@@ -97,11 +149,7 @@ def middle_frame(path):
     with av.open(str(path)) as video:
         for index, frame in enumerate(video.decode(video=0)):
             if index == target:
-                image = ImageOps.exif_transpose(frame.to_image()).convert("RGB")
-                image.thumbnail((512, 512))
-                buffer = io.BytesIO()
-                image.save(buffer, format="JPEG", quality=95)
-                return buffer.getvalue(), {"frame_index": target, "total_frames": count,
+                return png(frame.to_image()), {"frame_index": target, "total_frames": count,
                                             "timestamp_seconds": float(frame.time) if frame.time is not None else None}
     raise ValueError("Clip changed while decoding")
 

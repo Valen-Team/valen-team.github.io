@@ -1,0 +1,63 @@
+---
+title: Check claims against their citations
+description: Two predicates per claim separate supported, contradicted and unsupported claims; the ones the source does not settle go to an editor.
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/citation_check.py?cookbook-source';
+import data from '@site/static/cookbook/code/citation_check_data.json?cookbook-source';
+import output from '@site/static/cookbook/outputs/citation_check.json?cookbook-source';
+
+A drafted article about a city's bike share makes seven claims, each citing a report, council minutes or a survey. Before publishing, every claim is checked against the passage it cites. Claims the source clearly backs pass; contradicted and unsupported claims go back to the writer; the rest go to an editor.
+
+## How it works
+
+Each claim and its source form one input, with two predicates:
+
+| Question | Type |
+| --- | --- |
+| `supported`: the source states what the claim says | predicate |
+| `contradicted`: the source states something that conflicts with the claim | predicate |
+
+"Not supported" and "contradicted" lead to different actions, so they are separate questions. The truth table:
+
+| `contradicted` | `supported` | Status |
+| --- | --- | --- |
+| 0.7 or above | any | `contradicted` |
+| below 0.7 | 0.7 or above | `supported` |
+| below 0.3 | below 0.3 | `unsupported` |
+| otherwise | otherwise | `escalate` |
+
+## Run it
+
+Download the bundle once. The recorded answers in `caches/citation_check.json` let the script run without an API key; `--replay off` calls the [free hosted API](/docs/valen/api/) instead.
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python citation_check.py
+python citation_check.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## Code
+
+<CodeBlock language="python" title="citation_check.py">{source}</CodeBlock>
+
+<details>
+<summary>citation_check_data.json</summary>
+
+<CodeBlock language="json" title="citation_check_data.json">{data}</CodeBlock>
+
+</details>
+
+## Output
+
+"The average trip lasted 40 minutes" is contradicted by "14 minutes" (0.89). "Riders are happier than a year ago" has nothing in the survey to back it, so it is unsupported. "Trips fell in 2025" scores 0.62 contradicted and goes to an editor.
+
+<CodeBlock language="json" title="Recorded output">{output}</CodeBlock>
+
+## Make it yours
+
+- Comparing quantities ("most", "a third", "doubled") with figures in the source is arithmetic: extract the numbers in code and compare them there, and keep Valen for what the text says.
+- Feed `escalate` claims to an editor or a reasoning model; everything else is settled in one cheap pass.

@@ -1,0 +1,66 @@
+{
+  "dimensions": [
+    {
+      "photo": "mug-studio.jpg",
+      "lighting": 0.9991636368077078,
+      "background": 0.9938775610787292,
+      "framing": 0.9752801720575722
+    },
+    {
+      "photo": "mug-counter.jpg",
+      "lighting": 0.9860608196005157,
+      "background": 0.006156532209375251,
+      "framing": 0.9074895660257324
+    },
+    {
+      "photo": "mug-dim.jpg",
+      "lighting": 0.17881670806358135,
+      "background": 0.641231147103601,
+      "framing": 0.8176063590643421
+    },
+    {
+      "photo": "mug-cropped.jpg",
+      "lighting": 0.9932250863251958,
+      "background": 0.5433575647609814,
+      "framing": 0.29707197970072985
+    }
+  ],
+  "rankings": {
+    "marketplace": [
+      {
+        "photo": "mug-studio.jpg",
+        "score": 0.986
+      },
+      {
+        "photo": "mug-counter.jpg",
+        "score": 0.751
+      },
+      {
+        "photo": "mug-dim.jpg",
+        "score": 0.591
+      },
+      {
+        "photo": "mug-cropped.jpg",
+        "score": 0.555
+      }
+    ],
+    "premium_shop": [
+      {
+        "photo": "mug-studio.jpg",
+        "score": 0.992
+      },
+      {
+        "photo": "mug-cropped.jpg",
+        "score": 0.629
+      },
+      {
+        "photo": "mug-dim.jpg",
+        "score": 0.538
+      },
+      {
+        "photo": "mug-counter.jpg",
+        "score": 0.48
+      }
+    ]
+  }
+}

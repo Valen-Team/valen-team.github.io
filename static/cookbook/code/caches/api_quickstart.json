@@ -1,0 +1,194 @@
+{
+ "5eeeca8af3d9d39ba4187999c1ade0adad009ae37b83b97ea9c6251795809e3b": {
+  "answers": [
+   {
+    "choice": "white",
+    "confidence": 0.964841634004897,
+    "name": "sauce_color",
+    "probabilities": [
+     {
+      "probability": 0.0012343578556515856,
+      "value": "brown"
+     },
+     {
+      "probability": 0.9736312255036728,
+      "value": "white"
+     },
+     {
+      "probability": 0.02259671367373697,
+      "value": "red"
+     },
+     {
+      "probability": 0.0025377029669386665,
+      "value": "orange"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [
+   {
+    "model_size": [
+     288,
+     512
+    ],
+    "original_size": [
+     288,
+     512
+    ]
+   }
+  ],
+  "internal_usage": {
+   "compute_tokens": 217
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 14.37,
+   "forward_ms": 52.32,
+   "image_ms": 7.16,
+   "queue_ms": 0.01,
+   "total_ms": 123.26
+  },
+  "usage": {
+   "input_tokens": 217,
+   "output_tokens": 0
+  }
+ },
+ "b39e8c402e5cded6b87ff18bbcf85f9d1afd674896859640e0901e796b4975cc": {
+  "answers": [
+   {
+    "choice": "change_address",
+    "confidence": 0.9999289505706707,
+    "name": "intent",
+    "probabilities": [
+     {
+      "probability": 3.4016723812828095e-06,
+      "value": "billing_question"
+     },
+     {
+      "probability": 3.291567995152523e-05,
+      "value": "cancel_order"
+     },
+     {
+      "probability": 0.9999431604565366,
+      "value": "change_address"
+     },
+     {
+      "probability": 2.087726264525702e-06,
+      "value": "report_damage"
+     },
+     {
+      "probability": 1.843446486604273e-05,
+      "value": "track_order"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "name": "address_change",
+    "probability": 0.9984566240623853,
+    "type": "predicate"
+   },
+   {
+    "confidence": 0.9342730332711597,
+    "name": "explicitness",
+    "probabilities": [
+     {
+      "label": "none",
+      "probability": 0.0016383576849762936,
+      "value": 0
+     },
+     {
+      "label": "possible",
+      "probability": 0.04054126244927424,
+      "value": 1
+     },
+     {
+      "label": "explicit",
+      "probability": 0.9578203798657494,
+      "value": 2
+     }
+    ],
+    "score": 1.956182022180773,
+    "type": "score"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 225
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 9.31,
+   "forward_ms": 36.48,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 47.09
+  },
+  "usage": {
+   "input_tokens": 225,
+   "output_tokens": 0
+  }
+ },
+ "e360ddb6b48d00c93ecb1a89e083ddcb8bf1bda2feddd5760eabea50e0053b43": {
+  "answers": [
+   {
+    "choice": "flock",
+    "confidence": 0.9995986859291994,
+    "name": "group",
+    "probabilities": [
+     {
+      "probability": 0.00022472233506495753,
+      "value": "pride"
+     },
+     {
+      "probability": 0.9996990144468996,
+      "value": "flock"
+     },
+     {
+      "probability": 7.6111806719090535e-06,
+      "value": "clowder"
+     },
+     {
+      "probability": 6.865203736360213e-05,
+      "value": "gang"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [
+   {
+    "model_size": [
+     512,
+     342
+    ],
+    "original_size": [
+     512,
+     342
+    ]
+   }
+  ],
+  "internal_usage": {
+   "compute_tokens": 249
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 15.89,
+   "forward_ms": 61.79,
+   "image_ms": 8.13,
+   "queue_ms": 0.0,
+   "total_ms": 140.52
+  },
+  "usage": {
+   "input_tokens": 249,
+   "output_tokens": 0
+  }
+ }
+}

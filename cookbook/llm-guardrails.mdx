@@ -1,0 +1,63 @@
+---
+title: Guardrails for LLM replies
+description: One predicate per policy rule decides whether an LLM's draft reply is sent, blocked, reviewed or regenerated.
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/llm_guardrails.py?cookbook-source';
+import data from '@site/static/cookbook/code/llm_guardrails_data.json?cookbook-source';
+import output from '@site/static/cookbook/outputs/llm_guardrails.json?cookbook-source';
+
+An LLM drafts replies to bike-share customers. Support policy says the bot may not promise refunds, may not ask for passwords, codes or card numbers, and may not blame the customer. Every draft passes through Valen before it is sent, and the probability of each rule tells code exactly which rule a draft breaks.
+
+## How it works
+
+Each rule is its own predicate over the customer message and the draft, plus one quality check:
+
+| Question | Rule |
+| --- | --- |
+| `promises_compensation` | no refund, credit or compensation promises |
+| `asks_for_password`, `asks_for_code`, `asks_for_card` | never ask for secrets |
+| `blames_customer` | never tell the customer it is their fault |
+| `answers_customer` | the reply addresses what the customer asked |
+
+A first version asked for "a password, a one-time code or a full card number" in one question, and a draft asking for both a code and a password scored 0.32. Split into one question per secret, the same draft scores 0.87 and 0.95.
+
+| Rules | `answers_customer` | Action |
+| --- | --- | --- |
+| any rule 0.7 or above | any | `block` |
+| any rule 0.3 – 0.7 | any | `human_review` |
+| all below 0.3 | below 0.3 | `regenerate` |
+| all below 0.3 | 0.3 or above | `send` |
+
+## Run it
+
+Download the bundle once. The recorded answers in `caches/llm_guardrails.json` let the script run without an API key; `--replay off` calls the [free hosted API](/docs/valen/api/) instead.
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python llm_guardrails.py
+python llm_guardrails.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## Code
+
+<CodeBlock language="python" title="llm_guardrails.py">{source}</CodeBlock>
+
+<details>
+<summary>llm_guardrails_data.json</summary>
+
+<CodeBlock language="json" title="llm_guardrails_data.json">{data}</CodeBlock>
+
+</details>
+
+## Output
+
+<CodeBlock language="json" title="Recorded output">{output}</CodeBlock>
+
+## Make it yours
+
+- Add a rule by adding one line to `RULES`. Rules run in the same request, so a longer policy costs little extra time.
+- Log `broken` with each blocked draft; it is the training signal for your prompt.

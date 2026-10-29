@@ -1,0 +1,314 @@
+{
+ "4f6b6bae3ab451963c68b28c6258bf89fd7898a754d656796199e0e5895c67cf": {
+  "answers": [
+   {
+    "name": "promises_compensation",
+    "probability": 0.004615859982477985,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_password",
+    "probability": 0.0005356585070066202,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_code",
+    "probability": 0.002155360667917882,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_card",
+    "probability": 0.0020253738503979973,
+    "type": "predicate"
+   },
+   {
+    "name": "blames_customer",
+    "probability": 0.05902312081584957,
+    "type": "predicate"
+   },
+   {
+    "name": "answers_customer",
+    "probability": 0.005071748104748295,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 415
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 6.54,
+   "forward_ms": 36.98,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 44.7
+  },
+  "usage": {
+   "input_tokens": 415,
+   "output_tokens": 0
+  }
+ },
+ "5781cd88aa2483f3cc65cdf9aee9f4205727946a43994c028fef36fdd0cfbb20": {
+  "answers": [
+   {
+    "name": "promises_compensation",
+    "probability": 0.0004245653684002803,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_password",
+    "probability": 0.9162666884263373,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_code",
+    "probability": 0.9393212514143112,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_card",
+    "probability": 0.0003927302332713664,
+    "type": "predicate"
+   },
+   {
+    "name": "blames_customer",
+    "probability": 0.011804975129478605,
+    "type": "predicate"
+   },
+   {
+    "name": "answers_customer",
+    "probability": 0.7631894236327794,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 412
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 7.16,
+   "forward_ms": 37.48,
+   "image_ms": 0.0,
+   "queue_ms": 0.0,
+   "total_ms": 45.87
+  },
+  "usage": {
+   "input_tokens": 412,
+   "output_tokens": 0
+  }
+ },
+ "8f246f9db2b94a7cf9ad9326ce07af393ce40530fc3187b336febd01a4a27cc8": {
+  "answers": [
+   {
+    "name": "promises_compensation",
+    "probability": 0.9461518074169306,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_password",
+    "probability": 0.0006984496704922706,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_code",
+    "probability": 0.001697623000137231,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_card",
+    "probability": 0.0012184027287378246,
+    "type": "predicate"
+   },
+   {
+    "name": "blames_customer",
+    "probability": 0.03099930647388359,
+    "type": "predicate"
+   },
+   {
+    "name": "answers_customer",
+    "probability": 0.24704452612863403,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 407
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 7.02,
+   "forward_ms": 38.36,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 46.66
+  },
+  "usage": {
+   "input_tokens": 407,
+   "output_tokens": 0
+  }
+ },
+ "d2c1e364fc04b7aa0e932f36a0154081da3990aa2595f9219c21ca2e42a7f9c7": {
+  "answers": [
+   {
+    "name": "promises_compensation",
+    "probability": 0.1221074127522882,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_password",
+    "probability": 0.00015667670085275695,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_code",
+    "probability": 0.0006242179795131341,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_card",
+    "probability": 0.0002915973740919043,
+    "type": "predicate"
+   },
+   {
+    "name": "blames_customer",
+    "probability": 0.0033320292612514933,
+    "type": "predicate"
+   },
+   {
+    "name": "answers_customer",
+    "probability": 0.6017677187919617,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 418
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 6.83,
+   "forward_ms": 43.93,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 52.01
+  },
+  "usage": {
+   "input_tokens": 418,
+   "output_tokens": 0
+  }
+ },
+ "d3872ccc31c259fa4f9d3293c8c5edcea44dd44764e6e6a2fd4d5464490b5e8f": {
+  "answers": [
+   {
+    "name": "promises_compensation",
+    "probability": 0.016677336487740224,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_password",
+    "probability": 0.0008765866098046913,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_code",
+    "probability": 0.001291666020323971,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_card",
+    "probability": 0.0007790657434083206,
+    "type": "predicate"
+   },
+   {
+    "name": "blames_customer",
+    "probability": 0.9321890334458793,
+    "type": "predicate"
+   },
+   {
+    "name": "answers_customer",
+    "probability": 0.6824471747145898,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 411
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 7.26,
+   "forward_ms": 37.89,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 46.41
+  },
+  "usage": {
+   "input_tokens": 411,
+   "output_tokens": 0
+  }
+ },
+ "e5df5da3596de8a3534d22484170e6892ef42f45be3cc84d93c32e85a203e78c": {
+  "answers": [
+   {
+    "name": "promises_compensation",
+    "probability": 0.05493550788563123,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_password",
+    "probability": 0.005149861072603638,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_code",
+    "probability": 0.00123748593887831,
+    "type": "predicate"
+   },
+   {
+    "name": "asks_for_card",
+    "probability": 0.0008065738436320395,
+    "type": "predicate"
+   },
+   {
+    "name": "blames_customer",
+    "probability": 0.010404459908162777,
+    "type": "predicate"
+   },
+   {
+    "name": "answers_customer",
+    "probability": 0.4786401235652007,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 424
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 6.93,
+   "forward_ms": 37.58,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 45.8
+  },
+  "usage": {
+   "input_tokens": 424,
+   "output_tokens": 0
+  }
+ }
+}

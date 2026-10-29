@@ -1,0 +1,226 @@
+{
+ "2b400aff26147a8952e5be45c2855468bf371b5499cb0625d5a199e5778f6d4f": {
+  "answers": [
+   {
+    "name": "supported",
+    "probability": 0.19670646185735557,
+    "type": "predicate"
+   },
+   {
+    "name": "contradicted",
+    "probability": 0.10636692573403511,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 194
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 6.1,
+   "forward_ms": 35.71,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 42.78
+  },
+  "usage": {
+   "input_tokens": 194,
+   "output_tokens": 0
+  }
+ },
+ "52befd2b2a67ad0df81102e6245ff667b665742d0eff08a7c2ebce172cbb63e1": {
+  "answers": [
+   {
+    "name": "supported",
+    "probability": 0.9837899291028864,
+    "type": "predicate"
+   },
+   {
+    "name": "contradicted",
+    "probability": 0.09080726585680793,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 197
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.5,
+   "forward_ms": 41.91,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 48.29
+  },
+  "usage": {
+   "input_tokens": 197,
+   "output_tokens": 0
+  }
+ },
+ "88e8c0f5b67621e3c3768ddc42949dd18f8a0d5bc5fa9937ced2435f7a7da5e3": {
+  "answers": [
+   {
+    "name": "supported",
+    "probability": 0.9694863250698544,
+    "type": "predicate"
+   },
+   {
+    "name": "contradicted",
+    "probability": 0.06629886029506596,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 191
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.74,
+   "forward_ms": 37.24,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 44.02
+  },
+  "usage": {
+   "input_tokens": 191,
+   "output_tokens": 0
+  }
+ },
+ "ae63cc5ab81f71aa011e5b8a5a43a7010cd5f0ce5e5eca6a70aa76eaf7dd722e": {
+  "answers": [
+   {
+    "name": "supported",
+    "probability": 0.11813096878127707,
+    "type": "predicate"
+   },
+   {
+    "name": "contradicted",
+    "probability": 0.8891227576554849,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 211
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.78,
+   "forward_ms": 35.16,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 41.88
+  },
+  "usage": {
+   "input_tokens": 211,
+   "output_tokens": 0
+  }
+ },
+ "bd66e4a41beda6e128cee9e8e9ff0e8847352ce4e51cd0415ed732ed08360ddd": {
+  "answers": [
+   {
+    "name": "supported",
+    "probability": 0.992473812984103,
+    "type": "predicate"
+   },
+   {
+    "name": "contradicted",
+    "probability": 0.060028307587119245,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 219
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.89,
+   "forward_ms": 41.03,
+   "image_ms": 0.0,
+   "queue_ms": 0.0,
+   "total_ms": 47.9
+  },
+  "usage": {
+   "input_tokens": 219,
+   "output_tokens": 0
+  }
+ },
+ "dbdfac2725e1d9c81d4119d12e2905440ab1b341481c9c120e3d43f353c6c57b": {
+  "answers": [
+   {
+    "name": "supported",
+    "probability": 0.012904512852205586,
+    "type": "predicate"
+   },
+   {
+    "name": "contradicted",
+    "probability": 0.7954747317872861,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 194
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.87,
+   "forward_ms": 38.26,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 45.08
+  },
+  "usage": {
+   "input_tokens": 194,
+   "output_tokens": 0
+  }
+ },
+ "dfe6b5badd1cfac9f5003fe86c049bb0054654cdfce3244a165c784162197e7a": {
+  "answers": [
+   {
+    "name": "supported",
+    "probability": 0.041889894149444565,
+    "type": "predicate"
+   },
+   {
+    "name": "contradicted",
+    "probability": 0.6167122309420178,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 220
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.55,
+   "forward_ms": 34.83,
+   "image_ms": 0.0,
+   "queue_ms": 0.0,
+   "total_ms": 41.39
+  },
+  "usage": {
+   "input_tokens": 220,
+   "output_tokens": 0
+  }
+ }
+}

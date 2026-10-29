@@ -1,0 +1,53 @@
+---
+title: Rerank retrieved passages
+description: Ask whether each retrieved help-center passage answers the customer's question, sort by probability, and escalate when none does.
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/rerank.py?cookbook-source';
+import data from '@site/static/cookbook/code/rerank_data.json?cookbook-source';
+import output from '@site/static/cookbook/outputs/rerank.json?cookbook-source';
+
+A bike-share help bot retrieves five help-center passages with a cheap keyword search, then has to decide which one to answer from. Keyword overlap ranks a passage about damage reports first for "I was charged twice". Valen reads each passage against the question and moves the right one to the top.
+
+## How it works
+
+One predicate, asked once per retrieved passage, each in its own request so no passage sways the judgment of another:
+
+> A support agent could answer the customer's question using only this passage.
+
+Code sorts by probability and answers from the top passage when it reaches 0.7. Below that, the bot hands the question to a person. The wording was chosen by sending four variants as separate questions over the same passages: "answers the question" left the right passage at 0.5, while "a support agent could answer … using only this passage" separated right from wrong.
+
+## Run it
+
+Download the bundle once. The recorded answers in `caches/rerank.json` let the script run without an API key; `--replay off` calls the [free hosted API](/docs/valen/api/) instead.
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python rerank.py
+python rerank.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## Code
+
+<CodeBlock language="python" title="rerank.py">{source}</CodeBlock>
+
+<details>
+<summary>rerank_data.json</summary>
+
+<CodeBlock language="json" title="rerank_data.json">{data}</CodeBlock>
+
+</details>
+
+## Output
+
+Keyword order puts the right passage first for two of three questions; after reranking, all three. For the station-full question the best passage scores 0.64, so the bot escalates instead of answering.
+
+<CodeBlock language="json" title="Recorded output">{output}</CodeBlock>
+
+## Make it yours
+
+- Replace `retrieve` with your BM25 or embedding search; keep `k` small, since every passage is one request.
+- Valen ranks only what retrieval returns. When the right passage is missing, no score reaches 0.7, which is the signal to escalate.

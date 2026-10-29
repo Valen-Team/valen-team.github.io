@@ -1,0 +1,891 @@
+{
+ "1c15d73ac48ec6a7aed2057947bfa723b6b5fef707e17fef4af812d9f0f73d3a": {
+  "answers": [
+   {
+    "choice": "change_theme",
+    "confidence": 0.7463740165872655,
+    "name": "function",
+    "probabilities": [
+     {
+      "probability": 0.11801395936638619,
+      "value": "set_reminder"
+     },
+     {
+      "probability": 0.01922373599036874,
+      "value": "share_note"
+     },
+     {
+      "probability": 0.8097805124404491,
+      "value": "change_theme"
+     },
+     {
+      "probability": 0.05298179220279592,
+      "value": "export_note"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "name": "is_command",
+    "probability": 0.8734981417655945,
+    "type": "predicate"
+   },
+   {
+    "choice": "later_today",
+    "confidence": 0.6761182003056466,
+    "name": "set_reminder.when",
+    "probabilities": [
+     {
+      "probability": 0.7840788002037644,
+      "value": "later_today"
+     },
+     {
+      "probability": 0.0668801387214702,
+      "value": "tomorrow"
+     },
+     {
+      "probability": 0.14904106107476536,
+      "value": "next_week"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "view",
+    "confidence": 0.7548147586098457,
+    "name": "share_note.permission",
+    "probabilities": [
+     {
+      "probability": 0.8774073793049229,
+      "value": "view"
+     },
+     {
+      "probability": 0.12259262069507713,
+      "value": "edit"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "dark",
+    "confidence": 0.9461079593468985,
+    "name": "change_theme.theme",
+    "probabilities": [
+     {
+      "probability": 0.018524873691194016,
+      "value": "light"
+     },
+     {
+      "probability": 0.9640719728979323,
+      "value": "dark"
+     },
+     {
+      "probability": 0.017403153410873597,
+      "value": "system"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "markdown",
+    "confidence": 0.1052427350693534,
+    "name": "export_note.format",
+    "probabilities": [
+     {
+      "probability": 0.3984149337051074,
+      "value": "pdf"
+     },
+     {
+      "probability": 0.40349515671290226,
+      "value": "markdown"
+     },
+     {
+      "probability": 0.1980899095819904,
+      "value": "docx"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 391
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 7.48,
+   "forward_ms": 38.2,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 46.98
+  },
+  "usage": {
+   "input_tokens": 391,
+   "output_tokens": 0
+  }
+ },
+ "293055cf47df3344dc372b6b080b7d56e5b77917c804f5d4bedaee98f5aebf14": {
+  "answers": [
+   {
+    "choice": "share_note",
+    "confidence": 0.98834966512889,
+    "name": "function",
+    "probabilities": [
+     {
+      "probability": 0.0035578908379261176,
+      "value": "set_reminder"
+     },
+     {
+      "probability": 0.9912622488466675,
+      "value": "share_note"
+     },
+     {
+      "probability": 0.003610484721915063,
+      "value": "change_theme"
+     },
+     {
+      "probability": 0.0015693755934913804,
+      "value": "export_note"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "name": "is_command",
+    "probability": 0.8469533829065193,
+    "type": "predicate"
+   },
+   {
+    "choice": "later_today",
+    "confidence": 0.5030439943528769,
+    "name": "set_reminder.when",
+    "probabilities": [
+     {
+      "probability": 0.6686959962352513,
+      "value": "later_today"
+     },
+     {
+      "probability": 0.08307516698651264,
+      "value": "tomorrow"
+     },
+     {
+      "probability": 0.24822883677823598,
+      "value": "next_week"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "view",
+    "confidence": 0.9662981546077396,
+    "name": "share_note.permission",
+    "probabilities": [
+     {
+      "probability": 0.9831490773038698,
+      "value": "view"
+     },
+     {
+      "probability": 0.016850922696130196,
+      "value": "edit"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "dark",
+    "confidence": 0.22918622599264643,
+    "name": "change_theme.theme",
+    "probabilities": [
+     {
+      "probability": 0.3813755753431384,
+      "value": "light"
+     },
+     {
+      "probability": 0.4861241506617643,
+      "value": "dark"
+     },
+     {
+      "probability": 0.13250027399509737,
+      "value": "system"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "markdown",
+    "confidence": 0.17587342334170866,
+    "name": "export_note.format",
+    "probabilities": [
+     {
+      "probability": 0.3793220108949539,
+      "value": "pdf"
+     },
+     {
+      "probability": 0.4505822822278058,
+      "value": "markdown"
+     },
+     {
+      "probability": 0.17009570687724032,
+      "value": "docx"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 394
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 7.32,
+   "forward_ms": 37.86,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 46.59
+  },
+  "usage": {
+   "input_tokens": 394,
+   "output_tokens": 0
+  }
+ },
+ "37dbdec954ac84a575240dc77bc0c831a146d906d15d4afaa171eabb2e3deb5e": {
+  "answers": [
+   {
+    "choice": "set_reminder",
+    "confidence": 0.82962186183406,
+    "name": "function",
+    "probabilities": [
+     {
+      "probability": 0.8722163963755449,
+      "value": "set_reminder"
+     },
+     {
+      "probability": 0.12333320078478018,
+      "value": "share_note"
+     },
+     {
+      "probability": 0.0013096872341246694,
+      "value": "change_theme"
+     },
+     {
+      "probability": 0.003140715605550209,
+      "value": "export_note"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "name": "is_command",
+    "probability": 0.8666370123638059,
+    "type": "predicate"
+   },
+   {
+    "choice": "tomorrow",
+    "confidence": 0.8208067340539033,
+    "name": "set_reminder.when",
+    "probabilities": [
+     {
+      "probability": 0.10432261403445811,
+      "value": "later_today"
+     },
+     {
+      "probability": 0.8805378227026023,
+      "value": "tomorrow"
+     },
+     {
+      "probability": 0.015139563262939582,
+      "value": "next_week"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "view",
+    "confidence": 0.6575072509793267,
+    "name": "share_note.permission",
+    "probabilities": [
+     {
+      "probability": 0.8287536254896634,
+      "value": "view"
+     },
+     {
+      "probability": 0.17124637451033667,
+      "value": "edit"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "dark",
+    "confidence": 0.5380242996966309,
+    "name": "change_theme.theme",
+    "probabilities": [
+     {
+      "probability": 0.232736160592798,
+      "value": "light"
+     },
+     {
+      "probability": 0.692016199797754,
+      "value": "dark"
+     },
+     {
+      "probability": 0.07524763960944801,
+      "value": "system"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "markdown",
+    "confidence": 0.18104575034839657,
+    "name": "export_note.format",
+    "probabilities": [
+     {
+      "probability": 0.3545386089522061,
+      "value": "pdf"
+     },
+     {
+      "probability": 0.4540305002322644,
+      "value": "markdown"
+     },
+     {
+      "probability": 0.1914308908155295,
+      "value": "docx"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 385
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 7.44,
+   "forward_ms": 42.16,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 51.02
+  },
+  "usage": {
+   "input_tokens": 385,
+   "output_tokens": 0
+  }
+ },
+ "3eaa62d83b9e8f6a4cce8b9ae47bc8c49406398d43faf2d3e92ab8b31b40e593": {
+  "answers": [
+   {
+    "choice": "export_note",
+    "confidence": 0.9261557005657081,
+    "name": "function",
+    "probabilities": [
+     {
+      "probability": 0.0002431870330619462,
+      "value": "set_reminder"
+     },
+     {
+      "probability": 0.05505974479087622,
+      "value": "share_note"
+     },
+     {
+      "probability": 8.029275178082613e-05,
+      "value": "change_theme"
+     },
+     {
+      "probability": 0.944616775424281,
+      "value": "export_note"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "name": "is_command",
+    "probability": 0.9875167965186418,
+    "type": "predicate"
+   },
+   {
+    "choice": "later_today",
+    "confidence": 0.41295355137610623,
+    "name": "set_reminder.when",
+    "probabilities": [
+     {
+      "probability": 0.6086357009174042,
+      "value": "later_today"
+     },
+     {
+      "probability": 0.06138048092348572,
+      "value": "tomorrow"
+     },
+     {
+      "probability": 0.32998381815911015,
+      "value": "next_week"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "view",
+    "confidence": 0.696553085795744,
+    "name": "share_note.permission",
+    "probabilities": [
+     {
+      "probability": 0.848276542897872,
+      "value": "view"
+     },
+     {
+      "probability": 0.151723457102128,
+      "value": "edit"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "dark",
+    "confidence": 0.4567337988590374,
+    "name": "change_theme.theme",
+    "probabilities": [
+     {
+      "probability": 0.29607365638292044,
+      "value": "light"
+     },
+     {
+      "probability": 0.6378225325726916,
+      "value": "dark"
+     },
+     {
+      "probability": 0.06610381104438794,
+      "value": "system"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "docx",
+    "confidence": 0.9651031025556952,
+    "name": "export_note.format",
+    "probabilities": [
+     {
+      "probability": 0.016005592234367594,
+      "value": "pdf"
+     },
+     {
+      "probability": 0.00725900606183561,
+      "value": "markdown"
+     },
+     {
+      "probability": 0.9767354017037968,
+      "value": "docx"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 389
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 7.09,
+   "forward_ms": 36.68,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 45.07
+  },
+  "usage": {
+   "input_tokens": 389,
+   "output_tokens": 0
+  }
+ },
+ "9f921d936821791759c8127db1f34fcd37adaa35dde2b01940578e0c4e9dd790": {
+  "answers": [
+   {
+    "choice": "export_note",
+    "confidence": 0.2670145561142216,
+    "name": "function",
+    "probabilities": [
+     {
+      "probability": 0.2620227517773471,
+      "value": "set_reminder"
+     },
+     {
+      "probability": 0.20460390129965986,
+      "value": "share_note"
+     },
+     {
+      "probability": 0.08311242983732686,
+      "value": "change_theme"
+     },
+     {
+      "probability": 0.4502609170856662,
+      "value": "export_note"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "name": "is_command",
+    "probability": 0.3065500855445862,
+    "type": "predicate"
+   },
+   {
+    "choice": "later_today",
+    "confidence": 0.5051260139699271,
+    "name": "set_reminder.when",
+    "probabilities": [
+     {
+      "probability": 0.6700840093132847,
+      "value": "later_today"
+     },
+     {
+      "probability": 0.09111478245893251,
+      "value": "tomorrow"
+     },
+     {
+      "probability": 0.23880120822778284,
+      "value": "next_week"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "view",
+    "confidence": 0.6332620138933955,
+    "name": "share_note.permission",
+    "probabilities": [
+     {
+      "probability": 0.8166310069466978,
+      "value": "view"
+     },
+     {
+      "probability": 0.18336899305330226,
+      "value": "edit"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "dark",
+    "confidence": 0.6302034045025959,
+    "name": "change_theme.theme",
+    "probabilities": [
+     {
+      "probability": 0.1705977035358377,
+      "value": "light"
+     },
+     {
+      "probability": 0.753468936335064,
+      "value": "dark"
+     },
+     {
+      "probability": 0.07593336012909829,
+      "value": "system"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "markdown",
+    "confidence": 0.11731805827197524,
+    "name": "export_note.format",
+    "probabilities": [
+     {
+      "probability": 0.4015701472993217,
+      "value": "pdf"
+     },
+     {
+      "probability": 0.4115453721813168,
+      "value": "markdown"
+     },
+     {
+      "probability": 0.1868844805193615,
+      "value": "docx"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 385
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 8.16,
+   "forward_ms": 37.68,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 47.18
+  },
+  "usage": {
+   "input_tokens": 385,
+   "output_tokens": 0
+  }
+ },
+ "a1edb0b740df725d18072eae960b98ba0fbef926c933796aa2d7e2ab6566b6c2": {
+  "answers": [
+   {
+    "choice": "set_reminder",
+    "confidence": 0.34121666061336464,
+    "name": "function",
+    "probabilities": [
+     {
+      "probability": 0.5059124954600235,
+      "value": "set_reminder"
+     },
+     {
+      "probability": 0.0006969593989829568,
+      "value": "share_note"
+     },
+     {
+      "probability": 0.0002157116013804574,
+      "value": "change_theme"
+     },
+     {
+      "probability": 0.49317483353961306,
+      "value": "export_note"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "name": "is_command",
+    "probability": 0.9193248221227885,
+    "type": "predicate"
+   },
+   {
+    "choice": "next_week",
+    "confidence": 0.9640353910297951,
+    "name": "set_reminder.when",
+    "probabilities": [
+     {
+      "probability": 0.015404926281763695,
+      "value": "later_today"
+     },
+     {
+      "probability": 0.008571479698372806,
+      "value": "tomorrow"
+     },
+     {
+      "probability": 0.9760235940198635,
+      "value": "next_week"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "view",
+    "confidence": 0.6792462813966531,
+    "name": "share_note.permission",
+    "probabilities": [
+     {
+      "probability": 0.8396231406983266,
+      "value": "view"
+     },
+     {
+      "probability": 0.16037685930167347,
+      "value": "edit"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "dark",
+    "confidence": 0.34809539533087885,
+    "name": "change_theme.theme",
+    "probabilities": [
+     {
+      "probability": 0.30157647884979005,
+      "value": "light"
+     },
+     {
+      "probability": 0.5653969302205859,
+      "value": "dark"
+     },
+     {
+      "probability": 0.13302659092962404,
+      "value": "system"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "pdf",
+    "confidence": 0.9949483616991592,
+    "name": "export_note.format",
+    "probabilities": [
+     {
+      "probability": 0.9966322411327729,
+      "value": "pdf"
+     },
+     {
+      "probability": 0.0016251352096262853,
+      "value": "markdown"
+     },
+     {
+      "probability": 0.001742623657600814,
+      "value": "docx"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 392
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 7.59,
+   "forward_ms": 40.13,
+   "image_ms": 0.0,
+   "queue_ms": 0.0,
+   "total_ms": 48.99
+  },
+  "usage": {
+   "input_tokens": 392,
+   "output_tokens": 0
+  }
+ },
+ "b1a9ca961d1d58dc602476a5f8d637af7ef060df11bd6c816949de58f1e5e1c8": {
+  "answers": [
+   {
+    "choice": "change_theme",
+    "confidence": 0.9997875967357931,
+    "name": "function",
+    "probabilities": [
+     {
+      "probability": 5.2199961477200665e-05,
+      "value": "set_reminder"
+     },
+     {
+      "probability": 7.989400825076885e-05,
+      "value": "share_note"
+     },
+     {
+      "probability": 0.9998406975518448,
+      "value": "change_theme"
+     },
+     {
+      "probability": 2.720847842719573e-05,
+      "value": "export_note"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "name": "is_command",
+    "probability": 0.9843640593466292,
+    "type": "predicate"
+   },
+   {
+    "choice": "later_today",
+    "confidence": 0.6084214599743997,
+    "name": "set_reminder.when",
+    "probabilities": [
+     {
+      "probability": 0.7389476399829331,
+      "value": "later_today"
+     },
+     {
+      "probability": 0.07422700771657326,
+      "value": "tomorrow"
+     },
+     {
+      "probability": 0.18682535230049363,
+      "value": "next_week"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "view",
+    "confidence": 0.3743992224693762,
+    "name": "share_note.permission",
+    "probabilities": [
+     {
+      "probability": 0.6871996112346881,
+      "value": "view"
+     },
+     {
+      "probability": 0.3128003887653119,
+      "value": "edit"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "system",
+    "confidence": 0.9907125811890213,
+    "name": "change_theme.theme",
+    "probabilities": [
+     {
+      "probability": 0.0023524957665460216,
+      "value": "light"
+     },
+     {
+      "probability": 0.003839116774106465,
+      "value": "dark"
+     },
+     {
+      "probability": 0.9938083874593475,
+      "value": "system"
+     }
+    ],
+    "type": "choice"
+   },
+   {
+    "choice": "markdown",
+    "confidence": 0.14281654890154977,
+    "name": "export_note.format",
+    "probabilities": [
+     {
+      "probability": 0.3273559759951237,
+      "value": "pdf"
+     },
+     {
+      "probability": 0.4285443659343665,
+      "value": "markdown"
+     },
+     {
+      "probability": 0.24409965807050976,
+      "value": "docx"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 389
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 7.38,
+   "forward_ms": 39.34,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 48.21
+  },
+  "usage": {
+   "input_tokens": 389,
+   "output_tokens": 0
+  }
+ }
+}

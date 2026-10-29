@@ -1,0 +1,52 @@
+---
+title: Find when events happen in a clip
+description: Ask the same predicates of evenly spaced frames and smooth the probabilities into event times in code.
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/event_monitoring.py?cookbook-source';
+import output from '@site/static/cookbook/outputs/event_monitoring.json?cookbook-source';
+
+A food-content team wants chapter marks for short cooking clips: when is the dish served, and when does someone break a dumpling open? The script samples twelve evenly spaced frames from a 6.5-second clip, asks the same two questions of each frame, and finds when each event starts.
+
+## How it works
+
+| Question | Type |
+| --- | --- |
+| `plate_served`: a plate of dumplings sits in the middle of the frame | predicate |
+| `dumpling_opened`: two hands hold a single dumpling that is split in half | predicate |
+
+Code turns twelve probabilities per event into one time: the event starts at the first of two consecutive frames at 0.7 or above, so one noisy frame does not move a chapter mark. The first wording, "someone's hands are pulling a dumpling apart", also scored high on frames where a hand only held a dumpling; describing exactly what the frame shows fixed it.
+
+## Run it
+
+Download the bundle once. The recorded answers in `caches/event_monitoring.json` let the script run without an API key; `--replay off` calls the [free hosted API](/docs/valen/api/) instead.
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python event_monitoring.py --asset-dir .
+python event_monitoring.py --asset-dir . --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+The clip `momos.mp4` (≈395 KB) is not in the bundle; fetch it next to the scripts:
+
+```bash
+curl -fL https://raw.githubusercontent.com/Valen-Team/Valen/main/assets/cookbook/momos.mp4 -o momos.mp4
+```
+
+## Code
+
+<CodeBlock language="python" title="event_monitoring.py">{source}</CodeBlock>
+
+## Output
+
+The plate is served at 1.17 s and the dumpling is opened at 3.53 s.
+
+<CodeBlock language="json" title="Recorded output">{output}</CodeBlock>
+
+## Make it yours
+
+- Raise `count` for longer clips, or sample one frame per second; every frame is one request.
+- Video models like Valen's local backends can also take the whole clip; per-frame questions give you a timeline instead of one answer.

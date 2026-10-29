@@ -1,0 +1,58 @@
+---
+title: Score photos once, weigh them per storefront
+description: Score listing photos on lighting, background and framing once; each storefront ranks them with its own weights in code.
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/composite_scoring.py?cookbook-source';
+import output from '@site/static/cookbook/outputs/composite_scoring.json?cookbook-source';
+
+A marketplace asks sellers for a good main photo. "Is this a good photo?" hides what makes it good, and different storefronts care about different things. Valen scores each photo once on three dimensions; code combines them with weights each storefront can change without another model call.
+
+| Studio | Kitchen counter | Dim | Cropped |
+| --- | --- | --- | --- |
+| ![Mug on a studio backdrop](/cookbook/code/media/mug-studio.jpg) | ![Mug on a cluttered counter](/cookbook/code/media/mug-counter.jpg) | ![Mug in dim light](/cookbook/code/media/mug-dim.jpg) | ![Mug cut off at the edge](/cookbook/code/media/mug-cropped.jpg) |
+
+## How it works
+
+Three score questions, each with three levels described as situations a person could recognize:
+
+| Dimension | Levels |
+| --- | --- |
+| `lighting` | poor · fair · good |
+| `background` | cluttered · plain · studio |
+| `framing` | cut off · loose · centered |
+
+A score runs from 0 to 2 over three levels; code divides by 2 so each dimension is on 0–1, then takes a weighted sum per storefront:
+
+| Profile | lighting | background | framing |
+| --- | --- | --- | --- |
+| `marketplace` | 0.3 | 0.2 | 0.5 |
+| `premium_shop` | 0.3 | 0.5 | 0.2 |
+
+## Run it
+
+Download the bundle once. The recorded answers in `caches/composite_scoring.json` let the script run without an API key; `--replay off` calls the [free hosted API](/docs/valen/api/) instead.
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python composite_scoring.py
+python composite_scoring.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## Code
+
+<CodeBlock language="python" title="composite_scoring.py">{source}</CodeBlock>
+
+## Output
+
+The kitchen-counter photo is well lit and fully framed, so the marketplace ranks it second; the premium shop weighs the clutter and ranks it last.
+
+<CodeBlock language="json" title="Recorded output">{output}</CodeBlock>
+
+## Make it yours
+
+- Store the per-dimension scores, not only the total. New weights, filters or a learned model can use them later without calling Valen again.
+- The photos are generated for this recipe.

@@ -1,0 +1,111 @@
+{
+  "keyword_top1": 2,
+  "reranked_top1": 3,
+  "queries": [
+    {
+      "query": "I was charged twice for the same ride, can I get my money back?",
+      "keyword_order": [
+        "damage-report",
+        "card-charged-twice",
+        "late-return",
+        "damage-fee",
+        "station-full"
+      ],
+      "reranked": [
+        {
+          "id": "card-charged-twice",
+          "answers": 0.8985652729227516
+        },
+        {
+          "id": "late-return",
+          "answers": 0.17800874742852527
+        },
+        {
+          "id": "damage-fee",
+          "answers": 0.05538949909100312
+        },
+        {
+          "id": "station-full",
+          "answers": 0.03725921031749856
+        },
+        {
+          "id": "damage-report",
+          "answers": 0.02945133769907817
+        }
+      ],
+      "keyword_top_correct": false,
+      "reranked_top_correct": true,
+      "answer_with": "card-charged-twice"
+    },
+    {
+      "query": "The bike's brakes were already worn when I took it. Will I have to pay for that?",
+      "keyword_order": [
+        "damage-fee",
+        "damage-report",
+        "late-return",
+        "helmet",
+        "e-bike-battery"
+      ],
+      "reranked": [
+        {
+          "id": "damage-report",
+          "answers": 0.9774886906340852
+        },
+        {
+          "id": "damage-fee",
+          "answers": 0.9611416781331417
+        },
+        {
+          "id": "late-return",
+          "answers": 0.09392517689858818
+        },
+        {
+          "id": "e-bike-battery",
+          "answers": 0.07181187558594625
+        },
+        {
+          "id": "helmet",
+          "answers": 0.06563972034513534
+        }
+      ],
+      "keyword_top_correct": true,
+      "reranked_top_correct": true,
+      "answer_with": "damage-report"
+    },
+    {
+      "query": "There were no free docks at the station so I kept riding. Will I pay a late fee?",
+      "keyword_order": [
+        "late-return",
+        "station-full",
+        "damage-report",
+        "damage-fee",
+        "refund-time"
+      ],
+      "reranked": [
+        {
+          "id": "late-return",
+          "answers": 0.6440917657586406
+        },
+        {
+          "id": "station-full",
+          "answers": 0.31263142824172974
+        },
+        {
+          "id": "damage-fee",
+          "answers": 0.17896146805641847
+        },
+        {
+          "id": "refund-time",
+          "answers": 0.09888336357126723
+        },
+        {
+          "id": "damage-report",
+          "answers": 0.03217982716574106
+        }
+      ],
+      "keyword_top_correct": true,
+      "reranked_top_correct": true,
+      "answer_with": null
+    }
+  ]
+}

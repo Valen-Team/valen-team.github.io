@@ -1,0 +1,59 @@
+{
+ "e360ddb6b48d00c93ecb1a89e083ddcb8bf1bda2feddd5760eabea50e0053b43": {
+  "answers": [
+   {
+    "choice": "flock",
+    "confidence": 0.9995986859291994,
+    "name": "group",
+    "probabilities": [
+     {
+      "probability": 0.00022472233506495753,
+      "value": "pride"
+     },
+     {
+      "probability": 0.9996990144468996,
+      "value": "flock"
+     },
+     {
+      "probability": 7.6111806719090535e-06,
+      "value": "clowder"
+     },
+     {
+      "probability": 6.865203736360213e-05,
+      "value": "gang"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [
+   {
+    "model_size": [
+     512,
+     342
+    ],
+    "original_size": [
+     512,
+     342
+    ]
+   }
+  ],
+  "internal_usage": {
+   "compute_tokens": 249
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 15.88,
+   "forward_ms": 49.58,
+   "image_ms": 8.19,
+   "queue_ms": 0.01,
+   "total_ms": 128.38
+  },
+  "usage": {
+   "input_tokens": 249,
+   "output_tokens": 0
+  }
+ }
+}

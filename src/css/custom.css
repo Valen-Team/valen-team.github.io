@@ -307,26 +307,42 @@ article[itemprop='blogPost'] [class*='blogPostInfo'] {font-size:13px;color:var(-
 .modern-doc-grid {display:block;max-width:1120px;}
 .modern-doc-content {width:100%;max-width:none;}
 
-/* Cookbook uses the documentation shell and its visual tokens. */
+/* Cookbook directory: search, featured covers, goal tabs and a cover grid. */
 .cookbook-directory {margin-top:32px;}
-.cookbook-filters {display:flex;gap:16px;align-items:end;margin-bottom:20px;}
-.cookbook-filters label {display:flex;flex-direction:column;gap:8px;font-size:13px;font-weight:500;color:var(--text-muted);}
-.cookbook-filters label:first-child {flex:1;}
-.cookbook-filters input,.cookbook-filters select {width:100%;min-height:44px;padding:10px 14px;border:1px solid var(--border-strong);border-radius:8px;background:var(--surface);color:var(--text);font:14px var(--font-doc);}
-.cookbook-filters select {min-width:144px;}
-.cookbook-filters input::placeholder {color:var(--text-faint);}
+.cookbook-search {display:flex;align-items:center;gap:14px;max-width:760px;margin:0 auto 40px;padding:0 22px;min-height:60px;border:1px solid var(--border-strong);border-radius:999px;background:var(--surface);transition:border-color .2s,box-shadow .2s;}
+.cookbook-search:focus-within {border-color:var(--primary);box-shadow:0 0 0 4px var(--primary-soft);}
+.cookbook-search svg {width:22px;height:22px;flex:none;fill:none;stroke:var(--text);stroke-width:2;stroke-linecap:round;}
+.cookbook-search input {flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font:16px var(--font-doc);}
+.cookbook-search input::placeholder {color:var(--text-faint);}
+.sr-only {position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+.modern-doc-content h2.cookbook-heading {font-size:22px;margin:0 0 18px;border:0;padding:0;}
+.cookbook-featured {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-bottom:48px;}
+.cookbook-bar {display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-bottom:16px;}
+.cookbook-tabs {display:flex;flex-wrap:wrap;column-gap:22px;align-self:stretch;border-bottom:1px solid var(--border);}
+.cookbook-tabs button {flex:none;padding:12px 0;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;color:var(--text-muted);font:15px var(--font-doc);cursor:pointer;}
+.cookbook-tabs button:hover {color:var(--text);}
+.cookbook-tabs button[aria-selected='true'] {color:var(--heading);border-bottom-color:var(--heading);font-weight:500;}
+.cookbook-pills {display:flex;padding:3px;border:1px solid var(--border-strong);border-radius:999px;}
+.cookbook-pills button {padding:6px 14px;border:0;border-radius:999px;background:none;color:var(--text-muted);font:14px var(--font-doc);cursor:pointer;}
+.cookbook-pills button[aria-pressed='true'] {background:var(--primary-soft);color:var(--heading);}
 .cookbook-count {font-size:13px!important;color:var(--text-muted);}
-.cookbook-cards {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
-.cookbook-card {padding:24px;border:1px solid var(--border);border-radius:12px;background:var(--bg-doc);transition:border-color .2s,background .2s;}
-.cookbook-card:hover {border-color:var(--primary);background:var(--primary-soft);}
-.cookbook-card small {font-size:11px;font-weight:500;letter-spacing:.04em;color:var(--text-muted);}
-.modern-doc-content .cookbook-card h2 {font-size:19px;margin:12px 0 10px;border:0;padding:0;line-height:1.4;}
-.modern-doc-content .cookbook-card h2 a {color:var(--heading);text-decoration:none;}
-.modern-doc-content .cookbook-card p {font-size:14px;line-height:1.75;color:var(--text-muted);margin:0;}
+.cookbook-cards {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 24px;}
+.modern-doc-content a.cookbook-card {display:flex;flex-direction:column;color:inherit;text-decoration:none;}
+.cookbook-card img {width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:14px;margin-bottom:14px;transition:transform .25s,box-shadow .25s;}
+.cookbook-card:hover img {transform:translateY(-2px);box-shadow:0 10px 28px rgba(57,100,254,.18);}
+.cookbook-topic {display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-muted);}
+.cookbook-topic i {width:8px;height:8px;border-radius:50%;}
+.modern-doc-content .cookbook-card h3 {font-size:17px;line-height:1.45;margin:8px 0 6px;color:var(--heading);}
+.modern-doc-content .cookbook-card-large h3 {font-size:20px;}
+.modern-doc-content .cookbook-card:hover h3 {color:var(--primary);}
+.modern-doc-content .cookbook-card p {font-size:14px;line-height:1.7;color:var(--text-muted);margin:0 0 8px;}
+.cookbook-card time {font-size:13px;color:var(--text-faint);}
+@media(max-width:900px) {
+ .cookbook-featured,.cookbook-cards {grid-template-columns:repeat(2,minmax(0,1fr));}
+}
 @media(max-width:600px) {
- .cookbook-filters {flex-direction:column;align-items:stretch;}
- .cookbook-cards {grid-template-columns:1fr;}
- .cookbook-card {padding:20px;}
+ .cookbook-featured,.cookbook-cards {grid-template-columns:1fr;}
+ .cookbook-search {min-height:52px;margin-bottom:28px;}
 }
 
 /* The header describes content type; project names belong in the sidebar. */

@@ -1,0 +1,170 @@
+{
+ "2e9ca8d8ddfcb7c328629a85f1a686221ef0c7fb49a681ce95b6dbf127e5b4de": {
+  "answers": [
+   {
+    "name": "has_new_date",
+    "probability": 0.9980370964696507,
+    "type": "predicate"
+   },
+   {
+    "choice": "16 March",
+    "confidence": 0.9611094364715881,
+    "name": "delivery_date",
+    "probabilities": [
+     {
+      "probability": 0.002269886824692616,
+      "value": "2 March"
+     },
+     {
+      "probability": 0.016373583505617254,
+      "value": "March 9"
+     },
+     {
+      "probability": 0.970832077353691,
+      "value": "16 March"
+     },
+     {
+      "probability": 0.010524452315999142,
+      "value": "2026-03-02"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 346
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 6.32,
+   "forward_ms": 36.41,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 43.77
+  },
+  "usage": {
+   "input_tokens": 346,
+   "output_tokens": 0
+  }
+ },
+ "906a88ba2678b2bb50f168db37685f31512e5182d671b744927b479ffbf77102": {
+  "answers": [
+   {
+    "name": "has_new_date",
+    "probability": 0.19682010421693014,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 104
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.43,
+   "forward_ms": 37.25,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 43.69
+  },
+  "usage": {
+   "input_tokens": 104,
+   "output_tokens": 0
+  }
+ },
+ "9eef8b165f9e623af2b956548dfd95ec9d00276e2cf64e9ccc366d326c726f90": {
+  "answers": [
+   {
+    "name": "has_new_date",
+    "probability": 0.00443016482795233,
+    "type": "predicate"
+   },
+   {
+    "choice": "2026-03-20",
+    "confidence": 0.8553033151522773,
+    "name": "delivery_date",
+    "probabilities": [
+     {
+      "probability": 0.9276516575761387,
+      "value": "2026-03-20"
+     },
+     {
+      "probability": 0.07234834242386136,
+      "value": "18 March"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 259
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.75,
+   "forward_ms": 36.48,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 43.26
+  },
+  "usage": {
+   "input_tokens": 259,
+   "output_tokens": 0
+  }
+ },
+ "b25208e5a155f8896aeeb3413d5052ca7eee8bd359140006ff5cc80ddf896655": {
+  "answers": [
+   {
+    "name": "has_new_date",
+    "probability": 0.9780033681094145,
+    "type": "predicate"
+   },
+   {
+    "choice": "April 7",
+    "confidence": 0.9588627964700485,
+    "name": "delivery_date",
+    "probabilities": [
+     {
+      "probability": 0.9725751976466991,
+      "value": "April 7"
+     },
+     {
+      "probability": 0.02151654869008999,
+      "value": "31 March"
+     },
+     {
+      "probability": 0.0059082536632109346,
+      "value": "15 April"
+     }
+    ],
+    "type": "choice"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 270
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.88,
+   "forward_ms": 35.65,
+   "image_ms": 0.0,
+   "queue_ms": 0.0,
+   "total_ms": 42.48
+  },
+  "usage": {
+   "input_tokens": 270,
+   "output_tokens": 0
+  }
+ }
+}

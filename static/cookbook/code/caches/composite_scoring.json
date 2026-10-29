@@ -1,0 +1,410 @@
+{
+ "28f2f5055aa61e78c61e32f27cb63364ca192425beac426c75d0e30a98466f02": {
+  "answers": [
+   {
+    "confidence": 0.9974909104231234,
+    "name": "lighting",
+    "probabilities": [
+     {
+      "label": "poor",
+      "probability": 2.6171272705585597e-06,
+      "value": 0
+     },
+     {
+      "label": "fair",
+      "probability": 0.0016674921300432561,
+      "value": 1
+     },
+     {
+      "label": "good",
+      "probability": 0.9983298907426862,
+      "value": 2
+     }
+    ],
+    "score": 1.9983272736154156,
+    "type": "score"
+   },
+   {
+    "confidence": 0.9816326832361874,
+    "name": "background",
+    "probabilities": [
+     {
+      "label": "cluttered",
+      "probability": 3.5026259291134254e-06,
+      "value": 0
+     },
+     {
+      "label": "plain",
+      "probability": 0.012237872590683542,
+      "value": 1
+     },
+     {
+      "label": "studio",
+      "probability": 0.9877586247833874,
+      "value": 2
+     }
+    ],
+    "score": 1.9877551221574583,
+    "type": "score"
+   },
+   {
+    "confidence": 0.9258405161727167,
+    "name": "framing",
+    "probabilities": [
+     {
+      "label": "cut_off",
+      "probability": 0.005778180327498346,
+      "value": 0
+     },
+     {
+      "label": "loose",
+      "probability": 0.037883295229858845,
+      "value": 1
+     },
+     {
+      "label": "centered",
+      "probability": 0.9563385244426428,
+      "value": 2
+     }
+    ],
+    "score": 1.9505603441151445,
+    "type": "score"
+   }
+  ],
+  "images": [
+   {
+    "model_size": [
+     512,
+     512
+    ],
+    "original_size": [
+     512,
+     512
+    ]
+   }
+  ],
+  "internal_usage": {
+   "compute_tokens": 465
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 17.88,
+   "forward_ms": 53.9,
+   "image_ms": 9.91,
+   "queue_ms": 0.01,
+   "total_ms": 119.95
+  },
+  "usage": {
+   "input_tokens": 465,
+   "output_tokens": 0
+  }
+ },
+ "29dffd5cbde3cedaf14f27dd421c8c96125915850b5870f45b7e68041c5d20db": {
+  "answers": [
+   {
+    "confidence": 0.958182458801547,
+    "name": "lighting",
+    "probabilities": [
+     {
+      "label": "poor",
+      "probability": 7.040516619140592e-05,
+      "value": 0
+     },
+     {
+      "label": "fair",
+      "probability": 0.02773755046658592,
+      "value": 1
+     },
+     {
+      "label": "good",
+      "probability": 0.9721920443672227,
+      "value": 2
+     }
+    ],
+    "score": 1.9721216392010315,
+    "type": "score"
+   },
+   {
+    "confidence": 0.9815304033718742,
+    "name": "background",
+    "probabilities": [
+     {
+      "label": "cluttered",
+      "probability": 0.988876577535879,
+      "value": 0
+     },
+     {
+      "label": "plain",
+      "probability": 0.009933780509491605,
+      "value": 1
+     },
+     {
+      "label": "studio",
+      "probability": 0.001189641954629448,
+      "value": 2
+     }
+    ],
+    "score": 0.012313064418750502,
+    "type": "score"
+   },
+   {
+    "confidence": 0.7224686980771968,
+    "name": "framing",
+    "probabilities": [
+     {
+      "label": "cut_off",
+      "probability": 0.03057769007583802,
+      "value": 0
+     },
+     {
+      "label": "loose",
+      "probability": 0.12386548779685937,
+      "value": 1
+     },
+     {
+      "label": "centered",
+      "probability": 0.8455568221273027,
+      "value": 2
+     }
+    ],
+    "score": 1.8149791320514648,
+    "type": "score"
+   }
+  ],
+  "images": [
+   {
+    "model_size": [
+     512,
+     512
+    ],
+    "original_size": [
+     512,
+     512
+    ]
+   }
+  ],
+  "internal_usage": {
+   "compute_tokens": 465
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 19.71,
+   "forward_ms": 50.55,
+   "image_ms": 11.89,
+   "queue_ms": 0.01,
+   "total_ms": 151.85
+  },
+  "usage": {
+   "input_tokens": 465,
+   "output_tokens": 0
+  }
+ },
+ "fa87af96931cb851ecdb7c05fe1678236fd58ec7e9048be2ec1b592b04a4e7e7": {
+  "answers": [
+   {
+    "confidence": 0.9796752589755875,
+    "name": "lighting",
+    "probabilities": [
+     {
+      "label": "poor",
+      "probability": 1.8748427206370808e-05,
+      "value": 0
+     },
+     {
+      "label": "fair",
+      "probability": 0.013512330495195603,
+      "value": 1
+     },
+     {
+      "label": "good",
+      "probability": 0.986468921077598,
+      "value": 2
+     }
+    ],
+    "score": 1.9864501726503916,
+    "type": "score"
+   },
+   {
+    "confidence": 0.8531379145893488,
+    "name": "background",
+    "probabilities": [
+     {
+      "label": "cluttered",
+      "probability": 0.005596463709235676,
+      "value": 0
+     },
+     {
+      "label": "plain",
+      "probability": 0.902091943059566,
+      "value": 1
+     },
+     {
+      "label": "studio",
+      "probability": 0.09231159323119839,
+      "value": 2
+     }
+    ],
+    "score": 1.0867151295219628,
+    "type": "score"
+   },
+   {
+    "confidence": 0.3884341371895893,
+    "name": "framing",
+    "probabilities": [
+     {
+      "label": "cut_off",
+      "probability": 0.40678330790274037,
+      "value": 0
+     },
+     {
+      "label": "loose",
+      "probability": 0.5922894247930596,
+      "value": 1
+     },
+     {
+      "label": "centered",
+      "probability": 0.0009272673042000899,
+      "value": 2
+     }
+    ],
+    "score": 0.5941439594014597,
+    "type": "score"
+   }
+  ],
+  "images": [
+   {
+    "model_size": [
+     512,
+     512
+    ],
+    "original_size": [
+     512,
+     512
+    ]
+   }
+  ],
+  "internal_usage": {
+   "compute_tokens": 465
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 17.67,
+   "forward_ms": 52.2,
+   "image_ms": 9.87,
+   "queue_ms": 0.01,
+   "total_ms": 151.99
+  },
+  "usage": {
+   "input_tokens": 465,
+   "output_tokens": 0
+  }
+ },
+ "fe2c39a33a0fa3e68035df943bd063801ca47a2a3c5995060de33c90f9e919b6": {
+  "answers": [
+   {
+    "confidence": 0.4635498758092559,
+    "name": "lighting",
+    "probabilities": [
+     {
+      "label": "poor",
+      "probability": 0.7118397738981315,
+      "value": 0
+     },
+     {
+      "label": "fair",
+      "probability": 0.21868703607657444,
+      "value": 1
+     },
+     {
+      "label": "good",
+      "probability": 0.06947319002529412,
+      "value": 2
+     }
+    ],
+    "score": 0.3576334161271627,
+    "type": "score"
+   },
+   {
+    "confidence": 0.548628613573421,
+    "name": "background",
+    "probabilities": [
+     {
+      "label": "cluttered",
+      "probability": 0.009225981705258748,
+      "value": 0
+     },
+     {
+      "label": "plain",
+      "probability": 0.6990857423822807,
+      "value": 1
+     },
+     {
+      "label": "studio",
+      "probability": 0.2916882759124606,
+      "value": 2
+     }
+    ],
+    "score": 1.282462294207202,
+    "type": "score"
+   },
+   {
+    "confidence": 0.4528190771930263,
+    "name": "framing",
+    "probabilities": [
+     {
+      "label": "cut_off",
+      "probability": 0.03705141555326374,
+      "value": 0
+     },
+     {
+      "label": "loose",
+      "probability": 0.29068445076478827,
+      "value": 1
+     },
+     {
+      "label": "centered",
+      "probability": 0.6722641336819479,
+      "value": 2
+     }
+    ],
+    "score": 1.6352127181286842,
+    "type": "score"
+   }
+  ],
+  "images": [
+   {
+    "model_size": [
+     512,
+     512
+    ],
+    "original_size": [
+     512,
+     512
+    ]
+   }
+  ],
+  "internal_usage": {
+   "compute_tokens": 465
+  },
+  "model": "Valen-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 17.74,
+   "forward_ms": 61.27,
+   "image_ms": 9.09,
+   "queue_ms": 0.01,
+   "total_ms": 170.78
+  },
+  "usage": {
+   "input_tokens": 465,
+   "output_tokens": 0
+  }
+ }
+}

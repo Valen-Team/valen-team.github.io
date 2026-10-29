@@ -1,0 +1,54 @@
+{
+  "publishable": false,
+  "claims": [
+    {
+      "id": "c1",
+      "cites": "1",
+      "status": "supported",
+      "supported": 0.992473812984103,
+      "contradicted": 0.060028307587119245
+    },
+    {
+      "id": "c2",
+      "cites": "1",
+      "status": "contradicted",
+      "supported": 0.11813096878127707,
+      "contradicted": 0.8891227576554849
+    },
+    {
+      "id": "c3",
+      "cites": "2",
+      "status": "supported",
+      "supported": 0.9837899291028864,
+      "contradicted": 0.09080726585680793
+    },
+    {
+      "id": "c4",
+      "cites": "2",
+      "status": "contradicted",
+      "supported": 0.012904512852205586,
+      "contradicted": 0.7954747317872861
+    },
+    {
+      "id": "c5",
+      "cites": "3",
+      "status": "supported",
+      "supported": 0.9694863250698544,
+      "contradicted": 0.06629886029506596
+    },
+    {
+      "id": "c6",
+      "cites": "3",
+      "status": "unsupported",
+      "supported": 0.19670646185735557,
+      "contradicted": 0.10636692573403511
+    },
+    {
+      "id": "c7",
+      "cites": "1",
+      "status": "escalate",
+      "supported": 0.041889894149444565,
+      "contradicted": 0.6167122309420178
+    }
+  ]
+}

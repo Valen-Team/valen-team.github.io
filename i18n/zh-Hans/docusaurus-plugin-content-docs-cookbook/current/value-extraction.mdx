@@ -1,0 +1,55 @@
+---
+title: 从邮件中选出正确的日期
+description: 代码找出供应商邮件里的每个日期；Valen 选出新的交货日期，一道判断题识别没有新日期的邮件。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/value_extraction.py?cookbook-source';
+import data from '@site/static/cookbook/code/value_extraction_data.json?cookbook-source';
+import output from '@site/static/cookbook/outputs/value_extraction.json?cookbook-source';
+
+供应商邮件里会出现很多日期：下单日期、被推迟的日期、看起来像日期的发票号，以及藏在某处的新交货日期。**选择，而不是生成**：代码用正则表达式找出每个日期并规范化，Valen 选出哪一个是新的交货日期，代码再把规范化后的值写入订单。模型从不书写日期，所以永远不会写出格式错误的日期。
+
+## 工作原理
+
+| 问题 | 类型 | 作用 |
+| --- | --- | --- |
+| `has_new_date`：供应商给出了新的交货日期 | predicate | 处理空值情况：完全没有日期，或确认原日期不变 |
+| `delivery_date`：哪个日期是新的交货日期？ | 在代码找到的日期中做选择题 | 选出对应片段 |
+
+每个候选项的描述都引用了它周围的文字，让模型结合上下文判断日期。真值表：
+
+| `has_new_date` | `delivery_date` | 动作 |
+| --- | --- | --- |
+| 低于 0.3，或没有找到日期 | — | `no_new_date` |
+| 0.7 及以上 | 最高 ≥ 0.8 且差距 ≥ 0.2 | `update_order`，写入规范化后的日期 |
+| 其他 | 其他 | `review` |
+
+## 运行
+
+先下载一次示例包。`caches/value_extraction.json` 中录制的回答让脚本无需 API key 即可运行；加 `--replay off` 则改为调用[免费托管 API](/zh-Hans/docs/valen/api/)。
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python value_extraction.py
+python value_extraction.py --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+## 代码
+
+<CodeBlock language="python" title="value_extraction.py">{source}</CodeBlock>
+
+<CodeBlock language="json" title="value_extraction_data.json">{data}</CodeBlock>
+
+## 输出
+
+PO 1182 有四个候选日期，其中包括发票号 `2026-03-02`；Valen 选出了 "16 March"。PO 1190 确认原日期不变，所以 `has_new_date` 为 0.004，订单保持原样。
+
+<CodeBlock language="json" title="录制的输出">{output}</CodeBlock>
+
+## 改成你自己的
+
+- 同样的结构也适用于金额、订单号、姓名和地址：用代码找出候选项，问 Valen 业务上指的是哪一个，再用代码规范化。
+- 年份、时区或发件人的地区设置都在代码里补上；模型只负责选择。

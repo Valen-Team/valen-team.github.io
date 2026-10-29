@@ -1,0 +1,52 @@
+---
+title: 找出片段中事件发生的时间
+description: 对均匀间隔的帧问同样的判断题，再在代码中把概率平滑成事件时间。
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import source from '@site/static/cookbook/code/event_monitoring.py?cookbook-source';
+import output from '@site/static/cookbook/outputs/event_monitoring.json?cookbook-source';
+
+一个美食内容团队想给烹饪短片打章节标记：菜什么时候上桌，什么时候有人把饺子掰开？脚本从一段 6.5 秒的片段中均匀抽取十二帧，对每一帧问同样的两个问题，找出每个事件的开始时间。
+
+## 工作原理
+
+| 问题 | 类型 |
+| --- | --- |
+| `plate_served`：一盘饺子位于画面中央 | predicate |
+| `dumpling_opened`：两只手拿着一个被掰成两半的饺子 | predicate |
+
+代码把每个事件的十二个概率转换成一个时间点：事件从连续两帧都达到 0.7 及以上的第一帧开始，这样单独一帧的噪声不会移动章节标记。最初的措辞 "someone's hands are pulling a dumpling apart" 在只是用手拿着饺子的帧上也得分很高；准确描述画面中显示的内容后，问题就解决了。
+
+## 运行
+
+先下载一次示例包。`caches/event_monitoring.json` 中录制的回答让脚本无需 API key 即可运行；加 `--replay off` 则改为调用[免费托管 API](/zh-Hans/docs/valen/api/)。
+
+```bash
+curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
+python -m zipfile -e valen-cookbook.zip .
+cd valen-cookbook && python -m pip install -r requirements.txt
+python event_monitoring.py --asset-dir .
+python event_monitoring.py --asset-dir . --replay off --base-url https://api.valen-team.workers.dev/v1
+```
+
+视频 `momos.mp4`（约 395 KB）不在示例包中；把它下载到脚本所在目录：
+
+```bash
+curl -fL https://raw.githubusercontent.com/Valen-Team/Valen/main/assets/cookbook/momos.mp4 -o momos.mp4
+```
+
+## 代码
+
+<CodeBlock language="python" title="event_monitoring.py">{source}</CodeBlock>
+
+## 输出
+
+盘子在 1.17 秒上桌，饺子在 3.53 秒被掰开。
+
+<CodeBlock language="json" title="录制的输出">{output}</CodeBlock>
+
+## 改成你自己的
+
+- 片段较长时调大 `count`，或每秒抽一帧；每一帧都是一次请求。
+- 像 Valen 本地后端这样的视频模型也可以直接接收整段视频；逐帧提问得到的是一条时间线，而不是单个回答。

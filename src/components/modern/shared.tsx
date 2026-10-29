@@ -21,7 +21,10 @@ export const docGroups = [
 ];
 export const cookbookGroups = [
  {title:['GET STARTED','开始使用'],items:[['','Cookbook overview','教程概览'],['api-quickstart','API basics','API 入门'],['local-inference','Local inference','本地推理']]},
- {title:['APPLICATIONS','应用教程'],items:[['skill-support-router','Build with the agent skill','用 agent skill 构建'],['ticket-routing','Route support tickets','工单分流'],['calibrated-routing','Calibrate ticket routing','校准工单分流'],['product-screening','Screen product images','商品图片筛选'],['video-tagging','Tag short videos','短视频标注'],['domain-finetuning','Domain LoRA fine-tuning','领域 LoRA 微调']]},
+ {title:['ROUTE & TRIAGE','路由与分流'],items:[['function-calling','Commands to function calls','把一句话变成函数调用'],['ticket-routing','Route support tickets','工单分流'],['calibrated-routing','Calibrate ticket routing','校准工单分流'],['unknown-categories','Unknown categories','未知类别处理'],['skill-support-router','Build with the agent skill','用 agent skill 构建']]},
+ {title:['EXTRACT, SEARCH & VERIFY','抽取、检索与核查'],items:[['value-extraction','Pick the right date','挑出正确的日期'],['rerank','Rerank retrieved passages','重排检索结果'],['citation-check','Check claims against citations','核查论断与引用'],['llm-guardrails','Guardrails for LLM replies','给 LLM 回复加护栏']]},
+ {title:['IMAGES & VIDEO','看图看视频'],items:[['product-screening','Screen product images','商品图片筛选'],['document-check','Check scanned forms','核对扫描表单'],['composite-scoring','Score photos per storefront','按店铺需求给图片打分'],['video-tagging','Tag short videos','短视频标注'],['event-monitoring','Find events in a clip','找出视频里的事件']]},
+ {title:['ADAPT & SHIP','适配与上线'],items:[['domain-finetuning','Domain LoRA fine-tuning','领域 LoRA 微调']]},
  {title:['REFERENCE','参考'],items:[['/docs/valen/reliability/','Probability reliability','概率可靠性'],['validation','Validation & performance','验证、性能与版本'],['migration','Migration map','旧内容迁移表']]},
 ];
 const deploymentChildren: Record<string, string[][]> = {

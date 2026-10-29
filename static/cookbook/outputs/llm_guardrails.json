@@ -1,0 +1,93 @@
+[
+  {
+    "id": "d1",
+    "action": "send",
+    "broken": [],
+    "unclear": [],
+    "rules": {
+      "promises_compensation": 0.05493550788563123,
+      "asks_for_password": 0.005149861072603638,
+      "asks_for_code": 0.00123748593887831,
+      "asks_for_card": 0.0008065738436320395,
+      "blames_customer": 0.010404459908162777
+    },
+    "answers_customer": 0.4786401235652007
+  },
+  {
+    "id": "d2",
+    "action": "block",
+    "broken": [
+      "promises_compensation"
+    ],
+    "unclear": [],
+    "rules": {
+      "promises_compensation": 0.9461518074169306,
+      "asks_for_password": 0.0006984496704922706,
+      "asks_for_code": 0.001697623000137231,
+      "asks_for_card": 0.0012184027287378246,
+      "blames_customer": 0.03099930647388359
+    },
+    "answers_customer": 0.24704452612863403
+  },
+  {
+    "id": "d3",
+    "action": "block",
+    "broken": [
+      "asks_for_password",
+      "asks_for_code"
+    ],
+    "unclear": [],
+    "rules": {
+      "promises_compensation": 0.0004245653684002803,
+      "asks_for_password": 0.9162666884263373,
+      "asks_for_code": 0.9393212514143112,
+      "asks_for_card": 0.0003927302332713664,
+      "blames_customer": 0.011804975129478605
+    },
+    "answers_customer": 0.7631894236327794
+  },
+  {
+    "id": "d4",
+    "action": "block",
+    "broken": [
+      "blames_customer"
+    ],
+    "unclear": [],
+    "rules": {
+      "promises_compensation": 0.016677336487740224,
+      "asks_for_password": 0.0008765866098046913,
+      "asks_for_code": 0.001291666020323971,
+      "asks_for_card": 0.0007790657434083206,
+      "blames_customer": 0.9321890334458793
+    },
+    "answers_customer": 0.6824471747145898
+  },
+  {
+    "id": "d5",
+    "action": "regenerate",
+    "broken": [],
+    "unclear": [],
+    "rules": {
+      "promises_compensation": 0.004615859982477985,
+      "asks_for_password": 0.0005356585070066202,
+      "asks_for_code": 0.002155360667917882,
+      "asks_for_card": 0.0020253738503979973,
+      "blames_customer": 0.05902312081584957
+    },
+    "answers_customer": 0.005071748104748295
+  },
+  {
+    "id": "d6",
+    "action": "send",
+    "broken": [],
+    "unclear": [],
+    "rules": {
+      "promises_compensation": 0.1221074127522882,
+      "asks_for_password": 0.00015667670085275695,
+      "asks_for_code": 0.0006242179795131341,
+      "asks_for_card": 0.0002915973740919043,
+      "blames_customer": 0.0033320292612514933
+    },
+    "answers_customer": 0.6017677187919617
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "passages": [
+    {"id": "late-return", "text": "Returning a bike late: each extra 30 minutes after your booking ends is charged at the standard hourly rate. If the station is full, end the ride in the app and we waive the late fee."},
+    {"id": "station-full", "text": "If the return station is full, open the app, tap End ride and choose Station full. The app shows the nearest station with free docks and adds 15 free minutes."},
+    {"id": "damage-report", "text": "To report a damaged bike, tap the bike number in the app and choose Report a problem. Add a photo of the damage. You are not charged for damage that was there before your ride."},
+    {"id": "damage-fee", "text": "Damage fees: if a bike is damaged during your ride because of misuse, a repair fee of up to 80 euros may be charged. Normal wear such as worn brakes is never charged."},
+    {"id": "refund-time", "text": "Refunds go back to the card you paid with. Card refunds take 3 to 5 business days to appear; wallet top-ups are refunded within one day."},
+    {"id": "refund-request", "text": "You can request a refund for a ride within 14 days in the app under Ride history. Choose the ride, tap Request refund and tell us what went wrong."},
+    {"id": "helmet", "text": "Helmets are not included with standard bikes. E-bikes in Lisbon and Porto come with a helmet in the front basket; please return it with the bike."},
+    {"id": "e-bike-battery", "text": "An e-bike battery lasts about 60 km. The app shows the remaining range before you unlock. If the battery runs out, the bike still works as a normal bike."},
+    {"id": "card-charged-twice", "text": "Charged twice for one ride? The first charge is a temporary hold of 1 euro to check your card. It disappears within 7 days and is never collected."},
+    {"id": "student-pass", "text": "The student pass costs 9 euros a month and includes unlimited 45-minute rides. Verify your student email in the app to buy it."}
+  ],
+  "queries": [
+    {"text": "I was charged twice for the same ride, can I get my money back?", "relevant": ["card-charged-twice", "refund-request"]},
+    {"text": "The bike's brakes were already worn when I took it. Will I have to pay for that?", "relevant": ["damage-fee", "damage-report"]},
+    {"text": "There were no free docks at the station so I kept riding. Will I pay a late fee?", "relevant": ["late-return", "station-full"]}
+  ]
+}

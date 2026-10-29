@@ -4,6 +4,7 @@ import ast
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
 import sys
 import unittest
@@ -84,6 +85,18 @@ class Policies(unittest.TestCase):
             self.assertEqual(hashlib.sha256((CODE / filename).read_bytes()).hexdigest(), digest,
                              'Code changed after real-model validation: ' + filename)
 
+    def test_recipes_replay_their_recorded_answers(self):
+        import subprocess
+        for path in sorted((CODE / 'caches').glob('*.json')):
+            with self.subTest(recipe=path.stem):
+                result = subprocess.run([sys.executable, str(CODE / (path.stem + '.py')), '--replay', 'only',
+                                         '--asset-dir', str(CODE.parent)], capture_output=True, text=True, cwd=CODE,
+                                        env={'PYTHONDONTWRITEBYTECODE': '1', 'PATH': os.environ['PATH']})
+                self.assertEqual(result.returncode, 0, result.stderr)
+                published = CODE.parent / 'outputs' / (path.stem + '.json')
+                if published.exists():
+                    self.assertEqual(json.loads(result.stdout), json.loads(published.read_text()))
+
     def test_domain_recipe_is_bound_to_real_training_smoke(self):
         report = json.loads((ROOT / 'static/cookbook/validation/p2-finetuning.json').read_text())
         self.assertEqual(report['status'], 'passed')
@@ -129,10 +142,10 @@ def main():
     if args.bundle:
         # Generated from maintained files; the archive is never hand-edited.
         with zipfile.ZipFile(ROOT / 'static/cookbook/valen-cookbook.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
-            for path in sorted(CODE.iterdir()):
-                if not path.is_file():
+            for path in sorted(CODE.rglob('*')):
+                if not path.is_file() or '__pycache__' in path.parts:
                     continue
-                info = zipfile.ZipInfo('valen-cookbook/' + path.name, (2026, 10, 26, 0, 0, 0))
+                info = zipfile.ZipInfo('valen-cookbook/' + path.relative_to(CODE).as_posix(), (2026, 10, 26, 0, 0, 0))
                 info.compress_type = zipfile.ZIP_DEFLATED
                 info.external_attr = 0o644 << 16
                 archive.writestr(info, path.read_bytes())

@@ -1,0 +1,42 @@
+[
+  {
+    "scan": "loan-a.jpg",
+    "status": "accept",
+    "failed": [],
+    "unclear": [],
+    "checks": {
+      "name": 0.9992125595012277,
+      "serial": 0.9983302126024323,
+      "return_date": 0.9976673179646833,
+      "signed": 0.9990492985319737
+    }
+  },
+  {
+    "scan": "loan-b.jpg",
+    "status": "reject",
+    "failed": [
+      "return_date"
+    ],
+    "unclear": [],
+    "checks": {
+      "name": 0.9986719510816103,
+      "serial": 0.9984982673413811,
+      "return_date": 0.007865409520616382,
+      "signed": 0.997229301770541
+    }
+  },
+  {
+    "scan": "loan-c.jpg",
+    "status": "reject",
+    "failed": [
+      "signed"
+    ],
+    "unclear": [],
+    "checks": {
+      "name": 0.9989126426472942,
+      "serial": 0.9990923741991619,
+      "return_date": 0.997633862429052,
+      "signed": 0.006129618756955932
+    }
+  }
+]
