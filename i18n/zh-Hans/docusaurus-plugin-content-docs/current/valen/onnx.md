@@ -6,7 +6,7 @@ description: 通过 Python、Node.js、浏览器 WebGPU 或原生 C++ 文本集�
 
 # ONNX 推理与 SDK
 
-Python SDK 0.2.0 已发布到 [PyPI](https://pypi.org/project/valen-sdk/0.2.0/)；JavaScript SDK 0.2.0 已发布到 [npm，包名 @valen-team/sdk](https://www.npmjs.com/package/@valen-team/sdk/v/0.2.0)：`npm install @valen-team/sdk@0.2.0`。首次体验与格式选择见[版本选择](https://valen-team.github.io/zh-Hans/docs/valen/choosing/)。
+Python SDK 0.3.0 已发布到 [PyPI](https://pypi.org/project/valen-sdk/0.3.0/)；JavaScript SDK 0.2.0 已发布到 [npm，包名 @valen-team/sdk](https://www.npmjs.com/package/@valen-team/sdk/v/0.2.0)：`npm install @valen-team/sdk@0.2.0`。首次体验与格式选择见[版本选择](https://valen-team.github.io/zh-Hans/docs/valen/choosing/)。
 
 通过 ONNX Runtime 将 Valen 决策接入自己的应用。SDK 使用已发布的 Valen ONNX 组件，包含训练后的视觉主干与 Mixer 决策头；本地 SDK 推理无需安装 PyTorch 或 Transformers。
 
@@ -29,7 +29,7 @@ Python SDK 0.2.0 已发布到 [PyPI](https://pypi.org/project/valen-sdk/0.2.0/)�
 在新终端中执行：
 
 ```bash
-git clone --branch v0.2.0 --depth 1 https://github.com/Valen-Team/valen-sdk-python.git
+git clone --branch v0.3.0 --depth 1 https://github.com/Valen-Team/valen-sdk-python.git
 cd valen-sdk-python
 python -m pip install ".[onnx]"
 python examples/local_decisions.py

@@ -6,7 +6,7 @@ description: Run Valen with Python, Node.js, browser WebGPU or a native C++ text
 
 # ONNX inference and SDKs
 
-Python SDK 0.2.0 is published on [PyPI](https://pypi.org/project/valen-sdk/0.2.0/). JavaScript SDK 0.2.0 is published on [npm as @valen-team/sdk](https://www.npmjs.com/package/@valen-team/sdk/v/0.2.0): `npm install @valen-team/sdk@0.2.0`. For a first trial and format selection, see [version selection](https://valen-team.github.io/docs/valen/choosing/).
+Python SDK 0.3.0 is published on [PyPI](https://pypi.org/project/valen-sdk/0.3.0/). JavaScript SDK 0.2.0 is published on [npm as @valen-team/sdk](https://www.npmjs.com/package/@valen-team/sdk/v/0.2.0): `npm install @valen-team/sdk@0.2.0`. For a first trial and format selection, see [version selection](https://valen-team.github.io/docs/valen/choosing/).
 
 Run Valen decisions in your application with ONNX Runtime. The SDKs use the published Valen ONNX components, including the trained vision tower and Mixer decision head. Local SDK inference does not require PyTorch or Transformers.
 
@@ -29,7 +29,7 @@ First use downloads and caches the selected model components. The Python SDK dow
 From a fresh terminal:
 
 ```bash
-git clone --branch v0.2.0 --depth 1 https://github.com/Valen-Team/valen-sdk-python.git
+git clone --branch v0.3.0 --depth 1 https://github.com/Valen-Team/valen-sdk-python.git
 cd valen-sdk-python
 python -m pip install ".[onnx]"
 python examples/local_decisions.py
