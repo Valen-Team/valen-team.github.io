@@ -67,6 +67,6 @@ python api_quickstart.py --replay off --base-url http://127.0.0.1:8000/v1 --mode
 
 ## 素材、许可与相关文档
 
-代码与作者编写的 JSON 文本样例采用 <a href="/cookbook/code/LICENSE.txt">Apache-2.0</a>。工单为虚构示例。`sheep.jpg` 与 `momos.mp4` 沿用旧 Notebook 的评测片段和稳定素材 URL；旧目录未提供原始数据集归属及单独的媒体许可记录，因此这里不授予媒体再分发或商业使用许可。生产或再分发时请替换为有权使用的素材，勿把代码许可视为媒体许可。官网不额外复制这些媒体文件。
+代码与作者编写的 JSON 文本样例采用 <a href="/cookbook/code/LICENSE.txt">Apache-2.0</a>。工单为虚构示例。`sheep.jpg` 与 `momos.mp4` 来自 [VisualDecisionBench](https://huggingface.co/datasets/Valen-Team/VisualDecisionBench) 的评测样本：`sheep.jpg` 是 A-OKVQA 验证集中的 COCO 图片（`visualdecisionbench_image:000196`），`momos.mp4` 是 LLaVA-Video-178K 收录的 YouTube 视频 `HlDfIuavPjg`（`visualdecisionbench_video:000110`）。二者沿用上游条款：COCO 图片遵循其 Flickr 作者的条款，视频遵循 YouTube 条款。Apache-2.0 代码许可适用于代码与文本样例。
 
 [Decisions API](/zh-Hans/docs/valen/api/decisions/) · [SystemOne API](/zh-Hans/docs/valen/api/systemone/) · [ONNX / SDK](/zh-Hans/docs/valen/onnx/) · [Native deployment](/zh-Hans/docs/valen/quickstart/) · [GGUF deployment](/zh-Hans/docs/valen/gguf/) · [Evaluation](/zh-Hans/docs/valen/evaluation/) · [Validation and performance](../validation/)

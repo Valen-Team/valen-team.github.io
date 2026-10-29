@@ -537,8 +537,7 @@
             "items": {
               "type": "object",
               "required": [
-                "value",
-                "description"
+                "value"
               ],
               "properties": {
                 "value": {
@@ -559,8 +558,7 @@
             "items": {
               "type": "object",
               "required": [
-                "label",
-                "description"
+                "label"
               ],
               "properties": {
                 "label": {
