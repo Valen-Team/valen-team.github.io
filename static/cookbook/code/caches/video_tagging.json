@@ -1,25 +1,25 @@
 {
- "5eeeca8af3d9d39ba4187999c1ade0adad009ae37b83b97ea9c6251795809e3b": {
+ "d5406948899fa1e42b6f38c2c06417167692b9d76742b9a55307abf54f6d61cc": {
   "answers": [
    {
     "choice": "white",
-    "confidence": 0.964841634004897,
+    "confidence": 0.9594438148258839,
     "name": "sauce_color",
     "probabilities": [
      {
-      "probability": 0.0012343578556515856,
+      "probability": 0.0013946755867153904,
       "value": "brown"
      },
      {
-      "probability": 0.9736312255036728,
+      "probability": 0.9695828611194129,
       "value": "white"
      },
      {
-      "probability": 0.02259671367373697,
+      "probability": 0.025999585311857528,
       "value": "red"
      },
      {
-      "probability": 0.0025377029669386665,
+      "probability": 0.0030228779820141083,
       "value": "orange"
      }
     ],
@@ -45,11 +45,11 @@
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 14.55,
-   "forward_ms": 49.63,
-   "image_ms": 6.67,
+   "compile_ms": 13.62,
+   "forward_ms": 61.5,
+   "image_ms": 6.48,
    "queue_ms": 0.01,
-   "total_ms": 120.03
+   "total_ms": 129.09
   },
   "usage": {
    "input_tokens": 217,

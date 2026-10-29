@@ -7,63 +7,63 @@
   "timeline": [
     {
       "t": 0.0,
-      "plate_served": 0.34634892068213696,
-      "dumpling_opened": 0.6842849254608154
+      "plate_served": 0.28772332406868567,
+      "dumpling_opened": 0.6869076285687795
     },
     {
       "t": 0.6,
-      "plate_served": 0.3457100792440796,
-      "dumpling_opened": 0.5209015167028164
+      "plate_served": 0.2841475392624003,
+      "dumpling_opened": 0.5378598731118402
     },
     {
       "t": 1.17,
-      "plate_served": 0.9632418845393271,
-      "dumpling_opened": 0.4728759966157674
+      "plate_served": 0.9506918546070104,
+      "dumpling_opened": 0.49909529084535187
     },
     {
       "t": 1.77,
-      "plate_served": 0.9908312655169004,
-      "dumpling_opened": 0.3638649989326298
+      "plate_served": 0.9882011871570555,
+      "dumpling_opened": 0.3844224214553833
     },
     {
       "t": 2.37,
-      "plate_served": 0.9937304008465998,
-      "dumpling_opened": 0.5000229626900841
+      "plate_served": 0.9939650620129246,
+      "dumpling_opened": 0.47693486580446764
     },
     {
       "t": 2.97,
-      "plate_served": 0.9934892626661176,
-      "dumpling_opened": 0.2317068347843538
+      "plate_served": 0.9921591161768245,
+      "dumpling_opened": 0.22409593879461745
     },
     {
       "t": 3.53,
-      "plate_served": 0.9944311340021603,
-      "dumpling_opened": 0.971519379959088
+      "plate_served": 0.9933772363965263,
+      "dumpling_opened": 0.9733315472800861
     },
     {
       "t": 4.13,
-      "plate_served": 0.9880197708645262,
-      "dumpling_opened": 0.9798468004593827
+      "plate_served": 0.9892245749400858,
+      "dumpling_opened": 0.9821471985029578
     },
     {
       "t": 4.73,
-      "plate_served": 0.9874517882564655,
-      "dumpling_opened": 0.9932637353417986
+      "plate_served": 0.9875626683592001,
+      "dumpling_opened": 0.9937460755695204
     },
     {
       "t": 5.33,
-      "plate_served": 0.9862222103017072,
-      "dumpling_opened": 0.9977438020094755
+      "plate_served": 0.9818190756846941,
+      "dumpling_opened": 0.9975682870097096
     },
     {
       "t": 5.9,
-      "plate_served": 0.9671140349176304,
-      "dumpling_opened": 0.9972832683561454
+      "plate_served": 0.9723710906766717,
+      "dumpling_opened": 0.998138256710976
     },
     {
       "t": 6.5,
-      "plate_served": 0.9850453936224791,
-      "dumpling_opened": 0.997754688054369
+      "plate_served": 0.9833420918016248,
+      "dumpling_opened": 0.997343602582841
     }
   ]
 }

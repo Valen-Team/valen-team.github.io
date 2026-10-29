@@ -1,5 +1,5 @@
 """Find when things happen in a clip: ask the same questions of evenly spaced frames, then smooth in code. Apache-2.0."""
-from common import client, emit, image_input, parser, png, request
+from common import client, emit, frame_image, image_input, parser, png, request
 
 EVENTS = {
     "plate_served": "A plate of dumplings sits in the middle of the frame.",
@@ -11,7 +11,7 @@ def frames(path, count):
     """Evenly spaced frames as PNG bytes with their timestamps; the clip is decoded once."""
     import av
     with av.open(str(path)) as video:
-        decoded = [(frame.time, frame.to_image()) for frame in video.decode(video=0)]
+        decoded = [(frame.time, frame_image(frame)) for frame in video.decode(video=0)]
     for i in range(count):
         time, image = decoded[round(i * (len(decoded) - 1) / (count - 1))]
         yield round(float(time), 2), png(image)

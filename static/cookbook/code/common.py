@@ -131,6 +131,20 @@ def image_bytes(path):
         return png(image)
 
 
+def frame_image(frame):
+    """RGB from the decoded YUV planes, converted by Pillow: H.264 decoding is bit-exact, ffmpeg's RGB conversion is not."""
+    from PIL import Image
+    if frame.format.name != "yuv420p":
+        frame = frame.reformat(format="yuv420p")
+    y, u, v = (Image.frombuffer("L", (plane.width, plane.height), bytes(plane), "raw", "L", plane.line_size, 1)
+               for plane in frame.planes)
+    # Video stores limited range (16-235 luma, 16-240 chroma); Pillow's YCbCr expects full range.
+    y = y.point(lambda x: min(255, max(0, round((x - 16) * 255 / 219))))
+    u, v = (c.point(lambda x: min(255, max(0, round((x - 128) * 255 / 224 + 128)))).resize(y.size, Image.BILINEAR)
+            for c in (u, v))
+    return Image.merge("YCbCr", (y, u, v)).convert("RGB")
+
+
 def middle_frame(path):
     """Decode a bounded clip twice: count first, then keep only its middle frame."""
     import av
@@ -149,7 +163,7 @@ def middle_frame(path):
     with av.open(str(path)) as video:
         for index, frame in enumerate(video.decode(video=0)):
             if index == target:
-                return png(frame.to_image()), {"frame_index": target, "total_frames": count,
+                return png(frame_image(frame)), {"frame_index": target, "total_frames": count,
                                             "timestamp_seconds": float(frame.time) if frame.time is not None else None}
     raise ValueError("Clip changed while decoding")
 
