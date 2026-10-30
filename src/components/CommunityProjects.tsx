@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import useBrokenLinks from '@docusaurus/useBrokenLinks';
 import {ArrowLeft, ArrowRight, ArrowUpRight, Star} from 'lucide-react';
 import {useChinese} from './Content';
 import './community-projects.css';
@@ -15,6 +16,8 @@ const projects = [
 
 export default function CommunityProjects() {
   const zh = useChinese();
+  // Lets the build's anchor check see the navbar link to /#community-projects.
+  useBrokenLinks().collectAnchor('community-projects');
   const lang = zh ? 1 : 0;
   const [liveStars, setLiveStars] = useState<Record<string, number>>({});
   const [page, setPage] = useState(0);

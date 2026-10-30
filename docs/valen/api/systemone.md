@@ -211,6 +211,7 @@ The hosted endpoints accept, per request:
 | Candidates per question | 16 |
 | Characters per candidate description | 300 |
 | Characters of instructions | 2,000 |
+| Characters of state | 4,000; 32,000 with the `TypeSafe-Danger-Zone-Long-Context: true` header |
 
 A request over a limit returns HTTP 400 with the limit in `detail`. For video, send one frame per request and combine the answers in code; for more questions, send another request with the same evidence. Local deployments set their own limits, for example `VALEN_MAX_IMAGES`.
 

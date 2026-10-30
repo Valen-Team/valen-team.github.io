@@ -50,16 +50,7 @@ Valen places a request's questions in one causal sequence ([multi-question infer
 
 ## Recorded hard cases
 
-| Case | What happens | Restructure |
-| --- | --- | --- |
-| The correct category is missing from a Choice | Probability concentrates on the closest supplied candidate; an address change went to shipment tracking at 99.3% | Add a described `none` candidate and route it to review ([unknown categories](/cookbook/unknown-categories/)) |
-| A trailing generic sentence ("Please let me know the next step.") | It can move an out-of-scope message back into an in-scope category | Include such suffixed variants in your validation cases; for requests that must never be automated, also ask a Noul about that request itself ("The customer asks to change the delivery address") and route it in code |
-| Single-candidate Choice | Always probability 1 and confidence 1 | Ask a Noul instead |
-| Score over two-peaked opinions | The expected index lands between the peaks | Read the level probabilities, or split the dimension into Nouls |
-| Target occupies a few pixels of a large image | The question fails the human test | Crop or resize around the target in code before sending |
-| Clip-wide labels from one frame | One frame describes one moment | Sample several frames, send one per request (the hosted API takes one image), average each candidate's probability in code, and count people per frame rather than adding counts across frames ([video tagging](/cookbook/video-tagging/)) |
-
-Found another one? Open an issue at [Valen-Team/Valen](https://github.com/Valen-Team/Valen/issues) with the payload and the answer you expected.
+Cases where Valen answers less reliably, how large the effect is and how to restructure around each one are on [Known limitations](./known-limitations.md): rule tables, long lists and arithmetic in the state; a missing category; generic trailing sentences; single-candidate Choices; two-peaked Scores; small targets in large images; and labels for a whole clip from one frame.
 
 ## Read answers and set thresholds
 

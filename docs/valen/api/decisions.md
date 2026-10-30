@@ -239,6 +239,7 @@ The hosted endpoints accept, per request:
 | Candidates per question | 16 |
 | Characters per candidate description | 300 |
 | Characters of instructions | 2,000 |
+| Characters of text input | 4,000 |
 
 A request over a limit returns HTTP 400 with the limit in `detail`. For video, send one frame per request and combine the answers in code; for more questions, send another request with the same evidence. Local deployments set their own limits, for example `VALEN_MAX_IMAGES`.
 

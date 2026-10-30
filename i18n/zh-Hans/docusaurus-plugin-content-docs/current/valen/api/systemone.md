@@ -211,6 +211,7 @@ POST /v1/systemone
 | 每个问题的候选项 | 16 个 |
 | 每条候选描述 | 300 字符 |
 | 问题指令 | 2,000 字符 |
+| state | 4,000 字符；加 `TypeSafe-Danger-Zone-Long-Context: true` 请求头后 32,000 字符 |
 
 超出限制会返回 HTTP 400，`detail` 中写明具体限制。视频请每个请求发送一帧，在代码里合并回答；问题更多时，用相同的证据再发一个请求。本地部署可自行设置上限，例如 `VALEN_MAX_IMAGES`。
 
