@@ -1,14 +1,14 @@
 {
-  "passed": true,
+  "passed": false,
   "validation_kind": "real_model_javascript_sdk_http",
   "sdk_name": "@valen-team/sdk",
-  "sdk_version": "0.2.0",
+  "sdk_version": "0.4.0",
   "records": [
     {
       "id": "text",
       "passed": true,
       "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/models/site-evidence/job/gguf/Valen-Decision-1.5-0.8B-Q8_0.gguf",
         "answers": [
           {
             "name": "intent",
@@ -16,20 +16,20 @@
             "probabilities": [
               {
                 "value": "address",
-                "probability": 0.9999678587251428
+                "probability": 0.9995329104471153
               },
               {
                 "value": "cancel",
-                "probability": 0.00003214127485722157
+                "probability": 0.00046708955288459185
               }
             ],
-            "confidence": 0.9999357174502856,
+            "confidence": 0.9990658208942307,
             "choice": "address"
           },
           {
             "name": "change_address",
             "type": "predicate",
-            "probability": 0.9982443468457173
+            "probability": 0.9989856832314833
           },
           {
             "name": "explicitness",
@@ -38,21 +38,21 @@
               {
                 "label": "none",
                 "value": 0,
-                "probability": 0.012675093613854499
+                "probability": 0.0012503952956126
               },
               {
                 "label": "possible",
                 "value": 1,
-                "probability": 0.05436870874501274
+                "probability": 0.004256049517954564
               },
               {
                 "label": "explicit",
                 "value": 2,
-                "probability": 0.9329561976411327
+                "probability": 0.9944935551864328
               }
             ],
-            "confidence": 0.8804216560409174,
-            "score": 1.920281104027278
+            "confidence": 0.9898647398362304,
+            "score": 1.9932431598908202
           }
         ],
         "usage": {
@@ -65,7 +65,7 @@
       "id": "typed-choice",
       "passed": true,
       "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/models/site-evidence/job/gguf/Valen-Decision-1.5-0.8B-Q8_0.gguf",
         "answers": [
           {
             "name": "animal",
@@ -73,22 +73,22 @@
             "probabilities": [
               {
                 "value": true,
-                "probability": 0.9994861905090054
+                "probability": 0.9989222894308908
               },
               {
                 "value": "true",
-                "probability": 0.00046916907450602116
+                "probability": 0.0008529282835984055
               },
               {
                 "value": false,
-                "probability": 0.000027967900605188707
+                "probability": 0.00016249734250307432
               },
               {
                 "value": "false",
-                "probability": 0.000016672515883296103
+                "probability": 0.00006228494300787184
               }
             ],
-            "confidence": 0.9993149206786739,
+            "confidence": 0.998563052574521,
             "choice": true
           }
         ],
@@ -102,12 +102,12 @@
       "id": "image",
       "passed": true,
       "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/models/site-evidence/job/gguf/Valen-Decision-1.5-0.8B-Q8_0.gguf",
         "answers": [
           {
             "name": "red",
             "type": "predicate",
-            "probability": 0.5312669345185959
+            "probability": 0.8705388272995948
           },
           {
             "name": "color",
@@ -115,19 +115,19 @@
             "probabilities": [
               {
                 "value": "red",
-                "probability": 0.07323888801551497
+                "probability": 0.7492390164835747
               },
               {
                 "value": "blue",
-                "probability": 0.6443186009304713
+                "probability": 0.18857386142760166
               },
               {
                 "value": "green",
-                "probability": 0.2824425110540137
+                "probability": 0.062187122088823564
               }
             ],
-            "confidence": 0.466477901395707,
-            "choice": "blue"
+            "confidence": 0.6238585247253621,
+            "choice": "red"
           },
           {
             "name": "brightness",
@@ -136,20 +136,20 @@
               {
                 "label": "dark",
                 "value": 0,
-                "probability": 0.11672786158042753
+                "probability": 0.005584042383712716
               },
               {
                 "label": "bright",
                 "value": 1,
-                "probability": 0.8832721384195724
+                "probability": 0.9944159576162872
               }
             ],
-            "confidence": 0.766544276839145,
-            "score": 0.8832721384195724
+            "confidence": 0.9888319152325745,
+            "score": 0.9944159576162872
           }
         ],
         "usage": {
-          "input_tokens": 212,
+          "input_tokens": 215,
           "output_tokens": 0
         }
       }
@@ -158,31 +158,29 @@
       "id": "empty-questions",
       "passed": true,
       "status": 400,
-      "error": "ValenAPIError: {\"code\":400,\"message\":\"Invalid Valen Decisions request\",\"type\":\"invalid_request_error\"}"
+      "error": "ValenAPIError: Invalid Valen Decisions request"
     },
     {
       "id": "zero-temperature",
       "passed": true,
       "status": 400,
-      "error": "ValenAPIError: {\"code\":400,\"message\":\"temperature must be finite and positive\",\"type\":\"invalid_request_error\"}"
+      "error": "ValenAPIError: temperature must be finite and positive"
     },
     {
       "id": "boolean-temperature",
       "passed": true,
       "status": 400,
-      "error": "ValenAPIError: {\"code\":400,\"message\":\"Invalid Valen Decisions request\",\"type\":\"invalid_request_error\"}"
+      "error": "ValenAPIError: Invalid Valen Decisions request"
     },
     {
       "id": "duplicate-names",
-      "passed": true,
-      "status": 400,
-      "error": "ValenAPIError: {\"code\":400,\"message\":\"Invalid Valen Decisions request\",\"type\":\"invalid_request_error\"}"
+      "passed": false,
+      "error": "ValenInputError: questions: question names must be unique nonempty strings"
     },
     {
       "id": "numeric-choice",
-      "passed": true,
-      "status": 400,
-      "error": "ValenAPIError: {\"code\":400,\"message\":\"Invalid Valen Decisions request\",\"type\":\"invalid_request_error\"}"
+      "passed": false,
+      "error": "ValenInputError: questions.q: invalid candidate labels"
     }
   ]
 }

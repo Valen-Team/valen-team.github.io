@@ -4,7 +4,7 @@
     "sauce_color": "white"
   },
   "status": "tagged",
-  "confidence": 0.9752438526923451,
+  "confidence": 0.9881418877805519,
   "sampling": {
     "frame_index": 98,
     "total_frames": 196,
@@ -17,22 +17,22 @@
     "probabilities": [
       {
         "value": "brown",
-        "probability": 0.014343334878796554
+        "probability": 0.005554845704525973
       },
       {
         "value": "white",
-        "probability": 0.9752438526923451
+        "probability": 0.9881418877805519
       },
       {
         "value": "red",
-        "probability": 0.007025658192234735
+        "probability": 0.00435145486301229
       },
       {
         "value": "orange",
-        "probability": 0.0033871542366235487
+        "probability": 0.0019518116519097628
       }
     ],
-    "confidence": 0.9669918035897935,
+    "confidence": 0.9841891837074025,
     "choice": "white"
   }
 }

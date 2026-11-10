@@ -7,11 +7,10 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parent
-MODEL = Path('/mnt/shared-storage-user/mllm/liuziyu/share_data/Valen_Data/models/Valen-0.8B')
-PYTHON = '/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-vllm-check-261022-092527/env/bin/python'
+MODEL = Path('/mnt/shared-storage-user/mllm/zangyuhang/models/Valen-Decision-1.5-0.8B')
+PYTHON = '/data/valen_bbox/.venv/bin/python'
 if sys.executable != PYTHON:
-    env = os.environ | {'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1', 'OMP_NUM_THREADS': '4', 'TOKENIZERS_PARALLELISM': 'false'}
-    env['PYTHONPATH'] = '/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-hf-transformers-261024-135321/deps'
+    env = os.environ | {'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1', 'OMP_NUM_THREADS': '8', 'TOKENIZERS_PARALLELISM': 'false'}
     raise SystemExit(subprocess.call([PYTHON, str(Path(__file__).resolve())], env=env))
 import torch
 import transformers
@@ -25,7 +24,7 @@ for p in sorted(MODEL.iterdir()):
                 sha.update(block)
         artifacts[p.name] = sha.hexdigest()
 revision = hashlib.sha256(json.dumps(artifacts, sort_keys=True).encode()).hexdigest()
-runtime = {'model': 'Valen-Team/Valen-0.8B', 'revision_kind': 'sha256 of sorted cached model artifact hashes',
+runtime = {'model': 'Valen-Team/Valen-Decision-1.5-0.8B', 'hub_commit': 'ae8bdf7606c0dbd627301174c9cb800240fb4ec7', 'revision_kind': 'sha256 of sorted cached model artifact hashes',
            'revision': revision, 'artifacts_sha256': artifacts, 'torch': torch.__version__,
            'transformers': transformers.__version__, 'device': 'CPU: ' + next((line.split(':', 1)[1].strip() for line in Path('/proc/cpuinfo').read_text().splitlines() if line.startswith('model name')), __import__('platform').processor()),
            'threads': 8, 'cpu_affinity': sorted(os.sched_getaffinity(0)),

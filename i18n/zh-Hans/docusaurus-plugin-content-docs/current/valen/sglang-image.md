@@ -225,6 +225,6 @@ print(response.json()["answers"])
 
 ## 支持范围
 
-完整 Valen Qwen3.5 Mixer 检查点，`shared_state` 执行，单 GPU，TP=PP=1。支持文本和图片判断、选择与评分：Choice 为 1–255 个候选，Score 为 2–255 个有序等级。视频可先提取画面帧，再作为图片输入。
+完整 Valen Qwen3.5 Mixer 检查点，`shared_state` 执行，单 GPU，TP=PP=1。支持文本和图片判断、选择与评分：Choice 为 1–255 个候选，Score 为 2–255 个有序等级。Valen-Decision-1.5 检查点还支持 bbox 定位题，在一张输入图片中定位所描述的对象。视频可先提取画面帧，再作为图片输入。
 
 问题与答案结构见 [SystemOne](./api/systemone.md) 和 [Decisions](./api/decisions.md)。

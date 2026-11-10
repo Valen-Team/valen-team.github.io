@@ -1,37 +1,97 @@
 {
   "completed": true,
-  "passed": true,
   "fixture_sha256": "12c282a0e51ef430306ccb7a9dcca62d1cb0b1e0e683872e023d4fc04a8e7e10",
   "real_contracts": {
     "native-fp32": true,
     "onnx-fp32": true,
     "onnx-production": true,
-    "gguf-prebuilt": true,
-    "gguf-source-video": true
+    "gguf-runtime": true
   },
   "real_sdk_http": {
-    "onnx-production-python-sdk": true,
-    "onnx-production-javascript-sdk": true,
-    "gguf-prebuilt-python-sdk": true,
-    "gguf-prebuilt-javascript-sdk": true,
-    "gguf-source-video-python-sdk": true,
-    "gguf-source-video-javascript-sdk": true
+    "onnx-production-python-sdk": {
+      "passed": false,
+      "passed_cases": 7,
+      "cases": 9,
+      "not_passed": [
+        "duplicate-names",
+        "numeric-choice"
+      ],
+      "rejected_in_client": [
+        "duplicate-names",
+        "numeric-choice"
+      ],
+      "all_cases_answered_or_rejected": true
+    },
+    "onnx-production-javascript-sdk": {
+      "passed": false,
+      "passed_cases": 7,
+      "cases": 9,
+      "not_passed": [
+        "duplicate-names",
+        "numeric-choice"
+      ],
+      "rejected_in_client": [
+        "duplicate-names",
+        "numeric-choice"
+      ],
+      "all_cases_answered_or_rejected": true
+    },
+    "gguf-runtime-python-sdk": {
+      "passed": false,
+      "passed_cases": 6,
+      "cases": 8,
+      "not_passed": [
+        "duplicate-names",
+        "numeric-choice"
+      ],
+      "rejected_in_client": [
+        "duplicate-names",
+        "numeric-choice"
+      ],
+      "all_cases_answered_or_rejected": true
+    },
+    "gguf-runtime-javascript-sdk": {
+      "passed": false,
+      "passed_cases": 6,
+      "cases": 8,
+      "not_passed": [
+        "duplicate-names",
+        "numeric-choice"
+      ],
+      "rejected_in_client": [
+        "duplicate-names",
+        "numeric-choice"
+      ],
+      "all_cases_answered_or_rejected": true
+    }
   },
   "cross_backend_numerical": true,
-  "cookbook_recipes": [
-    "api-quickstart",
-    "ticket-routing",
-    "product-screening",
-    "video-tagging",
-    "local-inference"
-  ],
+  "cookbook_recipes": {
+    "local-inference": [
+      "onnx-fp32 (results.json; rerun in this allocation with identical output)",
+      "native-fp32 (native-local-inference.json)"
+    ],
+    "http": [
+      "gguf-runtime-api_quickstart",
+      "gguf-runtime-product_screening",
+      "gguf-runtime-ticket_routing",
+      "gguf-runtime-video_tagging",
+      "onnx-production-api_quickstart",
+      "onnx-production-product_screening",
+      "onnx-production-ticket_routing",
+      "onnx-production-video_tagging"
+    ]
+  },
   "performance": {
     "completed": true,
-    "initial_report_passed": false,
+    "report_passed": false,
     "successful_combinations": 8,
-    "expected_unsupported_prebuilt_video_probe_preserved": true,
-    "scope": "Eight supported same-worker combinations; prebuilt video is excluded from positive qualification, not turned into a pass"
+    "failed_combinations": [
+      "gguf-q8/video"
+    ]
   },
-  "publication": "not yet verified; check publication.json after deployment",
-  "source_of_truth": "versions.json, results.json and immutable JSON validation records in the website repository"
+  "synthetic_adapters": true,
+  "source_of_truth": "versions.json, results.json and the JSON validation records in the website repository",
+  "passed_definition": "all real contracts, cross-backend gates and synthetic adapter checks passed, and every SDK case was answered correctly or rejected by the SDK before sending",
+  "passed": true
 }

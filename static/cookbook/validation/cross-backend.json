@@ -2,7 +2,7 @@
   "passed": true,
   "fixture_sha256": "12c282a0e51ef430306ccb7a9dcca62d1cb0b1e0e683872e023d4fc04a8e7e10",
   "validation_kind": "real_model_numerical_regression",
-  "reference": "native FP32 CPU, source revision a0a10112716f54457bad6f60b792ad334f9e89fd",
+  "reference": "native FP32 CPU, Valen-Team/Valen-Decision-1.5-0.8B@ae8bdf7606c0dbd627301174c9cb800240fb4ec7",
   "gates": {
     "choice_agreement_min": 0.98,
     "probability_mae_max": 0.02,
@@ -10,42 +10,347 @@
     "normalized_score_mae_max": 0.05,
     "normalized_score_max_error_max": 0.15
   },
-  "gate_origin": "Reuse existing gguf-v2 fixed-set choice/probability/score gates; no Brier gate without labeled predicate truth",
-  "scope": "Small fixed protocol/diagnostic fixtures including synthetic image/video inputs; numerical consistency, not task accuracy or representative media quality",
-  "performance_note": "Follow-up numerical checks are independent of the original same-worker performance allocation; their timings are not pooled",
+  "scope": "Small fixed protocol/diagnostic fixtures including synthetic image/video inputs; numerical consistency, not task accuracy",
   "records": [
+    {
+      "backend": "onnx-fp32",
+      "compared_variants": 12,
+      "choice_agreement": 1.0,
+      "probability_mae": 3.147107533816407e-06,
+      "probability_max_error": 2.0363512744037138e-05,
+      "normalized_score_mae": 2.8566478919393273e-07,
+      "normalized_score_max_error": 9.922392749661668e-07,
+      "input_tokens_match": true,
+      "passed": true
+    },
     {
       "backend": "onnx-production",
       "compared_variants": 12,
-      "choice_agreement": 1,
-      "probability_mae": 0.00011417405724405982,
-      "probability_max_error": 0.001887466721190112,
-      "normalized_score_mae": 6.920155317171852e-05,
-      "normalized_score_max_error": 0.0002651179791687275,
+      "choice_agreement": 1.0,
+      "probability_mae": 3.147107533816407e-06,
+      "probability_max_error": 2.0363512744037138e-05,
+      "normalized_score_mae": 2.8566478919393273e-07,
+      "normalized_score_max_error": 9.922392749661668e-07,
       "input_tokens_match": true,
       "passed": true
     },
     {
-      "backend": "gguf-prebuilt",
+      "backend": "gguf-runtime",
       "compared_variants": 9,
-      "choice_agreement": 1,
-      "probability_mae": 0.0023105455172639255,
-      "probability_max_error": 0.02390979197868992,
-      "normalized_score_mae": 0.0005912215139872538,
-      "normalized_score_max_error": 0.001590903130648691,
+      "choice_agreement": 1.0,
+      "probability_mae": 0.0008760459907231197,
+      "probability_max_error": 0.010767371865399888,
+      "normalized_score_mae": 0.0002876870873737743,
+      "normalized_score_max_error": 0.0009198130695964313,
       "input_tokens_match": true,
       "passed": true
+    }
+  ],
+  "recipe_scope": "13 Cookbook recipes (text, image and video-frame requests) on CPU, native FP32 vs ONNX fp32 and q8-mlp bundles; numerical consistency, not task accuracy",
+  "recipe_records": [
+    {
+      "model": "Valen-Decision-1.5-0.8B",
+      "backend": "onnx-fp32",
+      "recipes": 13,
+      "compared_numbers": 216,
+      "decision_agreement": 1.0,
+      "probability_mae": 4.513543590888242e-05,
+      "probability_max_error": 0.0032023811068007113,
+      "passed": true,
+      "disagreements": []
     },
     {
-      "backend": "gguf-source-video",
-      "compared_variants": 12,
-      "choice_agreement": 1,
-      "probability_mae": 0.0032997771081165733,
-      "probability_max_error": 0.035390111370509736,
-      "normalized_score_mae": 0.0003960853935337023,
-      "normalized_score_max_error": 0.001590903130648691,
+      "model": "Valen-Decision-1.5-0.8B",
+      "backend": "onnx-q8-mlp",
+      "recipes": 13,
+      "compared_numbers": 216,
+      "decision_agreement": 0.9839357429718876,
+      "probability_mae": 0.001965502021909647,
+      "probability_max_error": 0.027616221677018105,
+      "passed": true,
+      "disagreements": [
+        [
+          "citation_check.claims[6].status",
+          "contradicted",
+          "escalate"
+        ],
+        [
+          "function_calling[4].call.kwargs.when",
+          "next_week",
+          "tomorrow"
+        ],
+        [
+          "rerank.queries[1].reranked[3].id",
+          "e-bike-battery",
+          "late-return"
+        ],
+        [
+          "rerank.queries[1].reranked[4].id",
+          "late-return",
+          "e-bike-battery"
+        ]
+      ]
+    },
+    {
+      "model": "Valen-Decision-1.5-2B",
+      "backend": "onnx-fp32",
+      "recipes": 13,
+      "compared_numbers": 215,
+      "decision_agreement": 1.0,
+      "probability_mae": 2.8063027842427405e-05,
+      "probability_max_error": 0.0005737325119289788,
+      "passed": true,
+      "disagreements": []
+    },
+    {
+      "model": "Valen-Decision-1.5-2B",
+      "backend": "onnx-q8-mlp",
+      "recipes": 13,
+      "compared_numbers": 215,
+      "decision_agreement": 1.0,
+      "probability_mae": 0.0008637657862660846,
+      "probability_max_error": 0.012134889374828983,
+      "passed": true,
+      "disagreements": []
+    },
+    {
+      "model": "Valen-Decision-1.5-4B",
+      "backend": "onnx-fp32",
+      "recipes": 13,
+      "compared_numbers": 215,
+      "decision_agreement": 1.0,
+      "probability_mae": 1.1631094749911112e-05,
+      "probability_max_error": 0.00016159184418246264,
+      "passed": true,
+      "disagreements": []
+    },
+    {
+      "model": "Valen-Decision-1.5-4B",
+      "backend": "onnx-q8-mlp",
+      "recipes": 13,
+      "compared_numbers": 215,
+      "decision_agreement": 1.0,
+      "probability_mae": 0.000543184824740077,
+      "probability_max_error": 0.0075681068341044155,
+      "passed": true,
+      "disagreements": []
+    },
+    {
+      "model": "Valen-Decision-1.5-9B",
+      "backend": "onnx-fp32",
+      "recipes": 13,
+      "compared_numbers": 215,
+      "decision_agreement": 1.0,
+      "probability_mae": 1.0741511870917789e-06,
+      "probability_max_error": 1.8913216124460952e-05,
+      "passed": true,
+      "disagreements": []
+    },
+    {
+      "model": "Valen-Decision-1.5-9B",
+      "backend": "onnx-q8-mlp",
+      "recipes": 13,
+      "compared_numbers": 215,
+      "decision_agreement": 1.0,
+      "probability_mae": 0.0005373755932388817,
+      "probability_max_error": 0.013438852596138473,
+      "passed": true,
+      "disagreements": []
+    }
+  ],
+  "gguf_scope": "Valen-Decision-1.5-0.8B GGUF F32 and Q8_0 (F32 vision) on the Valen-Decision-1.5 llama.cpp runtime build (version 0.2.0), Linux x86-64 CPU, against the native model; the same requests sent with JPEG and PNG images; box errors in normalized coordinates",
+  "gguf_records": [
+    {
+      "variant": "F32",
+      "request": "text",
       "input_tokens_match": true,
-      "passed": true
+      "has_boxes": false,
+      "jpeg": {
+        "max_probability_error": 4.727756571165642e-05,
+        "max_box_error": 0.0,
+        "max_box_confidence_error": 0.0
+      },
+      "png": {
+        "max_probability_error": 4.727756571165642e-05,
+        "max_box_error": 0.0,
+        "max_box_confidence_error": 0.0
+      }
+    },
+    {
+      "variant": "F32",
+      "request": "image",
+      "input_tokens_match": true,
+      "has_boxes": false,
+      "jpeg": {
+        "max_probability_error": 5.233835556117672e-05,
+        "max_box_error": 0.0,
+        "max_box_confidence_error": 0.0
+      },
+      "png": {
+        "max_probability_error": 2.7394063135233182e-05,
+        "max_box_error": 0.0,
+        "max_box_confidence_error": 0.0
+      }
+    },
+    {
+      "variant": "F32",
+      "request": "bbox",
+      "input_tokens_match": true,
+      "has_boxes": true,
+      "jpeg": {
+        "max_probability_error": 0.00015752695338755451,
+        "max_box_error": 0.004500000000000004,
+        "max_box_confidence_error": 0.0030999999999999917
+      },
+      "png": {
+        "max_probability_error": 2.5292874182403224e-05,
+        "max_box_error": 0.000300000000000078,
+        "max_box_confidence_error": 9.999999999998899e-05
+      }
+    },
+    {
+      "variant": "F32",
+      "request": "bbox_only",
+      "input_tokens_match": true,
+      "has_boxes": true,
+      "jpeg": {
+        "max_probability_error": 0.0,
+        "max_box_error": 0.0006000000000000449,
+        "max_box_confidence_error": 0.00029999999999996696
+      },
+      "png": {
+        "max_probability_error": 0.0,
+        "max_box_error": 9.999999999998899e-05,
+        "max_box_confidence_error": 9.999999999998899e-05
+      }
+    },
+    {
+      "variant": "F32",
+      "request": "bbox_later",
+      "input_tokens_match": true,
+      "has_boxes": true,
+      "jpeg": {
+        "max_probability_error": 0.00028787955049014435,
+        "max_box_error": 0.0006000000000000449,
+        "max_box_confidence_error": 0.00039999999999995595
+      },
+      "png": {
+        "max_probability_error": 7.318272198286735e-05,
+        "max_box_error": 0.00010000000000001674,
+        "max_box_confidence_error": 9.999999999998899e-05
+      }
+    },
+    {
+      "variant": "F32",
+      "request": "bbox_two_images",
+      "input_tokens_match": true,
+      "has_boxes": true,
+      "jpeg": {
+        "max_probability_error": 0.00020721348729790812,
+        "max_box_error": 0.0020999999999999908,
+        "max_box_confidence_error": 0.0018000000000000238
+      },
+      "png": {
+        "max_probability_error": 0.0002267658268956252,
+        "max_box_error": 0.00040000000000006697,
+        "max_box_confidence_error": 0.0010999999999999899
+      }
+    },
+    {
+      "variant": "Q8_0",
+      "request": "text",
+      "input_tokens_match": true,
+      "has_boxes": false,
+      "jpeg": {
+        "max_probability_error": 0.020805710611848993,
+        "max_box_error": 0.0,
+        "max_box_confidence_error": 0.0
+      },
+      "png": {
+        "max_probability_error": 0.020805710611848993,
+        "max_box_error": 0.0,
+        "max_box_confidence_error": 0.0
+      }
+    },
+    {
+      "variant": "Q8_0",
+      "request": "image",
+      "input_tokens_match": true,
+      "has_boxes": false,
+      "jpeg": {
+        "max_probability_error": 0.00021448135576696004,
+        "max_box_error": 0.0,
+        "max_box_confidence_error": 0.0
+      },
+      "png": {
+        "max_probability_error": 0.00015254183888643814,
+        "max_box_error": 0.0,
+        "max_box_confidence_error": 0.0
+      }
+    },
+    {
+      "variant": "Q8_0",
+      "request": "bbox",
+      "input_tokens_match": true,
+      "has_boxes": true,
+      "jpeg": {
+        "max_probability_error": 0.0037936629329783367,
+        "max_box_error": 0.033499999999999974,
+        "max_box_confidence_error": 0.04380000000000006
+      },
+      "png": {
+        "max_probability_error": 0.0027455862587416613,
+        "max_box_error": 0.009100000000000052,
+        "max_box_confidence_error": 0.005900000000000016
+      }
+    },
+    {
+      "variant": "Q8_0",
+      "request": "bbox_only",
+      "input_tokens_match": true,
+      "has_boxes": true,
+      "jpeg": {
+        "max_probability_error": 0.0,
+        "max_box_error": 0.0023999999999999577,
+        "max_box_confidence_error": 0.00039999999999995595
+      },
+      "png": {
+        "max_probability_error": 0.0,
+        "max_box_error": 0.003899999999999959,
+        "max_box_confidence_error": 0.0010000000000000009
+      }
+    },
+    {
+      "variant": "Q8_0",
+      "request": "bbox_later",
+      "input_tokens_match": true,
+      "has_boxes": true,
+      "jpeg": {
+        "max_probability_error": 0.0005817708944405586,
+        "max_box_error": 0.0019000000000000128,
+        "max_box_confidence_error": 0.0023000000000000798
+      },
+      "png": {
+        "max_probability_error": 0.00023791997514144292,
+        "max_box_error": 0.0021000000000000463,
+        "max_box_confidence_error": 0.0019000000000000128
+      }
+    },
+    {
+      "variant": "Q8_0",
+      "request": "bbox_two_images",
+      "input_tokens_match": true,
+      "has_boxes": true,
+      "jpeg": {
+        "max_probability_error": 0.0004324018211960823,
+        "max_box_error": 0.010000000000000009,
+        "max_box_confidence_error": 0.01579999999999998
+      },
+      "png": {
+        "max_probability_error": 0.0009961513239270525,
+        "max_box_error": 0.005099999999999993,
+        "max_box_confidence_error": 0.009800000000000031
+      }
     }
   ]
 }

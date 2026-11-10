@@ -1,1 +1,9 @@
-{"passed": true, "archive_sha256": "2fcc903eb853b8c04498bb4ee716c7c3662d1d07eb5c2d89c11310716ae04c0e", "all_extracted_files_match_original_manifest": true, "files": 31, "server_binary_sha256": "4fb0bec19b189ce4af6c87dc6877391c79fa59ec17dc5738995c45f435b2c519", "model_download_bytes": 0}
+{
+  "passed": true,
+  "release": "https://github.com/Valen-Team/Valen/releases/tag/gguf-runtime-v0.2.0",
+  "archive": "valen-gguf-runtime-0.2.0-linux-x86_64.tar.gz",
+  "archive_sha256": "4b3b6035adbb99f3bb47c75e55804e1f650f96b35b825d95a6cd4ae85ce39537",
+  "archive_matches_release_asset_digest": true,
+  "server_binary_sha256": "bcb312e517a427ee4acbc064910d4ea90d542f6d0f7ba361adf30446a5d37efa",
+  "model_download_bytes": 0
+}

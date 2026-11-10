@@ -1,10 +1,10 @@
 {
   "ticket_id": "ticket-001",
   "queue": "change_address",
-  "confidence": 0.9997408789006862,
-  "address_change_probability": 0.9861217309837942,
-  "explicitness_score": 1.7760466238635269,
-  "review_priority": 0.875699,
+  "confidence": 0.9997735553061748,
+  "address_change_probability": 0.9944646490188995,
+  "explicitness_score": 1.9797657017749146,
+  "review_priority": 0.984404,
   "action": "review_request_before_changing_order",
   "answers": [
     {
@@ -13,32 +13,32 @@
       "probabilities": [
         {
           "value": "billing_question",
-          "probability": 1.4187833178380963e-06
+          "probability": 8.96356046986516e-06
         },
         {
           "value": "cancel_order",
-          "probability": 0.0001391700124825059
+          "probability": 0.00010532086870330633
         },
         {
           "value": "change_address",
-          "probability": 0.9997408789006862
+          "probability": 0.9997735553061748
         },
         {
           "value": "report_damage",
-          "probability": 5.028781379401193e-06
+          "probability": 1.7795602656192624e-05
         },
         {
           "value": "track_order",
-          "probability": 0.00011350352213417096
+          "probability": 9.436466199573929e-05
         }
       ],
-      "confidence": 0.9996760986258576,
+      "confidence": 0.9997169441327186,
       "choice": "change_address"
     },
     {
       "name": "address_change",
       "type": "predicate",
-      "probability": 0.9861217309837942
+      "probability": 0.9944646490188995
     },
     {
       "name": "explicitness",
@@ -47,21 +47,21 @@
         {
           "label": "none",
           "value": 0,
-          "probability": 0.015179489959193966
+          "probability": 0.0029648925811185827
         },
         {
           "label": "possible",
           "value": 1,
-          "probability": 0.19359439621808508
+          "probability": 0.014304513062848136
         },
         {
           "label": "explicit",
           "value": 2,
-          "probability": 0.7912261138227209
+          "probability": 0.9827305943560333
         }
       ],
-      "confidence": 0.6640699357952904,
-      "score": 1.7760466238635269
+      "confidence": 0.969648552662372,
+      "score": 1.9797657017749146
     }
   ]
 }

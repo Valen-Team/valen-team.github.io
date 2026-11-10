@@ -240,6 +240,6 @@ print(response.json()["answers"])
 
 ## Supported scope
 
-Full Valen Qwen3.5 Mixer checkpoints, `shared_state` execution, one GPU, TP=PP=1. Text and images support predicate, choice, and score questions: choice has 1–255 candidates; score has 2–255 ordered levels. For video, extract frames and submit them as image inputs.
+Full Valen Qwen3.5 Mixer checkpoints, `shared_state` execution, one GPU, TP=PP=1. Text and images support predicate, choice, and score questions: choice has 1–255 candidates; score has 2–255 ordered levels. Valen-Decision-1.5 checkpoints also answer bbox questions, which locate a described object in one input image. For video, extract frames and submit them as image inputs.
 
 See [SystemOne](./api/systemone.md) and [Decisions](./api/decisions.md) for question and answer structures.

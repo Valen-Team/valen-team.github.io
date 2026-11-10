@@ -1,7 +1,10 @@
 {
   "status": "passed",
   "validation_kind": "real_model_smoke",
-  "scope": "Cached complete Valen-0.8B, one H200 CUDA GPU, LoRA rank 8, SDPA BF16, 1 training step and resume to step 2; reload/inference and same independent synthetic test before/after.",
+  "date": "2026-11-10",
+  "scope": "Complete Valen-Decision-1.5-0.8B, one NVIDIA H200 GPU, LoRA rank 8, SDPA BF16, 1 training step and resume to step 2; reload/inference and same independent synthetic test before/after.",
+  "model": "Valen-Team/Valen-Decision-1.5-0.8B",
+  "model_revision": "ae8bdf7606c0dbd627301174c9cb800240fb4ec7",
   "quality_improvement_claimed": false,
   "export_validated": false,
   "test_records": 3,
@@ -20,9 +23,9 @@
         "brier": 3,
         "nll": 3
       },
-      "accuracy": 1.0,
-      "brier": 0.0033288316135440255,
-      "nll": 0.02991968276910484
+      "accuracy": 0.6666666666666666,
+      "brier": 0.2788212316421171,
+      "nll": 0.46242616698145866
     }
   },
   "after": {
@@ -34,38 +37,37 @@
         "brier": 3,
         "nll": 3
       },
-      "accuracy": 1.0,
-      "brier": 0.0019259190406349564,
-      "nll": 0.022800371089639764
+      "accuracy": 0.6666666666666666,
+      "brier": 0.2625991740108778,
+      "nll": 0.43229179332653683
     }
   },
+  "training_loss": [
+    {
+      "step": 1,
+      "loss": 0.6335191481436292
+    },
+    {
+      "step": 2,
+      "loss": 0.5635997727513313
+    }
+  ],
   "training_tests": {
     "passed": 39,
     "skipped": 1,
-    "skip": "Optional Decision Index dependency unavailable; no Decision Index result claimed"
+    "summary": "39 passed, 1 skipped in 4.78s"
   },
   "environment": {
-    "torch": "2.14.0+cu130",
-    "transformers": "5.19.0",
+    "torch": "2.11.0+cu128",
+    "transformers": "5.20.2",
     "peft": "0.18.1",
-    "cuda": true
+    "cuda": true,
+    "device": "NVIDIA H200"
   },
   "attempts": [
     {
       "attempt": 1,
-      "result": "PEFT missing at preflight; no training updates"
-    },
-    {
-      "attempt": 2,
-      "result": "Compute-node PyPI timeout; no training updates"
-    },
-    {
-      "attempt": 3,
-      "result": "Baseline evaluation passed; training stopped before updates due to missing PyAV metadata"
-    },
-    {
-      "attempt": 4,
-      "result": "Passed using isolated small Python source packages and existing P1 cached dependencies"
+      "result": "Passed: all 11 steps exited 0 in one job"
     }
   ],
   "raw_results": "/cookbook/validation/p2-finetuning-smoke.json"

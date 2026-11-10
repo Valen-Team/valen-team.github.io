@@ -23,20 +23,20 @@
             "probabilities": [
               {
                 "value": "address",
-                "probability": 0.9999687802227345
+                "probability": 0.9995182096535702
               },
               {
                 "value": "cancel",
-                "probability": 3.121977726547585e-05
+                "probability": 0.00048179034642988305
               }
             ],
-            "confidence": 0.999937560445469,
+            "confidence": 0.9990364193071404,
             "choice": "address"
           },
           {
             "name": "change_address",
             "type": "predicate",
-            "probability": 0.998255233221263
+            "probability": 0.9989045813825966
           },
           {
             "name": "explicitness",
@@ -45,21 +45,21 @@
               {
                 "label": "none",
                 "value": 0,
-                "probability": 0.01275024985506279
+                "probability": 0.0011819255274526429
               },
               {
                 "label": "possible",
                 "value": 1,
-                "probability": 0.05360192816521193
+                "probability": 0.00408750419830247
               },
               {
                 "label": "explicit",
                 "value": 2,
-                "probability": 0.9336478219797253
+                "probability": 0.9947305702742449
               }
             ],
-            "confidence": 0.8813463581869938,
-            "score": 1.9208975721246626
+            "confidence": 0.9903229671201884,
+            "score": 1.9935486447467923
           }
         ],
         "usage": {
@@ -86,20 +86,20 @@
             "probabilities": [
               {
                 "value": "address",
-                "probability": 0.9999999990252646
+                "probability": 0.9999997676542861
               },
               {
                 "value": "cancel",
-                "probability": 9.747353526470285e-10
+                "probability": 2.323457138919269e-07
               }
             ],
-            "confidence": 0.9999999980505292,
+            "confidence": 0.9999995353085722,
             "choice": "address"
           },
           {
             "name": "change_address",
             "type": "predicate",
-            "probability": 0.9999969451474767
+            "probability": 0.9999987974262954
           },
           {
             "name": "explicitness",
@@ -108,21 +108,21 @@
               {
                 "label": "none",
                 "value": 0,
-                "probability": 0.00018584949599269473
+                "probability": 1.4117615493320009e-06
               },
               {
                 "label": "possible",
                 "value": 1,
-                "probability": 0.0032846176464923584
+                "probability": 1.6884863237175446e-05
               },
               {
                 "label": "explicit",
                 "value": 2,
-                "probability": 0.996529532857515
+                "probability": 0.9999817033752134
               }
             ],
-            "confidence": 0.9945155250422834,
-            "score": 1.9963436833615225
+            "confidence": 0.9999704374204963,
+            "score": 1.999980291613664
           }
         ],
         "usage": {
@@ -149,20 +149,20 @@
             "probabilities": [
               {
                 "value": "cancel",
-                "probability": 3.649996429227637e-05
+                "probability": 0.00020844533285910627
               },
               {
                 "value": "address",
-                "probability": 0.9999635000357078
+                "probability": 0.9997915546671409
               }
             ],
-            "confidence": 0.9999270000714156,
+            "confidence": 0.9995831093342817,
             "choice": "address"
           },
           {
             "name": "change_address",
             "type": "predicate",
-            "probability": 0.998138142815108
+            "probability": 0.9991476049562641
           },
           {
             "name": "explicitness",
@@ -171,21 +171,21 @@
               {
                 "label": "none",
                 "value": 0,
-                "probability": 0.013312637551320521
+                "probability": 0.0012583568701239269
               },
               {
                 "label": "possible",
                 "value": 1,
-                "probability": 0.05028963273088808
+                "probability": 0.004604511964660997
               },
               {
                 "label": "explicit",
                 "value": 2,
-                "probability": 0.9363977297177914
+                "probability": 0.9941371311652151
               }
             ],
-            "confidence": 0.8846276382497062,
-            "score": 1.923085092166471
+            "confidence": 0.9893181614426367,
+            "score": 1.992878774295091
           }
         ],
         "usage": {
@@ -212,22 +212,22 @@
             "probabilities": [
               {
                 "value": true,
-                "probability": 0.9995143580761107
+                "probability": 0.9987513434082687
               },
               {
                 "value": "true",
-                "probability": 0.0004421172379099738
+                "probability": 0.0009923804893717683
               },
               {
                 "value": false,
-                "probability": 2.689618630290796e-05
+                "probability": 0.000184586706306081
               },
               {
                 "value": "false",
-                "probability": 1.6628499676423394e-05
+                "probability": 7.168939605344302e-05
               }
             ],
-            "confidence": 0.9993524774348143,
+            "confidence": 0.9983351245443582,
             "choice": true
           }
         ],
@@ -255,22 +255,22 @@
             "probabilities": [
               {
                 "value": true,
-                "probability": 0.9999998033415098
+                "probability": 0.9999989734082734
               },
               {
                 "value": "true",
-                "probability": 1.9565760654423197e-07
+                "probability": 9.872820378133443e-07
               },
               {
                 "value": false,
-                "probability": 7.24107838845509e-10
+                "probability": 3.415746579990762e-08
               },
               {
                 "value": "false",
-                "probability": 2.7677570961054653e-10
+                "probability": 5.1522229116207745e-09
               }
             ],
-            "confidence": 0.9999997377886798,
+            "confidence": 0.9999986312110312,
             "choice": true
           }
         ],
@@ -298,22 +298,22 @@
             "probabilities": [
               {
                 "value": "false",
-                "probability": 4.657939890163753e-06
+                "probability": 0.00012475926710423164
               },
               {
                 "value": false,
-                "probability": 1.612672002905918e-05
+                "probability": 0.00043001656979166803
               },
               {
                 "value": "true",
-                "probability": 0.0013851789888089034
+                "probability": 0.010465748044015634
               },
               {
                 "value": true,
-                "probability": 0.998594036351272
+                "probability": 0.9889794761190885
               }
             ],
-            "confidence": 0.998125381801696,
+            "confidence": 0.9853059681587847,
             "choice": true
           }
         ],
@@ -338,7 +338,7 @@
           {
             "name": "red",
             "type": "predicate",
-            "probability": 0.5182708771299855
+            "probability": 0.8768717252909031
           },
           {
             "name": "color",
@@ -346,19 +346,19 @@
             "probabilities": [
               {
                 "value": "red",
-                "probability": 0.07339346780254176
+                "probability": 0.7491640913543411
               },
               {
                 "value": "blue",
-                "probability": 0.6364808629454929
+                "probability": 0.18922922783809948
               },
               {
                 "value": "green",
-                "probability": 0.29012566925196537
+                "probability": 0.06160668080755942
               }
             ],
-            "confidence": 0.45472129441823933,
-            "choice": "blue"
+            "confidence": 0.6237461370315117,
+            "choice": "red"
           },
           {
             "name": "brightness",
@@ -367,24 +367,24 @@
               {
                 "label": "dark",
                 "value": 0,
-                "probability": 0.1148758963713018
+                "probability": 0.006220160525210086
               },
               {
                 "label": "bright",
                 "value": 1,
-                "probability": 0.8851241036286982
+                "probability": 0.99377983947479
               }
             ],
-            "confidence": 0.7702482072573964,
-            "score": 0.8851241036286982
+            "confidence": 0.9875596789495799,
+            "score": 0.99377983947479
           }
         ],
         "usage": {
-          "input_tokens": 212,
+          "input_tokens": 215,
           "output_tokens": 0
         },
         "internal_usage": {
-          "compute_tokens": 212
+          "compute_tokens": 215
         }
       }
     },
@@ -400,7 +400,7 @@
           {
             "name": "red",
             "type": "predicate",
-            "probability": 0.5364930251306522
+            "probability": 0.9806641287767176
           },
           {
             "name": "color",
@@ -408,19 +408,19 @@
             "probabilities": [
               {
                 "value": "red",
-                "probability": 0.010889339345460181
+                "probability": 0.9340882265289734
               },
               {
                 "value": "blue",
-                "probability": 0.8189500537804476
+                "probability": 0.059595082735869
               },
               {
                 "value": "green",
-                "probability": 0.1701606068740921
+                "probability": 0.006316690735157709
               }
             ],
-            "confidence": 0.7284250806706714,
-            "choice": "blue"
+            "confidence": 0.9011323397934601,
+            "choice": "red"
           },
           {
             "name": "brightness",
@@ -429,24 +429,24 @@
               {
                 "label": "dark",
                 "value": 0,
-                "probability": 0.016565139223128113
+                "probability": 3.917471157818864e-05
               },
               {
                 "label": "bright",
                 "value": 1,
-                "probability": 0.9834348607768719
+                "probability": 0.9999608252884218
               }
             ],
-            "confidence": 0.9668697215537437,
-            "score": 0.9834348607768719
+            "confidence": 0.9999216505768436,
+            "score": 0.9999608252884218
           }
         ],
         "usage": {
-          "input_tokens": 212,
+          "input_tokens": 215,
           "output_tokens": 0
         },
         "internal_usage": {
-          "compute_tokens": 212
+          "compute_tokens": 215
         }
       }
     },
@@ -462,7 +462,7 @@
           {
             "name": "red",
             "type": "predicate",
-            "probability": 0.5182809070943398
+            "probability": 0.8774588402671706
           },
           {
             "name": "color",
@@ -470,19 +470,19 @@
             "probabilities": [
               {
                 "value": "green",
-                "probability": 0.4106528645479961
+                "probability": 0.2426279553429938
               },
               {
                 "value": "blue",
-                "probability": 0.5325323093147293
+                "probability": 0.22406977484172041
               },
               {
                 "value": "red",
-                "probability": 0.056814826137274704
+                "probability": 0.5333022698152857
               }
             ],
-            "confidence": 0.2987984639720939,
-            "choice": "blue"
+            "confidence": 0.2999534047229286,
+            "choice": "red"
           },
           {
             "name": "brightness",
@@ -491,24 +491,24 @@
               {
                 "label": "dark",
                 "value": 0,
-                "probability": 0.1097227100890382
+                "probability": 0.005987913019589051
               },
               {
                 "label": "bright",
                 "value": 1,
-                "probability": 0.8902772899109618
+                "probability": 0.994012086980411
               }
             ],
-            "confidence": 0.7805545798219236,
-            "score": 0.8902772899109618
+            "confidence": 0.9880241739608219,
+            "score": 0.994012086980411
           }
         ],
         "usage": {
-          "input_tokens": 212,
+          "input_tokens": 215,
           "output_tokens": 0
         },
         "internal_usage": {
-          "compute_tokens": 212
+          "compute_tokens": 215
         }
       }
     },
@@ -524,7 +524,7 @@
           {
             "name": "red",
             "type": "predicate",
-            "probability": 0.5364243699393445
+            "probability": 0.8129178957133247
           },
           {
             "name": "color",
@@ -532,18 +532,18 @@
             "probabilities": [
               {
                 "value": "red",
-                "probability": 0.5720720194441735
+                "probability": 0.8341787035996794
               },
               {
                 "value": "blue",
-                "probability": 0.42752891967786716
+                "probability": 0.07458987138416595
               },
               {
                 "value": "green",
-                "probability": 0.00039906087795935525
+                "probability": 0.09123142501615454
               }
             ],
-            "confidence": 0.3581080291662603,
+            "confidence": 0.7512680553995189,
             "choice": "red"
           },
           {
@@ -553,24 +553,24 @@
               {
                 "label": "dark",
                 "value": 0,
-                "probability": 0.00010388511441724037
+                "probability": 0.00928288758540291
               },
               {
                 "label": "bright",
                 "value": 1,
-                "probability": 0.9998961148855827
+                "probability": 0.990717112414597
               }
             ],
-            "confidence": 0.9997922297711656,
-            "score": 0.9998961148855827
+            "confidence": 0.9814342248291942,
+            "score": 0.990717112414597
           }
         ],
         "usage": {
-          "input_tokens": 271,
+          "input_tokens": 839,
           "output_tokens": 0
         },
         "internal_usage": {
-          "compute_tokens": 271
+          "compute_tokens": 839
         }
       }
     },
@@ -586,7 +586,7 @@
           {
             "name": "red",
             "type": "predicate",
-            "probability": 0.5724641769192015
+            "probability": 0.9497011464885479
           },
           {
             "name": "color",
@@ -594,18 +594,18 @@
             "probabilities": [
               {
                 "value": "red",
-                "probability": 0.641639014013837
+                "probability": 0.9804339566594821
               },
               {
                 "value": "blue",
-                "probability": 0.35836067376117536
+                "probability": 0.00783898556114446
               },
               {
                 "value": "green",
-                "probability": 3.1222498762565666e-07
+                "probability": 0.0117270577793735
               }
             ],
-            "confidence": 0.4624585210207556,
+            "confidence": 0.970650934989223,
             "choice": "red"
           },
           {
@@ -615,24 +615,24 @@
               {
                 "label": "dark",
                 "value": 0,
-                "probability": 1.0794359511040874e-08
+                "probability": 8.77867005573027e-05
               },
               {
                 "label": "bright",
                 "value": 1,
-                "probability": 0.9999999892056405
+                "probability": 0.9999122132994427
               }
             ],
-            "confidence": 0.999999978411281,
-            "score": 0.9999999892056405
+            "confidence": 0.9998244265988854,
+            "score": 0.9999122132994427
           }
         ],
         "usage": {
-          "input_tokens": 271,
+          "input_tokens": 839,
           "output_tokens": 0
         },
         "internal_usage": {
-          "compute_tokens": 271
+          "compute_tokens": 839
         }
       }
     },
@@ -648,7 +648,7 @@
           {
             "name": "red",
             "type": "predicate",
-            "probability": 0.5364496266730034
+            "probability": 0.8198314383652021
           },
           {
             "name": "color",
@@ -656,19 +656,19 @@
             "probabilities": [
               {
                 "value": "green",
-                "probability": 0.0016629602544766912
+                "probability": 0.09572300167160455
               },
               {
                 "value": "blue",
-                "probability": 0.590818982553967
+                "probability": 0.09283904766362804
               },
               {
                 "value": "red",
-                "probability": 0.40751805719155626
+                "probability": 0.8114379506647674
               }
             ],
-            "confidence": 0.38622847383095055,
-            "choice": "blue"
+            "confidence": 0.7171569259971511,
+            "choice": "red"
           },
           {
             "name": "brightness",
@@ -677,24 +677,24 @@
               {
                 "label": "dark",
                 "value": 0,
-                "probability": 0.0001181819344889376
+                "probability": 0.009570248626225618
               },
               {
                 "label": "bright",
                 "value": 1,
-                "probability": 0.9998818180655111
+                "probability": 0.9904297513737744
               }
             ],
-            "confidence": 0.9997636361310221,
-            "score": 0.9998818180655111
+            "confidence": 0.9808595027475487,
+            "score": 0.9904297513737744
           }
         ],
         "usage": {
-          "input_tokens": 271,
+          "input_tokens": 839,
           "output_tokens": 0
         },
         "internal_usage": {
-          "compute_tokens": 271
+          "compute_tokens": 839
         }
       }
     },
@@ -754,7 +754,5 @@
       }
     }
   ],
-  "passed": true,
-  "backend": "onnx-production",
-  "direct_video": "tested"
+  "passed": true
 }

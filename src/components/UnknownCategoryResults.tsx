@@ -13,25 +13,29 @@ function policy(value:{reject_all:boolean;threshold:number|null;margin:number|nu
 export default function UnknownCategoryResults({section}:{section:'example'|'takeaway'|'metrics'|'cases'}) {
   const zh=useChinese();
   if(section==='example') {
-    const before=evidence.cases.find(r=>r.strategy==='A_threshold'&&r.kind==='outside'&&r.route==='automatic');
-    const after=evidence.cases.find(r=>r.strategy==='C_none_threshold'&&r.id===before?.id);
-    if(!before||!after) return <p>{zh?'请查看下方完整实测记录。':'See the complete recorded cases below.'}</p>;
+    const rows=names.map(s=>evidence.cases.find(r=>r.strategy===s&&r.id===evidence.paired_id));
+    if(rows.some(r=>!r)) return <p>{zh?'请查看下方完整实测记录。':'See the complete recorded cases below.'}</p>;
+    const labels={A_threshold:['Original options; validated threshold','原候选；验证集选出的阈值'],B_none:['With none','增加 none'],C_none_threshold:['With none; validated threshold','增加 none；验证集选出的阈值']};
+    const outcome=(r:typeof rows[number])=>r!.route==='automatic'?(zh?'自动接收，分错队列':'Accepted into the wrong queue')
+      :r!.reason==='no_validation_rule'?(zh?'交给人工：没有阈值通过验证，全部复核':'Human review: no threshold passed validation, so everything is reviewed')
+      :r!.reason==='low_probability'?(zh?`交给人工：低于 p ≥ ${evidence.policies.C_none_threshold.threshold}`:`Human review: below p ≥ ${evidence.policies.C_none_threshold.threshold}`)
+      :(zh?'交给人工':'Human review');
     return <div>
-      <blockquote>{before.text}</blockquote>
+      <blockquote>{rows[0]!.text}</blockquote>
       <table><thead><tr><th>{zh?'同一条请求':'Same request'}</th><th>{zh?'Valen 的选择':'Valen choice'}</th><th>{zh?'应用处理':'Application outcome'}</th></tr></thead><tbody>
-        {[before,after].map((r,i)=><tr key={r.strategy}><td>{i===0?(zh?'原候选＋阈值':'Original options + gate'):(zh?'增加 none':'With none')}</td><td><code>{r.selected}</code><br/><small>{percent(r.probability)}</small></td><td>{r.route==='automatic'?(zh?'自动接收，分错队列':'Accepted into the wrong queue'):(zh?'交给人工':'Human review')}</td></tr>)}
+        {rows.map(r=><tr key={r!.strategy}><td>{labels[r!.strategy as keyof typeof labels][zh?1:0]}</td><td><code>{r!.selected}</code><br/><small>{percent(r!.probability)}</small></td><td>{outcome(r)}</td></tr>)}
       </tbody></table>
-      <small>{zh?'记录中的 Valen-0.8B 测试案例；概率对应各自的候选集合。':'Recorded Valen-0.8B test case; probabilities belong to their respective candidate sets.'}</small>
+      <small>{zh?`记录中的 ${evidence.model_label} 测试案例；概率对应各自的候选集合。`:`Recorded ${evidence.model_label} test case; probabilities belong to their respective candidate sets.`}</small>
     </div>;
   }
   if(section==='takeaway') {
-    const a=evidence.results.A_threshold.test, b=evidence.results.B_none.test;
-    return <table><thead><tr><th>{zh?'你需要关心的结果':'What matters'}</th><th>{zh?'原候选＋阈值':'Original options + gates'}</th><th>{zh?'增加 none':'With none'}</th></tr></thead><tbody>
-      <tr><th>{zh?'未知请求被错误接收':'Outside requests accepted'}</th><td>{a.counts.outside_accepted} / {a.counts.outside}<br/>{percent(a.outside_miss_rate.value)}</td><td>{b.counts.outside_accepted} / {b.counts.outside}<br/>{percent(b.outside_miss_rate.value)}</td></tr>
-      <tr><th>{zh?'正常请求转人工':'Normal requests reviewed'}</th><td>{a.counts.in_scope_review} / {a.counts.in_scope}<br/>{percent(a.in_scope_review_rate.value)}</td><td>{b.counts.in_scope_review} / {b.counts.in_scope}<br/>{percent(b.in_scope_review_rate.value)}</td></tr>
-      <tr><th>{zh?'自动处理中的错误':'Errors among acceptances'}</th><td>{a.counts.accepted_errors} / {a.counts.accepted}<br/>{percent(a.accepted_error_rate.value)}</td><td>{b.counts.accepted_errors} / {b.counts.accepted}<br/>{percent(b.accepted_error_rate.value)}</td></tr>
-      <tr><th>{zh?'自动处理量':'Automatic volume'}</th><td>{a.counts.accepted} / {a.counts.requests}<br/>{percent(a.coverage.value)}</td><td>{b.counts.accepted} / {b.counts.requests}<br/>{percent(b.coverage.value)}</td></tr>
-    </tbody></table>;
+    const cell=(n:number,d:number,v:number|null)=><>{n} / {d}<br/>{percent(v)}</>;
+    return <div className="table-responsive"><table><thead><tr><th>{zh?'你需要关心的结果':'What matters'}</th>{names.map(s=><th key={s}>{titles[s][zh?1:0]}</th>)}</tr></thead><tbody>
+      <tr><th>{zh?'未知请求被错误接收':'Outside requests accepted'}</th>{names.map(s=>{const t=evidence.results[s].test;return <td key={s}>{cell(t.counts.outside_accepted,t.counts.outside,t.outside_miss_rate.value)}</td>;})}</tr>
+      <tr><th>{zh?'正常请求转人工':'Normal requests reviewed'}</th>{names.map(s=>{const t=evidence.results[s].test;return <td key={s}>{cell(t.counts.in_scope_review,t.counts.in_scope,t.in_scope_review_rate.value)}</td>;})}</tr>
+      <tr><th>{zh?'自动处理中的错误':'Errors among acceptances'}</th>{names.map(s=>{const t=evidence.results[s].test;return <td key={s}>{cell(t.counts.accepted_errors,t.counts.accepted,t.accepted_error_rate.value)}</td>;})}</tr>
+      <tr><th>{zh?'自动处理量':'Automatic volume'}</th>{names.map(s=>{const t=evidence.results[s].test;return <td key={s}>{cell(t.counts.accepted,t.counts.requests,t.coverage.value)}</td>;})}</tr>
+    </tbody></table></div>;
   }
   if(section==='metrics') return <div>
     <p><strong>{zh?'记录范围':'Recorded scope'}</strong>: {evidence.model_label} · {evidence.runtime_label} · {zh?'600 次文本请求；仅测试划分结果如下':'600 text requests; test-split results below'}</p>

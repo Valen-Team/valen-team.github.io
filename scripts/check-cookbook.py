@@ -17,6 +17,9 @@ sys.path.insert(0, str(CODE))
 from common import choice_status
 from ticket_routing import run as route
 
+# Performance rows that failed in the published Valen-Decision-1.5 run; they stay visible.
+EXPECTED_FAILURES = [('gguf-q8', 'video')]
+
 # The command each page shows, for recipes that take more than the shared options.
 REPLAY_COMMANDS = {
     'skill_support_router': ['--message', 'Order was super late AND they forgot my drink', '--order-status', 'delivered'],
@@ -122,21 +125,34 @@ class Policies(unittest.TestCase):
         validation = ROOT / 'static/cookbook/validation'
         release = json.loads((validation / 'release-checks.json').read_text())
         performance = json.loads((validation / 'performance.json').read_text())
+        failures_record = json.loads((validation / 'preserved-failures.json').read_text())
         self.assertTrue(release['completed'])
         self.assertTrue(release['passed'])
         self.assertFalse(performance['passed'])  # Do not erase the unsupported video probe.
         failures = [row for row in performance['records'] if not row['passed']]
-        self.assertEqual([(row['backend'], row['modality']) for row in failures], [('gguf-q8', 'video')])
-        self.assertEqual(len([row for row in performance['records'] if row['passed']]), 8)
+        self.assertEqual([(row['backend'], row['modality']) for row in failures], EXPECTED_FAILURES)
+        self.assertEqual(len([row for row in performance['records'] if row['passed']]), 9 - len(EXPECTED_FAILURES))
+        self.assertEqual(sorted(failures_record['failure_notes']), sorted(b + '/' + m for b, m in EXPECTED_FAILURES))
+        self.assertTrue(failures_record['earlier_attempts'])
         fixture = release['fixture_sha256']
-        for name in ['native-fp32', 'onnx-fp32', 'onnx-production', 'gguf-prebuilt', 'gguf-source-video']:
+        for name in ['native-fp32', 'onnx-fp32', 'onnx-production', 'gguf-runtime']:
             report = json.loads((validation / (name + '-contract.json')).read_text())
             self.assertEqual(report['fixture_sha256'], fixture)
             self.assertTrue(report['passed'])
             self.assertTrue(all(row['passed'] for row in report['records']))
-        self.assertNotIn('video', json.loads((validation / 'gguf-prebuilt-contract.json').read_text())['scope'])
-        self.assertIn('video', json.loads((validation / 'gguf-source-video-contract.json').read_text())['scope'])
-
+            self.assertEqual('video' in report['scope'], name != 'gguf-runtime')
+        sdk = release['real_sdk_http']
+        for name in ['onnx-production', 'gguf-runtime']:
+            for language in ['python', 'javascript']:
+                report = sdk[name + '-' + language + '-sdk']
+                self.assertTrue(report['all_cases_answered_or_rejected'])
+                # Invalid requests the SDK rejects before sending stay listed rather than counted as passes.
+                self.assertEqual(report['not_passed'], ['duplicate-names', 'numeric-choice'])
+                self.assertEqual(report['rejected_in_client'], report['not_passed'])
+        comparison = json.loads((validation / 'cross-backend.json').read_text())
+        self.assertTrue(comparison['passed'])
+        self.assertEqual({r['backend'] for r in comparison['records']}, {'onnx-fp32', 'onnx-production', 'gguf-runtime'})
+        self.assertEqual(len(comparison['recipe_records']), 8)
 
 def main():
     p = argparse.ArgumentParser(__doc__)

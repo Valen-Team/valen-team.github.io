@@ -1,0 +1,67 @@
+{
+  "ticket_id": "ticket-001",
+  "queue": "change_address",
+  "confidence": 0.9997836634180873,
+  "address_change_probability": 0.9946369608379642,
+  "explicitness_score": 1.978287548937732,
+  "review_priority": 0.983839,
+  "action": "review_request_before_changing_order",
+  "answers": [
+    {
+      "name": "intent",
+      "type": "choice",
+      "probabilities": [
+        {
+          "value": "billing_question",
+          "probability": 8.96797335495441e-06
+        },
+        {
+          "value": "cancel_order",
+          "probability": 9.494333935050946e-05
+        },
+        {
+          "value": "change_address",
+          "probability": 0.9997836634180873
+        },
+        {
+          "value": "report_damage",
+          "probability": 1.822267141463441e-05
+        },
+        {
+          "value": "track_order",
+          "probability": 9.420259779245417e-05
+        }
+      ],
+      "confidence": 0.9997295792726091,
+      "choice": "change_address"
+    },
+    {
+      "name": "address_change",
+      "type": "predicate",
+      "probability": 0.9946369608379642
+    },
+    {
+      "name": "explicitness",
+      "type": "score",
+      "probabilities": [
+        {
+          "label": "none",
+          "value": 0,
+          "probability": 0.003247218241958656
+        },
+        {
+          "label": "possible",
+          "value": 1,
+          "probability": 0.015218014578350326
+        },
+        {
+          "label": "explicit",
+          "value": 2,
+          "probability": 0.9815347671796909
+        }
+      ],
+      "confidence": 0.9674313234065985,
+      "score": 1.978287548937732
+    }
+  ]
+}

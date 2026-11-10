@@ -53,16 +53,17 @@ with Valen.local("Valen-Team/Valen-Decision-1.5-0.8B-ONNX", variant="fp32") as c
 
 ## 模型与变体
 
-| 模型 | `fp32` · CPU | `q8-mlp` · CPU |
-| --- | --- | --- |
-| [Valen-Decision-1.5 0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) | 3.518 GB | 2.758 GB |
-| [Valen-Decision-1.5 2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) | 8.969 GB | 6.364 GB |
-| [Valen-Decision-1.5 4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) | 18.278 GB | 11.766 GB |
-| [Valen-Decision-1.5 9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) | 33.706 GB | 19.814 GB |
+| 模型 | `fp32` · CPU | `q8-mlp` · CPU | `cuda-fp16` · Python CUDA | `web-portable` · 浏览器 |
+| --- | --- | --- | --- | --- |
+| [Valen-Decision-1.5 0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) | 3.518 GB | 2.758 GB | 2.013 GB | 2.456 GB |
+| [Valen-Decision-1.5 2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) | 8.969 GB | 6.364 GB | 5.205 GB | — |
+| [Valen-Decision-1.5 4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) | 18.278 GB | 11.766 GB | 9.866 GB | — |
+| [Valen-Decision-1.5 9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) | 33.706 GB | 19.814 GB | 17.832 GB | — |
+| [Valen-Decision-1.5 27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX) | 104.487 GB | 55.288 GB | 53.237 GB | — |
 
-表中为十进制 GB 下载体积，包含视觉组件，不是运行时内存需求。[Valen-Decision-1.5 27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX) 采用相同的结构。
+表中为十进制 GB 下载体积，包含视觉组件，不是运行时内存需求。
 
-每个模型包包含 `valen_onnx.json` 清单以及 `embedding`、`vision`、`decision`、`grounding` 四张图：与 Valen-Decision-1.0 模型包结构相同，另有回答 [bbox 问题](#bbox-问题)的 grounding 图。CPU 建议从 `fp32` 开始。`q8-mlp` 将主干 MLP 权重量化为 8 位，决策头、定位头和视觉图保持 FP32。
+每个模型包包含 `valen_onnx.json` 清单以及 `embedding`、`vision`、`decision`、`grounding` 四张图：与 Valen-Decision-1.0 模型包结构相同，另有回答 [bbox 问题](#bbox-问题)的 grounding 图。CPU 建议从 `fp32` 开始。`q8-mlp` 将主干 MLP 权重量化为 8 位，决策头、定位头和视觉图保持 FP32。`cuda-fp16` 通过 Python SDK 在 NVIDIA GPU 上以 FP16 运行主干和嵌入，视觉图、决策头和定位头保持 FP32。`web-portable` 是供 JavaScript SDK 在浏览器 WebGPU 中运行的 0.8B 图，使用相同的 Valen 权重。四个变体都能回答 bbox 问题。
 
 每个模型包附带 `validation.json`。0.8B 在 CPU 上与原生 PyTorch 模型对比，覆盖 13 个 Cookbook 应用（216 个对比值）：
 
@@ -73,9 +74,20 @@ with Valen.local("Valen-Team/Valen-Decision-1.5-0.8B-ONNX", variant="fp32") as c
 
 单次请求中，0.8B、2B、4B 和 9B 的 `fp32` 与原生模型的差异约为 1e-5。
 
+`cuda-fp16` 与 `web-portable` 在一个文本请求（predicate、choice、score）、一个图片请求和一个 bbox 请求上与原生 FP32 模型对比，每个模型 44 个对比值，决策全部一致：
+
+| 变体 | 设备 | 最大概率差 | bbox 坐标最大差 |
+| --- | --- | --- | --- |
+| `cuda-fp16` 0.8B | NVIDIA H200 | 0.00032 | 0.0002 |
+| `cuda-fp16` 2B | NVIDIA H200 | 0.0010 | 0.0002 |
+| `cuda-fp16` 4B | NVIDIA H200 | 0.00023 | 0.0002 |
+| `cuda-fp16` 9B | NVIDIA H200 | 0.00098 | 0.0002 |
+| `cuda-fp16` 27B | NVIDIA H200 | 0.00016 | 0.0001 |
+| `web-portable` 0.8B | CPU（ONNX Runtime） | 0.0010 | 0.0002 |
+
 ### Valen-Decision-1.0 变体
 
-Valen-Decision-1.0 ONNX 仓库提供 `fp32` 与 `q8-mlp`，以及用于 Python CUDA 的 `cuda-fp16` 和用于浏览器 WebGPU 的 `web-portable`。本页的 [CUDA](#cuda) 与[浏览器 WebGPU](#浏览器-webgpu) 步骤使用这些仓库。Python SDK 0.4.0 及更早版本、JavaScript SDK 0.3.0 及更早版本运行这些仓库。
+Valen-Decision-1.0 ONNX 仓库提供 `fp32`、`q8-mlp`、`cuda-fp16`，0.8B 另有 `web-portable`。Python SDK 0.4.0 及更早版本、JavaScript SDK 0.3.0 及更早版本运行这些仓库。
 
 | 模型 | `fp32` · CPU | `q8-mlp` · CPU | `cuda-fp16` · Python CUDA | `web-portable` · 浏览器 |
 | --- | --- | --- | --- | --- |
@@ -83,11 +95,11 @@ Valen-Decision-1.0 ONNX 仓库提供 `fp32` 与 `q8-mlp`，以及用于 Python C
 | [Valen-Decision-1.0 2B](https://huggingface.co/Valen-Team/Valen-2B-ONNX) | 8.948 GB | 6.343 GB | 5.184 GB | — |
 | [Valen-Decision-1.0 4B](https://huggingface.co/Valen-Team/Valen-4B-ONNX) | 18.253 GB | 11.741 GB | 9.841 GB | — |
 
-表中为发布清单中的十进制 GB 下载体积，包含视觉组件。实测内存、延迟与质量对比见模型卡片。在 Valen-Decision-1.0 的 CPU 实测中，`q8-mlp` 缩小 MLP 权重并降低文本内存占用，速度比 FP32 慢。专用的 `web-portable` 变体提供 0.8B。CPU/CUDA 图使用 ONNX Runtime contrib 算子，不能直接替代浏览器图。
+表中为发布清单中的十进制 GB 下载体积，包含视觉组件。实测内存、延迟与质量对比见模型卡片。在 Valen-Decision-1.0 的 CPU 实测中，`q8-mlp` 缩小 MLP 权重并降低文本内存占用，速度比 FP32 慢。CPU/CUDA 图使用 ONNX Runtime contrib 算子，不能直接替代浏览器图。
 
 ### CUDA
 
-`cuda-fp16` 变体位于 Valen-Decision-1.0 ONNX 仓库。在独立 Python 环境中，从 Python SDK 仓库根目录安装 GPU 依赖：
+每个 Valen-Decision-1.5 模型包都包含 `cuda-fp16` 变体。在独立 Python 环境中，从 Python SDK 仓库根目录安装 GPU 依赖：
 
 ```bash
 python -m pip install ".[cuda]"
@@ -97,7 +109,7 @@ python -m pip install ".[cuda]"
 from valen_sdk import Valen
 
 with Valen.local(
-    "Valen-Team/Valen-0.8B-ONNX", variant="cuda-fp16",
+    "Valen-Team/Valen-Decision-1.5-0.8B-ONNX", variant="cuda-fp16",
     providers=[("CUDAExecutionProvider", {"use_tf32": "0"}), "CPUExecutionProvider"],
 ) as client:
     result = client.decisions(
@@ -238,7 +250,7 @@ npm install
 npm run dev
 ```
 
-打开终端显示的 localhost 地址，点击 **Run locally**。示例使用已发布的 Valen-Decision-1.0 0.8B `web-portable` 模型，包含运行时资源、加载反馈与错误提示。首次使用会下载并缓存模型组件，完整变体约为 2.443 GB。
+打开终端显示的 localhost 地址，点击 **Run locally**。`npm-v0.4.0` 标签中的示例使用 Valen-Decision-1.0 0.8B 的 `web-portable` 模型（约 2.443 GB），包含运行时资源、加载反馈与错误提示。在自己的页面中，用 `await Valen.local('Valen-Team/Valen-Decision-1.5-0.8B-ONNX', { variant: 'web-portable', device: 'webgpu' })` 加载 Valen-Decision-1.5，完整变体约为 2.456 GB。首次使用会下载并缓存模型组件。
 
 在 `examples/browser` 中运行 `npm run build` 和 `npm run preview` 可预览生产构建。部署需要 HTTPS 或 localhost、支持 WebGPU 的浏览器，以及示例中的 COOP/COEP 响应头。详见[浏览器示例](https://github.com/Valen-Team/valen-sdk-js/tree/main/examples/browser)。
 

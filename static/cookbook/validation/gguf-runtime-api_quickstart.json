@@ -6,32 +6,32 @@
       "probabilities": [
         {
           "value": "billing_question",
-          "probability": 1.4187833178380963e-06
+          "probability": 8.96797335495441e-06
         },
         {
           "value": "cancel_order",
-          "probability": 0.0001391700124825059
+          "probability": 9.494333935050946e-05
         },
         {
           "value": "change_address",
-          "probability": 0.9997408789006862
+          "probability": 0.9997836634180873
         },
         {
           "value": "report_damage",
-          "probability": 5.028781379401193e-06
+          "probability": 1.822267141463441e-05
         },
         {
           "value": "track_order",
-          "probability": 0.00011350352213417096
+          "probability": 9.420259779245417e-05
         }
       ],
-      "confidence": 0.9996760986258576,
+      "confidence": 0.9997295792726091,
       "choice": "change_address"
     },
     "address_change": {
       "name": "address_change",
       "type": "predicate",
-      "probability": 0.9861217309837942
+      "probability": 0.9946369608379642
     },
     "explicitness": {
       "name": "explicitness",
@@ -40,21 +40,21 @@
         {
           "label": "none",
           "value": 0,
-          "probability": 0.015179489959193966
+          "probability": 0.003247218241958656
         },
         {
           "label": "possible",
           "value": 1,
-          "probability": 0.19359439621808508
+          "probability": 0.015218014578350326
         },
         {
           "label": "explicit",
           "value": 2,
-          "probability": 0.7912261138227209
+          "probability": 0.9815347671796909
         }
       ],
-      "confidence": 0.6640699357952904,
-      "score": 1.7760466238635269
+      "confidence": 0.9674313234065985,
+      "score": 1.978287548937732
     }
   },
   "image": {
@@ -64,22 +64,22 @@
       "probabilities": [
         {
           "value": "pride",
-          "probability": 0.00024266329295405555
+          "probability": 0.00727114731857421
         },
         {
           "value": "flock",
-          "probability": 0.9963105297996027
+          "probability": 0.989914355972857
         },
         {
           "value": "clowder",
-          "probability": 0.002749012194385354
+          "probability": 0.002609865578168611
         },
         {
           "value": "gang",
-          "probability": 0.0006977947130579646
+          "probability": 0.00020463113040018545
         }
       ],
-      "confidence": 0.9950807063994702,
+      "confidence": 0.986552474630476,
       "choice": "flock"
     }
   },
@@ -90,22 +90,22 @@
       "probabilities": [
         {
           "value": "brown",
-          "probability": 0.014343334878796554
+          "probability": 0.005554845704525973
         },
         {
           "value": "white",
-          "probability": 0.9752438526923451
+          "probability": 0.9881418877805519
         },
         {
           "value": "red",
-          "probability": 0.007025658192234735
+          "probability": 0.00435145486301229
         },
         {
           "value": "orange",
-          "probability": 0.0033871542366235487
+          "probability": 0.0019518116519097628
         }
       ],
-      "confidence": 0.9669918035897935,
+      "confidence": 0.9841891837074025,
       "choice": "white"
     }
   },

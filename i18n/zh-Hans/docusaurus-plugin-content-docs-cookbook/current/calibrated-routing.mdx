@@ -33,7 +33,7 @@ cd valen-cookbook
 ```bash
 for role in calibration policy test; do
   python -m valen.reliability_collect \
-    --model-dir /models/Valen-0.8B --device cuda \
+    --model-dir /models/Valen-Decision-1.5-0.8B --device cuda \
     --data tickets/$role.jsonl --role "$role" \
     --protocol calibration_protocol.json \
     --group-namespace support-customers-v1 --output cache/$role.json
@@ -51,7 +51,7 @@ python -m valen.calibrate pipeline \
 
 ```bash
 python calibrated_ticket_routing.py \
-  --model-dir /models/Valen-0.8B --device cuda \
+  --model-dir /models/Valen-Decision-1.5-0.8B --device cuda \
   --request calibration_request.json \
   --protocol calibration_protocol.json \
   --calibration output/reliability/calibration.json \

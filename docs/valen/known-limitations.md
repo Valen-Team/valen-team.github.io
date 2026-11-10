@@ -12,7 +12,7 @@ Each entry says what goes wrong, how large the effect is, and the change that re
 
 Decision models of this size, Valen included, apply a written rule table or find one record in a list reliably only while the table or list is short. Accuracy falls quickly as it grows, and combining numbers is weak at every size.
 
-| Task in the question (ProceduralTypedDecisions) | Valen 0.8B / 2B / 4B | Other decision models up to 4B, median |
+| Task in the question (ProceduralTypedDecisions) | Valen-Decision-1.0 0.8B / 2B / 4B | Other decision models up to 4B, median |
 | --- | ---: | ---: |
 | Route a ticket by a rule table: 4–7 rules, one condition each | 77 / 76 / 97% | 87% |
 | 8–13 rules, up to two conditions each | 30 / 34 / 79% | 60% |
@@ -25,14 +25,14 @@ Decision models of this size, Valen included, apply a written rule table or find
 | Infer a fact from counts and conflicting reports | 59 / 56 / 62% | 69% |
 | Combine numbers: durations, balances, totals | 46 / 49 / 57% | 62% |
 
-**Do the rule, the lookup and the arithmetic in code.** Ask Valen only for the judgments code cannot make, one condition per question, and combine the answers in code. On 40 routing questions with 8–13 rules, one Choice over the categories with the rules in the state scored 33/40 on Valen 4B and 8/40 on 0.8B; one Noul per rule, with code taking the rule that holds, scored 40/40 on both.
+**Do the rule, the lookup and the arithmetic in code.** Ask Valen only for the judgments code cannot make, one condition per question, and combine the answers in code. On 40 routing questions with 8–13 rules (the first 40 level-1 `taxonomy_routing` records of the ProceduralTypedDecisions test split), Valen-Decision-1.5 0.8B, 2B and 4B on the hosted API answered all 40 correctly both ways, November 2026: one Choice over the categories with the rules in the state, and one Noul per rule with code taking the rule that holds. On Valen-Decision-1.0 the single Choice scored 33/40 on 4B and 8/40 on 0.8B, while one Noul per rule scored 40/40 on both.
 
 ## Recorded hard cases
 
 | Case | What happens | Restructure |
 | --- | --- | --- |
-| The correct category is missing from a Choice | Probability concentrates on the closest supplied candidate; an address change went to shipment tracking at 99.3% | Add a described `none` candidate and route it to review ([unknown categories](/cookbook/unknown-categories/)) |
-| A trailing generic sentence ("Please let me know the next step.") | It can move an out-of-scope message back into an in-scope category | Include such suffixed variants in your validation cases; for requests that must never be automated, also ask a Noul about that request itself ("The customer asks to change the delivery address") and route it in code |
+| The correct category is missing from a Choice | Probability concentrates on the closest supplied candidate; an address change went to shipment tracking at 99.1% on Valen-Decision-1.5-0.8B | Add a described `none` candidate and route it to review ([unknown categories](/cookbook/unknown-categories/)) |
+| A generic wrapper sentence ("Hello support.", "Thank you for your help.") | It can move an out-of-scope message back into an in-scope category; on Valen-Decision-1.5-0.8B a size-exchange request chose `none` as written and went to refunds once a greeting or thank-you was added | Include such wrapped variants in your validation cases; for requests that must never be automated, also ask a Noul about that request itself ("The customer asks to change the delivery address") and route it in code |
 | Single-candidate Choice | Always probability 1 and confidence 1 | Ask a Noul instead |
 | Score over two-peaked opinions | The expected index lands between the peaks | Read the level probabilities, or split the dimension into Nouls |
 | Target occupies a few pixels of a large image | The question fails the human test | Crop or resize around the target in code before sending |

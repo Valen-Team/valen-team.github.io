@@ -9,7 +9,7 @@ import UnknownCategoryResults from '@site/src/components/UnknownCategoryResults'
 
 你的自动工单系统能处理退款、查物流和开发票。客户要求“发货前修改收货地址”时，应该转给人工：**查物流的队列并不负责修改地址。**
 
-但在一次真实的 Valen 测试中，这条请求被分给了物流查询，选中概率达到 **99.3%**。即使应用要求概率至少为 99%，它也会通过。
+但在一次真实的 Valen-Decision-1.5-0.8B 测试中，这条请求被分给了物流查询，选中概率达到 **99.1%**。即使应用要求概率至少为 99%，它也会通过。
 
 ## 给模型一个“都不适用”的选项
 
@@ -17,21 +17,19 @@ import UnknownCategoryResults from '@site/src/components/UnknownCategoryResults'
 
 <UnknownCategoryResults section="example" />
 
-这次，模型选择了 `none`，应用把请求交给人工。Valen 仍然返回结构化选择和候选概率；你的代码只需要为这个选择安排一条兜底路径。
+有了 `none` 之后，物流查询的概率从 99.1% 降到 57.1%，`none` 得到 42.4%。物流查询仍排第一，所以“只要不是 `none` 就自动接收”的路由仍会把它分错队列；验证集选出的概率门槛 p ≥ 0.98 则把这次概率下降变成一次人工复核。Valen 仍然返回结构化选择和候选概率；兜底路径由你的代码安排。
 
 原因很直接：Choice 总会在你提供的候选中分配概率。当正确类别缺席时，“最可能的选项”仍可能是错误的。`none` 给了模型一个可表达的出口。把它作为普通 Choice 候选，就能接入现有流程。
 
-## 少一些错分，也会多一些人工
+## 把 `none` 和验证过的门槛一起用
 
-我们用 Valen-0.8B 比较了原来的阈值策略和增加 `none` 后的处理方式。下面是 **200 条未参与选门槛的测试请求**的结果：
+我们用 Valen-Decision-1.5-0.8B 比较了三种策略：原候选加概率门槛（A）、增加显式 `none`（B）、`none` 加概率门槛（C）。下面是 **200 条未参与选门槛的测试请求**的结果：
 
 <UnknownCategoryResults section="takeaway" />
 
-这组测试里，不属于这些类别、却被自动接收的请求从 8 条降到 1 条，代价是 3 条原本可以处理的正常请求被送给人工。是否值得，取决于你更在意错误派单，还是人工处理量。
+只有三个业务类别时，没有任何概率或差值门槛能在验证集上满足 5% 的错误率目标，所以 A 把所有请求都交给人工。增加 `none` 后，B 自动处理了 200 条中的 111 条，但 70 条候选外请求里仍有 11 条被分进业务队列。C 在此基础上使用验证集选出的门槛 p ≥ 0.98：**没有自动接收任何候选外请求**，48 条自动处理全部正确，代价是 100 条正常请求中有 52 条转给人工。是否值得，取决于你更在意错误派单，还是人工处理量。
 
-我们也测试了 `none` 加概率／差值门槛。验证集选出的额外门槛为零，因此它与仅使用 `none` 的结果相同；**本次测试没有显示叠加门槛的额外收益**。
-
-`none` 也会选错。给开头那条改地址请求加上 “Please let me know the next step.”，模型又把它分给了物流查询。一条询问包裹为何滞留海关的正常请求，则被判为 `none`。下面保留了这些失败记录。
+漏检集中在少数几个场景。除了改地址，一条保修维修请求（“I do not want a refund”）的五个表述变体都以 85–94% 的概率被分到退款，换大一号衣服的请求也有三个变体被分到退款。一条询问包裹为何滞留海关的正常请求，物流查询排第一但概率只有 88.8%，低于门槛，C 把它转给了人工。下面保留了这些记录。
 
 测试集由 40 个虚构场景的表述变体组成，完整分组和评测方法见文末。
 
@@ -44,7 +42,7 @@ import UnknownCategoryResults from '@site/src/components/UnknownCategoryResults'
 ```bash
 python -m zipfile -e valen-cookbook.zip .
 cd valen-cookbook
-python -m pip install valen-sdk==0.2.0
+python -m pip install valen-sdk==0.5.0
 python unknown_categories.py demo --text "Please change the delivery address before you ship my order."
 ```
 
@@ -108,7 +106,7 @@ A、C 分别扫描同一组预先声明的门槛：概率 `0, .5, .6, .7, .8, .8
 
 <UnknownCategoryResults section="cases" />
 
-完整报告保留每条测试决策，包括只改变表述就改变结果的情况。案例按固定规则从实测记录中选出。选择时依次优先 C、B、A；同一策略中优先无包装的原始消息，再按行 ID 排序。另外补充 A 中首个候选外漏检（优先原始消息，再按行 ID）及同一输入在 C 下的结果。
+完整报告保留每条测试决策，包括只改变表述就改变结果的情况。案例按固定规则从实测记录中选出。选择时依次优先 C、B、A；同一策略中优先无包装的原始消息，再按行 ID 排序。另外补充 B 中首个候选外漏检（优先原始消息，再按行 ID）及同一输入在 A、C 下的结果。
 
 
 </details>
@@ -129,16 +127,16 @@ python unknown_categories.py report --cache unknown-predictions.jsonl --output r
 
 评测自己的数据时，复制并编辑 `unknown_categories_data.json`。保持唯一行 ID、稳定 `group_id`、`validation`／`test` 划分，以及 `in_scope`、`outside`、`insufficient` 标签。候选内的 `gold` 填普通类别，其余填 JSON `null`。真值不进入模型请求。替换类别还需修改脚本中的 `CHOICES`、`NONE` 及描述；协议哈希会改变，旧缓存会被拒绝。
 
-每条请求采集两份预测，离线比较三种策略。B、C 复用相同预测。记录中的实测使用已有原版 0.8B 模型、CPU（八线程）和 FP32；以下路径需替换为自己的已有模型目录：
+每条请求采集两份预测，离线比较三种策略。B、C 复用相同预测。记录中的实测使用已有原版 Valen-Decision-1.5-0.8B 模型、CPU（八线程）和 FP32；以下路径需替换为自己的已有模型目录：
 
 ```bash
 python unknown_categories.py collect --backend native --device cpu --threads 8 \
-  --model /path/to/Valen-0.8B --revision YOUR_PINNED_ARTIFACT_ID \
+  --model /path/to/Valen-Decision-1.5-0.8B --revision YOUR_PINNED_ARTIFACT_ID \
   --dataset my-data.json --cache my-predictions.jsonl
 python unknown_categories.py report --dataset my-data.json \
   --cache my-predictions.jsonl --output my-report.json
 python unknown_categories.py demo --backend native --device cpu --threads 8 \
-  --model /path/to/Valen-0.8B --revision YOUR_PINNED_ARTIFACT_ID \
+  --model /path/to/Valen-Decision-1.5-0.8B --revision YOUR_PINNED_ARTIFACT_ID \
   --policy my-report.json --text "Please send my invoice."
 ```
 

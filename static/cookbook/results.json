@@ -5,7 +5,7 @@
   "tested_sources": {
     "local_inference.py": "fef799ea6e23b9f88d319ffd904bc9d647400068a91a1f1c5b21a6ca7e872de0",
     "video_tagging.py": "96fcb8ebe5ed3d215958988e1ac215cc7db4e172bf272a52053c5e2fb24be4ea",
-    "requirements.txt": "98bb3f831215f8b3b7db6a80b250df025c4b4fcecf55750031e900dd2b7117e2",
+    "requirements.txt": "77eb8342d477633a32626bf3e211e6a53f1006c5baec04eb61fb7583a1e45d97",
     "product_screening.py": "3d74988fd8e716be82ca0474aad4691d5b8bd32ac8ce26dd0ecf8e03d6d17a64",
     "LICENSE.txt": "a5149b34d460bb6cc884edce31801808973543f065c3a67de728e0f615ef8cfb",
     "common.py": "db07df30be95e7c702d06855eea293f1e1705f1d0374e12abb8753f4b5022710",
@@ -314,14 +314,14 @@
     },
     "local-inference": {
       "status": "verified",
-      "date": "2026-10-26",
-      "model": "Valen-0.8B / ONNX FP32",
-      "revision": "a0a10112716f54457bad6f60b792ad334f9e89fd",
-      "sdk": "0.2.0",
-      "backend": "ONNX Runtime 1.31.0 / CPU direct local",
+      "date": "2026-11-10",
+      "model": "Valen-Decision-1.5-0.8B / ONNX FP32",
+      "revision": "ae8bdf7606c0dbd627301174c9cb800240fb4ec7",
+      "sdk": "0.5.0",
+      "backend": "ONNX Runtime 1.31.1 / CPU direct local, bundle Valen-Team/Valen-Decision-1.5-0.8B-ONNX@ad8d5299f3c84b0fdd0fa7053d3db0e28e8d3d56",
       "result": {
         "decisions": {
-          "model": "Valen-0.8B",
+          "model": "Valen-Decision-1.5-0.8B",
           "answers": [
             {
               "name": "intent",
@@ -329,32 +329,32 @@
               "probabilities": [
                 {
                   "value": "billing_question",
-                  "probability": 1.4444915728188846e-06
+                  "probability": 8.96356046986516e-06
                 },
                 {
                   "value": "cancel_order",
-                  "probability": 0.00013284262147016516
+                  "probability": 0.00010532086870330633
                 },
                 {
                   "value": "change_address",
-                  "probability": 0.9997590278141875
+                  "probability": 0.9997735553061748
                 },
                 {
                   "value": "report_damage",
-                  "probability": 4.776970793180753e-06
+                  "probability": 1.7795602656192624e-05
                 },
                 {
                   "value": "track_order",
-                  "probability": 0.00010190810197642957
+                  "probability": 9.436466199573929e-05
                 }
               ],
-              "confidence": 0.9996987847677343,
+              "confidence": 0.9997169441327186,
               "choice": "change_address"
             },
             {
               "name": "address_change",
               "type": "predicate",
-              "probability": 0.9862781119951404
+              "probability": 0.9944646490188995
             },
             {
               "name": "explicitness",
@@ -363,21 +363,21 @@
                 {
                   "label": "none",
                   "value": 0,
-                  "probability": 0.015131870978155534
+                  "probability": 0.0029648925811185827
                 },
                 {
                   "label": "possible",
                   "value": 1,
-                  "probability": 0.1913538155432454
+                  "probability": 0.014304513062848136
                 },
                 {
                   "label": "explicit",
                   "value": 2,
-                  "probability": 0.7935143134785991
+                  "probability": 0.9827305943560333
                 }
               ],
-              "confidence": 0.6675736637506653,
-              "score": 1.7783824425004437
+              "confidence": 0.969648552662372,
+              "score": 1.9797657017749146
             }
           ],
           "usage": {
@@ -389,38 +389,38 @@
           }
         },
         "system_one": {
-          "model": "Valen-0.8B",
+          "model": "Valen-Decision-1.5-0.8B",
           "answers": {
             "intent": {
               "type": "choice",
               "probabilities": {
-                "billing_question": 1.4444915728188846e-06,
-                "cancel_order": 0.00013284262147016516,
-                "change_address": 0.9997590278141875,
-                "report_damage": 4.776970793180753e-06,
-                "track_order": 0.00010190810197642957
+                "billing_question": 8.96356046986516e-06,
+                "cancel_order": 0.00010532086870330633,
+                "change_address": 0.9997735553061748,
+                "report_damage": 1.7795602656192624e-05,
+                "track_order": 9.436466199573929e-05
               },
               "choice": "change_address",
-              "confidence": 0.9996987847677343
+              "confidence": 0.9997169441327186
             },
             "address_change": {
               "type": "noul",
-              "noul": 0.9862781119951404
+              "noul": 0.9944646490188995
             },
             "explicitness": {
               "type": "score",
               "probabilities": {
-                "0": 0.015131870978155534,
-                "1": 0.1913538155432454,
-                "2": 0.7935143134785991
+                "0": 0.0029648925811185827,
+                "1": 0.014304513062848136,
+                "2": 0.9827305943560333
               },
-              "score": 1.7783824425004437,
+              "score": 1.9797657017749146,
               "legend": {
                 "0": "No request",
                 "1": "Asks whether a change is possible",
                 "2": "Explicitly requests a change"
               },
-              "confidence": 0.6675736637506653
+              "confidence": 0.969648552662372
             }
           },
           "usage": {
@@ -438,22 +438,22 @@
             "probabilities": [
               {
                 "value": "pride",
-                "probability": 0.0006759448829023258
+                "probability": 0.005429339644659586
               },
               {
                 "value": "flock",
-                "probability": 0.9923460443802665
+                "probability": 0.992928191038992
               },
               {
                 "value": "clowder",
-                "probability": 0.0058704688188683804
+                "probability": 0.0015553237859392357
               },
               {
                 "value": "gang",
-                "probability": 0.001107541917962753
+                "probability": 8.714553040913649e-05
               }
             ],
-            "confidence": 0.9897947258403553,
+            "confidence": 0.9905709213853227,
             "choice": "flock"
           }
         },
@@ -464,22 +464,22 @@
             "probabilities": [
               {
                 "value": "brown",
-                "probability": 0.039694426657567713
+                "probability": 0.005852939306055921
               },
               {
                 "value": "white",
-                "probability": 0.9325758148359371
+                "probability": 0.9596975717412245
               },
               {
                 "value": "red",
-                "probability": 0.01581158949841234
+                "probability": 0.030143952766197458
               },
               {
                 "value": "orange",
-                "probability": 0.011918169008082881
+                "probability": 0.004305536186522133
               }
             ],
-            "confidence": 0.9101010864479161,
+            "confidence": 0.9462634289882993,
             "choice": "white"
           },
           "action": {
@@ -488,22 +488,22 @@
             "probabilities": [
               {
                 "value": "A",
-                "probability": 0.9996676220259049
+                "probability": 0.882619097075746
               },
               {
                 "value": "B",
-                "probability": 6.066860086765039e-05
+                "probability": 0.03589437525325559
               },
               {
                 "value": "C",
-                "probability": 0.0002527517367929761
+                "probability": 0.0802063112503166
               },
               {
                 "value": "D",
-                "probability": 1.8957636434528354e-05
+                "probability": 0.0012802164206817057
               }
             ],
-            "confidence": 0.9995568293678732,
+            "confidence": 0.843492129434328,
             "choice": "A"
           }
         }

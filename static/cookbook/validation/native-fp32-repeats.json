@@ -1,0 +1,30 @@
+{
+  "base_url": "http://127.0.0.1:18994/v1",
+  "repeats": 8,
+  "records": [
+    {
+      "id": "text",
+      "identical_responses": 7,
+      "compared": 7,
+      "max_probability_difference": 0.0,
+      "choices_stable": true,
+      "input_tokens": 166
+    },
+    {
+      "id": "image",
+      "identical_responses": 7,
+      "compared": 7,
+      "max_probability_difference": 0.0,
+      "choices_stable": true,
+      "input_tokens": 215
+    },
+    {
+      "id": "video",
+      "identical_responses": 7,
+      "compared": 7,
+      "max_probability_difference": 0.0,
+      "choices_stable": true,
+      "input_tokens": 839
+    }
+  ]
+}

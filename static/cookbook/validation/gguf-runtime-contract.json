@@ -4,8 +4,7 @@
   "scope": [
     "text",
     "typed-choice",
-    "image",
-    "video"
+    "image"
   ],
   "records": [
     {
@@ -15,7 +14,7 @@
       "passed": true,
       "protocol_max_probability_delta": 0.0,
       "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/models/site-evidence/job/gguf/Valen-Decision-1.5-0.8B-Q8_0.gguf",
         "answers": [
           {
             "name": "intent",
@@ -23,20 +22,20 @@
             "probabilities": [
               {
                 "value": "address",
-                "probability": 0.9999678587251428
+                "probability": 0.9995329104471153
               },
               {
                 "value": "cancel",
-                "probability": 3.214127485722157e-05
+                "probability": 0.00046708955288459185
               }
             ],
-            "confidence": 0.9999357174502856,
+            "confidence": 0.9990658208942307,
             "choice": "address"
           },
           {
             "name": "change_address",
             "type": "predicate",
-            "probability": 0.9982443468457173
+            "probability": 0.9989856832314833
           },
           {
             "name": "explicitness",
@@ -45,21 +44,21 @@
               {
                 "label": "none",
                 "value": 0,
-                "probability": 0.012675093613854499
+                "probability": 0.0012503952956126
               },
               {
                 "label": "possible",
                 "value": 1,
-                "probability": 0.05436870874501274
+                "probability": 0.004256049517954564
               },
               {
                 "label": "explicit",
                 "value": 2,
-                "probability": 0.9329561976411327
+                "probability": 0.9944935551864328
               }
             ],
-            "confidence": 0.8804216560409174,
-            "score": 1.920281104027278
+            "confidence": 0.9898647398362304,
+            "score": 1.9932431598908202
           }
         ],
         "usage": {
@@ -75,7 +74,7 @@
       "passed": true,
       "protocol_max_probability_delta": 0.0,
       "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/models/site-evidence/job/gguf/Valen-Decision-1.5-0.8B-Q8_0.gguf",
         "answers": [
           {
             "name": "intent",
@@ -83,20 +82,20 @@
             "probabilities": [
               {
                 "value": "address",
-                "probability": 0.999999998966872
+                "probability": 0.999999781623442
               },
               {
                 "value": "cancel",
-                "probability": 1.0331279594123057e-09
+                "probability": 2.1837655794396412e-07
               }
             ],
-            "confidence": 0.999999997933744,
+            "confidence": 0.9999995632468841,
             "choice": "address"
           },
           {
             "name": "change_address",
             "type": "predicate",
-            "probability": 0.9999969068400381
+            "probability": 0.9999989690722398
           },
           {
             "name": "explicitness",
@@ -105,21 +104,21 @@
               {
                 "label": "none",
                 "value": 0,
-                "probability": 0.00018391941145125848
+                "probability": 1.5808187392089008e-06
               },
               {
                 "label": "possible",
                 "value": 1,
-                "probability": 0.0033839446799324305
+                "probability": 1.8314740002137303e-05
               },
               {
                 "label": "explicit",
                 "value": 2,
-                "probability": 0.9964321359086163
+                "probability": 0.9999801044412586
               }
             ],
-            "confidence": 0.9943723247457475,
-            "score": 1.996248216497165
+            "confidence": 0.9999677854337792,
+            "score": 1.9999785236225194
           }
         ],
         "usage": {
@@ -135,7 +134,7 @@
       "passed": true,
       "protocol_max_probability_delta": 0.0,
       "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/models/site-evidence/job/gguf/Valen-Decision-1.5-0.8B-Q8_0.gguf",
         "answers": [
           {
             "name": "intent",
@@ -143,20 +142,20 @@
             "probabilities": [
               {
                 "value": "cancel",
-                "probability": 3.687731236337655e-05
+                "probability": 0.00019816162689203278
               },
               {
                 "value": "address",
-                "probability": 0.9999631226876367
+                "probability": 0.9998018383731081
               }
             ],
-            "confidence": 0.9999262453752733,
+            "confidence": 0.9996036767462162,
             "choice": "address"
           },
           {
             "name": "change_address",
             "type": "predicate",
-            "probability": 0.9981082293424618
+            "probability": 0.9991612796845256
           },
           {
             "name": "explicitness",
@@ -165,21 +164,21 @@
               {
                 "label": "none",
                 "value": 0,
-                "probability": 0.012794876328817381
+                "probability": 0.0012603538491769797
               },
               {
                 "label": "possible",
                 "value": 1,
-                "probability": 0.04960570406383279
+                "probability": 0.004582137298396559
               },
               {
                 "label": "explicit",
                 "value": 2,
-                "probability": 0.9375994196073499
+                "probability": 0.9941575088524264
               }
             ],
-            "confidence": 0.8872068149177987,
-            "score": 1.9248045432785326
+            "confidence": 0.9893457325048742,
+            "score": 1.9928971550032493
           }
         ],
         "usage": {
@@ -195,7 +194,7 @@
       "passed": true,
       "protocol_max_probability_delta": 0.0,
       "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/models/site-evidence/job/gguf/Valen-Decision-1.5-0.8B-Q8_0.gguf",
         "answers": [
           {
             "name": "animal",
@@ -203,22 +202,22 @@
             "probabilities": [
               {
                 "value": true,
-                "probability": 0.9994861905090054
+                "probability": 0.9989222894308908
               },
               {
                 "value": "true",
-                "probability": 0.00046916907450602116
+                "probability": 0.0008529282835984055
               },
               {
                 "value": false,
-                "probability": 2.7967900605188707e-05
+                "probability": 0.00016249734250307432
               },
               {
                 "value": "false",
-                "probability": 1.6672515883296103e-05
+                "probability": 6.228494300787184e-05
               }
             ],
-            "confidence": 0.9993149206786739,
+            "confidence": 0.998563052574521,
             "choice": true
           }
         ],
@@ -235,7 +234,7 @@
       "passed": true,
       "protocol_max_probability_delta": 0.0,
       "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/models/site-evidence/job/gguf/Valen-Decision-1.5-0.8B-Q8_0.gguf",
         "answers": [
           {
             "name": "animal",
@@ -243,22 +242,22 @@
             "probabilities": [
               {
                 "value": true,
-                "probability": 0.9999997785927883
+                "probability": 0.9999992405931586
               },
               {
                 "value": "true",
-                "probability": 2.2034594524132728e-07
+                "probability": 7.290566819167151e-07
               },
               {
                 "value": false,
-                "probability": 7.830077179560536e-10
+                "probability": 2.646237309146948e-08
               },
               {
                 "value": "false",
-                "probability": 2.7825859468706075e-10
+                "probability": 3.887786481093684e-09
               }
             ],
-            "confidence": 0.9999997047903845,
+            "confidence": 0.9999989874575448,
             "choice": true
           }
         ],
@@ -275,7 +274,7 @@
       "passed": true,
       "protocol_max_probability_delta": 0.0,
       "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/models/site-evidence/job/gguf/Valen-Decision-1.5-0.8B-Q8_0.gguf",
         "answers": [
           {
             "name": "animal",
@@ -283,22 +282,22 @@
             "probabilities": [
               {
                 "value": "false",
-                "probability": 4.573626588512529e-06
+                "probability": 0.00010732538870727671
               },
               {
                 "value": false,
-                "probability": 1.6474841348179563e-05
+                "probability": 0.0003721304079845727
               },
               {
                 "value": "true",
-                "probability": 0.0013674311202585454
+                "probability": 0.009965078671517918
               },
               {
                 "value": true,
-                "probability": 0.9986115204118047
+                "probability": 0.9895554655317902
               }
             ],
-            "confidence": 0.9981486938824062,
+            "confidence": 0.986073954042387,
             "choice": true
           }
         ],
@@ -315,12 +314,12 @@
       "passed": true,
       "protocol_max_probability_delta": 0.0,
       "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/models/site-evidence/job/gguf/Valen-Decision-1.5-0.8B-Q8_0.gguf",
         "answers": [
           {
             "name": "red",
             "type": "predicate",
-            "probability": 0.5312669345185959
+            "probability": 0.8705388272995948
           },
           {
             "name": "color",
@@ -328,19 +327,19 @@
             "probabilities": [
               {
                 "value": "red",
-                "probability": 0.07323888801551497
+                "probability": 0.7492390164835747
               },
               {
                 "value": "blue",
-                "probability": 0.6443186009304713
+                "probability": 0.18857386142760166
               },
               {
                 "value": "green",
-                "probability": 0.2824425110540137
+                "probability": 0.062187122088823564
               }
             ],
-            "confidence": 0.466477901395707,
-            "choice": "blue"
+            "confidence": 0.6238585247253621,
+            "choice": "red"
           },
           {
             "name": "brightness",
@@ -349,20 +348,20 @@
               {
                 "label": "dark",
                 "value": 0,
-                "probability": 0.11672786158042753
+                "probability": 0.005584042383712716
               },
               {
                 "label": "bright",
                 "value": 1,
-                "probability": 0.8832721384195724
+                "probability": 0.9944159576162872
               }
             ],
-            "confidence": 0.766544276839145,
-            "score": 0.8832721384195724
+            "confidence": 0.9888319152325745,
+            "score": 0.9944159576162872
           }
         ],
         "usage": {
-          "input_tokens": 212,
+          "input_tokens": 215,
           "output_tokens": 0
         }
       }
@@ -374,12 +373,12 @@
       "passed": true,
       "protocol_max_probability_delta": 0.0,
       "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/models/site-evidence/job/gguf/Valen-Decision-1.5-0.8B-Q8_0.gguf",
         "answers": [
           {
             "name": "red",
             "type": "predicate",
-            "probability": 0.5622902838305323
+            "probability": 0.978362719421294
           },
           {
             "name": "color",
@@ -387,19 +386,19 @@
             "probabilities": [
               {
                 "value": "red",
-                "probability": 0.010721775901297389
+                "probability": 0.9343737865352861
               },
               {
                 "value": "blue",
-                "probability": 0.8298213045548493
+                "probability": 0.05918925371381661
               },
               {
                 "value": "green",
-                "probability": 0.15945691954385321
+                "probability": 0.006436959750897236
               }
             ],
-            "confidence": 0.7447319568322739,
-            "choice": "blue"
+            "confidence": 0.9015606798029292,
+            "choice": "red"
           },
           {
             "name": "brightness",
@@ -408,20 +407,20 @@
               {
                 "label": "dark",
                 "value": 0,
-                "probability": 0.017164875777174134
+                "probability": 3.153171175889446e-05
               },
               {
                 "label": "bright",
                 "value": 1,
-                "probability": 0.9828351242228259
+                "probability": 0.999968468288241
               }
             ],
-            "confidence": 0.9656702484456517,
-            "score": 0.9828351242228259
+            "confidence": 0.9999369365764822,
+            "score": 0.999968468288241
           }
         ],
         "usage": {
-          "input_tokens": 212,
+          "input_tokens": 215,
           "output_tokens": 0
         }
       }
@@ -433,12 +432,12 @@
       "passed": true,
       "protocol_max_probability_delta": 0.0,
       "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
+        "model": "/mnt/shared-storage-user/mllm/zangyuhang/models/site-evidence/job/gguf/Valen-Decision-1.5-0.8B-Q8_0.gguf",
         "answers": [
           {
             "name": "red",
             "type": "predicate",
-            "probability": 0.5312985794352146
+            "probability": 0.873014921312864
           },
           {
             "name": "color",
@@ -446,77 +445,18 @@
             "probabilities": [
               {
                 "value": "green",
-                "probability": 0.4024709113780155
+                "probability": 0.24890860066127288
               },
               {
                 "value": "blue",
-                "probability": 0.5419100724634107
+                "probability": 0.22855856294276763
               },
               {
                 "value": "red",
-                "probability": 0.055619016158573814
+                "probability": 0.5225328363959595
               }
             ],
-            "confidence": 0.3128651086951161,
-            "choice": "blue"
-          },
-          {
-            "name": "brightness",
-            "type": "score",
-            "probabilities": [
-              {
-                "label": "dark",
-                "value": 0,
-                "probability": 0.10976162722772698
-              },
-              {
-                "label": "bright",
-                "value": 1,
-                "probability": 0.8902383727722731
-              }
-            ],
-            "confidence": 0.780476745544546,
-            "score": 0.8902383727722731
-          }
-        ],
-        "usage": {
-          "input_tokens": 212,
-          "output_tokens": 0
-        }
-      }
-    },
-    {
-      "id": "video",
-      "temperature": 1.0,
-      "reversed_choices": false,
-      "passed": true,
-      "protocol_max_probability_delta": 0.0,
-      "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
-        "answers": [
-          {
-            "name": "red",
-            "type": "predicate",
-            "probability": 0.5545416706163718
-          },
-          {
-            "name": "color",
-            "type": "choice",
-            "probabilities": [
-              {
-                "value": "red",
-                "probability": 0.5752652337541827
-              },
-              {
-                "value": "blue",
-                "probability": 0.42429803919349923
-              },
-              {
-                "value": "green",
-                "probability": 0.0004367270523179882
-              }
-            ],
-            "confidence": 0.36289785063127405,
+            "confidence": 0.28379925459393923,
             "choice": "red"
           },
           {
@@ -526,138 +466,20 @@
               {
                 "label": "dark",
                 "value": 0,
-                "probability": 0.00011669501876827695
+                "probability": 0.006907456469792885
               },
               {
                 "label": "bright",
                 "value": 1,
-                "probability": 0.9998833049812318
+                "probability": 0.9930925435302072
               }
             ],
-            "confidence": 0.9997666099624635,
-            "score": 0.9998833049812318
+            "confidence": 0.9861850870604142,
+            "score": 0.9930925435302072
           }
         ],
         "usage": {
-          "input_tokens": 271,
-          "output_tokens": 0
-        }
-      }
-    },
-    {
-      "id": "video",
-      "temperature": 0.5,
-      "reversed_choices": false,
-      "passed": true,
-      "protocol_max_probability_delta": 0.0,
-      "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
-        "answers": [
-          {
-            "name": "red",
-            "type": "predicate",
-            "probability": 0.6078006029569938
-          },
-          {
-            "name": "color",
-            "type": "choice",
-            "probabilities": [
-              {
-                "value": "red",
-                "probability": 0.6476645299125326
-              },
-              {
-                "value": "blue",
-                "probability": 0.3523350968080483
-              },
-              {
-                "value": "green",
-                "probability": 3.732794190406453e-07
-              }
-            ],
-            "confidence": 0.471496794868799,
-            "choice": "red"
-          },
-          {
-            "name": "brightness",
-            "type": "score",
-            "probabilities": [
-              {
-                "label": "dark",
-                "value": 0,
-                "probability": 1.362090601812379e-08
-              },
-              {
-                "label": "bright",
-                "value": 1,
-                "probability": 0.999999986379094
-              }
-            ],
-            "confidence": 0.999999972758188,
-            "score": 0.999999986379094
-          }
-        ],
-        "usage": {
-          "input_tokens": 271,
-          "output_tokens": 0
-        }
-      }
-    },
-    {
-      "id": "video",
-      "temperature": 1.0,
-      "reversed_choices": true,
-      "passed": true,
-      "protocol_max_probability_delta": 0.0,
-      "response": {
-        "model": "/mnt/shared-storage-user/mllm/zangyuhang/valen/runs/valen-gguf-v2-261025-221703/Valen-0.8B-GGUF-v2/Valen-0.8B-Q8_0.gguf",
-        "answers": [
-          {
-            "name": "red",
-            "type": "predicate",
-            "probability": 0.5546137279896781
-          },
-          {
-            "name": "color",
-            "type": "choice",
-            "probabilities": [
-              {
-                "value": "green",
-                "probability": 0.0018554582235097519
-              },
-              {
-                "value": "blue",
-                "probability": 0.5989831343990174
-              },
-              {
-                "value": "red",
-                "probability": 0.3991614073774728
-              }
-            ],
-            "confidence": 0.3984747015985261,
-            "choice": "blue"
-          },
-          {
-            "name": "brightness",
-            "type": "score",
-            "probabilities": [
-              {
-                "label": "dark",
-                "value": 0,
-                "probability": 0.00011355330345121858
-              },
-              {
-                "label": "bright",
-                "value": 1,
-                "probability": 0.9998864466965487
-              }
-            ],
-            "confidence": 0.9997728933930976,
-            "score": 0.9998864466965487
-          }
-        ],
-        "usage": {
-          "input_tokens": 271,
+          "input_tokens": 215,
           "output_tokens": 0
         }
       }
@@ -723,7 +545,5 @@
       }
     }
   ],
-  "passed": true,
-  "backend": "gguf-source-video",
-  "direct_video": "tested"
+  "passed": true
 }

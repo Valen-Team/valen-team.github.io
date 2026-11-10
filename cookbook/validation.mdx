@@ -2,48 +2,50 @@
 title: Validation, performance and versions
 ---
 
-import {PerformanceTable, ServerTimingTable, BackendCapabilities, NumericalTable, VersionSummary} from '@site/src/components/CookbookValidation';
+import {PerformanceTable, ServerTimingTable, BackendCapabilities, NumericalTable, RecipeConsistencyTable, GgufTable, VersionSummary} from '@site/src/components/CookbookValidation';
 
 # Measured scope, not a generic speed promise
 
-Validated on **26 October 2026**. This page reads the version manifest, performance rows and capability matrix directly from their machine-readable sources. The benchmark uses real 0.8B model weights with a small fixed text case and synthetic diagnostic image/video inputs. These are not representative task-accuracy or production-load benchmarks.
+Validated on **10 November 2026** with **Valen-Decision-1.5**. This page reads the version manifest, performance rows, comparisons and capability matrix directly from their machine-readable sources. The benchmark uses real Valen-Decision-1.5-0.8B weights with a small fixed text case and synthetic diagnostic image/video inputs. These are not representative task-accuracy or production-load benchmarks.
 
 <VersionSummary />
 
 <a href="/cookbook/versions.json">Full version and model-revision manifest</a> · <a href="/cookbook/results.json">Executed tutorial outputs and tested source hashes</a> · <a href="/cookbook/capabilities.json">Capability manifest</a>
 
-## Same-worker CPU measurements
+## Same-host CPU measurements
 
-All eight successful rows below came from **one allocation on one machine**: Intel Xeon Platinum 8558, Linux x86-64, four CPU threads, CPU affinity `[45, 46, 141, 142]`, no GPU. Native and ONNX use FP32; GGUF uses Q8_0 backbone weights with FP32 Mixer/vision, so its memory/latency tradeoff includes a precision difference. The source model revision is `a0a10112716f54457bad6f60b792ad334f9e89fd`.
+All rows below came from **one benchmark run in one dedicated cluster allocation**: Intel Xeon Platinum 8558, Linux x86-64, 16 allocated cores with four CPU threads per server, no GPU in use. Native and ONNX use FP32; GGUF uses Q8_0 backbone weights with an F32 vision file, so its memory/latency tradeoff includes a precision difference. The source model revision is `ae8bdf7606c0dbd627301174c9cb800240fb4ec7`.
 
-Each backend/modality gets a fresh server process, one cold request, two additional warmups and seven measured sequential requests. p50/p95 use linear interpolation on sorted samples. Concurrency is **one**; this is latency, not throughput. Startup includes interpreter/runtime imports, model initialization and health readiness; ONNX can initialize graph sessions during the first request. OS page caches were **not cleared**: “cold” means process-cold, not disk-cold. Native text was first in the allocation and had a longer startup; do not treat its first startup as a stable backend ratio.
+Each backend/modality gets a fresh server process, one cold request, two additional warmups and seven measured sequential requests, and every measured answer must equal the cold answer. p50/p95 use linear interpolation on sorted samples. Concurrency is **one**; this is latency, not throughput. Startup includes interpreter/runtime imports, model initialization and health readiness; ONNX initializes its graph sessions during the first request, so its cold requests are slower than its warm ones. OS page caches were **not cleared**: “cold” means process-cold, not disk-cold.
 
 <PerformanceTable />
 
-Peak memory is the isolated server process's Linux `VmHWM` resident-memory high-water mark, including resident mapped pages, libraries and the loaded model pipeline. It is not the model file size, the allocation limit, GPU memory, or a minimum RAM specification. The failed video probe does not provide a usable video-memory measurement.
+Peak memory is the isolated server process's Linux `VmHWM` resident-memory high-water mark, including resident mapped pages, libraries and the loaded model pipeline. It is not the model file size, the allocation limit, GPU memory, or a minimum RAM specification.
 
-The three backends receive the **same bytes, questions, candidate order, temperature 1.0 and media budgets**. Successful token counts match: text 166, image 212, video 271 (native/ONNX). Image budgets are 65,536–262,144 pixels; direct video uses 16 uniform frames with a 131,072–2,097,152 total-pixel budget. Exact input/media hashes and raw samples are in the JSON. Media bytes are prepared before the request timer; upload from a remote client or network asset fetch is not included.
+The backends receive the **same bytes, questions, candidate order, temperature 1.0 and media budgets**. Successful token counts match: text 166, image 215, video 839. Image budgets are 65,536–1,638,400 pixels; direct video uses 16 uniform frames with a 131,072–2,097,152 total-pixel budget. Exact input/media hashes and raw samples are in the JSON. Media bytes are prepared before the request timer; upload from a remote client or network asset fetch is not included.
 
-The native/ONNX latency server is a small localhost measurement adapter around real `predict`, not SGLang/vLLM or the production SDK HTTP stack. Follow-up checks separately exercised the production ONNX SDK service. The original benchmark was not rerun after fixing the measurement service's model alias for Cookbook checks.
+Transformers 5.20 decodes video files with torchcodec; the native environment used torchcodec 0.17.0 (CPU) with the FFmpeg 8 libraries bundled with PyAV 17.1.0. Every repeated native and ONNX request returned identical answers: eight requests per input on native, four on the production ONNX service.
+
+The native/ONNX latency server is a small localhost measurement adapter around real `predict`, not SGLang/vLLM or the production SDK HTTP stack. Separate checks exercised the production ONNX SDK service.
 
 ## Client time versus server time
 
-Client time includes JSON encoding, localhost HTTP, service work and response decoding. The native/ONNX adapter additionally measures the `predict` call, including compilation and media preprocessing. The prebuilt GGUF server does not expose an equivalent measurement, so the table leaves it unavailable rather than relabeling HTTP time as inference.
+Client time includes JSON encoding, localhost HTTP, service work and response decoding. The native/ONNX adapter additionally measures the `predict` call, including compilation and media preprocessing. The GGUF server does not expose an equivalent measurement, so the table leaves it unavailable rather than relabeling HTTP time as inference.
 
 <ServerTimingTable />
 
-<a href="/cookbook/validation/benchmark-config.json">Benchmark config JSON</a> · <a href="/cookbook/validation/performance.json">Raw performance report (including the failed probe)</a> · <a href="/cookbook/validation/preserved-failures.json">Preserved failures and resolutions</a>
+<a href="/cookbook/validation/benchmark-config.json">Benchmark config JSON</a> · <a href="/cookbook/validation/performance.json">Raw performance report (including the failed probes)</a> · <a href="/cookbook/validation/preserved-failures.json">Preserved failures and resolutions</a>
 
 ## Choose within the measured scope
 
 | Need | A useful starting path | Evidence and limits |
 | --- | --- | --- |
 | Try without downloading weights | Hosted API / website | Separate online service; no speed or memory comparison with the local worker |
-| Lower warm latency on these small CPU inputs | Native FP32 | Fastest measured warm requests here, with higher RSS and heavier startup/dependencies |
-| Python/JS integration without Torch | ONNX SDK | Python CPU FP32 measured here; Node/WebGPU local performance not rerun |
-| Smaller RSS on the measured CPU cases | GGUF Q8_0 + custom runtime | Lowest RSS in these rows; lower precision; CPU text/fixed images qualified |
-| Direct video | Native / Python ONNX; video-enabled GGUF source build | Prebuilt 0.1.0 has no direct video support; source-build regression is separate and its times are not pooled into this table |
-| CUDA, other model sizes/devices, concurrency | Use the deployment guide and measure your workload | No new P1 performance data; earlier quality/device evidence must not be mixed into this same-worker comparison |
+| Lower warm latency on these small CPU inputs | Native FP32 or ONNX FP32 | Similar warm text and image latency here; native is faster on direct video; ONNX peaks at 2.1–3.3 GiB RSS against 5.4–5.6 GiB for native |
+| Python/JS integration without Torch | ONNX SDK | Python CPU FP32 measured here; Node/WebGPU local performance not measured |
+| Smallest RSS on the measured CPU cases | GGUF Q8_0 + runtime 0.2.0 | Lowest RSS in these rows; lower precision; text and fixed images |
+| Direct video | Native / Python ONNX | GGUF runtime 0.2.0 has no direct video support; send sampled frames as images |
+| CUDA, other model sizes/devices, concurrency | Use the deployment guide and measure your workload | Not measured on this page; the size table below compares numbers, not speed |
 
 ## Interface and media capabilities
 
@@ -55,28 +57,40 @@ A finite positive **scalar** temperature is the portable intersection. Native/ON
 
 Local native/ONNX calls can read local files. HTTP media uses inline image/video data URLs where supported; the production ONNX service disables client-local paths. The hosted API and GPU plugins use a single image, so extract a frame explicitly for the video-tagging application. `Valen.local` is an **ONNX** loader; use `Valen.remote` for GGUF HTTP services. Generic upstream llama.cpp/Ollama does not become compatible through these SDKs.
 
-The exact downloadable GGUF 0.1.0 binary was reused and checked against its existing SHA256; no asset was downloaded again. It now has additional P1 fixed-image evidence. Its direct video probe returned HTTP 500, and the log states **video support not compiled in**. This failure remains published; use a sampled image or a separately built video-enabled runtime. The source-build video result is not qualification of the downloadable binary.
+The GGUF runs used the published [runtime 0.2.0 archive](https://github.com/Valen-Team/Valen/releases/tag/gguf-runtime-v0.2.0) (SHA256 `4b3b6035adbb99f3bb47c75e55804e1f650f96b35b825d95a6cd4ae85ce39537`, matching the release asset) with the Q8_0 and vision files published in `Valen-Team/Valen-Decision-1.5-0.8B-GGUF`. The runtime serves text, images and `bbox` questions. Its direct video probe returned HTTP 500 (“Failed to load image or audio file”); this failure remains published. Use sampled frames sent as images.
 
 ## Fixed regression and release checks
 
-One fixture in the main repository, `tests/fixtures/backend-contract.json`, covers choice, predicate/noul, score, mixed boolean/string candidates, reversed candidate order, temperatures 1.0/0.5 and invalid requests. Real checks compare each backend's Decisions and SystemOne answers, usage, candidate types/order and errors. The raw Python and JavaScript SDK packages are also exercised against the production ONNX service, the prebuilt GGUF text/image service and the video-enabled source service.
+One fixture in the main repository, `tests/fixtures/backend-contract.json`, covers choice, predicate/noul, score, mixed boolean/string candidates, reversed candidate order, temperatures 1.0/0.5 and invalid requests. Real checks compare each backend's Decisions and SystemOne answers, usage, candidate types/order and errors. They ran on native FP32, the ONNX FP32 measurement server, the production ONNX SDK service and the GGUF runtime (text and image). The published Python SDK 0.5.0 and JavaScript SDK 0.4.0 were exercised against the production ONNX service and the GGUF runtime.
 
 <NumericalTable />
 
-The numerical gates reuse the previous frozen GGUF regression's choice/probability/normalized-score thresholds. This small protocol fixture is not a replacement for the earlier 292-text/30-image quality set, and consistency with the native model is not accuracy against ground truth. All compared input token counts match. The follow-up allocation contributes numerical checks only; its timings are not merged with the earlier performance worker.
+The numerical gates are choice agreement ≥ 98%, probability MAE ≤ 0.02, maximum probability error ≤ 0.08 and normalized score MAE/maximum ≤ 0.05/0.15. This small protocol fixture checks consistency with the native model, not accuracy against ground truth. All compared input token counts match.
 
-| Validation layer | Actual P1 result | What it proves |
+### Cookbook recipes across model sizes
+
+Thirteen Cookbook recipes (text, image and video-frame requests) were run on CPU with the native model and with each ONNX bundle. FP32 bundles made the same decisions as the native model at every size. The `q8-mlp` variant agreed on every decision for 2B, 4B and 9B and on 98.4% for 0.8B, where four of 249 recipe decisions changed; they are listed in the JSON.
+
+<RecipeConsistencyTable />
+
+### GGUF against the native model, including boxes
+
+Each request was sent with JPEG and PNG images to the GGUF runtime build for Valen-Decision-1.5 (version 0.2.0) on CPU. Box errors are in normalized image coordinates.
+
+<GgufTable />
+
+| Validation layer | Result | What it proves |
 | --- | --- | --- |
-| Mock / constructed answers | Python SDK 28 tests, JavaScript SDK 12 tests; shared adapter check: 16 valid variants + 5 invalid cases | Client/adapter contracts, lifecycle, geometry and failure handling; no model quality claim |
-| Synthetic model | Not executed for P1 | No synthetic-model result substitutes for real weights |
-| Real model, fixed diagnostic fixtures | Native/ONNX/GGUF supported scopes passed both protocols; six live SDK-client reports passed | Small reproducible protocol and numerical regression, with real weights |
-| Real model, complete tutorials | Five maintained scripts: direct local ONNX/native basics and four HTTP scripts on ONNX and GGUF; 10 successful CLI executions | End-to-end sample workflows and actual business outputs |
+| Mock / constructed answers | Shared adapter check: 16 valid variants + 5 invalid cases across four Python adapters (including `valen-sdk` 0.5.0) and the JavaScript SDK 0.4.0 compiler | Request/response mapping and invalid-input handling; no model quality claim |
+| Synthetic model | Not executed | No synthetic-model result substitutes for real weights |
+| Real model, fixed diagnostic fixtures | Native/ONNX/GGUF contracts passed both protocols; each SDK answered all seven valid cases on both services and rejected the two remaining invalid requests itself, before sending them | Small reproducible protocol and numerical regression, with real weights |
+| Real model, complete tutorials | `local_inference.py` on native and ONNX, four HTTP scripts on the production ONNX service and on the GGUF runtime: 10 successful CLI executions | End-to-end sample workflows and actual business outputs |
 | Publication | Checked separately after deployment | A build or local test alone is not a live-publication pass |
 
-Fast synthetic mapping checks run in the main repository CI, pinned to the stable SDK source commits. Website CI tests source/output hashes, builds both languages and checks links. Code/sample changes invalidate the stored real-execution hashes until rerun. Before a relevant model/runtime/SDK release, run the real checks on cluster caches and validate the pinned release evidence; CI does not download model weights. See the [release and reproduction procedure](https://github.com/Valen-Team/Valen/blob/main/scripts/validation/README.md).
+Fast synthetic mapping checks run in the main repository CI. Website CI tests source/output hashes, builds both languages and checks links. Code/sample changes invalidate the stored real-execution hashes until rerun. Before a relevant model/runtime/SDK release, run the real checks on cluster caches and validate the pinned release evidence; CI does not download model weights. See the [release and reproduction procedure](https://github.com/Valen-Team/Valen/blob/main/scripts/validation/README.md).
 
-The first four HTTP tutorial attempts failed because the benchmark adapter served `Valen-0.8B` while the commands requested the deployment alias `valen`. The alias was corrected and affected checks rerun against the production SDK service. Both original failures and the successful replacement checks are retained. The prebuilt video failure was not “fixed” by relabeling a source build.
+The SDK check scripts count an invalid case as passed only when the service answers with HTTP 4xx. Both SDKs now reject `duplicate-names` and `numeric-choice` before sending, so their reports list those two cases as not passed; the services return HTTP 400 for both in the contract fixture. Three earlier benchmark attempts on a shared login node are preserved: native video failed until torchcodec was installed, the FFmpeg library path was incomplete in the second, and the third was interrupted when the overloaded node was rebooted. The published rows come from the single dedicated run above.
 
 <a href="/cookbook/validation/release-checks.json">Release check summary</a> · <a href="/cookbook/validation/cross-backend.json">Numerical comparison</a> · <a href="/cookbook/validation/synthetic-adapters.json">Synthetic adapter check</a> · [Migration map](../migration/)
 
-P1 does not newly qualify 2B/4B, GPU/CUDA performance, browser WebGPU local execution, the C++ integration, SGLang/vLLM GPU serving or custom Ollama import. Existing qualified evidence remains linked from their deployment/model references. The original media lacks a separately recorded dataset/license attribution; the tutorials state that limitation and preserve the shared URLs.
+This page does not measure same-host performance for 2B and larger models, GPU/CUDA performance, browser WebGPU local execution, the C++ integration, SGLang/vLLM GPU serving or custom Ollama import; their deployment and model references carry their own evidence. The original media lacks a separately recorded dataset/license attribution; the tutorials state that limitation and preserve the shared URLs.

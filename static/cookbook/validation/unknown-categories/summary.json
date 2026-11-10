@@ -3,8 +3,8 @@
   "validation_kind": "real_model_execution",
   "identity": {
     "backend": "native",
-    "model": "/mnt/shared-storage-user/mllm/liuziyu/share_data/Valen_Data/models/Valen-0.8B",
-    "revision": "27a778930396d80c88e2b18b2b1aa848fdf8c4b0b6bd5e52dc48ee832fad7075",
+    "model": "/mnt/shared-storage-user/mllm/zangyuhang/models/Valen-Decision-1.5-0.8B",
+    "revision": "6f40de9d18e6aeb1c3ca61a81534a1588428ad55508aec24a4eba73dd885329f",
     "base_url": null,
     "device": "cpu",
     "threads": 8,
@@ -12,7 +12,7 @@
   },
   "dataset_sha256": "c2d889a9896ecc2605d97a2d1265a19c4107ddb078f32ae58d62b4e49dd1d235",
   "protocol_sha256": "d6e36acba84ff86cd326f4dcdd45200a54e0a903e0ac2cb897cd202fe0089915",
-  "cache_sha256": "cee6b332ba7cc977bd38f855bb2da4e5d7458ce1acaf598a768e832971dbcfa2",
+  "cache_sha256": "462d5725f9ba986bfb7037b9d01e9658aa9b916a554ccb09ec276307b7a4a10d",
   "source_sha256": "d9ed3606dc570384fce474072de8ef040df5a326868c982f58e70909a1e0a767",
   "resolved_models": [
     "Valen"
@@ -21,16 +21,16 @@
   "scope": "Authored fictional stress set: 60 source scenarios with five mechanical surface variants each, not 300 independent intents. Split before variants; groups never cross splits. No external dataset or customer data.",
   "policies": {
     "A_threshold": {
-      "threshold": 0.99,
-      "margin": 0,
-      "reject_all": false,
+      "reject_all": true,
+      "threshold": null,
+      "margin": null,
       "validation_observed_error_target": 0.05,
       "min_accepted_source_groups": 5,
       "selection": "maximum validation coverage, then fewer errors, then lower threshold and margin; no test tuning"
     },
     "B_none": null,
     "C_none_threshold": {
-      "threshold": 0,
+      "threshold": 0.98,
       "margin": 0,
       "reject_all": false,
       "validation_observed_error_target": 0.05,
@@ -44,34 +44,30 @@
         "counts": {
           "requests": 100,
           "source_groups": 20,
-          "accepted": 50,
-          "accepted_errors": 1,
+          "accepted": 0,
+          "accepted_errors": 0,
           "outside": 30,
           "outside_accepted": 0,
           "in_scope": 50,
-          "in_scope_review": 1,
+          "in_scope_review": 50,
           "insufficient": 20,
-          "insufficient_review": 19,
+          "insufficient_review": 20,
           "request_errors": 0,
           "outside_detected": 30
         },
         "reasons": {
-          "accepted": 50,
-          "low_probability": 50
+          "no_validation_rule": 100
         },
         "coverage": {
-          "value": 0.5,
+          "value": 0.0,
           "ci95": [
-            0.29,
-            0.71
+            0.0,
+            0.0
           ]
         },
         "accepted_error_rate": {
-          "value": 0.02,
-          "ci95": [
-            0.0,
-            0.08163265306122448
-          ]
+          "value": null,
+          "ci95": null
         },
         "outside_miss_rate": {
           "value": 0.0,
@@ -81,16 +77,16 @@
           ]
         },
         "in_scope_review_rate": {
-          "value": 0.02,
+          "value": 1.0,
           "ci95": [
-            0.0,
-            0.06666666666666667
+            1.0,
+            1.0
           ]
         },
         "insufficient_review_rate": {
-          "value": 0.95,
+          "value": 1.0,
           "ci95": [
-            0.8,
+            1.0,
             1.0
           ]
         },
@@ -106,47 +102,43 @@
         "counts": {
           "requests": 200,
           "source_groups": 40,
-          "accepted": 108,
-          "accepted_errors": 8,
+          "accepted": 0,
+          "accepted_errors": 0,
           "outside": 70,
-          "outside_accepted": 8,
+          "outside_accepted": 0,
           "in_scope": 100,
-          "in_scope_review": 0,
+          "in_scope_review": 100,
           "insufficient": 30,
           "insufficient_review": 30,
           "request_errors": 0,
-          "outside_detected": 62
+          "outside_detected": 70
         },
         "reasons": {
-          "accepted": 108,
-          "low_probability": 92
+          "no_validation_rule": 200
         },
         "coverage": {
-          "value": 0.54,
-          "ci95": [
-            0.375,
-            0.69
-          ]
-        },
-        "accepted_error_rate": {
-          "value": 0.07407407407407407,
-          "ci95": [
-            0.0,
-            0.1935483870967742
-          ]
-        },
-        "outside_miss_rate": {
-          "value": 0.11428571428571428,
-          "ci95": [
-            0.0,
-            0.3
-          ]
-        },
-        "in_scope_review_rate": {
           "value": 0.0,
           "ci95": [
             0.0,
             0.0
+          ]
+        },
+        "accepted_error_rate": {
+          "value": null,
+          "ci95": null
+        },
+        "outside_miss_rate": {
+          "value": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "in_scope_review_rate": {
+          "value": 1.0,
+          "ci95": [
+            1.0,
+            1.0
           ]
         },
         "insufficient_review_rate": {
@@ -157,9 +149,9 @@
           ]
         },
         "outside_detection_rate": {
-          "value": 0.8857142857142857,
+          "value": 1.0,
           "ci95": [
-            0.7,
+            1.0,
             1.0
           ]
         }
@@ -170,47 +162,47 @@
         "counts": {
           "requests": 100,
           "source_groups": 20,
-          "accepted": 50,
-          "accepted_errors": 2,
+          "accepted": 56,
+          "accepted_errors": 7,
           "outside": 30,
-          "outside_accepted": 0,
+          "outside_accepted": 5,
           "in_scope": 50,
-          "in_scope_review": 2,
+          "in_scope_review": 1,
           "insufficient": 20,
           "insufficient_review": 18,
           "request_errors": 0,
-          "outside_detected": 30
+          "outside_detected": 25
         },
         "reasons": {
-          "accepted": 50,
-          "none_selected": 50
+          "accepted": 56,
+          "none_selected": 44
         },
         "coverage": {
-          "value": 0.5,
+          "value": 0.56,
           "ci95": [
-            0.29,
-            0.71
+            0.35,
+            0.76
           ]
         },
         "accepted_error_rate": {
-          "value": 0.04,
+          "value": 0.125,
           "ci95": [
             0.0,
-            0.15384615384615385
+            0.3333333333333333
           ]
         },
         "outside_miss_rate": {
-          "value": 0.0,
+          "value": 0.16666666666666666,
           "ci95": [
             0.0,
-            0.0
+            0.5
           ]
         },
         "in_scope_review_rate": {
-          "value": 0.04,
+          "value": 0.02,
           "ci95": [
             0.0,
-            0.13333333333333333
+            0.06666666666666667
           ]
         },
         "insufficient_review_rate": {
@@ -221,9 +213,9 @@
           ]
         },
         "outside_detection_rate": {
-          "value": 1.0,
+          "value": 0.8333333333333334,
           "ci95": [
-            1.0,
+            0.5,
             1.0
           ]
         }
@@ -232,60 +224,60 @@
         "counts": {
           "requests": 200,
           "source_groups": 40,
-          "accepted": 99,
-          "accepted_errors": 2,
+          "accepted": 111,
+          "accepted_errors": 11,
           "outside": 70,
-          "outside_accepted": 1,
+          "outside_accepted": 11,
           "in_scope": 100,
-          "in_scope_review": 3,
+          "in_scope_review": 0,
           "insufficient": 30,
-          "insufficient_review": 29,
+          "insufficient_review": 30,
           "request_errors": 0,
-          "outside_detected": 69
+          "outside_detected": 59
         },
         "reasons": {
-          "accepted": 99,
-          "none_selected": 101
+          "accepted": 111,
+          "none_selected": 89
         },
         "coverage": {
-          "value": 0.495,
+          "value": 0.555,
           "ci95": [
-            0.34,
-            0.64
+            0.405,
+            0.705
           ]
         },
         "accepted_error_rate": {
-          "value": 0.020202020202020204,
+          "value": 0.0990990990990991,
           "ci95": [
             0.0,
-            0.057971014492753624
+            0.22727272727272727
           ]
         },
         "outside_miss_rate": {
-          "value": 0.014285714285714285,
+          "value": 0.15714285714285714,
           "ci95": [
             0.0,
-            0.047058823529411764
+            0.35
           ]
         },
         "in_scope_review_rate": {
-          "value": 0.03,
+          "value": 0.0,
           "ci95": [
             0.0,
-            0.0782608695652174
+            0.0
           ]
         },
         "insufficient_review_rate": {
-          "value": 0.9666666666666667,
+          "value": 1.0,
           "ci95": [
-            0.9,
+            1.0,
             1.0
           ]
         },
         "outside_detection_rate": {
-          "value": 0.9857142857142858,
+          "value": 0.8428571428571429,
           "ci95": [
-            0.9529411764705882,
+            0.65,
             1.0
           ]
         }
@@ -296,33 +288,34 @@
         "counts": {
           "requests": 100,
           "source_groups": 20,
-          "accepted": 50,
-          "accepted_errors": 2,
+          "accepted": 21,
+          "accepted_errors": 0,
           "outside": 30,
           "outside_accepted": 0,
           "in_scope": 50,
-          "in_scope_review": 2,
+          "in_scope_review": 29,
           "insufficient": 20,
-          "insufficient_review": 18,
+          "insufficient_review": 20,
           "request_errors": 0,
           "outside_detected": 30
         },
         "reasons": {
-          "accepted": 50,
-          "none_selected": 50
+          "accepted": 21,
+          "low_probability": 35,
+          "none_selected": 44
         },
         "coverage": {
-          "value": 0.5,
+          "value": 0.21,
           "ci95": [
-            0.29,
-            0.71
+            0.05,
+            0.39
           ]
         },
         "accepted_error_rate": {
-          "value": 0.04,
+          "value": 0.0,
           "ci95": [
             0.0,
-            0.15384615384615385
+            0.0
           ]
         },
         "outside_miss_rate": {
@@ -333,16 +326,16 @@
           ]
         },
         "in_scope_review_rate": {
-          "value": 0.04,
+          "value": 0.58,
           "ci95": [
-            0.0,
-            0.13333333333333333
+            0.2833333333333333,
+            0.8714285714285714
           ]
         },
         "insufficient_review_rate": {
-          "value": 0.9,
+          "value": 1.0,
           "ci95": [
-            0.6,
+            1.0,
             1.0
           ]
         },
@@ -358,68 +351,69 @@
         "counts": {
           "requests": 200,
           "source_groups": 40,
-          "accepted": 99,
-          "accepted_errors": 2,
+          "accepted": 48,
+          "accepted_errors": 0,
           "outside": 70,
-          "outside_accepted": 1,
+          "outside_accepted": 0,
           "in_scope": 100,
-          "in_scope_review": 3,
+          "in_scope_review": 52,
           "insufficient": 30,
-          "insufficient_review": 29,
+          "insufficient_review": 30,
           "request_errors": 0,
-          "outside_detected": 69
+          "outside_detected": 70
         },
         "reasons": {
-          "accepted": 99,
-          "none_selected": 101
+          "low_probability": 63,
+          "accepted": 48,
+          "none_selected": 89
         },
         "coverage": {
-          "value": 0.495,
+          "value": 0.24,
           "ci95": [
-            0.34,
-            0.64
+            0.13,
+            0.36
           ]
         },
         "accepted_error_rate": {
-          "value": 0.020202020202020204,
+          "value": 0.0,
           "ci95": [
             0.0,
-            0.057971014492753624
+            0.0
           ]
         },
         "outside_miss_rate": {
-          "value": 0.014285714285714285,
+          "value": 0.0,
           "ci95": [
             0.0,
-            0.047058823529411764
+            0.0
           ]
         },
         "in_scope_review_rate": {
-          "value": 0.03,
+          "value": 0.52,
           "ci95": [
-            0.0,
-            0.0782608695652174
+            0.3333333333333333,
+            0.7
           ]
         },
         "insufficient_review_rate": {
-          "value": 0.9666666666666667,
+          "value": 1.0,
           "ci95": [
-            0.9,
+            1.0,
             1.0
           ]
         },
         "outside_detection_rate": {
-          "value": 0.9857142857142858,
+          "value": 1.0,
           "ci95": [
-            0.9529411764705882,
+            1.0,
             1.0
           ]
         }
       }
     }
   },
-  "model_label": "Valen-0.8B",
-  "runtime_label": "native FP32 · CPU: INTEL(R) XEON(R) PLATINUM 8558 · eager · shared_state · T=1",
+  "model_label": "Valen-Decision-1.5-0.8B",
+  "runtime_label": "native FP32 · CPU: INTEL(R) XEON(R) GOLD 6530 · eager · shared_state · T=1",
   "example": {
     "id": "outside-00-plain",
     "group_id": "outside-00",
@@ -430,19 +424,19 @@
     "outputs": [
       {
         "variant": "without_none",
-        "selected": "invoice",
+        "selected": "refund",
         "probabilities": [
           {
             "value": "refund",
-            "probability": 0.12401573994186825
+            "probability": 0.5084799755325993
           },
           {
             "value": "shipping",
-            "probability": 0.17546466817561937
+            "probability": 0.1491819353448691
           },
           {
             "value": "invoice",
-            "probability": 0.7005195918825124
+            "probability": 0.34233808912253166
           }
         ],
         "status": "ok"
@@ -453,19 +447,19 @@
         "probabilities": [
           {
             "value": "refund",
-            "probability": 0.0009113517221420398
+            "probability": 0.0015828930013911601
           },
           {
             "value": "shipping",
-            "probability": 0.0012917878840520793
+            "probability": 0.0005465654264254048
           },
           {
             "value": "invoice",
-            "probability": 0.005178132444991452
+            "probability": 0.0012539968419595891
           },
           {
             "value": "none",
-            "probability": 0.9926187279488144
+            "probability": 0.9966165447302239
           }
         ],
         "status": "ok"
@@ -473,46 +467,46 @@
     ],
     "decisions": {
       "A_threshold": {
-        "selected": "invoice",
-        "probability": 0.7005195918825124,
-        "margin": 0.5250549237068931,
+        "selected": "refund",
+        "probability": 0.5084799755325993,
+        "margin": 0.1661418864100676,
         "probabilities": [
           {
             "value": "refund",
-            "probability": 0.12401573994186825
+            "probability": 0.5084799755325993
           },
           {
             "value": "shipping",
-            "probability": 0.17546466817561937
+            "probability": 0.1491819353448691
           },
           {
             "value": "invoice",
-            "probability": 0.7005195918825124
+            "probability": 0.34233808912253166
           }
         ],
         "route": "human_review",
-        "reason": "low_probability"
+        "reason": "no_validation_rule"
       },
       "B_none": {
         "selected": "none",
-        "probability": 0.9926187279488144,
-        "margin": 0.987440595503823,
+        "probability": 0.9966165447302239,
+        "margin": 0.9950336517288327,
         "probabilities": [
           {
             "value": "refund",
-            "probability": 0.0009113517221420398
+            "probability": 0.0015828930013911601
           },
           {
             "value": "shipping",
-            "probability": 0.0012917878840520793
+            "probability": 0.0005465654264254048
           },
           {
             "value": "invoice",
-            "probability": 0.005178132444991452
+            "probability": 0.0012539968419595891
           },
           {
             "value": "none",
-            "probability": 0.9926187279488144
+            "probability": 0.9966165447302239
           }
         ],
         "route": "human_review",
@@ -520,24 +514,24 @@
       },
       "C_none_threshold": {
         "selected": "none",
-        "probability": 0.9926187279488144,
-        "margin": 0.987440595503823,
+        "probability": 0.9966165447302239,
+        "margin": 0.9950336517288327,
         "probabilities": [
           {
             "value": "refund",
-            "probability": 0.0009113517221420398
+            "probability": 0.0015828930013911601
           },
           {
             "value": "shipping",
-            "probability": 0.0012917878840520793
+            "probability": 0.0005465654264254048
           },
           {
             "value": "invoice",
-            "probability": 0.005178132444991452
+            "probability": 0.0012539968419595891
           },
           {
             "value": "none",
-            "probability": 0.9926187279488144
+            "probability": 0.9966165447302239
           }
         ],
         "route": "human_review",
@@ -545,6 +539,7 @@
       }
     }
   },
+  "paired_id": "outside-07-plain",
   "cases": [
     {
       "strategy": "C_none_threshold",
@@ -555,24 +550,24 @@
       "gold": null,
       "text": "I forgot my password. Help me regain access to my account.",
       "selected": "none",
-      "probability": 0.9954695898135146,
-      "margin": 0.9919973533503699,
+      "probability": 0.9991517735504374,
+      "margin": 0.9986514144990583,
       "probabilities": [
         {
           "value": "refund",
-          "probability": 0.00040383129758562786
+          "probability": 0.00016833718881670303
         },
         {
           "value": "shipping",
-          "probability": 0.0006543424257550526
+          "probability": 0.00017953020936670145
         },
         {
           "value": "invoice",
-          "probability": 0.0034722364631447847
+          "probability": 0.0005003590513791313
         },
         {
           "value": "none",
-          "probability": 0.9954695898135146
+          "probability": 0.9991517735504374
         }
       ],
       "route": "human_review",
@@ -583,32 +578,32 @@
       }
     },
     {
-      "strategy": "C_none_threshold",
-      "id": "outside-07-followup",
+      "strategy": "B_none",
+      "id": "outside-07-plain",
       "group_id": "outside-07",
       "split": "test",
       "kind": "outside",
       "gold": null,
-      "text": "Please change the delivery address before you ship my order. Please let me know the next step.",
+      "text": "Please change the delivery address before you ship my order.",
       "selected": "shipping",
-      "probability": 0.5905155925580313,
-      "margin": 0.182033163757158,
+      "probability": 0.5709555825903229,
+      "margin": 0.1468086424016532,
       "probabilities": [
         {
           "value": "refund",
-          "probability": 0.0001798932421926601
+          "probability": 0.0016144700780236542
         },
         {
           "value": "shipping",
-          "probability": 0.5905155925580313
+          "probability": 0.5709555825903229
         },
         {
           "value": "invoice",
-          "probability": 0.0008220853989027698
+          "probability": 0.0032830071429839494
         },
         {
           "value": "none",
-          "probability": 0.4084824288008733
+          "probability": 0.42414694018866966
         }
       ],
       "route": "automatic",
@@ -620,74 +615,38 @@
     },
     {
       "strategy": "C_none_threshold",
-      "id": "shipping-05-followup",
-      "group_id": "shipping-05",
+      "id": "invoice-01-plain",
+      "group_id": "invoice-01",
       "split": "test",
       "kind": "in_scope",
-      "gold": "shipping",
-      "text": "Can you check why my package is waiting at customs? Please let me know the next step.",
-      "selected": "none",
-      "probability": 0.5016825924457395,
-      "margin": 0.004365189318208784,
+      "gold": "invoice",
+      "text": "I need a tax invoice showing my company name.",
+      "selected": "invoice",
+      "probability": 0.9786594970227845,
+      "margin": 0.9574183881999545,
       "probabilities": [
         {
           "value": "refund",
-          "probability": 0.00020231623731375913
+          "probability": 6.78628951112142e-05
         },
         {
           "value": "shipping",
-          "probability": 0.49731740312753075
+          "probability": 3.1531259274194616e-05
         },
         {
           "value": "invoice",
-          "probability": 0.000797688189415861
+          "probability": 0.9786594970227845
         },
         {
           "value": "none",
-          "probability": 0.5016825924457395
+          "probability": 0.021241108822830066
         }
       ],
       "route": "human_review",
-      "reason": "none_selected",
+      "reason": "low_probability",
       "caption": {
         "en": "In-scope request sent to review",
         "zh": "误报：正常请求转人工"
-      }
-    },
-    {
-      "strategy": "C_none_threshold",
-      "id": "insufficient-04-plain",
-      "group_id": "insufficient-04",
-      "split": "test",
-      "kind": "insufficient",
-      "gold": null,
-      "text": "I have a question about my purchase.",
-      "selected": "invoice",
-      "probability": 0.5378833780696701,
-      "margin": 0.1427562646311485,
-      "probabilities": [
-        {
-          "value": "refund",
-          "probability": 0.04556129810949052
-        },
-        {
-          "value": "shipping",
-          "probability": 0.021428210382317677
-        },
-        {
-          "value": "invoice",
-          "probability": 0.5378833780696701
-        },
-        {
-          "value": "none",
-          "probability": 0.39512711343852164
-        }
-      ],
-      "route": "automatic",
-      "reason": "accepted",
-      "caption": {
-        "en": "Underspecified request accepted",
-        "zh": "信息不足仍被自动接受"
       }
     },
     {
@@ -699,24 +658,24 @@
       "gold": "invoice",
       "text": "Please email me a copy of the invoice for my purchase.",
       "selected": "invoice",
-      "probability": 0.9995462525310315,
-      "margin": 0.9991039066305832,
+      "probability": 0.9955378385314254,
+      "margin": 0.991299627380365,
       "probabilities": [
         {
           "value": "refund",
-          "probability": 1.0121956219138267e-05
+          "probability": 0.0002152925391467751
         },
         {
           "value": "shipping",
-          "probability": 1.2796123012416905e-06
+          "probability": 8.657778367459252e-06
         },
         {
           "value": "invoice",
-          "probability": 0.9995462525310315
+          "probability": 0.9955378385314254
         },
         {
           "value": "none",
-          "probability": 0.00044234590044817123
+          "probability": 0.00423821115106043
         }
       ],
       "route": "automatic",
@@ -735,27 +694,27 @@
       "gold": null,
       "text": "Please change the delivery address before you ship my order.",
       "selected": "shipping",
-      "probability": 0.993467225653654,
-      "margin": 0.987704727150492,
+      "probability": 0.9908089274810634,
+      "margin": 0.9846744655959457,
       "probabilities": [
         {
           "value": "refund",
-          "probability": 0.0007702758431840828
+          "probability": 0.0030566106338189448
         },
         {
           "value": "shipping",
-          "probability": 0.993467225653654
+          "probability": 0.9908089274810634
         },
         {
           "value": "invoice",
-          "probability": 0.005762498503161962
+          "probability": 0.00613446188511767
         }
       ],
-      "route": "automatic",
-      "reason": "accepted",
+      "route": "human_review",
+      "reason": "no_validation_rule",
       "caption": {
-        "en": "High-probability outside miss (A)",
-        "zh": "高概率漏检：阈值策略 A"
+        "en": "Same message, thresholds only (A)",
+        "zh": "同一输入：仅阈值，策略 A"
       }
     },
     {
@@ -766,38 +725,38 @@
       "kind": "outside",
       "gold": null,
       "text": "Please change the delivery address before you ship my order.",
-      "selected": "none",
-      "probability": 0.5117348845589615,
-      "margin": 0.026665544884967696,
+      "selected": "shipping",
+      "probability": 0.5709555825903229,
+      "margin": 0.1468086424016532,
       "probabilities": [
         {
           "value": "refund",
-          "probability": 0.0003758089626935796
+          "probability": 0.0016144700780236542
         },
         {
           "value": "shipping",
-          "probability": 0.48506933967399385
+          "probability": 0.5709555825903229
         },
         {
           "value": "invoice",
-          "probability": 0.0028199668043509623
+          "probability": 0.0032830071429839494
         },
         {
           "value": "none",
-          "probability": 0.5117348845589615
+          "probability": 0.42414694018866966
         }
       ],
       "route": "human_review",
-      "reason": "none_selected",
+      "reason": "low_probability",
       "caption": {
-        "en": "Same message with none (C)",
-        "zh": "同一输入加入 none：策略 C"
+        "en": "Same message, none + thresholds (C)",
+        "zh": "同一输入：none＋阈值，策略 C"
       }
     }
   ],
   "interpretation": {
-    "en": "Observed outside miss rates A/B/C: 11.4% / 1.4% / 1.4%; in-scope review: 0.0% / 3.0% / 3.0%. Read both together: fewer misses can require more human review. An explicit none option does not guarantee that unknown requests are caught. Validation selected p ≥ 0 and gap ≥ 0 for C, so C equals B: this set shows no additional benefit from the probability gates. A’s observed test accepted error is 7.4%; the 5% validation target is not a held-out guarantee.",
-    "zh": "实测 A／B／C 候选外漏检率分别为 11.4%／1.4%／1.4%；正常请求转人工比例为 0.0%／3.0%／3.0%。两者需要一起看：降低漏检可能增加人工量，提供 none 不保证识别所有未知请求。 验证集为 C 选出的门槛是 p ≥ 0、gap ≥ 0，因此 C 与 B 相同；这组数据没有显示叠加概率门槛的额外收益。 A 的测试集自动处理错误率为 7.4%，验证集的 5% 目标并不是独立测试保证。"
+    "en": "Validation-selected rules A/B/C: no feasible rule, review all; none only; p ≥ 0.98, gap ≥ 0. Observed on the test split, A/B/C: outside miss rate 0.0% / 15.7% / 0.0%; in-scope review 100.0% / 0.0% / 52.0%; automatic coverage 0.0% / 55.5% / 24.0%; accepted error rate — / 9.9% / 0.0%. Read misses and review volume together.",
+    "zh": "验证集为 A／B／C 选定的规则：无可行规则，全部转人工；仅按 none 判断；p ≥ 0.98、gap ≥ 0。测试划分上 A／B／C 的实测结果：候选外漏检率 0.0%／15.7%／0.0%；正常请求转人工 100.0%／0.0%／52.0%；自动处理覆盖率 0.0%／55.5%／24.0%；自动处理错误率 —／9.9%／0.0%。漏检与人工量需要一起看。"
   },
-  "complete_report_sha256": "d138c6a29ac75d8e1c48865d7c044e73effcbbf33da78f6cae87cb8398a3a94b"
+  "complete_report_sha256": "131312c738fe868d5212fec6ef04072c06e834539c2b7ef582b537051ecdb5b7"
 }

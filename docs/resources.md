@@ -23,7 +23,7 @@ Explore the [organization's model collection](https://huggingface.co/Valen-Team)
 
 ## ONNX models and SDKs
 
-Use the [ONNX inference guide](/docs/valen/onnx/) to choose a variant. The Valen-Decision-1.5 bundles provide `fp32` and `q8-mlp` for CPU and run with Python SDK 0.5.0 and JavaScript SDK 0.4.0; the Valen-Decision-1.0 repos also provide CUDA and browser variants. Model cards include download sizes and comparisons with the native model.
+Use the [ONNX inference guide](/docs/valen/onnx/) to choose a variant. The Valen-Decision-1.5 bundles provide `fp32` and `q8-mlp` for CPU, `cuda-fp16` for NVIDIA GPUs and, for 0.8B, `web-portable` for browser WebGPU, and run with Python SDK 0.5.0 and JavaScript SDK 0.4.0. Model cards include download sizes and comparisons with the native model.
 
 Valen-Decision-1.5 ONNX: [0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) · [2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) · [4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) · [9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) · [27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX)
 

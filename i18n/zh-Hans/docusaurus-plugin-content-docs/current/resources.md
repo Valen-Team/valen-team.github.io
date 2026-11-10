@@ -23,7 +23,7 @@ sidebar_label: 资源
 
 ## ONNX 模型与 SDK
 
-通过 [ONNX 推理指南](/zh-Hans/docs/valen/onnx/) 选择变体。Valen-Decision-1.5 模型包提供 CPU 的 `fp32` 与 `q8-mlp`，由 Python SDK 0.5.0 和 JavaScript SDK 0.4.0 运行；Valen-Decision-1.0 仓库还提供 CUDA 与浏览器变体。下载体积及与原生模型的对比见各模型卡片。
+通过 [ONNX 推理指南](/zh-Hans/docs/valen/onnx/) 选择变体。Valen-Decision-1.5 模型包提供 CPU 的 `fp32` 与 `q8-mlp`、NVIDIA GPU 的 `cuda-fp16`，0.8B 另有浏览器 WebGPU 的 `web-portable`，由 Python SDK 0.5.0 和 JavaScript SDK 0.4.0 运行。下载体积及与原生模型的对比见各模型卡片。
 
 Valen-Decision-1.5 ONNX：[0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) · [2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) · [4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) · [9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) · [27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX)
 

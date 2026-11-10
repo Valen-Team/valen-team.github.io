@@ -9,7 +9,7 @@ import UnknownCategoryResults from '@site/src/components/UnknownCategoryResults'
 
 Your ticket router handles refunds, shipment tracking and invoices. A customer asks to change their delivery address before dispatch. That needs a person: **a tracking queue cannot change an address.**
 
-In a recorded Valen test, the message was nevertheless assigned to shipment tracking with **99.3% probability**. It passed even a 99% acceptance threshold.
+In a recorded Valen-Decision-1.5-0.8B test, the message was nevertheless assigned to shipment tracking with **99.1% probability**. It passed even a 99% acceptance threshold.
 
 ## Give the model a “none of these” option
 
@@ -17,21 +17,19 @@ Keep the message and business categories unchanged, add a `none` candidate, and 
 
 <UnknownCategoryResults section="example" />
 
-The model now chooses `none`, and the application sends the request to a person. Valen still returns a structured choice and candidate probabilities; your code provides a fallback path for that choice.
+With `none` available, the probability of shipment tracking falls from 99.1% to 57.1%, and `none` takes 42.4%. Tracking still ranks first, so a router that accepts every non-`none` choice still sends this message to the wrong queue. The probability gate selected on validation data, p ≥ 0.98, turns that drop into a human review. Valen still returns a structured choice and candidate probabilities; your code provides the fallback path.
 
 Choice distributes probability across the candidates you supply. When the correct category is missing, the highest-probability candidate can still be wrong. `none` gives the model a way to express that case. Add it as an ordinary Choice candidate in your existing flow.
 
-## Fewer wrong assignments, more human review
+## Use `none` and a validated gate together
 
-We compared the original threshold policy with an explicit `none` option on Valen-0.8B. These are the results on **200 held-out test requests**:
+We compared three policies on Valen-Decision-1.5-0.8B: the original categories with a probability gate (A), an explicit `none` option (B), and `none` with a probability gate (C). These are the results on **200 held-out test requests**:
 
 <UnknownCategoryResults section="takeaway" />
 
-Outside requests accepted in error fell from eight to one, while three normal requests were sent to review. Whether that trade is worthwhile depends on the cost of a wrong assignment and the review capacity you have.
+With only the three business categories, no probability or margin gate met the 5% validation error target, so A sends every request to review. Adding `none` lets B handle 111 of 200 requests automatically, but 11 of 70 outside requests were still accepted into a business queue. C adds the validation-selected gate p ≥ 0.98: it accepted **no outside requests** and made no errors among its 48 automatic decisions, while 52 of 100 normal requests went to review. Whether that trade is worthwhile depends on the cost of a wrong assignment and the review capacity you have.
 
-We also tested `none` with probability and margin gates. Validation selected zero additional gates, so it matched the none-only policy. **This test showed no extra benefit from adding thresholds.**
-
-`none` still makes mistakes. Append “Please let me know the next step.” to the opening address-change message, and the model accepts it as a tracking request again. A legitimate question about a parcel held at customs was sent to review. Those failures remain in the records below.
+The misses concentrate in a few scenarios. Besides the address change, a warranty repair request (“I do not want a refund”) went to refunds at 85–94% in all five of its variants, and a size exchange went to refunds in three variants. A legitimate question about a parcel held at customs ranked tracking first at 88.8%, below the gate, so C sent it to review. Those cases remain in the records below.
 
 The test requests are surface variants of 40 fictional scenarios. Grouping and evaluation details are available below.
 
@@ -44,7 +42,7 @@ Define what `none` means. Here it covers requests outside refunds, tracking and 
 ```bash
 python -m zipfile -e valen-cookbook.zip .
 cd valen-cookbook
-python -m pip install valen-sdk==0.2.0
+python -m pip install valen-sdk==0.5.0
 python unknown_categories.py demo --text "Please change the delivery address before you ship my order."
 ```
 
@@ -108,7 +106,7 @@ Outside detection rate counts semantic/policy review decisions and **excludes re
 
 <UnknownCategoryResults section="cases" />
 
-Every test decision remains available in the complete report, including messages whose wrappers change the result. The examples are selected by a fixed rule. Selection prefers C, then B, then A; within each strategy it prefers the unwrapped message and then row ID. An additional pair shows the first outside miss under A (preferring an unwrapped message, then row ID) and C on that exact input.
+Every test decision remains available in the complete report, including messages whose wrappers change the result. The examples are selected by a fixed rule. Selection prefers C, then B, then A; within each strategy it prefers the unwrapped message and then row ID. An additional set shows the first outside miss under B (preferring an unwrapped message, then row ID) and A and C on that exact input.
 
 
 </details>
@@ -129,16 +127,16 @@ python unknown_categories.py report --cache unknown-predictions.jsonl --output r
 
 To evaluate your own data, edit a copy of `unknown_categories_data.json`. Keep unique row IDs, stable `group_id`, `validation`/`test` splits and separate `in_scope`, `outside` and `insufficient` labels. Put the ordinary category in `gold` only for in-scope requests, otherwise use JSON `null`. Labels never enter the model request. Replacing categories also requires updating `CHOICES`, `NONE` and their descriptions in the script; the protocol hash changes and old caches are rejected.
 
-Collect two predictions per request, then replay all three policies locally. B and C reuse the same predictions. The recorded run used an existing native 0.8B model on CPU (eight threads) in FP32; replace the paths below with your own existing model directory:
+Collect two predictions per request, then replay all three policies locally. B and C reuse the same predictions. The recorded run used an existing native Valen-Decision-1.5-0.8B model on CPU (eight threads) in FP32; replace the paths below with your own existing model directory:
 
 ```bash
 python unknown_categories.py collect --backend native --device cpu --threads 8 \
-  --model /path/to/Valen-0.8B --revision YOUR_PINNED_ARTIFACT_ID \
+  --model /path/to/Valen-Decision-1.5-0.8B --revision YOUR_PINNED_ARTIFACT_ID \
   --dataset my-data.json --cache my-predictions.jsonl
 python unknown_categories.py report --dataset my-data.json \
   --cache my-predictions.jsonl --output my-report.json
 python unknown_categories.py demo --backend native --device cpu --threads 8 \
-  --model /path/to/Valen-0.8B --revision YOUR_PINNED_ARTIFACT_ID \
+  --model /path/to/Valen-Decision-1.5-0.8B --revision YOUR_PINNED_ARTIFACT_ID \
   --policy my-report.json --text "Please send my invoice."
 ```
 

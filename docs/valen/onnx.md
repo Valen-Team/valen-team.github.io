@@ -53,16 +53,17 @@ Complete ticket routing, image screening, video tagging and measured outputs are
 
 ## Models and variants
 
-| Model | `fp32` · CPU | `q8-mlp` · CPU |
-| --- | --- | --- |
-| [Valen-Decision-1.5 0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) | 3.518 GB | 2.758 GB |
-| [Valen-Decision-1.5 2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) | 8.969 GB | 6.364 GB |
-| [Valen-Decision-1.5 4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) | 18.278 GB | 11.766 GB |
-| [Valen-Decision-1.5 9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) | 33.706 GB | 19.814 GB |
+| Model | `fp32` · CPU | `q8-mlp` · CPU | `cuda-fp16` · Python CUDA | `web-portable` · browser |
+| --- | --- | --- | --- | --- |
+| [Valen-Decision-1.5 0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) | 3.518 GB | 2.758 GB | 2.013 GB | 2.456 GB |
+| [Valen-Decision-1.5 2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) | 8.969 GB | 6.364 GB | 5.205 GB | — |
+| [Valen-Decision-1.5 4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) | 18.278 GB | 11.766 GB | 9.866 GB | — |
+| [Valen-Decision-1.5 9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) | 33.706 GB | 19.814 GB | 17.832 GB | — |
+| [Valen-Decision-1.5 27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX) | 104.487 GB | 55.288 GB | 53.237 GB | — |
 
-These are decimal GB download sizes, including vision components. They are not runtime memory requirements. [Valen-Decision-1.5 27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX) uses the same layout.
+These are decimal GB download sizes, including vision components. They are not runtime memory requirements.
 
-Each bundle has a `valen_onnx.json` manifest and the graphs `embedding`, `vision`, `decision` and `grounding`: the layout of the Valen-Decision-1.0 bundles plus the grounding graph that answers [bbox questions](#bbox-questions). Start with `fp32` on CPU. `q8-mlp` quantizes the backbone MLP weights to 8 bits; the decision head, the grounding head and the vision graph stay FP32.
+Each bundle has a `valen_onnx.json` manifest and the graphs `embedding`, `vision`, `decision` and `grounding`: the layout of the Valen-Decision-1.0 bundles plus the grounding graph that answers [bbox questions](#bbox-questions). Start with `fp32` on CPU. `q8-mlp` quantizes the backbone MLP weights to 8 bits; the decision head, the grounding head and the vision graph stay FP32. `cuda-fp16` runs the backbone and embedding in FP16 on NVIDIA GPUs through the Python SDK, with the vision graph, decision head and grounding head in FP32. `web-portable` is the 0.8B graph for browser WebGPU with the JavaScript SDK, built from the same Valen weights. All four variants answer bbox questions.
 
 Each bundle ships a `validation.json`. Compared with the native PyTorch model on CPU, for 0.8B over the 13 Cookbook recipes (216 compared values):
 
@@ -73,9 +74,20 @@ Each bundle ships a `validation.json`. Compared with the native PyTorch model on
 
 On single requests, `fp32` agrees with the native model to about 1e-5 for 0.8B, 2B, 4B and 9B.
 
+`cuda-fp16` and `web-portable` were compared with the native FP32 model on a text request (predicate, choice and score), an image request and a bbox request, 44 compared values per model, with identical decisions throughout:
+
+| Variant | Device | Maximum probability difference | Maximum bbox coordinate difference |
+| --- | --- | --- | --- |
+| `cuda-fp16` 0.8B | NVIDIA H200 | 0.00032 | 0.0002 |
+| `cuda-fp16` 2B | NVIDIA H200 | 0.0010 | 0.0002 |
+| `cuda-fp16` 4B | NVIDIA H200 | 0.00023 | 0.0002 |
+| `cuda-fp16` 9B | NVIDIA H200 | 0.00098 | 0.0002 |
+| `cuda-fp16` 27B | NVIDIA H200 | 0.00016 | 0.0001 |
+| `web-portable` 0.8B | CPU (ONNX Runtime) | 0.0010 | 0.0002 |
+
 ### Valen-Decision-1.0 variants
 
-The Valen-Decision-1.0 ONNX repos provide `fp32` and `q8-mlp`, plus `cuda-fp16` for Python CUDA and `web-portable` for browser WebGPU. Use them for the [CUDA](#cuda) and [browser WebGPU](#browser-webgpu) instructions on this page. Python SDK 0.4.0 and earlier and JavaScript SDK 0.3.0 and earlier run these repos.
+The Valen-Decision-1.0 ONNX repos provide `fp32`, `q8-mlp`, `cuda-fp16` and, for 0.8B, `web-portable`. Python SDK 0.4.0 and earlier and JavaScript SDK 0.3.0 and earlier run these repos.
 
 | Model | `fp32` · CPU | `q8-mlp` · CPU | `cuda-fp16` · Python CUDA | `web-portable` · browser |
 | --- | --- | --- | --- | --- |
@@ -83,11 +95,11 @@ The Valen-Decision-1.0 ONNX repos provide `fp32` and `q8-mlp`, plus `cuda-fp16` 
 | [Valen-Decision-1.0 2B](https://huggingface.co/Valen-Team/Valen-2B-ONNX) | 8.948 GB | 6.343 GB | 5.184 GB | — |
 | [Valen-Decision-1.0 4B](https://huggingface.co/Valen-Team/Valen-4B-ONNX) | 18.253 GB | 11.741 GB | 9.841 GB | — |
 
-These are decimal GB download sizes from the published manifests, including vision components. The model cards include measured memory, latency and quality comparisons. In the Valen-Decision-1.0 CPU measurements, `q8-mlp` reduced MLP weight size and text memory and was slower than FP32. The dedicated `web-portable` variant is available for 0.8B. CPU/CUDA graphs contain ONNX Runtime contrib operators and cannot be substituted for the browser graph.
+These are decimal GB download sizes from the published manifests, including vision components. The model cards include measured memory, latency and quality comparisons. In the Valen-Decision-1.0 CPU measurements, `q8-mlp` reduced MLP weight size and text memory and was slower than FP32. CPU/CUDA graphs contain ONNX Runtime contrib operators and cannot be substituted for the browser graph.
 
 ### CUDA
 
-The `cuda-fp16` variant is in the Valen-Decision-1.0 ONNX repos. In a separate Python environment, install the GPU dependencies from the Python SDK repository root:
+Every Valen-Decision-1.5 bundle includes the `cuda-fp16` variant. In a separate Python environment, install the GPU dependencies from the Python SDK repository root:
 
 ```bash
 python -m pip install ".[cuda]"
@@ -97,7 +109,7 @@ python -m pip install ".[cuda]"
 from valen_sdk import Valen
 
 with Valen.local(
-    "Valen-Team/Valen-0.8B-ONNX", variant="cuda-fp16",
+    "Valen-Team/Valen-Decision-1.5-0.8B-ONNX", variant="cuda-fp16",
     providers=[("CUDAExecutionProvider", {"use_tf32": "0"}), "CPUExecutionProvider"],
 ) as client:
     result = client.decisions(
@@ -238,7 +250,7 @@ npm install
 npm run dev
 ```
 
-Open the localhost URL and click **Run locally**. The example uses the published Valen-Decision-1.0 0.8B `web-portable` model and includes runtime assets, loading feedback and error handling. First use downloads and caches model components; the complete variant is about 2.443 GB.
+Open the localhost URL and click **Run locally**. The example at the `npm-v0.4.0` tag uses the Valen-Decision-1.0 0.8B `web-portable` model (about 2.443 GB) and includes runtime assets, loading feedback and error handling. In your own page, load Valen-Decision-1.5 with `await Valen.local('Valen-Team/Valen-Decision-1.5-0.8B-ONNX', { variant: 'web-portable', device: 'webgpu' })`; the complete variant is about 2.456 GB. First use downloads and caches model components.
 
 From `examples/browser`, use `npm run build` and `npm run preview` for a production preview. Deployment needs HTTPS or localhost, a WebGPU-capable browser, and the example's COOP/COEP response headers. See the [browser example](https://github.com/Valen-Team/valen-sdk-js/tree/main/examples/browser).
 

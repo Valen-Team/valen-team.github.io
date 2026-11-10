@@ -1,7 +1,7 @@
 {
-  "passed": true,
+  "passed": false,
   "validation_kind": "real_model_python_sdk_http",
-  "sdk_version": "0.2.0",
+  "sdk_version": "0.5.0",
   "records": [
     {
       "id": "text",
@@ -17,42 +17,42 @@
             "probabilities": [
               {
                 "value": "address",
-                "probability": 0.9999687802227345
+                "probability": 0.9995182096535702
               },
               {
                 "value": "cancel",
-                "probability": 3.121977726547585e-05
+                "probability": 0.00048179034642988305
               }
             ],
-            "confidence": 0.999937560445469
+            "confidence": 0.9990364193071404
           },
           {
             "name": "change_address",
             "type": "predicate",
-            "probability": 0.998255233221263
+            "probability": 0.9989045813825966
           },
           {
             "name": "explicitness",
             "type": "score",
-            "score": 1.9208975721246626,
+            "score": 1.9935486447467923,
             "probabilities": [
               {
                 "label": "none",
                 "value": 0,
-                "probability": 0.01275024985506279
+                "probability": 0.0011819255274526429
               },
               {
                 "label": "possible",
                 "value": 1,
-                "probability": 0.05360192816521193
+                "probability": 0.00408750419830247
               },
               {
                 "label": "explicit",
                 "value": 2,
-                "probability": 0.9336478219797253
+                "probability": 0.9947305702742449
               }
             ],
-            "confidence": 0.8813463581869938
+            "confidence": 0.9903229671201884
           }
         ],
         "usage": {
@@ -78,22 +78,22 @@
             "probabilities": [
               {
                 "value": true,
-                "probability": 0.9995143580761107
+                "probability": 0.9987513434082687
               },
               {
                 "value": "true",
-                "probability": 0.0004421172379099738
+                "probability": 0.0009923804893717683
               },
               {
                 "value": false,
-                "probability": 2.689618630290796e-05
+                "probability": 0.000184586706306081
               },
               {
                 "value": "false",
-                "probability": 1.6628499676423394e-05
+                "probability": 7.168939605344302e-05
               }
             ],
-            "confidence": 0.9993524774348143
+            "confidence": 0.9983351245443582
           }
         ],
         "usage": {
@@ -115,53 +115,53 @@
           {
             "name": "red",
             "type": "predicate",
-            "probability": 0.5182708771299855
+            "probability": 0.8768717252909031
           },
           {
             "name": "color",
             "type": "choice",
-            "choice": "blue",
+            "choice": "red",
             "probabilities": [
               {
                 "value": "red",
-                "probability": 0.07339346780254176
+                "probability": 0.7491640913543411
               },
               {
                 "value": "blue",
-                "probability": 0.6364808629454929
+                "probability": 0.18922922783809948
               },
               {
                 "value": "green",
-                "probability": 0.29012566925196537
+                "probability": 0.06160668080755942
               }
             ],
-            "confidence": 0.45472129441823933
+            "confidence": 0.6237461370315117
           },
           {
             "name": "brightness",
             "type": "score",
-            "score": 0.8851241036286982,
+            "score": 0.99377983947479,
             "probabilities": [
               {
                 "label": "dark",
                 "value": 0,
-                "probability": 0.1148758963713018
+                "probability": 0.006220160525210086
               },
               {
                 "label": "bright",
                 "value": 1,
-                "probability": 0.8851241036286982
+                "probability": 0.99377983947479
               }
             ],
-            "confidence": 0.7702482072573964
+            "confidence": 0.9875596789495799
           }
         ],
         "usage": {
-          "input_tokens": 212,
+          "input_tokens": 215,
           "output_tokens": 0
         },
         "internal_usage": {
-          "compute_tokens": 212
+          "compute_tokens": 215
         }
       }
     },
@@ -175,7 +175,7 @@
           {
             "name": "red",
             "type": "predicate",
-            "probability": 0.5364243699393445
+            "probability": 0.8129178957133247
           },
           {
             "name": "color",
@@ -184,44 +184,44 @@
             "probabilities": [
               {
                 "value": "red",
-                "probability": 0.5720720194441735
+                "probability": 0.8341787035996794
               },
               {
                 "value": "blue",
-                "probability": 0.42752891967786716
+                "probability": 0.07458987138416595
               },
               {
                 "value": "green",
-                "probability": 0.00039906087795935525
+                "probability": 0.09123142501615454
               }
             ],
-            "confidence": 0.3581080291662603
+            "confidence": 0.7512680553995189
           },
           {
             "name": "brightness",
             "type": "score",
-            "score": 0.9998961148855827,
+            "score": 0.990717112414597,
             "probabilities": [
               {
                 "label": "dark",
                 "value": 0,
-                "probability": 0.00010388511441724037
+                "probability": 0.00928288758540291
               },
               {
                 "label": "bright",
                 "value": 1,
-                "probability": 0.9998961148855827
+                "probability": 0.990717112414597
               }
             ],
-            "confidence": 0.9997922297711656
+            "confidence": 0.9814342248291942
           }
         ],
         "usage": {
-          "input_tokens": 271,
+          "input_tokens": 839,
           "output_tokens": 0
         },
         "internal_usage": {
-          "compute_tokens": 271
+          "compute_tokens": 839
         }
       }
     },
@@ -229,31 +229,29 @@
       "id": "empty-questions",
       "passed": true,
       "status": 400,
-      "error": "{'type': 'invalid_request', 'message': 'questions must contain 1\u2013256 questions'}"
+      "error": "questions must contain 1\u2013256 questions"
     },
     {
       "id": "zero-temperature",
       "passed": true,
       "status": 400,
-      "error": "{'type': 'invalid_request', 'message': 'temperature must be finite and positive'}"
+      "error": "temperature must be finite and positive"
     },
     {
       "id": "boolean-temperature",
       "passed": true,
       "status": 400,
-      "error": "{'type': 'invalid_request', 'message': 'temperature must be finite and positive'}"
+      "error": "temperature must be finite and positive"
     },
     {
       "id": "duplicate-names",
-      "passed": true,
-      "status": 400,
-      "error": "{'type': 'invalid_request', 'message': 'question names must be unique nonempty strings'}"
+      "passed": false,
+      "error": "ValenInputError('questions: question names must be unique nonempty strings')"
     },
     {
       "id": "numeric-choice",
-      "passed": true,
-      "status": 400,
-      "error": "{'type': 'invalid_request', 'message': 'choice values must be strings or booleans; level labels must be strings'}"
+      "passed": false,
+      "error": "ValenInputError('questions.q: invalid candidate labels')"
     }
   ]
 }
