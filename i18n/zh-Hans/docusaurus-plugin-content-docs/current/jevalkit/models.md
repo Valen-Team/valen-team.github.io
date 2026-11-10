@@ -16,6 +16,7 @@ sidebar_label: "接入模型"
 | Valen-2B | Valen | 原生接口 | jevalkit[hf] | [源码](https://github.com/Valen-Team/Valen) |
 | Intern-Decision-2B | Intern-Decision | 原生接口 | Python 3.12+; 作者的 requirements.txt | [源码](https://github.com/InternLM/Intern-Decision) |
 | Valen-4B | Valen | 原生接口 | jevalkit[hf] | [源码](https://github.com/Valen-Team/Valen) |
+| Valen-Decision-1.5-{0.8B,2B,4B,9B,27B} | Valen | 原生接口 | jevalkit[hf] | [源码](https://huggingface.co/Valen-Team) |
 | Intern-Decision-4B | Intern-Decision | 原生接口 | Python 3.12+; 作者的 requirements.txt | [源码](https://github.com/InternLM/Intern-Decision) |
 | Laya | Laya | 原生接口 | laya | [源码](https://github.com/NandhaKishorM/laya) |
 | Liquid-d1-3B | Liquid-d1 | 原生接口 | transformers>=5.14; 作者依赖 | [源码](https://huggingface.co/LiquidAI/d1-3B) |

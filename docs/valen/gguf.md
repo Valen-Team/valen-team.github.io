@@ -4,9 +4,11 @@ title: GGUF local service
 
 # GGUF local service
 
-These models require the Valen-patched llama.cpp/Ollama. Support in official unmodified releases is not claimed. For the quickest online trial, see [version selection](/docs/valen/choosing/).
+Run these models with the Valen-patched llama.cpp/Ollama, which return candidate probabilities. For the quickest online trial, see [version selection](/docs/valen/choosing/).
 
-All three sizes provide F32 and Q8_0. Q4_K_M and Q5_K_M did not pass the fixed quality gates and are not provided. See the [quality report](https://huggingface.co/Valen-Team/Valen-0.8B-GGUF/blob/main/validation/quality-summary.json) in each model repository.
+This guide uses the Valen-Decision-1.0 GGUF models. Valen-Decision-1.5 BF16 GGUF files: [0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-GGUF) · [2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-GGUF) · [4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-GGUF) · [9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-GGUF) · [27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-GGUF).
+
+All three Valen-Decision-1.0 sizes provide F32 and Q8_0. Q4_K_M and Q5_K_M did not pass the fixed quality gates and are not provided. See the [quality report](https://huggingface.co/Valen-Team/Valen-0.8B-GGUF/blob/main/validation/quality-summary.json) in each model repository.
 
 ## Linux x86-64 CPU prebuilt package
 

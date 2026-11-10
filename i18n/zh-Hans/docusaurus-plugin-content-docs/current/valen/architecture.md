@@ -22,6 +22,16 @@ Shared-state 将 state/媒体放入一次，再放所有题目及候选，最后
 
 此模式中 `logical_tokens = compute_tokens = 完整共享序列长度`。包含视觉 token，不含反向、padding 批次开销或 RLCD/参考策略的重复前向，不能视为 FLOPs。`max_length` 限制完整序列，超长直接报错。`tokens_per_step` 按每卡预算打包完整 state；`microbatch_size` 计算 state 数，padding token 上限可能缩小批次，单个超预算行仍单独执行但必须满足 state 限制。一次前向不保证恒定内存或线性成本。
 
+## Valen-Decision-1.5
+
+Valen-Decision-1.5 在同一架构上新增分块注意力和定位头。27B 基于 Qwen3.8-27B，其余尺寸基于 Qwen3.5。
+
+**分块注意力。** 在 full-attention 层中，存放 state 和媒体的共享前缀内部双向，且不关注题目区，因此前缀的计算仍由所有问题共用。决策题共用一个可见完整前缀的双向块；每道 `bbox` 题单独成块。线性注意力层保持因果。
+
+**定位头。** `bbox` 题是在图像 token 上做决策：该题的 Decision 读出位为被引用图片的每个视觉 token 打分，每个 token 回归其格点中心到框四边的距离。预测框取概率最大 token 的回归结果；`confidence` 是中心落在该框内的 token 的概率质量。坐标按原图宽高归一化到 `[0, 1]`。见 [Bbox 问题](./bbox.md)。
+
+已发布的 Valen-Decision-1.5 配置为 `valen_decision_version="1.5"`、`valen_full_attention_mask="bbox_blocks"`、`valen_grounding={"width": 512, "hidden": 1024}`，Mixer 设置不变，`valen_max_length=16384`。`model_type` 仍为 `valen_qwen`。实现：[block_attention.py](https://github.com/Valen-Team/Valen/blob/main/valen/modeling/qwen/block_attention.py)、[grounding.py](https://github.com/Valen-Team/Valen/blob/main/valen/modeling/qwen/grounding.py)、[架构契约](https://github.com/Valen-Team/Valen/blob/main/valen/modeling/qwen/DECISION_1_5.md)。
+
 ## 历史与可选实现
 
 `question` 模式在每个分支重复 state：Choice/Noul 一题一个分支，Score 每等级一个分支。state 长度 B、后缀长度 Sᵢ 时，逻辑 token 为 `B + sum(Sᵢ)`，计算 token 为 `sum(B + Sᵢ)`，没有跨分支骨干 KV 缓存复用。这与发布版 shared-state 输入不同。
@@ -41,7 +51,7 @@ Bilinear 使用两投影的缩放点积；MLP、role-MLP、dual-encoder 仍是�
 <details>
 <summary>发布配置</summary>
 
-发布的原生 Valen-0.8B、Valen-2B、Valen-4B 使用 Qwen3.5 多模态骨干、**Mixer** 候选评分头和 **shared_state** 执行。发布配置为 `model_type="valen_qwen"`、`qwen_execution="shared_state"`、`valen_head.head_type="mixer"`。Mixer 宽度 256、两层 block、角色混合隐藏宽度 16、通道混合隐藏宽度 1024。`valen_max_length=32768` 限制完整序列，不代表每种后端都接受这一预算。
+发布的原生 Valen-Decision-1.0 模型（Valen-0.8B、Valen-2B、Valen-4B）使用 Qwen3.5 多模态骨干、**Mixer** 候选评分头和 **shared_state** 执行。发布配置为 `model_type="valen_qwen"`、`qwen_execution="shared_state"`、`valen_head.head_type="mixer"`。Mixer 宽度 256、两层 block、角色混合隐藏宽度 16、通道混合隐藏宽度 1024。`valen_max_length=32768` 限制完整序列，不代表每种后端都接受这一预算。
 
 这些是发布配置，不能用通用构建器的 `bilinear` / `question` fallback 替代。加载完整模型时继承已保存架构，拒绝不兼容的评分头尺寸，并保留训练后的评分头。
 

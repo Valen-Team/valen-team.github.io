@@ -12,7 +12,7 @@ Hosted APIs and local deployments support two protocols:
 | System One | POST | `/v1/systemone` | [API reference](./api/systemone.md) |
 | Decisions | POST | `/v1/decisions` | [API reference](./api/decisions.md) |
 
-The hosted service also exposes a model list endpoint:
+The hosted service serves Valen-Decision-1.5 0.8B, 2B and 4B under the model IDs `valen-0.8b`, `valen-2b` and `valen-4b`, and exposes a model list endpoint:
 
 | Endpoint | Method | Path | Documentation |
 |---|---|---|---|

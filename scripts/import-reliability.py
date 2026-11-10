@@ -11,7 +11,7 @@ import math
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-MODELS = ("Valen-0.8B", "Valen-2B", "Valen-4B")
+MODELS = ("Valen-Decision-1.5-0.8B", "Valen-Decision-1.5-2B", "Valen-Decision-1.5-4B")
 
 
 def read(path):
@@ -32,7 +32,7 @@ def fingerprint(value):
 def validate(model, report):
     if report["schema_version"] != 1 or report["identity"]["model"] != "Valen-Team/" + model:
         raise ValueError("Wrong report/model identity")
-    if not report.get("study", {}).get("name", "").startswith("BANKING77 retrospective"):
+    if not report.get("study", {}).get("name", "").startswith("BANKING77 reliability replay v1, Valen-Decision-1.5"):
         raise ValueError("This homepage snapshot is scoped to the documented BANKING77 study")
     artifact = report["calibration"]
     if artifact["identity"] != report["identity"] or artifact["kind"] != "temperature":
@@ -127,7 +127,7 @@ def import_reports(source, root=ROOT):
                         "questions": report["test"]["questions"], "report_url": prefix + "/report.json.gz", "report_bytes": len(packed),
                         "calibration_url": prefix + "/calibration.json", "protocol_url": prefix + "/protocol.json",
                         "source_url": report["study"]["source_url"],
-                        "scope": "BANKING77 · English · 77 candidate intents · retrospective public-test replay. Not a production or vision guarantee.",
+                        "scope": "BANKING77 · English · 77 candidate intents · public test set, three-way split. Not a production or vision guarantee.",
                         "before": small_metrics(report["before"]), "after": small_metrics(report["after"]),
                         "operating_points": [{"validation_target": p["validation_target"], "test": p["test"], "policy_url": prefix + f"/policy-{i}.json"}
                                              for i, p in enumerate(report["operating_points"])]})

@@ -12,13 +12,13 @@ import output from '@site/static/cookbook/outputs/function_calling.json?cookbook
 
 ## 工作原理
 
-代码里的函数表是所有问题的唯一来源。一次请求包含：
+代码里的函数表是所有问题的唯一来源。状态是一个很小的 JSON 对象：`app` 说明这段文本是什么（"Command bar of a notes app, typed while a note is open"），`command` 是用户输入的内容。一次请求包含：
 
 | 问题 | 类型 | 何时读取 |
 | --- | --- | --- |
 | `function`：用户想让应用做什么？ | 在四个函数中做选择题 | 始终读取 |
-| `is_command`：笔记应用能否完成用户的请求？ | predicate | 始终读取 |
-| 每个函数的每个参数对应一个 `<function>.<arg>` | 选择题 | 只读取被选中的函数 |
+| `is_command`：这条消息是不是要笔记应用执行的指令？ | predicate | 始终读取 |
+| 每个函数的每个参数对应一个 `<function>.<arg>`，问题文本各自写在函数表里 | 选择题 | 只读取被选中的函数 |
 
 预先问出所有函数的参数，就是**推测式并行提问**：问题开销很小，并且基于同一输入一起运行，所以无论最后选中哪个函数，一次往返就够了。选择题总会选出一个选项，因此“不是指令”的情况单独用一道判断题来问，而不是加一个 `none` 选项。
 
@@ -49,12 +49,12 @@ python function_calling.py --replay off --base-url https://api.valen-team.worker
 
 ## 输出
 
-五条指令变成了函数调用。"Remind me next week? actually make it a pdf" 包含两个请求，所以应用会问用户要哪一个。"What's the weather in Shanghai" 落在中间区间，得到帮助文本。
+五条指令变成了函数调用，每条的 `is_command` 都在 0.87 及以上，被选中函数的概率都在 0.96 及以上。"Remind me next week? actually make it a pdf" 包含两个请求：`export_note` 得到 0.62，其余归 `set_reminder`，所以应用会问用户要哪一个。"What's the weather in Shanghai" 的 `is_command` 为 0.03，结果是 `not_a_command`。
 
 <CodeBlock language="json" title="录制的输出">{output}</CodeBlock>
 
 ## 改成你自己的
 
-- 在 `TOOLS` 里加一项就能新增函数，问题会自动生成。自由文本、数字和日期留给代码处理（见[选出正确的日期](../value-extraction/)）。
-- 按用户想做的事来描述每个函数（"Send or share this note with other people"），而不是用它的 API 名称。
-- `is_command` 的措辞直接点名了容易混淆的情况：需要外部信息（如天气或新闻）的请求。
+- 在 `TOOLS` 里加一项就能新增函数：写一句描述，并给每个参数写一个直接的问题（"Which file format does the user want?"），请求会自动生成。自由文本、数字和日期留给代码处理（见[选出正确的日期](../value-extraction/)）。
+- 按用户想做的事和它涵盖的选项来描述每个函数（"Send this note to other people, or let them read or edit it"），而不是用它的 API 名称。
+- `is_command` 只问一件直白的事，状态里的 `app` 字段告诉 Valen 这段文本是在命令栏里输入的。有了这个上下文，天气问题或一句问候读起来就不是指令。

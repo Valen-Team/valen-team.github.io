@@ -40,28 +40,35 @@ class EvidencePublication(unittest.TestCase):
                 self.assertTrue((ROOT / "static" / point["policy_url"].lstrip("/")).is_file())
 
     def test_model_or_calibration_mismatch_cannot_be_published(self):
-        report = copy.deepcopy(self.reports["Valen-0.8B"])
+        report = copy.deepcopy(self.reports["Valen-Decision-1.5-0.8B"])
         report["calibration"]["temperature"] = 1
-        with self.assertRaises(ValueError): publisher.validate("Valen-0.8B", report)
-        with self.assertRaises(ValueError): publisher.validate("Valen-4B", self.reports["Valen-0.8B"])
+        with self.assertRaises(ValueError): publisher.validate("Valen-Decision-1.5-0.8B", report)
+        with self.assertRaises(ValueError): publisher.validate("Valen-Decision-1.5-4B", self.reports["Valen-Decision-1.5-0.8B"])
 
     def test_changed_denominator_cannot_be_published(self):
-        report = copy.deepcopy(self.reports["Valen-0.8B"])
+        report = copy.deepcopy(self.reports["Valen-Decision-1.5-0.8B"])
         report["operating_points"][-1]["test"]["eligible"] += 1
-        with self.assertRaises(ValueError): publisher.validate("Valen-0.8B", report)
+        with self.assertRaises(ValueError): publisher.validate("Valen-Decision-1.5-0.8B", report)
 
     def test_test_group_leakage_cannot_be_published(self):
-        report = copy.deepcopy(self.reports["Valen-0.8B"])
+        report = copy.deepcopy(self.reports["Valen-Decision-1.5-0.8B"])
         report["test"]["group_hashes"].append(report["calibration"]["fit"]["group_hashes"][0])
-        with self.assertRaises(ValueError): publisher.validate("Valen-0.8B", report)
+        with self.assertRaises(ValueError): publisher.validate("Valen-Decision-1.5-0.8B", report)
 
-    def test_regressions_and_accept_nothing_states_are_retained(self):
+    def test_measured_outcomes_and_accept_nothing_states_are_retained(self):
         snapshot = publisher.read(ROOT / "src/data/reliability.json")
-        model = next(m for m in snapshot["models"] if m["model"] == "Valen-4B")
-        self.assertGreater(model["after"]["ece"], model["before"]["ece"])
-        self.assertGreater(model["after"]["brier"], model["before"]["brier"])
-        self.assertEqual(model["operating_points"][0]["test"]["accepted"], 0)
-        self.assertIsNone(model["operating_points"][0]["test"]["error_rate"])
+        models = {m["model"]: m for m in snapshot["models"]}
+        for model in models.values():
+            # No size has a qualifying rule at the 1% validation target.
+            self.assertEqual(model["operating_points"][0]["test"]["accepted"], 0)
+            self.assertIsNone(model["operating_points"][0]["test"]["error_rate"])
+            for key in ("ece", "nll", "brier"):
+                self.assertLess(model["after"][key], model["before"][key])
+        small = models["Valen-Decision-1.5-0.8B"]["operating_points"]
+        self.assertEqual(small[1]["test"]["accepted"], 0)
+        self.assertEqual((small[2]["test"]["accepted"], small[2]["test"]["errors"]), (783, 27))
+        large = models["Valen-Decision-1.5-4B"]["operating_points"]
+        self.assertEqual((large[1]["test"]["accepted"], large[1]["test"]["errors"]), (654, 3))
 
     def test_public_reports_contain_no_remote_paths_or_per_question_payloads(self):
         for report in self.reports.values():

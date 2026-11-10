@@ -2,9 +2,9 @@
  "_meta": {
   "valen-2b": {
    "base_url": "https://api.valen-team.workers.dev/v1",
-   "model": "Valen-2B",
+   "model": "Valen-Decision-1.5-2B",
    "model_id": "valen-2b",
-   "recorded": "2026-10-29",
+   "recorded": "2026-11-10",
    "revision": "local"
   }
  },
@@ -12,27 +12,27 @@
   "answers": [
    {
     "choice": "change_address",
-    "confidence": 0.9999289505706707,
+    "confidence": 0.9997612977202532,
     "name": "intent",
     "probabilities": [
      {
-      "probability": 3.4016723812828095e-06,
+      "probability": 2.9615462656269814e-06,
       "value": "billing_question"
      },
      {
-      "probability": 3.291567995152523e-05,
+      "probability": 0.00011410188981165587,
       "value": "cancel_order"
      },
      {
-      "probability": 0.9999431604565366,
+      "probability": 0.9998090381762026,
       "value": "change_address"
      },
      {
-      "probability": 2.087726264525702e-06,
+      "probability": 9.486926433594504e-06,
       "value": "report_damage"
      },
      {
-      "probability": 1.843446486604273e-05,
+      "probability": 6.441146128656554e-05,
       "value": "track_order"
      }
     ],
@@ -40,30 +40,30 @@
    },
    {
     "name": "address_change",
-    "probability": 0.9984566240623853,
+    "probability": 0.9989510209459393,
     "type": "predicate"
    },
    {
-    "confidence": 0.9342730332711597,
+    "confidence": 0.9333481082521525,
     "name": "explicitness",
     "probabilities": [
      {
       "label": "none",
-      "probability": 0.0016383576849762936,
+      "probability": 0.003707516304216059,
       "value": 0
      },
      {
       "label": "possible",
-      "probability": 0.04054126244927424,
+      "probability": 0.03701956189013287,
       "value": 1
      },
      {
       "label": "explicit",
-      "probability": 0.9578203798657494,
+      "probability": 0.9592729218056512,
       "value": 2
      }
     ],
-    "score": 1.956182022180773,
+    "score": 1.955565405501435,
     "type": "score"
    }
   ],
@@ -71,15 +71,15 @@
   "internal_usage": {
    "compute_tokens": 225
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 6.5,
-   "forward_ms": 37.82,
+   "compile_ms": 6.01,
+   "forward_ms": 36.95,
    "image_ms": 0.0,
    "queue_ms": 0.01,
-   "total_ms": 45.49
+   "total_ms": 44.33
   },
   "usage": {
    "input_tokens": 225,

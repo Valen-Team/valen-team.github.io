@@ -6,9 +6,11 @@ description: 通过 Python、Node.js、浏览器 WebGPU 或原生 C++ 文本集�
 
 # ONNX 推理与 SDK
 
-Python SDK 0.3.0 已发布到 [PyPI](https://pypi.org/project/valen-sdk/0.3.0/)；JavaScript SDK 0.2.0 已发布到 [npm，包名 @valen-team/sdk](https://www.npmjs.com/package/@valen-team/sdk/v/0.2.0)：`npm install @valen-team/sdk@0.2.0`。首次体验与格式选择见[版本选择](https://valen-team.github.io/zh-Hans/docs/valen/choosing/)。
+Python SDK 0.5.0 已发布到 [PyPI](https://pypi.org/project/valen-sdk/0.5.0/)；JavaScript SDK 0.4.0 已发布到 [npm，包名 @valen-team/sdk](https://www.npmjs.com/package/@valen-team/sdk/v/0.4.0)：`npm install @valen-team/sdk@0.4.0`。首次体验与格式选择见[版本选择](https://valen-team.github.io/zh-Hans/docs/valen/choosing/)。
 
-通过 ONNX Runtime 将 Valen 决策接入自己的应用。SDK 使用已发布的 Valen ONNX 组件，包含训练后的视觉主干与 Mixer 决策头；本地 SDK 推理无需安装 PyTorch 或 Transformers。
+本页示例运行 Valen-Decision-1.5 ONNX 模型包：[0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) · [2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) · [4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) · [9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) · [27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX)。Python SDK 0.5.0 与 JavaScript SDK 0.4.0 的 `Valen.local(...)` 会构建这些模型使用的分块注意力掩码，本地结果与原生模型一致。同一版本的 SDK 也运行 Valen-Decision-1.0 ONNX 模型包。
+
+通过 ONNX Runtime 将 Valen 决策接入自己的应用。SDK 使用已发布的 Valen ONNX 组件，包含训练后的视觉主干、决策头和 Valen-Decision-1.5 的定位头；本地 SDK 推理无需安装 PyTorch 或 Transformers。
 
 原生 Python 模型可使用 [Transformers](./quickstart.md)，本地 ONNX 推理可选择下方 SDK。两条路径均支持 SystemOne 和 Decisions；C++ 当前提供 SystemOne 文本集成示例。
 
@@ -24,25 +26,23 @@ Python SDK 0.3.0 已发布到 [PyPI](https://pypi.org/project/valen-sdk/0.3.0/)�
 
 需要 Python 3.11+ 和 Git。
 
-首次使用会下载并缓存所选模型组件。Python SDK 会下载所选变体的完整文件，包含视觉权重；0.8B FP32 约为 3.505 GB。Node 的纯文本请求仅下载需要的组件。离线使用时可指定本地目录或已有缓存。
+首次使用会下载并缓存所选模型组件。Python SDK 会下载所选变体的完整文件，包含视觉权重；0.8B FP32 约为 3.518 GB。Node 的纯文本请求仅下载需要的组件。离线使用时可指定本地目录或已有缓存。
 
 在新终端中执行：
 
 ```bash
-git clone --branch v0.3.0 --depth 1 https://github.com/Valen-Team/valen-sdk-python.git
+git clone --branch v0.5.0 --depth 1 https://github.com/Valen-Team/valen-sdk-python.git
 cd valen-sdk-python
 python -m pip install ".[onnx]"
 python examples/local_decisions.py
 ```
 
-
-
-最短通路检查：
+使用 Valen-Decision-1.5 的最短通路检查（`examples/` 中的脚本加载 Valen-Decision-1.0 0.8B 模型包）：
 
 ```python
 from valen_sdk import Valen
 
-with Valen.local("Valen-Team/Valen-0.8B-ONNX", variant="fp32") as client:
+with Valen.local("Valen-Team/Valen-Decision-1.5-0.8B-ONNX", variant="fp32") as client:
     result = client.decisions(input="A cat is on the sofa.", questions=[
         {"name": "cat", "type": "predicate", "instructions": "A cat is present."},
     ])
@@ -53,19 +53,41 @@ with Valen.local("Valen-Team/Valen-0.8B-ONNX", variant="fp32") as client:
 
 ## 模型与变体
 
+| 模型 | `fp32` · CPU | `q8-mlp` · CPU |
+| --- | --- | --- |
+| [Valen-Decision-1.5 0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) | 3.518 GB | 2.758 GB |
+| [Valen-Decision-1.5 2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) | 8.969 GB | 6.364 GB |
+| [Valen-Decision-1.5 4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) | 18.278 GB | 11.766 GB |
+| [Valen-Decision-1.5 9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) | 33.706 GB | 19.814 GB |
+
+表中为十进制 GB 下载体积，包含视觉组件，不是运行时内存需求。[Valen-Decision-1.5 27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX) 采用相同的结构。
+
+每个模型包包含 `valen_onnx.json` 清单以及 `embedding`、`vision`、`decision`、`grounding` 四张图：与 Valen-Decision-1.0 模型包结构相同，另有回答 [bbox 问题](#bbox-问题)的 grounding 图。CPU 建议从 `fp32` 开始。`q8-mlp` 将主干 MLP 权重量化为 8 位，决策头、定位头和视觉图保持 FP32。
+
+每个模型包附带 `validation.json`。0.8B 在 CPU 上与原生 PyTorch 模型对比，覆盖 13 个 Cookbook 应用（216 个对比值）：
+
+| 变体 | 决策一致率 | 概率平均绝对差 | 最大差 |
+| --- | --- | --- | --- |
+| `fp32` | 完全一致 | 4.5e-5 | 0.0032 |
+| `q8-mlp` | 98.4% | 0.0020 | 0.028 |
+
+单次请求中，0.8B、2B、4B 和 9B 的 `fp32` 与原生模型的差异约为 1e-5。
+
+### Valen-Decision-1.0 变体
+
+Valen-Decision-1.0 ONNX 仓库提供 `fp32` 与 `q8-mlp`，以及用于 Python CUDA 的 `cuda-fp16` 和用于浏览器 WebGPU 的 `web-portable`。本页的 [CUDA](#cuda) 与[浏览器 WebGPU](#浏览器-webgpu) 步骤使用这些仓库。Python SDK 0.4.0 及更早版本、JavaScript SDK 0.3.0 及更早版本运行这些仓库。
+
 | 模型 | `fp32` · CPU | `q8-mlp` · CPU | `cuda-fp16` · Python CUDA | `web-portable` · 浏览器 |
 | --- | --- | --- | --- | --- |
-| [Valen 0.8B](https://huggingface.co/Valen-Team/Valen-0.8B-ONNX) | 3.505 GB | 2.746 GB | 2.000 GB | 2.443 GB |
-| [Valen 2B](https://huggingface.co/Valen-Team/Valen-2B-ONNX) | 8.948 GB | 6.343 GB | 5.184 GB | — |
-| [Valen 4B](https://huggingface.co/Valen-Team/Valen-4B-ONNX) | 18.253 GB | 11.741 GB | 9.841 GB | — |
+| [Valen-Decision-1.0 0.8B](https://huggingface.co/Valen-Team/Valen-0.8B-ONNX) | 3.505 GB | 2.746 GB | 2.000 GB | 2.443 GB |
+| [Valen-Decision-1.0 2B](https://huggingface.co/Valen-Team/Valen-2B-ONNX) | 8.948 GB | 6.343 GB | 5.184 GB | — |
+| [Valen-Decision-1.0 4B](https://huggingface.co/Valen-Team/Valen-4B-ONNX) | 18.253 GB | 11.741 GB | 9.841 GB | — |
 
-表中为发布清单中的十进制 GB 下载体积，包含视觉组件，不是运行时内存需求。实测内存、延迟与质量对比见模型卡片。
-
-CPU 建议从 `fp32` 开始。`q8-mlp` 缩小 MLP 权重并降低实测文本内存占用，但在已测 CPU 上比 FP32 更慢。专用的 `web-portable` 变体仅提供 0.8B。CPU/CUDA 图使用 ONNX Runtime contrib 算子，不能直接替代浏览器图。
+表中为发布清单中的十进制 GB 下载体积，包含视觉组件。实测内存、延迟与质量对比见模型卡片。在 Valen-Decision-1.0 的 CPU 实测中，`q8-mlp` 缩小 MLP 权重并降低文本内存占用，速度比 FP32 慢。专用的 `web-portable` 变体提供 0.8B。CPU/CUDA 图使用 ONNX Runtime contrib 算子，不能直接替代浏览器图。
 
 ### CUDA
 
-在独立 Python 环境中，从 Python SDK 仓库根目录安装 GPU 依赖：
+`cuda-fp16` 变体位于 Valen-Decision-1.0 ONNX 仓库。在独立 Python 环境中，从 Python SDK 仓库根目录安装 GPU 依赖：
 
 ```bash
 python -m pip install ".[cuda]"
@@ -94,7 +116,7 @@ with Valen.local(
 from valen_sdk import Valen
 
 with Valen.local(
-    "Valen-Team/Valen-0.8B-ONNX", variant="fp32", local_files_only=True,
+    "Valen-Team/Valen-Decision-1.5-0.8B-ONNX", variant="fp32", local_files_only=True,
 ) as client:
     result = client.decisions(
         input="Please send my order to my new address.",
@@ -104,7 +126,7 @@ with Valen.local(
     print(result.by_name("change_address").probability)
 ```
 
-也可指定本地模型目录：`Valen.local("./models/Valen-0.8B-ONNX", variant="fp32", local_files_only=True)`。请保留清单、图与外部权重文件的原始目录结构。Node 中对应的选项名为 `cacheDir` 与 `localFilesOnly`。
+也可指定本地模型目录：`Valen.local("./models/Valen-Decision-1.5-0.8B-ONNX", variant="fp32", local_files_only=True)`。请保留清单、图与外部权重文件的原始目录结构。Node 中对应的选项名为 `cacheDir` 与 `localFilesOnly`。
 
 ## 图片与视频
 
@@ -117,6 +139,63 @@ python examples/media.py /path/to/clip.mp4 --video
 ```
 
 示例使用 Decisions 消息中的 `input_image` / `input_video`，视频采样四帧。完整代码见[媒体示例](https://github.com/Valen-Team/valen-sdk-python/blob/main/examples/media.py)。JavaScript SDK 也提供图片/视频示例；Node 视频需在系统中安装 FFmpeg 和 ffprobe。浏览器视频使用 WebCodecs，可用编码取决于浏览器支持情况。
+
+## Bbox 问题
+
+`bbox` 问题返回图片中目标的边界框、中心点和置信度。Python 与 JavaScript SDK 在本地通过 grounding 图回答，所有 Valen-Decision-1.5 模型包均包含该图，并可与判断、选择、评分问题放在同一请求中。下载示例图片：
+
+```bash
+curl -fL https://valen-team.github.io/cookbook/code/media/mug-counter.jpg -o mug-counter.jpg
+```
+
+```python
+from valen_sdk import Valen
+
+with Valen.local("Valen-Team/Valen-Decision-1.5-0.8B-ONNX", variant="fp32") as client:
+    result = client.decisions(
+        input=[{"role": "user", "content": [{"type": "input_image", "image_url": "mug-counter.jpg"}]}],
+        questions=[
+            {"name": "mug", "type": "bbox", "instructions": "The blue mug.", "image": 0},
+            {"name": "sponge", "type": "bbox", "instructions": "The sponge."},
+            {"name": "box", "type": "bbox", "instructions": "The white box."},
+            {"name": "rack", "type": "bbox", "instructions": "The dish rack."},
+            {"name": "full", "type": "predicate", "instructions": "The mug has coffee in it."},
+        ],
+    )
+    for name in ("mug", "sponge", "box", "rack"):
+        answer = result.by_name(name)
+        print(name, answer.bbox, answer.point, answer.confidence)
+    print("full", result.by_name("full").probability)
+```
+
+Valen-Decision-1.5-0.8B `fp32` 的实测结果（749 个输入 token）：
+
+| 问题 | `bbox` | `point` | `confidence` / `probability` |
+| --- | --- | --- | --- |
+| `mug` | `[0.2533, 0.3112, 0.8276, 0.8263]` | `[0.5404, 0.5687]` | 0.9467 |
+| `sponge` | `[0.0, 0.5077, 0.1936, 0.7243]` | `[0.0968, 0.616]` | 0.9226 |
+| `box` | `[0.6213, 0.0, 0.9816, 0.3704]` | `[0.8014, 0.1852]` | 0.8786 |
+| `rack` | `[0.0, 0.075, 0.3272, 0.4854]` | `[0.1636, 0.2802]` | 0.8566 |
+| `full` | | | 0.98471 |
+
+`bbox` 为 `[x1, y1, x2, y2]`，`point` 为 `[x, y]`，均按图片宽高归一化到 0–1。类型化的 SystemOne 请求使用 `valen_sdk` 中的 `Bbox(instructions=..., image=0)`，`result.bboxes` 汇总这些答案。JavaScript 提供与 `predicate`、`choice`、`score` 并列的 `bbox(instructions, image = 0)`，以及类型 `BboxQuestion` 和 `BboxAnswer`：
+
+```js
+import { Valen, bbox, predicate } from '@valen-team/sdk';
+
+const client = await Valen.local('Valen-Team/Valen-Decision-1.5-0.8B-ONNX', { variant: 'fp32' });
+try {
+  const result = await client.systemOne(
+    { messages: [{ role: 'user', content: [{ type: 'image_url', image_url: { url: 'mug-counter.jpg' } }] }] },
+    { mug: bbox('The blue mug.'), full: predicate('The mug has coffee in it.') },
+  );
+  console.log(result.answers.mug.bbox, result.answers.mug.point, result.answers.mug.confidence);
+} finally {
+  await client.close();
+}
+```
+
+问题字段、答案字段和原生 Transformers 路径见 [Bbox 问题](./bbox.md)。
 
 ## 与大模型对比
 
@@ -140,26 +219,26 @@ for client in (Valen.remote("https://api.valen-team.workers.dev/v1", model="vale
 需要 Node.js 22.12+ 或 24，以及 Git：
 
 ```bash
-git clone --branch npm-v0.2.0 --depth 1 https://github.com/Valen-Team/valen-sdk-js.git
+git clone --branch npm-v0.4.0 --depth 1 https://github.com/Valen-Team/valen-sdk-js.git
 cd valen-sdk-js
 npm ci --ignore-scripts
 node examples/local.mjs
 ```
 
-示例在 CPU 上执行相同的三个决策，SDK 包内提供 TypeScript 类型。安装到自己的应用、本地媒体与 `client.systemOne(...)` 的用法见 [JavaScript README](https://github.com/Valen-Team/valen-sdk-js)。需要 CUDA 时，可运行 Python 服务并从 Node 通过 HTTP 调用。
+示例在 CPU 上执行相同的三个决策，SDK 包内提供 TypeScript 类型。在自己的应用中，用 `await Valen.local('Valen-Team/Valen-Decision-1.5-0.8B-ONNX', { variant: 'fp32' })` 加载 Valen-Decision-1.5。安装到自己的应用、本地媒体与 `client.systemOne(...)` 的用法见 [JavaScript README](https://github.com/Valen-Team/valen-sdk-js)。需要 CUDA 时，可运行 Python 服务并从 Node 通过 HTTP 调用。
 
 ## 浏览器 WebGPU
 
 浏览器示例可以独立使用。在新终端中克隆 JavaScript SDK 并进入示例目录；如果已经克隆，可直接进入 `valen-sdk-js/examples/browser`：
 
 ```bash
-git clone --branch npm-v0.2.0 --depth 1 https://github.com/Valen-Team/valen-sdk-js.git
+git clone --branch npm-v0.4.0 --depth 1 https://github.com/Valen-Team/valen-sdk-js.git
 cd valen-sdk-js/examples/browser
 npm install
 npm run dev
 ```
 
-打开终端显示的 localhost 地址，点击 **Run locally**。示例使用已发布的 0.8B `web-portable` 模型，包含运行时资源、加载反馈与错误提示。首次使用会下载并缓存模型组件，完整变体约为 2.443 GB。
+打开终端显示的 localhost 地址，点击 **Run locally**。示例使用已发布的 Valen-Decision-1.0 0.8B `web-portable` 模型，包含运行时资源、加载反馈与错误提示。首次使用会下载并缓存模型组件，完整变体约为 2.443 GB。
 
 在 `examples/browser` 中运行 `npm run build` 和 `npm run preview` 可预览生产构建。部署需要 HTTPS 或 localhost、支持 WebGPU 的浏览器，以及示例中的 COOP/COEP 响应头。详见[浏览器示例](https://github.com/Valen-Team/valen-sdk-js/tree/main/examples/browser)。
 
@@ -171,7 +250,7 @@ Decisions 使用问题列表，是非判断返回 `probability`；SystemOne 使�
 
 ```bash
 python -m pip install ".[onnx,server]"
-valen serve --model Valen-Team/Valen-0.8B-ONNX --model-name valen --port 8000
+valen serve --model Valen-Team/Valen-Decision-1.5-0.8B-ONNX --model-name valen --port 8000
 ```
 
 服务监听 `http://127.0.0.1:8000`，提供 `/v1/decisions` 与 `/v1/systemone`。在另一个终端运行 `python examples/http_client.py` 即可调用。应用中使用 `Valen.remote("http://127.0.0.1:8000/v1", model="valen")` 接入；仅 HTTP 客户端无需本地模型权重或 ONNX Runtime，Python HTTP 客户端支持 Python 3.10+。

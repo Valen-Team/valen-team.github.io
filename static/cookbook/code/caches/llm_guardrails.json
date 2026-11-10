@@ -3,32 +3,32 @@
   "answers": [
    {
     "name": "promises_compensation",
-    "probability": 0.004615859982477985,
+    "probability": 0.04948871974003736,
     "type": "predicate"
    },
    {
     "name": "asks_for_password",
-    "probability": 0.0005356585070066202,
+    "probability": 0.00027313206033470304,
     "type": "predicate"
    },
    {
     "name": "asks_for_code",
-    "probability": 0.002155360667917882,
+    "probability": 0.0007366341798898615,
     "type": "predicate"
    },
    {
     "name": "asks_for_card",
-    "probability": 0.0020253738503979973,
+    "probability": 0.0005184173628431105,
     "type": "predicate"
    },
    {
     "name": "blames_customer",
-    "probability": 0.05902312081584957,
+    "probability": 0.08388269101542968,
     "type": "predicate"
    },
    {
     "name": "answers_customer",
-    "probability": 0.005071748104748295,
+    "probability": 0.03472609710988148,
     "type": "predicate"
    }
   ],
@@ -36,15 +36,15 @@
   "internal_usage": {
    "compute_tokens": 415
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 6.54,
-   "forward_ms": 36.98,
+   "compile_ms": 6.63,
+   "forward_ms": 47.13,
    "image_ms": 0.0,
    "queue_ms": 0.01,
-   "total_ms": 44.7
+   "total_ms": 65.02
   },
   "usage": {
    "input_tokens": 415,
@@ -55,32 +55,32 @@
   "answers": [
    {
     "name": "promises_compensation",
-    "probability": 0.0004245653684002803,
+    "probability": 0.00030862768811188156,
     "type": "predicate"
    },
    {
     "name": "asks_for_password",
-    "probability": 0.9162666884263373,
+    "probability": 0.778383493571386,
     "type": "predicate"
    },
    {
     "name": "asks_for_code",
-    "probability": 0.9393212514143112,
+    "probability": 0.8420860338741417,
     "type": "predicate"
    },
    {
     "name": "asks_for_card",
-    "probability": 0.0003927302332713664,
+    "probability": 0.0005283441501229763,
     "type": "predicate"
    },
    {
     "name": "blames_customer",
-    "probability": 0.011804975129478605,
+    "probability": 0.004500494315572416,
     "type": "predicate"
    },
    {
     "name": "answers_customer",
-    "probability": 0.7631894236327794,
+    "probability": 0.6755016129640711,
     "type": "predicate"
    }
   ],
@@ -88,15 +88,15 @@
   "internal_usage": {
    "compute_tokens": 412
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 7.16,
-   "forward_ms": 37.48,
+   "compile_ms": 10.41,
+   "forward_ms": 50.72,
    "image_ms": 0.0,
    "queue_ms": 0.0,
-   "total_ms": 45.87
+   "total_ms": 63.47
   },
   "usage": {
    "input_tokens": 412,
@@ -107,32 +107,32 @@
   "answers": [
    {
     "name": "promises_compensation",
-    "probability": 0.9461518074169306,
+    "probability": 0.9686236805771788,
     "type": "predicate"
    },
    {
     "name": "asks_for_password",
-    "probability": 0.0006984496704922706,
+    "probability": 0.00023977052101594143,
     "type": "predicate"
    },
    {
     "name": "asks_for_code",
-    "probability": 0.001697623000137231,
+    "probability": 0.001023224259900997,
     "type": "predicate"
    },
    {
     "name": "asks_for_card",
-    "probability": 0.0012184027287378246,
+    "probability": 0.0006739952104136891,
     "type": "predicate"
    },
    {
     "name": "blames_customer",
-    "probability": 0.03099930647388359,
+    "probability": 0.036065612048761735,
     "type": "predicate"
    },
    {
     "name": "answers_customer",
-    "probability": 0.24704452612863403,
+    "probability": 0.6474543416072521,
     "type": "predicate"
    }
   ],
@@ -140,15 +140,15 @@
   "internal_usage": {
    "compute_tokens": 407
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 7.02,
-   "forward_ms": 38.36,
+   "compile_ms": 6.53,
+   "forward_ms": 45.13,
    "image_ms": 0.0,
    "queue_ms": 0.01,
-   "total_ms": 46.66
+   "total_ms": 53.27
   },
   "usage": {
    "input_tokens": 407,
@@ -158,9 +158,9 @@
  "_meta": {
   "valen-2b": {
    "base_url": "https://api.valen-team.workers.dev/v1",
-   "model": "Valen-2B",
+   "model": "Valen-Decision-1.5-2B",
    "model_id": "valen-2b",
-   "recorded": "2026-10-29",
+   "recorded": "2026-11-10",
    "revision": "local"
   }
  },
@@ -168,32 +168,32 @@
   "answers": [
    {
     "name": "promises_compensation",
-    "probability": 0.1221074127522882,
+    "probability": 0.18804700467946553,
     "type": "predicate"
    },
    {
     "name": "asks_for_password",
-    "probability": 0.00015667670085275695,
+    "probability": 9.690906614835409e-05,
     "type": "predicate"
    },
    {
     "name": "asks_for_code",
-    "probability": 0.0006242179795131341,
+    "probability": 0.00031038508785632903,
     "type": "predicate"
    },
    {
     "name": "asks_for_card",
-    "probability": 0.0002915973740919043,
+    "probability": 0.00010652336780084894,
     "type": "predicate"
    },
    {
     "name": "blames_customer",
-    "probability": 0.0033320292612514933,
+    "probability": 0.0017220141700883531,
     "type": "predicate"
    },
    {
     "name": "answers_customer",
-    "probability": 0.6017677187919617,
+    "probability": 0.7910774623368049,
     "type": "predicate"
    }
   ],
@@ -201,15 +201,15 @@
   "internal_usage": {
    "compute_tokens": 418
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 6.83,
-   "forward_ms": 43.93,
+   "compile_ms": 7.0,
+   "forward_ms": 45.08,
    "image_ms": 0.0,
    "queue_ms": 0.01,
-   "total_ms": 52.01
+   "total_ms": 53.66
   },
   "usage": {
    "input_tokens": 418,
@@ -220,32 +220,32 @@
   "answers": [
    {
     "name": "promises_compensation",
-    "probability": 0.016677336487740224,
+    "probability": 0.09618541698906133,
     "type": "predicate"
    },
    {
     "name": "asks_for_password",
-    "probability": 0.0008765866098046913,
+    "probability": 0.000333316902645238,
     "type": "predicate"
    },
    {
     "name": "asks_for_code",
-    "probability": 0.001291666020323971,
+    "probability": 0.0004700309764947309,
     "type": "predicate"
    },
    {
     "name": "asks_for_card",
-    "probability": 0.0007790657434083206,
+    "probability": 0.0003157755610657046,
     "type": "predicate"
    },
    {
     "name": "blames_customer",
-    "probability": 0.9321890334458793,
+    "probability": 0.8582078493401781,
     "type": "predicate"
    },
    {
     "name": "answers_customer",
-    "probability": 0.6824471747145898,
+    "probability": 0.7698616970117282,
     "type": "predicate"
    }
   ],
@@ -253,15 +253,15 @@
   "internal_usage": {
    "compute_tokens": 411
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 7.26,
-   "forward_ms": 37.89,
+   "compile_ms": 7.08,
+   "forward_ms": 45.43,
    "image_ms": 0.0,
-   "queue_ms": 0.01,
-   "total_ms": 46.41
+   "queue_ms": 0.0,
+   "total_ms": 54.01
   },
   "usage": {
    "input_tokens": 411,
@@ -272,32 +272,32 @@
   "answers": [
    {
     "name": "promises_compensation",
-    "probability": 0.05493550788563123,
+    "probability": 0.12289143332458483,
     "type": "predicate"
    },
    {
     "name": "asks_for_password",
-    "probability": 0.005149861072603638,
+    "probability": 0.0006569205777585849,
     "type": "predicate"
    },
    {
     "name": "asks_for_code",
-    "probability": 0.00123748593887831,
+    "probability": 0.0005500502263040154,
     "type": "predicate"
    },
    {
     "name": "asks_for_card",
-    "probability": 0.0008065738436320395,
+    "probability": 0.00037301425723301805,
     "type": "predicate"
    },
    {
     "name": "blames_customer",
-    "probability": 0.010404459908162777,
+    "probability": 0.014123562455494528,
     "type": "predicate"
    },
    {
     "name": "answers_customer",
-    "probability": 0.4786401235652007,
+    "probability": 0.7629317710172265,
     "type": "predicate"
    }
   ],
@@ -305,15 +305,15 @@
   "internal_usage": {
    "compute_tokens": 424
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 6.93,
-   "forward_ms": 37.58,
+   "compile_ms": 6.77,
+   "forward_ms": 54.79,
    "image_ms": 0.0,
-   "queue_ms": 0.01,
-   "total_ms": 45.8
+   "queue_ms": 0.0,
+   "total_ms": 63.77
   },
   "usage": {
    "input_tokens": 424,

@@ -20,7 +20,7 @@ def retrieve(query, passages, k):
 def run(predict, query, passages, k=5):
     retrieved = retrieve(query["text"], passages, k)
     question = [{"name": "answers", "type": "predicate",
-                 "instructions": "A support agent could answer the customer's question using only this passage."}]
+                 "instructions": "The passage contains the information needed to reply to the customer."}]
     # Each passage gets its own request so no passage can sway the judgment of another.
     scored = [{"id": p["id"], "answers": request(predict, f"Customer question: {query['text']}\n\nHelp-center passage: "
                                                  f"{p['text']}", question)["answers"]["probability"]}

@@ -1,63 +1,36 @@
 {
- "1bae85011fafc9924a22b956280ee7926a7a0086c0d9e2814f5b234b1ff32455": {
+ "0fd3a099b0292322db1cee8ac70fe77f776d7232b34b07a5334a8836cf5138bf": {
   "answers": [
    {
     "name": "answers",
-    "probability": 0.03725921031749856,
+    "probability": 0.5518629052511181,
     "type": "predicate"
    }
   ],
   "images": [],
   "internal_usage": {
-   "compute_tokens": 135
+   "compute_tokens": 137
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 5.38,
-   "forward_ms": 34.79,
+   "compile_ms": 5.51,
+   "forward_ms": 36.92,
    "image_ms": 0.0,
-   "queue_ms": 0.0,
-   "total_ms": 40.97
+   "queue_ms": 0.02,
+   "total_ms": 43.81
   },
   "usage": {
-   "input_tokens": 135,
+   "input_tokens": 137,
    "output_tokens": 0
   }
  },
- "3cbe303a9e7d6dec57ec0f3218256c3c875e4f6e6231b07979b0254da3a0c47e": {
+ "4e5b9e4a034a8aa4bbbaab685b2f5a07db54cf020c3875e209327c2d0403f45c": {
   "answers": [
    {
     "name": "answers",
-    "probability": 0.05538949909100312,
-    "type": "predicate"
-   }
-  ],
-  "images": [],
-  "internal_usage": {
-   "compute_tokens": 138
-  },
-  "model": "Valen-2B",
-  "model_id": "valen-2b",
-  "revision": "local",
-  "timing": {
-   "compile_ms": 5.38,
-   "forward_ms": 35.76,
-   "image_ms": 0.0,
-   "queue_ms": 0.01,
-   "total_ms": 41.93
-  },
-  "usage": {
-   "input_tokens": 138,
-   "output_tokens": 0
-  }
- },
- "3d5121367f2c0afd251f7e56035ef68651c63ffaeb7125ecece0594679d7004b": {
-  "answers": [
-   {
-    "name": "answers",
-    "probability": 0.02945133769907817,
+    "probability": 0.0067689863068746995,
     "type": "predicate"
    }
   ],
@@ -65,278 +38,53 @@
   "internal_usage": {
    "compute_tokens": 138
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 5.65,
-   "forward_ms": 36.1,
+   "compile_ms": 5.39,
+   "forward_ms": 36.68,
    "image_ms": 0.0,
    "queue_ms": 0.01,
-   "total_ms": 42.6
+   "total_ms": 43.43
   },
   "usage": {
    "input_tokens": 138,
    "output_tokens": 0
   }
  },
- "7bb378071649262b8f358422705357993933fe614538469745bd309553ac9714": {
+ "53a3ada46c7dbd9535b6a802e4407b35cbc5eda6843def5edba6e4bf9920268f": {
   "answers": [
    {
     "name": "answers",
-    "probability": 0.06563972034513534,
+    "probability": 0.9068324160323087,
     "type": "predicate"
    }
   ],
   "images": [],
   "internal_usage": {
-   "compute_tokens": 135
+   "compute_tokens": 131
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 6.13,
-   "forward_ms": 45.84,
-   "image_ms": 0.0,
-   "queue_ms": 0.0,
-   "total_ms": 52.86
-  },
-  "usage": {
-   "input_tokens": 135,
-   "output_tokens": 0
-  }
- },
- "7d34a9c1e4373930a30beaa5e2e887ebf04d73a8dc209362a90d7a275e7fdcde": {
-  "answers": [
-   {
-    "name": "answers",
-    "probability": 0.8985652729227516,
-    "type": "predicate"
-   }
-  ],
-  "images": [],
-  "internal_usage": {
-   "compute_tokens": 133
-  },
-  "model": "Valen-2B",
-  "model_id": "valen-2b",
-  "revision": "local",
-  "timing": {
-   "compile_ms": 5.23,
-   "forward_ms": 35.47,
+   "compile_ms": 7.72,
+   "forward_ms": 44.09,
    "image_ms": 0.0,
    "queue_ms": 0.01,
-   "total_ms": 41.5
+   "total_ms": 52.84
   },
   "usage": {
-   "input_tokens": 133,
+   "input_tokens": 131,
    "output_tokens": 0
   }
  },
- "96a4a991b6b03c1dcb8d72a5e953d9cd45e58c05acdb884d614f942d4f225b3b": {
+ "5d350b83206ca7bf0a64b13cd9d22f8f217f4433be59f826a8460c2a12c7eed5": {
   "answers": [
    {
     "name": "answers",
-    "probability": 0.17896146805641847,
-    "type": "predicate"
-   }
-  ],
-  "images": [],
-  "internal_usage": {
-   "compute_tokens": 142
-  },
-  "model": "Valen-2B",
-  "model_id": "valen-2b",
-  "revision": "local",
-  "timing": {
-   "compile_ms": 6.08,
-   "forward_ms": 34.99,
-   "image_ms": 0.0,
-   "queue_ms": 0.01,
-   "total_ms": 41.99
-  },
-  "usage": {
-   "input_tokens": 142,
-   "output_tokens": 0
-  }
- },
- "_meta": {
-  "valen-2b": {
-   "base_url": "https://api.valen-team.workers.dev/v1",
-   "model": "Valen-2B",
-   "model_id": "valen-2b",
-   "recorded": "2026-10-29",
-   "revision": "local"
-  }
- },
- "a49da83092403ce744f2cbcf0f2e0b41b6add6320be3aa81d10b650d2fa07737": {
-  "answers": [
-   {
-    "name": "answers",
-    "probability": 0.17800874742852527,
-    "type": "predicate"
-   }
-  ],
-  "images": [],
-  "internal_usage": {
-   "compute_tokens": 141
-  },
-  "model": "Valen-2B",
-  "model_id": "valen-2b",
-  "revision": "local",
-  "timing": {
-   "compile_ms": 5.21,
-   "forward_ms": 37.14,
-   "image_ms": 0.0,
-   "queue_ms": 0.0,
-   "total_ms": 43.15
-  },
-  "usage": {
-   "input_tokens": 141,
-   "output_tokens": 0
-  }
- },
- "a6e33b5412d94b6e833dc21fac81dd8fac0eb6ff68b4b55b39c38cf45056ed58": {
-  "answers": [
-   {
-    "name": "answers",
-    "probability": 0.9774886906340852,
-    "type": "predicate"
-   }
-  ],
-  "images": [],
-  "internal_usage": {
-   "compute_tokens": 142
-  },
-  "model": "Valen-2B",
-  "model_id": "valen-2b",
-  "revision": "local",
-  "timing": {
-   "compile_ms": 5.07,
-   "forward_ms": 37.3,
-   "image_ms": 0.0,
-   "queue_ms": 0.01,
-   "total_ms": 43.17
-  },
-  "usage": {
-   "input_tokens": 142,
-   "output_tokens": 0
-  }
- },
- "b0dd878de73f8e67e89b92153c3418775b75064548b79145fab0b8cb3f2659cb": {
-  "answers": [
-   {
-    "name": "answers",
-    "probability": 0.31263142824172974,
-    "type": "predicate"
-   }
-  ],
-  "images": [],
-  "internal_usage": {
-   "compute_tokens": 139
-  },
-  "model": "Valen-2B",
-  "model_id": "valen-2b",
-  "revision": "local",
-  "timing": {
-   "compile_ms": 5.59,
-   "forward_ms": 36.55,
-   "image_ms": 0.0,
-   "queue_ms": 0.01,
-   "total_ms": 42.99
-  },
-  "usage": {
-   "input_tokens": 139,
-   "output_tokens": 0
-  }
- },
- "b343de8a31531da59fbfa0af721b9b51b27a49f16f57a3c2a0bc99f65c7bc0d8": {
-  "answers": [
-   {
-    "name": "answers",
-    "probability": 0.9611416781331417,
-    "type": "predicate"
-   }
-  ],
-  "images": [],
-  "internal_usage": {
-   "compute_tokens": 142
-  },
-  "model": "Valen-2B",
-  "model_id": "valen-2b",
-  "revision": "local",
-  "timing": {
-   "compile_ms": 5.67,
-   "forward_ms": 35.38,
-   "image_ms": 0.0,
-   "queue_ms": 0.01,
-   "total_ms": 41.91
-  },
-  "usage": {
-   "input_tokens": 142,
-   "output_tokens": 0
-  }
- },
- "d0215a35f258a5fd4a64294d64746c94168a1bdf6d9c4f689240de423242633e": {
-  "answers": [
-   {
-    "name": "answers",
-    "probability": 0.03217982716574106,
-    "type": "predicate"
-   }
-  ],
-  "images": [],
-  "internal_usage": {
-   "compute_tokens": 142
-  },
-  "model": "Valen-2B",
-  "model_id": "valen-2b",
-  "revision": "local",
-  "timing": {
-   "compile_ms": 5.54,
-   "forward_ms": 34.19,
-   "image_ms": 0.0,
-   "queue_ms": 0.0,
-   "total_ms": 40.53
-  },
-  "usage": {
-   "input_tokens": 142,
-   "output_tokens": 0
-  }
- },
- "e448c7916b1b96b1d1fea2634cb69e7b504fcce8f3b519ae465766c2ad6e9070": {
-  "answers": [
-   {
-    "name": "answers",
-    "probability": 0.6440917657586406,
-    "type": "predicate"
-   }
-  ],
-  "images": [],
-  "internal_usage": {
-   "compute_tokens": 145
-  },
-  "model": "Valen-2B",
-  "model_id": "valen-2b",
-  "revision": "local",
-  "timing": {
-   "compile_ms": 5.34,
-   "forward_ms": 36.77,
-   "image_ms": 0.0,
-   "queue_ms": 0.0,
-   "total_ms": 42.95
-  },
-  "usage": {
-   "input_tokens": 145,
-   "output_tokens": 0
-  }
- },
- "eee4644b2ea42a824a72a03aeaba734075563460be5dd6a663c4d019bb49c7a5": {
-  "answers": [
-   {
-    "name": "answers",
-    "probability": 0.09888336357126723,
+    "probability": 0.04598559655658711,
     "type": "predicate"
    }
   ],
@@ -344,26 +92,26 @@
   "internal_usage": {
    "compute_tokens": 136
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 5.12,
-   "forward_ms": 34.84,
+   "compile_ms": 5.33,
+   "forward_ms": 35.7,
    "image_ms": 0.0,
    "queue_ms": 0.01,
-   "total_ms": 40.79
+   "total_ms": 41.99
   },
   "usage": {
    "input_tokens": 136,
    "output_tokens": 0
   }
  },
- "ef81168702fd99bb33958379587fa1a2fe6971d307eb19bd6f80cedc0e0861ce": {
+ "632d3597ac42c5894029cdaf2795fb04d2649fffd1618262d033e0be1aeeb93b": {
   "answers": [
    {
     "name": "answers",
-    "probability": 0.07181187558594625,
+    "probability": 0.9950396692432985,
     "type": "predicate"
    }
   ],
@@ -371,45 +119,297 @@
   "internal_usage": {
    "compute_tokens": 140
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 5.73,
-   "forward_ms": 36.3,
+   "compile_ms": 5.3,
+   "forward_ms": 37.89,
    "image_ms": 0.0,
    "queue_ms": 0.01,
-   "total_ms": 42.91
+   "total_ms": 44.61
   },
   "usage": {
    "input_tokens": 140,
    "output_tokens": 0
   }
  },
- "f527edeb67facaf5ca29824175b92f0a1eb4ab62cf98eeae75bf4e1041f9a63b": {
+ "7475fc6e2dd4922cd13919b17be59cae0a613b29c055cf136af93f00f0b85947": {
   "answers": [
    {
     "name": "answers",
-    "probability": 0.09392517689858818,
+    "probability": 0.019548872072920838,
     "type": "predicate"
    }
   ],
   "images": [],
   "internal_usage": {
-   "compute_tokens": 145
+   "compute_tokens": 136
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 5.3,
-   "forward_ms": 35.46,
+   "compile_ms": 5.64,
+   "forward_ms": 35.92,
    "image_ms": 0.0,
    "queue_ms": 0.01,
-   "total_ms": 41.59
+   "total_ms": 42.63
   },
   "usage": {
-   "input_tokens": 145,
+   "input_tokens": 136,
+   "output_tokens": 0
+  }
+ },
+ "763e1bb99cfa759117c9c6f975277655a79dca29ad1b16ac6ead22f434bc766b": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.08262502716430085,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 139
+  },
+  "model": "Valen-Decision-1.5-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.68,
+   "forward_ms": 34.74,
+   "image_ms": 0.0,
+   "queue_ms": 0.0,
+   "total_ms": 41.63
+  },
+  "usage": {
+   "input_tokens": 139,
+   "output_tokens": 0
+  }
+ },
+ "8d0b748ac0c2b6947ca56d6b25ec48c73e5902e09866a6b2736ad42598263acd": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.033019631650214196,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 133
+  },
+  "model": "Valen-Decision-1.5-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.29,
+   "forward_ms": 35.18,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 41.51
+  },
+  "usage": {
+   "input_tokens": 133,
+   "output_tokens": 0
+  }
+ },
+ "_meta": {
+  "valen-2b": {
+   "base_url": "https://api.valen-team.workers.dev/v1",
+   "model": "Valen-Decision-1.5-2B",
+   "model_id": "valen-2b",
+   "recorded": "2026-11-10",
+   "revision": "local"
+  }
+ },
+ "a16c620fdad320b65b5f5420bb3818eb3cd2830170d6047147c0db408a95c786": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.9095426030685612,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 143
+  },
+  "model": "Valen-Decision-1.5-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.51,
+   "forward_ms": 37.56,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 44.5
+  },
+  "usage": {
+   "input_tokens": 143,
+   "output_tokens": 0
+  }
+ },
+ "a849b79ef691e8979ba275798f9d8f4d32e25a29e6676063bff4c93180d72e8c": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.006271778278354445,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 133
+  },
+  "model": "Valen-Decision-1.5-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.34,
+   "forward_ms": 36.57,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 43.18
+  },
+  "usage": {
+   "input_tokens": 133,
+   "output_tokens": 0
+  }
+ },
+ "bcc1432ccc13602f99fc59b950e6ad571bfbe91688d97823cadd8adf721f1bd8": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.009273141862854037,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 143
+  },
+  "model": "Valen-Decision-1.5-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.56,
+   "forward_ms": 46.6,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 53.68
+  },
+  "usage": {
+   "input_tokens": 143,
+   "output_tokens": 0
+  }
+ },
+ "e5d157277c72ef23d54776ec7bbede82f658e9335a3b18fa3e9e3e4953bad8b3": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.028443279521573783,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 140
+  },
+  "model": "Valen-Decision-1.5-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 8.08,
+   "forward_ms": 36.34,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 45.76
+  },
+  "usage": {
+   "input_tokens": 140,
+   "output_tokens": 0
+  }
+ },
+ "eab078f0a2447a669f1ddfaa36b1db9aac7667727703d15cd4dad49597214c91": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.9968582140132537,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 140
+  },
+  "model": "Valen-Decision-1.5-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.45,
+   "forward_ms": 38.0,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 44.89
+  },
+  "usage": {
+   "input_tokens": 140,
+   "output_tokens": 0
+  }
+ },
+ "fb997cd9261f660f0fce02e2fb9e804863c932e1eb314ebe99e125fccbd47d38": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.006660806926682568,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 134
+  },
+  "model": "Valen-Decision-1.5-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.37,
+   "forward_ms": 43.92,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 50.88
+  },
+  "usage": {
+   "input_tokens": 134,
+   "output_tokens": 0
+  }
+ },
+ "fceca797ae29277a08fb95897c1c1d54aad43e3694923ca27715c9336c0d8ca0": {
+  "answers": [
+   {
+    "name": "answers",
+    "probability": 0.22942182211253526,
+    "type": "predicate"
+   }
+  ],
+  "images": [],
+  "internal_usage": {
+   "compute_tokens": 140
+  },
+  "model": "Valen-Decision-1.5-2B",
+  "model_id": "valen-2b",
+  "revision": "local",
+  "timing": {
+   "compile_ms": 5.47,
+   "forward_ms": 37.21,
+   "image_ms": 0.0,
+   "queue_ms": 0.01,
+   "total_ms": 44.05
+  },
+  "usage": {
+   "input_tokens": 140,
    "output_tokens": 0
   }
  }

@@ -11,7 +11,9 @@ Valen returns probabilities over your candidate intents. Use them to route quali
 
 ## See how much work it can take on
 
-In a retrospective replay of BANKING77 predictions, Valen 0.8B accepted **147 of 1,276 test questions** using a rule selected before the test. **One accepted answer was wrong**: **11.5% automated coverage** with **0.68% accepted error**.
+On the BANKING77 test split, Valen-Decision-1.5-0.8B accepted **783 of 1,276 questions** using a rule selected before the test at a 5% validation target. **27 accepted answers were wrong**: **61.4% automated coverage** with **3.45% accepted error**. Under the same target, Valen-Decision-1.5-2B accepted 881 questions (69.0%) with 20 errors (2.27%), and Valen-Decision-1.5-4B accepted 971 (76.1%) with 18 errors (1.85%).
+
+A stricter target shrinks the automated share. At a 2% target, 2B accepted 634 questions with 5 errors (0.79%) and 4B accepted 654 with 3 errors (0.46%), while 0.8B had no qualifying rule. At a 1% target no size had a qualifying rule, so every question goes to review.
 
 This is an English benchmark with 77 candidate intents. Explore the [released-model evidence](/docs/valen/reliability/) to compare models and validation targets, inspect accepted counts and errors, and check the study's scope.
 

@@ -2,64 +2,64 @@
   "dimensions": [
     {
       "photo": "mug-studio.jpg",
-      "lighting": 0.9991636368077078,
-      "background": 0.9938775610787292,
-      "framing": 0.9752801720575722
+      "lighting": 0.9889963887118989,
+      "background": 0.9972350318985743,
+      "framing": 0.8883909566308658
     },
     {
       "photo": "mug-counter.jpg",
-      "lighting": 0.9860608196005157,
-      "background": 0.006156532209375251,
-      "framing": 0.9074895660257324
+      "lighting": 0.8228301087150994,
+      "background": 0.5794170243736997,
+      "framing": 0.7432827066731232
     },
     {
       "photo": "mug-dim.jpg",
-      "lighting": 0.17881670806358135,
-      "background": 0.641231147103601,
-      "framing": 0.8176063590643421
+      "lighting": 0.1636904472946574,
+      "background": 0.9116011111684837,
+      "framing": 0.6795780315041513
     },
     {
       "photo": "mug-cropped.jpg",
-      "lighting": 0.9932250863251958,
-      "background": 0.5433575647609814,
-      "framing": 0.29707197970072985
+      "lighting": 0.8773602817401968,
+      "background": 0.6420634614886478,
+      "framing": 0.4935439969352964
     }
   ],
   "rankings": {
     "marketplace": [
       {
         "photo": "mug-studio.jpg",
-        "score": 0.986
+        "score": 0.94
       },
       {
         "photo": "mug-counter.jpg",
-        "score": 0.751
-      },
-      {
-        "photo": "mug-dim.jpg",
-        "score": 0.591
+        "score": 0.734
       },
       {
         "photo": "mug-cropped.jpg",
-        "score": 0.555
+        "score": 0.638
+      },
+      {
+        "photo": "mug-dim.jpg",
+        "score": 0.571
       }
     ],
     "premium_shop": [
       {
         "photo": "mug-studio.jpg",
-        "score": 0.992
-      },
-      {
-        "photo": "mug-cropped.jpg",
-        "score": 0.629
-      },
-      {
-        "photo": "mug-dim.jpg",
-        "score": 0.538
+        "score": 0.973
       },
       {
         "photo": "mug-counter.jpg",
-        "score": 0.48
+        "score": 0.685
+      },
+      {
+        "photo": "mug-cropped.jpg",
+        "score": 0.683
+      },
+      {
+        "photo": "mug-dim.jpg",
+        "score": 0.641
       }
     ]
   }

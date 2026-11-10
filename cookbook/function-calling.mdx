@@ -12,13 +12,13 @@ A notes app has a command bar. People type things like "send this to the design 
 
 ## How it works
 
-The function table in code is the single source of every question. One request carries:
+The function table in code is the single source of every question. The state is a small JSON object: `app` says what the text is ("Command bar of a notes app, typed while a note is open") and `command` holds what the user typed. One request carries:
 
 | Question | Type | Read when |
 | --- | --- | --- |
 | `function`: what does the user want the app to do? | choice over the four functions | always |
-| `is_command`: could a notes app do what the user asks? | predicate | always |
-| `<function>.<arg>` for every argument of every function | choice | only for the chosen function |
+| `is_command`: is the message an instruction for the notes app to carry out? | predicate | always |
+| `<function>.<arg>` for every argument of every function, each with its own question from the table | choice | only for the chosen function |
 
 Asking every function's arguments up front is **speculative fan-out**: questions are cheap and run together over the same input, so one round trip is enough whichever function wins. A choice always picks an option, so the null case gets its own predicate instead of a `none` option.
 
@@ -49,12 +49,12 @@ python function_calling.py --replay off --base-url https://api.valen-team.worker
 
 ## Output
 
-Five commands become calls. "Remind me next week? actually make it a pdf" holds two requests, so the app asks which one. "What's the weather in Shanghai" lands in the middle band and gets the help text.
+Five commands become calls, each with `is_command` at 0.87 or above and the chosen function at 0.96 or above. "Remind me next week? actually make it a pdf" holds two requests: `export_note` gets 0.62 and `set_reminder` the rest, so the app asks which one. "What's the weather in Shanghai" scores 0.03 on `is_command` and is `not_a_command`.
 
 <CodeBlock language="json" title="Recorded output">{output}</CodeBlock>
 
 ## Make it yours
 
-- Add a function by adding an entry to `TOOLS`; questions follow automatically. Free text, numbers and dates stay with code (see [pick the right date](../value-extraction/)).
-- Describe each function by what the user wants ("Send or share this note with other people"), not by its API name.
-- The `is_command` wording names the confusing case directly: requests that need outside information such as weather or news.
+- Add a function by adding an entry to `TOOLS` with a description and one direct question per argument ("Which file format does the user want?"); the request follows automatically. Free text, numbers and dates stay with code (see [pick the right date](../value-extraction/)).
+- Describe each function by what the user wants and the options it covers ("Send this note to other people, or let them read or edit it"), not by its API name.
+- `is_command` asks one plain thing, and the `app` field in the state tells Valen that the text was typed into a command bar. With that context a weather question or a greeting reads as something other than an instruction.

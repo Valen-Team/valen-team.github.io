@@ -2,36 +2,43 @@
   "schema_version": 1,
   "kind": "top_probability_policy",
   "identity": {
-    "model": "Valen-Team/Valen-0.8B",
-    "revision": "c2c481fcb319bd9ae834abc7c6373271710cf24e",
+    "model": "Valen-Team/Valen-Decision-1.5-0.8B",
+    "revision": "ae8bdf7606c0dbd627301174c9cb800240fb4ec7",
     "backend": "transformers:shared_state:sdpa:cuda",
-    "precision": "torch.float32",
-    "protocol_sha256": "935dd173d9e66bea9b5fb3bb4e7ab92ff3db0d61043179b203055a8cfce6633e",
+    "precision": "torch.bfloat16",
+    "protocol_sha256": "61d334b0804f33a185505240cdb7263ff8920f1036ef868f236d9974d440aaf9",
     "artifacts_sha256": {
-      "model.safetensors": "465714dd28702c4232d9233c2a2157d366967c541b2a27d9dadccc816304fd48",
       "batching.py": "ea45d4724bcafca559fc5a2a18092918b633746771c19da6554c29bc5f2cef64",
-      "compiler.py": "f35bab2e71b6beb1228daaa5b7baecdacf04eaf713aee14e8082b97090f910b4",
-      "configuration_valen.py": "8aa80266e8c328b5251d969de80f58e706dcd15a535c877108aab452ff572279",
+      "block_attention.py": "27b0a2b209a17afe13a7ecd0afd180d99ba6b873147e7b18bd1e028dea96e074",
+      "chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+      "compiler.py": "72cada57ec9a50ad688e8542f52615b82a021cc60e90e80c5e147e86a823de85",
+      "config.json": "13f0d828c5a39e18bd8329231e5ad259d087bd3b83326f2c3cd8e1b26e95af93",
+      "configuration_valen.py": "29f930d193a75547bd5fa63715c0b5f3ac6acf4b5cc803f98d61713d0e951534",
       "data_types.py": "b06ce08081d8f7b2bf36abf302410a96086395e75a04f9e9b1c591db519b1641",
+      "decisions.py": "476e998b624d7222c156e8e87e3d9c07b04dafe44c412cbe95b29f9d76b9935b",
+      "grounding.py": "a40ae673819a3cc243e081bcd2020980044ad26f2ea9591d5f49b29fc855c16b",
       "heads.py": "63b5970a8bfa121eff94d50ffd35e1fa8387f3af5abccc5f5b75381fb084fc34",
-      "modeling_valen.py": "851f90a089c23060e321e1da192689fd3b405253f219f67723bf57c873612d62",
-      "responses.py": "298016b0070f1000a38d033e1048e038ff5df6fc1dcbe830601105b181f1d228",
-      "runtime_model.py": "2ce5808373505105bedc254bd99671fbeea43c25483e6b63add77b9e32d7baaf",
-      "schema.py": "81659cc31b9673f6b9482095a4bbf6a2fb0b1415f0dfdd1c057278ecdca13595",
-      "config.json": "8a6a766acfe35a6eb3d373e90c43af0f08dbd44301251df71e18b1b5b5381c08"
+      "model.safetensors": "d2808df20a2501debe47bd8bacac41d1cd33cc1a9d6f687d8dc436da9f3603bc",
+      "modeling_valen.py": "15f388154a3cf78683dcb50b8c302554dc2a554fb7b247cb54d948eb6f99b71a",
+      "processor_config.json": "d89ef49ce9cd37fbf510158e13c1ef063d9286411c1ec9049932dbe0487143b1",
+      "responses.py": "a7239109a0a466966037c690040a773a03fa0ee8476a80408cfacf79ce463a7b",
+      "runtime_model.py": "04a971069fbfb1a86315d52c294c9ac184f691f5223771efcca4454bc1be2915",
+      "schema.py": "20277d14d11542c23b45e56b22f1c1dcb27a3853b4b06af449d72b6accd95d63",
+      "tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+      "tokenizer_config.json": "7488550a894dcf741616126e322ea31d66cf9457b59ec5825f4c7efdced421f8"
     }
   },
-  "calibration_sha256": "63c001cdc64dc7d1f8ab4b12f8a53a897b4251ee646154b5b94fcc3487d7265c",
+  "calibration_sha256": "53dbe266e476261d4d991d78bbf026ddf8c431b9f985ee21e002e56a3a9fdec7",
   "calibration_fit": {
     "dataset": {
-      "name": "BANKING77 official test / retrospective three-way replay",
+      "name": "BANKING77 official test / three-way replay",
       "sha256": "f13205c4b54dbed549afcb86e26759b257aab96b763ceb8c0346c4d61c4d03a5",
       "source_url": "https://github.com/PolyAI-LDN/task-specific-datasets/tree/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data",
-      "predictions_sha256": "9501478664c225811b0f3cce967843031f50e6b0e44d9681d291d8776b52d237",
-      "manifest_sha256": "59b5d84fb9656178dbd2636c371e5918c8c84ca1c6802951d70021283b9928cb",
-      "original_metrics_sha256": "652a6cde3b15a4406c795808e5ed3ce512136cb143d2e657dd64ca6c9a42647f"
+      "predictions_sha256": "b9d9e4cddd2f0a65a45672ee7c1e81e31a9feee11ba8df469160d307276f7eb7",
+      "manifest_sha256": "dc6262b317913c7164f515c4336280248b34d77f0c6636bb03a07f94ef60c282",
+      "original_metrics_sha256": "698ef3dc2b22717604bc01f1327e0db534356ad85b1518658bab6e3c4f9a2f3c"
     },
-    "cache_sha256": "79fc1b340d38eb60036ed5d23bf65dcb88aec07702aaccdbc8342aa76a12c612",
+    "cache_sha256": "e0c84cacda168a0b43bb5a53b957d27f8f64ff2f58d50d82f41062270dd3653d",
     "group_namespace": "BANKING77-normalized-utterance-v1",
     "group_hashes": [
       "00f919d78c2b2f0c4a0d9eeacd3423e90608a5bfb14adae74ad430c9203a6de8",
@@ -947,14 +954,14 @@
   },
   "selection": {
     "dataset": {
-      "name": "BANKING77 official test / retrospective three-way replay",
+      "name": "BANKING77 official test / three-way replay",
       "sha256": "f13205c4b54dbed549afcb86e26759b257aab96b763ceb8c0346c4d61c4d03a5",
       "source_url": "https://github.com/PolyAI-LDN/task-specific-datasets/tree/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data",
-      "predictions_sha256": "9501478664c225811b0f3cce967843031f50e6b0e44d9681d291d8776b52d237",
-      "manifest_sha256": "59b5d84fb9656178dbd2636c371e5918c8c84ca1c6802951d70021283b9928cb",
-      "original_metrics_sha256": "652a6cde3b15a4406c795808e5ed3ce512136cb143d2e657dd64ca6c9a42647f"
+      "predictions_sha256": "b9d9e4cddd2f0a65a45672ee7c1e81e31a9feee11ba8df469160d307276f7eb7",
+      "manifest_sha256": "dc6262b317913c7164f515c4336280248b34d77f0c6636bb03a07f94ef60c282",
+      "original_metrics_sha256": "698ef3dc2b22717604bc01f1327e0db534356ad85b1518658bab6e3c4f9a2f3c"
     },
-    "cache_sha256": "60fced10d5047499883b43786fba6a4f39d9261b313707ac095a65c2337f4f03",
+    "cache_sha256": "2ec55258b86894078c7e13f39585490b2da617f23c4e18a21da98b4768e2fc81",
     "group_namespace": "BANKING77-normalized-utterance-v1",
     "group_hashes": [
       "000666a8591660b88f90dedeabda55b1a87fdc7a6168c243984159ae08302410",
@@ -1856,16 +1863,19 @@
     ],
     "questions": 896
   },
-  "max_error": 0.01,
+  "max_error": 0.1,
   "min_accepted": 30,
   "criterion": "Wilson 95% upper bound on policy validation; no test or shifted-domain guarantee",
-  "threshold": null,
+  "threshold": 0.658933445668059,
   "validation_operating_point": {
-    "threshold": null,
-    "accepted": 0,
-    "errors": 0,
-    "coverage": 0,
-    "error_rate": null,
-    "error_interval": null
+    "threshold": 0.658933445668059,
+    "accepted": 708,
+    "errors": 55,
+    "coverage": 0.7901785714285714,
+    "error_rate": 0.07768361581920905,
+    "error_interval": [
+      0.060167504724329135,
+      0.09975779522840891
+    ]
   }
 }

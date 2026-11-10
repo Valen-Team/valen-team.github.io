@@ -4,41 +4,41 @@
     "safety": false,
     "compensation": false
   },
-  "model_id": "Valen-Team/Valen-4B",
+  "model_id": "Valen-Team/Valen-Decision-1.5-4B",
   "question_set": "v3",
   "answers": {
     "queue": {
       "type": "choice",
       "choice": "missing_or_wrong_item",
-      "confidence": 0.5706318127237087,
+      "confidence": 0.5724171866760668,
       "probabilities": {
-        "late_order": 0.35721989301648555,
-        "missing_or_wrong_item": 0.6421931772697572,
-        "food_quality": 0.00038141380567082377,
-        "payment_refund": 5.102247648324228e-05,
-        "account_access": 1.3665282958944707e-05,
-        "none": 0.00014082814864417514
+        "late_order": 0.35555102703737623,
+        "missing_or_wrong_item": 0.6436809888967223,
+        "food_quality": 0.0004743052852149623,
+        "payment_refund": 1.4111974413471254e-05,
+        "account_access": 6.290624276801835e-06,
+        "none": 0.0002732761819960959
       }
     },
     "safety": {
       "type": "noul",
-      "noul": 0.08014070302352833
+      "noul": 0.0006493247897860787
     },
     "compensation": {
       "type": "noul",
-      "noul": 0.020768978165886808
+      "noul": 0.0007747360839627893
     },
     "multi": {
       "type": "noul",
-      "noul": 0.9299979417770641
+      "noul": 0.9969667861706337
     },
     "delete_account": {
       "type": "noul",
-      "noul": 0.03255860916404362
+      "noul": 8.976896104978981e-05
     },
     "describes_event": {
       "type": "noul",
-      "noul": 0.9969588460112058
+      "noul": 0.9981279897768478
     }
   }
 }

@@ -14,9 +14,9 @@ A bike-share help bot retrieves five help-center passages with a cheap keyword s
 
 One predicate, asked once per retrieved passage, each in its own request so no passage sways the judgment of another:
 
-> A support agent could answer the customer's question using only this passage.
+> The passage contains the information needed to reply to the customer.
 
-Code sorts by probability and answers from the top passage when it reaches 0.7. Below that, the bot hands the question to a person. The wording was chosen by sending four variants as separate questions over the same passages: "answers the question" left the right passage at 0.5, while "a support agent could answer … using only this passage" separated right from wrong.
+Code sorts by probability and answers from the top passage when it reaches 0.7. Below that, the bot hands the question to a person. The wording was chosen by sending five variants as separate questions over the same passages: "a support agent could answer … using only this passage" and "answers the customer's question" left two of the three right passages around 0.7, "tells the customer what they want to know" left the best passages at 0.5 or below, while "contains the information needed to reply" put the best passage for every question above 0.9 and kept unrelated passages at 0.4 or below.
 
 ## Run it
 
@@ -43,7 +43,7 @@ python rerank.py --replay off --base-url https://api.valen-team.workers.dev/v1
 
 ## Output
 
-Keyword order puts the right passage first for two of three questions; after reranking, all three. For the station-full question the best passage scores 0.64, so the bot escalates instead of answering.
+Keyword order puts the right passage first for two of three questions; after reranking, all three, with top scores of 0.91, 1.00 and 0.91, so the bot answers each one. For the station-full question the runner-up `station-full` passage scores 0.55: it covers part of the situation, and the bot answers from `late-return`.
 
 <CodeBlock language="json" title="Recorded output">{output}</CodeBlock>
 

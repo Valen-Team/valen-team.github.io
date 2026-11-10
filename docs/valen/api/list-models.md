@@ -72,7 +72,7 @@ Successful requests return HTTP 200. This example shows one model from the list:
 | `data[].object` | string | Entry type: `model`. |
 | `data[].created` | integer | Upstream creation time as a Unix timestamp in seconds. |
 
-Read model names from `data[].id`, such as `valen-0.8b`, `valen-2b`, and `valen-4b`.
+Read model names from `data[].id`: `valen-0.8b`, `valen-2b`, and `valen-4b` serve Valen-Decision-1.5 0.8B, 2B and 4B.
 
 ## Use a model
 

@@ -4,7 +4,7 @@ title: 模型微调
 
 # 用自己的数据微调 Valen
 
-微调就是用自己的标注数据继续训练已有模型。例如，让 Valen 学习你公司的客服分类规则。建议从 Valen-0.8B 的 LoRA 微调开始，只更新少量参数，先做小规模尝试。
+微调就是用自己的标注数据继续训练已有模型。例如，让 Valen 学习你公司的客服分类规则。建议从 Valen-Decision-1.5-0.8B 的 LoRA 微调开始，只更新少量参数，先做小规模尝试。
 
 [领域微调 Cookbook](/zh-Hans/cookbook/domain-finetuning/)包含数据模板和可直接运行的完整步骤。
 

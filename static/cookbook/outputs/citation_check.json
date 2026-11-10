@@ -5,50 +5,50 @@
       "id": "c1",
       "cites": "1",
       "status": "supported",
-      "supported": 0.992473812984103,
-      "contradicted": 0.060028307587119245
+      "supported": 0.9945601147964824,
+      "contradicted": 0.005196863158933618
     },
     {
       "id": "c2",
       "cites": "1",
       "status": "contradicted",
-      "supported": 0.11813096878127707,
-      "contradicted": 0.8891227576554849
+      "supported": 0.006477264009932377,
+      "contradicted": 0.9724420945486374
     },
     {
       "id": "c3",
       "cites": "2",
       "status": "supported",
-      "supported": 0.9837899291028864,
-      "contradicted": 0.09080726585680793
+      "supported": 0.9891546263496483,
+      "contradicted": 0.026541825879150462
     },
     {
       "id": "c4",
       "cites": "2",
       "status": "contradicted",
-      "supported": 0.012904512852205586,
-      "contradicted": 0.7954747317872861
+      "supported": 0.010568207255471971,
+      "contradicted": 0.8482903952049644
     },
     {
       "id": "c5",
       "cites": "3",
       "status": "supported",
-      "supported": 0.9694863250698544,
-      "contradicted": 0.06629886029506596
+      "supported": 0.8484749608599264,
+      "contradicted": 0.0444134577470201
     },
     {
       "id": "c6",
       "cites": "3",
       "status": "unsupported",
-      "supported": 0.19670646185735557,
-      "contradicted": 0.10636692573403511
+      "supported": 0.20822349011365326,
+      "contradicted": 0.13048867127115252
     },
     {
       "id": "c7",
       "cites": "1",
       "status": "escalate",
-      "supported": 0.041889894149444565,
-      "contradicted": 0.6167122309420178
+      "supported": 0.06718918872737076,
+      "contradicted": 0.3651060537545812
     }
   ]
 }

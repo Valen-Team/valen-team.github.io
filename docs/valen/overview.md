@@ -16,17 +16,23 @@ For example, classify a customer message as an address change or cancellation, o
 
 | Model | Native weights / Transformers | ONNX Runtime | GGUF / custom runtime |
 | --- | --- | --- | --- |
-| Valen 0.8B | [Valen-0.8B](https://huggingface.co/Valen-Team/Valen-0.8B) | [Valen-0.8B-ONNX](https://huggingface.co/Valen-Team/Valen-0.8B-ONNX) | [Valen-0.8B-GGUF](https://huggingface.co/Valen-Team/Valen-0.8B-GGUF) |
-| Valen 2B | [Valen-2B](https://huggingface.co/Valen-Team/Valen-2B) | [Valen-2B-ONNX](https://huggingface.co/Valen-Team/Valen-2B-ONNX) | [Valen-2B-GGUF](https://huggingface.co/Valen-Team/Valen-2B-GGUF) |
-| Valen 4B | [Valen-4B](https://huggingface.co/Valen-Team/Valen-4B) | [Valen-4B-ONNX](https://huggingface.co/Valen-Team/Valen-4B-ONNX) | [Valen-4B-GGUF](https://huggingface.co/Valen-Team/Valen-4B-GGUF) |
+| Valen-Decision-1.5 0.8B | [Valen-Decision-1.5-0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B) | [Valen-Decision-1.5-0.8B-ONNX](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) | [Valen-Decision-1.5-0.8B-GGUF](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-GGUF) |
+| Valen-Decision-1.5 2B | [Valen-Decision-1.5-2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B) | [Valen-Decision-1.5-2B-ONNX](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) | [Valen-Decision-1.5-2B-GGUF](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-GGUF) |
+| Valen-Decision-1.5 4B | [Valen-Decision-1.5-4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B) | [Valen-Decision-1.5-4B-ONNX](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) | [Valen-Decision-1.5-4B-GGUF](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-GGUF) |
+| Valen-Decision-1.5 9B | [Valen-Decision-1.5-9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B) | [Valen-Decision-1.5-9B-ONNX](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) | [Valen-Decision-1.5-9B-GGUF](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-GGUF) |
+| Valen-Decision-1.5 27B | [Valen-Decision-1.5-27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B) | [Valen-Decision-1.5-27B-ONNX](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX) | [Valen-Decision-1.5-27B-GGUF](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-GGUF) |
+| Valen-Decision-1.0 0.8B | [Valen-0.8B](https://huggingface.co/Valen-Team/Valen-0.8B) | [Valen-0.8B-ONNX](https://huggingface.co/Valen-Team/Valen-0.8B-ONNX) | [Valen-0.8B-GGUF](https://huggingface.co/Valen-Team/Valen-0.8B-GGUF) |
+| Valen-Decision-1.0 2B | [Valen-2B](https://huggingface.co/Valen-Team/Valen-2B) | [Valen-2B-ONNX](https://huggingface.co/Valen-Team/Valen-2B-ONNX) | [Valen-2B-GGUF](https://huggingface.co/Valen-Team/Valen-2B-GGUF) |
+| Valen-Decision-1.0 4B | [Valen-4B](https://huggingface.co/Valen-Team/Valen-4B) | [Valen-4B-ONNX](https://huggingface.co/Valen-Team/Valen-4B-ONNX) | [Valen-4B-GGUF](https://huggingface.co/Valen-Team/Valen-4B-GGUF) |
 
 Released formats and earlier checkpoints are listed in the [Hugging Face organization](https://huggingface.co/Valen-Team).
 
-## Three decision types
+## Four question types
 
 - **Choice:** distribute probability across named options.
 - **Noul:** estimate whether a statement is true or false.
 - **Score:** assign probability to ordered grades.
+- **Bbox:** locate what the instructions describe in an image and return a box. Valen-Decision-1.5 answers [bbox questions](/docs/valen/bbox/) through Transformers and the [ONNX SDKs](/docs/valen/onnx/#bbox-questions).
 
 The same state can be shared by multiple questions. Read the [data format](/docs/valen/data-format/) and [shared-state execution guide](/docs/valen/qwen-shared-state/) for the full semantics.
 

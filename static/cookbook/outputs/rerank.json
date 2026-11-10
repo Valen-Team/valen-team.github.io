@@ -14,23 +14,23 @@
       "reranked": [
         {
           "id": "card-charged-twice",
-          "answers": 0.8985652729227516
+          "answers": 0.9068324160323087
         },
         {
           "id": "late-return",
-          "answers": 0.17800874742852527
+          "answers": 0.08262502716430085
         },
         {
           "id": "damage-fee",
-          "answers": 0.05538949909100312
+          "answers": 0.04598559655658711
         },
         {
           "id": "station-full",
-          "answers": 0.03725921031749856
+          "answers": 0.033019631650214196
         },
         {
           "id": "damage-report",
-          "answers": 0.02945133769907817
+          "answers": 0.019548872072920838
         }
       ],
       "keyword_top_correct": false,
@@ -48,29 +48,29 @@
       ],
       "reranked": [
         {
-          "id": "damage-report",
-          "answers": 0.9774886906340852
+          "id": "damage-fee",
+          "answers": 0.9968582140132537
         },
         {
-          "id": "damage-fee",
-          "answers": 0.9611416781331417
+          "id": "damage-report",
+          "answers": 0.9950396692432985
         },
         {
           "id": "late-return",
-          "answers": 0.09392517689858818
+          "answers": 0.009273141862854037
         },
         {
           "id": "e-bike-battery",
-          "answers": 0.07181187558594625
+          "answers": 0.0067689863068746995
         },
         {
           "id": "helmet",
-          "answers": 0.06563972034513534
+          "answers": 0.006271778278354445
         }
       ],
       "keyword_top_correct": true,
       "reranked_top_correct": true,
-      "answer_with": "damage-report"
+      "answer_with": "damage-fee"
     },
     {
       "query": "There were no free docks at the station so I kept riding. Will I pay a late fee?",
@@ -84,28 +84,28 @@
       "reranked": [
         {
           "id": "late-return",
-          "answers": 0.6440917657586406
+          "answers": 0.9095426030685612
         },
         {
           "id": "station-full",
-          "answers": 0.31263142824172974
+          "answers": 0.5518629052511181
         },
         {
           "id": "damage-fee",
-          "answers": 0.17896146805641847
-        },
-        {
-          "id": "refund-time",
-          "answers": 0.09888336357126723
+          "answers": 0.22942182211253526
         },
         {
           "id": "damage-report",
-          "answers": 0.03217982716574106
+          "answers": 0.028443279521573783
+        },
+        {
+          "id": "refund-time",
+          "answers": 0.006660806926682568
         }
       ],
       "keyword_top_correct": true,
       "reranked_top_correct": true,
-      "answer_with": null
+      "answer_with": "late-return"
     }
   ]
 }

@@ -72,7 +72,7 @@ curl --fail-with-body https://api.valen-team.workers.dev/v1/models
 | `data[].object` | string | 条目类型：`model`。 |
 | `data[].created` | integer | 上游提供的创建时间，Unix 时间戳，单位为秒。 |
 
-从 `data[].id` 读取模型名，例如 `valen-0.8b`、`valen-2b` 和 `valen-4b`。
+从 `data[].id` 读取模型名：`valen-0.8b`、`valen-2b` 和 `valen-4b` 分别对应 Valen-Decision-1.5 的 0.8B、2B 和 4B。
 
 ## 使用模型
 

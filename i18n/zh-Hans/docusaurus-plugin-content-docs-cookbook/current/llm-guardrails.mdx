@@ -21,7 +21,7 @@ import output from '@site/static/cookbook/outputs/llm_guardrails.json?cookbook-s
 | `blames_customer` | 绝不说是客户的错 |
 | `answers_customer` | 回复回应了客户的问题 |
 
-第一版用一道题同时问 "a password, a one-time code or a full card number"，一份同时索要验证码和密码的草稿只得了 0.32。拆成每种敏感信息一道题后，同一份草稿分别得到 0.87 和 0.95。
+第一版用一道题同时问 "a password, a one-time code or a full card number"，这样无法知道草稿索要的是哪一种。拆成每种敏感信息一道题后，一份同时索要验证码和密码的草稿分别得到 0.84 和 0.78，卡号一题接近 0。
 
 | 规则 | `answers_customer` | 动作 |
 | --- | --- | --- |

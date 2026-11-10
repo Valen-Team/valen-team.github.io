@@ -29,7 +29,7 @@ export default function ImmersiveHero({onSelectQuickstart}: {onSelectQuickstart:
           <p>{zh ? '理解文本、图像与视频，\n输出候选项的决策概率。' : 'Text, images, and video in.\nStructured decisions out.'}</p>
           <div className="immersive-actions"><Link to="/docs/valen/api/">{zh ? '从 API 开始' : 'Start with the API'}<Arrow/></Link><a href="https://huggingface.co/Valen-Team">{zh ? '探索模型' : 'Explore models'}<Arrow diagonal/></a></div>
         </div>
-        <div className="immersive-stage-meta"><span>{zh ? '开放权重' : 'OPEN WEIGHTS'} <strong>0.8B / 2B / 4B</strong></span><span>TEXT · IMAGE · VIDEO</span></div>
+        <div className="immersive-stage-meta"><span>{zh ? '开放权重' : 'OPEN WEIGHTS'} <strong>0.8B – 27B</strong></span><span>TEXT · IMAGE · VIDEO</span></div>
       </div>
       <nav className="immersive-entry-rail" aria-label={zh ? '选择开始方式' : 'Choose how to start'}>
         {[['Valen API', zh ? '一次请求，开始决策' : 'Your first decision, one request away'], ['Transformers', zh ? '下载权重，在本地运行' : 'Open weights, on your own machine'], ['JevalKit', zh ? '评测、比较、复现' : 'Evaluate. Compare. Reproduce.']].map(([label,description],i)=><a key={label} href="#quickstart" onClick={()=>onSelectQuickstart(i)}><span><strong>{label}</strong><small>{description}</small></span><Arrow/></a>)}

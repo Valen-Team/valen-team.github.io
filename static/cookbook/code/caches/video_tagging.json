@@ -2,9 +2,9 @@
  "_meta": {
   "valen-2b": {
    "base_url": "https://api.valen-team.workers.dev/v1",
-   "model": "Valen-2B",
+   "model": "Valen-Decision-1.5-2B",
    "model_id": "valen-2b",
-   "recorded": "2026-10-29",
+   "recorded": "2026-11-10",
    "revision": "local"
   }
  },
@@ -12,23 +12,23 @@
   "answers": [
    {
     "choice": "white",
-    "confidence": 0.9594438148258839,
+    "confidence": 0.960800652301311,
     "name": "sauce_color",
     "probabilities": [
      {
-      "probability": 0.0013946755867153904,
+      "probability": 0.005942444384714905,
       "value": "brown"
      },
      {
-      "probability": 0.9695828611194129,
+      "probability": 0.9706004892259832,
       "value": "white"
      },
      {
-      "probability": 0.025999585311857528,
+      "probability": 0.017770889974528012,
       "value": "red"
      },
      {
-      "probability": 0.0030228779820141083,
+      "probability": 0.0056861764147739715,
       "value": "orange"
      }
     ],
@@ -50,15 +50,15 @@
   "internal_usage": {
    "compute_tokens": 217
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 13.62,
-   "forward_ms": 61.5,
-   "image_ms": 6.48,
+   "compile_ms": 13.4,
+   "forward_ms": 98.02,
+   "image_ms": 7.15,
    "queue_ms": 0.01,
-   "total_ms": 129.09
+   "total_ms": 167.13
   },
   "usage": {
    "input_tokens": 217,

@@ -16,6 +16,7 @@ Registration is not evidence of a successful weight-level evaluation: consult th
 | Valen-2B | Valen | native | jevalkit[hf] | [source](https://github.com/Valen-Team/Valen) |
 | Intern-Decision-2B | Intern-Decision | native | Python 3.12+; author requirements.txt | [source](https://github.com/InternLM/Intern-Decision) |
 | Valen-4B | Valen | native | jevalkit[hf] | [source](https://github.com/Valen-Team/Valen) |
+| Valen-Decision-1.5-{0.8B,2B,4B,9B,27B} | Valen | native | jevalkit[hf] | [source](https://huggingface.co/Valen-Team) |
 | Intern-Decision-4B | Intern-Decision | native | Python 3.12+; author requirements.txt | [source](https://github.com/InternLM/Intern-Decision) |
 | Laya | Laya | native | laya | [source](https://github.com/NandhaKishorM/laya) |
 | Liquid-d1-3B | Liquid-d1 | native | transformers>=5.14; author dependencies | [source](https://huggingface.co/LiquidAI/d1-3B) |

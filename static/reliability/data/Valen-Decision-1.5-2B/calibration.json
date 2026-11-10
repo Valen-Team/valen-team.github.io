@@ -2,26 +2,33 @@
   "schema_version": 1,
   "kind": "temperature",
   "identity": {
-    "model": "Valen-Team/Valen-0.8B",
-    "revision": "c2c481fcb319bd9ae834abc7c6373271710cf24e",
+    "model": "Valen-Team/Valen-Decision-1.5-2B",
+    "revision": "eb8da3dacc5e80f1e6f1cde28b6daea344fa3986",
     "backend": "transformers:shared_state:sdpa:cuda",
-    "precision": "torch.float32",
-    "protocol_sha256": "935dd173d9e66bea9b5fb3bb4e7ab92ff3db0d61043179b203055a8cfce6633e",
+    "precision": "torch.bfloat16",
+    "protocol_sha256": "61d334b0804f33a185505240cdb7263ff8920f1036ef868f236d9974d440aaf9",
     "artifacts_sha256": {
-      "model.safetensors": "465714dd28702c4232d9233c2a2157d366967c541b2a27d9dadccc816304fd48",
       "batching.py": "ea45d4724bcafca559fc5a2a18092918b633746771c19da6554c29bc5f2cef64",
-      "compiler.py": "f35bab2e71b6beb1228daaa5b7baecdacf04eaf713aee14e8082b97090f910b4",
-      "configuration_valen.py": "8aa80266e8c328b5251d969de80f58e706dcd15a535c877108aab452ff572279",
+      "block_attention.py": "27b0a2b209a17afe13a7ecd0afd180d99ba6b873147e7b18bd1e028dea96e074",
+      "chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+      "compiler.py": "72cada57ec9a50ad688e8542f52615b82a021cc60e90e80c5e147e86a823de85",
+      "config.json": "97faa5441752eecb304a6ec8d17cf03971d5bb363481eb2020b347fe88072694",
+      "configuration_valen.py": "29f930d193a75547bd5fa63715c0b5f3ac6acf4b5cc803f98d61713d0e951534",
       "data_types.py": "b06ce08081d8f7b2bf36abf302410a96086395e75a04f9e9b1c591db519b1641",
+      "decisions.py": "476e998b624d7222c156e8e87e3d9c07b04dafe44c412cbe95b29f9d76b9935b",
+      "grounding.py": "a40ae673819a3cc243e081bcd2020980044ad26f2ea9591d5f49b29fc855c16b",
       "heads.py": "63b5970a8bfa121eff94d50ffd35e1fa8387f3af5abccc5f5b75381fb084fc34",
-      "modeling_valen.py": "851f90a089c23060e321e1da192689fd3b405253f219f67723bf57c873612d62",
-      "responses.py": "298016b0070f1000a38d033e1048e038ff5df6fc1dcbe830601105b181f1d228",
-      "runtime_model.py": "2ce5808373505105bedc254bd99671fbeea43c25483e6b63add77b9e32d7baaf",
-      "schema.py": "81659cc31b9673f6b9482095a4bbf6a2fb0b1415f0dfdd1c057278ecdca13595",
-      "config.json": "8a6a766acfe35a6eb3d373e90c43af0f08dbd44301251df71e18b1b5b5381c08"
+      "model.safetensors": "1c9c1112aa0c417b081b0fa757c78be77e487b97de50adb4c83eecfbe03c35da",
+      "modeling_valen.py": "15f388154a3cf78683dcb50b8c302554dc2a554fb7b247cb54d948eb6f99b71a",
+      "processor_config.json": "d89ef49ce9cd37fbf510158e13c1ef063d9286411c1ec9049932dbe0487143b1",
+      "responses.py": "a7239109a0a466966037c690040a773a03fa0ee8476a80408cfacf79ce463a7b",
+      "runtime_model.py": "04a971069fbfb1a86315d52c294c9ac184f691f5223771efcca4454bc1be2915",
+      "schema.py": "20277d14d11542c23b45e56b22f1c1dcb27a3853b4b06af449d72b6accd95d63",
+      "tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+      "tokenizer_config.json": "7488550a894dcf741616126e322ea31d66cf9457b59ec5825f4c7efdced421f8"
     }
   },
-  "temperature": 1.1534182707020237,
+  "temperature": 0.9689192610534451,
   "objective": "mean soft-target NLL on valid calibration questions",
   "bounds": [
     0.01,
@@ -29,14 +36,14 @@
   ],
   "fit": {
     "dataset": {
-      "name": "BANKING77 official test / retrospective three-way replay",
+      "name": "BANKING77 official test / three-way replay",
       "sha256": "f13205c4b54dbed549afcb86e26759b257aab96b763ceb8c0346c4d61c4d03a5",
       "source_url": "https://github.com/PolyAI-LDN/task-specific-datasets/tree/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data",
-      "predictions_sha256": "9501478664c225811b0f3cce967843031f50e6b0e44d9681d291d8776b52d237",
-      "manifest_sha256": "59b5d84fb9656178dbd2636c371e5918c8c84ca1c6802951d70021283b9928cb",
-      "original_metrics_sha256": "652a6cde3b15a4406c795808e5ed3ce512136cb143d2e657dd64ca6c9a42647f"
+      "predictions_sha256": "ef943595f52e39b635405a414c4da267f27b9719c8bc46f565ea27350b604f4c",
+      "manifest_sha256": "dc26acf8024e34c107625d36b7e7f388f7a1038386a463c27be3f09715dbb6c9",
+      "original_metrics_sha256": "9dd9da2f98a49b8b4abc2a951a483e1bb681d5ac58d061f0cb26321c4f7defaa"
     },
-    "cache_sha256": "79fc1b340d38eb60036ed5d23bf65dcb88aec07702aaccdbc8342aa76a12c612",
+    "cache_sha256": "7f1cf4086995fd1ef3027477dcc95b9334e3bb549c32afb074b95dd3cf30f8a3",
     "group_namespace": "BANKING77-normalized-utterance-v1",
     "group_hashes": [
       "00f919d78c2b2f0c4a0d9eeacd3423e90608a5bfb14adae74ad430c9203a6de8",

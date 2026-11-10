@@ -7,11 +7,11 @@
       "16 March",
       "2026-03-02"
     ],
-    "has_new_date": 0.9980370964696507,
+    "has_new_date": 0.9980960249754459,
     "status": "update_order",
     "delivery_date": "2026-03-16",
     "span": "16 March",
-    "confidence": 0.970832077353691
+    "confidence": 0.9915644820645324
   },
   {
     "id": "po-1190",
@@ -19,7 +19,7 @@
       "2026-03-20",
       "18 March"
     ],
-    "has_new_date": 0.00443016482795233,
+    "has_new_date": 0.018688968460048753,
     "status": "no_new_date"
   },
   {
@@ -29,16 +29,16 @@
       "31 March",
       "15 April"
     ],
-    "has_new_date": 0.9780033681094145,
+    "has_new_date": 0.9819198262462996,
     "status": "update_order",
     "delivery_date": "2026-04-07",
     "span": "April 7",
-    "confidence": 0.9725751976466991
+    "confidence": 0.9907003463346274
   },
   {
     "id": "po-1211",
     "candidates": [],
-    "has_new_date": 0.19682010421693014,
+    "has_new_date": 0.18983143557384338,
     "status": "no_new_date"
   }
 ]

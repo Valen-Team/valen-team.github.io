@@ -4,9 +4,11 @@ title: GGUF 本地服务
 
 # GGUF 本地服务
 
-这些 GGUF 需要 Valen 补丁版 llama.cpp/Ollama；官方未修改版本不能直接视为支持。首次在线体验见[版本选择](/zh-Hans/docs/valen/choosing/)。
+这些 GGUF 通过 Valen 补丁版 llama.cpp/Ollama 运行，返回候选项概率。首次在线体验见[版本选择](/zh-Hans/docs/valen/choosing/)。
 
-三个尺寸发布 F32 和 Q8_0；Q4_K_M 和 Q5_K_M 未通过固定质量门槛，因此不提供。各模型卡记录了[质量报告](https://huggingface.co/Valen-Team/Valen-0.8B-GGUF/blob/main/validation/quality-summary.json)。
+本指南使用 Valen-Decision-1.0 GGUF 模型。Valen-Decision-1.5 的 BF16 GGUF 文件：[0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-GGUF) · [2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-GGUF) · [4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-GGUF) · [9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-GGUF) · [27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-GGUF)。
+
+Valen-Decision-1.0 的三个尺寸发布 F32 和 Q8_0；Q4_K_M 和 Q5_K_M 未通过固定质量门槛，因此不提供。各模型卡记录了[质量报告](https://huggingface.co/Valen-Team/Valen-0.8B-GGUF/blob/main/validation/quality-summary.json)。
 
 ## Linux x86-64 CPU 预编译包
 

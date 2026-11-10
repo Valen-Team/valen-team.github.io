@@ -9,18 +9,25 @@ sidebar_label: Resources
 
 | Release | Download |
 | --- | --- |
-| Valen 0.8B | [Hugging Face](https://huggingface.co/Valen-Team/Valen-0.8B) |
-| Valen 2B | [Hugging Face](https://huggingface.co/Valen-Team/Valen-2B) |
-| Valen 4B | [Hugging Face](https://huggingface.co/Valen-Team/Valen-4B) |
+| Valen-Decision-1.5 0.8B | [Hugging Face](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B) |
+| Valen-Decision-1.5 2B | [Hugging Face](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B) |
+| Valen-Decision-1.5 4B | [Hugging Face](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B) |
+| Valen-Decision-1.5 9B | [Hugging Face](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B) |
+| Valen-Decision-1.5 27B | [Hugging Face](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B) |
+| Valen-Decision-1.0 0.8B | [Hugging Face](https://huggingface.co/Valen-Team/Valen-0.8B) |
+| Valen-Decision-1.0 2B | [Hugging Face](https://huggingface.co/Valen-Team/Valen-2B) |
+| Valen-Decision-1.0 4B | [Hugging Face](https://huggingface.co/Valen-Team/Valen-4B) |
 | Valen Preview 0923 | [Earlier checkpoint](https://huggingface.co/Valen-Team/Valen-Preview-0923) |
 
 Explore the [organization's model collection](https://huggingface.co/Valen-Team) for available export formats.
 
 ## ONNX models and SDKs
 
-Use the [ONNX inference guide](/docs/valen/onnx/) to choose a CPU, CUDA or browser variant. Model cards include download sizes, memory and quality comparisons.
+Use the [ONNX inference guide](/docs/valen/onnx/) to choose a variant. The Valen-Decision-1.5 bundles provide `fp32` and `q8-mlp` for CPU and run with Python SDK 0.5.0 and JavaScript SDK 0.4.0; the Valen-Decision-1.0 repos also provide CUDA and browser variants. Model cards include download sizes and comparisons with the native model.
 
-[Valen-0.8B-ONNX](https://huggingface.co/Valen-Team/Valen-0.8B-ONNX) · [Valen-2B-ONNX](https://huggingface.co/Valen-Team/Valen-2B-ONNX) · [Valen-4B-ONNX](https://huggingface.co/Valen-Team/Valen-4B-ONNX)
+Valen-Decision-1.5 ONNX: [0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) · [2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) · [4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) · [9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) · [27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX)
+
+Valen-Decision-1.0 ONNX: [0.8B](https://huggingface.co/Valen-Team/Valen-0.8B-ONNX) · [2B](https://huggingface.co/Valen-Team/Valen-2B-ONNX) · [4B](https://huggingface.co/Valen-Team/Valen-4B-ONNX)
 
 [Python SDK](https://github.com/Valen-Team/valen-sdk-python) · [JavaScript / TypeScript SDK](https://github.com/Valen-Team/valen-sdk-js) · [C++ text integration](https://github.com/Valen-Team/valen-sdk-cpp)
 

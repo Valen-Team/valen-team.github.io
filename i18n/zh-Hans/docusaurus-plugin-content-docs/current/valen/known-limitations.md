@@ -6,7 +6,7 @@ description: Valen 在哪些情形下回答不可靠（基于公开 benchmark �
 
 # 已知弱点
 
-每一条写明哪里会出错、影响有多大，以及能消除它的改法。测量对比的是 Valen 0.8B、2B、4B 与 [JevalKit](/zh-Hans/docs/jevalkit/) 榜单上其他 7 个 4B 及以下的决策模型（Intern-Decision 0.8B、2B、4B，StartLux v1.1 0.8B、2B、4B，Liquid d1 3B）的中位数，题目相同，2026 年 10 月。
+每一条写明哪里会出错、影响有多大，以及能消除它的改法。测量对比的是 Valen-Decision-1.0 0.8B、2B、4B 与 [JevalKit](/zh-Hans/docs/jevalkit/) 榜单上其他 7 个 4B 及以下的决策模型（Intern-Decision 0.8B、2B、4B，StartLux v1.1 0.8B、2B、4B，Liquid d1 3B）的中位数，题目相同，2026 年 10 月。
 
 ## state 里的规则表、长列表和算术
 

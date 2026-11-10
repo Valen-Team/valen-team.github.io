@@ -21,7 +21,7 @@ Each rule is its own predicate over the customer message and the draft, plus one
 | `blames_customer` | never tell the customer it is their fault |
 | `answers_customer` | the reply addresses what the customer asked |
 
-A first version asked for "a password, a one-time code or a full card number" in one question, and a draft asking for both a code and a password scored 0.32. Split into one question per secret, the same draft scores 0.87 and 0.95.
+A first version asked for "a password, a one-time code or a full card number" in one question, which cannot say which secret a draft asks for. Split into one question per secret, a draft asking for both a code and a password scores 0.84 and 0.78, and the card question stays near 0.
 
 | Rules | `answers_customer` | Action |
 | --- | --- | --- |

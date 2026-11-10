@@ -8,9 +8,9 @@ description: Install the dependencies and run Valen with either inference protoc
 
 # Local inference with Transformers
 
-Load Valen in Python and use SystemOne or Decisions for predicate, choice, and score questions over text, images, and video.
+Load Valen in Python and use SystemOne or Decisions for predicate, choice, and score questions over text, images, and video. Valen-Decision-1.5 also answers [bbox questions](./bbox.md) with a box in an image.
 
-This page uses PyTorch and native Hugging Face weights; no Valen SDK installation is needed. For CPU, ONNX Runtime or browser inference, use [ONNX & SDKs](./onnx.md).
+This page uses PyTorch and native Hugging Face weights; no Valen SDK installation is needed. For CPU, ONNX Runtime or browser inference, use [ONNX & SDKs](./onnx.md); the SDKs run the Valen-Decision-1.5 ONNX bundles, including bbox questions.
 
 ## Install dependencies
 
@@ -28,7 +28,7 @@ from transformers import AutoModel
 
 model = (
     AutoModel.from_pretrained(
-        "Valen-Team/Valen-0.8B",
+        "Valen-Team/Valen-Decision-1.5-0.8B",
         trust_remote_code=True,
         dtype="auto",
         attn_implementation="sdpa",
@@ -40,9 +40,9 @@ torch.set_float32_matmul_precision("highest")
 torch.backends.cudnn.allow_tf32 = False
 ```
 
-Replace the model ID with `Valen-Team/Valen-2B` or `Valen-Team/Valen-4B` to select another size. `dtype="auto"` preserves each model’s storage precision; the Mixer decision head uses FP32.
+Replace `0.8B` in the model ID with `2B`, `4B`, `9B` or `27B` to select another size. `dtype="auto"` preserves each model’s storage precision; the decision and grounding heads use FP32.
 
-The first load downloads and caches native model weights. Once cached, add `local_files_only=True` to `AutoModel.from_pretrained(...)` to prevent downloads, or replace the model ID with a local model directory. Use native `Valen-*B` repositories here; load ONNX graphs through the [SDKs](./onnx.md).
+The first load downloads and caches native model weights. Once cached, add `local_files_only=True` to `AutoModel.from_pretrained(...)` to prevent downloads, or replace the model ID with a local model directory. Use native `Valen-Decision-1.5-*B` repositories here; load the `Valen-Decision-1.5-*B-ONNX` bundles through the [SDKs](./onnx.md).
 
 ## Minimal inference check
 

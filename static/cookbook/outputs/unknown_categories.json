@@ -1,23 +1,23 @@
 {
   "selected": "none",
-  "probability": 0.9614564845816118,
-  "margin": 0.9303510349339065,
+  "probability": 0.727456417632146,
+  "margin": 0.46143861669207786,
   "probabilities": [
     {
       "value": "refund",
-      "probability": 0.0006448843097294247
+      "probability": 0.001365803609338547
     },
     {
       "value": "shipping",
-      "probability": 0.03110544964770529
+      "probability": 0.2660178009400681
     },
     {
       "value": "invoice",
-      "probability": 0.0067931814609534635
+      "probability": 0.0051599778184473815
     },
     {
       "value": "none",
-      "probability": 0.9614564845816118
+      "probability": 0.727456417632146
     }
   ],
   "route": "human_review",

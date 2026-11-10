@@ -4,7 +4,7 @@ title: Fine-tuning
 
 # Fine-tune Valen on your data
 
-Fine-tuning uses your labeled examples to adapt an existing model—for example, to your company’s support-ticket categories. Start with Valen-0.8B and LoRA, which updates a small subset of parameters for an initial experiment.
+Fine-tuning uses your labeled examples to adapt an existing model—for example, to your company’s support-ticket categories. Start with Valen-Decision-1.5-0.8B and LoRA, which updates a small subset of parameters for an initial experiment.
 
 The [domain fine-tuning Cookbook](/cookbook/domain-finetuning/) includes a data template and runnable steps.
 

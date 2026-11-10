@@ -8,9 +8,9 @@ description: 安装依赖并使用两种协议运行 Valen。
 
 # 使用 Transformers 在本地推理
 
-在 Python 中加载 Valen，使用 SystemOne 或 Decisions 对文本、图片和视频进行判断、选择与评分。
+在 Python 中加载 Valen，使用 SystemOne 或 Decisions 对文本、图片和视频进行判断、选择与评分。Valen-Decision-1.5 还能回答 [bbox 问题](./bbox.md)，返回图片中的边界框。
 
-本页使用 PyTorch 与原生 Hugging Face 权重，不需要安装 Valen SDK。需要 CPU、ONNX Runtime 或浏览器推理时，请阅读 [ONNX 与 SDK](./onnx.md)。
+本页使用 PyTorch 与原生 Hugging Face 权重，不需要安装 Valen SDK。需要 CPU、ONNX Runtime 或浏览器推理时，请阅读 [ONNX 与 SDK](./onnx.md)；SDK 运行 Valen-Decision-1.5 ONNX 模型包，包括 bbox 问题。
 
 ## 安装依赖
 
@@ -28,7 +28,7 @@ from transformers import AutoModel
 
 model = (
     AutoModel.from_pretrained(
-        "Valen-Team/Valen-0.8B",
+        "Valen-Team/Valen-Decision-1.5-0.8B",
         trust_remote_code=True,
         dtype="auto",
         attn_implementation="sdpa",
@@ -40,9 +40,9 @@ torch.set_float32_matmul_precision("highest")
 torch.backends.cudnn.allow_tf32 = False
 ```
 
-将模型名替换为 `Valen-Team/Valen-2B` 或 `Valen-Team/Valen-4B`，可以切换规模。`dtype="auto"` 保留各模型的存储精度，Mixer 决策头使用 FP32。
+将模型名中的 `0.8B` 替换为 `2B`、`4B`、`9B` 或 `27B`，可以切换规模。`dtype="auto"` 保留各模型的存储精度，决策头和定位头使用 FP32。
 
-首次加载会下载并缓存原生模型权重。已有缓存后，在 `AutoModel.from_pretrained(...)` 中加入 `local_files_only=True` 可禁止下载；也可以将模型 ID 换成本地模型目录。请使用原生 `Valen-*B` 仓库，ONNX 图由 [SDK](./onnx.md) 加载。
+首次加载会下载并缓存原生模型权重。已有缓存后，在 `AutoModel.from_pretrained(...)` 中加入 `local_files_only=True` 可禁止下载；也可以将模型 ID 换成本地模型目录。请使用原生 `Valen-Decision-1.5-*B` 仓库，`Valen-Decision-1.5-*B-ONNX` 模型包由 [SDK](./onnx.md) 加载。
 
 ## 最短调用
 

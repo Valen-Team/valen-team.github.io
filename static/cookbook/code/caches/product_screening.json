@@ -2,9 +2,9 @@
  "_meta": {
   "valen-2b": {
    "base_url": "https://api.valen-team.workers.dev/v1",
-   "model": "Valen-2B",
+   "model": "Valen-Decision-1.5-2B",
    "model_id": "valen-2b",
-   "recorded": "2026-10-29",
+   "recorded": "2026-11-10",
    "revision": "local"
   }
  },
@@ -12,23 +12,23 @@
   "answers": [
    {
     "choice": "flock",
-    "confidence": 0.9995986859291994,
+    "confidence": 0.9693160355443844,
     "name": "group",
     "probabilities": [
      {
-      "probability": 0.00022472233506495753,
+      "probability": 8.73534099423345e-05,
       "value": "pride"
      },
      {
-      "probability": 0.9996990144468996,
+      "probability": 0.9769870266582883,
       "value": "flock"
      },
      {
-      "probability": 7.6111806719090535e-06,
+      "probability": 0.022872821706069628,
       "value": "clowder"
      },
      {
-      "probability": 6.865203736360213e-05,
+      "probability": 5.279822569973193e-05,
       "value": "gang"
      }
     ],
@@ -50,15 +50,15 @@
   "internal_usage": {
    "compute_tokens": 249
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 15.88,
-   "forward_ms": 49.58,
-   "image_ms": 8.19,
+   "compile_ms": 15.74,
+   "forward_ms": 48.56,
+   "image_ms": 8.39,
    "queue_ms": 0.01,
-   "total_ms": 128.38
+   "total_ms": 128.67
   },
   "usage": {
    "input_tokens": 249,

@@ -11,7 +11,7 @@ import RequestExample from '@site/src/components/modern/RequestExample';
 
 # System One
 
-向托管 API 提供文本或图片，并提出判断、选择或评分问题。接口返回每个问题的结果及对应概率。视频可先提取画面帧，再作为图片输入。
+向托管 API 提供文本或图片，并提出判断、选择或评分问题。接口返回每个问题的结果及对应概率。要在图片中定位目标，可通过 Transformers 提出 [bbox 问题](../bbox.md)。视频可先提取画面帧，再作为图片输入。
 
 ```text
 POST /v1/systemone

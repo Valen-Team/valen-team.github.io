@@ -4,8 +4,8 @@ export type Candidate = {value: string; description: string; score?: number};
 export type Probability = {value: string; probability: number};
 export type DecisionAnswer = {name: string; type: 'predicate' | 'choice' | 'score'; choice: string; raw?: unknown; probability?: number; score?: number; confidence?: number; probabilities: Probability[]};
 export const modelOptions = [
-  ['valen-2b', 'Valen 2B'], ['valen-4b', 'Valen 4B'],
-  ['valen-0.8b', 'Valen 0.8B'],
+  ['valen-2b', 'Valen-Decision-1.5 2B'], ['valen-4b', 'Valen-Decision-1.5 4B'],
+  ['valen-0.8b', 'Valen-Decision-1.5 0.8B'],
 ] as const;
 export function booleanCandidates(zh: boolean): Candidate[] {
   return [{value: 'true', description: zh ? '是：问题中的条件成立' : 'Yes: the condition in the question is true'},

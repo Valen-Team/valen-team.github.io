@@ -14,11 +14,11 @@ import output from '@site/static/cookbook/outputs/rerank.json?cookbook-source';
 
 一道判断题，对每个检索到的段落各问一次，每次单独发请求，这样任何段落都不会影响对其他段落的判断：
 
-> A support agent could answer the customer's question using only this passage.
+> The passage contains the information needed to reply to the customer.
 
-（客服人员仅凭这段内容就能回答客户的问题。）
+（这段内容包含了回复客户所需的信息。）
 
-代码按概率排序，最高的段落达到 0.7 时就依据它作答；低于 0.7 时，机器人把问题交给人工。这个措辞是这样选出来的：把四种写法作为不同的问题，针对同一批段落一起发送。"answers the question" 让正确段落停留在 0.5，而 "a support agent could answer … using only this passage" 把正确和错误的段落区分开了。
+代码按概率排序，最高的段落达到 0.7 时就依据它作答；低于 0.7 时，机器人把问题交给人工。这个措辞是这样选出来的：把五种写法作为不同的问题，针对同一批段落一起发送。"a support agent could answer … using only this passage" 和 "answers the customer's question" 让三个正确段落中的两个停留在 0.7 附近，"tells the customer what they want to know" 让最佳段落停在 0.5 及以下，而 "contains the information needed to reply" 让每个问题的最佳段落都高于 0.9，无关段落都在 0.4 及以下。
 
 ## 运行
 
@@ -45,7 +45,7 @@ python rerank.py --replay off --base-url https://api.valen-team.workers.dev/v1
 
 ## 输出
 
-按关键词排序，三个问题中有两个的正确段落排在第一；重新排序后三个都排在第一。对于站点停满的问题，最佳段落得分 0.64，所以机器人转人工，而不是直接作答。
+按关键词排序，三个问题中有两个的正确段落排在第一；重新排序后三个都排在第一，最高得分分别为 0.91、1.00 和 0.91，所以机器人对每个问题都直接作答。对于站点停满的问题，排第二的 `station-full` 段落得分 0.55：它只覆盖了部分情况，机器人依据 `late-return` 作答。
 
 <CodeBlock language="json" title="录制的输出">{output}</CodeBlock>
 

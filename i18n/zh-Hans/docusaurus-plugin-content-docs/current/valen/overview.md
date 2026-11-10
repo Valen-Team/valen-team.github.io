@@ -16,17 +16,23 @@ Valen 是一个用于分类、判断和评分的多模态模型。你提供文�
 
 | 模型 | 原生权重 / Transformers | ONNX Runtime | GGUF / 定制运行时 |
 | --- | --- | --- | --- |
-| Valen 0.8B | [Valen-0.8B](https://huggingface.co/Valen-Team/Valen-0.8B) | [Valen-0.8B-ONNX](https://huggingface.co/Valen-Team/Valen-0.8B-ONNX) | [Valen-0.8B-GGUF](https://huggingface.co/Valen-Team/Valen-0.8B-GGUF) |
-| Valen 2B | [Valen-2B](https://huggingface.co/Valen-Team/Valen-2B) | [Valen-2B-ONNX](https://huggingface.co/Valen-Team/Valen-2B-ONNX) | [Valen-2B-GGUF](https://huggingface.co/Valen-Team/Valen-2B-GGUF) |
-| Valen 4B | [Valen-4B](https://huggingface.co/Valen-Team/Valen-4B) | [Valen-4B-ONNX](https://huggingface.co/Valen-Team/Valen-4B-ONNX) | [Valen-4B-GGUF](https://huggingface.co/Valen-Team/Valen-4B-GGUF) |
+| Valen-Decision-1.5 0.8B | [Valen-Decision-1.5-0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B) | [Valen-Decision-1.5-0.8B-ONNX](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) | [Valen-Decision-1.5-0.8B-GGUF](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-GGUF) |
+| Valen-Decision-1.5 2B | [Valen-Decision-1.5-2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B) | [Valen-Decision-1.5-2B-ONNX](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) | [Valen-Decision-1.5-2B-GGUF](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-GGUF) |
+| Valen-Decision-1.5 4B | [Valen-Decision-1.5-4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B) | [Valen-Decision-1.5-4B-ONNX](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) | [Valen-Decision-1.5-4B-GGUF](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-GGUF) |
+| Valen-Decision-1.5 9B | [Valen-Decision-1.5-9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B) | [Valen-Decision-1.5-9B-ONNX](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) | [Valen-Decision-1.5-9B-GGUF](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-GGUF) |
+| Valen-Decision-1.5 27B | [Valen-Decision-1.5-27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B) | [Valen-Decision-1.5-27B-ONNX](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX) | [Valen-Decision-1.5-27B-GGUF](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-GGUF) |
+| Valen-Decision-1.0 0.8B | [Valen-0.8B](https://huggingface.co/Valen-Team/Valen-0.8B) | [Valen-0.8B-ONNX](https://huggingface.co/Valen-Team/Valen-0.8B-ONNX) | [Valen-0.8B-GGUF](https://huggingface.co/Valen-Team/Valen-0.8B-GGUF) |
+| Valen-Decision-1.0 2B | [Valen-2B](https://huggingface.co/Valen-Team/Valen-2B) | [Valen-2B-ONNX](https://huggingface.co/Valen-Team/Valen-2B-ONNX) | [Valen-2B-GGUF](https://huggingface.co/Valen-Team/Valen-2B-GGUF) |
+| Valen-Decision-1.0 4B | [Valen-4B](https://huggingface.co/Valen-Team/Valen-4B) | [Valen-4B-ONNX](https://huggingface.co/Valen-Team/Valen-4B-ONNX) | [Valen-4B-GGUF](https://huggingface.co/Valen-Team/Valen-4B-GGUF) |
 
 导出格式与历史版本见 [Hugging Face 组织](https://huggingface.co/Valen-Team)。
 
-## 三类决策问题
+## 四类问题
 
 - **Choice**：在命名候选项之间分配概率。
 - **Noul**：估计命题为真或假的概率。
 - **Score**：在有序等级上输出概率分布。
+- **Bbox**：在图片中定位指令描述的目标并返回边界框。Valen-Decision-1.5 通过 Transformers 和 [ONNX SDK](/zh-Hans/docs/valen/onnx/#bbox-问题) 回答 [bbox 问题](/zh-Hans/docs/valen/bbox/)。
 
 同一个状态可以由多个问题共享。完整语义见[数据格式](/zh-Hans/docs/valen/data-format/)与[多问题共享计算](/zh-Hans/docs/valen/qwen-shared-state/)。
 

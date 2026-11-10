@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "date": "2026-10-29",
+  "date": "2026-11-10",
   "validation_kind": "real_model_execution",
   "tested_sources": {
     "local_inference.py": "fef799ea6e23b9f88d319ffd904bc9d647400068a91a1f1c5b21a6ca7e872de0",
@@ -16,120 +16,120 @@
   "recipes": {
     "api-quickstart": {
       "status": "verified",
-      "date": "2026-10-29",
-      "model": "Valen-2B",
+      "date": "2026-11-10",
+      "model": "Valen-Decision-1.5-2B",
       "revision": "hosted valen-2b",
       "sdk": "0.2.0",
       "backend": "Valen hosted API (api.valen-team.workers.dev), answers recorded in caches/api_quickstart.json",
       "result": {
         "text": {
           "intent": {
-            "choice": "change_address",
-            "confidence": 0.9999289505706707,
+            "type": "choice",
             "name": "intent",
+            "choice": "change_address",
             "probabilities": [
               {
-                "probability": 3.4016723812828095e-06,
-                "value": "billing_question"
+                "value": "billing_question",
+                "probability": 2.9615462656269814e-06
               },
               {
-                "probability": 3.291567995152523e-05,
-                "value": "cancel_order"
+                "value": "cancel_order",
+                "probability": 0.00011410188981165587
               },
               {
-                "probability": 0.9999431604565366,
-                "value": "change_address"
+                "value": "change_address",
+                "probability": 0.9998090381762026
               },
               {
-                "probability": 2.087726264525702e-06,
-                "value": "report_damage"
+                "value": "report_damage",
+                "probability": 9.486926433594504e-06
               },
               {
-                "probability": 1.843446486604273e-05,
-                "value": "track_order"
+                "value": "track_order",
+                "probability": 6.441146128656554e-05
               }
             ],
-            "type": "choice"
+            "confidence": 0.9997612977202532
           },
           "address_change": {
+            "type": "predicate",
             "name": "address_change",
-            "probability": 0.9984566240623853,
-            "type": "predicate"
+            "probability": 0.9989510209459393
           },
           "explicitness": {
-            "confidence": 0.9342730332711597,
+            "type": "score",
             "name": "explicitness",
+            "score": 1.955565405501435,
             "probabilities": [
               {
+                "value": 0,
                 "label": "none",
-                "probability": 0.0016383576849762936,
-                "value": 0
+                "probability": 0.003707516304216059
               },
               {
+                "value": 1,
                 "label": "possible",
-                "probability": 0.04054126244927424,
-                "value": 1
+                "probability": 0.03701956189013287
               },
               {
+                "value": 2,
                 "label": "explicit",
-                "probability": 0.9578203798657494,
-                "value": 2
+                "probability": 0.9592729218056512
               }
             ],
-            "score": 1.956182022180773,
-            "type": "score"
+            "confidence": 0.9333481082521525
           }
         },
         "image": {
           "group": {
-            "choice": "flock",
-            "confidence": 0.9995986859291994,
+            "type": "choice",
             "name": "group",
+            "choice": "flock",
             "probabilities": [
               {
-                "probability": 0.00022472233506495753,
-                "value": "pride"
+                "value": "pride",
+                "probability": 8.73534099423345e-05
               },
               {
-                "probability": 0.9996990144468996,
-                "value": "flock"
+                "value": "flock",
+                "probability": 0.9769870266582883
               },
               {
-                "probability": 7.6111806719090535e-06,
-                "value": "clowder"
+                "value": "clowder",
+                "probability": 0.022872821706069628
               },
               {
-                "probability": 6.865203736360213e-05,
-                "value": "gang"
+                "value": "gang",
+                "probability": 5.279822569973193e-05
               }
             ],
-            "type": "choice"
+            "confidence": 0.9693160355443844
           }
         },
         "video_frame": {
           "sauce_color": {
-            "choice": "white",
-            "confidence": 0.9594438148258839,
+            "type": "choice",
             "name": "sauce_color",
+            "choice": "white",
             "probabilities": [
               {
-                "probability": 0.0013946755867153904,
-                "value": "brown"
+                "value": "brown",
+                "probability": 0.005942444384714905
               },
               {
-                "probability": 0.9695828611194129,
-                "value": "white"
+                "value": "white",
+                "probability": 0.9706004892259832
               },
               {
-                "probability": 0.025999585311857528,
-                "value": "red"
+                "value": "red",
+                "probability": 0.017770889974528012
               },
               {
-                "probability": 0.0030228779820141083,
-                "value": "orange"
+                "value": "orange",
+                "probability": 0.0056861764147739715
               }
             ],
-            "type": "choice"
+            "confidence": 0.960800652301311
           }
         },
         "sampling": {
@@ -141,83 +141,83 @@
     },
     "ticket-routing": {
       "status": "verified",
-      "date": "2026-10-29",
-      "model": "Valen-2B",
+      "date": "2026-11-10",
+      "model": "Valen-Decision-1.5-2B",
       "revision": "hosted valen-2b",
       "sdk": "0.2.0",
       "backend": "Valen hosted API (api.valen-team.workers.dev), answers recorded in caches/ticket_routing.json",
       "result": {
         "ticket_id": "ticket-001",
         "queue": "change_address",
-        "confidence": 0.9999431604565366,
-        "address_change_probability": 0.9984566240623853,
-        "explicitness_score": 1.956182022180773,
-        "review_priority": 0.976581,
+        "confidence": 0.9998090381762026,
+        "address_change_probability": 0.9989510209459393,
+        "explicitness_score": 1.955565405501435,
+        "review_priority": 0.976757,
         "action": "review_request_before_changing_order",
         "answers": [
           {
-            "choice": "change_address",
-            "confidence": 0.9999289505706707,
+            "type": "choice",
             "name": "intent",
+            "choice": "change_address",
             "probabilities": [
               {
-                "probability": 3.4016723812828095e-06,
-                "value": "billing_question"
+                "value": "billing_question",
+                "probability": 2.9615462656269814e-06
               },
               {
-                "probability": 3.291567995152523e-05,
-                "value": "cancel_order"
+                "value": "cancel_order",
+                "probability": 0.00011410188981165587
               },
               {
-                "probability": 0.9999431604565366,
-                "value": "change_address"
+                "value": "change_address",
+                "probability": 0.9998090381762026
               },
               {
-                "probability": 2.087726264525702e-06,
-                "value": "report_damage"
+                "value": "report_damage",
+                "probability": 9.486926433594504e-06
               },
               {
-                "probability": 1.843446486604273e-05,
-                "value": "track_order"
+                "value": "track_order",
+                "probability": 6.441146128656554e-05
               }
             ],
-            "type": "choice"
+            "confidence": 0.9997612977202532
           },
           {
+            "type": "predicate",
             "name": "address_change",
-            "probability": 0.9984566240623853,
-            "type": "predicate"
+            "probability": 0.9989510209459393
           },
           {
-            "confidence": 0.9342730332711597,
+            "type": "score",
             "name": "explicitness",
+            "score": 1.955565405501435,
             "probabilities": [
               {
+                "value": 0,
                 "label": "none",
-                "probability": 0.0016383576849762936,
-                "value": 0
+                "probability": 0.003707516304216059
               },
               {
+                "value": 1,
                 "label": "possible",
-                "probability": 0.04054126244927424,
-                "value": 1
+                "probability": 0.03701956189013287
               },
               {
+                "value": 2,
                 "label": "explicit",
-                "probability": 0.9578203798657494,
-                "value": 2
+                "probability": 0.9592729218056512
               }
             ],
-            "score": 1.956182022180773,
-            "type": "score"
+            "confidence": 0.9333481082521525
           }
         ]
       }
     },
     "product-screening": {
       "status": "verified",
-      "date": "2026-10-29",
-      "model": "Valen-2B",
+      "date": "2026-11-10",
+      "model": "Valen-Decision-1.5-2B",
       "revision": "hosted valen-2b",
       "sdk": "0.2.0",
       "backend": "Valen hosted API (api.valen-team.workers.dev), answers recorded in caches/product_screening.json",
@@ -228,48 +228,48 @@
             "title": "Flock of sheep photographic print",
             "expected_group": "flock",
             "status": "accept",
-            "category_match_probability": 0.9996990144468996
+            "category_match_probability": 0.9769870266582883
           },
           {
             "id": "print-002",
             "title": "Clowder of cats photographic print",
             "expected_group": "clowder",
             "status": "category_mismatch",
-            "category_match_probability": 7.6111806719090535e-06
+            "category_match_probability": 0.022872821706069628
           }
         ],
         "predicted_group": "flock",
-        "confidence": 0.9996990144468996,
+        "confidence": 0.9769870266582883,
         "answer": {
-          "choice": "flock",
-          "confidence": 0.9995986859291994,
+          "type": "choice",
           "name": "group",
+          "choice": "flock",
           "probabilities": [
             {
-              "probability": 0.00022472233506495753,
-              "value": "pride"
+              "value": "pride",
+              "probability": 8.73534099423345e-05
             },
             {
-              "probability": 0.9996990144468996,
-              "value": "flock"
+              "value": "flock",
+              "probability": 0.9769870266582883
             },
             {
-              "probability": 7.6111806719090535e-06,
-              "value": "clowder"
+              "value": "clowder",
+              "probability": 0.022872821706069628
             },
             {
-              "probability": 6.865203736360213e-05,
-              "value": "gang"
+              "value": "gang",
+              "probability": 5.279822569973193e-05
             }
           ],
-          "type": "choice"
+          "confidence": 0.9693160355443844
         }
       }
     },
     "video-tagging": {
       "status": "verified",
-      "date": "2026-10-29",
-      "model": "Valen-2B",
+      "date": "2026-11-10",
+      "model": "Valen-Decision-1.5-2B",
       "revision": "hosted valen-2b",
       "sdk": "0.2.0",
       "backend": "Valen hosted API (api.valen-team.workers.dev), answers recorded in caches/video_tagging.json",
@@ -279,7 +279,7 @@
           "sauce_color": "white"
         },
         "status": "tagged",
-        "confidence": 0.9695828611194129,
+        "confidence": 0.9706004892259832,
         "sampling": {
           "frame_index": 98,
           "total_frames": 196,
@@ -287,28 +287,28 @@
         },
         "scope": "single_frame_visual_attribute_only",
         "answer": {
-          "choice": "white",
-          "confidence": 0.9594438148258839,
+          "type": "choice",
           "name": "sauce_color",
+          "choice": "white",
           "probabilities": [
             {
-              "probability": 0.0013946755867153904,
-              "value": "brown"
+              "value": "brown",
+              "probability": 0.005942444384714905
             },
             {
-              "probability": 0.9695828611194129,
-              "value": "white"
+              "value": "white",
+              "probability": 0.9706004892259832
             },
             {
-              "probability": 0.025999585311857528,
-              "value": "red"
+              "value": "red",
+              "probability": 0.017770889974528012
             },
             {
-              "probability": 0.0030228779820141083,
-              "value": "orange"
+              "value": "orange",
+              "probability": 0.0056861764147739715
             }
           ],
-          "type": "choice"
+          "confidence": 0.960800652301311
         }
       }
     },

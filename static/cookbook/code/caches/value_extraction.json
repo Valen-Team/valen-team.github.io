@@ -3,28 +3,28 @@
   "answers": [
    {
     "name": "has_new_date",
-    "probability": 0.9980370964696507,
+    "probability": 0.9980960249754459,
     "type": "predicate"
    },
    {
     "choice": "16 March",
-    "confidence": 0.9611094364715881,
+    "confidence": 0.9887526427527099,
     "name": "delivery_date",
     "probabilities": [
      {
-      "probability": 0.002269886824692616,
+      "probability": 0.000419897523362716,
       "value": "2 March"
      },
      {
-      "probability": 0.016373583505617254,
+      "probability": 0.006697207026995416,
       "value": "March 9"
      },
      {
-      "probability": 0.970832077353691,
+      "probability": 0.9915644820645324,
       "value": "16 March"
      },
      {
-      "probability": 0.010524452315999142,
+      "probability": 0.0013184133851096174,
       "value": "2026-03-02"
      }
     ],
@@ -35,15 +35,15 @@
   "internal_usage": {
    "compute_tokens": 346
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 6.32,
-   "forward_ms": 36.41,
+   "compile_ms": 6.0,
+   "forward_ms": 48.37,
    "image_ms": 0.0,
-   "queue_ms": 0.01,
-   "total_ms": 43.77
+   "queue_ms": 0.0,
+   "total_ms": 55.63
   },
   "usage": {
    "input_tokens": 346,
@@ -54,7 +54,7 @@
   "answers": [
    {
     "name": "has_new_date",
-    "probability": 0.19682010421693014,
+    "probability": 0.18983143557384338,
     "type": "predicate"
    }
   ],
@@ -62,15 +62,15 @@
   "internal_usage": {
    "compute_tokens": 104
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 5.43,
-   "forward_ms": 37.25,
+   "compile_ms": 6.25,
+   "forward_ms": 55.89,
    "image_ms": 0.0,
    "queue_ms": 0.01,
-   "total_ms": 43.69
+   "total_ms": 63.27
   },
   "usage": {
    "input_tokens": 104,
@@ -81,20 +81,20 @@
   "answers": [
    {
     "name": "has_new_date",
-    "probability": 0.00443016482795233,
+    "probability": 0.018688968460048753,
     "type": "predicate"
    },
    {
     "choice": "2026-03-20",
-    "confidence": 0.8553033151522773,
+    "confidence": 0.9864925233882442,
     "name": "delivery_date",
     "probabilities": [
      {
-      "probability": 0.9276516575761387,
+      "probability": 0.9932462616941221,
       "value": "2026-03-20"
      },
      {
-      "probability": 0.07234834242386136,
+      "probability": 0.006753738305877935,
       "value": "18 March"
      }
     ],
@@ -105,15 +105,15 @@
   "internal_usage": {
    "compute_tokens": 259
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 5.75,
-   "forward_ms": 36.48,
+   "compile_ms": 5.69,
+   "forward_ms": 53.75,
    "image_ms": 0.0,
    "queue_ms": 0.01,
-   "total_ms": 43.26
+   "total_ms": 60.72
   },
   "usage": {
    "input_tokens": 259,
@@ -123,9 +123,9 @@
  "_meta": {
   "valen-2b": {
    "base_url": "https://api.valen-team.workers.dev/v1",
-   "model": "Valen-2B",
+   "model": "Valen-Decision-1.5-2B",
    "model_id": "valen-2b",
-   "recorded": "2026-10-29",
+   "recorded": "2026-11-10",
    "revision": "local"
   }
  },
@@ -133,24 +133,24 @@
   "answers": [
    {
     "name": "has_new_date",
-    "probability": 0.9780033681094145,
+    "probability": 0.9819198262462996,
     "type": "predicate"
    },
    {
     "choice": "April 7",
-    "confidence": 0.9588627964700485,
+    "confidence": 0.986050519501941,
     "name": "delivery_date",
     "probabilities": [
      {
-      "probability": 0.9725751976466991,
+      "probability": 0.9907003463346274,
       "value": "April 7"
      },
      {
-      "probability": 0.02151654869008999,
+      "probability": 0.006367411416458805,
       "value": "31 March"
      },
      {
-      "probability": 0.0059082536632109346,
+      "probability": 0.002932242248913642,
       "value": "15 April"
      }
     ],
@@ -161,15 +161,15 @@
   "internal_usage": {
    "compute_tokens": 270
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 5.88,
-   "forward_ms": 35.65,
+   "compile_ms": 6.04,
+   "forward_ms": 43.13,
    "image_ms": 0.0,
    "queue_ms": 0.0,
-   "total_ms": 42.48
+   "total_ms": 50.44
   },
   "usage": {
    "input_tokens": 270,

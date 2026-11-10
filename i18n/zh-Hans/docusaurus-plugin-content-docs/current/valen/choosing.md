@@ -13,13 +13,14 @@ title: 版本选择
 | JavaScript 本地运行 | [ONNX JavaScript SDK](/zh-Hans/docs/valen/onnx/)，使用 Node.js CPU 或浏览器 WebGPU；支持文本、图片和视频 |
 | Linux x86-64 CPU 上运行本地 HTTP 服务 | [GGUF Q8_0 和 Valen 定制运行包](/zh-Hans/docs/valen/gguf/)；先试文本，图片和视频的验证范围见运行指南 |
 | 已有 NVIDIA GPU 服务环境 | 根据环境选择 [vLLM](/zh-Hans/docs/valen/vllm-plugin/) 或 [SGLang](/zh-Hans/docs/valen/sglang-plugin/)；支持文本和图片，视频可提取帧作为图片输入 |
+| 在图片中定位目标 | 使用 Valen-Decision-1.5 回答 [bbox 问题](/zh-Hans/docs/valen/bbox/)：原生权重和 Transformers，或 [ONNX SDK](/zh-Hans/docs/valen/onnx/#bbox-问题) |
 | 微调模型 | 使用原生完整权重，参照[训练指南](/zh-Hans/docs/valen/training/) |
 
-离线运行需要提前准备对应模型文件或缓存。Python ONNX 0.8B FP32 首次下载约 3.505 GB；GGUF 0.8B Q8_0 文本文件约 0.761 GiB。更多变体及下载体积见 [ONNX](/zh-Hans/docs/valen/onnx/) 和 [GGUF](/zh-Hans/docs/valen/gguf/) 指南。
+离线运行需要提前准备对应模型文件或缓存。Valen-Decision-1.5 的 Python ONNX 0.8B FP32 首次下载约 3.518 GB；Valen-Decision-1.0 的 GGUF 0.8B Q8_0 文本文件约 0.761 GiB。更多变体及下载体积见 [ONNX](/zh-Hans/docs/valen/onnx/) 和 [GGUF](/zh-Hans/docs/valen/gguf/) 指南。
 
-## 0.8B、2B 还是 4B？
+## 选择哪个尺寸？
 
-这些数字表示模型大小。首次本地尝试可从 0.8B 开始；如果需要更好的任务效果，再用自己的数据比较 2B 和 4B，同时考虑下载体积和设备资源。[查看模型评测](/zh-Hans/docs/valen/evaluation/) · [比较概率可靠性](/zh-Hans/docs/valen/reliability/)
+Valen-Decision-1.5 提供 0.8B、2B、4B、9B 和 27B 五个尺寸，数字表示模型大小。网页体验和免费 API 提供 0.8B、2B 和 4B；9B 和 27B 下载权重后在本地运行。首次本地尝试可从 0.8B 开始；如果需要更好的任务效果，再用自己的数据比较更大的尺寸，同时考虑下载体积和设备资源。尺寸越大，[Jev Decision Index](/zh-Hans/docs/valen/decision-index/) 得分越高。[查看模型评测](/zh-Hans/docs/valen/evaluation/) · [比较概率可靠性](/zh-Hans/docs/valen/reliability/)
 
 ## 比较运行成本
 

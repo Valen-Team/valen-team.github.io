@@ -11,7 +11,7 @@ import RequestExample from '@site/src/components/modern/RequestExample';
 
 # System One
 
-Send text or images to the hosted API and ask predicate, choice, or score questions. The API returns results and associated probabilities for each question. For video, extract frames first and submit them as image inputs.
+Send text or images to the hosted API and ask predicate, choice, or score questions. The API returns results and associated probabilities for each question. For video, extract frames first and submit them as image inputs. To locate objects in an image, ask [bbox questions](../bbox.md) through Transformers.
 
 ```text
 POST /v1/systemone
@@ -188,7 +188,7 @@ Successful requests return HTTP 200 with a JSON response body.
 
 | Field | Type | Description |
 |---|---|---|
-| `model` | string | Model that answered the request. |
+| `model` | string | Model that answered the request, such as `Valen-Decision-1.5-2B`. |
 | `answers` | object | Answers keyed by question ID. |
 | `usage` | object | `input_tokens` and `output_tokens`. |
 

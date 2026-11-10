@@ -6,7 +6,7 @@ description: Where Valen's answers become unreliable, measured on public benchma
 
 # Known limitations
 
-Each entry says what goes wrong, how large the effect is, and the change that removes it. Measurements compare Valen 0.8B, 2B and 4B with the median of the seven other decision models of 4B parameters or fewer on the [JevalKit](/docs/jevalkit/) leaderboard (Intern-Decision 0.8B, 2B and 4B, StartLux v1.1 0.8B, 2B and 4B, and Liquid d1 3B), on the same benchmark questions, October 2026.
+Each entry says what goes wrong, how large the effect is, and the change that removes it. Measurements compare Valen-Decision-1.0 0.8B, 2B and 4B with the median of the seven other decision models of 4B parameters or fewer on the [JevalKit](/docs/jevalkit/) leaderboard (Intern-Decision 0.8B, 2B and 4B, StartLux v1.1 0.8B, 2B and 4B, and Liquid d1 3B), on the same benchmark questions, October 2026.
 
 ## Rule tables, long lists and arithmetic in the state
 

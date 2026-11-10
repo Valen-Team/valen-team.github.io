@@ -5,7 +5,7 @@ sidebar_label: API 调用
 
 # API 调用
 
-托管 API 和本地部署支持两种协议：
+托管 API 和本地部署支持两种协议。托管服务以模型 ID `valen-0.8b`、`valen-2b` 和 `valen-4b` 提供 Valen-Decision-1.5 的 0.8B、2B 和 4B：
 
 | 接口 | 方法 | 路径 | 文档 |
 |---|---|---|---|

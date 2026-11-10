@@ -3,22 +3,22 @@
   "answers": [
    {
     "name": "name",
-    "probability": 0.9986719510816103,
+    "probability": 0.9993733114550664,
     "type": "predicate"
    },
    {
     "name": "serial",
-    "probability": 0.9984982673413811,
+    "probability": 0.9996179520889161,
     "type": "predicate"
    },
    {
     "name": "return_date",
-    "probability": 0.007865409520616382,
+    "probability": 0.0011252332455932068,
     "type": "predicate"
    },
    {
     "name": "signed",
-    "probability": 0.997229301770541,
+    "probability": 0.9941347572149205,
     "type": "predicate"
    }
   ],
@@ -37,15 +37,15 @@
   "internal_usage": {
    "compute_tokens": 461
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 15.1,
-   "forward_ms": 52.33,
-   "image_ms": 5.0,
+   "compile_ms": 14.8,
+   "forward_ms": 57.0,
+   "image_ms": 4.96,
    "queue_ms": 0.01,
-   "total_ms": 111.14
+   "total_ms": 126.3
   },
   "usage": {
    "input_tokens": 461,
@@ -56,22 +56,22 @@
   "answers": [
    {
     "name": "name",
-    "probability": 0.9992125595012277,
+    "probability": 0.9996919384238487,
     "type": "predicate"
    },
    {
     "name": "serial",
-    "probability": 0.9983302126024323,
+    "probability": 0.9996425871108582,
     "type": "predicate"
    },
    {
     "name": "return_date",
-    "probability": 0.9976673179646833,
+    "probability": 0.998802473444587,
     "type": "predicate"
    },
    {
     "name": "signed",
-    "probability": 0.9990492985319737,
+    "probability": 0.997379170500649,
     "type": "predicate"
    }
   ],
@@ -90,15 +90,15 @@
   "internal_usage": {
    "compute_tokens": 459
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 21.21,
-   "forward_ms": 67.22,
-   "image_ms": 5.09,
+   "compile_ms": 14.62,
+   "forward_ms": 73.32,
+   "image_ms": 5.08,
    "queue_ms": 0.01,
-   "total_ms": 136.98
+   "total_ms": 132.16
   },
   "usage": {
    "input_tokens": 459,
@@ -108,9 +108,9 @@
  "_meta": {
   "valen-2b": {
    "base_url": "https://api.valen-team.workers.dev/v1",
-   "model": "Valen-2B",
+   "model": "Valen-Decision-1.5-2B",
    "model_id": "valen-2b",
-   "recorded": "2026-10-29",
+   "recorded": "2026-11-10",
    "revision": "local"
   }
  },
@@ -118,22 +118,22 @@
   "answers": [
    {
     "name": "name",
-    "probability": 0.9989126426472942,
+    "probability": 0.9994527653372396,
     "type": "predicate"
    },
    {
     "name": "serial",
-    "probability": 0.9990923741991619,
+    "probability": 0.9995917904419953,
     "type": "predicate"
    },
    {
     "name": "return_date",
-    "probability": 0.997633862429052,
+    "probability": 0.9994132590072962,
     "type": "predicate"
    },
    {
     "name": "signed",
-    "probability": 0.006129618756955932,
+    "probability": 0.030324790820830682,
     "type": "predicate"
    }
   ],
@@ -152,15 +152,15 @@
   "internal_usage": {
    "compute_tokens": 460
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 14.45,
-   "forward_ms": 51.08,
-   "image_ms": 4.58,
+   "compile_ms": 13.76,
+   "forward_ms": 56.96,
+   "image_ms": 4.76,
    "queue_ms": 0.01,
-   "total_ms": 106.38
+   "total_ms": 112.43
   },
   "usage": {
    "input_tokens": 460,

@@ -3,12 +3,12 @@
   "answers": [
    {
     "name": "plate_served",
-    "probability": 0.9506918546070104,
+    "probability": 0.9288413511491167,
     "type": "predicate"
    },
    {
     "name": "dumpling_opened",
-    "probability": 0.49909529084535187,
+    "probability": 0.4189447829234327,
     "type": "predicate"
    }
   ],
@@ -27,15 +27,15 @@
   "internal_usage": {
    "compute_tokens": 288
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 15.56,
-   "forward_ms": 54.29,
-   "image_ms": 5.82,
+   "compile_ms": 13.2,
+   "forward_ms": 49.93,
+   "image_ms": 5.8,
    "queue_ms": 0.01,
-   "total_ms": 119.72
+   "total_ms": 115.28
   },
   "usage": {
    "input_tokens": 288,
@@ -46,12 +46,12 @@
   "answers": [
    {
     "name": "plate_served",
-    "probability": 0.28772332406868567,
+    "probability": 0.3617296591203855,
     "type": "predicate"
    },
    {
     "name": "dumpling_opened",
-    "probability": 0.6869076285687795,
+    "probability": 0.08221357122334778,
     "type": "predicate"
    }
   ],
@@ -70,15 +70,15 @@
   "internal_usage": {
    "compute_tokens": 288
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 12.82,
-   "forward_ms": 49.98,
-   "image_ms": 4.76,
+   "compile_ms": 12.66,
+   "forward_ms": 61.51,
+   "image_ms": 4.7,
    "queue_ms": 0.01,
-   "total_ms": 96.33
+   "total_ms": 107.91
   },
   "usage": {
    "input_tokens": 288,
@@ -89,12 +89,12 @@
   "answers": [
    {
     "name": "plate_served",
-    "probability": 0.9875626683592001,
+    "probability": 0.9698011317562467,
     "type": "predicate"
    },
    {
     "name": "dumpling_opened",
-    "probability": 0.9937460755695204,
+    "probability": 0.9826415179577939,
     "type": "predicate"
    }
   ],
@@ -113,15 +113,15 @@
   "internal_usage": {
    "compute_tokens": 288
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 13.48,
-   "forward_ms": 50.76,
-   "image_ms": 6.29,
+   "compile_ms": 13.97,
+   "forward_ms": 46.81,
+   "image_ms": 6.2,
    "queue_ms": 0.01,
-   "total_ms": 122.53
+   "total_ms": 119.75
   },
   "usage": {
    "input_tokens": 288,
@@ -132,12 +132,12 @@
   "answers": [
    {
     "name": "plate_served",
-    "probability": 0.2841475392624003,
+    "probability": 0.4012527266030892,
     "type": "predicate"
    },
    {
     "name": "dumpling_opened",
-    "probability": 0.5378598731118402,
+    "probability": 0.2734991175304507,
     "type": "predicate"
    }
   ],
@@ -156,15 +156,15 @@
   "internal_usage": {
    "compute_tokens": 288
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 14.68,
-   "forward_ms": 49.38,
-   "image_ms": 5.16,
-   "queue_ms": 0.01,
-   "total_ms": 105.29
+   "compile_ms": 15.58,
+   "forward_ms": 48.63,
+   "image_ms": 7.52,
+   "queue_ms": 82.38,
+   "total_ms": 190.05
   },
   "usage": {
    "input_tokens": 288,
@@ -175,12 +175,12 @@
   "answers": [
    {
     "name": "plate_served",
-    "probability": 0.9933772363965263,
+    "probability": 0.9758485164264257,
     "type": "predicate"
    },
    {
     "name": "dumpling_opened",
-    "probability": 0.9733315472800861,
+    "probability": 0.9544475886153593,
     "type": "predicate"
    }
   ],
@@ -199,15 +199,15 @@
   "internal_usage": {
    "compute_tokens": 288
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 13.45,
-   "forward_ms": 67.4,
-   "image_ms": 6.06,
+   "compile_ms": 13.22,
+   "forward_ms": 48.0,
+   "image_ms": 6.15,
    "queue_ms": 0.01,
-   "total_ms": 130.02
+   "total_ms": 113.48
   },
   "usage": {
    "input_tokens": 288,
@@ -218,12 +218,12 @@
   "answers": [
    {
     "name": "plate_served",
-    "probability": 0.9921591161768245,
+    "probability": 0.9846137820820452,
     "type": "predicate"
    },
    {
     "name": "dumpling_opened",
-    "probability": 0.22409593879461745,
+    "probability": 0.026703376644569753,
     "type": "predicate"
    }
   ],
@@ -242,15 +242,15 @@
   "internal_usage": {
    "compute_tokens": 288
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 13.43,
-   "forward_ms": 48.64,
-   "image_ms": 6.46,
-   "queue_ms": 0.0,
-   "total_ms": 115.82
+   "compile_ms": 13.55,
+   "forward_ms": 47.98,
+   "image_ms": 6.72,
+   "queue_ms": 0.01,
+   "total_ms": 116.22
   },
   "usage": {
    "input_tokens": 288,
@@ -261,12 +261,12 @@
   "answers": [
    {
     "name": "plate_served",
-    "probability": 0.9723710906766717,
+    "probability": 0.9596703198893265,
     "type": "predicate"
    },
    {
     "name": "dumpling_opened",
-    "probability": 0.998138256710976,
+    "probability": 0.983920960660137,
     "type": "predicate"
    }
   ],
@@ -285,15 +285,15 @@
   "internal_usage": {
    "compute_tokens": 288
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 13.24,
-   "forward_ms": 54.21,
-   "image_ms": 6.18,
-   "queue_ms": 0.01,
-   "total_ms": 135.11
+   "compile_ms": 13.68,
+   "forward_ms": 48.23,
+   "image_ms": 6.17,
+   "queue_ms": 0.0,
+   "total_ms": 121.65
   },
   "usage": {
    "input_tokens": 288,
@@ -303,9 +303,9 @@
  "_meta": {
   "valen-2b": {
    "base_url": "https://api.valen-team.workers.dev/v1",
-   "model": "Valen-2B",
+   "model": "Valen-Decision-1.5-2B",
    "model_id": "valen-2b",
-   "recorded": "2026-10-29",
+   "recorded": "2026-11-10",
    "revision": "local"
   }
  },
@@ -313,12 +313,12 @@
   "answers": [
    {
     "name": "plate_served",
-    "probability": 0.9892245749400858,
+    "probability": 0.9720638140214778,
     "type": "predicate"
    },
    {
     "name": "dumpling_opened",
-    "probability": 0.9821471985029578,
+    "probability": 0.9664615741214616,
     "type": "predicate"
    }
   ],
@@ -337,15 +337,15 @@
   "internal_usage": {
    "compute_tokens": 288
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 13.56,
-   "forward_ms": 50.33,
-   "image_ms": 6.21,
-   "queue_ms": 0.01,
-   "total_ms": 118.29
+   "compile_ms": 16.07,
+   "forward_ms": 51.41,
+   "image_ms": 6.23,
+   "queue_ms": 73.65,
+   "total_ms": 195.91
   },
   "usage": {
    "input_tokens": 288,
@@ -356,12 +356,12 @@
   "answers": [
    {
     "name": "plate_served",
-    "probability": 0.9833420918016248,
+    "probability": 0.9667162366761768,
     "type": "predicate"
    },
    {
     "name": "dumpling_opened",
-    "probability": 0.997343602582841,
+    "probability": 0.9829099510079616,
     "type": "predicate"
    }
   ],
@@ -380,15 +380,15 @@
   "internal_usage": {
    "compute_tokens": 288
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 13.69,
-   "forward_ms": 52.97,
-   "image_ms": 6.42,
+   "compile_ms": 13.26,
+   "forward_ms": 94.15,
+   "image_ms": 6.39,
    "queue_ms": 0.01,
-   "total_ms": 127.0
+   "total_ms": 167.47
   },
   "usage": {
    "input_tokens": 288,
@@ -399,12 +399,12 @@
   "answers": [
    {
     "name": "plate_served",
-    "probability": 0.9939650620129246,
+    "probability": 0.9825042183930901,
     "type": "predicate"
    },
    {
     "name": "dumpling_opened",
-    "probability": 0.47693486580446764,
+    "probability": 0.14925361369971252,
     "type": "predicate"
    }
   ],
@@ -423,15 +423,15 @@
   "internal_usage": {
    "compute_tokens": 288
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 13.6,
-   "forward_ms": 52.33,
-   "image_ms": 6.6,
+   "compile_ms": 13.8,
+   "forward_ms": 49.17,
+   "image_ms": 6.37,
    "queue_ms": 0.01,
-   "total_ms": 120.82
+   "total_ms": 115.25
   },
   "usage": {
    "input_tokens": 288,
@@ -442,12 +442,12 @@
   "answers": [
    {
     "name": "plate_served",
-    "probability": 0.9818190756846941,
+    "probability": 0.9637330717767887,
     "type": "predicate"
    },
    {
     "name": "dumpling_opened",
-    "probability": 0.9975682870097096,
+    "probability": 0.9848137335829676,
     "type": "predicate"
    }
   ],
@@ -466,15 +466,15 @@
   "internal_usage": {
    "compute_tokens": 288
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 13.91,
-   "forward_ms": 50.34,
-   "image_ms": 6.41,
+   "compile_ms": 13.74,
+   "forward_ms": 50.39,
+   "image_ms": 6.13,
    "queue_ms": 0.01,
-   "total_ms": 122.18
+   "total_ms": 123.35
   },
   "usage": {
    "input_tokens": 288,
@@ -485,12 +485,12 @@
   "answers": [
    {
     "name": "plate_served",
-    "probability": 0.9882011871570555,
+    "probability": 0.9704281857323579,
     "type": "predicate"
    },
    {
     "name": "dumpling_opened",
-    "probability": 0.3844224214553833,
+    "probability": 0.43897987481498124,
     "type": "predicate"
    }
   ],
@@ -509,15 +509,15 @@
   "internal_usage": {
    "compute_tokens": 288
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 13.52,
-   "forward_ms": 53.37,
-   "image_ms": 6.19,
+   "compile_ms": 13.66,
+   "forward_ms": 49.44,
+   "image_ms": 6.29,
    "queue_ms": 0.01,
-   "total_ms": 121.71
+   "total_ms": 117.15
   },
   "usage": {
    "input_tokens": 288,

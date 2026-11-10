@@ -2,72 +2,72 @@
  "28f2f5055aa61e78c61e32f27cb63364ca192425beac426c75d0e30a98466f02": {
   "answers": [
    {
-    "confidence": 0.9974909104231234,
+    "confidence": 0.9669891661356967,
     "name": "lighting",
     "probabilities": [
      {
       "label": "poor",
-      "probability": 2.6171272705585597e-06,
+      "probability": 0.00011153008257800861,
       "value": 0
      },
      {
       "label": "fair",
-      "probability": 0.0016674921300432561,
+      "probability": 0.02178416241104616,
       "value": 1
      },
      {
       "label": "good",
-      "probability": 0.9983298907426862,
+      "probability": 0.9781043075063758,
       "value": 2
      }
     ],
-    "score": 1.9983272736154156,
+    "score": 1.9779927774237978,
     "type": "score"
    },
    {
-    "confidence": 0.9816326832361874,
+    "confidence": 0.9917050956957228,
     "name": "background",
     "probabilities": [
      {
       "label": "cluttered",
-      "probability": 3.5026259291134254e-06,
+      "probability": 2.244420177326193e-05,
       "value": 0
      },
      {
       "label": "plain",
-      "probability": 0.012237872590683542,
+      "probability": 0.005485047799304891,
       "value": 1
      },
      {
       "label": "studio",
-      "probability": 0.9877586247833874,
+      "probability": 0.9944925079989219,
       "value": 2
      }
     ],
-    "score": 1.9877551221574583,
+    "score": 1.9944700637971486,
     "type": "score"
    },
    {
-    "confidence": 0.9258405161727167,
+    "confidence": 0.6651728698925972,
     "name": "framing",
     "probabilities": [
      {
       "label": "cut_off",
-      "probability": 0.005778180327498346,
+      "probability": 0.0006482989728607655,
       "value": 0
      },
      {
       "label": "loose",
-      "probability": 0.037883295229858845,
+      "probability": 0.22192148879254706,
       "value": 1
      },
      {
       "label": "centered",
-      "probability": 0.9563385244426428,
+      "probability": 0.7774302122345922,
       "value": 2
      }
     ],
-    "score": 1.9505603441151445,
+    "score": 1.7767819132617315,
     "type": "score"
    }
   ],
@@ -86,15 +86,15 @@
   "internal_usage": {
    "compute_tokens": 465
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 17.88,
-   "forward_ms": 53.9,
-   "image_ms": 9.91,
+   "compile_ms": 16.54,
+   "forward_ms": 74.9,
+   "image_ms": 8.65,
    "queue_ms": 0.01,
-   "total_ms": 119.95
+   "total_ms": 138.82
   },
   "usage": {
    "input_tokens": 465,
@@ -104,72 +104,72 @@
  "29dffd5cbde3cedaf14f27dd421c8c96125915850b5870f45b7e68041c5d20db": {
   "answers": [
    {
-    "confidence": 0.958182458801547,
+    "confidence": 0.4684903261452983,
     "name": "lighting",
     "probabilities": [
      {
       "label": "poor",
-      "probability": 7.040516619140592e-05,
+      "probability": 0.002675129378803523,
       "value": 0
      },
      {
       "label": "fair",
-      "probability": 0.02773755046658592,
+      "probability": 0.34898952381219406,
       "value": 1
      },
      {
       "label": "good",
-      "probability": 0.9721920443672227,
+      "probability": 0.6483353468090024,
       "value": 2
      }
     ],
-    "score": 1.9721216392010315,
+    "score": 1.6456602174301989,
     "type": "score"
    },
    {
-    "confidence": 0.9815304033718742,
+    "confidence": 0.0,
     "name": "background",
     "probabilities": [
      {
       "label": "cluttered",
-      "probability": 0.988876577535879,
+      "probability": 0.3576971116702986,
       "value": 0
      },
      {
       "label": "plain",
-      "probability": 0.009933780509491605,
+      "probability": 0.12577172791200358,
       "value": 1
      },
      {
       "label": "studio",
-      "probability": 0.001189641954629448,
+      "probability": 0.5165311604176979,
       "value": 2
      }
     ],
-    "score": 0.012313064418750502,
+    "score": 1.1588340487473994,
     "type": "score"
    },
    {
-    "confidence": 0.7224686980771968,
+    "confidence": 0.22984812001936972,
     "name": "framing",
     "probabilities": [
      {
       "label": "cut_off",
-      "probability": 0.03057769007583802,
+      "probability": 0.024803981149542277,
       "value": 0
      },
      {
       "label": "loose",
-      "probability": 0.12386548779685937,
+      "probability": 0.4638266243546689,
       "value": 1
      },
      {
       "label": "centered",
-      "probability": 0.8455568221273027,
+      "probability": 0.5113693944957888,
       "value": 2
      }
     ],
-    "score": 1.8149791320514648,
+    "score": 1.4865654133462465,
     "type": "score"
    }
   ],
@@ -188,15 +188,15 @@
   "internal_usage": {
    "compute_tokens": 465
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 19.71,
-   "forward_ms": 50.55,
-   "image_ms": 11.89,
-   "queue_ms": 0.01,
-   "total_ms": 151.85
+   "compile_ms": 19.3,
+   "forward_ms": 50.06,
+   "image_ms": 11.71,
+   "queue_ms": 0.0,
+   "total_ms": 150.68
   },
   "usage": {
    "input_tokens": 465,
@@ -206,81 +206,81 @@
  "_meta": {
   "valen-2b": {
    "base_url": "https://api.valen-team.workers.dev/v1",
-   "model": "Valen-2B",
+   "model": "Valen-Decision-1.5-2B",
    "model_id": "valen-2b",
-   "recorded": "2026-10-29",
+   "recorded": "2026-11-10",
    "revision": "local"
   }
  },
  "fa87af96931cb851ecdb7c05fe1678236fd58ec7e9048be2ec1b592b04a4e7e7": {
   "answers": [
    {
-    "confidence": 0.9796752589755875,
+    "confidence": 0.6320808452205903,
     "name": "lighting",
     "probabilities": [
      {
       "label": "poor",
-      "probability": 1.8748427206370808e-05,
+      "probability": 0.0010644395082482596,
       "value": 0
      },
      {
       "label": "fair",
-      "probability": 0.013512330495195603,
+      "probability": 0.24315055750310996,
       "value": 1
      },
      {
       "label": "good",
-      "probability": 0.986468921077598,
+      "probability": 0.7557850029886418,
       "value": 2
      }
     ],
-    "score": 1.9864501726503916,
+    "score": 1.7547205634803935,
     "type": "score"
    },
    {
-    "confidence": 0.8531379145893488,
+    "confidence": 0.5701792602445155,
     "name": "background",
     "probabilities": [
      {
       "label": "cluttered",
-      "probability": 0.005596463709235676,
+      "probability": 0.0012101184298471182,
       "value": 0
      },
      {
       "label": "plain",
-      "probability": 0.902091943059566,
+      "probability": 0.7134528401630104,
       "value": 1
      },
      {
       "label": "studio",
-      "probability": 0.09231159323119839,
+      "probability": 0.28533704140714256,
       "value": 2
      }
     ],
-    "score": 1.0867151295219628,
+    "score": 1.2841269229772956,
     "type": "score"
    },
    {
-    "confidence": 0.3884341371895893,
+    "confidence": 0.8477753556140476,
     "name": "framing",
     "probabilities": [
      {
       "label": "cut_off",
-      "probability": 0.40678330790274037,
+      "probability": 0.05719755119335448,
       "value": 0
      },
      {
       "label": "loose",
-      "probability": 0.5922894247930596,
+      "probability": 0.8985169037426984,
       "value": 1
      },
      {
       "label": "centered",
-      "probability": 0.0009272673042000899,
+      "probability": 0.04428554506394715,
       "value": 2
      }
     ],
-    "score": 0.5941439594014597,
+    "score": 0.9870879938705928,
     "type": "score"
    }
   ],
@@ -299,15 +299,15 @@
   "internal_usage": {
    "compute_tokens": 465
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 17.67,
-   "forward_ms": 52.2,
-   "image_ms": 9.87,
+   "compile_ms": 19.48,
+   "forward_ms": 50.22,
+   "image_ms": 10.17,
    "queue_ms": 0.01,
-   "total_ms": 151.99
+   "total_ms": 151.45
   },
   "usage": {
    "input_tokens": 465,
@@ -317,72 +317,72 @@
  "fe2c39a33a0fa3e68035df943bd063801ca47a2a3c5995060de33c90f9e919b6": {
   "answers": [
    {
-    "confidence": 0.4635498758092559,
+    "confidence": 0.5089286581160277,
     "name": "lighting",
     "probabilities": [
      {
       "label": "poor",
-      "probability": 0.7118397738981315,
+      "probability": 0.677769626874384,
       "value": 0
      },
      {
       "label": "fair",
-      "probability": 0.21868703607657444,
+      "probability": 0.3170798516619172,
       "value": 1
      },
      {
       "label": "good",
-      "probability": 0.06947319002529412,
+      "probability": 0.00515052146369879,
       "value": 2
      }
     ],
-    "score": 0.3576334161271627,
+    "score": 0.3273808945893148,
     "type": "score"
    },
    {
-    "confidence": 0.548628613573421,
+    "confidence": 0.7348033335054512,
     "name": "background",
     "probabilities": [
      {
       "label": "cluttered",
-      "probability": 0.009225981705258748,
+      "probability": 0.00236034136000628,
       "value": 0
      },
      {
       "label": "plain",
-      "probability": 0.6990857423822807,
+      "probability": 0.17207709494301993,
       "value": 1
      },
      {
       "label": "studio",
-      "probability": 0.2916882759124606,
+      "probability": 0.8255625636969738,
       "value": 2
      }
     ],
-    "score": 1.282462294207202,
+    "score": 1.8232022223369675,
     "type": "score"
    },
    {
-    "confidence": 0.4528190771930263,
+    "confidence": 0.4178533340347159,
     "name": "framing",
     "probabilities": [
      {
       "label": "cut_off",
-      "probability": 0.03705141555326374,
+      "probability": 0.014470857150943296,
       "value": 0
      },
      {
       "label": "loose",
-      "probability": 0.29068445076478827,
+      "probability": 0.6119022226898106,
       "value": 1
      },
      {
       "label": "centered",
-      "probability": 0.6722641336819479,
+      "probability": 0.37362692015924603,
       "value": 2
      }
     ],
-    "score": 1.6352127181286842,
+    "score": 1.3591560630083026,
     "type": "score"
    }
   ],
@@ -401,15 +401,15 @@
   "internal_usage": {
    "compute_tokens": 465
   },
-  "model": "Valen-2B",
+  "model": "Valen-Decision-1.5-2B",
   "model_id": "valen-2b",
   "revision": "local",
   "timing": {
-   "compile_ms": 17.74,
-   "forward_ms": 61.27,
-   "image_ms": 9.09,
+   "compile_ms": 17.49,
+   "forward_ms": 53.99,
+   "image_ms": 9.34,
    "queue_ms": 0.01,
-   "total_ms": 170.78
+   "total_ms": 164.13
   },
   "usage": {
    "input_tokens": 465,

@@ -1,8 +1,8 @@
 [
   {
     "command": "ping me about this tomorrow morning",
-    "is_command": 0.8666370123638059,
-    "confidence": 0.8722163963755449,
+    "is_command": 0.8689344070031002,
+    "confidence": 0.9895418514983607,
     "status": "call",
     "call": {
       "function": "set_reminder",
@@ -14,8 +14,8 @@
   },
   {
     "command": "send this to the design team but they shouldn't be able to change anything",
-    "is_command": 0.8469533829065193,
-    "confidence": 0.9912622488466675,
+    "is_command": 0.8830357884452974,
+    "confidence": 0.9626162886462086,
     "status": "call",
     "call": {
       "function": "share_note",
@@ -27,8 +27,8 @@
   },
   {
     "command": "my eyes hurt at night, can you make the screen darker",
-    "is_command": 0.8734981417655945,
-    "confidence": 0.8097805124404491,
+    "is_command": 0.9509949332114899,
+    "confidence": 0.9983083256583876,
     "status": "call",
     "call": {
       "function": "change_theme",
@@ -40,8 +40,8 @@
   },
   {
     "command": "I need this as a word file for my manager",
-    "is_command": 0.9875167965186418,
-    "confidence": 0.944616775424281,
+    "is_command": 0.9622785348936482,
+    "confidence": 0.9940151606053361,
     "status": "call",
     "call": {
       "function": "export_note",
@@ -53,24 +53,24 @@
   },
   {
     "command": "can you remind me next week? actually make it a pdf instead",
-    "is_command": 0.9193248221227885,
-    "confidence": 0.5059124954600235,
+    "is_command": 0.8978655555799083,
+    "confidence": 0.6150150489199239,
     "status": "clarify",
     "options": [
-      "set_reminder",
-      "export_note"
+      "export_note",
+      "set_reminder"
     ]
   },
   {
     "command": "what's the weather in Shanghai",
-    "is_command": 0.3065500855445862,
-    "confidence": 0.4502609170856662,
-    "status": "show_help"
+    "is_command": 0.028491487810628224,
+    "confidence": 0.44177245753636524,
+    "status": "not_a_command"
   },
   {
     "command": "make it look like whatever my phone is set to",
-    "is_command": 0.9843640593466292,
-    "confidence": 0.9998406975518448,
+    "is_command": 0.9843509172376493,
+    "confidence": 0.9971061434451165,
     "status": "call",
     "call": {
       "function": "change_theme",
