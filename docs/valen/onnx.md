@@ -6,9 +6,9 @@ description: Run Valen with Python, Node.js, browser WebGPU or a native C++ text
 
 # ONNX inference and SDKs
 
-Python SDK 0.5.0 is published on [PyPI](https://pypi.org/project/valen-sdk/0.5.0/). JavaScript SDK 0.4.0 is published on [npm as @valen-team/sdk](https://www.npmjs.com/package/@valen-team/sdk/v/0.4.0): `npm install @valen-team/sdk@0.4.0`. For a first trial and format selection, see [version selection](https://valen-team.github.io/docs/valen/choosing/).
+Python SDK 0.5.1 is published on [PyPI](https://pypi.org/project/valen-sdk/0.5.1/). JavaScript SDK 0.4.0 is published on [npm as @valen-team/sdk](https://www.npmjs.com/package/@valen-team/sdk/v/0.4.0): `npm install @valen-team/sdk@0.4.0`. For a first trial and format selection, see [version selection](https://valen-team.github.io/docs/valen/choosing/).
 
-The examples on this page run the Valen-Decision-1.5 ONNX bundles: [0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) · [2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) · [4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) · [9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) · [27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX). `Valen.local(...)` in Python SDK 0.5.0 and JavaScript SDK 0.4.0 builds the block attention mask these models use, so local results match the native model. The same SDK versions run the Valen-Decision-1.0 ONNX bundles.
+The examples on this page run the Valen-Decision-1.5 ONNX bundles: [0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) · [2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) · [4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) · [9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) · [27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX). `Valen.local(...)` in Python SDK 0.5.1 and JavaScript SDK 0.4.0 builds the block attention mask these models use, so local results match the native model. The same SDK versions run the Valen-Decision-1.0 ONNX bundles.
 
 Run Valen decisions in your application with ONNX Runtime. The SDKs use the published Valen ONNX components, including the trained vision tower, the decision head and the Valen-Decision-1.5 grounding head. Local SDK inference does not require PyTorch or Transformers.
 
@@ -31,13 +31,13 @@ First use downloads and caches the selected model components. The Python SDK dow
 From a fresh terminal:
 
 ```bash
-git clone --branch v0.5.0 --depth 1 https://github.com/Valen-Team/valen-sdk-python.git
+git clone --branch v0.5.1 --depth 1 https://github.com/Valen-Team/valen-sdk-python.git
 cd valen-sdk-python
 python -m pip install ".[onnx]"
 python examples/local_decisions.py
 ```
 
-A minimal path check with Valen-Decision-1.5 (the scripts in `examples/` load the Valen-Decision-1.0 0.8B bundle):
+A minimal path check with Valen-Decision-1.5 (the scripts in `examples/` use the same 0.8B bundle):
 
 ```python
 from valen_sdk import Valen
@@ -250,7 +250,7 @@ npm install
 npm run dev
 ```
 
-Open the localhost URL and click **Run locally**. The example at the `npm-v0.4.0` tag uses the Valen-Decision-1.0 0.8B `web-portable` model (about 2.443 GB) and includes runtime assets, loading feedback and error handling. In your own page, load Valen-Decision-1.5 with `await Valen.local('Valen-Team/Valen-Decision-1.5-0.8B-ONNX', { variant: 'web-portable', device: 'webgpu' })`; the complete variant is about 2.456 GB. First use downloads and caches model components.
+Open the localhost URL and click **Run locally**. The example loads the Valen-Decision-1.5 0.8B `web-portable` variant (about 2.456 GB) and includes runtime assets, loading feedback and error handling. In your own page, load it with `await Valen.local('Valen-Team/Valen-Decision-1.5-0.8B-ONNX', { variant: 'web-portable', device: 'webgpu' })`. First use downloads and caches model components.
 
 From `examples/browser`, use `npm run build` and `npm run preview` for a production preview. Deployment needs HTTPS or localhost, a WebGPU-capable browser, and the example's COOP/COEP response headers. See the [browser example](https://github.com/Valen-Team/valen-sdk-js/tree/main/examples/browser).
 

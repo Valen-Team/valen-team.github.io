@@ -6,9 +6,9 @@ description: 通过 Python、Node.js、浏览器 WebGPU 或原生 C++ 文本集�
 
 # ONNX 推理与 SDK
 
-Python SDK 0.5.0 已发布到 [PyPI](https://pypi.org/project/valen-sdk/0.5.0/)；JavaScript SDK 0.4.0 已发布到 [npm，包名 @valen-team/sdk](https://www.npmjs.com/package/@valen-team/sdk/v/0.4.0)：`npm install @valen-team/sdk@0.4.0`。首次体验与格式选择见[版本选择](https://valen-team.github.io/zh-Hans/docs/valen/choosing/)。
+Python SDK 0.5.1 已发布到 [PyPI](https://pypi.org/project/valen-sdk/0.5.1/)；JavaScript SDK 0.4.0 已发布到 [npm，包名 @valen-team/sdk](https://www.npmjs.com/package/@valen-team/sdk/v/0.4.0)：`npm install @valen-team/sdk@0.4.0`。首次体验与格式选择见[版本选择](https://valen-team.github.io/zh-Hans/docs/valen/choosing/)。
 
-本页示例运行 Valen-Decision-1.5 ONNX 模型包：[0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) · [2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) · [4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) · [9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) · [27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX)。Python SDK 0.5.0 与 JavaScript SDK 0.4.0 的 `Valen.local(...)` 会构建这些模型使用的分块注意力掩码，本地结果与原生模型一致。同一版本的 SDK 也运行 Valen-Decision-1.0 ONNX 模型包。
+本页示例运行 Valen-Decision-1.5 ONNX 模型包：[0.8B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-0.8B-ONNX) · [2B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-2B-ONNX) · [4B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B-ONNX) · [9B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-9B-ONNX) · [27B](https://huggingface.co/Valen-Team/Valen-Decision-1.5-27B-ONNX)。Python SDK 0.5.1 与 JavaScript SDK 0.4.0 的 `Valen.local(...)` 会构建这些模型使用的分块注意力掩码，本地结果与原生模型一致。同一版本的 SDK 也运行 Valen-Decision-1.0 ONNX 模型包。
 
 通过 ONNX Runtime 将 Valen 决策接入自己的应用。SDK 使用已发布的 Valen ONNX 组件，包含训练后的视觉主干、决策头和 Valen-Decision-1.5 的定位头；本地 SDK 推理无需安装 PyTorch 或 Transformers。
 
@@ -31,13 +31,13 @@ Python SDK 0.5.0 已发布到 [PyPI](https://pypi.org/project/valen-sdk/0.5.0/)�
 在新终端中执行：
 
 ```bash
-git clone --branch v0.5.0 --depth 1 https://github.com/Valen-Team/valen-sdk-python.git
+git clone --branch v0.5.1 --depth 1 https://github.com/Valen-Team/valen-sdk-python.git
 cd valen-sdk-python
 python -m pip install ".[onnx]"
 python examples/local_decisions.py
 ```
 
-使用 Valen-Decision-1.5 的最短通路检查（`examples/` 中的脚本加载 Valen-Decision-1.0 0.8B 模型包）：
+使用 Valen-Decision-1.5 的最短通路检查（`examples/` 中的脚本使用同一个 0.8B 模型包）：
 
 ```python
 from valen_sdk import Valen
@@ -250,7 +250,7 @@ npm install
 npm run dev
 ```
 
-打开终端显示的 localhost 地址，点击 **Run locally**。`npm-v0.4.0` 标签中的示例使用 Valen-Decision-1.0 0.8B 的 `web-portable` 模型（约 2.443 GB），包含运行时资源、加载反馈与错误提示。在自己的页面中，用 `await Valen.local('Valen-Team/Valen-Decision-1.5-0.8B-ONNX', { variant: 'web-portable', device: 'webgpu' })` 加载 Valen-Decision-1.5，完整变体约为 2.456 GB。首次使用会下载并缓存模型组件。
+打开终端显示的 localhost 地址，点击 **Run locally**。示例加载 Valen-Decision-1.5 0.8B 的 `web-portable` 变体（约 2.456 GB），包含运行时资源、加载反馈与错误提示。在自己的页面中，用 `await Valen.local('Valen-Team/Valen-Decision-1.5-0.8B-ONNX', { variant: 'web-portable', device: 'webgpu' })` 加载。首次使用会下载并缓存模型组件。
 
 在 `examples/browser` 中运行 `npm run build` 和 `npm run preview` 可预览生产构建。部署需要 HTTPS 或 localhost、支持 WebGPU 的浏览器，以及示例中的 COOP/COEP 响应头。详见[浏览器示例](https://github.com/Valen-Team/valen-sdk-js/tree/main/examples/browser)。
 
