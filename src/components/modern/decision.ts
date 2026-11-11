@@ -1,8 +1,8 @@
 /** Native Decisions requests, with probability bars normalized for the conversation UI. */
-export type OutputMode = 'choice' | 'boolean' | 'score';
+export type OutputMode = 'choice' | 'boolean' | 'score' | 'bbox';
 export type Candidate = {value: string; description: string; score?: number};
 export type Probability = {value: string; probability: number};
-export type DecisionAnswer = {name: string; type: 'predicate' | 'choice' | 'score'; choice: string; raw?: unknown; probability?: number; score?: number; confidence?: number; probabilities: Probability[]};
+export type DecisionAnswer = {name: string; type: 'predicate' | 'choice' | 'score' | 'bbox'; choice: string; bbox?: number[]; point?: number[]; raw?: unknown; probability?: number; score?: number; confidence?: number; probabilities: Probability[]};
 export const modelOptions = [
   ['valen-2b', 'Valen-Decision-1.5 2B'], ['valen-4b', 'Valen-Decision-1.5 4B'],
   ['valen-0.8b', 'Valen-Decision-1.5 0.8B'],
@@ -22,7 +22,8 @@ export function buildPayload({model, question, context, image, mode, candidates,
   if (!modelOptions.some(([value]) => value === model)) throw new Error('model');
   if (!question.trim() || question.length > 1000) throw new Error('question');
   if (context.length > 3000) throw new Error('context');
-  if (candidates.length < 2 || candidates.length > 8 || new Set(candidates.map(c => c.value)).size !== candidates.length || candidates.some(c => !c.description.trim() || c.description.length > 280)) throw new Error('candidates');
+  if (mode === 'bbox' && !image) throw new Error('image');
+  if (mode !== 'bbox' && (candidates.length < 2 || candidates.length > 8 || new Set(candidates.map(c => c.value)).size !== candidates.length || candidates.some(c => !c.description.trim() || c.description.length > 280))) throw new Error('candidates');
   if (mode === 'score' && candidates.some((c, i) => c.score !== i)) throw new Error('candidates');
   if (image && !/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(image)) throw new Error('image');
   // Current evidence has priority. Recent decisions are bounded and marked as history.
@@ -33,7 +34,7 @@ export function buildPayload({model, question, context, image, mode, candidates,
   return {
     model,
     input: image ? [{role: 'user', content: [{type: 'input_text', text: input}, {type: 'input_image', image_url: image}]}] : input,
-    questions: [{name: 'q0', type: mode === 'boolean' ? 'predicate' : mode, instructions: question.trim(), ...(mode === 'choice' ? {choices: candidates.map(c => ({value: c.value, description: c.description.trim()}))} : mode === 'score' ? {levels: candidates.map(c => ({label: String(c.score), description: c.description.trim()}))} : {})}],
+    questions: [{name: 'q0', type: mode === 'boolean' ? 'predicate' : mode, instructions: question.trim(), ...(mode === 'choice' ? {choices: candidates.map(c => ({value: c.value, description: c.description.trim()}))} : mode === 'score' ? {levels: candidates.map(c => ({label: String(c.score), description: c.description.trim()}))} : mode === 'bbox' ? {image: 0} : {})}],
     temperature: 1,
   };
 }
@@ -44,6 +45,12 @@ export function parseAnswer(data: unknown, candidates: Candidate[], mode: Output
   const validProbability = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 1;
   if (!answer || answer.name !== 'q0' || answer.type !== type) throw new Error('response');
   if (answer.confidence !== undefined && !validProbability(answer.confidence)) throw new Error('response');
+  if (type === 'bbox') {
+    const {bbox, point} = answer;
+    if (!Array.isArray(bbox) || bbox.length !== 4 || !bbox.every(validProbability) || bbox[0] >= bbox[2] || bbox[1] >= bbox[3]) throw new Error('response');
+    if (!Array.isArray(point) || point.length !== 2 || !point.every(validProbability)) throw new Error('response');
+    return {...answer, raw: answer, choice: '', probabilities: []};
+  }
   if (type === 'predicate') {
     if (!validProbability(answer.probability)) throw new Error('response');
     return {...answer, raw: answer, choice: answer.probability >= 0.5 ? 'true' : 'false', probabilities: [{value: 'true', probability: answer.probability}, {value: 'false', probability: 1 - answer.probability}]};

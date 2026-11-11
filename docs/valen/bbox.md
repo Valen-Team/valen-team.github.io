@@ -15,7 +15,7 @@ Every Valen-Decision-1.5 size, 0.8B to 27B, answers bbox questions in each local
 - The [GGUF runtime 0.2.0](./gguf.md#bbox-request-with-an-image) with image input.
 - The [vLLM](./vllm-plugin.md) and [SGLang](./sglang-plugin.md) plugins.
 
-The hosted API answers predicate, choice and score questions.
+The [hosted API](./api.md) answers bbox questions with Valen-Decision-1.5 0.8B, 2B and 4B (`valen-0.8b`, `valen-2b`, `valen-4b`) through [`/v1/decisions`](./api/decisions.md) and [`/v1/systemone`](./api/systemone.md), one image per request.
 
 ## Request
 

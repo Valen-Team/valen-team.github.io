@@ -211,6 +211,9 @@
           },
           {
             "$ref": "#/components/schemas/SOScore"
+          },
+          {
+            "$ref": "#/components/schemas/SOBbox"
           }
         ],
         "discriminator": {
@@ -300,6 +303,30 @@
             },
             "description": "Ordered level descriptions, lowest first.",
             "maxItems": 16
+          }
+        }
+      },
+      "SOBbox": {
+        "type": "object",
+        "required": [
+          "type",
+          "instructions"
+        ],
+        "properties": {
+          "type": {
+            "const": "bbox"
+          },
+          "instructions": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "description": "What to locate in the image."
+          },
+          "image": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "Zero-based index of the image to search."
           }
         }
       },
@@ -458,6 +485,47 @@
                 "maximum": 1
               }
             }
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "bbox",
+              "point",
+              "confidence"
+            ],
+            "properties": {
+              "type": {
+                "const": "bbox"
+              },
+              "bbox": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "minItems": 4,
+                "maxItems": 4,
+                "description": "[x1, y1, x2, y2], normalized to the image width and height."
+              },
+              "point": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "minItems": 2,
+                "maxItems": 2,
+                "description": "[x, y] centre of the box, normalized to the image width and height."
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
           }
         ]
       },
@@ -523,7 +591,8 @@
             "enum": [
               "predicate",
               "choice",
-              "score"
+              "score",
+              "bbox"
             ]
           },
           "instructions": {
@@ -572,6 +641,12 @@
             },
             "description": "Required for score; ordered lowest first.",
             "maxItems": 16
+          },
+          "image": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "Bbox only: zero-based index of the image to search."
           }
         }
       },
@@ -681,7 +756,8 @@
             "enum": [
               "predicate",
               "choice",
-              "score"
+              "score",
+              "bbox"
             ]
           },
           "name": {
@@ -727,6 +803,28 @@
             "type": "number",
             "minimum": 0,
             "maximum": 1
+          },
+          "bbox": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "minItems": 4,
+            "maxItems": 4,
+            "description": "Bbox only: [x1, y1, x2, y2], normalized to the image width and height."
+          },
+          "point": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "minItems": 2,
+            "maxItems": 2,
+            "description": "Bbox only: [x, y] centre of the box, normalized to the image width and height."
           }
         }
       },

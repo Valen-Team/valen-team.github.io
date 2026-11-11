@@ -1,13 +1,21 @@
 // Interactive previews derive their English task data from the canonical recipes.
 import samples from '@site/static/cookbook/code/samples.json';
-export const cookbook = [
-  {id: 'text', input: samples.ticket.text, question: {...samples.ticket.questions[0], name: 'q0'}, asset: null},
-  {id: 'image', input: 'Answer using only the visible image.', question: {...samples.product.question, name: 'q0'}, asset: '/cookbook/sheep.jpg'},
-  {id: 'video', input: 'Answer using only the visible image.', question: {...samples.video.question, name: 'q0'}, asset: '/cookbook/momos-frame.jpg'},
-] as const;
+type Choice = {value: string; description: string};
+export type Example = {id: string; kind: 'text' | 'image' | 'video'; mode: 'choice' | 'bbox'; input: string; question: {name: string; instructions: string; choices: Choice[]}; asset: string | null; file?: string; video?: string};
+export const cookbook: Example[] = [
+  {id: 'bbox', kind: 'image', mode: 'bbox', input: '', question: {name: 'q0', instructions: 'The blue mug.', choices: []}, asset: '/cookbook/code/media/mug-counter.jpg', file: 'mug-counter.jpg'},
+  {id: 'text', kind: 'text', mode: 'choice', input: samples.ticket.text, question: {...samples.ticket.questions[0], name: 'q0'} as Example['question'], asset: null},
+  {id: 'image', kind: 'image', mode: 'choice', input: 'Answer using only the visible image.', question: {...samples.product.question, name: 'q0'}, asset: '/cookbook/sheep.jpg', file: 'sheep.jpg'},
+  {id: 'video', kind: 'video', mode: 'choice', input: 'Answer using only the visible image.', question: {...samples.video.question, name: 'q0'}, asset: '/cookbook/momos-frame.jpg', file: 'momos.mp4', video: '/cookbook/momos.mp4'},
+];
 
 // Chinese adaptations keep the same image assets and API choice identifiers.
 const chinese = [
+  {
+    input: '',
+    instructions: '蓝色的马克杯。',
+    descriptions: [],
+  },
   {
     input: '我搬家了，可以把订单寄到榆树街 12 号，而不是原来的地址吗？',
     instructions: '这条客户消息表达了什么意图？',
@@ -24,7 +32,7 @@ const chinese = [
     descriptions: ['棕色', '白色', '红色', '橙色'],
   },
 ];
-export function getCookbook(zh: boolean) {
+export function getCookbook(zh: boolean): Example[] {
   return cookbook.map((example, index) => ({
     ...example,
     input: zh ? chinese[index].input : example.input,

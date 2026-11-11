@@ -13,7 +13,7 @@ title: 版本选择
 | JavaScript 本地运行 | [ONNX JavaScript SDK](/zh-Hans/docs/valen/onnx/)，使用 Node.js CPU 或浏览器 WebGPU；支持文本、图片和视频 |
 | Linux x86-64 CPU 上运行本地 HTTP 服务 | [GGUF Q8_0 和 Valen 定制运行包](/zh-Hans/docs/valen/gguf/)；Valen-Decision-1.5 支持文本、图片和 bbox 请求 |
 | 已有 NVIDIA GPU 服务环境 | 根据环境选择 [vLLM](/zh-Hans/docs/valen/vllm-plugin/) 或 [SGLang](/zh-Hans/docs/valen/sglang-plugin/)；支持文本、图片和 bbox 问题，视频可提取帧作为图片输入 |
-| 在图片中定位目标 | 使用 Valen-Decision-1.5 回答 [bbox 问题](/zh-Hans/docs/valen/bbox/)：原生权重和 Transformers，[ONNX SDK](/zh-Hans/docs/valen/onnx/#bbox-问题)，[GGUF 运行时](/zh-Hans/docs/valen/gguf/#带图片的-bbox-请求)，或 [vLLM](/zh-Hans/docs/valen/vllm-plugin/) 与 [SGLang](/zh-Hans/docs/valen/sglang-plugin/) 插件 |
+| 在图片中定位目标 | 使用 Valen-Decision-1.5 回答 [bbox 问题](/zh-Hans/docs/valen/bbox/)：[托管 API](/zh-Hans/docs/valen/api/)，原生权重和 Transformers，[ONNX SDK](/zh-Hans/docs/valen/onnx/#bbox-问题)，[GGUF 运行时](/zh-Hans/docs/valen/gguf/#带图片的-bbox-请求)，或 [vLLM](/zh-Hans/docs/valen/vllm-plugin/) 与 [SGLang](/zh-Hans/docs/valen/sglang-plugin/) 插件 |
 | 微调模型 | 使用原生完整权重，参照[训练指南](/zh-Hans/docs/valen/training/) |
 
 离线运行需要提前准备对应模型文件或缓存。Valen-Decision-1.5 的 Python ONNX 0.8B FP32 首次下载约 3.518 GB；Valen-Decision-1.5 的 GGUF 0.8B Q8_0 文本文件约 0.77 GiB，配套视觉文件约 0.37 GiB。更多变体及下载体积见 [ONNX](/zh-Hans/docs/valen/onnx/) 和 [GGUF](/zh-Hans/docs/valen/gguf/) 指南。

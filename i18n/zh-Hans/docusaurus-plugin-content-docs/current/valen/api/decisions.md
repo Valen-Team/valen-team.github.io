@@ -11,7 +11,7 @@ import RequestExample from '@site/src/components/modern/RequestExample';
 
 # Decisions
 
-向托管 API 提供文本或图片，并提出判断、选择或评分问题。接口返回每个问题的结果及对应概率。要在图片中定位目标，可通过 Transformers、ONNX SDK、GGUF、vLLM 或 SGLang 提出 [bbox 问题](../bbox.md)。视频可先提取画面帧，再作为图片输入。
+向托管 API 提供文本或图片，并提出判断、选择、评分或 bbox 问题。接口返回每个问题的结果及对应概率，[bbox 问题](../bbox.md)返回边界框。视频可先提取画面帧，再作为图片输入。
 
 ```text
 POST /v1/decisions
@@ -206,6 +206,56 @@ POST /v1/decisions
   ]
 }
 ```
+
+</TabItem>
+<TabItem value="bbox" label="bbox">
+
+在请求图片中定位指令描述的目标。图片按[图片输入](#图片输入)的方式发送。`image` 是待定位图片从 0 开始的序号，默认 `0`。bbox 问题没有候选项，可与其他题型放在同一请求中。
+
+请求：
+
+```json
+{
+  "model": "valen-2b",
+  "input": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "input_image",
+          "image_url": "data:image/jpeg;base64,..."
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "name": "mug",
+      "type": "bbox",
+      "instructions": "The blue mug.",
+      "image": 0
+    }
+  ]
+}
+```
+
+`valen-2b` 对[示例图片](https://valen-team.github.io/cookbook/code/media/mug-counter.jpg)的回答：
+
+```json
+{
+  "answers": [
+    {
+      "type": "bbox",
+      "name": "mug",
+      "bbox": [0.2846, 0.2767, 0.8271, 0.7705],
+      "point": [0.5558, 0.5236],
+      "confidence": 0.8549
+    }
+  ]
+}
+```
+
+`bbox` 为 `[x1, y1, x2, y2]`，`point` 为 `[x, y]`，按图片宽高归一化到 0–1。字段说明见 [bbox 问题](../bbox.md)。
 
 </TabItem>
 </Tabs>

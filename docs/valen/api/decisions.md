@@ -11,7 +11,7 @@ import RequestExample from '@site/src/components/modern/RequestExample';
 
 # Decisions
 
-Send text or images to the hosted API and ask predicate, choice, or score questions. The API returns results and associated probabilities for each question. For video, extract frames first and submit them as image inputs. To locate objects in an image, ask [bbox questions](../bbox.md) through Transformers, the SDKs with ONNX, GGUF, vLLM or SGLang.
+Send text or images to the hosted API and ask predicate, choice, score, or bbox questions. The API returns results and associated probabilities for each question, and a box for each [bbox question](../bbox.md). For video, extract frames first and submit them as image inputs.
 
 ```text
 POST /v1/decisions
@@ -206,6 +206,56 @@ Example answer:
   ]
 }
 ```
+
+</TabItem>
+<TabItem value="bbox" label="bbox">
+
+Locate what the instructions describe in the request image. Send the image as in [Images](#images). `image` is the zero-based index of the image to search and defaults to `0`. A bbox question has no candidates and can sit next to the other question types in one request.
+
+Request:
+
+```json
+{
+  "model": "valen-2b",
+  "input": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "input_image",
+          "image_url": "data:image/jpeg;base64,..."
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "name": "mug",
+      "type": "bbox",
+      "instructions": "The blue mug.",
+      "image": 0
+    }
+  ]
+}
+```
+
+Answer from `valen-2b` for the [example image](https://valen-team.github.io/cookbook/code/media/mug-counter.jpg):
+
+```json
+{
+  "answers": [
+    {
+      "type": "bbox",
+      "name": "mug",
+      "bbox": [0.2846, 0.2767, 0.8271, 0.7705],
+      "point": [0.5558, 0.5236],
+      "confidence": 0.8549
+    }
+  ]
+}
+```
+
+`bbox` is `[x1, y1, x2, y2]` and `point` is `[x, y]`, normalized to 0–1 against the image width and height. Fields are described in [bbox questions](../bbox.md).
 
 </TabItem>
 </Tabs>

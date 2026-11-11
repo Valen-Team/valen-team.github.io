@@ -15,7 +15,7 @@ Valen-Decision-1.5 的全部尺寸（0.8B 到 27B）在每种本地运行方式�
 - [GGUF 运行时 0.2.0](./gguf.md#带图片的-bbox-请求)，支持图片输入。
 - [vLLM](./vllm-plugin.md) 与 [SGLang](./sglang-plugin.md) 插件。
 
-托管 API 回答判断、选择和评分问题。
+[托管 API](./api.md) 通过 [`/v1/decisions`](./api/decisions.md) 和 [`/v1/systemone`](./api/systemone.md) 回答 bbox 问题，可用 Valen-Decision-1.5 的 0.8B、2B、4B（`valen-0.8b`、`valen-2b`、`valen-4b`），每个请求一张图片。
 
 ## 请求
 

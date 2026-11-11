@@ -11,7 +11,7 @@ import RequestExample from '@site/src/components/modern/RequestExample';
 
 # System One
 
-向托管 API 提供文本或图片，并提出判断、选择或评分问题。接口返回每个问题的结果及对应概率。要在图片中定位目标，可通过 Transformers、ONNX SDK、GGUF、vLLM 或 SGLang 提出 [bbox 问题](../bbox.md)。视频可先提取画面帧，再作为图片输入。
+向托管 API 提供文本或图片，并提出判断、选择、评分或 bbox 问题。接口返回每个问题的结果及对应概率，[bbox 问题](../bbox.md)返回边界框。视频可先提取画面帧，再作为图片输入。
 
 ```text
 POST /v1/systemone
@@ -178,6 +178,51 @@ POST /v1/systemone
   }
 }
 ```
+
+</TabItem>
+<TabItem value="bbox" label="bbox">
+
+在请求图片中定位指令描述的目标。图片按[图片输入](#图片输入)的方式通过 `assets` 提供。`image` 是待定位图片从 0 开始的序号，默认 `0`。bbox 问题没有 `criteria`，可与其他题型放在同一请求中。
+
+请求：
+
+```json
+{
+  "model": "valen-2b",
+  "state": "Answer using only the visible image.\nvalen-example-photo",
+  "assets": {
+    "valen-example-photo": {
+      "type": "image",
+      "format": "jpeg",
+      "data_base64": "..."
+    }
+  },
+  "questions": {
+    "mug": {
+      "type": "bbox",
+      "instructions": "The blue mug.",
+      "image": 0
+    }
+  }
+}
+```
+
+`valen-2b` 对[示例图片](https://valen-team.github.io/cookbook/code/media/mug-counter.jpg)的回答：
+
+```json
+{
+  "answers": {
+    "mug": {
+      "type": "bbox",
+      "bbox": [0.294, 0.3206, 0.8645, 0.808],
+      "point": [0.5793, 0.5643],
+      "confidence": 0.907
+    }
+  }
+}
+```
+
+`bbox` 为 `[x1, y1, x2, y2]`，`point` 为 `[x, y]`，按图片宽高归一化到 0–1。字段说明见 [bbox 问题](../bbox.md)。
 
 </TabItem>
 </Tabs>

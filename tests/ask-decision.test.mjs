@@ -70,3 +70,14 @@ test('file selection enforces advertised extensions, MIME types and size limits'
   assert.equal(fileKind({name:'clip.mp4',type:'',size:1024}),'video');
   for(const file of [{name:'image.gif',type:'image/gif',size:10},{name:'image.png',type:'video/mp4',size:10},{name:'clip.mp4',type:'video/mp4',size:21*1024*1024},{name:'image.jpg',type:'image/jpeg',size:4*1024*1024}]) assert.throws(()=>fileKind(file));
 });
+test('bbox questions need an image, send no candidates and return a box', () => {
+  const image='data:image/png;base64,AAAA';
+  const payload=buildPayload({...base,mode:'bbox',candidates:[],image,question:'The blue mug.'});
+  assert.deepEqual(payload.questions,[{name:'q0',type:'bbox',instructions:'The blue mug.',image:0}]);
+  assert.throws(()=>buildPayload({...base,mode:'bbox',candidates:[]}));
+  const raw={name:'q0',type:'bbox',bbox:[.25,.3,.8,.8],point:[.5,.55],confidence:.9};
+  const answer=parseAnswer({answers:[raw]},[],'bbox');
+  assert.deepEqual(answer.bbox,raw.bbox); assert.deepEqual(answer.raw,raw);
+  assert.throws(()=>parseAnswer({answers:[{...raw,bbox:[.8,.3,.25,.8]}]},[],'bbox'));
+  assert.throws(()=>parseAnswer({answers:[{...raw,point:[.5]}]},[],'bbox'));
+});
