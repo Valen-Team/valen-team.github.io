@@ -49,7 +49,7 @@ Implementation: [heads.py](https://github.com/Valen-Team/Valen/blob/main/valen/m
 <a id="saving-loading-and-output"></a>
 
 <details>
-<summary>Release configuration</summary>
+<summary>Valen-Decision-1.0 release configuration</summary>
 
 The released native Valen-Decision-1.0 models (Valen-0.8B, Valen-2B and Valen-4B) use a Qwen3.5 multimodal backbone, **Mixer** candidate scorer and **shared_state** execution. Release config fields are `model_type="valen_qwen"`, `qwen_execution="shared_state"`, and `valen_head.head_type="mixer"`. The published Mixer uses width 256, two blocks, role-MLP hidden width 16 and channel-MLP hidden width 1024. `valen_max_length=32768` is a complete-sequence limit, not a guarantee that every backend accepts that budget.
 

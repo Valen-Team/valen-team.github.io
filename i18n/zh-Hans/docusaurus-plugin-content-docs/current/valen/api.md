@@ -31,7 +31,7 @@ sidebar_label: API 调用
 
 如需申请 API Key 或提高调用额度，请邮件联系 [liuziyu77@sjtu.edu.cn](mailto:liuziyu77@sjtu.edu.cn)。
 
-本地服务的模型名与图片输入格式见：[SGLang](./sglang.md) · [vLLM](./vllm.md) · [Transformers](./quickstart.md)。
+本地服务的模型名与图片输入格式见：[SGLang](./sglang.md) · [vLLM](./vllm.md) · [GGUF](./gguf.md) · [Transformers](./quickstart.md)。
 
 让编程 agent 帮你完成集成，可以安装 [Valen agent skill](./agent-skill.md)。
 

@@ -11,7 +11,7 @@ import RequestExample from '@site/src/components/modern/RequestExample';
 
 # Decisions
 
-向托管 API 提供文本或图片，并提出判断、选择或评分问题。接口返回每个问题的结果及对应概率。要在图片中定位目标，可通过 Transformers 提出 [bbox 问题](../bbox.md)。视频可先提取画面帧，再作为图片输入。
+向托管 API 提供文本或图片，并提出判断、选择或评分问题。接口返回每个问题的结果及对应概率。要在图片中定位目标，可通过 Transformers、ONNX SDK、GGUF、vLLM 或 SGLang 提出 [bbox 问题](../bbox.md)。视频可先提取画面帧，再作为图片输入。
 
 ```text
 POST /v1/decisions
@@ -216,7 +216,7 @@ POST /v1/decisions
 
 | 字段 | 类型 | 说明 |
 |---|---|---|
-| `model` | string | 是 | 托管模型 ID，例如 `valen-2b`；见 [List Models](./list-models.md)。 |
+| `model` | string | 实际回答请求的模型，例如 `Valen-Decision-1.5-2B`。 |
 | `answers` | object[] | 按请求顺序返回，包含对应的 `name`。 |
 | `usage` | object | `input_tokens` 和 `output_tokens`。 |
 

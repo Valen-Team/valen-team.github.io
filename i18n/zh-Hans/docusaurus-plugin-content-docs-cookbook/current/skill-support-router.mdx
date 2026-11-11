@@ -42,21 +42,22 @@ agent 用自己标注的样本，以及调参后才写的留出集做测试，�
 
 ## 在没见过的消息上的结果
 
-在 [skill 评测集](https://github.com/Valen-Team/skills/tree/main/evals) 的 60 条隐藏测试消息上打分，每个字段用 balanced accuracy（各类召回率的平均）：
+在 [skill 评测集](https://github.com/Valen-Team/skills/tree/main/evals) 的 60 条隐藏测试消息上打分，每个字段用 balanced accuracy（各类召回率的平均）。agent 于 2026 年 10 月 29 日构建并评测这个分流器，当时 `valen-4b` 服务的是 Valen-Decision-1.0；最后一行把首版原样改用 Valen-Decision-1.5 4B 重跑：
 
 | 版本 | 队列 | 安全 | 补偿 | 平均 | 三项全对 |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | 首版（`v1/`，看任何标注样本之前） | 94% | 98% | 100% | 97.2% | – |
 | 终版（本页代码） | 95% | 100% | 99% | 98.1% | 56 / 60 |
+| 首版，Valen-Decision-1.5 4B | 94% | 94% | 100% | 96.0% | 56 / 60 |
 
-常数答案在这个任务上得 39%。终版仍然判错的 4 条：
+常数答案在这个任务上得 39%。终版在 Valen-Decision-1.0 上仍然判错的 4 条：
 
 - "wow, only 70 minutes for a 2km delivery. amazing service as always"：讽刺句被转到 `human_review`，应为 `late_order`。
 - 要求不放花生却放了花生、并出现过敏：判成 `food_quality`，应为 `missing_or_wrong_item`（`safety` 判对了）。
 - "Cancelled the order within a minute but I was still charged"：`compensation` 判为 true，但按规则 12，只报告多扣款、没有提出要求时应为 false。
 - 账号被盗并被用来下了三单：判成 `account_access`，按"两个问题"规则应为 `human_review`。
 
-在评测集的三个任务上（文本分流、图片分拣、视频打标签），带 skill 写出的首版平均分：Claude Code **92.7%**，Codex **91.2%**；不带 skill 时分别是 **80.2%** 和 **63.3%**。带 skill 的首版最低也有 86.8%。不带 skill 时，两个 agent 各有一次首版彻底失败：Claude Code 对措辞含糊的 `usable` 问题直接用 0.5 做阈值，把所有图片判成不可用；Codex 在一个请求里塞了 8 帧视频，而接口每次只收一张图。最新数字见[评测集 README](https://github.com/Valen-Team/skills/tree/main/evals#results)。
+在评测集的三个任务上（文本分流、图片分拣、视频打标签），使用 Valen-Decision-1.0 时，带 skill 写出的首版平均分：Claude Code **92.7%**，Codex **91.2%**；不带 skill 时分别是 **80.2%** 和 **63.3%**。带 skill 的首版最低也有 86.8%。不带 skill 时，两个 agent 各有一次首版彻底失败：Claude Code 对措辞含糊的 `usable` 问题直接用 0.5 做阈值，把所有图片判成不可用；Codex 在一个请求里塞了 8 帧视频，而接口每次只收一张图。这些首版原样通过托管 API 改用 Valen-Decision-1.5 重跑，带 skill 的首版平均分为 4B **93.0%**、2B **93.0%**、0.8B **87.8%**。最新数字见[评测集 README](https://github.com/Valen-Team/skills/tree/main/evals#results)。
 
 ## 运行
 
@@ -66,7 +67,7 @@ agent 用自己标注的样本，以及调参后才写的留出集做测试，�
 curl -fLO https://valen-team.github.io/cookbook/valen-cookbook.zip
 python -m zipfile -e valen-cookbook.zip .
 cd valen-cookbook
-python skill_support_router.py --message "晚了一个小时，而且鸡翅少了两个" --order-status delivered
+python skill_support_router.py --message "Order was super late AND they forgot my drink" --order-status delivered
 ```
 
 这条消息的回答已录制在 `caches/skill_support_router.json`，不联网也能运行。换成新消息时会调用[免费托管 API](/zh-Hans/docs/valen/api/) 并录制下来；加 `--replay off` 则每次都调用。

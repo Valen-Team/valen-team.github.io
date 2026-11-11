@@ -49,7 +49,7 @@ Bilinear 使用两投影的缩放点积；MLP、role-MLP、dual-encoder 仍是�
 <a id="保存加载和输出"></a>
 
 <details>
-<summary>发布配置</summary>
+<summary>Valen-Decision-1.0 发布配置</summary>
 
 发布的原生 Valen-Decision-1.0 模型（Valen-0.8B、Valen-2B、Valen-4B）使用 Qwen3.5 多模态骨干、**Mixer** 候选评分头和 **shared_state** 执行。发布配置为 `model_type="valen_qwen"`、`qwen_execution="shared_state"`、`valen_head.head_type="mixer"`。Mixer 宽度 256、两层 block、角色混合隐藏宽度 16、通道混合隐藏宽度 1024。`valen_max_length=32768` 限制完整序列，不代表每种后端都接受这一预算。
 

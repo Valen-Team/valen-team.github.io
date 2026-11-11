@@ -32,7 +32,7 @@ Valen 是一个用于分类、判断和评分的多模态模型。你提供文�
 - **Choice**：在命名候选项之间分配概率。
 - **Noul**：估计命题为真或假的概率。
 - **Score**：在有序等级上输出概率分布。
-- **Bbox**：在图片中定位指令描述的目标并返回边界框。Valen-Decision-1.5 通过 Transformers 和 [ONNX SDK](/zh-Hans/docs/valen/onnx/#bbox-问题) 回答 [bbox 问题](/zh-Hans/docs/valen/bbox/)。
+- **Bbox**：在图片中定位指令描述的目标并返回边界框。Valen-Decision-1.5 通过 Transformers、[ONNX SDK](/zh-Hans/docs/valen/onnx/#bbox-问题)、[GGUF 运行时](/zh-Hans/docs/valen/gguf/#带图片的-bbox-请求)以及 [vLLM](/zh-Hans/docs/valen/vllm-plugin/) 和 [SGLang](/zh-Hans/docs/valen/sglang-plugin/) 插件回答 [bbox 问题](/zh-Hans/docs/valen/bbox/)。
 
 同一个状态可以由多个问题共享。完整语义见[数据格式](/zh-Hans/docs/valen/data-format/)与[多问题共享计算](/zh-Hans/docs/valen/qwen-shared-state/)。
 
@@ -61,7 +61,7 @@ SystemOne 使用 `noul` 表达是非判断并返回同名字段；Decisions 使�
 
 ## 版本选择
 
-[版本选择 / Version selection](/zh-Hans/docs/valen/choosing/) · [GGUF](/zh-Hans/docs/valen/gguf/)
+[版本选择](/zh-Hans/docs/valen/choosing/) · [GGUF](/zh-Hans/docs/valen/gguf/)
 
 [第一次调用](./getting-started.md) · [Cookbook](/zh-Hans/cookbook/)
 

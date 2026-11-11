@@ -14,7 +14,7 @@ Run a local HTTP service with a Docker image containing the SGLang runtime and V
 
 ## Requirements
 
-Linux x86-64, an NVIDIA GPU supporting FA3 (such as H100 or H200), a compatible CUDA driver, and Docker with Buildx and NVIDIA Container Toolkit. The image builds on the official SGLang runtime.
+Linux x86-64, an NVIDIA GPU supporting FA3 (such as H100 or H200), a compatible CUDA driver, and Docker with Buildx and NVIDIA Container Toolkit. The image builds on the official SGLang 0.5.23 runtime (`lmsysorg/sglang:v0.5.23`).
 
 ## Build the image
 
@@ -225,6 +225,6 @@ print(response.json()["answers"])
 
 ## Supported scope
 
-Full Valen Qwen3.5 Mixer checkpoints, `shared_state` execution, one GPU, TP=PP=1. Text and images support predicate, choice, and score questions: choice has 1–255 candidates; score has 2–255 ordered levels. Valen-Decision-1.5 checkpoints also answer bbox questions, which locate a described object in one input image. For video, extract frames and submit them as image inputs.
+Full Valen Qwen3.5 Mixer checkpoints, `shared_state` execution, one GPU, TP=PP=1. Text and images support predicate, choice, and score questions: choice has 1–255 candidates; score has 2–255 ordered levels. Valen-Decision-1.5 checkpoints also answer bbox questions, which locate a described object in one input image. On Valen-Decision-1.5 0.8B and 2B, served answers match the native model within 0.02. For video, extract frames and submit them as image inputs.
 
 See [SystemOne](./api/systemone.md) and [Decisions](./api/decisions.md) for question and answer structures.

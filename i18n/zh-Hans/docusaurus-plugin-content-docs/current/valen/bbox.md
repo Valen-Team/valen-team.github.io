@@ -8,7 +8,14 @@ description: 向 Valen-Decision-1.5 询问目标在图片中的位置，返回�
 
 `bbox` 问题询问目标在图片中的位置。Valen-Decision-1.5 返回边界框、框的中心点和置信度，并与同一输入上的判断、选择、评分问题在同一次前向计算中完成。
 
-通过 [Transformers](./quickstart.md) 和 Valen-Decision-1.5 原生权重提出 bbox 问题，五个尺寸均可使用；也可通过 Python 与 JavaScript SDK 加载 Valen-Decision-1.5 ONNX 模型包提出，见 [SDK 中的 bbox 问题](./onnx.md#bbox-问题)。托管 API 回答判断、选择和评分问题。
+Valen-Decision-1.5 的全部尺寸（0.8B 到 27B）在每种本地运行方式中都能回答 bbox 问题：
+
+- [Transformers](./quickstart.md) 加载原生权重，即本页示例。
+- Python 与 JavaScript SDK 加载 ONNX 模型包，见 [SDK 中的 bbox 问题](./onnx.md#bbox-问题)。
+- [GGUF 运行时 0.2.0](./gguf.md#带图片的-bbox-请求)，支持图片输入。
+- [vLLM](./vllm-plugin.md) 与 [SGLang](./sglang-plugin.md) 插件。
+
+托管 API 回答判断、选择和评分问题。
 
 ## 请求
 

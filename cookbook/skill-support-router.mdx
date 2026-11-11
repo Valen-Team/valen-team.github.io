@@ -42,21 +42,22 @@ The agent tested on its own labeled cases and a held-out set it wrote after tuni
 
 ## Results on unseen messages
 
-Scored on the 60 hidden test messages of the [skill benchmark](https://github.com/Valen-Team/skills/tree/main/evals), using balanced accuracy (mean per-class recall) per field:
+Scored on the 60 hidden test messages of the [skill benchmark](https://github.com/Valen-Team/skills/tree/main/evals), using balanced accuracy (mean per-class recall) per field. The agent built and scored this router on 29 October 2026, when `valen-4b` served Valen-Decision-1.0; the last row reruns the first version unchanged on Valen-Decision-1.5 4B:
 
 | Version | Queue | Safety | Compensation | Mean | All three right |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | First version (`v1/`, before any labeled example) | 94% | 98% | 100% | 97.2% | – |
 | Final version (this page's code) | 95% | 100% | 99% | 98.1% | 56 / 60 |
+| First version on Valen-Decision-1.5 4B | 94% | 94% | 100% | 96.0% | 56 / 60 |
 
-A constant answer scores 39% on this task. The four messages it still gets wrong:
+A constant answer scores 39% on this task. The four messages the final version still gets wrong on Valen-Decision-1.0:
 
 - "wow, only 70 minutes for a 2km delivery. amazing service as always": sarcasm sent to `human_review` instead of `late_order`.
 - Peanuts in noodles ordered without them, with an allergic reaction: `food_quality` instead of `missing_or_wrong_item` (`safety` is right).
 - "Cancelled the order within a minute but I was still charged": `compensation` raised, though rule 12 says an overcharge report without a request is `false`.
 - A hacked account used for three card orders: `account_access` instead of `human_review` for two problems.
 
-Across all three benchmark tasks (text routing, image sorting, video tagging), first versions written with the skill averaged **92.7%** with Claude Code and **91.2%** with Codex; without the skill they averaged **80.2%** and **63.3%**. With the skill, no first version scored below 86.8%. Without it, each agent produced one first version that failed outright: Claude Code thresholded a vaguely worded `usable` question at 0.5 and marked every image unusable, and Codex sent eight video frames in a request that accepts one. The [benchmark README](https://github.com/Valen-Team/skills/tree/main/evals#results) keeps the current numbers.
+Across all three benchmark tasks (text routing, image sorting, video tagging), on Valen-Decision-1.0, first versions written with the skill averaged **92.7%** with Claude Code and **91.2%** with Codex; without the skill they averaged **80.2%** and **63.3%**. With the skill, no first version scored below 86.8%. Without it, each agent produced one first version that failed outright: Claude Code thresholded a vaguely worded `usable` question at 0.5 and marked every image unusable, and Codex sent eight video frames in a request that accepts one. Rerun unchanged on Valen-Decision-1.5 through the hosted API, the first versions written with the skill average **93.0%** on 4B, **93.0%** on 2B and **87.8%** on 0.8B. The [benchmark README](https://github.com/Valen-Team/skills/tree/main/evals#results) keeps the current numbers.
 
 ## Run it
 

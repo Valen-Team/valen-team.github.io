@@ -8,7 +8,14 @@ description: Ask Valen-Decision-1.5 where something is in an image and get a box
 
 A `bbox` question asks where something is in an image. Valen-Decision-1.5 answers with a box, its centre point and a confidence, in the same forward pass as the predicate, choice and score questions about the same input.
 
-Ask bbox questions through [Transformers](./quickstart.md) with the native Valen-Decision-1.5 weights, in any of the five sizes, or through the Python and JavaScript SDKs with a Valen-Decision-1.5 ONNX bundle: see [bbox questions in the SDKs](./onnx.md#bbox-questions). The hosted API answers predicate, choice and score questions.
+Every Valen-Decision-1.5 size, 0.8B to 27B, answers bbox questions in each local runtime:
+
+- [Transformers](./quickstart.md) with the native weights, shown on this page.
+- The Python and JavaScript SDKs with an ONNX bundle: see [bbox questions in the SDKs](./onnx.md#bbox-questions).
+- The [GGUF runtime 0.2.0](./gguf.md#bbox-request-with-an-image) with image input.
+- The [vLLM](./vllm-plugin.md) and [SGLang](./sglang-plugin.md) plugins.
+
+The hosted API answers predicate, choice and score questions.
 
 ## Request
 

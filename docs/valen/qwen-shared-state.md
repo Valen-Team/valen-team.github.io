@@ -36,6 +36,8 @@ heads are also supported with the same shared backbone execution.
 All Choice, Noul and Score questions share one graph. Score sees all ordered grade
 descriptions and emits all logits in one forward. The schemas use ordinary causal
 attention, so question order, option order and other questions can affect results.
+Valen-Decision-1.5 adds `bbox` questions to the same graph and uses block-structured
+attention in its full-attention layers ([architecture](./architecture.md#valen-decision-15)).
 This is a changed input format that needs training and held-out validation.
 
 Labels and external IDs do not enter the sequence. Training and evaluation retain

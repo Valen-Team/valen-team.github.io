@@ -13,8 +13,8 @@ JevalKit is an open-source evaluation toolkit for Jev-like decision models. It p
 ## What's included
 
 - A common evaluation command across **eight benchmark families**.
-- Prepared evaluation data in **ten TSV views**.
-- Adapters for **twenty model families**.
+- Prepared evaluation data in **ten TSV views**, plus Decision Index 0.4.1 public Text/Vision tracks prepared locally.
+- Adapters for **twenty-four model families**, including Valen-Decision-1.5.
 - Saved predictions, manifests, probability metrics, and leaderboard exports.
 
 Registration does not imply a completed evaluation. The [leaderboard](https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard) distinguishes full evaluations, smoke tests, and imported predictions. See its manifests for coverage and provenance.

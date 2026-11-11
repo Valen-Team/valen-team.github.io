@@ -13,8 +13,8 @@ JevalKit 为 Jev 类决策模型提供统一接口和预处理评测数据，无
 ## 包含哪些能力
 
 - 统一评测命令，覆盖 **8 类 Benchmark**。
-- 整理好的 **10 份 TSV 数据视图**。
-- 已注册 **20 个模型家族**的适配器。
+- 整理好的 **10 份 TSV 数据视图**，另可在本地准备 Decision Index 0.4.1 公开 Text/Vision 轨道。
+- 已注册 **24 个模型家族**的适配器，包括 Valen-Decision-1.5。
 - 保存预测、来源清单、概率指标与排行榜导出。
 
 模型注册不代表完成了完整实测。[排行榜](https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard)区分完整评测、冒烟检查和导入预测，具体覆盖与来源见各结果清单。

@@ -14,7 +14,7 @@ Run a local HTTP service with a Docker image containing the vLLM runtime and Val
 
 ## Requirements
 
-Linux x86-64, an NVIDIA GPU, a compatible CUDA driver, and Docker with Buildx and NVIDIA Container Toolkit. The image builds on the official vLLM runtime.
+Linux x86-64, an NVIDIA GPU, a compatible CUDA driver, and Docker with Buildx and NVIDIA Container Toolkit. The image builds on the official vLLM 0.33.0 runtime (`vllm/vllm-openai:v0.33.0`).
 
 ## Build the image
 
@@ -225,7 +225,7 @@ print(response.json()["answers"])
 
 ## Supported scope
 
-Full Valen Qwen3.5 Mixer checkpoints, `shared_state` execution, one GPU, TP=PP=1. The default maximum input length is 8192; adjust it with `--max-model-len`. Text and images support predicate, choice, and score questions: choice has 1–255 candidates; score has 2–255 ordered levels. Valen-Decision-1.5 checkpoints also answer bbox questions, which locate a described object in one input image. For video, extract frames and submit them as image inputs.
+Full Valen Qwen3.5 Mixer checkpoints, `shared_state` execution, one GPU, TP=PP=1. The default maximum input length is 8192; adjust it with `--max-model-len`. Text and images support predicate, choice, and score questions: choice has 1–255 candidates; score has 2–255 ordered levels. Valen-Decision-1.5 checkpoints also answer bbox questions, which locate a described object in one input image. On Valen-Decision-1.5 0.8B and 2B, served answers match the native model within 0.02. The launcher sets `--gdn-prefill-backend triton`, the GDN prefill kernel that matches the native model and gives the same answers regardless of batch composition. For video, extract frames and submit them as image inputs.
 
 Each request supports up to 16 images, each up to 24 MiB encoded and 32 megapixels.
 

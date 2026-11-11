@@ -32,7 +32,7 @@ Released formats and earlier checkpoints are listed in the [Hugging Face organiz
 - **Choice:** distribute probability across named options.
 - **Noul:** estimate whether a statement is true or false.
 - **Score:** assign probability to ordered grades.
-- **Bbox:** locate what the instructions describe in an image and return a box. Valen-Decision-1.5 answers [bbox questions](/docs/valen/bbox/) through Transformers and the [ONNX SDKs](/docs/valen/onnx/#bbox-questions).
+- **Bbox:** locate what the instructions describe in an image and return a box. Valen-Decision-1.5 answers [bbox questions](/docs/valen/bbox/) through Transformers, the [ONNX SDKs](/docs/valen/onnx/#bbox-questions), the [GGUF runtime](/docs/valen/gguf/#bbox-request-with-an-image) and the [vLLM](/docs/valen/vllm-plugin/) and [SGLang](/docs/valen/sglang-plugin/) plugins.
 
 The same state can be shared by multiple questions. Read the [data format](/docs/valen/data-format/) and [shared-state execution guide](/docs/valen/qwen-shared-state/) for the full semantics.
 
@@ -61,7 +61,7 @@ SystemOne names true/false questions `noul` and returns the same field; Decision
 
 ## Choose a version
 
-[版本选择 / Version selection](/docs/valen/choosing/) · [GGUF](/docs/valen/gguf/)
+[Version selection](/docs/valen/choosing/) · [GGUF](/docs/valen/gguf/)
 
 [First call](./getting-started.md) · [Cookbook](/cookbook/)
 

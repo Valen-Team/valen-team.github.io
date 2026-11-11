@@ -274,6 +274,6 @@ SDK 默认 `execution="shared_state"`，在同一请求中共享一次前向计�
 
 ## 原生 C++ 文本集成
 
-[C++ 仓库](https://github.com/Valen-Team/valen-sdk-cpp) 提供模型下载脚本、Rust tokenizer/模板组件、CMake 构建步骤及完整的 SystemOne JSON 请求。它在 C++ 进程内直接运行 FP32 CPU 文本推理，每个进程处理一次请求。已实测 macOS ARM 示例；Linux 构建步骤尚未实测。图片、视频、Decisions 或 HTTP 请使用 Python 或 JavaScript。
+[C++ 仓库](https://github.com/Valen-Team/valen-sdk-cpp) 提供模型下载脚本、Rust tokenizer/模板组件、CMake 构建步骤及完整的 SystemOne JSON 请求。它在 C++ 进程内直接运行 FP32 CPU 文本推理，每个进程处理一次请求，可加载 Valen-Decision-1.5 和 Valen-Decision-1.0 模型包。真实模型验证覆盖 macOS ARM 上的 Valen-Decision-1.5 0.8B，结果与 Python SDK 一致。图片、视频、Decisions 或 HTTP 请使用 Python 或 JavaScript。
 
 [原生 Transformers 推理](./quickstart.md) · [模型下载](/zh-Hans/docs/resources/) · [Valen 源码](https://github.com/Valen-Team/Valen)

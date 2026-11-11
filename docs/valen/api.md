@@ -31,7 +31,7 @@ For details on training, data uses, and retention, see [API data handling and re
 
 For an API key or higher quotas, contact [liuziyu77@sjtu.edu.cn](mailto:liuziyu77@sjtu.edu.cn).
 
-For local model names and image input formats, see: [SGLang](./sglang.md) · [vLLM](./vllm.md) · [Transformers](./quickstart.md).
+For local model names and image input formats, see: [SGLang](./sglang.md) · [vLLM](./vllm.md) · [GGUF](./gguf.md) · [Transformers](./quickstart.md).
 
 To have a coding agent build the integration, install the [Valen agent skill](./agent-skill.md).
 

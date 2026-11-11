@@ -55,14 +55,15 @@ sidebar_label: "数据格式"
 | `type` | `criteria` | 标签键 | 顺序 |
 | --- | --- | --- | --- |
 | `choice` | 1–255 个候选名 → 非空描述的映射 | 候选名，必须完整覆盖 | 训练打乱候选及对应标签；推理保留输入顺序 |
-| `noul` | 不需要，提供时也不参与候选构造 | `"true"`、`"false"` | 固定 true 在前 |
+| `noul` | 可选判定标准 `{"true": "...", "false": "..."}`，拼接到 instructions 之后；候选保持固定 | `"true"`、`"false"` | 固定 true 在前 |
 | `score` | 2–255 个非空等级描述的列表 | `"0"` 到 `"K-1"` | 保留列表顺序，从 0 开始 |
+| `bbox` | 无；可选 `image` 指定图片序号，默认 0（Valen-Decision-1.5） | target 为 `{"bbox": [x1, y1, x2, y2]}` 或 `{"point": [x, y]}`，归一化到 `[0, 1]` | 图像 token 即候选 |
 
 Choice 的候选名也会作为输入文本，问题 ID 不会。默认的 `question` 模式下，Score 每个分支只看到自己的等级描述；`shared_state` 模式下，全部等级描述出现在同一序列中，一次前向即为全部等级评分。两种模式输出的数值都按列表索引计算，范围为 `[0, K-1]`。如果业务需要 1–5 分或 0–100 分，可以在调用端转换。
 
 ## 标签与缺失值
 
-`probabilities` 必须恰好覆盖当前题的全部候选键。每个值是有限、非负的数字；总和按 `abs_tol=1e-6` 校验为 1。单个候选为 1、其余为 0 是硬标签；部分场景可以保留软标签。
+`probabilities` 必须恰好覆盖当前题的全部候选键。每个值是有限、非负的数字；总和按 `abs_tol=1e-6` 校验为 1。单个候选为 1、其余为 0 是硬标签；部分场景可以保留软标签。`bbox` 题的 target 用 `bbox` 或 `point` 代替 `probabilities`，并满足 `x1 < x2`、`y1 < y2`（见 [bbox 问题](./bbox.md#训练目标)）。
 
 以下写法都表示该题无标签：省略对应的 target、target 为 `null`、省略 `probabilities`、`probabilities` 为 `null`。若完全没有标签，省略 `targets` 或使用 `{}`，不要把整个 `targets` 写成 `null`。
 

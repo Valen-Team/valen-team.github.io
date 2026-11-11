@@ -30,7 +30,7 @@ python serving/vllm/build_kit.py \
 
 ## 准备运行环境
 
-使用官方 vLLM 镜像。替换下面的部署包和模型目录路径：
+使用官方 vLLM 0.33.0 镜像。替换下面的部署包和模型目录路径：
 
 ```bash
 docker run --rm -it --gpus device=0 --ipc=host \
@@ -38,7 +38,7 @@ docker run --rm -it --gpus device=0 --ipc=host \
   -v /absolute/path/to/serving-kit/vllm:/opt/valen-kit:ro \
   -v /absolute/path/to/Valen-Decision-1.5-2B:/models/Valen-Decision-1.5-2B:ro \
   --entrypoint bash \
-  docker.io/vllm/vllm-openai:nightly
+  docker.io/vllm/vllm-openai:v0.33.0
 ```
 
 容器内的 `/opt/valen-kit` 和 `/models/Valen-Decision-1.5-2B` 对应这两个挂载目录。使用已有 Python 环境时，将下文路径替换为实际目录。
@@ -240,7 +240,7 @@ print(response.json()["answers"])
 
 ## 支持范围
 
-完整 Valen Qwen3.5 Mixer 检查点，`shared_state` 执行，单 GPU，TP=PP=1。默认最大输入长度为 8192，可通过 `--max-model-len` 调整。支持文本和图片判断、选择与评分：Choice 为 1–255 个候选，Score 为 2–255 个有序等级。Valen-Decision-1.5 检查点还支持 bbox 定位题，在一张输入图片中定位所描述的对象。视频可先提取画面帧，再作为图片输入。
+完整 Valen Qwen3.5 Mixer 检查点，`shared_state` 执行，单 GPU，TP=PP=1。默认最大输入长度为 8192，可通过 `--max-model-len` 调整。支持文本和图片判断、选择与评分：Choice 为 1–255 个候选，Score 为 2–255 个有序等级。Valen-Decision-1.5 检查点还支持 bbox 定位题，在一张输入图片中定位所描述的对象。在 Valen-Decision-1.5 0.8B 和 2B 上，服务返回的结果与原生模型的差异不超过 0.02。启动脚本默认设置 `--gdn-prefill-backend triton`，该 GDN prefill 内核与原生模型一致，结果不随批次组成变化。视频可先提取画面帧，再作为图片输入。
 
 每请求最多 16 张图片，每张编码后不超过 24 MiB、3200 万像素。
 

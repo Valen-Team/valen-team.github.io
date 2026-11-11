@@ -32,6 +32,7 @@ Bilinear、MLP 和 role-MLP 头同样支持这种共享 backbone 的执行方式
 
 全部 Choice、Noul 和 Score 题共用一张计算图。Score 能看到全部有序等级描述，一次前向即输出全部
 logits。schema 使用普通的因果注意力，因此题目顺序、选项顺序以及其他题目都可能影响结果。
+Valen-Decision-1.5 把 `bbox` 题加入同一张计算图，并在 full-attention 层使用分块注意力（见[架构](./architecture.md#valen-decision-15)）。
 这是一种新的输入格式，需要重新训练，并在独立验证集上检验。
 
 标签和外部 ID 不进入序列。训练和评估**在输入中保留请求的全部问题**，包括无标签问题；

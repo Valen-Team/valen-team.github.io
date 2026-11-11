@@ -11,7 +11,7 @@ import RequestExample from '@site/src/components/modern/RequestExample';
 
 # System One
 
-Send text or images to the hosted API and ask predicate, choice, or score questions. The API returns results and associated probabilities for each question. For video, extract frames first and submit them as image inputs. To locate objects in an image, ask [bbox questions](../bbox.md) through Transformers.
+Send text or images to the hosted API and ask predicate, choice, or score questions. The API returns results and associated probabilities for each question. For video, extract frames first and submit them as image inputs. To locate objects in an image, ask [bbox questions](../bbox.md) through Transformers, the SDKs with ONNX, GGUF, vLLM or SGLang.
 
 ```text
 POST /v1/systemone

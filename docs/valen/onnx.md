@@ -274,6 +274,6 @@ HTTP images/video must use inline base64 data URLs; local paths from direct SDK 
 
 ## Native C++ text integration
 
-The [C++ repository](https://github.com/Valen-Team/valen-sdk-cpp) includes a model download script, Rust tokenizer/template components, CMake build instructions and a complete SystemOne JSON request. It runs FP32 CPU text inference directly in a C++ process, with one request per process. Its macOS ARM example has been tested; the Linux build instructions have not been tested. Use Python or JavaScript for images, video, Decisions or HTTP.
+The [C++ repository](https://github.com/Valen-Team/valen-sdk-cpp) includes a model download script, Rust tokenizer/template components, CMake build instructions and a complete SystemOne JSON request. It runs FP32 CPU text inference directly in a C++ process, with one request per process, and loads both Valen-Decision-1.5 and Valen-Decision-1.0 bundles. Real-model validation covers Valen-Decision-1.5 0.8B on macOS ARM, matching the Python SDK. Use Python or JavaScript for images, video, Decisions or HTTP.
 
 [Native Transformers inference](./quickstart.md) · [Model downloads](/docs/resources/) · [Valen source](https://github.com/Valen-Team/Valen)

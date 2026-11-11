@@ -30,7 +30,7 @@ python serving/sglang/build_kit.py \
 
 ## Prepare the runtime
 
-Use the official SGLang image. Replace the kit and checkpoint paths below:
+Use the official SGLang 0.5.23 image. Replace the kit and checkpoint paths below:
 
 ```bash
 docker run --rm -it --gpus device=0 --ipc=host \
@@ -38,7 +38,7 @@ docker run --rm -it --gpus device=0 --ipc=host \
   -v /absolute/path/to/serving-kit/sglang:/opt/valen-kit:ro \
   -v /absolute/path/to/Valen-Decision-1.5-2B:/models/Valen-Decision-1.5-2B:ro \
   --entrypoint bash \
-  docker.io/lmsysorg/sglang:latest
+  docker.io/lmsysorg/sglang:v0.5.23
 ```
 
 Inside the container, `/opt/valen-kit` and `/models/Valen-Decision-1.5-2B` refer to those mounts. In an existing Python environment, substitute the actual paths below.
@@ -240,6 +240,6 @@ print(response.json()["answers"])
 
 ## Supported scope
 
-Full Valen Qwen3.5 Mixer checkpoints, `shared_state` execution, one GPU, TP=PP=1. Text and images support predicate, choice, and score questions: choice has 1–255 candidates; score has 2–255 ordered levels. Valen-Decision-1.5 checkpoints also answer bbox questions, which locate a described object in one input image. For video, extract frames and submit them as image inputs.
+Full Valen Qwen3.5 Mixer checkpoints, `shared_state` execution, one GPU, TP=PP=1. Text and images support predicate, choice, and score questions: choice has 1–255 candidates; score has 2–255 ordered levels. Valen-Decision-1.5 checkpoints also answer bbox questions, which locate a described object in one input image. On Valen-Decision-1.5 0.8B and 2B, served answers match the native model within 0.02. For video, extract frames and submit them as image inputs.
 
 See [SystemOne](./api/systemone.md) and [Decisions](./api/decisions.md) for question and answer structures.
