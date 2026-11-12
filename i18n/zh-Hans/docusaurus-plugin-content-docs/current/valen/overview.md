@@ -54,7 +54,7 @@ Valen 是一个用于分类、判断和评分的多模态模型。你提供文�
 3. 阅读[模型架构](/zh-Hans/docs/valen/architecture/)与[配置参考](/zh-Hans/docs/valen/configuration/)。
 4. [评测检查点](/zh-Hans/docs/valen/evaluation/)，或通过 [JevalKit](/zh-Hans/docs/jevalkit/) 比较模型。
 
-[源码仓库](https://github.com/Valen-Team/Valen) · [Cookbook](https://valen-team.github.io/cookbook/) · [体验 Demo](https://huggingface.co/spaces/yuhangzang/Valen-Preview-0923)
+[源码仓库](https://github.com/Valen-Team/Valen) · [Cookbook](https://valen-team.github.io/cookbook/) · [体验 Demo](https://huggingface.co/spaces/Valen-Team/Valen-API)
 
 
 SystemOne 使用 `noul` 表达是非判断并返回同名字段；Decisions 使用 `predicate` 并返回 `probability`。Transformers 与 ONNX SDK 均支持两种协议，HTTP 端点结构见 [API 文档](/zh-Hans/docs/valen/api/)。

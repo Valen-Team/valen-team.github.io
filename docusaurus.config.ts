@@ -21,7 +21,16 @@ const config: Config = {
   },
   presets: [['classic', {
     docs: {sidebarPath: './sidebars.ts', showLastUpdateTime: false},
-    blog: false,
+    blog: {
+      routeBasePath: 'news',
+      blogTitle: 'News & releases',
+      blogDescription: 'Models, benchmarks, tools, and research from Valen Team.',
+      blogSidebarCount: 0,
+      postsPerPage: 10,
+      showReadingTime: true,
+      feedOptions: {type: ['rss', 'atom'], title: 'Valen Team — News'},
+      onUntruncatedBlogPosts: 'throw',
+    },
     theme: {customCss: './src/css/custom.css'},
   } satisfies Preset.Options]],
   plugins: ['./plugins/cookbook-redirects.cjs', './plugins/llms-txt.cjs', ['@docusaurus/plugin-content-docs', {
@@ -39,6 +48,7 @@ const config: Config = {
         {to: '/', label: 'Chat', position: 'left'},
         {to: '/docs/', label: 'Documentation', position: 'left'},
         {to: '/cookbook/', label: 'Cookbook', position: 'left'},
+        {to: '/news/', label: 'News', position: 'left'},
         {href: 'https://github.com/Valen-Team', label: 'GitHub', position: 'right'},
         {type: 'localeDropdown', position: 'right'},
         {type: 'search', position: 'right'},
@@ -48,7 +58,7 @@ const config: Config = {
       style: 'light',
       links: [
         {title: 'Build', items: [{label: 'Documentation', to: '/docs/'}, {label: 'Valen API', to: '/docs/valen/api/'}, {label: 'API data handling', to: '/docs/valen/api/data-handling/'}, {label: 'Local inference', to: '/docs/valen/quickstart/'}, {label: 'ONNX & SDKs', to: '/docs/valen/onnx/'}]},
-        {title: 'Explore', items: [{label: 'JevalKit', to: '/docs/jevalkit/'}, {label: 'Models & datasets', href: 'https://huggingface.co/Valen-Team'}, {label: 'Leaderboard', href: 'https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard'}]},
+        {title: 'Explore', items: [{label: 'News', to: '/news/'}, {label: 'Playground', href: 'https://huggingface.co/spaces/Valen-Team/Valen-API'}, {label: 'JevalKit', to: '/docs/jevalkit/'}, {label: 'Models & datasets', href: 'https://huggingface.co/Valen-Team'}, {label: 'Leaderboard', href: 'https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard'}]},
       ],
       copyright: `© ${new Date().getFullYear()} Valen Team · 万澜. Fast Decisions. Continuous Evolution.`,
     },

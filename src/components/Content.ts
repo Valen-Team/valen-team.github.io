@@ -8,6 +8,7 @@ export const projects = [
 ];
 
 export const updates = [
+  {date: '2026-11-09', type: ['MODELS', '模型发布'], title: ['Valen-Decision-1.5: five sizes, bounding boxes, one forward pass', 'Valen-Decision-1.5：五个尺寸，支持画框，一次前向完成'], description: ['Open decision models from 0.8B to 27B with block-structured attention and a grounding head.', '0.8B 到 27B 的开放决策模型，采用块结构注意力和定位头。'], slug: '/news/valen-decision-1.5/'},
   {date: '2026-10-19', type: ['TOOLING', '工具发布'], title: ['Introducing the JevalKit Leaderboard', 'JevalKit Leaderboard 正式发布'], description: ['Compare decision models across benchmarks, explore probability metrics, and download results.', '跨 Benchmark 比较决策模型，查看概率指标并下载评测结果。'], slug: '/news/jevalkit-leaderboard/'},
   {date: '2026-10-13', type: ['RELEASE', '版本更新'], title: ['More ways to run Valen: API, ONNX, and GGUF', '通过 API、ONNX 和 GGUF 使用 Valen'], description: ['New deployment formats and an API cookbook make it easier to bring decisions into your applications.', '新增部署格式与 API Cookbook，更方便地将决策能力接入应用。'], slug: '/news/valen-deployment/'},
   {date: '2026-10-07', type: ['MODELS & DATA', '模型与数据'], title: ['Valen 0.8B, 2B, and 4B — now with vision', 'Valen 0.8B、2B、4B：让决策看见世界'], description: ['Open multimodal decision models and VisualDecisionBench for image and video evaluation.', '开放多模态决策模型，以及用于图像与视频决策评测的 VisualDecisionBench。'], slug: '/news/valen-multimodal/'},

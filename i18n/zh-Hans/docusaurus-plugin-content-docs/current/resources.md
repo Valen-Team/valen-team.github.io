@@ -42,7 +42,7 @@ Valen-Decision-1.0 ONNX：[0.8B](https://huggingface.co/Valen-Team/Valen-0.8B-ON
 
 ## 交互资源
 
-- [Valen Demo](https://huggingface.co/spaces/yuhangzang/Valen-Preview-0923)
+- [Valen Demo](https://huggingface.co/spaces/Valen-Team/Valen-API)
 - [JevalKit Leaderboard](https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard)
 - [API Cookbook](https://valen-team.github.io/zh-Hans/cookbook/api-quickstart/)
 - [本地推理 Cookbook](https://valen-team.github.io/zh-Hans/cookbook/local-inference/)

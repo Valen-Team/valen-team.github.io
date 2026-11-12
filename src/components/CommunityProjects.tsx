@@ -61,6 +61,6 @@ export default function CommunityProjects() {
       <span aria-live="polite">{zh ? `第 ${page + 1} / ${pageCount} 页` : `${page + 1} / ${pageCount}`}</span>
       <button type="button" onClick={() => setPage(page + 1)} disabled={page === pageCount - 1} aria-label={zh ? '下一页' : 'Next page'}><ArrowRight size={17} aria-hidden="true" /></button>
     </nav>
-    <p className="community-projects-note">{zh ? '以上项目由各自作者维护；收录不代表合作、背书或已独立复现。' : 'These projects are maintained by their respective authors; inclusion does not imply affiliation, endorsement or independent reproduction.'}</p>
+    <p className="community-projects-note">{zh ? '以上项目由各自作者维护。' : 'These projects are maintained by their respective authors.'}</p>
   </section>;
 }
