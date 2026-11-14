@@ -22,7 +22,7 @@ python -m valen.train --config finetune.json
 | `training.tokens_per_step` | 每卡每次更新的 token 预算 |
 | `data.max_length` | 单条完整共享序列的长度上限 |
 
-完整模型会继承已保存的 Mixer、执行模式和媒体设置，续训时不要重新指定一套评分头。
+完整模型会继承已保存的 Mixer、执行模式和媒体设置；Valen-Decision-1.5 模型还会继承注意力掩码（`full_attention_mask`，发布模型为 `bbox_blocks`）和已训练的定位头（`grounding_head`），同一份配方即按发布时的架构微调。续训时不要重新指定一套评分头。
 
 ## 显存与学习率
 

@@ -22,7 +22,7 @@ Set these fields before running; paths are relative to your working directory.
 | `training.tokens_per_step` | Token budget per GPU update; lower it to reduce memory |
 | `data.max_length` | Maximum complete shared-state sequence length |
 
-The complete model supplies the saved Mixer architecture, execution mode and media settings. Leave these unchanged when continuing a released model.
+The complete model supplies the saved Mixer architecture, execution mode and media settings. A Valen-Decision-1.5 model also supplies its attention mask (`full_attention_mask`, `bbox_blocks` in the released models) and its trained grounding head (`grounding_head`), so the same recipe fine-tunes it with the architecture it was released with. Leave these unchanged when continuing a released model.
 
 ## Memory and learning rate
 
