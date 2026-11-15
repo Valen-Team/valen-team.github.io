@@ -378,3 +378,31 @@ article[itemprop='blogPost'] [class*='blogPostInfo'] {font-size:13px;color:var(-
 .modern-nav--docs .modern-brand:after {content:'Docs';font-size:15px;}
 .modern-sidebar-project + .modern-sidebar-project {margin-top:28px;padding-top:22px;border-top:1px solid var(--border);}
 .modern-sidebar-nav .modern-sidebar-project-title {font-size:14px;font-weight:600;color:var(--heading);letter-spacing:0;margin:0 12px 20px;}
+/* Roller pages carry Roller's own mark in the header. */
+.modern-brand img.roller-mark {width:30px;height:30px;flex-shrink:0;}
+img.roller-mark--dark,[data-theme='dark'] img.roller-mark--light {display:none;}
+[data-theme='dark'] img.roller-mark--dark {display:block;}
+@media(max-width:360px){.modern-nav--docs .modern-brand img.roller-mark{width:25px;height:25px}}
+/* Documentation covers more than one project. The header switches between them; on narrow screens the drawer does. */
+.modern-nav-projects {display:flex;align-items:center;gap:8px;margin-inline:auto;}
+.modern-nav-projects a.modern-project-card {display:flex;align-items:center;gap:9px;height:40px;padding:0 14px 0 10px;border:1px solid var(--border);border-radius:var(--r-sm);color:var(--text);white-space:nowrap;text-decoration:none;}
+.modern-nav-projects a.modern-project-card>span {display:flex;align-items:baseline;gap:8px;}
+.modern-nav-projects a.modern-project-card svg,.modern-nav-projects a.modern-project-card img.roller-mark {width:22px;height:22px;flex-shrink:0;}
+.modern-sidebar-nav .modern-sidebar-projects {margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.modern-doc-sidebar .modern-sidebar-projects {display:none;}
+.modern-sidebar-nav a.modern-project-card {gap:12px;padding:10px 12px;margin-block:6px;border:1px solid var(--border);border-radius:var(--r-sm);color:var(--text);}
+.modern-sidebar-nav a.modern-project-card>span {display:flex;flex-direction:column;gap:1px;min-width:0;line-height:1.35;}
+.modern-sidebar-nav a.modern-project-card svg,.modern-sidebar-nav a.modern-project-card img.roller-mark {width:28px;height:28px;flex-shrink:0;}
+a.modern-project-card svg {color:var(--primary);}
+a.modern-project-card strong {font:600 14px var(--font-doc);color:var(--heading);}
+a.modern-project-card small {font:12px var(--font-doc);color:var(--text-muted);}
+.modern-nav-projects a.modern-project-card:hover,.modern-sidebar-nav a.modern-project-card:hover {border-color:var(--border-strong);text-decoration:none;}
+.modern-nav-projects a.modern-project-card.selected,.modern-sidebar-nav a.modern-project-card.selected,.modern-sidebar-nav a.modern-project-card.selected:hover {background:var(--primary-soft);border-color:var(--primary);}
+/* Search sits with the header actions and narrows to an icon before the project cards lose room. */
+.modern-nav-search--compact {width:auto;margin:0;}
+.modern-nav-search--compact .search-trigger {width:auto;}
+.modern-nav-search--compact .search-trigger kbd {margin-left:6px;}
+@media(min-width:1101px){.modern-nav--docs .modern-nav-row{position:relative}.modern-nav-projects{position:absolute;left:50%;transform:translateX(-50%);margin:0}}
+@media(max-width:1360px){.modern-nav-projects a.modern-project-card small{display:none}}
+@media(max-width:1100px){.modern-nav-search--compact .search-trigger>span,.modern-nav-search--compact .search-trigger>kbd{display:none}.modern-nav-search--compact .search-trigger{padding:0 9px}}
+@media(max-width:800px){.modern-nav-projects{display:none}.modern-nav--docs .modern-brand{margin-right:auto}}

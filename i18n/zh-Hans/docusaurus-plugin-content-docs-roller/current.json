@@ -1,0 +1,7 @@
+{
+  "sidebar.roller.category.Getting started": {"message": "开始使用"},
+  "sidebar.roller.category.Harness setup": {"message": "Harness 配置"},
+  "sidebar.roller.category.Tasks and runs": {"message": "Task 与运行"},
+  "sidebar.roller.category.Traces and training data": {"message": "轨迹与训练数据"},
+  "sidebar.roller.category.Benchmarks": {"message": "Benchmark"}
+}

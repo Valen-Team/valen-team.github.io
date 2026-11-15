@@ -128,6 +128,576 @@
       "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs/current/jevalkit/benchmarks.md",
       "title": "Benchmark 评分协议",
       "locale": "zh-Hans"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/index.md",
+      "blobSha": "6106326a49509c13c31030611be54d85c2d82544",
+      "destination": "roller/index.md",
+      "title": "Roller documentation",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/benches/bench-format.md",
+      "blobSha": "acac7bbf3ff53c6b8af040c3d1acc0afcc26604c",
+      "destination": "roller/benches/bench-format.md",
+      "title": "Bench integration and scoring",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/benches/benchmark-standard.md",
+      "blobSha": "ff7709b1306374c03c754004e5f290d378770c6c",
+      "destination": "roller/benches/benchmark-standard.md",
+      "title": "Benchmark run configuration",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/benches/pinchbench.md",
+      "blobSha": "eeb0cb354e34296086ad03c8d5f4b9d5167722b0",
+      "destination": "roller/benches/pinchbench.md",
+      "title": "PinchBench",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/benches/qwenclawbench-evaluation-2026-09-17.md",
+      "blobSha": "2c0fd5b0d47aa2a0fc57590c75ebbed6edfa0008",
+      "destination": "roller/benches/qwenclawbench-evaluation-2026-09-17.md",
+      "title": "QwenClawBench final leaderboard",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/benches/qwenclawbench.md",
+      "blobSha": "99dcca99de477e30eb45d5df9654add192915621",
+      "destination": "roller/benches/qwenclawbench.md",
+      "title": "QwenClawBench",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/benches/skillsbench.md",
+      "blobSha": "6323f9142aa6175076f3ad5bec76224ee9e4b7c3",
+      "destination": "roller/benches/skillsbench.md",
+      "title": "SkillsBench",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/benches/swebench-pro.md",
+      "blobSha": "42620faad3afc95485c0aa153b81add4dc5f1049",
+      "destination": "roller/benches/swebench-pro.md",
+      "title": "SWE-Bench Pro",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/benches/wildclawbench.md",
+      "blobSha": "5940d217742df4c5bee84bef00cb2f37fbbe4543",
+      "destination": "roller/benches/wildclawbench.md",
+      "title": "WildClawBench",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/harnesses/claude-code-configuration.md",
+      "blobSha": "ff39f3db89778cf49e4802ffae0829e52f873bfe",
+      "destination": "roller/harnesses/claude-code-configuration.md",
+      "title": "Claude Code Harness guide",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/harnesses/codex-configuration.md",
+      "blobSha": "830b47d15a014be41b1797b5bb6a0fcb28b639f1",
+      "destination": "roller/harnesses/codex-configuration.md",
+      "title": "Codex Harness guide",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/harnesses/deepseek-configuration.md",
+      "blobSha": "65b893252acd61ec0d00112ac207db57d1bf6dd0",
+      "destination": "roller/harnesses/deepseek-configuration.md",
+      "title": "DeepSeek Harness guide",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/harnesses/hermes-configuration.md",
+      "blobSha": "87a206a26476480854a7bf43d9a040508ac1a221",
+      "destination": "roller/harnesses/hermes-configuration.md",
+      "title": "Hermes Harness guide",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/harnesses/openclaw-configuration.md",
+      "blobSha": "dcf5f1dbb5186632ff36caa388605abd4d8147ac",
+      "destination": "roller/harnesses/openclaw-configuration.md",
+      "title": "OpenClaw Harness guide",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/harnesses/opencode-configuration.md",
+      "blobSha": "e986fd039fe61c392ad695138816fb0e9f1fa1fb",
+      "destination": "roller/harnesses/opencode-configuration.md",
+      "title": "OpenCode Harness guide",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/harnesses/pi-configuration.md",
+      "blobSha": "fc7df5abd47cbb7ae0d3aa18bb40e108b14ecc4f",
+      "destination": "roller/harnesses/pi-configuration.md",
+      "title": "Pi Agent Harness guide",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/harnesses/tool-availability.md",
+      "blobSha": "0c65a015a83c7474e7163497313c29672d231e55",
+      "destination": "roller/harnesses/tool-availability.md",
+      "title": "Harness tool availability",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/start/cli-reference.md",
+      "blobSha": "8e1aec77f1d2c48307ba9803db35924ad97d79ad",
+      "destination": "roller/start/cli-reference.md",
+      "title": "CLI reference",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/start/docker-builds.md",
+      "blobSha": "4a8a122176aea588591b94b82248359a9b2b3dbc",
+      "destination": "roller/start/docker-builds.md",
+      "title": "Docker builds and package mirrors",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/start/getting-started.md",
+      "blobSha": "4f5bdea20aadf07fee02dd5e3e93b08492e31a4f",
+      "destination": "roller/start/getting-started.md",
+      "title": "Getting started: from install to the first trajectory",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/start/introduction.md",
+      "blobSha": "1ed58c5c633bd72d9e0cb2ebd09f808581054d46",
+      "destination": "roller/start/introduction.md",
+      "title": "Introduction",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/tasks/task-bundle-and-storage.md",
+      "blobSha": "21a71bdcec4c320d42fda3502989d4e1149fdeb7",
+      "destination": "roller/tasks/task-bundle-and-storage.md",
+      "title": "Files, Task Bundles, and result storage",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/tasks/task-format.md",
+      "blobSha": "91b959ed8a1f40a7b5cec0d41e09ac108276eadf",
+      "destination": "roller/tasks/task-format.md",
+      "title": "Task format reference",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/tasks/user-simulator.md",
+      "blobSha": "5b3f5bfb43d5aaf852fd6e31ae5430be3e1460e3",
+      "destination": "roller/tasks/user-simulator.md",
+      "title": "User Simulator and dynamic conversation",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/traces/sft-format.md",
+      "blobSha": "3cddb2d7e9e1d4580113cfa4a87a650bb6a31821",
+      "destination": "roller/traces/sft-format.md",
+      "title": "SFT data format",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/traces/subagent-capture-protocol.md",
+      "blobSha": "0a3edacc2bd406f1798c15fd541c91f074552447",
+      "destination": "roller/traces/subagent-capture-protocol.md",
+      "title": "Subagent capture protocol v1",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/traces/thinking-verification-matrix.md",
+      "blobSha": "9b3d69ebbecf00f83b996d91ed59d1acb01a4c02",
+      "destination": "roller/traces/thinking-verification-matrix.md",
+      "title": "Thinking regression check matrix",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/traces/trajectory-outputs.md",
+      "blobSha": "fea4d56b7dd837d61aa2819aa2b3b5dc50cc76a3",
+      "destination": "roller/traces/trajectory-outputs.md",
+      "title": "Trajectory output file guide",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/en/traces/viewer.md",
+      "blobSha": "c04bca2cfd3a91cf8298435e7c6089ab989449b8",
+      "destination": "roller/traces/viewer.md",
+      "title": "Trajectory Viewer",
+      "locale": "en",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/index.md",
+      "blobSha": "b7d2e57de08f88d07d455a5326353733244fb1e0",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/index.md",
+      "title": "Roller 文档",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/benches/bench-format.md",
+      "blobSha": "9d1d6dae844d8b79e6c33a775dd505d2c077a163",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/benches/bench-format.md",
+      "title": "Bench 接入与评分",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/benches/benchmark-standard.md",
+      "blobSha": "b7ceabab426aab975cb14b114fce97835f0d67a8",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/benches/benchmark-standard.md",
+      "title": "Benchmark 运行配置",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/benches/pinchbench.md",
+      "blobSha": "6bf734b539b2564fdfc47037486f89af90ad320e",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/benches/pinchbench.md",
+      "title": "PinchBench",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/benches/qwenclawbench.md",
+      "blobSha": "27b3f3a3f7e9e48d22f9a261d24ec3ccb7c6a763",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/benches/qwenclawbench.md",
+      "title": "QwenClawBench",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/benches/skillsbench.md",
+      "blobSha": "3db74249980c5defb736d6dcb5f310f650d4780e",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/benches/skillsbench.md",
+      "title": "SkillsBench",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/benches/swebench-pro.md",
+      "blobSha": "3b262fbb36d964da29a3a5ed07a615ef8fed08a8",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/benches/swebench-pro.md",
+      "title": "SWE-Bench Pro",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/benches/wildclawbench.md",
+      "blobSha": "3a46d009e15a58f9a2a35de01132a2deca5ba2b0",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/benches/wildclawbench.md",
+      "title": "WildClawBench",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/harnesses/claude-code-configuration.md",
+      "blobSha": "dcbc5ef37c20334e95ef84e933762f593c6e8b48",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/harnesses/claude-code-configuration.md",
+      "title": "Claude Code Harness 指南",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/harnesses/codex-configuration.md",
+      "blobSha": "fa29b9fccff46d851fc34da295e0204d5d932929",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/harnesses/codex-configuration.md",
+      "title": "Codex Harness 指南",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/harnesses/deepseek-configuration.md",
+      "blobSha": "686d715a086ffc70d6b832e210488428836ee63d",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/harnesses/deepseek-configuration.md",
+      "title": "DeepSeek Harness 指南",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/harnesses/hermes-configuration.md",
+      "blobSha": "5060ba357f3e3e4f32343b7341893d3ebb9b2261",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/harnesses/hermes-configuration.md",
+      "title": "Hermes Harness 指南",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/harnesses/openclaw-configuration.md",
+      "blobSha": "0d3bf90362e22b205c041086b4751d5a83ff308b",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/harnesses/openclaw-configuration.md",
+      "title": "OpenClaw Harness 指南",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/harnesses/opencode-configuration.md",
+      "blobSha": "85bdac1c00a7a2fe1a92f4db3847a235e1d007fc",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/harnesses/opencode-configuration.md",
+      "title": "OpenCode Harness 指南",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/harnesses/pi-configuration.md",
+      "blobSha": "c5c8e0a58d52aaa75ba619057f085d97409c94cb",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/harnesses/pi-configuration.md",
+      "title": "Pi Agent Harness 指南",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/harnesses/tool-availability.md",
+      "blobSha": "574591ca75af9e342d5425f6d4fe4d59af3d6cad",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/harnesses/tool-availability.md",
+      "title": "Harness 工具开放情况",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/start/cli-reference.md",
+      "blobSha": "a2df85ced65bc67ce2af85779d76c7abd7b03ded",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/start/cli-reference.md",
+      "title": "CLI 参数参考",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/start/docker-builds.md",
+      "blobSha": "dd912920f0020b99e71c238fd0ef858c2a6029db",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/start/docker-builds.md",
+      "title": "Docker 构建与镜像源",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/start/getting-started.md",
+      "blobSha": "202f9538b57694f1741ebf3e85f6c7d6e201a33a",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/start/getting-started.md",
+      "title": "快速上手：从安装到第一条轨迹",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/start/introduction.md",
+      "blobSha": "22e81bc64c55b99478edd5457997147962a71f25",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/start/introduction.md",
+      "title": "Roller 简介",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/tasks/task-bundle-and-storage.md",
+      "blobSha": "60ef9969b56e61dcfc0b11e77facfa1211655ab4",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/tasks/task-bundle-and-storage.md",
+      "title": "文件、Task Bundle 与结果存储",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/tasks/task-format.md",
+      "blobSha": "25b0c912cc6da856ead28ea82c7897531a432115",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/tasks/task-format.md",
+      "title": "Task 格式参考",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/tasks/user-simulator.md",
+      "blobSha": "97192a76019fc2d0f8b16b16d4d29c089c3146a8",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/tasks/user-simulator.md",
+      "title": "User Simulator 与动态对话",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/traces/sft-format.md",
+      "blobSha": "836235138e02e7d4606c6476884f85d3743e8c12",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/traces/sft-format.md",
+      "title": "SFT 数据格式",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/traces/subagent-capture-protocol.md",
+      "blobSha": "48a6ef82f4d22769bbbc439bf37a3030fe56057c",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/traces/subagent-capture-protocol.md",
+      "title": "Subagent 采集协议 v1",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/traces/thinking-verification-matrix.md",
+      "blobSha": "db4aeca02e1153ae8c552626322283928ca51731",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/traces/thinking-verification-matrix.md",
+      "title": "Thinking 回归检查矩阵",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/traces/trajectory-outputs.md",
+      "blobSha": "2d76d9048bc85c6ac84e4fabb93482add6ab141a",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/traces/trajectory-outputs.md",
+      "title": "轨迹产出文件指南",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
+    },
+    {
+      "repository": "Valen-Team/Roller",
+      "path": "docs/zh/traces/viewer.md",
+      "blobSha": "0bbad6698ed0b8dcc91a67af7d573ded501f41c5",
+      "destination": "i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/traces/viewer.md",
+      "title": "轨迹可视化 Viewer",
+      "locale": "zh-Hans",
+      "commit": "416f7edf8448c6fca76725ad930a532ff13a3be8",
+      "retrieved": "2026-11-16"
     }
   ],
   "status": "Historical import provenance only; website is the sole user-documentation source; no reverse or upstream prose synchronization."

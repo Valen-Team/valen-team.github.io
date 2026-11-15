@@ -4,6 +4,7 @@ Technical reference documents in `content-sources.json` are adapted from:
 
 - [Valen-Team/Valen](https://github.com/Valen-Team/Valen), Apache License 2.0.
 - [Valen-Team/JevalKit](https://github.com/Valen-Team/JevalKit), Apache License 2.0.
+- [Valen-Team/Roller](https://github.com/Valen-Team/Roller), Apache License 2.0.
 
 Changes include documentation frontmatter, removal of redundant language links, rewritten navigation links, static SVG renderings of the two model flowcharts, and historical source attribution. The JevalKit installation guide includes a repository checkout step. Source paths and content blob hashes are recorded in `content-sources.json`.
 
@@ -22,3 +23,7 @@ The Cookbook adapts the two bilingual notebooks formerly maintained in Valen, Ap
 ## P2 documentation consolidation
 
 Website prose is maintained here; content-sources.json is historical provenance, not a synchronization input. Migrated historical measurement/experiment details retain their original scope. The new domain_finetuning.py code uses the Cookbook Apache-2.0 license; its newly authored synthetic support text/labels are CC0-1.0, explicitly separated from third-party media.
+
+## Roller handbook migration (2026-11-16)
+
+The Roller section adapts the bilingual handbook formerly maintained in `Valen-Team/Roller/docs`, Apache-2.0, at commit `416f7ed`. Changes include documentation frontmatter, site-absolute links between pages, GitHub links for repository files, explicit heading IDs in place of Sphinx labels, and removal of the Sphinx table of contents. The three architecture, lifecycle and pipeline diagrams are the light variants from `Valen-Team/Roller/assets/diagrams`. Source paths and content blob hashes are recorded in `content-sources.json`. The handbook is maintained here from this point on.

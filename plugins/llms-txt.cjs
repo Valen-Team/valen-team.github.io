@@ -1,4 +1,4 @@
-// Markdown copies of every docs and cookbook page, plus llms.txt indexes, for coding agents.
+// Markdown copies of every docs, cookbook and Roller page, plus llms.txt indexes, for coding agents.
 const {mkdirSync, readFileSync, writeFileSync} = require('node:fs');
 const {dirname, extname, join} = require('node:path');
 
@@ -21,7 +21,7 @@ function toMarkdown(raw, {title, url, siteDir}) {
   body = body.replace(/^[ \t]*<TabItem\b[^>]*label="([^"]+)"[^>]*>[ \t]*$/gm, '\n**$1**\n');
   body = body.replace(/^[ \t]*<\/?(Tabs|TabItem)\b[^>]*>[ \t]*$/gm, '');
   body = body.replace(/^[ \t]*<[A-Z]\w*\b[^>]*\/>[ \t]*$/gm, `\nInteractive content: [open the web page](${url}).`);
-  body = body.replace(/\]\((\/(?:zh-Hans\/)?(?:docs|cookbook)\/[^)#\s]*?)\/(#[^)\s]*)?\)/g, (_, path, hash = '') => `](${path}.md${hash})`);
+  body = body.replace(/\]\((\/(?:zh-Hans\/)?(?:docs|cookbook|roller)\/[^)#\s]*?)\/(#[^)\s]*)?\)/g, (_, path, hash = '') => `](${path}.md${hash})`);
   body = body.replace(/\]\(\.\.\/([\w-]+)\/(#[^)\s]*)?\)/g, (_, slug, hash = '') => `](./${slug}.md${hash})`);
   body = body.replace(/\]\(pathname:\/\//g, '](');
   body = body.replace(/\n{3,}/g, '\n\n').trim();
@@ -41,7 +41,7 @@ module.exports = function llmsTxt(context) {
       for (const [pluginId, content] of Object.entries(allContent['docusaurus-plugin-content-docs'] || {})) {
         for (const doc of content.loadedVersions.flatMap(version => version.docs)) {
           const route = doc.permalink.slice(baseUrl.length).replace(/\/$/, '');
-          pages.push({section: pluginId === 'cookbook' ? 'cookbook' : 'docs', title: doc.title, description: doc.description,
+          pages.push({section: pluginId === 'cookbook' || pluginId === 'roller' ? pluginId : 'docs', title: doc.title, description: doc.description,
             source: doc.source.replace(/^@site/, siteDir), url: `${site}${doc.permalink.replace(/\/?$/, '/')}`, mdPath: `${route}.md`});
         }
       }
@@ -60,22 +60,26 @@ module.exports = function llmsTxt(context) {
       const index = zh ? [
         '# Valen', '',
         '> Valen（万澜）是多模态 System One 决策模型：输入文本、图像和视频，对你提供的候选项返回结构化概率。', '',
-        '每个页面都有 Markdown 版本：在文档或 Cookbook 路径后加 `.md`。', '',
+        '每个页面都有 Markdown 版本：在文档、Cookbook 或 Roller 路径后加 `.md`。', '',
         '## API', '',
         `- [OpenAPI 规格](${site}/openapi.json)：System One、Decisions 和 List Models 的请求与响应结构`,
         `- [Agent skill](https://github.com/Valen-Team/skills)：给编程 agent 用的 Valen 集成方法`, '',
         '## 文档', '', ...pages.filter(page => page.section === 'docs').map(entry), '',
         '## Cookbook', '', ...pages.filter(page => page.section === 'cookbook').map(entry), '',
+        '## Roller', '', '> Roller 在一次性 Docker 容器中运行可调用工具的 Agent，采集轨迹、完成 Benchmark 评分并导出 SFT 数据。', '',
+        ...pages.filter(page => page.section === 'roller').map(entry), '',
         '## 可选', '', `- [全部页面合集](${site}${baseUrl}llms-full.txt)`, '',
       ] : [
         '# Valen', '',
         '> Valen is a multimodal System One decision model. Text, images and video in; structured probabilities over the candidates you supply out.', '',
-        'Every page has a Markdown version: append `.md` to a docs or cookbook path.', '',
+        'Every page has a Markdown version: append `.md` to a docs, cookbook or roller path.', '',
         '## API', '',
         `- [OpenAPI spec](${site}/openapi.json): request and response schemas for System One, Decisions and List Models`,
         `- [Agent skill](https://github.com/Valen-Team/skills): integration craft for coding agents`, '',
         '## Docs', '', ...pages.filter(page => page.section === 'docs').map(entry), '',
         '## Cookbook', '', ...pages.filter(page => page.section === 'cookbook').map(entry), '',
+        '## Roller', '', '> Roller runs tool-using agents in disposable Docker containers, collects their trajectories, grades benchmark tasks and exports SFT data.', '',
+        ...pages.filter(page => page.section === 'roller').map(entry), '',
         '## Optional', '', `- [All pages in one file](${site}${baseUrl}llms-full.txt)`, '',
         '简体中文版本：https://valen-team.github.io/zh-Hans/llms.txt', '',
       ];

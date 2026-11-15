@@ -1,6 +1,6 @@
 # Valen website
 
-Website and documentation for Valen and JevalKit: [valen-team.github.io](https://valen-team.github.io/).
+Website and documentation for Valen, JevalKit and Roller: [valen-team.github.io](https://valen-team.github.io/).
 
 ## Local development
 
@@ -26,6 +26,6 @@ Immutable real-model outputs, failed attempts, runtime integrity and benchmark r
 
 ## Documentation ownership
 
-The website is the sole user-facing documentation maintenance source. Edit `docs/` and its Chinese locale directly: five groups cover getting started, integrations, model concepts, training/fine-tuning and evaluation. Cookbook owns complete executable applications, including domain fine-tuning. Protocol pages own fields; concepts own semantics; training/evaluation pages own methods and references. Code-adjacent implementation notes remain in code repositories.
+The website is the sole user-facing documentation maintenance source. Edit `docs/` and its Chinese locale directly: five groups cover getting started, integrations, model concepts, training/fine-tuning and evaluation. Cookbook owns complete executable applications, including domain fine-tuning. The Roller handbook is a separate docs section: edit `roller/` and `i18n/zh-Hans/docusaurus-plugin-content-docs-roller/current/`, and keep its navigation in `rollerGroups` (`src/components/modern/shared.tsx`) and `roller-sidebars.ts` in step. Protocol pages own fields; concepts own semantics; training/evaluation pages own methods and references. Code-adjacent implementation notes remain in code repositories.
 
 `scripts/sync-docs.mjs` is retired and refuses to restore upstream prose. `content-sources.json` is historical provenance only. Migration records are kept with delivery evidence and the code repository migration README.

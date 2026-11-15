@@ -13,8 +13,8 @@ function field(frontmatter, name) {
 }
 for (const locale of ['en', 'zh-Hans']) {
   const prefix = locale === 'en' ? '' : '/zh-Hans';
-  for (const type of ['docs', 'cookbook']) {
-    const translated = type === 'cookbook' ? 'docusaurus-plugin-content-docs-cookbook/current' : 'docusaurus-plugin-content-docs/current';
+  for (const type of ['docs', 'cookbook', 'roller']) {
+    const translated = type === 'docs' ? 'docusaurus-plugin-content-docs/current' : `docusaurus-plugin-content-docs-${type}/current`;
     const dir = join(root, locale === 'en' ? type : `i18n/zh-Hans/${translated}`);
     for (const file of walk(dir)) {
       const raw = readFileSync(file, 'utf8');
@@ -23,7 +23,7 @@ for (const locale of ['en', 'zh-Hans']) {
       const slug = field(fm, 'slug');
       const title = field(fm, 'title') || body.match(/^# (.+)$/m)?.[1] || name;
       const path = `${prefix}/${type}/${(slug || name).replace(/^\/|\/$/g, '')}/`.replace(/\/+/g, '/');
-      const section = type === 'cookbook' ? 'Cookbook' : name.startsWith('valen/') ? 'Valen' : name.startsWith('jevalkit/') ? 'JevalKit' : (locale === 'en' ? 'Documentation' : '文档');
+      const section = type === 'cookbook' ? 'Cookbook' : type === 'roller' ? 'Roller' : name.startsWith('valen/') ? 'Valen' : name.startsWith('jevalkit/') ? 'JevalKit' : (locale === 'en' ? 'Documentation' : '文档');
       const text = body.replace(/^import .*$/gm,'').replace(/<[^>]*>/g,' ').replace(/\[([^\]]+)\]\([^)]*\)/g,'$1').replace(/[#*`|]/g,' ').replace(/\s+/g,' ').trim();
       entries.push({title, path, locale, section, text});
     }
