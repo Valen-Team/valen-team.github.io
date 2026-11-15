@@ -22,6 +22,7 @@ title: "轨迹产出文件指南"
 | 核对模型实际收到的请求历史和 tools | `--wire-trace full` 的 `wire_trace.jsonl` | 保存代理实际转发的每次 JSON 请求体 |
 | 查看 Task Agent 交付文件 | `results/` | 只回收 task 声明的输出目录和额外 collect path |
 | 查看动态双方可见对话 | `conversation.json` | 不包含隐藏 reasoning、tool call 和 tool result |
+| 在 Harbor 或其他 ATIF 工具中使用轨迹 | `roller export` 生成的 `trajectory.json` | 由 ACTF 转换的 ATIF 文档，图片存为文件 |
 
 训练时使用 SFT，分析时使用 ACTF。排查 Harness 运行、上下文组装或模型服务行为时，查看原始会话 `trace.jsonl` 和完整请求记录 `wire_trace.jsonl`。
 完整请求记录会在多轮运行中重复保存历史内容，文件会快速增大，不适合直接作为训练数据。
@@ -301,6 +302,57 @@ run 汇总把这类样本计入 `sft_segmented`，不计入 `sft_included` 或 `
 
 每行与对应的 sample 级 SFT record 相同，不增加 task ID 或其他 metadata。样本
 来源须通过相邻 run/sample `info.json` 和目录位置追溯。
+
+### 4.5 ATIF 导出：`trajectory.json` {#atif-export}
+
+`roller export RUN_DIR` 把每个 sample 的 ACTF 转换为
+[ATIF](https://github.com/harbor-framework/harbor/blob/main/rfcs/0001-trajectory-format.md)，
+即 [Harbor](https://github.com/harbor-framework/harbor) 读取的 Agent Trajectory
+Interchange Format。该命令在已有 run 上执行，读取 `trace_ACTF.json` 和 sample
+`info.json`，不修改 run。
+
+```text
+<run>/atif/                          # 或 --output 指定的目录
+└── <model>/
+    └── <index>_<task>/
+        ├── trajectory.json
+        └── images/                  # 轨迹含图片时存在
+```
+
+凡是有 `trace_ACTF.json` 的 sample 都会导出，包括失败和超时的 sample，文档中
+记录 sample 的状态。没有 ACTF 的 sample 会列为已跳过。与 `sft.jsonl` 相同，导出
+只覆盖 Task Agent，不包含 User Simulator 的子轨迹。
+
+导出的文档声明 `ATIF-v1.7`，各字段的来源如下：
+
+| ATIF 字段 | 来源 |
+| --- | --- |
+| `session_id` | `<run-name>/<model>/<index>_<task>` |
+| `agent.name`、`agent.version`、`agent.model_name` | sample `info.json` 中的 Harness 名称、Harness 版本和模型 |
+| `agent.tool_definitions` | ACTF 顶层 `tools` |
+| `system` step | ACTF 顶层 `system_prompt` |
+| `user` step | ACTF step 的 `user_content`，非空时生成 |
+| `agent` step | 同一 ACTF step 的 `assistant_content`，对应 `message`、`reasoning_content` 和 `tool_calls` |
+| `observation.results` | ACTF `observation`，`source_call_id` 把每个结果关联到对应的调用 |
+| `metrics` | ACTF `metric` 的 `prompt_tokens_len`、`completion_tokens_len` 和缓存读取数；其余 metric 字段写入 `metrics.extra` |
+| `final_metrics` | 各 step metrics 的合计，以及 sample `info.json` 中的 `cost_usd` |
+| `extra.roller` | task ID、sample index、状态、错误和 bench 得分 |
+
+一个 ACTF step 对应一到两个 ATIF step，因此两份文件的 `step_id` 不同。图片写入
+`images/`，以内容哈希命名，并用相对路径引用。既不是文本也不是图片的内容块以其
+JSON 文本保留。
+
+ATIF 中没有对应位置的 ACTF 字段，按 ACTF 的字段名保留在同一个工具调用、结果或
+step 的 `extra` 对象中，例如工具结果的 `isError` 和 `details`、step 的
+`finished_at`。ATIF 只允许结果引用本 step 内的调用；对应调用在其他 step 的结果
+没有 `source_call_id`，其 `toolCallId` 保留在 `extra` 中。
+
+Harbor 可以校验导出的文件，也可以把它加载进 Claude Code 或 Codex 会话：
+
+```bash
+python -m harbor.utils.trajectory_validator runs/demo/atif/MODEL/0000_TASK/trajectory.json
+harbor run -p TASK_DIR -a claude-code -m MODEL --load-trajectory runs/demo/atif/MODEL/0000_TASK/trajectory.json
+```
 
 ## 5. 诊断与辅助文件
 

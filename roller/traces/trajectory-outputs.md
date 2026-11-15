@@ -23,6 +23,7 @@ to use them for training, analysis, and debugging.
 | Check the request history and tools received by the model | `wire_trace.jsonl` from `--wire-trace full` | Saves each JSON request body forwarded by the proxy |
 | Inspect Task Agent delivered files | `results/` | Recovers only the output directories the task declared plus extra collect paths |
 | Inspect the dialogue both sides can see | `conversation.json` | Does not include hidden reasoning, tool calls, or tool results |
+| Use a trajectory in Harbor or another ATIF tool | `trajectory.json` from `roller export` | ATIF document converted from ACTF, with images stored as files |
 
 Use SFT for training and ACTF for analysis. When troubleshooting Harness execution, context assembly, or model-service behavior, inspect the native session in `trace.jsonl` and complete request records in `wire_trace.jsonl`.
 Complete request records repeat conversation history across turns and grow quickly, so they are unsuitable for direct use as training data.
@@ -366,6 +367,62 @@ or `sft_excluded`.
 Each line is the same JSON object as its matching sample-level SFT record. No task ID
 or other metadata is added. Sample provenance must be recovered from the
 adjacent run/sample `info.json` and from directory location.
+
+### 4.5 ATIF export: `trajectory.json` {#atif-export}
+
+`roller export RUN_DIR` converts the ACTF of every sample to
+[ATIF](https://github.com/harbor-framework/harbor/blob/main/rfcs/0001-trajectory-format.md),
+the Agent Trajectory Interchange Format that
+[Harbor](https://github.com/harbor-framework/harbor) reads. It runs on an
+existing run, reads `trace_ACTF.json` and the sample `info.json`, and does not
+modify the run.
+
+```text
+<run>/atif/                          # or the directory given with --output
+└── <model>/
+    └── <index>_<task>/
+        ├── trajectory.json
+        └── images/                  # present when the trajectory contains images
+```
+
+Every sample that has `trace_ACTF.json` is exported, including failed and
+timed-out samples, and the document records the sample status. Samples without
+ACTF are reported as skipped. Like `sft.jsonl`, the export covers the Task
+Agent and does not include User Simulator sub-trajectories.
+
+The documents declare `ATIF-v1.7`. Their fields come from these sources:
+
+| ATIF field | Source |
+| --- | --- |
+| `session_id` | `<run-name>/<model>/<index>_<task>` |
+| `agent.name`, `agent.version`, `agent.model_name` | Harness name, Harness version, and model in the sample `info.json` |
+| `agent.tool_definitions` | ACTF top-level `tools` |
+| `system` step | ACTF top-level `system_prompt` |
+| `user` step | `user_content` of an ACTF step, when it is not empty |
+| `agent` step | `assistant_content` of the same ACTF step, as `message`, `reasoning_content`, and `tool_calls` |
+| `observation.results` | ACTF `observation`, with `source_call_id` linking each result to its call |
+| `metrics` | `prompt_tokens_len`, `completion_tokens_len`, and the cache-read count of the ACTF `metric`; the remaining metric fields go to `metrics.extra` |
+| `final_metrics` | Sums of the step metrics, and `cost_usd` from the sample `info.json` |
+| `extra.roller` | Task ID, sample index, status, error, and bench scores |
+
+One ACTF step becomes one or two ATIF steps, so `step_id` values differ between
+the two files. Images are written to `images/`, named by content hash, and
+referenced by relative path. A content block that is neither text nor an image
+is kept as its JSON text.
+
+ACTF fields without an ATIF counterpart are kept in the `extra` object of the
+same tool call, result, or step, under their ACTF names. Examples are `isError`
+and `details` of a tool result and `finished_at` of a step. ATIF only lets a
+result refer to a call of its own step; a result whose call is in another step
+has no `source_call_id` and keeps `toolCallId` in `extra`.
+
+Harbor can validate an exported file and load it into a Claude Code or Codex
+session:
+
+```bash
+python -m harbor.utils.trajectory_validator runs/demo/atif/MODEL/0000_TASK/trajectory.json
+harbor run -p TASK_DIR -a claude-code -m MODEL --load-trajectory runs/demo/atif/MODEL/0000_TASK/trajectory.json
+```
 
 ## 5. Diagnostic and auxiliary files
 

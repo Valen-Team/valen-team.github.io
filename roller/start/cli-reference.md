@@ -30,6 +30,7 @@ Choose the command for the job first, then add that command's flags.
 | `roller collect [OPTIONS]` | Reads tasks, runs a Harness, and collects trajectories |
 | `roller init [DIRECTORY]` | Writes the example tasks, configuration templates, and benchmark run configurations to `DIRECTORY/examples` (default: the current directory); existing files are kept |
 | `roller view RUN_DIR` | Opens an existing run in the Viewer |
+| `roller export RUN_DIR` | Exports the trajectories of an existing run as ATIF, the trajectory format Harbor reads, with flags in section 9 |
 | `roller bench ...` | Lists, runs, exports, or summarizes benchmarks, with collection flags in section 8 |
 | `roller --version` | Shows the installed Roller version |
 
@@ -325,3 +326,19 @@ Prefer `collect --bench`. It converts tasks, runs containers, grades results, an
 See [Benchmark run configuration](/roller/benches/benchmark-standard/) for the fields and the `collect` flag each one sets.
 
 See [Bench integration and scoring](/roller/benches/bench-format/) for field semantics, scoring order, `stage` leak prevention, and aggregation rules.
+
+## 9. Export flags
+
+Export flags select the run to convert and the directory that receives the converted trajectories.
+
+```bash
+roller export RUN_DIR [--format atif] [--output DIR]
+```
+
+| Flag | Default | Purpose |
+| --- | --- | --- |
+| `RUN_DIR` | Required | Selects a Roller run containing `samples/` |
+| `--format` | `atif` | Selects the target format; `atif` is the Agent Trajectory Interchange Format that Harbor reads |
+| `--output` / `-o` | `RUN_DIR/atif` | Sets the directory to write |
+
+The command writes one `trajectory.json` per sample and does not modify the run. See [ATIF export](/roller/traces/trajectory-outputs/#atif-export) for the file layout and the field mapping.

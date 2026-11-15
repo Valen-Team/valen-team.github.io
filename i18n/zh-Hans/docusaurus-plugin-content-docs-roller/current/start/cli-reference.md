@@ -30,6 +30,7 @@ roller view --help
 | `roller collect [OPTIONS]` | 读取 task，运行 Harness 并采集轨迹 |
 | `roller init [DIRECTORY]` | 将示例 task、配置模板和 benchmark 运行配置写入 `DIRECTORY/examples`（默认当前目录），已存在的文件保持不变 |
 | `roller view RUN_DIR` | 在 Viewer 中浏览已有 run |
+| `roller export RUN_DIR` | 把已有 run 的轨迹导出为 Harbor 读取的轨迹格式 ATIF，参数见第 9 节 |
 | `roller bench ...` | 列出、运行、导出或汇总 benchmark，采集参数见第 8 节 |
 | `roller --version` | 查看当前安装的 Roller 版本 |
 
@@ -321,3 +322,19 @@ roller bench report RUN_DIR [--output REPORT.json]
 各字段及其对应的 `collect` 参数见 [Benchmark 运行配置](/roller/benches/benchmark-standard/)。
 
 字段语义、评分时序、`stage` 防泄漏规则和聚合口径见 [Bench 接入与评分](/roller/benches/bench-format/)。
+
+## 9. Export 参数
+
+Export 参数用于选择要转换的 run，并设置转换结果的写入目录。
+
+```bash
+roller export RUN_DIR [--format atif] [--output DIR]
+```
+
+| 参数 | 默认值 | 用途 |
+| --- | --- | --- |
+| `RUN_DIR` | 必填 | 指定包含 `samples/` 的 Roller run |
+| `--format` | `atif` | 选择目标格式；`atif` 是 Harbor 读取的 Agent Trajectory Interchange Format |
+| `--output` / `-o` | `RUN_DIR/atif` | 设置写入目录 |
+
+该命令为每个 sample 写入一个 `trajectory.json`，不修改 run。文件布局和字段对应关系见 [ATIF 导出](/roller/traces/trajectory-outputs/#atif-export)。
