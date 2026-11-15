@@ -251,6 +251,13 @@ contains:
 - `observation`: tool results after those calls;
 - `metric`, start/end time, and stop reason.
 
+On all seven Harnesses, `metric.prompt_tokens_len` counts the whole prompt of the
+call, cached tokens included, and `metric.completion_tokens_len` counts the
+generated tokens. `cache_read_tokens` and `cache_write_tokens` give the part of
+the prompt read from and written to the prompt cache; Codex names them
+`cache_read_tokens_len` and `cache_write_tokens_len`. The `usage` object in the
+sample `info.json` reports input and cache tokens as separate components instead.
+
 Generation conditions:
 
 - The Harness has obtained `trace.jsonl`, and the matching adapter can produce

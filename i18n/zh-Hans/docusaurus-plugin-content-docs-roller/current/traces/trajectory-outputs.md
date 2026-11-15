@@ -216,6 +216,12 @@ ACTF 顶层保存 `schema_version`、`system_prompt`、完整 `tools`、`steps` 
 - `observation`：该次调用之后的工具结果；
 - `metric`、开始/结束时间和 stop reason。
 
+七个 Harness 的 `metric.prompt_tokens_len` 都是该次调用整个 prompt 的 token 数，包含
+缓存 token；`metric.completion_tokens_len` 是生成的 token 数。`cache_read_tokens` 和
+`cache_write_tokens` 是 prompt 中从缓存读取和写入缓存的部分，Codex 的字段名为
+`cache_read_tokens_len` 和 `cache_write_tokens_len`。sample `info.json` 的 `usage` 则把
+输入和缓存 token 作为各自独立的分量记录。
+
 生成条件：
 
 - Harness 已取得 `trace.jsonl`，且对应 adapter 能生成 canonical ACTF；
