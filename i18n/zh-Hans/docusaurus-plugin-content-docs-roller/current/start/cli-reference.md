@@ -328,7 +328,7 @@ roller bench report RUN_DIR [--output REPORT.json]
 Export 参数用于选择要转换的 run、目标格式和结果的写入目录。
 
 ```bash
-roller export RUN_DIR [--format atif|hf] [--output DIR] [--no-redact] [--redact-rules FILE]
+roller export RUN_DIR [--format atif|hf] [--output DIR] [--no-redact] [--include-runs] [--redact-rules FILE]
 ```
 
 | 参数 | 默认值 | 用途 |
@@ -336,7 +336,8 @@ roller export RUN_DIR [--format atif|hf] [--output DIR] [--no-redact] [--redact-
 | `RUN_DIR` | 必填 | 指定包含 `samples/` 的 Roller run |
 | `--format` | `atif` | 选择目标格式：`atif` 是 Harbor 读取的 Agent Trajectory Interchange Format，`hf` 是 Hugging Face 数据集目录 |
 | `--output` / `-o` | `RUN_DIR/<format>` | 设置写入目录 |
-| `--redact` / `--no-redact` | 开启 | 与 `--format hf` 配合，在导出的文件中替换 run 的模型端点、主机路径和凭据取值 |
+| `--redact` / `--no-redact` | 开启 | 与 `--format hf` 配合，在导出的文件中替换 run 的模型端点、`NO_PROXY` 主机、机器名、主机路径和凭据取值 |
+| `--include-runs` | 关闭 | 与 `--format hf` 配合，额外写入 `runs/<harness>-<model>/`，即包含 sample 全部文件的 Roller run 目录 |
 | `--redact-rules` | 无 | 与 `--format hf` 配合，指定一个 JSON 文件，追加 `replace`、`exclude` 和 `forbid` 规则；无论 `--redact` 是否开启都会应用 |
 
-该命令不修改 run。`--format atif` 为每个 sample 写入一个 `trajectory.json`，文件布局和字段对应关系见 [ATIF 导出](/roller/traces/trajectory-outputs/#atif-export)。`--format hf` 写入数据集卡片、供 Hub 轨迹查看器展示的 Agent 会话（每个 sample 一个）、每个 sample 一行的表格和 Roller run 目录，并按 Harness 和模型分组、命名为 `<harness>-<model>`，同一目录可容纳多个 run，见 [Hugging Face 导出](/roller/traces/trajectory-outputs/#hugging-face-export)。
+该命令不修改 run。`--format atif` 为每个 sample 写入一个 `trajectory.json`，文件布局和字段对应关系见 [ATIF 导出](/roller/traces/trajectory-outputs/#atif-export)。`--format hf` 写入数据集卡片、供 Hub 轨迹查看器展示的 Agent 会话（每个 sample 一个）、以及每个 sample 一行的表格，并按 Harness 和模型分组、命名为 `<harness>-<model>`，同一目录可容纳多个 run，见 [Hugging Face 导出](/roller/traces/trajectory-outputs/#hugging-face-export)。

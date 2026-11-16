@@ -199,24 +199,23 @@ roller view runs/wildclawbench-open-models
 
 ## 7. 把 run 发布为数据集
 
-`roller export --format hf` 把 run 打包成 Hugging Face 数据集目录：一份数据集卡片，以及每个模型的三样内容：
-每个 sample 的 OpenClaw 原生会话、每个 sample 一行的表格、一个 Roller run 目录。本次运行的两个模型分别成为
+`roller export --format hf` 把 run 打包成 Hugging Face 数据集目录：一份数据集卡片，以及每个模型的两样内容：
+每个 sample 的 OpenClaw 原生会话，和每个 sample 一行的表格。本次运行的两个模型分别成为
 `openclaw-glm-5.3-flash` 和 `openclaw-deepseek-v4.1-flash-1017` 两个部分。Hub 把这些会话识别为
 agent traces，所以数据集带有 **Traces** 标签，每次 rollout 都能在 Hub 的轨迹查看器中打开。
 
-导出的文件是脱敏后的：导出会把这次 run 的模型端点、主机路径和凭据取值替换为占位符，并打印替换了哪些内容。
-`--redact-rules` 用来追加某个环境特有的替换，例如主机名和模型权重所在的目录。请在采集所用的环境中执行导出，
-凭据变量在那里有值：
+导出的文件是脱敏后的：导出会把这次 run 的模型端点、`NO_PROXY` 里的主机、机器名、主机路径和凭据取值替换为占位符，
+并打印替换了哪些内容。`--redact-rules` 用来追加 run 没有记录的内容，这里是模型权重所在的目录。请在采集所用的机器上
+执行导出，凭据变量在那里有值：
 
 ```bash
 roller export runs/wildclawbench-open-models \
   --format hf --output dataset --redact-rules redact.json
 
-hf upload Valen-Team/Roller-WildClawBench-Trajectories dataset . \
-  --repo-type dataset --exclude "runs/*"
+hf upload Valen-Team/Roller-WildClawBench-Trajectories dataset . --repo-type dataset
 ```
 
-这个数据集发布卡片、会话和表格。run 目录包含这次运行的全部文件，`--exclude` 让它留在采集机器上。
+导出目录里就是要发布的内容：卡片、会话和表格。加上 `--include-runs` 会同时写出 run 目录，其中是这次运行的全部文件。
 
 首次导出会写入 `dataset/README.md`，请编辑它来介绍数据集；之后的导出只刷新其中的统计表。后续的 run
 （其他模型或其他 Harness）用同样的方式追加到同一个仓库，每个 run 成为各自的 `<harness>-<model>` 部分。

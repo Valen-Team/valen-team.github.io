@@ -446,7 +446,7 @@ does not modify the run.
 │       └── <index>_<task>.jsonl     # agent session of one sample, for the trace viewer of the Hub
 ├── data/
 │   └── <harness>-<model>.jsonl      # one row per sample
-└── runs/
+└── runs/                            # only with --include-runs
     └── <harness>-<model>/           # Roller run directory with the samples of that model
 ```
 
@@ -455,14 +455,15 @@ with the model ID without its provider: `openclaw-glm-5` for `vllm/glm-5` on
 OpenClaw. A run of several models is split into one part per model. Every path
 carries the part name, so further runs can be exported into the same folder and
 a dataset can grow by one Harness or model at a time. Exporting a part again
-replaces its three paths and leaves the other parts as they are.
+replaces its paths and leaves the other parts as they are. Every sample is
+exported, including failed samples and samples without a score.
 
-Each directory under `runs/` is a Roller run directory, so `roller view` opens
-it after a download. It holds the samples of its model. Its `info.json`,
-`sft.jsonl`, `sft_segments.jsonl`, and `bench-report.json` are written again for
-these samples, by the code that writes them during collection; the other
-run-level files are copied. Every sample is exported, including failed samples
-and samples without a score.
+The folder holds what is published: the card, the sessions, and the tables.
+`--include-runs` adds `runs/`. Each directory under it is a Roller run directory
+with every file of the samples of its model, so `roller view` opens it after a
+download. Its `info.json`, `sft.jsonl`, `sft_segments.jsonl`, and
+`bench-report.json` are written again for these samples, by the code that
+writes them during collection; the other run-level files are copied.
 
 The Hub reads the files under `traces/` as
 [agent traces](https://huggingface.co/docs/hub/agent-traces): the dataset is
@@ -517,8 +518,8 @@ schemas differ in shape between samples, and the Dataset Viewer needs one type
 per column. Parse them with `json.loads`.
 
 The card reports the Harness, model, samples, completed samples, scored samples,
-mean score, mean steps, and total tokens of each part that has a table in the
-folder. The mean score divides by every sample of the model, as
+mean score, and mean steps of each part that has a table in the folder, and the
+total tokens when the samples recorded usage. The mean score divides by every sample of the model, as
 `roller bench report` does. The first export writes the card. A later export replaces only the text between
 `<!-- roller:stats:start -->` and `<!-- roller:stats:end -->`, so edits to the
 rest of the card are kept.
@@ -530,12 +531,15 @@ the run itself records:
 | What | Source | Replaced by |
 | --- | --- | --- |
 | Model endpoints | `provenance.api_base_urls` of the samples, and the URL values of the variables their containers received | `endpoint-1.example`, `endpoint-2.example`, and so on. Loopback addresses stay |
-| Host paths | The benchmark root, the workspace, the task list, and the Harness configuration files of the run configuration | `<bench-root>`, `<workspace>`, `<tasks-dir>`, `<config-dir>` |
+| Proxy exceptions | The hosts in the value of a `NO_PROXY` variable the containers received | `internal-1.example`, `internal-2.example`, and so on. Loopback names, the common private address blocks such as `10.0.0.0/8`, and names of one label such as `.svc` stay |
+| Machine name | The name of the machine that runs the export | `collection-host.example` for the fully qualified name, `collection-domain.example` for its domain, and `collection-host` for the bare name. The bare name is replaced as a whole word, so `<name>.github.io` stays |
+| Host paths | The run directory, and the benchmark root, the workspace, the task list, and the Harness configuration files of the run configuration | `<run-dir>`, `<bench-root>`, `<workspace>`, `<tasks-dir>`, `<config-dir>` |
 | Credentials | The values of the variables named in `provenance.environment_names` whose name ends in `key`, `token`, `secret`, `password`, or `credential` | `[REDACTED]` |
 
 The run records the names of the variables its containers received, not their
-values. Run the export in the environment of the collection, where those
-variables are set, so the export can find their values in the files. The command
+values. Run the export in the environment of the collection, on the machine of
+the collection, where those variables are set, so the export can find their
+values in the files. The command
 prints what it replaced, and names the credential variables that are not set and
 whose values it therefore could not look for. A value shorter than 12 characters
 is a stand-in such as `local` and stays, because replacing it would rewrite
@@ -543,8 +547,11 @@ ordinary words.
 
 ```text
 Exported 168 samples as a Hugging Face dataset to dataset
-Redacted: 2 endpoints, 3 host paths, the values of OPENROUTER_API_KEY
+Redacted: 2 endpoints, 2 NO_PROXY hosts, the name of this machine, 4 host paths, the values of OPENROUTER_API_KEY
 ```
+
+What the run does not record needs a rule of your own. One example is the
+directory of the model weights, which a `/v1/models` response returns.
 
 `--redact-rules FILE` adds rules of your own. They are applied after the ones
 above, and also with `--no-redact`:
@@ -560,7 +567,7 @@ above, and also with `--no-redact`:
 | Key | Effect |
 | --- | --- |
 | `replace` | Replaces every match of the regular expression `pattern` with `with`, line by line, in every UTF-8 text file |
-| `exclude` | Leaves out the files whose path inside the run matches the glob; `*` also matches `/` |
+| `exclude` | With `--include-runs`, leaves out the files whose path inside the run matches the glob; `*` also matches `/` |
 | `forbid` | Stops the export and names the file and line when a line still matches the regular expression after replacement |
 
 Binary files are copied unchanged. The sessions and the tables are built from

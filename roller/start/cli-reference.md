@@ -332,7 +332,7 @@ See [Bench integration and scoring](/roller/benches/bench-format/) for field sem
 Export flags select the run to convert, the target format, and the directory that receives the result.
 
 ```bash
-roller export RUN_DIR [--format atif|hf] [--output DIR] [--no-redact] [--redact-rules FILE]
+roller export RUN_DIR [--format atif|hf] [--output DIR] [--no-redact] [--include-runs] [--redact-rules FILE]
 ```
 
 | Flag | Default | Purpose |
@@ -340,7 +340,8 @@ roller export RUN_DIR [--format atif|hf] [--output DIR] [--no-redact] [--redact-
 | `RUN_DIR` | Required | Selects a Roller run containing `samples/` |
 | `--format` | `atif` | Selects the target format: `atif`, the Agent Trajectory Interchange Format that Harbor reads, or `hf`, a Hugging Face dataset folder |
 | `--output` / `-o` | `RUN_DIR/<format>` | Sets the directory to write |
-| `--redact` / `--no-redact` | On | With `--format hf`, replaces the model endpoints, host paths, and credential values of the run in the exported files |
+| `--redact` / `--no-redact` | On | With `--format hf`, replaces the model endpoints, `NO_PROXY` hosts, machine name, host paths, and credential values of the run in the exported files |
+| `--include-runs` | Off | With `--format hf`, also writes `runs/<harness>-<model>/`, a Roller run directory with every file of the samples |
 | `--redact-rules` | None | With `--format hf`, names a JSON file of further `replace`, `exclude`, and `forbid` rules, applied whether or not `--redact` is on |
 
-The command does not modify the run. `--format atif` writes one `trajectory.json` per sample; see [ATIF export](/roller/traces/trajectory-outputs/#atif-export) for the file layout and the field mapping. `--format hf` writes a dataset card, the agent session of every sample for the trace viewer of the Hub, a table with one row per sample, and a Roller run directory, as one part per Harness and model named `<harness>-<model>`, so that one folder can hold several runs; see [Hugging Face export](/roller/traces/trajectory-outputs/#hugging-face-export).
+The command does not modify the run. `--format atif` writes one `trajectory.json` per sample; see [ATIF export](/roller/traces/trajectory-outputs/#atif-export) for the file layout and the field mapping. `--format hf` writes a dataset card, the agent session of every sample for the trace viewer of the Hub, and a table with one row per sample, as one part per Harness and model named `<harness>-<model>`, so that one folder can hold several runs; see [Hugging Face export](/roller/traces/trajectory-outputs/#hugging-face-export).

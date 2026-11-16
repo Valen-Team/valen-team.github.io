@@ -216,29 +216,28 @@ roller view runs/wildclawbench-open-models
 
 `roller export --format hf` packages the run as a Hugging Face dataset folder:
 a dataset card and, for each model, the native OpenClaw session of every
-sample, a table with one row per sample, and a Roller run directory. The two
+sample and a table with one row per sample. The two
 models of this run become the parts `openclaw-glm-5.3-flash` and
 `openclaw-deepseek-v4.1-flash-1017`. The Hub reads the sessions as agent
 traces, so the dataset is tagged **Traces** and every rollout opens in the
 trace viewer of the Hub.
 
 The exported files are redacted: the export replaces the model endpoints, the
-host paths, and the credential values of the run with placeholders, and prints
-what it replaced. `--redact-rules` adds the replacements of one environment,
-such as its hostnames and the directory of the model weights. Run the export in
-the environment of the collection, where the credential variables are set:
+hosts that `NO_PROXY` names, the name of the machine, the host paths, and the
+credential values of the run with placeholders, and prints what it replaced.
+`--redact-rules` adds what the run does not record, here the directory of the
+model weights. Run the export on the machine of the collection, where the
+credential variables are set:
 
 ```bash
 roller export runs/wildclawbench-open-models \
   --format hf --output dataset --redact-rules redact.json
 
-hf upload Valen-Team/Roller-WildClawBench-Trajectories dataset . \
-  --repo-type dataset --exclude "runs/*"
+hf upload Valen-Team/Roller-WildClawBench-Trajectories dataset . --repo-type dataset
 ```
 
-This dataset publishes the card, the sessions, and the table. `--exclude`
-keeps the run directories, which hold every file of the run, on the collection
-machine.
+The folder holds what is published: the card, the sessions, and the tables.
+`--include-runs` also writes the run directories, with every file of the run.
 
 The first export writes `dataset/README.md`. Edit it to describe the dataset; a
 later export refreshes only its statistics table. Later runs, with other models

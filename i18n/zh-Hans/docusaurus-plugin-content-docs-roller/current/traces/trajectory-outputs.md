@@ -374,20 +374,20 @@ harbor run -p TASK_DIR -a claude-code -m MODEL --load-trajectory runs/demo/atif/
 │       └── <index>_<task>.jsonl     # 单个 sample 的 Agent 会话，供 Hub 的轨迹查看器展示
 ├── data/
 │   └── <harness>-<model>.jsonl      # 每个 sample 一行
-└── runs/
+└── runs/                            # 仅在使用 --include-runs 时写入
     └── <harness>-<model>/           # 只含该模型 sample 的 Roller run 目录
 ```
 
 导出按 Harness 和模型分组，每组命名为 `<harness>-<model>`，其中模型 ID 不带
 provider：OpenClaw 上的 `vllm/glm-5` 对应 `openclaw-glm-5`。包含多个模型的 run 会按
 模型拆成多组。每个路径都带组名，因此可以把更多的 run 导出到同一个目录，数据集按
-Harness 或模型逐次增长。再次导出某一组只替换它的三个路径，其他组保持不变。
-
-`runs/` 下的每个目录都是 Roller run 目录，下载后可直接用 `roller view` 打开，其中
-只有对应模型的 sample。`info.json`、`sft.jsonl`、`sft_segments.jsonl` 和
-`bench-report.json` 按这些 sample 重新生成，使用的是采集时写这些文件的同一套代码；
-其余 run 级文件原样复制。所有 sample 都会导出，包括失败的 sample 和没有分数的
+Harness 或模型逐次增长。再次导出某一组只替换它的路径，其他组保持不变。所有 sample 都会导出，包括失败的 sample 和没有分数的
 sample。
+
+导出目录里就是要发布的内容：卡片、会话和表格。`--include-runs` 额外写入 `runs/`，其下的每个目录都是
+Roller run 目录，包含对应模型全部 sample 的所有文件，下载后可直接用 `roller view` 打开。
+`info.json`、`sft.jsonl`、`sft_segments.jsonl` 和 `bench-report.json` 按这些 sample
+重新生成，使用的是采集时写这些文件的同一套代码；其余 run 级文件原样复制。
 
 Hub 把 `traces/` 下的文件识别为
 [agent traces](https://huggingface.co/docs/hub/agent-traces)：数据集带有 **Traces**
@@ -440,7 +440,7 @@ sample 之间不一致，而 Dataset Viewer 要求每列只有一种类型。读
 解析。
 
 卡片对目录中每个有表格的分组列出 Harness、模型、sample 数、完成数、已评分数、
-平均分、平均 step 数和 token 总量。平均分以该模型的全部 sample 为分母，与
+平均分和平均 step 数；sample 记录了用量时，还列出 token 总量。平均分以该模型的全部 sample 为分母，与
 `roller bench report` 一致。首次导出时写入卡片；再次导出只替换 `<!-- roller:stats:start -->` 与
 `<!-- roller:stats:end -->` 之间的内容，卡片其余部分的修改会保留。
 
@@ -450,18 +450,22 @@ sample 之间不一致，而 Dataset Viewer 要求每列只有一种类型。读
 | 内容 | 来源 | 替换为 |
 | --- | --- | --- |
 | 模型端点 | 各 sample 的 `provenance.api_base_urls`，以及传入容器的变量中取值为 URL 的部分 | `endpoint-1.example`、`endpoint-2.example`，依此类推；回环地址保留 |
-| 主机路径 | run 配置中的 benchmark 根目录、workspace、task 清单和 Harness 配置文件 | `<bench-root>`、`<workspace>`、`<tasks-dir>`、`<config-dir>` |
+| 代理例外 | 传入容器的 `NO_PROXY` 变量取值中的主机 | `internal-1.example`、`internal-2.example`，依此类推；回环名称、`10.0.0.0/8` 这类通用的私有地址段，以及 `.svc` 这类只有一段的名称保留 |
+| 机器名 | 执行导出的机器的名称 | 完整域名替换为 `collection-host.example`，其中的域替换为 `collection-domain.example`，单独的主机名替换为 `collection-host`；主机名按整词替换，`<name>.github.io` 保持不变 |
+| 主机路径 | run 目录，以及 run 配置中的 benchmark 根目录、workspace、task 清单和 Harness 配置文件 | `<run-dir>`、`<bench-root>`、`<workspace>`、`<tasks-dir>`、`<config-dir>` |
 | 凭据 | `provenance.environment_names` 中名称以 `key`、`token`、`secret`、`password` 或 `credential` 结尾的变量的取值 | `[REDACTED]` |
 
-run 只记录传入容器的变量名，不记录取值。请在采集所用的环境中执行导出，这些变量在
+run 只记录传入容器的变量名，不记录取值。请在采集所用的机器和环境中执行导出，这些变量在
 那里有值，导出才能在文件中找到并替换它们。命令会输出替换了什么，并列出未设置、因而
 无法查找其取值的凭据变量。取值短于 12 个字符的视为 `local` 这类占位值，保持不变，
 因为替换它会改写轨迹中的普通词语。
 
 ```text
 Exported 168 samples as a Hugging Face dataset to dataset
-Redacted: 2 endpoints, 3 host paths, the values of OPENROUTER_API_KEY
+Redacted: 2 endpoints, 2 NO_PROXY hosts, the name of this machine, 4 host paths, the values of OPENROUTER_API_KEY
 ```
+
+run 没有记录的内容需要自己写规则，例如 `/v1/models` 响应里返回的模型权重目录。
 
 `--redact-rules FILE` 用于追加自定义规则，在上述替换之后应用，使用 `--no-redact`
 时同样生效：
@@ -477,7 +481,7 @@ Redacted: 2 endpoints, 3 host paths, the values of OPENROUTER_API_KEY
 | 键 | 作用 |
 | --- | --- |
 | `replace` | 在每个 UTF-8 文本文件中逐行把正则表达式 `pattern` 的匹配替换为 `with` |
-| `exclude` | 不复制在 run 内的路径匹配该 glob 的文件；`*` 也匹配 `/` |
+| `exclude` | 使用 `--include-runs` 时，不复制在 run 内的路径匹配该 glob 的文件；`*` 也匹配 `/` |
 | `forbid` | 替换后仍有行匹配该正则表达式时，停止导出并给出文件和行号 |
 
 二进制文件原样复制。会话文件和表格都由脱敏后的文件生成，因此所有替换同样作用于它们。
