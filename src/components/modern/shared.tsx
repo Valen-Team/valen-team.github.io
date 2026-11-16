@@ -6,6 +6,7 @@ import {ArrowUpRight, GitBranch} from 'lucide-react';
 export const isModern = (path: string) => /^\/(?:zh-Hans\/?)?$/.test(path) || /\/(?:minimal|docs|cookbook|roller)(?:\/|$)/.test(path);
 export const isCookbook = (path: string) => /^\/(?:zh-Hans\/)?cookbook(?:\/|$)/.test(path);
 export const isRoller = (path: string) => /^\/(?:zh-Hans\/)?roller(?:\/|$)/.test(path);
+export const isRollerCookbook = (path: string) => /^\/(?:zh-Hans\/)?roller\/cookbook(?:\/|$)/.test(path);
 export const isModernDoc = (path: string) => /^\/(?:zh-Hans\/)?(?:docs|cookbook|roller)(?:\/|$)/.test(path);
 export const docSection = (path: string) => isCookbook(path) ? 'cookbook' : isRoller(path) ? 'roller' : 'docs';
 // The supplied Valen mark, rendered as a monochrome SVG mask; source image is unchanged.
@@ -51,6 +52,10 @@ export const rollerGroups = [
  {title:['Traces and training data','轨迹与训练数据'],items:[['traces/trajectory-outputs','Trajectory outputs','轨迹产出文件'],['traces/sft-format','SFT format','SFT 数据格式'],['traces/subagent-capture-protocol','Subagent capture protocol','Subagent 采集协议'],['traces/thinking-verification-matrix','Thinking check matrix','Thinking 检查矩阵'],['traces/viewer','Viewer','Viewer']]},
  {title:['Benchmarks','Benchmark'],items:[['benches/bench-format','Integration and scoring','接入与评分'],['benches/benchmark-standard','Run configuration','运行配置'],['benches/wildclawbench','WildClawBench','WildClawBench'],['benches/skillsbench','SkillsBench','SkillsBench'],['benches/pinchbench','PinchBench','PinchBench'],['benches/qwenclawbench','QwenClawBench','QwenClawBench'],['benches/swebench-pro','SWE-Bench Pro','SWE-Bench Pro']]},
 ];
+export const rollerCookbookGroups = [
+ {title:['GET STARTED','开始使用'],items:[['cookbook','Cookbook overview','教程概览']]},
+ {title:['COLLECT & PUBLISH','采集与发布'],items:[['cookbook/wildclawbench-open-models','WildClawBench with two self-hosted models','用两个自部署模型采集 WildClawBench']]},
+];
 const deploymentChildren: Record<string, string[][]> = {
  'benches/qwenclawbench': [['benches/qwenclawbench-evaluation-2026-09-17','Audited evaluation, 2026-09','审计评测（2026-09）']],
  'jevalkit': [['jevalkit/quickstart','Quickstart','快速开始'],['jevalkit/models','Model interfaces','模型接入'],['jevalkit/benchmarks','Benchmarks and scoring','基准与评分']],
@@ -67,7 +72,7 @@ export function ModernSidebar({onNavigate}: {onNavigate?:()=>void}) {
   const {pathname} = useLocation();
   const currentPath = pathname.replace(/^\/zh-Hans/, '');
   const section = docSection(pathname);
-  const groups = section === 'cookbook' ? cookbookGroups : section === 'roller' ? rollerGroups : docGroups;
+  const groups = section === 'cookbook' ? cookbookGroups : section === 'roller' ? (isRollerCookbook(pathname) ? rollerCookbookGroups : rollerGroups) : docGroups;
   const renderLink = ([id, en, cn, badge, trailingBadge]: string[]) => {
     const path = id.startsWith('/') ? id : `/${section}/${id ? `${id}/` : ''}`;
     return <Link to={path} className={currentPath === path ? 'active' : ''}

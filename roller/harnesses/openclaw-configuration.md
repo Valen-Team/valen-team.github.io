@@ -58,7 +58,7 @@ docker version
 docker image inspect custom-openclaw-image:tag
 ```
 
-The official OpenClaw image does not require any additional container-user configuration. Roller automatically prepares a writable workspace and local Gateway settings inside each one-shot container. These settings do not change host permissions. Pass `--container-user image` only when a custom image already provides a writable workspace for its default user and should run as that user.
+The official OpenClaw image does not require any additional container-user configuration. Roller automatically prepares a writable workspace and local Gateway settings inside each one-shot container. These settings do not change host permissions. The task workspace is `/tmp_workspace`. OpenClaw runs in `/root/.openclaw/workspace`, the workspace path of an OpenClaw install, which Roller links to the task workspace; session files record this path as the working directory. Pass `--container-user image` only when a custom image already provides a writable workspace for its default user and should run as that user.
 
 ## 3. Environment variables and API
 

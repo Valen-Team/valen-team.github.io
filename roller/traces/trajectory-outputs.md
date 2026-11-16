@@ -24,6 +24,7 @@ to use them for training, analysis, and debugging.
 | Inspect Task Agent delivered files | `results/` | Recovers only the output directories the task declared plus extra collect paths |
 | Inspect the dialogue both sides can see | `conversation.json` | Does not include hidden reasoning, tool calls, or tool results |
 | Use a trajectory in Harbor or another ATIF tool | `trajectory.json` from `roller export` | ATIF document converted from ACTF, with images stored as files |
+| Publish a run on the Hugging Face Hub | Folder from `roller export --format hf` | The agent sessions, which the Hub opens in its trace viewer, one table row per sample, and a copy of the run that `roller view` opens |
 
 Use SFT for training and ACTF for analysis. When troubleshooting Harness execution, context assembly, or model-service behavior, inspect the native session in `trace.jsonl` and complete request records in `wire_trace.jsonl`.
 Complete request records repeat conversation history across turns and grow quickly, so they are unsuitable for direct use as training data.
@@ -430,6 +431,160 @@ session:
 python -m harbor.utils.trajectory_validator runs/demo/atif/MODEL/0000_TASK/trajectory.json
 harbor run -p TASK_DIR -a claude-code -m MODEL --load-trajectory runs/demo/atif/MODEL/0000_TASK/trajectory.json
 ```
+
+### 4.6 Hugging Face export: a dataset folder {#hugging-face-export}
+
+`roller export RUN_DIR --format hf` packages a run as a folder that can be
+uploaded to the Hugging Face Hub as a dataset. It runs on an existing run and
+does not modify the run.
+
+```text
+<run>/hf/                            # or the directory given with --output
+├── README.md                        # dataset card with a statistics table
+├── traces/
+│   └── <harness>-<model>/
+│       └── <index>_<task>.jsonl     # agent session of one sample, for the trace viewer of the Hub
+├── data/
+│   └── <harness>-<model>.jsonl      # one row per sample
+└── runs/
+    └── <harness>-<model>/           # Roller run directory with the samples of that model
+```
+
+The export writes one part per Harness and model, named `<harness>-<model>`
+with the model ID without its provider: `openclaw-glm-5` for `vllm/glm-5` on
+OpenClaw. A run of several models is split into one part per model. Every path
+carries the part name, so further runs can be exported into the same folder and
+a dataset can grow by one Harness or model at a time. Exporting a part again
+replaces its three paths and leaves the other parts as they are.
+
+Each directory under `runs/` is a Roller run directory, so `roller view` opens
+it after a download. It holds the samples of its model. Its `info.json`,
+`sft.jsonl`, `sft_segments.jsonl`, and `bench-report.json` are written again for
+these samples, by the code that writes them during collection; the other
+run-level files are copied. Every sample is exported, including failed samples
+and samples without a score.
+
+The Hub reads the files under `traces/` as
+[agent traces](https://huggingface.co/docs/hub/agent-traces): the dataset is
+tagged **Traces**, and Data Studio opens each sample in a trace viewer with its
+prompts, reasoning, tool calls, and tool results. Each file is the agent session
+of one sample:
+
+| Harness | File under `traces/` |
+| --- | --- |
+| OpenClaw | The native session `trace.jsonl`. Its session header gets `harness: "openclaw"`, the session ID `<harness>-<model>/<index>_<task>`, the session name `<task> · <model>`, and a `roller` object with the run, sample path, task, status, and score. Every other line is unchanged |
+| Codex, Claude Code | The native session `trace.jsonl`, unchanged |
+| Hermes, OpenCode, DeepSeek, Pi | A session converted from ACTF, because the `trace.jsonl` of these Harnesses uses a Roller event schema. A sample without `trace_ACTF.json` has no file |
+
+A converted session follows Pi's
+[session format](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/session-format.md),
+version 3, which the Hub accepts from a harness that names itself in the session
+header:
+
+| Session line | Source |
+| --- | --- |
+| `session` header | The Harness name as `harness`, session ID `<harness>-<model>/<index>_<task>`, the same `roller` object, and an empty `cwd`, because ACTF does not record the working directory |
+| `model_change`, `session_info` | Provider and model ID from the model reference; `<task> · <model>` as the session name |
+| `system` message | ACTF top-level `system_prompt`, with the function tools of ACTF `tools` as `toolsAdded` |
+| `user` message | `user_content` of an ACTF step, when it is not empty; images stay images |
+| `assistant` message | `assistant_content` of the same step as `thinking`, `text`, and `toolCall` blocks, with token usage and stop reason from the step `metric` |
+| `toolResult` message | Each ACTF `observation` of the step, with the name of the tool it answers |
+
+The trace viewer names the Harness of each session after the `harness` field of
+its header, for example `openclaw trace`.
+
+The card declares two configurations, and each covers every part in the folder.
+`traces`, the default, covers `traces/**/*.jsonl`. `trajectories` covers the
+tables `data/*.jsonl`: `load_dataset("OWNER/NAME", "trajectories")`.
+
+Each row of `data/<harness>-<model>.jsonl` describes one sample:
+
+| Column | Content |
+| --- | --- |
+| `run`, `sample`, `trace` | Part name `<harness>-<model>`, the sample path inside its run directory, and the path of its session |
+| `task_id`, `upstream_task_id`, `run_index` | Task ID. For a bench run with `--bench-runs-per-task`, also the task ID before repetition and the repetition number |
+| `bench`, `category` | Bench name and category of a bench sample |
+| `model`, `harness` | Model and Harness of the sample |
+| `status`, `error` | Status and error from the sample `info.json` |
+| `score`, `grader_error` | Bench score and grader error. `score` is empty when the sample was not graded or grading failed |
+| `steps`, `tool_calls` | Number of ACTF steps and of tool calls |
+| `input_tokens`, `output_tokens`, `total_tokens`, `elapsed_seconds` | Usage and duration from the sample `info.json` |
+| `files` | Paths of the output files under `results/` |
+| `messages`, `tools` | The SFT record of the sample as two JSON strings; empty when the sample has no `trace_SFT.json` |
+
+`messages` and `tools` are JSON strings because message contents and tool
+schemas differ in shape between samples, and the Dataset Viewer needs one type
+per column. Parse them with `json.loads`.
+
+The card reports the Harness, model, samples, completed samples, scored samples,
+mean score, mean steps, and total tokens of each part that has a table in the
+folder. The mean score divides by every sample of the model, as
+`roller bench report` does. The first export writes the card. A later export replaces only the text between
+`<!-- roller:stats:start -->` and `<!-- roller:stats:end -->`, so edits to the
+rest of the card are kept.
+
+The exported files are redacted by default; `--no-redact` exports them as they
+are. The export replaces what is private to the collection environment, which
+the run itself records:
+
+| What | Source | Replaced by |
+| --- | --- | --- |
+| Model endpoints | `provenance.api_base_urls` of the samples, and the URL values of the variables their containers received | `endpoint-1.example`, `endpoint-2.example`, and so on. Loopback addresses stay |
+| Host paths | The benchmark root, the workspace, the task list, and the Harness configuration files of the run configuration | `<bench-root>`, `<workspace>`, `<tasks-dir>`, `<config-dir>` |
+| Credentials | The values of the variables named in `provenance.environment_names` whose name ends in `key`, `token`, `secret`, `password`, or `credential` | `[REDACTED]` |
+
+The run records the names of the variables its containers received, not their
+values. Run the export in the environment of the collection, where those
+variables are set, so the export can find their values in the files. The command
+prints what it replaced, and names the credential variables that are not set and
+whose values it therefore could not look for. A value shorter than 12 characters
+is a stand-in such as `local` and stays, because replacing it would rewrite
+ordinary words.
+
+```text
+Exported 168 samples as a Hugging Face dataset to dataset
+Redacted: 2 endpoints, 3 host paths, the values of OPENROUTER_API_KEY
+```
+
+`--redact-rules FILE` adds rules of your own. They are applied after the ones
+above, and also with `--no-redact`:
+
+```json
+{
+  "replace": [{"pattern": "gpu-node-\\d+\\.cluster\\.internal", "with": "node"}],
+  "exclude": ["samples/*/wire_trace.jsonl"],
+  "forbid": ["sk-[A-Za-z0-9]{20,}"]
+}
+```
+
+| Key | Effect |
+| --- | --- |
+| `replace` | Replaces every match of the regular expression `pattern` with `with`, line by line, in every UTF-8 text file |
+| `exclude` | Leaves out the files whose path inside the run matches the glob; `*` also matches `/` |
+| `forbid` | Stops the export and names the file and line when a line still matches the regular expression after replacement |
+
+Binary files are copied unchanged. The sessions and the tables are built from
+the redacted files, so every replacement also applies to them.
+
+Upload the folder with the Hugging Face CLI:
+
+```bash
+hf upload OWNER/NAME runs/demo/hf . --repo-type dataset
+```
+
+To add a run to a published dataset, download its card and tables, export the
+new run into that folder, and upload the folder. The upload adds the parts of
+the new run and updates the card; the parts already in the dataset stay as they
+are:
+
+```bash
+hf download OWNER/NAME --repo-type dataset --include README.md --include "data/*" --local-dir dataset
+roller export runs/next --format hf --output dataset
+hf upload OWNER/NAME dataset . --repo-type dataset
+```
+
+[WildClawBench with two self-hosted models](/roller/cookbook/wildclawbench-open-models/)
+follows a run from collection to a published dataset.
 
 ## 5. Diagnostic and auxiliary files
 

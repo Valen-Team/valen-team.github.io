@@ -37,34 +37,50 @@ const entries = [
   {id:'domain-finetuning', goal:'adapt', modality:'text', date:'2026-10-26', title:['Domain LoRA fine-tuning', '领域 LoRA 微调'], summary:['Prepare independent splits, fine-tune complete 0.8B, resume and compare on one held-out test.', '从完整 0.8B 准备独立划分、微调、恢复并在同一测试集比较。']},
 ];
 
+// The Roller cookbook: recipes grouped by what they produce, filtered by Harness.
+const rollerGoals = [
+  {id:'collect', label:['Collect & publish', '采集与发布'], color:'var(--paper-route)'},
+];
+
+const rollerEntries = [
+  {id:'wildclawbench-open-models', goal:'collect', modality:'openclaw', date:'2026-11-16', title:['WildClawBench with two self-hosted models', '用两个自部署模型采集 WildClawBench'], summary:['Serve two open-weight models, collect and grade their WildClawBench trajectories in one run, and publish the run as a Hugging Face dataset.', '部署两个开源权重模型，在一次 run 中采集并评分它们的 WildClawBench 轨迹，再把 run 发布为 Hugging Face 数据集。']},
+];
+
+const collections = {
+  valen: {goals, entries, base:'/cookbook/', covers:'/img/cookbook/',
+    filters:[['all', 'All', '全部'], ['text', 'Text', '文本'], ['image', 'Image', '图片'], ['video', 'Video', '视频']]},
+  roller: {goals:rollerGoals, entries:rollerEntries as typeof entries, base:'/roller/cookbook/', covers:'/img/roller/cookbook/',
+    filters:[['all', 'All', '全部'], ['openclaw', 'OpenClaw', 'OpenClaw']]},
+};
+type Collection = typeof collections[keyof typeof collections];
+
 const pageSize = 6;
 
-const modalities = [['all', 'All', '全部'], ['text', 'Text', '文本'], ['image', 'Image', '图片'], ['video', 'Video', '视频']];
-
-function Topic({goal}:{goal:string}) {
-  const zh=useChinese(), g=goals.find(x=>x.id===goal)!;
+function Topic({goal, set}:{goal:string; set:Collection}) {
+  const zh=useChinese(), g=set.goals.find(x=>x.id===goal)!;
   return <span className="cookbook-topic"><i style={{background:g.color}}/>{g.label[zh?1:0]}</span>;
 }
 
-function Card({e, large}:{e:typeof entries[number]; large?:boolean}) {
-  const zh=useChinese(), cover=useBaseUrl(`/img/cookbook/${e.id}.webp`), paper=goals.find(g=>g.id===e.goal)!.color;
-  return <Link to={`/cookbook/${e.id}/`} className={large?'cookbook-card cookbook-card-large':'cookbook-card'}>
+function Card({e, large, set}:{e:typeof entries[number]; large?:boolean; set:Collection}) {
+  const zh=useChinese(), cover=useBaseUrl(`${set.covers}${e.id}.webp`), paper=set.goals.find(g=>g.id===e.goal)!.color;
+  return <Link to={`${set.base}${e.id}/`} className={large?'cookbook-card cookbook-card-large':'cookbook-card'}>
     <img src={cover} alt="" loading="lazy" width={960} height={640} style={{background:paper}}/>
-    <Topic goal={e.goal}/>
+    <Topic goal={e.goal} set={set}/>
     <h3>{e.title[zh?1:0]}</h3>
     {!large&&<p>{e.summary[zh?1:0]}</p>}
     {!large&&<time dateTime={e.date}>{e.date}</time>}
   </Link>;
 }
 
-export default function CookbookIndex() {
+export default function CookbookIndex({collection='valen'}:{collection?:keyof typeof collections}) {
+  const set=collections[collection], {goals, entries, filters:modalities}=set;
   const zh=useChinese(), [query,setQuery]=useState(''), [goal,setGoal]=useState('all'), [modality,setModality]=useState('all'), [page,setPage]=useState(0), top=useRef<HTMLDivElement>(null);
   const q=query.trim().toLowerCase();
   const rows=entries
     .filter(e=>(goal==='all'||e.goal===goal) && (modality==='all'||e.modality.includes(modality))
       && `${e.title.join(' ')} ${e.summary.join(' ')} ${e.modality}`.toLowerCase().includes(q))
     .sort((a,b)=>b.date.localeCompare(a.date));
-  const showFeatured=!q&&goal==='all'&&modality==='all';
+  const showFeatured=!q&&goal==='all'&&modality==='all'&&entries.some(e=>e.featured);
   const list=rows.filter(e=>!(showFeatured&&e.featured)), pageCount=Math.ceil(list.length/pageSize);
   const turn=(n:number)=>{setPage(n); top.current?.scrollIntoView({block:'start'});};
   return <section className="cookbook-directory" aria-label={zh?'教程目录':'Tutorial directory'}>
@@ -75,7 +91,7 @@ export default function CookbookIndex() {
     </label>
     {showFeatured&&<>
       <h2 className="cookbook-heading">{zh?'精选':'Featured'}</h2>
-      <div className="cookbook-featured">{entries.filter(e=>e.featured).map(e=><Card key={e.id} e={e} large/>)}</div>
+      <div className="cookbook-featured">{entries.filter(e=>e.featured).map(e=><Card key={e.id} e={e} large set={set}/>)}</div>
     </>}
     <div className="cookbook-bar" ref={top}>
       <div className="cookbook-tabs" role="tablist">
@@ -87,7 +103,7 @@ export default function CookbookIndex() {
       </div>
     </div>
     <p className="cookbook-count" role="status">{zh?`${rows.length} 篇教程`:`${rows.length} cookbook${rows.length===1?'':'s'}`}</p>
-    <div className="cookbook-cards">{list.slice(page*pageSize, (page+1)*pageSize).map(e=><Card key={e.id} e={e}/>)}</div>
+    <div className="cookbook-cards">{list.slice(page*pageSize, (page+1)*pageSize).map(e=><Card key={e.id} e={e} set={set}/>)}</div>
     {pageCount>1&&<nav className="cookbook-pagination" aria-label={zh?'教程分页':'Cookbook pages'}>
       <button type="button" onClick={()=>turn(page-1)} disabled={page===0} aria-label={zh?'上一页':'Previous page'}><ArrowLeft size={17} aria-hidden="true"/></button>
       <span aria-live="polite">{zh?`第 ${page+1} / ${pageCount} 页`:`${page+1} / ${pageCount}`}</span>

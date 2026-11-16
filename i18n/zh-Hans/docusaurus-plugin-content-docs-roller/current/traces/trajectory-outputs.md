@@ -23,6 +23,7 @@ title: "轨迹产出文件指南"
 | 查看 Task Agent 交付文件 | `results/` | 只回收 task 声明的输出目录和额外 collect path |
 | 查看动态双方可见对话 | `conversation.json` | 不包含隐藏 reasoning、tool call 和 tool result |
 | 在 Harbor 或其他 ATIF 工具中使用轨迹 | `roller export` 生成的 `trajectory.json` | 由 ACTF 转换的 ATIF 文档，图片存为文件 |
+| 把一次 run 发布到 Hugging Face Hub | `roller export --format hf` 生成的目录 | Hub 轨迹查看器可直接打开的 Agent 会话、每个 sample 一行的表格，以及可用 `roller view` 打开的 run 副本 |
 
 训练时使用 SFT，分析时使用 ACTF。排查 Harness 运行、上下文组装或模型服务行为时，查看原始会话 `trace.jsonl` 和完整请求记录 `wire_trace.jsonl`。
 完整请求记录会在多轮运行中重复保存历史内容，文件会快速增大，不适合直接作为训练数据。
@@ -359,6 +360,145 @@ Harbor 可以校验导出的文件，也可以把它加载进 Claude Code 或 Co
 python -m harbor.utils.trajectory_validator runs/demo/atif/MODEL/0000_TASK/trajectory.json
 harbor run -p TASK_DIR -a claude-code -m MODEL --load-trajectory runs/demo/atif/MODEL/0000_TASK/trajectory.json
 ```
+
+### 4.6 Hugging Face 导出：数据集目录 {#hugging-face-export}
+
+`roller export RUN_DIR --format hf` 把一次 run 打包为可上传到 Hugging Face Hub 的
+数据集目录。该命令在已有 run 上执行，不修改 run。
+
+```text
+<run>/hf/                            # 或 --output 指定的目录
+├── README.md                        # 数据集卡片，含统计表
+├── traces/
+│   └── <harness>-<model>/
+│       └── <index>_<task>.jsonl     # 单个 sample 的 Agent 会话，供 Hub 的轨迹查看器展示
+├── data/
+│   └── <harness>-<model>.jsonl      # 每个 sample 一行
+└── runs/
+    └── <harness>-<model>/           # 只含该模型 sample 的 Roller run 目录
+```
+
+导出按 Harness 和模型分组，每组命名为 `<harness>-<model>`，其中模型 ID 不带
+provider：OpenClaw 上的 `vllm/glm-5` 对应 `openclaw-glm-5`。包含多个模型的 run 会按
+模型拆成多组。每个路径都带组名，因此可以把更多的 run 导出到同一个目录，数据集按
+Harness 或模型逐次增长。再次导出某一组只替换它的三个路径，其他组保持不变。
+
+`runs/` 下的每个目录都是 Roller run 目录，下载后可直接用 `roller view` 打开，其中
+只有对应模型的 sample。`info.json`、`sft.jsonl`、`sft_segments.jsonl` 和
+`bench-report.json` 按这些 sample 重新生成，使用的是采集时写这些文件的同一套代码；
+其余 run 级文件原样复制。所有 sample 都会导出，包括失败的 sample 和没有分数的
+sample。
+
+Hub 把 `traces/` 下的文件识别为
+[agent traces](https://huggingface.co/docs/hub/agent-traces)：数据集带有 **Traces**
+标签，在 Data Studio 中点开任一 sample，即可在轨迹查看器中阅读其 prompt、reasoning、
+工具调用和工具结果。每个文件是一个 sample 的 Agent 会话：
+
+| Harness | `traces/` 下的文件 |
+| --- | --- |
+| OpenClaw | 原生会话 `trace.jsonl`。会话头写入 `harness: "openclaw"`、会话 ID `<harness>-<model>/<index>_<task>`、会话名称 `<task> · <model>`，以及包含 run、sample 路径、task、状态和分数的 `roller` 对象；其余各行保持不变 |
+| Codex、Claude Code | 原生会话 `trace.jsonl`，不做修改 |
+| Hermes、OpenCode、DeepSeek、Pi | 由 ACTF 转换的会话，因为这些 Harness 的 `trace.jsonl` 使用 Roller 的事件 schema。没有 `trace_ACTF.json` 的 sample 没有对应文件 |
+
+转换得到的会话采用 Pi 的
+[会话格式](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/session-format.md)
+第 3 版；harness 在会话头中写明自己的名称后，Hub 即可读取这种格式：
+
+| 会话中的行 | 来源 |
+| --- | --- |
+| `session` 头 | Harness 名称写入 `harness`，会话 ID 为 `<harness>-<model>/<index>_<task>`，带同样的 `roller` 对象；`cwd` 为空，因为 ACTF 不记录工作目录 |
+| `model_change`、`session_info` | 由模型引用拆出的 provider 和模型 ID；会话名称为 `<task> · <model>` |
+| `system` 消息 | ACTF 顶层的 `system_prompt`，ACTF `tools` 中的函数工具写入 `toolsAdded` |
+| `user` 消息 | ACTF step 的 `user_content`（非空时）；图片保留为图片 |
+| `assistant` 消息 | 同一 step 的 `assistant_content`，拆为 `thinking`、`text` 和 `toolCall` 块，并附 step `metric` 中的 token 用量和停止原因 |
+| `toolResult` 消息 | 该 step 的每条 ACTF `observation`，并注明对应工具的名称 |
+
+轨迹查看器按会话头的 `harness` 字段显示每个会话的 Harness 名称，例如
+`openclaw trace`。
+
+卡片声明两个配置，均覆盖目录中的全部分组：默认配置 `traces` 对应
+`traces/**/*.jsonl`；`trajectories` 对应表格 `data/*.jsonl`，读取方式为
+`load_dataset("OWNER/NAME", "trajectories")`。
+
+`data/<harness>-<model>.jsonl` 的每一行描述一个 sample：
+
+| 列 | 内容 |
+| --- | --- |
+| `run`、`sample`、`trace` | 组名 `<harness>-<model>`、sample 在其 run 目录内的路径，以及其会话文件的路径 |
+| `task_id`、`upstream_task_id`、`run_index` | Task ID。使用 `--bench-runs-per-task` 的 bench 运行还包含重复前的 Task ID 和重复序号 |
+| `bench`、`category` | bench sample 的 bench 名称和类别 |
+| `model`、`harness` | sample 的模型和 Harness |
+| `status`、`error` | sample `info.json` 中的状态和错误 |
+| `score`、`grader_error` | bench 分数和评分错误。sample 未评分或评分失败时 `score` 为空 |
+| `steps`、`tool_calls` | ACTF step 数和工具调用数 |
+| `input_tokens`、`output_tokens`、`total_tokens`、`elapsed_seconds` | sample `info.json` 中的用量和耗时 |
+| `files` | `results/` 下输出文件的路径 |
+| `messages`、`tools` | sample 的 SFT record，保存为两个 JSON 字符串；sample 没有 `trace_SFT.json` 时为空 |
+
+`messages` 和 `tools` 保存为 JSON 字符串：消息内容和工具 schema 的结构在不同
+sample 之间不一致，而 Dataset Viewer 要求每列只有一种类型。读取时用 `json.loads`
+解析。
+
+卡片对目录中每个有表格的分组列出 Harness、模型、sample 数、完成数、已评分数、
+平均分、平均 step 数和 token 总量。平均分以该模型的全部 sample 为分母，与
+`roller bench report` 一致。首次导出时写入卡片；再次导出只替换 `<!-- roller:stats:start -->` 与
+`<!-- roller:stats:end -->` 之间的内容，卡片其余部分的修改会保留。
+
+导出的文件默认是脱敏后的；`--no-redact` 按原样导出。导出会替换采集环境特有的内容，
+这些内容都由 run 自己记录：
+
+| 内容 | 来源 | 替换为 |
+| --- | --- | --- |
+| 模型端点 | 各 sample 的 `provenance.api_base_urls`，以及传入容器的变量中取值为 URL 的部分 | `endpoint-1.example`、`endpoint-2.example`，依此类推；回环地址保留 |
+| 主机路径 | run 配置中的 benchmark 根目录、workspace、task 清单和 Harness 配置文件 | `<bench-root>`、`<workspace>`、`<tasks-dir>`、`<config-dir>` |
+| 凭据 | `provenance.environment_names` 中名称以 `key`、`token`、`secret`、`password` 或 `credential` 结尾的变量的取值 | `[REDACTED]` |
+
+run 只记录传入容器的变量名，不记录取值。请在采集所用的环境中执行导出，这些变量在
+那里有值，导出才能在文件中找到并替换它们。命令会输出替换了什么，并列出未设置、因而
+无法查找其取值的凭据变量。取值短于 12 个字符的视为 `local` 这类占位值，保持不变，
+因为替换它会改写轨迹中的普通词语。
+
+```text
+Exported 168 samples as a Hugging Face dataset to dataset
+Redacted: 2 endpoints, 3 host paths, the values of OPENROUTER_API_KEY
+```
+
+`--redact-rules FILE` 用于追加自定义规则，在上述替换之后应用，使用 `--no-redact`
+时同样生效：
+
+```json
+{
+  "replace": [{"pattern": "gpu-node-\\d+\\.cluster\\.internal", "with": "node"}],
+  "exclude": ["samples/*/wire_trace.jsonl"],
+  "forbid": ["sk-[A-Za-z0-9]{20,}"]
+}
+```
+
+| 键 | 作用 |
+| --- | --- |
+| `replace` | 在每个 UTF-8 文本文件中逐行把正则表达式 `pattern` 的匹配替换为 `with` |
+| `exclude` | 不复制在 run 内的路径匹配该 glob 的文件；`*` 也匹配 `/` |
+| `forbid` | 替换后仍有行匹配该正则表达式时，停止导出并给出文件和行号 |
+
+二进制文件原样复制。会话文件和表格都由脱敏后的文件生成，因此所有替换同样作用于它们。
+
+使用 Hugging Face CLI 上传该目录：
+
+```bash
+hf upload OWNER/NAME runs/demo/hf . --repo-type dataset
+```
+
+向已发布的数据集追加一个 run 时，先下载其卡片和表格，把新的 run 导出到该目录，再
+上传。上传会添加新 run 的各个分组并更新卡片，数据集中已有的分组保持不变：
+
+```bash
+hf download OWNER/NAME --repo-type dataset --include README.md --include "data/*" --local-dir dataset
+roller export runs/next --format hf --output dataset
+hf upload OWNER/NAME dataset . --repo-type dataset
+```
+
+[用两个自部署模型采集 WildClawBench](/roller/cookbook/wildclawbench-open-models/)
+完整演示了从采集到发布数据集的过程。
 
 ## 5. 诊断与辅助文件
 

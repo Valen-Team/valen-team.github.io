@@ -30,7 +30,7 @@ Choose the command for the job first, then add that command's flags.
 | `roller collect [OPTIONS]` | Reads tasks, runs a Harness, and collects trajectories |
 | `roller init [DIRECTORY]` | Writes the example tasks, configuration templates, and benchmark run configurations to `DIRECTORY/examples` (default: the current directory); existing files are kept |
 | `roller view RUN_DIR` | Opens an existing run in the Viewer |
-| `roller export RUN_DIR` | Exports the trajectories of an existing run as ATIF, the trajectory format Harbor reads, with flags in section 9 |
+| `roller export RUN_DIR` | Exports an existing run as ATIF, the trajectory format Harbor reads, or as a Hugging Face dataset folder, with flags in section 9 |
 | `roller bench ...` | Lists, runs, exports, or summarizes benchmarks, with collection flags in section 8 |
 | `roller --version` | Shows the installed Roller version |
 
@@ -329,16 +329,18 @@ See [Bench integration and scoring](/roller/benches/bench-format/) for field sem
 
 ## 9. Export flags
 
-Export flags select the run to convert and the directory that receives the converted trajectories.
+Export flags select the run to convert, the target format, and the directory that receives the result.
 
 ```bash
-roller export RUN_DIR [--format atif] [--output DIR]
+roller export RUN_DIR [--format atif|hf] [--output DIR] [--no-redact] [--redact-rules FILE]
 ```
 
 | Flag | Default | Purpose |
 | --- | --- | --- |
 | `RUN_DIR` | Required | Selects a Roller run containing `samples/` |
-| `--format` | `atif` | Selects the target format; `atif` is the Agent Trajectory Interchange Format that Harbor reads |
-| `--output` / `-o` | `RUN_DIR/atif` | Sets the directory to write |
+| `--format` | `atif` | Selects the target format: `atif`, the Agent Trajectory Interchange Format that Harbor reads, or `hf`, a Hugging Face dataset folder |
+| `--output` / `-o` | `RUN_DIR/<format>` | Sets the directory to write |
+| `--redact` / `--no-redact` | On | With `--format hf`, replaces the model endpoints, host paths, and credential values of the run in the exported files |
+| `--redact-rules` | None | With `--format hf`, names a JSON file of further `replace`, `exclude`, and `forbid` rules, applied whether or not `--redact` is on |
 
-The command writes one `trajectory.json` per sample and does not modify the run. See [ATIF export](/roller/traces/trajectory-outputs/#atif-export) for the file layout and the field mapping.
+The command does not modify the run. `--format atif` writes one `trajectory.json` per sample; see [ATIF export](/roller/traces/trajectory-outputs/#atif-export) for the file layout and the field mapping. `--format hf` writes a dataset card, the agent session of every sample for the trace viewer of the Hub, a table with one row per sample, and a Roller run directory, as one part per Harness and model named `<harness>-<model>`, so that one folder can hold several runs; see [Hugging Face export](/roller/traces/trajectory-outputs/#hugging-face-export).

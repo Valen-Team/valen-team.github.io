@@ -60,7 +60,7 @@ docker version
 docker image inspect custom-openclaw-image:tag
 ```
 
-使用官方 OpenClaw 镜像时，无需额外设置容器用户。Roller 会在一次性容器中自动准备可写工作区和本地 Gateway 配置，这些设置不会改变宿主机权限。仅当自定义镜像已为默认用户准备好可写工作区，且应以该用户运行时，才需传入 `--container-user image`。
+使用官方 OpenClaw 镜像时，无需额外设置容器用户。Roller 会在一次性容器中自动准备可写工作区和本地 Gateway 配置，这些设置不会改变宿主机权限。task 工作区位于 `/tmp_workspace`；OpenClaw 在 `/root/.openclaw/workspace` 中运行，这是 OpenClaw 安装后的默认工作区路径，Roller 把它链接到 task 工作区，会话文件记录的工作目录即为该路径。仅当自定义镜像已为默认用户准备好可写工作区，且应以该用户运行时，才需传入 `--container-user image`。
 
 ## 3. 环境变量与 API
 
