@@ -27,10 +27,10 @@ WildClawBench 任务，每个任务三次，Roller 在同一次 run 中采集并
 
 ## 1. 准备
 
-- `main` 分支的 Roller（包含 `roller export --format hf`），以及正在运行的 Docker daemon：
+- Roller 0.4.0 及以上版本（包含 `roller export --format hf`），以及正在运行的 Docker daemon：
 
   ```bash
-  pip install git+https://github.com/Valen-Team/Roller.git
+  pip install roller-agent
   ```
 
 - WildClawBench 检出目录及其镜像 `wildclawbench-ubuntu:v1.3`，见 [WildClawBench](/roller/benches/wildclawbench/)。本次运行使用的版本是 `41bfe78a4d04369887687397708504882a80c17a`。

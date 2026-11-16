@@ -29,10 +29,10 @@ what else can change.
 
 ## 1. Requirements
 
-- Roller from the `main` branch, which has `roller export --format hf`, and a running Docker daemon:
+- Roller 0.4.0 or later, which has `roller export --format hf`, and a running Docker daemon:
 
   ```bash
-  pip install git+https://github.com/Valen-Team/Roller.git
+  pip install roller-agent
   ```
 
 - A WildClawBench checkout and its image `wildclawbench-ubuntu:v1.3`. See [WildClawBench](/roller/benches/wildclawbench/). This run uses revision `41bfe78a4d04369887687397708504882a80c17a`.
