@@ -143,6 +143,7 @@ roller collect \
 | `--codex-web-search` | `disabled` | `disabled`、`cached` 或 `live` |
 | `--codex-websockets` / `--no-codex-websockets` | 关闭 | 自定义 provider 是否使用 Responses WebSocket |
 | `--codex-image-detail` | 无 | `auto`、`low`、`high` 或 `original`。Codex 发出的 Responses 图片输入未带 `detail` 时，补上该值 |
+| `--codex-tool-images-as-user` | 关闭 | 将工具返回的图片附到后续用户图片消息，兼容忽略工具图片的服务 |
 
 单一 Codex 运行可使用通用参数形式。混合 Harness 运行应使用 `--codex-image`、`--codex-api-base` 和 `--codex-api-key-env` 等专属形式，以避免将设置应用到其他参与者。
 
@@ -183,6 +184,19 @@ roller collect ... --harness codex --api-base https://example.test/v1 --codex-im
 - 请求记录代理为每个没有 `detail` 的图片输入补上该值，包括用户消息和工具输出中的图片。已带 `detail` 的内容块和不含此类图片的请求原样转发。
 - 该参数依赖请求记录代理，要求同时使用 `--api-base`、默认的 `--network host`、`--no-codex-websockets`，以及 `--wire-trace actf` 或 `full`。
 - 设置后，该值写入 `lock.json` 和 `info.json`。修改后请使用新的 `--run-name`。
+
+如果 Responses 服务能接收用户图片，却忽略 `view_image` 的图片返回值，可启用：
+
+```bash
+roller collect ... --harness codex --api-base http://localhost:8000/v1 \
+  --codex-tool-images-as-user \
+  --codex-config-set features.enable_request_compression=false
+```
+
+代理保留工具输出中的文本，将原样的图片字节附到紧随其后的用户消息。本次
+[WildClawBench 案例](/roller/cookbook/wildclawbench-open-models/)使用的 Kimi K3.1 Pro
+服务需要此设置；原生支持工具图片的服务保持关闭即可。该选项需要 HTTP 请求代理，
+启用后会记录在运行配置中。
 
 ## 6. Thinking 配置
 

@@ -143,6 +143,7 @@ This table lists Codex-specific runtime flags only. API addresses and keys are d
 | `--codex-web-search` | `disabled` | `disabled`, `cached`, or `live` |
 | `--codex-websockets` / `--no-codex-websockets` | Off | Whether a custom provider uses Responses WebSocket |
 | `--codex-image-detail` | None | `auto`, `low`, `high`, or `original`. Sets this `detail` on Responses image inputs that Codex sends without one |
+| `--codex-tool-images-as-user` | Off | Attach tool-returned images as user image messages for backends that ignore images in tool outputs |
 
 A single Codex run can use the shared flag forms. In a mixed-Harness run, use the dedicated forms such as `--codex-image`, `--codex-api-base`, and `--codex-api-key-env` so that the settings apply only to the intended participant.
 
@@ -183,6 +184,21 @@ roller collect ... --harness codex --api-base https://example.test/v1 --codex-im
 - The request recording proxy adds the value to every image input that has no `detail`, in user messages and in tool outputs. Blocks that already carry a `detail` and requests without such an image are forwarded unchanged.
 - The flag requires the proxy: `--api-base`, the default `--network host`, `--no-codex-websockets`, and `--wire-trace actf` or `full`.
 - The value is recorded in `lock.json` and `info.json` when it is set. Use a new `--run-name` after changing it.
+
+For a Responses backend that accepts user images but ignores images returned by
+`view_image`, enable `--codex-tool-images-as-user`:
+
+```bash
+roller collect ... --harness codex --api-base http://localhost:8000/v1 \
+  --codex-tool-images-as-user \
+  --codex-config-set features.enable_request_compression=false
+```
+
+The proxy keeps tool text in its original output and attaches the same image
+bytes in a following user message. This setting was needed by the Kimi K3.1 Pro
+backend in the [WildClawBench example](/roller/cookbook/wildclawbench-open-models/).
+Leave it off for backends with native multimodal tool output support. Like image
+detail, it requires the HTTP request proxy and is recorded when enabled.
 
 ## 6. Thinking configuration
 
