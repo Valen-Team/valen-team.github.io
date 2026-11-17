@@ -255,7 +255,7 @@ roller collect [原命令] --resume
 
 Resume 会先比较 `lock.json` 中影响运行行为的配置和输入摘要，再检查成功 sample 的必需产物。配置和输入一致且产物完整时，该 sample 会被跳过。产物损坏时会重新运行，配置或输入改变时会拒绝继续。
 
-只有继续原实验时才使用 `--resume`。若改变模型、镜像、thinking、wire 或其他影响运行语义的设置，应使用新的 `--run-name`。
+只有继续原实验时才使用 `--resume`。若改变现有模型的配置、镜像、thinking、wire 或其他影响运行语义的设置，应使用新的 `--run-name`；保留原有请求时可以增加模型和任务。
 
 ## 7. Viewer 参数
 
@@ -328,16 +328,31 @@ roller bench report RUN_DIR [--output REPORT.json]
 Export 参数用于选择要转换的 run、目标格式和结果的写入目录。
 
 ```bash
-roller export RUN_DIR [--format atif|hf] [--output DIR] [--no-redact] [--include-runs] [--redact-rules FILE]
+roller export RUN_DIR [--format atif|hf|sft] [--output DIR] [--min-score X] [--no-redact] [--include-runs] [--redact-rules FILE]
 ```
 
 | 参数 | 默认值 | 用途 |
 | --- | --- | --- |
 | `RUN_DIR` | 必填 | 指定包含 `samples/` 的 Roller run |
-| `--format` | `atif` | 选择目标格式：`atif` 是 Harbor 读取的 Agent Trajectory Interchange Format，`hf` 是 Hugging Face 数据集目录 |
+| `--format` | `atif` | 选择目标格式：`atif` 是 Harbor 读取的 Agent Trajectory Interchange Format，`hf` 是 Hugging Face 数据集目录，`sft` 是带逐行索引的训练数据 |
 | `--output` / `-o` | `RUN_DIR/<format>` | 设置写入目录 |
 | `--redact` / `--no-redact` | 开启 | 与 `--format hf` 配合，在导出的文件中替换 run 的模型端点、`NO_PROXY` 主机、机器名、主机路径和凭据取值 |
 | `--include-runs` | 关闭 | 与 `--format hf` 配合，额外写入 `runs/<harness>-<model>/`，即包含 sample 全部文件的 Roller run 目录 |
 | `--redact-rules` | 无 | 与 `--format hf` 配合，指定一个 JSON 文件，追加 `replace`、`exclude` 和 `forbid` 规则；无论 `--redact` 是否开启都会应用 |
 
 该命令不修改 run。`--format atif` 为每个 sample 写入一个 `trajectory.json`，文件布局和字段对应关系见 [ATIF 导出](/roller/traces/trajectory-outputs/#atif-export)。`--format hf` 写入数据集卡片、供 Hub 轨迹查看器展示的 Agent 会话（每个 sample 一个）、以及每个 sample 一行的表格，并按 Harness 和模型分组、命名为 `<harness>-<model>`，同一目录可容纳多个 run，见 [Hugging Face 导出](/roller/traces/trajectory-outputs/#hugging-face-export)。
+
+## 采集恢复与诊断
+
+采集在启动容器前预检任务环境变量、agent API key 和评分器环境变量，`--dry-run` 也执行检查。每个样本完成时输出进度和 ETA；60 秒没有完成样本则输出心跳及运行最久的样本。`<run>/collect.log` 保留 INFO 日志，不受控制台静默等级影响。
+
+| 选项 | 默认 | 行为 |
+| --- | --- | --- |
+| `--max-consecutive-errors N` | `10` | 连续 N 个 rollout error 后停止派发，等待已运行样本完成；`0` 关闭熔断。超时不计入连续错误数，成功样本重置计数。 |
+| `--retry-backoff SECONDS` | `0` | 样本重试等待时间，每次重试翻倍。 |
+| `--grader-retries N` | `2` | 在同一容器重试失败评分器，依次等待 5 秒、10 秒；运行超过 600 秒的评分器不再重试。 |
+| `--resume --resume-unscored` | 关闭 | 重跑 agent 成功但评分失败的样本，会再次调用 agent。 |
+
+第一次 Ctrl-C 停止派发并等待运行中的样本；第二次 Ctrl-C、SIGTERM 或 SIGHUP 清理当前采集进程的容器并写中断检查点。调用方明确忽略的信号保持忽略。不可捕获的 kill 之后，先用 `roller clean RUN_DIR --dry-run` 检查残留，再执行 `roller clean RUN_DIR`。清理默认保留仍在运行或归属不明的容器；`--force` 可以强制移除。
+
+Resume 允许增加任务和模型，但原有请求必须全部保留且不变。同一主版本、次版本内的补丁升级兼容；执行配置和输入仍受锁约束。有效主数据对应的派生 SFT 文件可原地重建，无需再次调用模型。

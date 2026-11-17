@@ -219,3 +219,13 @@ User Simulator rollout 的 Task Agent SFT 位于根 sample，模拟用户自身�
 同一条 assistant 消息中的多个工具调用可能按任意顺序完成。SFT 导出按 `tool_call_id` 配对，然后按该消息的 `tool_calls` 数组顺序输出 tool 消息；不会按工具名或 ID 字典序排序，也不会跨 step 移动结果。重复、缺失、无对应调用或工具名不匹配的结果仍会导致转换失败。
 
 图片在结果重排后按消息顺序加入顶层 `images`，因此第 N 个 `<image>` 仍对应 `images[N-1]`。原始轨迹和 ACTF 的 observation 顺序保持不变，可用于检查实际完成顺序。此规则统一训练数据顺序，不表示原来的逆序结果在按 ID 配对时发生了内容错配。已生成的 SFT 文件不会自动重写，重新导出后才会应用此规则。
+
+## 得分与记录索引
+
+采集在 `sft.jsonl` 旁写入 `sft_index.jsonl`，在 `sft_segments.jsonl` 旁写入 `sft_segments_index.jsonl`。索引与训练记录逐行同序对应，包含 task ID、模型、Harness、样本路径、benchmark、分类和得分；训练记录自身格式保持不变。
+
+```bash
+roller export RUN_DIR --format sft --min-score 0.5 --output training
+```
+
+该命令从样本重建数据集及索引，仅保留得分至少 0.5 的样本，排除未评分样本。不指定 `--min-score` 时，采集和导出仍保留成功且符合训练条件的零分样本。得分由 `roller bench report` 使用的同一 benchmark adapter 计算。

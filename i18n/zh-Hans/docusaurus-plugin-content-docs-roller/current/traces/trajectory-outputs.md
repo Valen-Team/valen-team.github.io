@@ -877,3 +877,9 @@ OpenCode raw 使用 `roller.opencode-events/v1`：记录 provider 序列化请�
 DeepSeek raw 使用 `roller.deepseek-events/v1`，保存 SDK 原生通知和序列化请求，不生成 OpenClaw cache trace。详见 [DeepSeek Harness](/roller/harnesses/deepseek-configuration/)。
 
 Pi raw 使用 `roller.pi-events/v1`，记录原生事件、context、实际请求与轮次边界；不要求 OpenClaw cache trace。详见 [Pi Agent](/roller/harnesses/pi-configuration/)。
+
+## 导出密钥检测与审阅
+
+HF 导出默认识别并替换常见密钥形态，即使导出环境没有原始凭据：`sk-` key、GitHub/Hugging Face token、AWS access ID 与具名 secret key、JWT、Bearer 凭据、URL 密码及 PEM 私钥。`--no-redact` 同时关闭形态替换和环境脱敏；自定义规则仍会应用。
+
+每次导出在输出目录旁写入 `<output>.redaction-report.json`，按文件、行号和类型报告疑似残留邮箱、内网 IPv4、个人 home 路径和凭据，不重复匹配值。邮箱、内网地址和 home 路径可能属于 benchmark 内容，因此保留原文供审阅；无法扫描的二进制文件单独列出。检测采用启发式规则，不能证明导出完全没有秘密。使用 `--include-runs` 时，共享文件会排除已有 `atif/`、`hf/`、`sft/` 导出目录和先前的审阅报告。

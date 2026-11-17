@@ -248,3 +248,13 @@ simulated user's own SFT is at `user_simulator/trace_SFT.json`. Run-level
 Tools called in one assistant message may finish in any order. SFT export pairs results by `tool_call_id` and emits tool messages in that assistant message's `tool_calls` array order. It does not sort by tool name or lexicographic ID, or move results across steps. Duplicate, missing, unmatched and name-mismatched results still fail conversion.
 
 Images are appended to the top-level `images` list after ordering results, so the Nth `<image>` still maps to `images[N-1]`. Raw traces and ACTF observation order remain unchanged, so the actual completion order can still be inspected. This rule makes the order of training output canonical; results in reversed order were not necessarily mispaired when consumed by ID. Existing SFT files are not rewritten automatically; re-export them to apply this ordering.
+
+## Scores and record indexes
+
+Collection writes `sft_index.jsonl` beside `sft.jsonl`, and `sft_segments_index.jsonl` beside `sft_segments.jsonl`. Each index has one line per training record in the same order, with task ID, model, Harness, sample path, benchmark, category and score. Training records retain their original schema.
+
+```bash
+roller export RUN_DIR --format sft --min-score 0.5 --output training
+```
+
+This rebuilds the datasets and indexes from samples, retaining scores at least 0.5 and excluding unscored samples. Without `--min-score`, collection and export retain successful, training-eligible samples even at zero score. Scores use the same benchmark adapter as `roller bench report`.

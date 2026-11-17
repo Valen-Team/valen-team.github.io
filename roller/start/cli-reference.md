@@ -259,7 +259,7 @@ roller collect [original command] --resume
 
 Resume first compares the execution settings and input digests in `lock.json`, then checks the required artifacts of successful samples. A sample is skipped when its settings and inputs match and its artifacts are complete. Damaged artifacts are rerun. Changed settings or inputs cause Resume to stop.
 
-Use `--resume` only for the same experiment. Start a new `--run-name` after changing the model, image, thinking, wire, or any other setting that affects execution.
+Use `--resume` only for the same experiment. Start a new `--run-name` after changing existing model settings, image, thinking, wire, or other execution settings. Adding new models and tasks is supported when existing requests remain unchanged.
 
 ## 7. Viewer flags
 
@@ -332,16 +332,31 @@ See [Bench integration and scoring](/roller/benches/bench-format/) for field sem
 Export flags select the run to convert, the target format, and the directory that receives the result.
 
 ```bash
-roller export RUN_DIR [--format atif|hf] [--output DIR] [--no-redact] [--include-runs] [--redact-rules FILE]
+roller export RUN_DIR [--format atif|hf|sft] [--output DIR] [--min-score X] [--no-redact] [--include-runs] [--redact-rules FILE]
 ```
 
 | Flag | Default | Purpose |
 | --- | --- | --- |
 | `RUN_DIR` | Required | Selects a Roller run containing `samples/` |
-| `--format` | `atif` | Selects the target format: `atif`, the Agent Trajectory Interchange Format that Harbor reads, or `hf`, a Hugging Face dataset folder |
+| `--format` | `atif` | Selects the target format: `atif`, the Agent Trajectory Interchange Format that Harbor reads, `hf`, a Hugging Face dataset folder, or `sft`, training records with aligned indexes |
 | `--output` / `-o` | `RUN_DIR/<format>` | Sets the directory to write |
 | `--redact` / `--no-redact` | On | With `--format hf`, replaces the model endpoints, `NO_PROXY` hosts, machine name, host paths, and credential values of the run in the exported files |
 | `--include-runs` | Off | With `--format hf`, also writes `runs/<harness>-<model>/`, a Roller run directory with every file of the samples |
 | `--redact-rules` | None | With `--format hf`, names a JSON file of further `replace`, `exclude`, and `forbid` rules, applied whether or not `--redact` is on |
 
 The command does not modify the run. `--format atif` writes one `trajectory.json` per sample; see [ATIF export](/roller/traces/trajectory-outputs/#atif-export) for the file layout and the field mapping. `--format hf` writes a dataset card, the agent session of every sample for the trace viewer of the Hub, and a table with one row per sample, as one part per Harness and model named `<harness>-<model>`, so that one folder can hold several runs; see [Hugging Face export](/roller/traces/trajectory-outputs/#hugging-face-export).
+
+## Collection recovery and diagnostics
+
+Collection checks required task variables, agent API keys and grader variables before launching containers, including with `--dry-run`. Every completed rollout logs progress and ETA; a 60-second heartbeat lists the longest running samples. `<run>/collect.log` retains INFO messages even with a quieter console.
+
+| Option | Default | Behavior |
+| --- | --- | --- |
+| `--max-consecutive-errors N` | `10` | Stop dispatching after N consecutive rollout errors; `0` disables the breaker. Timeouts reset the streak. Running rollouts finish. |
+| `--retry-backoff SECONDS` | `0` | Delay sample retries, doubling after each retry. |
+| `--grader-retries N` | `2` | Retry a failed grader in the same container, with 5s then 10s backoff. Graders that took over 600s are not retried. |
+| `--resume --resume-unscored` | Off | Rerun successful agents whose grading failed; this calls the agent again. |
+
+The first Ctrl-C stops dispatch and waits for running samples. A second Ctrl-C, SIGTERM or SIGHUP removes this collector's containers and writes an interrupted checkpoint. An explicitly ignored signal remains ignored. After an uncatchable kill, inspect leftovers with `roller clean RUN_DIR --dry-run`, then run `roller clean RUN_DIR`. Cleanup keeps containers belonging to live or unknown collectors unless `--force` is supplied.
+
+Resume accepts added tasks and models when every recorded request is still present and unchanged. Roller patch releases within the same major/minor version are compatible; changes to execution settings and inputs remain locked. Derived SFT files are rebuilt from valid primary evidence without calling the model again.

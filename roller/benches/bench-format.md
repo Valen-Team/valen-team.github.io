@@ -310,3 +310,9 @@ See each bench's README for its configuration (see §6.1):
 Before running, check the README's parameter mappings and unsupported options.
 Missing configuration may change evaluation conditions without raising an
 error, making scores unsuitable for direct comparison.
+
+## Reports and failed grading
+
+Reports group results by model (and Harness when needed). Multi-model reports contain no combined average. Every collected sample, including agent startup errors, remains in its model's denominator; category averages use the same rule. Reports show scored and unscored counts and reasons, plus an average over scored samples for diagnosis. Planned requests without any sample are listed separately.
+
+A genuine score of zero is scored. A grader error is unscored and makes collection exit unsuccessfully. Fix its cause and use `--resume --resume-unscored` to rerun only affected samples; the agent is run again because its disposable workspace is gone. `--grader-retries` retries grading before the live container is removed.

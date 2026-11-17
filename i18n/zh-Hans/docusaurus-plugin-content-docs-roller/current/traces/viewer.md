@@ -155,3 +155,7 @@ roller view /path/to/run --port 17866
 
 输入路径必须是 run 根目录，而不是 `samples/`、单个 sample 或
 `trace_ACTF.json`。合法根目录包含 run `info.json` 或 `samples/`。
+
+## 语言与 benchmark 得分
+
+Viewer 默认英文，可用页头 **EN / 中文** 切换，浏览器会记住选择。Benchmark run 在样本概览显示得分和评分器错误，支持按分数排序，以及 **大于零 / 零 / 未评分** 筛选；这些分组不是通过阈值。用户消息中的图片块与工具结果图片都可直接显示。

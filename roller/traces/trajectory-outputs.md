@@ -1052,3 +1052,9 @@ OpenCode raw uses `roller.opencode-events/v1`: serialized provider requests, nat
 DeepSeek raw uses `roller.deepseek-events/v1`: native SDK notifications and serialized requests. It produces no OpenClaw cache trace. See [DeepSeek Harness](/roller/harnesses/deepseek-configuration/).
 
 Pi raw uses `roller.pi-events/v1`: native events, contexts, actual requests, and turn boundaries. No OpenClaw cache trace is required. See [Pi Agent](/roller/harnesses/pi-configuration/).
+
+## Export credential detection and review
+
+HF export replaces common credential shapes even when the original credential is absent from the exporting environment: `sk-` keys, GitHub and Hugging Face tokens, AWS access IDs and named secret keys, JWTs, Bearer credentials, URL passwords and PEM private keys. `--no-redact` disables these replacements as well as environment redaction; custom rules still apply.
+
+Each export writes `<output>.redaction-report.json` beside the output directory. It reports possible residual emails, private IPv4 addresses, personal home paths and credential shapes by file, line and kind, without repeating matched values. Emails, private addresses and home paths are left intact for review because they may be benchmark content. Binary files that could not be scanned are listed. Detection is heuristic and does not establish that an export contains no secrets. With `--include-runs`, existing `atif/`, `hf/`, `sft/` export directories and prior review reports are excluded from shared run files.
