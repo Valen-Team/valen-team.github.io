@@ -30,6 +30,7 @@ Choose the command for the job first, then add that command's flags.
 | `roller collect [OPTIONS]` | Reads tasks, runs a Harness, and collects trajectories |
 | `roller init [DIRECTORY]` | Writes the example tasks, configuration templates, and benchmark run configurations to `DIRECTORY/examples` (default: the current directory); existing files are kept |
 | `roller view RUN_DIR` | Opens an existing run in the Viewer |
+| `roller import [PATH ...]` | Imports the local Claude Code and Codex sessions as a run, with flags in section 10 |
 | `roller export RUN_DIR` | Exports an existing run as ATIF, the trajectory format Harbor reads, or as a Hugging Face dataset folder, with flags in section 9 |
 | `roller bench ...` | Lists, runs, exports, or summarizes benchmarks, with collection flags in section 8 |
 | `roller --version` | Shows the installed Roller version |
@@ -345,6 +346,27 @@ roller export RUN_DIR [--format atif|hf|sft] [--output DIR] [--min-score X] [--n
 | `--redact-rules` | None | With `--format hf`, names a JSON file of further `replace`, `exclude`, and `forbid` rules, applied whether or not `--redact` is on |
 
 The command does not modify the run. `--format atif` writes one `trajectory.json` per sample; see [ATIF export](/roller/traces/trajectory-outputs/#atif-export) for the file layout and the field mapping. `--format hf` writes a dataset card, the agent session of every sample for the trace viewer of the Hub, and a table with one row per sample, as one part per Harness and model named `<harness>-<model>`, so that one folder can hold several runs; see [Hugging Face export](/roller/traces/trajectory-outputs/#hugging-face-export).
+
+## 10. Import flags
+
+Import flags select the local sessions to turn into a run and where to write it.
+
+```bash
+roller import [PATH ...] [--harness claude-code|codex] [--output DIR] [--run-name NAME] [--since YYYY-MM-DD] [--project GLOB]... [--parallel N] [--dry-run]
+```
+
+| Flag | Default | Purpose |
+| --- | --- | --- |
+| `PATH ...` | `~/.claude/projects`, `~/.codex/sessions`, `~/.codex/archived_sessions` | Selects session files or directories; `CLAUDE_CONFIG_DIR` and `CODEX_HOME` move the defaults |
+| `--harness` | Both | Imports only `claude-code` or `codex` sessions |
+| `--output` | `runs` | Sets the output root |
+| `--run-name` | `imported` | Sets the run directory name |
+| `--since` | All | Imports the sessions that started on or after this date |
+| `--project` | All | Imports the sessions whose project matches the glob; can be repeated |
+| `--parallel` | `4` | Converts this many sessions at once |
+| `--dry-run` | Off | Lists the sessions by project without writing anything |
+
+Running the command again skips unchanged sessions. See [Session import](/roller/traces/import/) for the files read, the sample layout, SFT records and redaction before upload.
 
 ## Collection recovery and diagnostics
 

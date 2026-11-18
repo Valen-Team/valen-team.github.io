@@ -30,6 +30,7 @@ roller view --help
 | `roller collect [OPTIONS]` | 读取 task，运行 Harness 并采集轨迹 |
 | `roller init [DIRECTORY]` | 将示例 task、配置模板和 benchmark 运行配置写入 `DIRECTORY/examples`（默认当前目录），已存在的文件保持不变 |
 | `roller view RUN_DIR` | 在 Viewer 中浏览已有 run |
+| `roller import [PATH ...]` | 把本机 Claude Code 和 Codex 会话导入成 run，参数见第 10 节 |
 | `roller export RUN_DIR` | 把已有 run 导出为 Harbor 读取的轨迹格式 ATIF，或导出为 Hugging Face 数据集目录，参数见第 9 节 |
 | `roller bench ...` | 列出、运行、导出或汇总 benchmark，采集参数见第 8 节 |
 | `roller --version` | 查看当前安装的 Roller 版本 |
@@ -341,6 +342,27 @@ roller export RUN_DIR [--format atif|hf|sft] [--output DIR] [--min-score X] [--n
 | `--redact-rules` | 无 | 与 `--format hf` 配合，指定一个 JSON 文件，追加 `replace`、`exclude` 和 `forbid` 规则；无论 `--redact` 是否开启都会应用 |
 
 该命令不修改 run。`--format atif` 为每个 sample 写入一个 `trajectory.json`，文件布局和字段对应关系见 [ATIF 导出](/roller/traces/trajectory-outputs/#atif-export)。`--format hf` 写入数据集卡片、供 Hub 轨迹查看器展示的 Agent 会话（每个 sample 一个）、以及每个 sample 一行的表格，并按 Harness 和模型分组、命名为 `<harness>-<model>`，同一目录可容纳多个 run，见 [Hugging Face 导出](/roller/traces/trajectory-outputs/#hugging-face-export)。
+
+## 10. Import 参数
+
+Import 参数用于选择要导入成 run 的本机会话和写入位置。
+
+```bash
+roller import [PATH ...] [--harness claude-code|codex] [--output DIR] [--run-name NAME] [--since YYYY-MM-DD] [--project GLOB]... [--parallel N] [--dry-run]
+```
+
+| 参数 | 默认值 | 用途 |
+| --- | --- | --- |
+| `PATH ...` | `~/.claude/projects`、`~/.codex/sessions`、`~/.codex/archived_sessions` | 指定会话文件或目录；`CLAUDE_CONFIG_DIR`、`CODEX_HOME` 可改变默认目录 |
+| `--harness` | 两种都导 | 只导入 `claude-code` 或 `codex` 的会话 |
+| `--output` | `runs` | 设置输出根目录 |
+| `--run-name` | `imported` | 设置 run 目录名 |
+| `--since` | 全部 | 只导入此日期及之后开始的会话 |
+| `--project` | 全部 | 只导入项目名匹配 glob 的会话，可重复 |
+| `--parallel` | `4` | 同时转换的会话数 |
+| `--dry-run` | 关闭 | 按项目列出会话，不写文件 |
+
+再次运行时跳过未变化的会话。导入哪些文件、sample 结构、SFT 记录和上传前的脱敏见 [会话导入](/roller/traces/import/)。
 
 ## 采集恢复与诊断
 
