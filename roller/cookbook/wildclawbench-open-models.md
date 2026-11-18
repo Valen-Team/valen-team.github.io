@@ -1,14 +1,14 @@
 ---
-title: "WildClawBench with four models and two Harnesses"
-description: "Collect, grade and browse WildClawBench trajectories with OpenClaw and Codex, using four self-hosted models."
+title: "WildClawBench with four models and three Harnesses"
+description: "Collect, grade and browse WildClawBench trajectories with OpenClaw, Codex and Claude Code, using four self-hosted models."
 ---
 
-# WildClawBench with four models and two Harnesses
+# WildClawBench with four models and three Harnesses
 
 This example collects real agent trajectories with DeepSeek-V4.1-Flash-1017,
 GLM-5.3-Flash, Kimi K3 and Kimi K3.1 Pro. Each published model–Harness collection runs the same 28 tasks
-three times. The dataset contains four OpenClaw collections and two Codex
-collections, for DeepSeek and GLM. Roller starts the task container, collects
+three times. The dataset contains 1,008 attempts across OpenClaw, Codex and
+Claude Code. Roller starts the task container, collects
 the session, grades the work and exports a dataset that opens in the HF trace viewer.
 
 [Browse the trajectories](https://huggingface.co/datasets/Valen-Team/Roller-WildClawBench-Trajectories)
@@ -18,19 +18,19 @@ to collect your own model.
 | Item | Setting |
 | --- | --- |
 | Tasks | 28 WildClawBench tasks using local assets and the task's mock services |
-| Repetitions | 3 per task and model: 84 attempts per collection; 336 OpenClaw and 168 Codex attempts |
+| Repetitions | 3 per task and model, for 84 attempts per collection and 336 per Harness |
 | Models | DeepSeek-V4.1-Flash-1017, GLM-5.3-Flash, Kimi K3, Kimi K3.1 Pro |
-| Harnesses | OpenClaw 2026.3.11; Codex CLI 0.149.0 |
-| Judge | GLM-5.3-Flash, the same model for both batches |
+| Harnesses | OpenClaw 2026.3.11, Codex CLI 0.149.0 and Claude Code 2.1.222 |
+| Judge | GLM-5.3-Flash, the same judge for all three Harnesses |
 | Limits | Original task timeouts; 120-second grader timeout; no Roller retries |
 | Collection | 8 rollout workers per model; concurrent jobs shared 2 grader slots |
 
 ## Batches
 
-The dataset retains 336 OpenClaw attempts and adds 168 Codex attempts from
-DeepSeek and GLM. Each model–Harness collection contains 84 attempts. Batch
-notes record the versions and settings, and the HF tables include scores,
-execution status and grader errors for every attempt.
+Each of the 12 model–Harness collections contains 84 attempts. The dataset
+card records the versions and settings. The comparison uses all attempts
+and counts missing scores as zero in the means. The trajectory table retains
+missing scores as null and includes execution status and grader errors.
 
 ## 1. Requirements
 
@@ -51,17 +51,19 @@ cd examples/cookbook/wildclawbench-open-models
 export WILDCLAWBENCH_ROOT=~/WildClawBench
 ```
 
-The two public task images keep the benchmark environment:
+The public task images keep the benchmark environment:
 
 ```bash
 docker pull ghcr.io/valen-team/roller-wildclaw-base:1.3-clean.1
 docker pull ghcr.io/valen-team/roller-wildclaw-codex:1.3-codex0.149.0
+docker pull ghcr.io/valen-team/roller-wildclaw-claude-code:1.3-claude2.1.222
 ```
 
 The base removes personal builder credentials and identity state from the
 original image; its old layers are not part of the published image. The
-Codex derivative adds the CLI, Node.js and ripgrep. Task inputs and deliberate
-test keys are staged separately from the benchmark checkout and stay unchanged.
+Codex derivative adds the CLI, Node.js and ripgrep. The Claude Code image
+installs the pinned CLI from the npm registry on first use in a new container.
+Roller stages task inputs and deliberate test keys from the benchmark checkout.
 See the [build instructions](https://github.com/Valen-Team/Roller/tree/main/docker/wildclawbench).
 
 ## 2. Configure a judge
@@ -138,7 +140,44 @@ at the configured server defaults. The published settings were:
 The Codex collection retained those backend defaults and used a 32,768-token
 response cap. New runs can use the settings supported by their own endpoint.
 
-## 5. Inspect and export
+## 5. Collect with Claude Code
+
+Use an Anthropic Messages endpoint that supports streaming, tool calls and
+images returned by tools. Set the model ID exactly as the endpoint exposes it.
+
+```bash
+export MODEL=glm-5.3-flash
+export ANTHROPIC_BASE_URL=http://localhost:8000
+export ANTHROPIC_API_KEY=not-required
+./collect-claude-code.sh --dry-run
+./collect-claude-code.sh
+```
+
+For a one-task trial, use the same `one-task.txt` as above:
+
+```bash
+TASK_IDS_FILE="$PWD/one-task.txt" RUNS_PER_TASK=1 PARALLEL=1 \
+  RUN_NAME=wildclawbench-claude-code-check ./collect-claude-code.sh
+```
+
+The published collection used a local image with the same CLI version installed
+before the tasks started. Set `CLAUDE_CODE_IMAGE` to use that local build.
+See the [task image recipe](https://github.com/Valen-Team/Roller/tree/main/docker/wildclawbench).
+
+If your Messages gateway rejects PDF `document` blocks, install the PDF
+dependencies with `pip install -e '.[pdf]'` from the Roller checkout. Pass
+`--claude-pdf-as-images` to the script to send each page as extracted text and a
+PNG. Roller records the forwarded request in the wire trace. Set
+`CLAUDE_CODE_MAX_CONTEXT_TOKENS` to the endpoint's configured context window
+if Claude Code needs to compact sooner.
+
+For this collection, the four endpoints used Messages and Claude Code requested
+up to 32,000 output tokens. Retries for rejected PDFs used the page conversion
+option. GLM retries for context errors used the endpoint's 98,304-token window.
+The dataset keeps one row for each task and repetition, including errors and
+timeouts after those settings were applied.
+
+## 6. Inspect and export
 
 ```bash
 roller view runs/wildclawbench-codex-glm
@@ -156,7 +195,7 @@ replacing known environment credentials, collection endpoints and host paths.
 Adjust the example `redact.json` for environment-specific values and review the
 exported content before publishing. See [trajectory outputs](/roller/traces/trajectory-outputs/#hugging-face-export).
 
-## 6. Append to an HF dataset
+## 7. Append to an HF dataset
 
 ```bash
 hf upload <owner>/<dataset> dataset . --repo-type dataset
