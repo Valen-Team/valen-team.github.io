@@ -1,14 +1,14 @@
 ---
-title: "WildClawBench with four models and three Harnesses"
-description: "Collect, grade and browse WildClawBench trajectories with OpenClaw, Codex and Claude Code, using four self-hosted models."
+title: "WildClawBench with four models and four Harnesses"
+description: "Collect, grade and browse WildClawBench trajectories with OpenClaw, Codex, Claude Code and DeepSeek Harness, using four self-hosted models."
 ---
 
-# WildClawBench with four models and three Harnesses
+# WildClawBench with four models and four Harnesses
 
 This example collects real agent trajectories with DeepSeek-V4.1-Flash-1017,
 GLM-5.3-Flash, Kimi K3 and Kimi K3.1 Pro. Each published model–Harness collection runs the same 28 tasks
-three times. The dataset contains 1,008 attempts across OpenClaw, Codex and
-Claude Code. Roller starts the task container, collects
+three times. The dataset contains 1,344 attempts across OpenClaw, Codex, Claude Code and
+DeepSeek Harness. Roller starts an isolated environment, collects
 the session, grades the work and exports a dataset that opens in the HF trace viewer.
 
 [Browse the trajectories](https://huggingface.co/datasets/Valen-Team/Roller-WildClawBench-Trajectories)
@@ -20,22 +20,22 @@ to collect your own model.
 | Tasks | 28 WildClawBench tasks using local assets and the task's mock services |
 | Repetitions | 3 per task and model, for 84 attempts per collection and 336 per Harness |
 | Models | DeepSeek-V4.1-Flash-1017, GLM-5.3-Flash, Kimi K3, Kimi K3.1 Pro |
-| Harnesses | OpenClaw 2026.3.11, Codex CLI 0.149.0 and Claude Code 2.1.222 |
-| Judge | GLM-5.3-Flash, the same judge for all three Harnesses |
+| Harnesses | OpenClaw 2026.3.11, Codex CLI 0.149.0 and Claude Code 2.1.222, and DeepSeek Harness 0.1.5rc1 |
+| Judge | GLM-5.3-Flash, the same judge for all four Harnesses |
 | Limits | Original task timeouts; 120-second grader timeout; no Roller retries |
 | Collection | 8 rollout workers per model; concurrent jobs shared 2 grader slots |
 
 ## Batches
 
-Each of the 12 model–Harness collections contains 84 attempts. The dataset
+Each of the 16 model–Harness collections contains 84 attempts. The dataset
 card records the versions and settings. The comparison uses all attempts
 and counts missing scores as zero in the means. The trajectory table retains
 missing scores as null and includes execution status and grader errors.
 
 ## 1. Requirements
 
-The new options in this example are not in PyPI 0.4.0. Install Roller from a
-Git checkout and have Docker running:
+Install Roller from a Git checkout. Use a running Docker daemon for Docker
+collection, or Python 3.11 or later for E2B.
 
 ```bash
 git clone https://github.com/Valen-Team/Roller.git
@@ -177,7 +177,34 @@ option. GLM retries for context errors used the endpoint's 98,304-token window.
 The dataset keeps one row for each task and repetition, including errors and
 timeouts after those settings were applied.
 
-## 6. Inspect and export
+## 6. Collect with DeepSeek Harness
+
+Use a Chat Completions endpoint that streams tool calls. For image tasks, select
+a model that accepts images.
+
+For Docker, build the task image from the Roller repository root, then change
+to the example directory.
+
+```bash
+docker build --build-arg BASE_IMAGE=ghcr.io/valen-team/roller-wildclaw-base:1.3-clean.1 \
+  -t roller-wildclaw-deepseek:1.3-deepseek0.1.5rc1 docker/deepseek
+cd examples/cookbook/wildclawbench-open-models
+export DEEPSEEK_IMAGE=roller-wildclaw-deepseek:1.3-deepseek0.1.5rc1
+export MODEL=your-model-id
+export MODEL_BASE=https://model.example/v1
+./collect-deepseek.sh --dry-run
+./collect-deepseek.sh --deepseek-profile sdk --deepseek-input-modalities text,image
+```
+
+For E2B, follow the [public template recipe](https://github.com/Valen-Team/Roller/tree/main/docker/wildclawbench#e2b-template)
+to install `.[e2b]` and build a template. Set `E2B_API_KEY`,
+`SANDBOX_PROVIDER=e2b` and `SANDBOX_TEMPLATE` on the collector, then run the
+same script. Use model and judge endpoints reachable from the E2B sandbox.
+For a first run with a local grader, use the template recipe's single-task
+command with the calendar scheduling task. It installs its warmup dependencies
+from PyPI.
+
+## 7. Inspect and export
 
 ```bash
 roller view runs/wildclawbench-codex-glm
@@ -195,7 +222,7 @@ replacing known environment credentials, collection endpoints and host paths.
 Adjust the example `redact.json` for environment-specific values and review the
 exported content before publishing. See [trajectory outputs](/roller/traces/trajectory-outputs/#hugging-face-export).
 
-## 7. Append to an HF dataset
+## 8. Append to an HF dataset
 
 ```bash
 hf upload <owner>/<dataset> dataset . --repo-type dataset

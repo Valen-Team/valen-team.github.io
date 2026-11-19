@@ -40,6 +40,16 @@ docker build -t roller-deepseek:0.1.5rc1 docker/deepseek
 
 默认基础镜像为 `python:3.12-slim`，支持 Linux x86_64 和 aarch64。如需更换基础镜像或 Debian 软件源，请参见 [Docker 构建与镜像源](/roller/start/docker-builds/)。
 
+
+### 在 E2B 上运行 WildClawBench
+
+采集端使用 Python 3.11 或更高版本，从 Roller 检出安装 `e2b` 扩展。
+按[模板配方](https://github.com/Valen-Team/Roller/tree/main/docker/wildclawbench#e2b-template)
+构建使用固定 Harness 运行时的模板。设置采集端的 `E2B_API_KEY`，
+在单代理 WildClawBench 采集中传入
+`--sandbox-provider e2b --sandbox-template "$E2B_TEMPLATE"`。
+模型端点和评分端点须能从沙箱访问。Roller 记录模板构建版本，并在收回任务产物和评分后释放实例。
+
 ## 3. 环境变量与 API
 
 DeepSeek Harness 连接支持流式响应、工具调用和 DeepSeek thinking 字段的 Chat Completions 服务。首次运行需要准备 API 地址、API Key 和模型 ID。

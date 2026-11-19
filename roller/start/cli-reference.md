@@ -151,6 +151,8 @@ These flags select the image, Docker runtime settings, and model-service connect
 | Flag | Default | Purpose |
 | --- | --- | --- |
 | `--docker-image IMAGE` | Pinned image for the Harness | Overrides the Harness image for this run |
+| `--sandbox-provider NAME` | `docker` | Selects Docker, E2B, or an installed provider for single-agent DeepSeek WildClawBench runs |
+| `--sandbox-template TEMPLATE` | — | Template to use when a remote provider is selected |
 | `--container-user USER` | `0` | Sets the disposable container user, `image` keeps the image default |
 | `--docker-binary PATH` | `docker` | Selects the Docker CLI name or path |
 | `--network MODE` | `host` | Sets the container network mode, some full wire-trace paths require host networking |
