@@ -40,6 +40,17 @@ The image contains the official SDK and runtime. The host does not need a separa
 
 The default base image is `python:3.12-slim`, with Linux x86_64 and aarch64 support. For another base image or Debian mirror, see [Docker builds and package mirrors](/roller/start/docker-builds/).
 
+
+### E2B for WildClawBench
+
+Use Python 3.11 or later on the collector and install the `e2b` extra from the
+Roller checkout. The [template recipe](https://github.com/Valen-Team/Roller/tree/main/docker/wildclawbench#e2b-template)
+uses the same pinned Harness runtime. With the template built, set `E2B_API_KEY`
+on the collector and pass `--sandbox-provider e2b --sandbox-template "$E2B_TEMPLATE"`
+to a single-agent WildClawBench collection. Configure actor and judge endpoints
+that the sandbox can reach. Roller records the template build in the run and
+releases the instance after collecting the outputs and grader result.
+
 ## 3. Environment variables and API
 
 The DeepSeek Harness connects to a Chat Completions service that supports streaming, tool calls, and DeepSeek thinking fields. A first run requires an API address, an API key, and a model ID.

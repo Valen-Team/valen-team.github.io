@@ -151,6 +151,8 @@ roller collect ... --retries 3 --retry-backoff 30
 | 参数 | 默认值 | 用途 |
 | --- | --- | --- |
 | `--docker-image IMAGE` | 对应 Harness 固定镜像 | 覆盖本次运行使用的 Harness 镜像 |
+| `--sandbox-provider NAME` | `docker` | 为单代理 DeepSeek WildClawBench 选择 Docker、E2B 或已安装的 provider |
+| `--sandbox-template TEMPLATE` | — | 选择远程 provider 时使用的模板 |
 | `--container-user USER` | `0` | 设置一次性容器用户，`image` 表示沿用镜像默认用户 |
 | `--docker-binary PATH` | `docker` | 指定 Docker CLI 的名称或路径 |
 | `--network MODE` | `host` | 设置容器网络模式，部分 full wire trace 功能依赖 host network |

@@ -1,13 +1,13 @@
 ---
-title: "四个模型、三种 Harness 采集 WildClawBench"
-description: "用 OpenClaw、Codex 和 Claude Code 采集、评分并浏览四个自部署模型的 WildClawBench 轨迹。"
+title: "四个模型、四种 Harness 采集 WildClawBench"
+description: "用 OpenClaw、Codex、Claude Code 和 DeepSeek Harness 采集、评分并浏览四个自部署模型的 WildClawBench 轨迹。"
 ---
 
-# 四个模型、三种 Harness 采集 WildClawBench
+# 四个模型、四种 Harness 采集 WildClawBench
 
 本案例使用 DeepSeek-V4.1-Flash-1017、GLM-5.3-Flash、Kimi K3 和 Kimi K3.1 Pro，
 每组模型与 Harness 组合运行相同的 28 个任务，每题三次。数据集覆盖 OpenClaw、
-Codex 和 Claude Code，共 1,008 条轨迹。Roller 负责启动任务容器、
+Codex、Claude Code 和 DeepSeek Harness，共 1,344 条轨迹。Roller 负责启动隔离环境、
 保存会话、评分和导出，结果可以直接在 HF 的轨迹查看器中浏览。
 
 可以[浏览公开轨迹](https://huggingface.co/datasets/Valen-Team/Roller-WildClawBench-Trajectories)，
@@ -19,19 +19,19 @@ Codex 和 Claude Code，共 1,008 条轨迹。Roller 负责启动任务容器、
 | 任务 | 28 个依赖本地素材及任务自带模拟服务的 WildClawBench 任务 |
 | 重复次数 | 每模型每题 3 次，每组 84 条，每种 Harness 共 336 条 |
 | 模型 | DeepSeek-V4.1-Flash-1017、GLM-5.3-Flash、Kimi K3、Kimi K3.1 Pro |
-| Harness | OpenClaw 2026.3.11、Codex CLI 0.149.0 和 Claude Code 2.1.222 |
-| Judge | 三种 Harness 均使用 GLM-5.3-Flash |
+| Harness | OpenClaw 2026.3.11、Codex CLI 0.149.0 和 Claude Code 2.1.222、DeepSeek Harness 0.1.5rc1 |
+| Judge | 四种 Harness 均使用 GLM-5.3-Flash |
 | 时限 | 原题超时；评分 120 秒；Roller 层不重试 |
 | 并发 | 每模型 8 个 rollout；同时运行的采集作业共享 2 个评分槽位 |
 
 ## 批次
 
-12 组模型与 Harness 组合各包含 84 次尝试。数据集卡片记录版本和设置。
+16 组模型与 Harness 组合各包含 84 次尝试。数据集卡片记录版本和设置。
 对照图用全部尝试计算均分，缺分计零。轨迹表将缺分保留为 null，并记录运行状态和评分错误。
 
 ## 1. 准备环境
 
-示例使用尚未包含在 PyPI 0.4.0 中的新开关，请先从 Git 检出并安装 Roller，准备运行中的 Docker：
+从 Git 检出并安装 Roller。Docker 采集需要运行中的 Docker，E2B 采集需要 Python 3.11 或更高版本。
 
 ```bash
 git clone https://github.com/Valen-Team/Roller.git
@@ -158,7 +158,26 @@ Roller 会发送逐页提取的文本和 PNG，并在 wire trace 中记录转发
 后端拒绝 PDF 的样本使用逐页转换补跑，GLM 上下文报错的样本按端点的 98,304 token
 窗口补跑。每道题的每次重复在数据集中各有一行，包括应用这些设置后仍出现的错误和超时。
 
-## 6. 查看和导出
+## 6. 使用 DeepSeek Harness 采集
+
+模型服务需支持流式 Chat Completions 和工具调用。图像任务还需要支持图像输入的模型。
+
+Docker 路径从 Roller 仓库根目录构建任务镜像，然后进入示例目录。
+
+```bash
+docker build --build-arg BASE_IMAGE=ghcr.io/valen-team/roller-wildclaw-base:1.3-clean.1 \
+  -t roller-wildclaw-deepseek:1.3-deepseek0.1.5rc1 docker/deepseek
+cd examples/cookbook/wildclawbench-open-models
+export DEEPSEEK_IMAGE=roller-wildclaw-deepseek:1.3-deepseek0.1.5rc1
+export MODEL=your-model-id
+export MODEL_BASE=https://model.example/v1
+./collect-deepseek.sh --dry-run
+./collect-deepseek.sh --deepseek-profile sdk --deepseek-input-modalities text,image
+```
+
+使用 E2B 时，按[公开模板配方](https://github.com/Valen-Team/Roller/tree/main/docker/wildclawbench#e2b-template)安装 `.[e2b]` 并构建模板。在采集端设置 `E2B_API_KEY`、`SANDBOX_PROVIDER=e2b` 和 `SANDBOX_TEMPLATE`，再运行同一个脚本。模型端点和评分端点要能从 E2B 沙箱访问。首次试跑可用模板配方里的单题命令跑日历调度题。该题使用本地评分器，从 PyPI 安装预热依赖。
+
+## 7. 查看和导出
 
 ```bash
 roller view runs/wildclawbench-codex-glm
@@ -174,7 +193,7 @@ roller export runs/wildclawbench-codex-glm --format hf --output dataset \
 采集端点和宿主机路径。按自己的环境调整 `redact.json`，查看导出内容后再发布。
 详见[轨迹输出](/roller/traces/trajectory-outputs/#hugging-face-export)。
 
-## 7. 追加到 HF 数据集
+## 8. 追加到 HF 数据集
 
 ```bash
 hf upload <owner>/<dataset> dataset . --repo-type dataset
