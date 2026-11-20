@@ -120,6 +120,6 @@ roller export runs/my-run --format tokens
 
 ## 5. 适用范围
 
-- `--token-ids` 需要 `--capture-calls`，并在 Docker 中执行；不支持远程沙箱。
+- `--token-ids` 需要 `--capture-calls`。Roller 0.6.0 只在 Docker 中记录 token id。Roller 的 Git 版本在远程沙箱（`--sandbox-provider`）中也能记录：采集端和沙箱模板都用 `pip install git+https://github.com/Valen-Team/Roller.git` 安装，由沙箱内的请求记录代理写 `token_ids.jsonl`。
 - token id 是所服务模型的分词器编号。请把模型名称和版本与数据一起保存。
 - `roller export --format hf` 不包含 `token_ids.jsonl`。加上 `--include-runs` 时会复制 sample 的全部文件，其中包括 token id。文本脱敏作用不到 token id，除非打算公开这些 token，请在 `--redact-rules` 文件里加上 `"exclude": ["samples/*/token_ids.jsonl"]`。

@@ -398,7 +398,10 @@ Hub 把 `traces/` 下的文件识别为
 | --- | --- |
 | OpenClaw | 原生会话 `trace.jsonl`。会话头写入 `harness: "openclaw"`、会话 ID `<harness>-<model>/<index>_<task>`、会话名称 `<task> · <model>`，以及包含 run、sample 路径、task、状态和分数的 `roller` 对象；其余各行保持不变 |
 | Codex、Claude Code | 原生会话 `trace.jsonl`，不做修改 |
-| Hermes、OpenCode、DeepSeek、Pi | 从 ACTF 转换的会话。ACTF 缺失时，OpenCode 和 DeepSeek 会导出已有的原生 journal |
+| Hermes | 从 ACTF 转换的会话。Roller 的 Git 版本改为由 Hermes journal 生成一个 `hermes sessions export` 格式的会话：`id`、`source`、`model`、`system_prompt`、`started_at`、`ended_at`、`message_count`、`tool_call_count`，以及 journal 记下的 `messages`（Hermes 压缩历史之前的全部消息），另带与 OpenClaw 会话头相同的 `harness`、`name` 和 `roller` 字段 |
+| OpenCode、DeepSeek、Pi | 从 ACTF 转换的会话。ACTF 缺失时，OpenCode 和 DeepSeek 会导出已有的原生 journal |
+
+Git 版本用 `pip install git+https://github.com/Valen-Team/Roller.git` 安装。
 
 转换得到的会话采用 Pi 的
 [会话格式](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/session-format.md)
@@ -882,7 +885,7 @@ Pi raw 使用 `roller.pi-events/v1`，记录原生事件、context、实际请�
 
 HF 导出默认识别并替换常见密钥形态，即使导出环境没有原始凭据：`sk-` key、GitHub/Hugging Face token、AWS access ID 与具名 secret key、JWT、Bearer 凭据、URL 密码及 PEM 私钥。`--no-redact` 同时关闭形态替换和环境脱敏；自定义规则仍会应用。
 
-每次导出在输出目录旁写入 `<output>.redaction-report.json`，按文件、行号和类型报告疑似残留邮箱、内网 IPv4、个人 home 路径和凭据，不重复匹配值。邮箱、内网地址和 home 路径可能属于 benchmark 内容，因此保留原文供审阅；无法扫描的二进制文件单独列出。上传前逐项看过报告。使用 `--include-runs` 时，共享文件会排除已有 `atif/`、`hf/`、`sft/` 导出目录和先前的审阅报告。
+每次导出在输出目录旁写入 `<output>.redaction-report.json`，按文件、行号和类型报告疑似残留邮箱、内网 IPv4、个人 home 路径和凭据，不重复匹配值。在 Roller 的 Git 版本中，导入会话的导出还会把替换过的本机用户名仍然出现的位置记为 `user_name`（不分大小写，连在别的单词里也算）。邮箱、内网地址和 home 路径可能属于 benchmark 内容，因此保留原文供审阅；无法扫描的二进制文件单独列出。上传前逐项看过报告。使用 `--include-runs` 时，共享文件会排除已有 `atif/`、`hf/`、`sft/` 导出目录和先前的审阅报告，Git 版本还会排除 `tokens/`。
 
 题目中有刻意设置的测试 key 时，可在 `roller export --format hf` 后加
 `--preserve-task-keys`：保留形似凭据的题目取值，同时继续替换已知的环境凭据、

@@ -120,6 +120,6 @@ A subagent has its own sequences. A conversation that was compacted continues in
 
 ## 5. Scope
 
-- `--token-ids` needs `--capture-calls` and Docker execution; a remote sandbox is not supported.
+- `--token-ids` needs `--capture-calls`. Roller 0.6.0 records token ids in Docker only. The Git version of Roller also records them in a remote sandbox (`--sandbox-provider`): install it on the collector and in the sandbox template with `pip install git+https://github.com/Valen-Team/Roller.git`, and the request recording proxy in the sandbox writes `token_ids.jsonl`.
 - Token ids are numbers of the tokenizer of the served model. Keep the model name and revision with the data.
 - `roller export --format hf` leaves `token_ids.jsonl` out. With `--include-runs` it copies every file of the samples, token ids included. Text redaction does not reach token ids, so add `"exclude": ["samples/*/token_ids.jsonl"]` to the `--redact-rules` file unless the tokens are meant to be published.

@@ -475,7 +475,10 @@ of one sample:
 | --- | --- |
 | OpenClaw | The native session `trace.jsonl`. Its session header gets `harness: "openclaw"`, the session ID `<harness>-<model>/<index>_<task>`, the session name `<task> · <model>`, and a `roller` object with the run, sample path, task, status, and score. Every other line is unchanged |
 | Codex, Claude Code | The native session `trace.jsonl`, unchanged |
-| Hermes, OpenCode, DeepSeek, Pi | A session converted from ACTF. When ACTF is unavailable, OpenCode and DeepSeek exports keep the native journal if it exists |
+| Hermes | A session converted from ACTF. The Git version of Roller writes one session in the format of `hermes sessions export` instead, built from the Hermes journal: `id`, `source`, `model`, `system_prompt`, `started_at`, `ended_at`, `message_count`, `tool_call_count` and the journaled `messages`, from before Hermes compressed its history, with the same `harness`, `name` and `roller` fields as the OpenClaw header |
+| OpenCode, DeepSeek, Pi | A session converted from ACTF. When ACTF is unavailable, OpenCode and DeepSeek exports keep the native journal if it exists |
+
+The Git version installs with `pip install git+https://github.com/Valen-Team/Roller.git`.
 
 A converted session follows Pi's
 [session format](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/session-format.md),
@@ -1057,7 +1060,7 @@ Pi raw uses `roller.pi-events/v1`: native events, contexts, actual requests, and
 
 HF export replaces common credential shapes even when the original credential is absent from the exporting environment: `sk-` keys, GitHub and Hugging Face tokens, AWS access IDs and named secret keys, JWTs, Bearer credentials, URL passwords and PEM private keys. `--no-redact` disables these replacements as well as environment redaction; custom rules still apply.
 
-Each export writes `<output>.redaction-report.json` beside the output directory. It reports possible residual emails, private IPv4 addresses, personal home paths and credential shapes by file, line and kind, without repeating matched values. Emails, private addresses and home paths are left intact for review because they may be benchmark content. Binary files that could not be scanned are listed. Review every entry of the report before uploading. With `--include-runs`, existing `atif/`, `hf/`, `sft/` export directories and prior review reports are excluded from shared run files.
+Each export writes `<output>.redaction-report.json` beside the output directory. It reports possible residual emails, private IPv4 addresses, personal home paths and credential shapes by file, line and kind, without repeating matched values. In the Git version of Roller, the report of imported sessions also lists, as `user_name`, every place where a local user name the export replaced is still present, in any case and also inside a longer word. Emails, private addresses and home paths are left intact for review because they may be benchmark content. Binary files that could not be scanned are listed. Review every entry of the report before uploading. With `--include-runs`, existing `atif/`, `hf/`, `sft/` export directories and prior review reports are excluded from shared run files, and in the Git version `tokens/` as well.
 
 For benchmark fixtures that deliberately contain keys, add `--preserve-task-keys`
 to `roller export --format hf`. It keeps credential-shaped task values while
