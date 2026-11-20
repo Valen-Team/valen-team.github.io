@@ -41,13 +41,13 @@ Tasks + models + Harness
             └─ generated files and run metadata
 ~~~
 
-The following figure shows the components of a run: the host process with the Collector, the request proxy and the trace converters, and one Docker container per rollout. Green arrows mark model calls; dashed elements are optional or conditional.
+The following figure shows the components of a run: the host process with the Collector, the request proxy and the trace converters, and one Docker container or E2B sandbox per rollout. `roller import` feeds local sessions to the same converters without a container. Blue arrows mark model calls; dashed elements are optional or conditional.
 
-![Roller architecture: the host process loads and snapshots tasks, the Collector starts one Docker container per rollout, model calls pass through the request proxy, and the trace converters write samples to the run directory](/img/roller/architecture-en.png)
+![Roller architecture: the host process loads and snapshots tasks, the Collector starts one Docker container or E2B sandbox per rollout, model calls pass through the request proxy, and the trace converters write samples to the run directory; roller import feeds local sessions to the same converters, and the Viewer, training, bench reports and dataset exports read the run directory](/img/roller/architecture-en.svg)
 
 Each rollout passes through the following stages. The Collector retries a failed attempt up to `--retries` times before it finalizes the sample.
 
-![Lifecycle of one rollout: Resume check, container start, turns with model calls and an optional User Simulator, optional bench grading, teardown, trace conversion, and retry or finalization](/img/roller/lifecycle-en.png)
+![Lifecycle of one rollout: Resume check, container or sandbox start, turns with model calls and an optional User Simulator, optional bench grading, teardown, trace conversion, and retry or finalization](/img/roller/lifecycle-en.svg)
 
 ## 3. Common terms in the handbook
 

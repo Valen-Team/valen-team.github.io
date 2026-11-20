@@ -6,10 +6,10 @@ title: "会话导入"
 
 `roller import` 把本机已有的 Claude Code 和 Codex 会话导入成 Roller run。每个会话生成一个 sample，包含原生会话、ACTF 轨迹，能转换时还有 SFT 记录。之后 Viewer 和 `roller export --format atif|sft|hf` 像读取采集出的 run 一样读取它。不需要 Docker、模型服务和任务列表。
 
-这个命令随下一个版本发布。在此之前，从仓库安装 Roller：
+这个命令包含在 Roller 0.5.0 及之后的版本中：
 
 ```bash
-uv tool install "git+https://github.com/Valen-Team/Roller"
+uv tool install roller-agent    # 或：python -m pip install roller-agent
 ```
 
 ## 1. 导入

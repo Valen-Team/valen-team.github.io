@@ -41,13 +41,13 @@ Task + 模型 + Harness
           └─ 生成文件与运行信息
 ~~~
 
-下图展示一次运行涉及的组件：宿主机进程中的 Collector、请求代理和轨迹转换器，以及每个 rollout 对应的 Docker 容器。绿色箭头表示模型调用；虚线表示可选组件和条件路径。
+下图展示一次运行涉及的组件：宿主机进程中的 Collector、请求代理和轨迹转换器，以及每个 rollout 对应的 Docker 容器或 E2B 沙箱。`roller import` 把本机会话交给同一套转换器，不启动容器。蓝色箭头表示模型调用；虚线表示可选组件和条件路径。
 
-![Roller 架构：宿主机进程加载 task 并生成快照，Collector 为每个 rollout 启动一个 Docker 容器，模型调用经过请求代理，轨迹转换器将 sample 写入运行目录](/img/roller/architecture-zh-Hans.png)
+![Roller 架构：宿主机进程加载 task 并生成快照，Collector 为每个 rollout 启动一个 Docker 容器或 E2B 沙箱，模型调用经过请求代理，轨迹转换器将 sample 写入运行目录；roller import 把本机会话交给同一套转换器，Viewer、训练、Bench 报告和数据集导出读取运行目录](/img/roller/architecture-zh-Hans.svg)
 
 每个 rollout 依次经历以下阶段。尝试失败时，Collector 最多重试 `--retries` 次，然后完成 sample 收尾。
 
-![单个 rollout 的生命周期：Resume 检查、启动容器、包含模型调用和可选 User Simulator 的多轮对话、可选的 bench 评分、回收、轨迹转换，以及重试或收尾](/img/roller/lifecycle-zh-Hans.png)
+![单个 rollout 的生命周期：Resume 检查、启动容器或沙箱、包含模型调用和可选 User Simulator 的多轮对话、可选的 bench 评分、回收、轨迹转换，以及重试或收尾](/img/roller/lifecycle-zh-Hans.svg)
 
 ## 3. Handbook 常用术语
 
