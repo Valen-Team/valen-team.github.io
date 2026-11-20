@@ -19,7 +19,7 @@ Use the OpenCode Harness when a task needs:
 - local-image inspection with a vision-capable model.
 - single-turn, multi-turn, Task Agent, or User Simulator execution.
 
-The OpenCode Harness does not accept images directly in task messages. Account login, MCP, subagents, persistent memory, and automatic compaction are also disabled. Long tasks need a sufficiently large model context window.
+Pass first-turn images through `files.attach_images`. Subagents are available with native tools and call capture. Long tasks need a sufficiently large context window because automatic compaction is disabled.
 
 ## 2. Image preparation
 
@@ -78,7 +78,7 @@ This table lists OpenCode-specific runtime flags only. See section 3 for API add
 | `--opencode-image` | Takes precedence over `--docker-image`. If neither is set, `ROLLER_OPENCODE_IMAGE` is used, with `roller-opencode:1.18.30` as the fallback |
 | `--opencode-max-steps` | 100 for SkillsBench and 12 otherwise, also bounded by the task timeout |
 | `--opencode-context-length` | 128000 tokens by default, minimum 1024. Set it to match the actual model |
-| `--opencode-output-tokens` | 32768 for SkillsBench and 8192 otherwise. Must be positive and smaller than the context window |
+| `--opencode-output-tokens` | Maximum output tokens requested per model call. Defaults to 32768 for SkillsBench and 8192 otherwise. Set a positive value below the context window |
 | `--opencode-vision` / `--no-opencode-vision` | Declares image-input support to OpenCode. Enabled by default; can be disabled explicitly for text-only models |
 | `--opencode-native-tools` | Off. Permits every tool in the native OpenCode registry instead of the fixed `bash/read/write/edit/apply_patch/glob/grep/skill` list. The `task` tool is permitted only with `--capture-calls` |
 | `--opencode-deny-tool NAME` | Denies one native tool or permission under `--opencode-native-tools`. Repeat it as needed |
@@ -116,7 +116,7 @@ A run produces three main trajectory files:
 
 Image attachments are preserved in ACTF and multimodal SFT. Tool definitions are taken from the actual model request and are not inferred from call arguments.
 
-Incomplete sessions, empty replies, API errors, truncated replies, corrupt traces, or tool definitions that change unexpectedly are not marked successful. A timeout stops the container and preserves available trajectories and files when possible.
+Incomplete sessions, empty replies, API errors, truncated replies, corrupt traces, or tool definitions that change unexpectedly are not marked successful. A timeout stops the container and recovers available trajectories and files. When the journal records a context overflow or a tool that is still running, ACTF keeps the observed turns and marks the trajectory unavailable for SFT.
 
 ## 8. First-run check
 

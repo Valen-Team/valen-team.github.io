@@ -1,14 +1,14 @@
 ---
-title: "WildClawBench with four models and four Harnesses"
-description: "Collect, grade and browse WildClawBench trajectories with OpenClaw, Codex, Claude Code and DeepSeek Harness, using four self-hosted models."
+title: "WildClawBench with four models and five Harnesses"
+description: "Collect, grade and browse WildClawBench trajectories with OpenClaw, Codex, Claude Code, DeepSeek Harness and OpenCode, using four self-hosted models."
 ---
 
-# WildClawBench with four models and four Harnesses
+# WildClawBench with four models and five Harnesses
 
 This example collects real agent trajectories with DeepSeek-V4.1-Flash-1017,
 GLM-5.3-Flash, Kimi K3 and Kimi K3.1 Pro. Each published model–Harness collection runs the same 28 tasks
-three times. The dataset contains 1,344 attempts across OpenClaw, Codex, Claude Code and
-DeepSeek Harness. Roller starts an isolated environment, collects
+three times. The dataset contains 1,680 attempts across OpenClaw, Codex, Claude Code,
+DeepSeek Harness and OpenCode. Roller starts an isolated environment, collects
 the session, grades the work and exports a dataset that opens in the HF trace viewer.
 
 [Browse the trajectories](https://huggingface.co/datasets/Valen-Team/Roller-WildClawBench-Trajectories)
@@ -20,14 +20,14 @@ to collect your own model.
 | Tasks | 28 WildClawBench tasks using local assets and the task's mock services |
 | Repetitions | 3 per task and model, for 84 attempts per collection and 336 per Harness |
 | Models | DeepSeek-V4.1-Flash-1017, GLM-5.3-Flash, Kimi K3, Kimi K3.1 Pro |
-| Harnesses | OpenClaw 2026.3.11, Codex CLI 0.149.0 and Claude Code 2.1.222, and DeepSeek Harness 0.1.5rc1 |
-| Judge | GLM-5.3-Flash, the same judge for all four Harnesses |
-| Limits | Original task timeouts; 120-second grader timeout; no Roller retries |
-| Collection | 8 rollout workers per model; concurrent jobs shared 2 grader slots |
+| Harnesses | OpenClaw 2026.3.11, Codex CLI 0.149.0, Claude Code 2.1.222, DeepSeek Harness 0.1.5rc1, OpenCode 1.18.30 |
+| Judge | GLM-5.3-Flash, the same judge for all five Harnesses |
+| Limits | Original task timeouts, 120-second grader timeout. The OpenCode batch allowed one grader retry |
+| Collection | Worker counts varied by batch. See the dataset card for published settings |
 
 ## Batches
 
-Each of the 16 model–Harness collections contains 84 attempts. The dataset
+Each of the 20 model–Harness collections contains 84 attempts. The dataset
 card records the versions and settings. The comparison uses all attempts
 and counts missing scores as zero in the means. The trajectory table retains
 missing scores as null and includes execution status and grader errors.
@@ -43,8 +43,9 @@ cd Roller
 pip install -e .
 ```
 
-Download [WildClawBench](https://github.com/InternLM/WildClawBench) and its task
-assets, then open the example directory:
+Prepare the WildClawBench checkout and its `workspace/` task assets by following
+the [upstream setup](https://github.com/InternLM/WildClawBench#download-task-data), then open
+the example directory:
 
 ```bash
 cd examples/cookbook/wildclawbench-open-models
@@ -204,7 +205,34 @@ For a first run with a local grader, use the template recipe's single-task
 command with the calendar scheduling task. It installs its warmup dependencies
 from PyPI.
 
-## 7. Inspect and export
+## 7. Collect with OpenCode
+
+Use the Git checkout from step 1 and an OpenAI Chat Completions endpoint with
+streaming, tool-call and image support. Set `OPENAI_API_KEY` for authentication
+if required. From the example directory, build the WildClawBench task image
+with OpenCode 1.18.30 and run one model at a time.
+
+```bash
+docker build --platform linux/amd64 \
+  --build-arg BASE_IMAGE=ghcr.io/valen-team/roller-wildclaw-base:1.3-clean.1 \
+  -t roller-wildclaw-opencode:1.3-opencode1.18.30 ../../../docker/opencode
+export OPENCODE_IMAGE=roller-wildclaw-opencode:1.3-opencode1.18.30
+export MODEL=your-model-id
+export MODEL_BASE=https://model.example/v1
+export MODEL_CONTEXT_WINDOW=98304
+./collect-opencode.sh --dry-run
+./collect-opencode.sh
+```
+
+Set the context window to match your endpoint. The script uses the standard
+OpenCode tools, 256 steps, a 32,768-token response cap and high reasoning
+effort. It saves the full requests, tool calls and reasoning. The published
+batch used isolated sandboxes. This recipe uses Docker.
+
+For a one-task check, set `TASK_IDS_FILE`, `RUNS_PER_TASK=1` and `PARALLEL=1`.
+See [OpenCode configuration](/roller/harnesses/opencode-configuration/).
+
+## 8. Inspect and export
 
 ```bash
 roller view runs/wildclawbench-codex-glm
@@ -222,7 +250,7 @@ replacing known environment credentials, collection endpoints and host paths.
 Adjust the example `redact.json` for environment-specific values and review the
 exported content before publishing. See [trajectory outputs](/roller/traces/trajectory-outputs/#hugging-face-export).
 
-## 8. Append to an HF dataset
+## 9. Append to an HF dataset
 
 ```bash
 hf upload <owner>/<dataset> dataset . --repo-type dataset

@@ -475,7 +475,7 @@ of one sample:
 | --- | --- |
 | OpenClaw | The native session `trace.jsonl`. Its session header gets `harness: "openclaw"`, the session ID `<harness>-<model>/<index>_<task>`, the session name `<task> · <model>`, and a `roller` object with the run, sample path, task, status, and score. Every other line is unchanged |
 | Codex, Claude Code | The native session `trace.jsonl`, unchanged |
-| Hermes, OpenCode, DeepSeek, Pi | A session converted from ACTF, because the `trace.jsonl` of these Harnesses uses a Roller event schema. A sample without `trace_ACTF.json` has no file |
+| Hermes, OpenCode, DeepSeek, Pi | A session converted from ACTF. When ACTF is unavailable, OpenCode and DeepSeek exports keep the native journal if it exists |
 
 A converted session follows Pi's
 [session format](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/session-format.md),

@@ -398,7 +398,7 @@ Hub 把 `traces/` 下的文件识别为
 | --- | --- |
 | OpenClaw | 原生会话 `trace.jsonl`。会话头写入 `harness: "openclaw"`、会话 ID `<harness>-<model>/<index>_<task>`、会话名称 `<task> · <model>`，以及包含 run、sample 路径、task、状态和分数的 `roller` 对象；其余各行保持不变 |
 | Codex、Claude Code | 原生会话 `trace.jsonl`，不做修改 |
-| Hermes、OpenCode、DeepSeek、Pi | 由 ACTF 转换的会话，因为这些 Harness 的 `trace.jsonl` 使用 Roller 的事件 schema。没有 `trace_ACTF.json` 的 sample 没有对应文件 |
+| Hermes、OpenCode、DeepSeek、Pi | 从 ACTF 转换的会话。ACTF 缺失时，OpenCode 和 DeepSeek 会导出已有的原生 journal |
 
 转换得到的会话采用 Pi 的
 [会话格式](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/session-format.md)

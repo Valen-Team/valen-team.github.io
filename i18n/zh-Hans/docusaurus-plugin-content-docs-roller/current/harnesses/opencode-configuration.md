@@ -19,7 +19,7 @@ OpenCode Harness 适合以下场景：
 - 使用具备视觉能力的模型查看本地图片。
 - 运行单轮、多轮、Task Agent 或 User Simulator task。
 
-当前不支持在 task 消息中直接放入图片，也不启用账号登录、MCP、子 Agent、持久记忆和自动压缩。长任务需要为模型配置足够大的上下文窗口。
+通过 `files.attach_images` 发送首轮图片。启用原生工具和调用捕获后可以使用子 Agent。由于自动压缩已关闭，长任务需要配置足够大的上下文窗口。
 
 ## 2. 镜像准备
 
@@ -78,7 +78,7 @@ roller collect \
 | `--opencode-image` | 优先于 `--docker-image`。两者均未设置时使用 `ROLLER_OPENCODE_IMAGE`，该变量也未设置时使用 `roller-opencode:1.18.30` |
 | `--opencode-max-steps` | SkillsBench 默认为 100，其他任务默认为 12，同时受整个 task 的超时限制 |
 | `--opencode-context-length` | 模型上下文窗口，默认 128000，至少 1024，按服务实际能力设置 |
-| `--opencode-output-tokens` | SkillsBench 默认为 32768，其他任务默认为 8192，必须小于上下文窗口 |
+| `--opencode-output-tokens` | 每次模型请求的输出 token 上限。SkillsBench 默认为 32768，其他任务默认为 8192。设置小于上下文窗口的正数 |
 | `--opencode-vision` / `--no-opencode-vision` | 是否向 OpenCode 声明模型支持图片输入。默认开启，纯文本模型可显式关闭 |
 | `--opencode-native-tools` | 默认关闭。开启后允许 OpenCode 原生注册表中的全部工具，不再限于固定的 `bash/read/write/edit/apply_patch/glob/grep/skill`。`task` 工具仅在开启 `--capture-calls` 时允许 |
 | `--opencode-deny-tool NAME` | 在 `--opencode-native-tools` 下禁用一个原生工具或权限，可重复指定 |
@@ -116,7 +116,7 @@ OpenCode 可使用 `bash`、`read`、`write`、`edit`、`apply_patch`、`glob` �
 
 图片附件保留在 ACTF 和多模态 SFT 中。工具定义取自实际模型请求，不根据调用参数推断。
 
-不完整 session、空回复、API 错误、截断回复、损坏的轨迹或前后不一致的工具定义不会被标记为成功。超时后停止容器，并尽量回收已生成的轨迹和文件。
+不完整 session、空回复、API 错误、截断回复、损坏的轨迹或前后不一致的工具定义不会被标记为成功。超时后停止容器，并回收已有的轨迹和文件。原始记录显示上下文溢出或工具仍在运行时，ACTF 保留已记录的对话轮次，并将该轨迹标为不可用于 SFT。
 
 ## 8. 首次运行检查
 
