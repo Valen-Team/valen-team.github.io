@@ -168,9 +168,21 @@ See the [task image recipe](https://github.com/Valen-Team/Roller/tree/main/docke
 If your Messages gateway rejects PDF `document` blocks, install the PDF
 dependencies with `pip install -e '.[pdf]'` from the Roller checkout. Pass
 `--claude-pdf-as-images` to the script to send each page as extracted text and a
-PNG. Roller records the forwarded request in the wire trace. Set
-`CLAUDE_CODE_MAX_CONTEXT_TOKENS` to the endpoint's configured context window
-if Claude Code needs to compact sooner.
+PNG. Roller records the forwarded request in the wire trace.
+
+Claude Code compacts a conversation on its own only when an auto-compact window
+is set. Set `CLAUDE_CODE_AUTO_COMPACT_WINDOW` and pass it to the container:
+
+```bash
+CLAUDE_CODE_AUTO_COMPACT_WINDOW=100000 ./collect-claude-code.sh \
+  --pass-env CLAUDE_CODE_AUTO_COMPACT_WINDOW
+```
+
+Claude Code then compacts when a request reaches about 33,000 tokens less than
+the window, about 67,000 tokens for 100000, the smallest window it accepts.
+To compact earlier, also set `CLAUDE_CODE_MAX_CONTEXT_TOKENS`, which the script
+already passes, to a smaller window: with 64000, Claude Code compacts at about
+31,000 tokens. `CLAUDE_CODE_MAX_CONTEXT_TOKENS` alone does not start compaction.
 
 For this collection, the four endpoints used Messages and Claude Code requested
 up to 32,000 output tokens. Retries for rejected PDFs used the page conversion

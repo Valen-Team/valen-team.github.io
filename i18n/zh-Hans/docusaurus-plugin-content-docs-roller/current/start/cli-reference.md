@@ -33,6 +33,7 @@ roller view --help
 | `roller import [PATH ...]` | 把本机 Claude Code 和 Codex 会话导入成 run，参数见第 10 节 |
 | `roller export RUN_DIR` | 把已有 run 导出为 Harbor 读取的轨迹格式 ATIF，或导出为 Hugging Face 数据集目录，参数见第 9 节 |
 | `roller bench ...` | 列出、运行、导出或汇总 benchmark，采集参数见第 8 节 |
+| `roller clean [PATH]` | 清理已停止的采集进程留下的容器和 bundle 目录；`--dry-run` 先列出要清理的内容 |
 | `roller --version` | 查看当前安装的 Roller 版本 |
 
 最小的 collect 命令需要 task 清单。模型可通过 `--model` 指定，也可写在每条 task 的 `model` 字段中：

@@ -134,11 +134,13 @@ benchmark:
 | 字段 | `collect` 参数 |
 | --- | --- |
 | `output`、`run_name` | `--output`、`--run-name` |
-| `parallel`、`launch_interval`、`grader_parallel` | `--parallel`、`--launch-interval`、`--grader-parallel` |
+| `parallel`、`launch_interval`、`grader_parallel`、`grader_retries` | `--parallel`、`--launch-interval`、`--grader-parallel`、`--grader-retries` |
 | `samples`、`retries`、`retry_backoff`、`timeout` | `--samples`、`--retries`、`--retry-backoff`、`--timeout` |
-| `start_index`、`limit`、`resume`、`resume_verify_outputs` | `--start-index`、`--limit`、`--resume`、`--resume-verify-outputs` |
+| `max_consecutive_errors` | `--max-consecutive-errors` |
+| `start_index`、`limit`、`resume`、`resume_verify_outputs`、`resume_unscored` | `--start-index`、`--limit`、`--resume`、`--resume-verify-outputs`、`--resume-unscored` |
 | `wire_trace`、`keep_thinking` | `--wire-trace`、`--keep-thinking` / `--no-keep-thinking` |
-| `capture_calls`、`capture_debug` | `--capture-calls`、`--capture-debug` |
+| `capture_calls`、`capture_debug`、`token_ids` | `--capture-calls`、`--capture-debug`、`--token-ids` |
+| `sandbox_provider`、`sandbox_template` | `--sandbox-provider`、`--sandbox-template` |
 | `thinking_capabilities` | `--thinking-capabilities` |
 | `pass_env` | `--pass-env`，每个变量名一次 |
 | `container_user`、`network`、`docker_binary` | `--container-user`、`--network`、`--docker-binary` |

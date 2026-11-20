@@ -195,4 +195,4 @@ The input path must be the run root, not `samples/`, a single sample, or
 
 ## Language and benchmark scores
 
-The Viewer defaults to English. Use **EN / 中文** in the header to switch languages; the browser remembers the choice. Benchmark runs show each sample's score and grader error in the overview, with score sorting and filters for **Above zero**, **Zero**, and **Unscored**. These groups are not pass/fail thresholds. User message image blocks are displayed inline as well as tool-result images.
+The Viewer opens in Chinese when the browser language is Chinese and in English otherwise. Use **EN / 中文** in the header to switch languages; the browser remembers the choice. Benchmark runs show each sample's score and grader error in the overview, with score sorting and filters for **Above zero**, **Zero**, and **Unscored**. These groups are not pass/fail thresholds. User message image blocks are displayed inline as well as tool-result images.

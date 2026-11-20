@@ -33,6 +33,7 @@ Choose the command for the job first, then add that command's flags.
 | `roller import [PATH ...]` | Imports the local Claude Code and Codex sessions as a run, with flags in section 10 |
 | `roller export RUN_DIR` | Exports an existing run as ATIF, the trajectory format Harbor reads, or as a Hugging Face dataset folder, with flags in section 9 |
 | `roller bench ...` | Lists, runs, exports, or summarizes benchmarks, with collection flags in section 8 |
+| `roller clean [PATH]` | Removes the containers and bundle directories that stopped collectors left behind; `--dry-run` lists them first |
 | `roller --version` | Shows the installed Roller version |
 
 A minimal collect command requires a task list. Set the model with `--model` or in each task's `model` field.
@@ -378,7 +379,7 @@ Collection checks required task variables, agent API keys and grader variables b
 
 | Option | Default | Behavior |
 | --- | --- | --- |
-| `--max-consecutive-errors N` | `10` | Stop dispatching after N consecutive rollout errors; `0` disables the breaker. Timeouts reset the streak. Running rollouts finish. |
+| `--max-consecutive-errors N` | `10` | Stop dispatching after N consecutive rollout errors; `0` disables the breaker. Timeouts do not count toward the streak, and a successful rollout resets it. Running rollouts finish. |
 | `--retry-backoff SECONDS` | `0` | Delay sample retries, doubling after each retry. |
 | `--grader-retries N` | `2` | Retry a failed grader in the same container, with 5s then 10s backoff. Graders that took over 600s are not retried. |
 | `--resume --resume-unscored` | Off | Rerun successful agents whose grading failed; this calls the agent again. |

@@ -6,11 +6,10 @@ title: "Token id 与 logprob"
 
 `--token-ids` 为 rollout 的每一次模型调用保存三样数据：端点收到的 token id、模型生成的 token id、每个生成 token 的 logprob。数据由端点直接返回，记录的就是模型实际读到和采样出的 token，不需要再套一遍对话模板，也不需要重新分词。`roller export --format tokens` 再把同一段对话的各次调用拼成一条序列，用于训练。
 
-七个 Harness 都支持。本页的选项在 Roller 的 Git 版本中：
+七个 Harness 都支持。本页的选项包含在 Roller 0.6.0 及之后的版本中：
 
 ```bash
-uv tool install git+https://github.com/Valen-Team/Roller.git
-# 或：python -m pip install git+https://github.com/Valen-Team/Roller.git
+uv tool install roller-agent    # 或：python -m pip install roller-agent
 ```
 
 ## 1. 端点
@@ -38,6 +37,8 @@ vllm serve <model> --logprobs-mode processed_logprobs
 roller collect --tasks tasks.jsonl --harness hermes --model my-model \
   --api-base http://localhost:8000/v1 --capture-calls --token-ids
 ```
+
+Hermes、OpenCode、Pi Agent 和 Codex 从 `OPENAI_API_KEY` 读取密钥，DeepSeek Harness 从 `DEEPSEEK_API_KEY` 读取，Claude Code 从 `ANTHROPIC_API_KEY` 读取；`--api-key-env NAME` 可改为从别的变量读取。OpenClaw 的密钥取自 `--model-config`。vLLM 启动时没有设 `--api-key` 的话，填任意非空值即可，例如 `export OPENAI_API_KEY=not-required`。
 
 | Harness | Harness 使用的 API | 还需要 |
 | --- | --- | --- |

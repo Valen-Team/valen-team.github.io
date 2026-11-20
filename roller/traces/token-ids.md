@@ -6,11 +6,10 @@ title: "Token ids and logprobs"
 
 `--token-ids` saves, for every model call of a rollout, the token ids the endpoint received, the token ids it generated, and the logprob of each generated token. The data comes from the endpoint itself, so it holds exactly the tokens the model read and sampled: no chat template is applied a second time and no text is tokenized again. `roller export --format tokens` then joins the calls of a conversation into one sequence for training.
 
-All seven Harnesses are supported. The options on this page are in the Git version of Roller:
+All seven Harnesses are supported. The options on this page are part of Roller 0.6.0 and later:
 
 ```bash
-uv tool install git+https://github.com/Valen-Team/Roller.git
-# or: python -m pip install git+https://github.com/Valen-Team/Roller.git
+uv tool install roller-agent    # or: python -m pip install roller-agent
 ```
 
 ## 1. Endpoint
@@ -38,6 +37,8 @@ Add `--capture-calls --token-ids` to a collection that runs in Docker with an ex
 roller collect --tasks tasks.jsonl --harness hermes --model my-model \
   --api-base http://localhost:8000/v1 --capture-calls --token-ids
 ```
+
+The Harness reads its key from `OPENAI_API_KEY` for Hermes, OpenCode, Pi Agent and Codex, `DEEPSEEK_API_KEY` for DeepSeek Harness and `ANTHROPIC_API_KEY` for Claude Code; `--api-key-env NAME` reads it from another variable. OpenClaw takes the key from `--model-config`. For a vLLM server started without `--api-key`, any non-empty value works, such as `export OPENAI_API_KEY=not-required`.
 
 | Harness | API the Harness speaks | Also needed |
 | --- | --- | --- |

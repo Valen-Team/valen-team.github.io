@@ -153,7 +153,15 @@ TASK_IDS_FILE="$PWD/one-task.txt" RUNS_PER_TASK=1 PARALLEL=1 \
 如果 Messages 网关拒绝 PDF `document` 块，在 Roller 检出目录运行
 `pip install -e '.[pdf]'`，再给采集脚本加 `--claude-pdf-as-images`。
 Roller 会发送逐页提取的文本和 PNG，并在 wire trace 中记录转发的请求。
-需要让 Claude Code 提前压缩时，把 `CLAUDE_CODE_MAX_CONTEXT_TOKENS` 设为端点的上下文长度。
+Claude Code 只有在设了自动压缩窗口时才会自行压缩对话。设置 `CLAUDE_CODE_AUTO_COMPACT_WINDOW` 并传入容器：
+
+```bash
+CLAUDE_CODE_AUTO_COMPACT_WINDOW=100000 ./collect-claude-code.sh \
+  --pass-env CLAUDE_CODE_AUTO_COMPACT_WINDOW
+```
+
+之后请求达到比窗口少约 33,000 token 时压缩；窗口最小可设 100000，对应约 67,000 token。
+要更早压缩，再把 `CLAUDE_CODE_MAX_CONTEXT_TOKENS`（脚本已经传入）设为更小的窗口：设为 64000 时约 31,000 token 压缩。只设 `CLAUDE_CODE_MAX_CONTEXT_TOKENS` 不会触发压缩。
 
 本批次的四个端点均使用 Messages，Claude Code 请求的输出上限为 32,000 token。
 后端拒绝 PDF 的样本使用逐页转换补跑，GLM 上下文报错的样本按端点的 98,304 token
