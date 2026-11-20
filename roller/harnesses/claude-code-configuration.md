@@ -121,6 +121,7 @@ This table lists Claude Code-specific runtime flags only. See section 3 for API 
 | `--claude-max-thinking-tokens` | None | Set `MAX_THINKING_TOKENS` for Claude Code |
 | `--claude-permission-mode` | `bypassPermissions` | Select the Claude Code permission mode |
 | `--claude-unique-tool-ids` | Off | Replace tool-call IDs that the API service issues more than once before Claude Code receives them, see section 9.5 |
+| `--claude-chat-completions` | Off | Translate the Messages requests of Claude Code to Chat Completions at the request recording proxy, for endpoints that serve only that API. Needed for [`--token-ids`](/roller/traces/token-ids/) |
 
 A single Claude Code run can use the shared flag forms. In a mixed-Harness run, use dedicated forms such as `--claude-code-image`, `--claude-api-base`, and `--claude-api-key-env` so that the settings apply only to the intended participant.
 

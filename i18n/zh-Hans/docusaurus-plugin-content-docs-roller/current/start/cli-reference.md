@@ -173,6 +173,8 @@ Roller CLI 识别下列逻辑档位，但每个 Harness 仅支持其中一部分
 | `--thinking-capabilities PATH` | 未设置 | 加载带版本的模型/端点能力声明，在运行前校验档位 |
 | `--keep-thinking` / `--no-keep-thinking` | 开启 | 决定 ACTF 和 SFT 是否导出可见 reasoning |
 | `--wire-trace MODE` | `actf` | 选择 `off`、`actf` 或 `full` 请求记录模式 |
+| `--capture-calls` | 关闭 | 保存每个参与者的完整模型调用和子 Agent 关系，见 [Subagent 采集协议](/roller/traces/subagent-capture-protocol/) |
+| `--token-ids` | 关闭 | 与 `--capture-calls` 一起使用，把每次模型调用的 prompt 和生成内容的 token id、每个生成 token 的 logprob 保存到 `token_ids.jsonl`，见 [Token id 与 logprob](/roller/traces/token-ids/) |
 
 ```text
 off | minimal | low | medium | high | xhigh | adaptive | max | ultra
@@ -240,7 +242,7 @@ Wire trace 用于决定是否记录模型服务的实际 HTTP 请求，常规采
 
 各 Harness 开放的工具及对应的选择参数见 [Harness 工具开放情况](/roller/harnesses/tool-availability/)。
 
-如果端点需要调整请求或响应，`--codex-image-detail` 为 Responses 图片输入设置 `detail`（见 [Codex Harness 指南](/roller/harnesses/codex-configuration/#codex-cli-flags)），`--claude-unique-tool-ids` 替换服务重复签发的工具调用 ID（见 [Claude Code Harness 指南](/roller/harnesses/claude-code-configuration/#claude-code-cli-flags)）。
+如果端点需要调整请求或响应，`--codex-image-detail` 为 Responses 图片输入设置 `detail`（见 [Codex Harness 指南](/roller/harnesses/codex-configuration/#codex-cli-flags)），`--claude-unique-tool-ids` 替换服务重复签发的工具调用 ID（见 [Claude Code Harness 指南](/roller/harnesses/claude-code-configuration/#claude-code-cli-flags)）。端点只提供 Chat Completions 时，`--claude-chat-completions` 和 `--codex-chat-completions` 转换这两个 Harness 的 Messages 和 Responses 请求。
 
 如需核对当前使用的 Roller 版本支持的完整参数列表，请运行：
 
@@ -331,19 +333,19 @@ roller bench report RUN_DIR [--output REPORT.json]
 Export 参数用于选择要转换的 run、目标格式和结果的写入目录。
 
 ```bash
-roller export RUN_DIR [--format atif|hf|sft] [--output DIR] [--min-score X] [--no-redact] [--include-runs] [--redact-rules FILE]
+roller export RUN_DIR [--format atif|hf|sft|tokens] [--output DIR] [--min-score X] [--no-redact] [--include-runs] [--redact-rules FILE]
 ```
 
 | 参数 | 默认值 | 用途 |
 | --- | --- | --- |
 | `RUN_DIR` | 必填 | 指定包含 `samples/` 的 Roller run |
-| `--format` | `atif` | 选择目标格式：`atif` 是 Harbor 读取的 Agent Trajectory Interchange Format，`hf` 是 Hugging Face 数据集目录，`sft` 是带逐行索引的训练数据 |
+| `--format` | `atif` | 选择目标格式：`atif` 是 Harbor 读取的 Agent Trajectory Interchange Format，`hf` 是 Hugging Face 数据集目录，`sft` 是带逐行索引的训练数据，`tokens` 是用 `--token-ids` 采集的 run 的 token 序列 |
 | `--output` / `-o` | `RUN_DIR/<format>` | 设置写入目录 |
 | `--redact` / `--no-redact` | 开启 | 与 `--format hf` 配合，在导出的文件中替换 run 的模型端点、`NO_PROXY` 主机、机器名、主机路径和凭据取值 |
 | `--include-runs` | 关闭 | 与 `--format hf` 配合，额外写入 `runs/<harness>-<model>/`，即包含 sample 全部文件的 Roller run 目录 |
 | `--redact-rules` | 无 | 与 `--format hf` 配合，指定一个 JSON 文件，追加 `replace`、`exclude` 和 `forbid` 规则；无论 `--redact` 是否开启都会应用 |
 
-该命令不修改 run。`--format atif` 为每个 sample 写入一个 `trajectory.json`，文件布局和字段对应关系见 [ATIF 导出](/roller/traces/trajectory-outputs/#atif-export)。`--format hf` 写入数据集卡片、供 Hub 轨迹查看器展示的 Agent 会话（每个 sample 一个）、以及每个 sample 一行的表格，并按 Harness 和模型分组、命名为 `<harness>-<model>`，同一目录可容纳多个 run，见 [Hugging Face 导出](/roller/traces/trajectory-outputs/#hugging-face-export)。
+该命令不修改 run。`--format atif` 为每个 sample 写入一个 `trajectory.json`，文件布局和字段对应关系见 [ATIF 导出](/roller/traces/trajectory-outputs/#atif-export)。`--format hf` 写入数据集卡片、供 Hub 轨迹查看器展示的 Agent 会话（每个 sample 一个）、以及每个 sample 一行的表格，并按 Harness 和模型分组、命名为 `<harness>-<model>`，同一目录可容纳多个 run，见 [Hugging Face 导出](/roller/traces/trajectory-outputs/#hugging-face-export)。`--format tokens` 写入 `tokens.jsonl`，见 [Token id 与 logprob](/roller/traces/token-ids/#export)。
 
 ## 10. Import 参数
 

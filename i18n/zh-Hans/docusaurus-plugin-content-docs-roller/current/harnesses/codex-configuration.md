@@ -144,6 +144,7 @@ roller collect \
 | `--codex-websockets` / `--no-codex-websockets` | 关闭 | 自定义 provider 是否使用 Responses WebSocket |
 | `--codex-image-detail` | 无 | `auto`、`low`、`high` 或 `original`。Codex 发出的 Responses 图片输入未带 `detail` 时，补上该值 |
 | `--codex-tool-images-as-user` | 关闭 | 将工具返回的图片附到后续用户图片消息，兼容忽略工具图片的服务 |
+| `--codex-chat-completions` | 关闭 | 在请求记录代理上把 Codex 的 Responses 请求转换成 Chat Completions，用于只提供该 API 的端点。[`--token-ids`](/roller/traces/token-ids/) 需要它 |
 
 单一 Codex 运行可使用通用参数形式。混合 Harness 运行应使用 `--codex-image`、`--codex-api-base` 和 `--codex-api-key-env` 等专属形式，以避免将设置应用到其他参与者。
 

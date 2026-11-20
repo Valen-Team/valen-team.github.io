@@ -173,6 +173,8 @@ The Roller CLI recognizes the logical levels below, but each Harness supports on
 | `--thinking-capabilities PATH` | Unset | Loads versioned model/endpoint capability declarations for preflight validation |
 | `--keep-thinking` / `--no-keep-thinking` | On | Decides whether ACTF and SFT export visible reasoning |
 | `--wire-trace MODE` | `actf` | Selects `off`, `actf`, or `full` request recording |
+| `--capture-calls` | Off | Saves the full model calls and the subagent relations of every participant, see [Subagent capture protocol](/roller/traces/subagent-capture-protocol/) |
+| `--token-ids` | Off | With `--capture-calls`, saves the prompt and completion token ids of every model call and the logprob of each generated token in `token_ids.jsonl`, see [Token ids and logprobs](/roller/traces/token-ids/) |
 
 ```text
 off | minimal | low | medium | high | xhigh | adaptive | max | ultra
@@ -244,7 +246,7 @@ Flags that belong to one Harness are documented in that Harness guide. Each guid
 
 For the tools each Harness exposes and the flags that select them, see [Harness tool availability](/roller/harnesses/tool-availability/).
 
-For endpoints that need adapted requests or responses, `--codex-image-detail` sets the `detail` of Responses image inputs ([Codex Harness guide](/roller/harnesses/codex-configuration/#codex-cli-flags)), and `--claude-unique-tool-ids` replaces tool-call IDs that the service issues more than once ([Claude Code Harness guide](/roller/harnesses/claude-code-configuration/#claude-code-cli-flags)).
+For endpoints that need adapted requests or responses, `--codex-image-detail` sets the `detail` of Responses image inputs ([Codex Harness guide](/roller/harnesses/codex-configuration/#codex-cli-flags)), and `--claude-unique-tool-ids` replaces tool-call IDs that the service issues more than once ([Claude Code Harness guide](/roller/harnesses/claude-code-configuration/#claude-code-cli-flags)). For an endpoint that serves only Chat Completions, `--claude-chat-completions` and `--codex-chat-completions` translate the Messages and Responses requests of these Harnesses.
 
 To inspect the complete flag set supported by the Roller version currently in use, run:
 
@@ -335,19 +337,19 @@ See [Bench integration and scoring](/roller/benches/bench-format/) for field sem
 Export flags select the run to convert, the target format, and the directory that receives the result.
 
 ```bash
-roller export RUN_DIR [--format atif|hf|sft] [--output DIR] [--min-score X] [--no-redact] [--include-runs] [--redact-rules FILE]
+roller export RUN_DIR [--format atif|hf|sft|tokens] [--output DIR] [--min-score X] [--no-redact] [--include-runs] [--redact-rules FILE]
 ```
 
 | Flag | Default | Purpose |
 | --- | --- | --- |
 | `RUN_DIR` | Required | Selects a Roller run containing `samples/` |
-| `--format` | `atif` | Selects the target format: `atif`, the Agent Trajectory Interchange Format that Harbor reads, `hf`, a Hugging Face dataset folder, or `sft`, training records with aligned indexes |
+| `--format` | `atif` | Selects the target format: `atif`, the Agent Trajectory Interchange Format that Harbor reads, `hf`, a Hugging Face dataset folder, `sft`, training records with aligned indexes, or `tokens`, the token sequences of a run collected with `--token-ids` |
 | `--output` / `-o` | `RUN_DIR/<format>` | Sets the directory to write |
 | `--redact` / `--no-redact` | On | With `--format hf`, replaces the model endpoints, `NO_PROXY` hosts, machine name, host paths, and credential values of the run in the exported files |
 | `--include-runs` | Off | With `--format hf`, also writes `runs/<harness>-<model>/`, a Roller run directory with every file of the samples |
 | `--redact-rules` | None | With `--format hf`, names a JSON file of further `replace`, `exclude`, and `forbid` rules, applied whether or not `--redact` is on |
 
-The command does not modify the run. `--format atif` writes one `trajectory.json` per sample; see [ATIF export](/roller/traces/trajectory-outputs/#atif-export) for the file layout and the field mapping. `--format hf` writes a dataset card, the agent session of every sample for the trace viewer of the Hub, and a table with one row per sample, as one part per Harness and model named `<harness>-<model>`, so that one folder can hold several runs; see [Hugging Face export](/roller/traces/trajectory-outputs/#hugging-face-export).
+The command does not modify the run. `--format atif` writes one `trajectory.json` per sample; see [ATIF export](/roller/traces/trajectory-outputs/#atif-export) for the file layout and the field mapping. `--format hf` writes a dataset card, the agent session of every sample for the trace viewer of the Hub, and a table with one row per sample, as one part per Harness and model named `<harness>-<model>`, so that one folder can hold several runs; see [Hugging Face export](/roller/traces/trajectory-outputs/#hugging-face-export). `--format tokens` writes `tokens.jsonl`; see [Token ids and logprobs](/roller/traces/token-ids/#export).
 
 ## 10. Import flags
 

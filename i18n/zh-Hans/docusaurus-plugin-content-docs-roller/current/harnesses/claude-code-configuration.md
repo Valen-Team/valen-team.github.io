@@ -121,6 +121,7 @@ roller collect \
 | `--claude-max-thinking-tokens` | 无 | 设置传给 Claude Code 的 `MAX_THINKING_TOKENS` |
 | `--claude-permission-mode` | `bypassPermissions` | 选择 Claude Code permission mode |
 | `--claude-unique-tool-ids` | 关闭 | API 服务重复签发工具调用 ID 时，在 Claude Code 收到响应前替换重复的 ID，见 9.5 节 |
+| `--claude-chat-completions` | 关闭 | 在请求记录代理上把 Claude Code 的 Messages 请求转换成 Chat Completions，用于只提供该 API 的端点。[`--token-ids`](/roller/traces/token-ids/) 需要它 |
 
 单一 Claude Code 运行可使用通用参数形式。混合 Harness 运行应使用 `--claude-code-image`、`--claude-api-base` 和 `--claude-api-key-env` 等专属形式，以免设置作用于其他参与者。
 
