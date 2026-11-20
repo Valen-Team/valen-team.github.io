@@ -122,9 +122,9 @@ trace_ACTF.json ── linear ────────────────�
 captured Calls ──── compaction ──────────────────> sft_segments/ (opt-in)
 ```
 
-The following figure shows the same data path, including the files that are enabled by flags (dashed).
+The following figure shows the same data path, including the files that are enabled by flags (dashed) and the exports that read the sample files.
 
-![Trace data pipeline: the Harness session is copied to trace.jsonl and converted to trace_ACTF.json, which yields trace_SFT.json and sft.jsonl; --capture-calls enables compaction segments and --wire-trace full keeps request bodies in wire_trace.jsonl](/img/roller/pipeline-en.png)
+![Trace data pipeline: the Harness session, collected or imported, is copied to trace.jsonl and converted to trace_ACTF.json, which yields trace_SFT.json and sft.jsonl; roller export redacts the sessions into a Hugging Face dataset and converts the trace to ATIF; --capture-calls enables compaction segments and --wire-trace full keeps request bodies in wire_trace.jsonl](/img/roller/pipeline-en.svg)
 
 `trace.jsonl` records events from the current Harness session. ACTF converts
 those events into an analysis format; SFT removes fields that training does not

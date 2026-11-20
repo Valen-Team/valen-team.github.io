@@ -115,9 +115,9 @@ trace_ACTF.json ── 线性 ────────────────�
 捕获的 Calls ──── 压缩 ─────────────────────────> sft_segments/（显式使用）
 ```
 
-下图展示相同的数据链路，虚线部分为需通过参数开启的文件。
+下图展示相同的数据链路，虚线部分为需通过参数开启的文件，右侧是读取 sample 文件的导出。
 
-![轨迹数据流：Harness session 复制为 trace.jsonl 并转换为 trace_ACTF.json，再生成 trace_SFT.json 和 sft.jsonl；--capture-calls 开启压缩分段导出，--wire-trace full 将请求体保存到 wire_trace.jsonl](/img/roller/pipeline-zh-Hans.png)
+![轨迹数据流：采集或导入的 Harness session 复制为 trace.jsonl 并转换为 trace_ACTF.json，再生成 trace_SFT.json 和 sft.jsonl；roller export 把 session 脱敏后导出为 Hugging Face 数据集，并把统一轨迹转换为 ATIF；--capture-calls 开启压缩分段导出，--wire-trace full 将请求体保存到 wire_trace.jsonl](/img/roller/pipeline-zh-Hans.svg)
 
 `trace.jsonl` 记录当前 Harness session 的事件。ACTF 将这些事件转换为分析格式，
 SFT 再去除训练不需要的字段。SFT 不参与 ACTF 或 raw 的生成。

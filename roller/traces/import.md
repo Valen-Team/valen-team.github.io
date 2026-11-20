@@ -6,10 +6,10 @@ title: "Session import"
 
 `roller import` turns the Claude Code and Codex sessions already on this machine into a Roller run. Each session becomes one sample with its native session, its ACTF trajectory and, when one can be made, its SFT record. The Viewer and `roller export --format atif|sft|hf` then read the run like a collected one. No Docker, model endpoint or task list is needed.
 
-The command arrives with the next release. Until then, install Roller from the repository:
+The command is part of Roller 0.5.0 and later:
 
 ```bash
-uv tool install "git+https://github.com/Valen-Team/Roller"
+uv tool install roller-agent    # or: python -m pip install roller-agent
 ```
 
 ## 1. Import
