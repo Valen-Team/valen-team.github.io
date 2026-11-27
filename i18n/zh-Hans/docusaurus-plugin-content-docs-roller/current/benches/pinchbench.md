@@ -23,7 +23,7 @@ mkdir -p "$ROLLER_RUN_ROOT"
 `linux/amd64` OpenClaw 镜像。目录已存在时，脚本仅校验 commit，不改动数据。脚本会打印实际
 commit，便于将数据版本记入实验记录。脚本不读取或写入 key。如需手工准备，请 clone
 <https://github.com/pinchbench/skill>，再拉取
-`ghcr.io/openclaw/openclaw:2026.7.1-2`。
+`ghcr.io/openclaw/openclaw:2026.11.10`。
 
 OpenClaw 还需要一份模型配置。将以下内容保存为 `example.models.json`，再将 API 地址、
 key 和模型 ID 替换为模型服务商提供的值：

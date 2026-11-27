@@ -39,7 +39,7 @@ roller collect --bench skillsbench --bench-root "$SKILLSBENCH_ROOT" \
 
 `prepare-skillsbench.sh` accepts any persistent directory. It clones v1.1 when the directory is
 missing. For an existing checkout, it verifies the commit without changing the data. It also builds
-`roller-opencode:1.18.30` and does not read or write an API key. To prepare the environment manually,
+`roller-opencode:1.19.6` and does not read or write an API key. To prepare the environment manually,
 check out the `v1.1` tag and build `docker/opencode`.
 
 Before running the commands, replace the example API URL, key, and model ID with the values from

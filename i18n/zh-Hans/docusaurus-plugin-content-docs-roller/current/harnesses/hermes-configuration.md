@@ -26,14 +26,14 @@ Hermes Harness 适合以下场景：
 拉取预构建镜像，并标记为 Roller 默认使用的名称：
 
 ```bash
-docker pull ghcr.io/valen-team/roller-hermes:d15ed4445207
-docker tag ghcr.io/valen-team/roller-hermes:d15ed4445207 roller-hermes:d15ed4445207
+docker pull ghcr.io/valen-team/roller-hermes:8fc037444731
+docker tag ghcr.io/valen-team/roller-hermes:8fc037444731 roller-hermes:8fc037444731
 ```
 
 预构建镜像的平台为 `linux/amd64`。如需自行构建，在 Roller 仓库根目录执行：
 
 ```bash
-docker build -t roller-hermes:d15ed4445207 docker/hermes
+docker build -t roller-hermes:8fc037444731 docker/hermes
 ```
 
 镜像包含 Hermes 及其 Python 依赖。宿主机无需另外安装 Hermes，也无需启动 Hermes gateway。构建完成后，在第 3 节配置 API 地址、API Key 和模型 ID。
@@ -65,7 +65,7 @@ roller collect \
   --model model-id \
   --api-base https://api.example.com/v1 \
   --api-key-env ROLLER_HERMES_KEY \
-  --docker-image roller-hermes:d15ed4445207 \
+  --docker-image roller-hermes:8fc037444731 \
   --limit 1 \
   --output runs \
   --run-name hermes-demo
@@ -77,7 +77,7 @@ roller collect \
 
 | 参数 | 默认值与行为 |
 | --- | --- |
-| `--hermes-image` | 优先于共享的 `--docker-image`。两者均未设置时使用 `ROLLER_HERMES_IMAGE`，该变量也未设置时使用 `roller-hermes:d15ed4445207` |
+| `--hermes-image` | 优先于共享的 `--docker-image`。两者均未设置时使用 `ROLLER_HERMES_IMAGE`，该变量也未设置时使用 `roller-hermes:8fc037444731` |
 | `--hermes-context-length` | 可选上下文窗口覆盖，至少 64000 tokens |
 | `--hermes-max-iterations` | 每条用户消息最多 12 次模型迭代，同时受整个 task 的超时限制 |
 | `--hermes-vision` / `--no-hermes-vision` | 启用 `vision_analyze`，并声明所选模型支持图片输入。默认开启 |

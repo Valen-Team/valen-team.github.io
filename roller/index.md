@@ -45,13 +45,27 @@ The first-run guide uses OpenClaw. That path is sufficient until one successful 
 | --- | --- | --- |
 | OpenClaw (default) | OpenAI Responses or Chat Completions | Custom/open models, multimodal input, and dynamic User Simulator |
 | Codex | Responses | Codex CLI tool trajectories |
-| Claude Code | Anthropic <code>/v1/messages</code> | Claude Code tools and native thinking |
+| Claude Code | Anthropic <code>/v1/messages</code> | Claude Code tools, native thinking, and remote sandboxes |
 | Hermes | OpenAI Chat Completions | Native request and tool-message traces |
 | OpenCode | OpenAI Chat Completions | Native CLI sessions and file tools |
-| DeepSeek Harness | DeepSeek Chat Completions | Native SDK sessions and persistent Bash |
+| DeepSeek Harness | DeepSeek Chat Completions | Native SDK sessions, persistent Bash, and E2B sandboxes |
 | Pi Agent | OpenAI Chat Completions | Native AgentSession and coding tools |
+| Stirrup | OpenAI Chat Completions | Host-side agent loop (`code_exec`, `view_image`, `finish`) with offline containers or remote sandboxes |
 
-All seven use the same Task, Sample, trace, and SFT formats, as well as the same Viewer, retry, and Resume workflow. Their images, APIs, tools, and reasoning options differ.
+All eight use the same Task, Sample, trace, and SFT formats, as well as the same Viewer, retry, and Resume workflow. Their images, APIs, tools, and reasoning options differ.
+
+### Capability matrix
+
+| Harness | Docker | Remote sandbox | User Simulator | `--capture-calls` & `--token-ids` | `roller import` | Prebuilt image |
+| --- | --- | --- | --- | --- | --- | --- |
+| OpenClaw | Yes | — | Yes | Yes | — | Upstream (`ghcr.io/openclaw/openclaw:2026.11.10`) |
+| Codex | Yes | — | Yes | Yes (`--codex-chat-completions` for `--token-ids`) | Yes (`~/.codex`) | `ghcr.io/valen-team/roller-codex:0.172.0` |
+| Claude Code | Yes | Yes (`--sandbox-provider`) | Yes | Yes (`--claude-chat-completions` for `--token-ids`) | Yes (`~/.claude`) | Build locally (`docker/claude-code`) |
+| Hermes | Yes | — | Yes | Yes | — | `ghcr.io/valen-team/roller-hermes:8fc037444731` |
+| OpenCode | Yes | — | Yes | Yes | — | `ghcr.io/valen-team/roller-opencode:1.19.6` |
+| DeepSeek Harness | Yes | WildClawBench only (`e2b` / `roller.sandbox_providers`) | Yes | Yes | — | `ghcr.io/valen-team/roller-deepseek:0.2.2rc2` |
+| Pi Agent | Yes | — | Yes | Yes | — | `ghcr.io/valen-team/roller-pi:1.6.1` |
+| Stirrup | Yes | Yes (`roller.sandbox_providers`) | — | Yes | — | Base image (`python:3.13-slim`) |
 
 ## Where to begin
 

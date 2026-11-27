@@ -57,7 +57,7 @@ docker build \
   --build-arg DEBIAN_MIRROR=http://apt.example/repository/debian-proxy \
   --build-arg DEBIAN_SECURITY_MIRROR=http://apt.example/repository/debian-security-proxy \
   --build-arg NPM_REGISTRY=https://npm.example/repository/npm-proxy/ \
-  -t roller-pi:0.85.1 docker/pi
+  -t roller-pi:1.6.1 docker/pi
 ```
 
 构建会检查 `/etc/apt/sources.list` 和 `/etc/apt/sources.list.d/` 中的 `.list` 与 `.sources` 文件，只替换完整的 Debian 官方仓库地址。发行版代号、组件和签名配置保持不变。
@@ -103,7 +103,7 @@ OpenCode 使用的软件源须同时提供 npm 包元数据和 tarball。Pi 使�
 docker build \
   --build-arg PIP_INDEX_URL=http://pypi.internal/simple \
   --build-arg PIP_TRUSTED_HOST=pypi.internal \
-  -t roller-hermes:d15ed4445207 docker/hermes
+  -t roller-hermes:8fc037444731 docker/hermes
 ```
 
 `PIP_TRUSTED_HOST` 只控制 pip。若 uv 下载端也需要放宽连接校验，须单独设置 `UV_INSECURE_HOST`。两者默认均不启用。具体规则见 [pip trusted-host](https://pip.pypa.io/en/stable/cli/pip/#cmdoption-trusted-host) 和 [uv insecure host](https://docs.astral.sh/uv/reference/environment/#uv_insecure_host)。

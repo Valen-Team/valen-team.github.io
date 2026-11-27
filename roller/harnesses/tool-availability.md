@@ -17,6 +17,7 @@ This page lists the tools each Harness exposes to the model by default and the f
 | OpenCode | `bash`, `read`, `write`, `edit`, `apply_patch`, `glob`, `grep`, and `skill` | `--opencode-native-tools`, with `--opencode-deny-tool NAME` for exclusions |
 | DeepSeek | The `sdk-minimal` profile, which provides one persistent `bash` tool | `--deepseek-profile sdk`, `--deepseek-permission-mode MODE`, `--deepseek-input-modalities text,image` |
 | Pi Agent | The seven built-in tools `read`, `bash`, `edit`, `write`, `grep`, `find`, and `ls` | None |
+| Stirrup | `code_exec`, `view_image`, and `finish` | None (commands execute in the sample container or remote sandbox) |
 
 Without these flags a Harness keeps its default tools, and existing runs resume with their recorded configuration.
 

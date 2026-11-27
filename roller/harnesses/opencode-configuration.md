@@ -6,7 +6,7 @@ title: "OpenCode Harness guide"
 
 The OpenCode Harness runs tasks through OpenCode Agent when they need file editing, shell commands, or local-image inspection. It connects to an OpenAI Chat Completions service with streaming and tool-call support. This guide follows the order needed for a first run: image, API, Harness-specific flags, sessions, and outputs.
 
-Roller currently pins [OpenCode](https://opencode.ai/docs/cli/) 1.18.30. For Task fields, see [Task format reference](/roller/tasks/task-format/). For shared outputs, see [Trajectory output file guide](/roller/traces/trajectory-outputs/).
+Roller currently pins [OpenCode](https://opencode.ai/docs/cli/) 1.19.6. For Task fields, see [Task format reference](/roller/tasks/task-format/). For shared outputs, see [Trajectory output file guide](/roller/traces/trajectory-outputs/).
 
 For a first run, complete sections 1 through 3 and run the example command. Read the later sections on Harness-specific flags, sessions, and trajectories when those features are needed.
 
@@ -26,14 +26,14 @@ Pass first-turn images through `files.attach_images`. Subagents are available wi
 Pull the prebuilt image and give it the name Roller uses by default:
 
 ```bash
-docker pull ghcr.io/valen-team/roller-opencode:1.18.30
-docker tag ghcr.io/valen-team/roller-opencode:1.18.30 roller-opencode:1.18.30
+docker pull ghcr.io/valen-team/roller-opencode:1.19.6
+docker tag ghcr.io/valen-team/roller-opencode:1.19.6 roller-opencode:1.19.6
 ```
 
 The prebuilt image is `linux/amd64`. To build the image yourself instead, run this from the Roller repository root:
 
 ```bash
-docker build -t roller-opencode:1.18.30 docker/opencode
+docker build -t roller-opencode:1.19.6 docker/opencode
 ```
 
 The image contains the pinned OpenCode release and its runtime dependencies. The host does not need Node.js, Bun, or OpenCode. After the build, configure the API address, API key, and model ID in section 3.
@@ -63,7 +63,7 @@ roller collect \
   --model model-id \
   --api-base https://api.example.com/v1 \
   --api-key-env ROLLER_OPENCODE_KEY \
-  --docker-image roller-opencode:1.18.30 \
+  --docker-image roller-opencode:1.19.6 \
   --limit 1 \
   --output runs \
   --run-name opencode-demo
@@ -75,7 +75,7 @@ This table lists OpenCode-specific runtime flags only. See section 3 for API add
 
 | Option | Default / behavior |
 | --- | --- |
-| `--opencode-image` | Takes precedence over `--docker-image`. If neither is set, `ROLLER_OPENCODE_IMAGE` is used, with `roller-opencode:1.18.30` as the fallback |
+| `--opencode-image` | Takes precedence over `--docker-image`. If neither is set, `ROLLER_OPENCODE_IMAGE` is used, with `roller-opencode:1.19.6` as the fallback |
 | `--opencode-max-steps` | 100 for SkillsBench and 12 otherwise, also bounded by the task timeout |
 | `--opencode-context-length` | 128000 tokens by default, minimum 1024. Set it to match the actual model |
 | `--opencode-output-tokens` | Maximum output tokens requested per model call. Defaults to 32768 for SkillsBench and 8192 otherwise. Set a positive value below the context window |

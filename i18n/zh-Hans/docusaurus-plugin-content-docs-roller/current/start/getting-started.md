@@ -58,13 +58,13 @@ OpenClaw 同时支持 OpenAI Responses 和 Chat Completions。
 在线拉取固定版本镜像：
 
 ```bash
-docker pull ghcr.io/openclaw/openclaw:2026.7.1-2
+docker pull ghcr.io/openclaw/openclaw:2026.11.10
 ```
 
 也可加载已有归档：
 
 ```bash
-docker load -i /path/to/openclaw-2026.7.1-2-linux-amd64.tar.gz
+docker load -i /path/to/openclaw-2026.11.10-linux-amd64.tar.gz
 ```
 
 如需使用自定义镜像 tag，请通过 `--docker-image` 传入，或设置 `ROLLER_OPENCLAW_IMAGE`。

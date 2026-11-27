@@ -6,7 +6,7 @@ title: "Pi Agent Harness guide"
 
 The Pi Agent Harness runs tasks through Pi Coding Agent when they need shell commands, file editing, or local-image inspection. It connects to an OpenAI Chat Completions service with streaming and tool-call support. This guide follows the order needed for a first run: image, API, Harness-specific flags, sessions, and outputs.
 
-Roller currently pins the official [Pi Coding Agent SDK](https://pi.dev/docs/latest/sdk) 0.85.1. For Task fields, see [Task format reference](/roller/tasks/task-format/). For shared outputs, see [Trajectory output file guide](/roller/traces/trajectory-outputs/).
+Roller currently pins the official [Pi Coding Agent SDK](https://pi.dev/docs/latest/sdk) 1.6.1. For Task fields, see [Task format reference](/roller/tasks/task-format/). For shared outputs, see [Trajectory output file guide](/roller/traces/trajectory-outputs/).
 
 For a first run, complete sections 1 through 3 and run the example command. Read the later sections on Harness-specific flags, sessions, and trajectories when those features are needed.
 
@@ -26,14 +26,14 @@ The Pi Agent Harness does not accept images or video directly in task messages. 
 Pull the prebuilt image and give it the name Roller uses by default:
 
 ```bash
-docker pull ghcr.io/valen-team/roller-pi:0.85.1
-docker tag ghcr.io/valen-team/roller-pi:0.85.1 roller-pi:0.85.1
+docker pull ghcr.io/valen-team/roller-pi:1.6.1
+docker tag ghcr.io/valen-team/roller-pi:1.6.1 roller-pi:1.6.1
 ```
 
 The prebuilt image is `linux/amd64`. To build the image yourself instead, run this from the Roller repository root:
 
 ```bash
-docker build -t roller-pi:0.85.1 docker/pi
+docker build -t roller-pi:1.6.1 docker/pi
 ```
 
 The image contains Node.js, the Pi SDK, and runtime tools. The host does not need those dependencies installed separately. After the build, configure the API address, API key, and model ID in section 3.
@@ -63,7 +63,7 @@ roller collect \
   --model model-id \
   --api-base https://api.example.com/v1 \
   --api-key-env ROLLER_PI_KEY \
-  --docker-image roller-pi:0.85.1 \
+  --docker-image roller-pi:1.6.1 \
   --limit 1 \
   --output runs \
   --run-name pi-demo
@@ -75,7 +75,7 @@ This table lists Pi-specific runtime flags only. See section 3 for API addresses
 
 | Flag | Default and behavior |
 | --- | --- |
-| `--pi-image` | Takes precedence over `--docker-image`. If neither is set, `ROLLER_PI_IMAGE` is used, with `roller-pi:0.85.1` as the fallback |
+| `--pi-image` | Takes precedence over `--docker-image`. If neither is set, `ROLLER_PI_IMAGE` is used, with `roller-pi:1.6.1` as the fallback |
 | `--pi-max-steps` | At most 12 model requests per user message, also bounded by task and turn deadlines |
 | `--pi-context-length` | 128000 by default, minimum 1024. Set it to match the actual model service |
 | `--pi-output-tokens` | 8192 by default. Must be positive and smaller than the context window. Sent as `max_tokens` |

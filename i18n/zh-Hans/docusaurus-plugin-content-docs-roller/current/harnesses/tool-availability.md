@@ -17,6 +17,7 @@ title: "Harness 工具开放情况"
 | OpenCode | `bash`、`read`、`write`、`edit`、`apply_patch`、`glob`、`grep` 和 `skill` | `--opencode-native-tools`，配合 `--opencode-deny-tool NAME` 排除工具 |
 | DeepSeek | `sdk-minimal` profile，提供一个持久化的 `bash` 工具 | `--deepseek-profile sdk`、`--deepseek-permission-mode MODE`、`--deepseek-input-modalities text,image` |
 | Pi Agent | 七种内置工具 `read`、`bash`、`edit`、`write`、`grep`、`find` 和 `ls` | 无 |
+| Stirrup | `code_exec`、`view_image` 和 `finish` | 无（命令在 sample 容器或远程沙箱内执行） |
 
 未使用这些参数时，Harness 保持默认工具，已有的 run 按原有配置 Resume。
 

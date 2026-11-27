@@ -6,7 +6,7 @@ title: "Claude Code Harness 指南"
 
 Claude Code Harness 用于通过 Claude Code 执行需要终端、文件或图片工具的 task。该 Harness 连接 Anthropic Messages 兼容服务。本页按照镜像、API、专属参数、session 和轨迹的顺序介绍首次使用所需内容。
 
-Roller 当前固定使用 Claude Code 2.1.222。Task 字段见 [Task 格式参考](/roller/tasks/task-format/)，通用产物见 [轨迹产出文件指南](/roller/traces/trajectory-outputs/)。
+Roller 当前固定使用 Claude Code 2.1.332。Task 字段见 [Task 格式参考](/roller/tasks/task-format/)，通用产物见 [轨迹产出文件指南](/roller/traces/trajectory-outputs/)。
 
 首次使用时，请先完成第 1 至第 3 节并运行示例命令。后续章节介绍专属参数、Thinking 和轨迹，可在需要相应功能时查阅。
 
@@ -26,7 +26,7 @@ Claude Code Harness 适合以下场景：
 Claude Code 的许可不允许再分发，因此不提供预构建镜像，需要在本地构建。
 
 Roller 使用 [`docker/claude-code/Dockerfile`](https://github.com/Valen-Team/Roller/blob/main/docker/claude-code/Dockerfile)，基础镜像为
-`node:22-bookworm-slim`，默认固定安装 `@anthropic-ai/claude-code@2.1.222`。Codex 已使用的
+`node:22-bookworm-slim`，默认固定安装 `@anthropic-ai/claude-code@2.1.332`。Codex 已使用的
 Node 22 离线归档可直接复用，无需重新下载基础镜像。
 
 在线基础镜像：
@@ -35,9 +35,9 @@ Node 22 离线归档可直接复用，无需重新下载基础镜像。
 docker pull --platform linux/amd64 node:22-bookworm-slim
 docker build \
   --platform linux/amd64 \
-  --build-arg CLAUDE_CODE_VERSION=2.1.222 \
+  --build-arg CLAUDE_CODE_VERSION=2.1.332 \
   -f docker/claude-code/Dockerfile \
-  -t roller-claude-code:2.1.222 \
+  -t roller-claude-code:2.1.332 \
   .
 ```
 
@@ -47,9 +47,9 @@ docker build \
 docker load -i node-22-bookworm-slim-linux-amd64.tar.gz
 docker build \
   --platform linux/amd64 \
-  --build-arg CLAUDE_CODE_VERSION=2.1.222 \
+  --build-arg CLAUDE_CODE_VERSION=2.1.332 \
   -f docker/claude-code/Dockerfile \
-  -t roller-claude-code:2.1.222 \
+  -t roller-claude-code:2.1.332 \
   .
 ```
 
@@ -60,19 +60,19 @@ Debian 软件源参数 `DEBIAN_MIRROR`、`DEBIAN_SECURITY_MIRROR` 的用法见 [
 ```bash
 docker build \
   --platform linux/amd64 \
-  --build-arg CLAUDE_CODE_VERSION=2.1.222 \
+  --build-arg CLAUDE_CODE_VERSION=2.1.332 \
   --build-arg DEBIAN_MIRROR=http://mirrors.tuna.tsinghua.edu.cn/debian \
   --build-arg DEBIAN_SECURITY_MIRROR=http://mirrors.tuna.tsinghua.edu.cn/debian-security \
   -f docker/claude-code/Dockerfile \
-  -t roller-claude-code:2.1.222 \
+  -t roller-claude-code:2.1.332 \
   .
 ```
 
 验证并设置默认镜像：
 
 ```bash
-docker run --rm roller-claude-code:2.1.222 claude --version
-export ROLLER_CLAUDE_CODE_IMAGE=roller-claude-code:2.1.222
+docker run --rm roller-claude-code:2.1.332 claude --version
+export ROLLER_CLAUDE_CODE_IMAGE=roller-claude-code:2.1.332
 ```
 
 正式数据集应固定 Claude Code 版本。原生 session 字段、permission mode 和 effort 列表会随
@@ -99,7 +99,7 @@ roller collect \
   --model model-id \
   --api-base https://api.example.com/v1/messages \
   --api-key-env ROLLER_ANTHROPIC_KEY \
-  --docker-image roller-claude-code:2.1.222 \
+  --docker-image roller-claude-code:2.1.332 \
   --limit 1 \
   --output runs \
   --run-name claude-code-demo
@@ -115,13 +115,22 @@ roller collect \
 
 | 参数 | 默认值 | 用途 |
 | --- | --- | --- |
-| `--docker-image` / `--claude-code-image` | `ROLLER_CLAUDE_CODE_IMAGE` 或 `roller-claude-code:2.1.222` | 覆盖 Claude Code 镜像 |
+| `--docker-image` / `--claude-code-image` | `ROLLER_CLAUDE_CODE_IMAGE` 或 `roller-claude-code:2.1.332` | 覆盖 Claude Code 镜像 |
 | `--claude-settings` | 无 | 向隔离容器注入原生 `settings.json`。运行锁保存其 SHA-256，含旧 BLAKE2b 指纹的 lock 仍可 Resume |
 | `--claude-max-turns` | 无 | 每条预定义用户消息的 Agent 执行轮数上限 |
 | `--claude-max-thinking-tokens` | 无 | 设置传给 Claude Code 的 `MAX_THINKING_TOKENS` |
 | `--claude-permission-mode` | `bypassPermissions` | 选择 Claude Code permission mode |
 | `--claude-unique-tool-ids` | 关闭 | API 服务重复签发工具调用 ID 时，在 Claude Code 收到响应前替换重复的 ID，见 9.5 节 |
 | `--claude-chat-completions` | 关闭 | 在请求记录代理上把 Claude Code 的 Messages 请求转换成 Chat Completions，用于只提供该 API 的端点。[`--token-ids`](/roller/traces/token-ids/) 需要它 |
+| `--claude-sandbox-binary` | `/opt/claude-code/bin/claude` | 远程沙箱内挂载的 Claude Code CLI 二进制路径 |
+| `--claude-context-window` | 无 | 声明服务端上下文长度，使 Claude Code 在请求超限前触发上下文压缩 |
+| `--claude-tool-images-inline` | 关闭 | 将工具返回的图片保留在 tool 消息本身，而不是放在紧随其后的 user 消息中 |
+
+### 远程沙箱执行
+
+Claude Code 支持通过 `--sandbox-provider NAME --sandbox-template NAME` 在任意注册于 `roller.sandbox_providers` entry point 的远程沙箱中运行。沙箱模板挂载 Claude Code CLI 二进制（默认 `/opt/claude-code/bin/claude`，可用 `--claude-sandbox-binary PATH` 覆盖）并承载任务工作区。
+
+对于无出网权限的沙箱，实现 `route_http` 的 provider 会经由沙箱 API 将 CLI 的模型请求转发回采集宿主机上的请求记录代理，`--wire-trace full`、`--capture-calls` 和 `--token-ids` 产出的文件与 Docker 模式一致。`--network` 和 `--keep-container-on-error` 仅适用于 Docker。
 
 单一 Claude Code 运行可使用通用参数形式。混合 Harness 运行应使用 `--claude-code-image`、`--claude-api-base` 和 `--claude-api-key-env` 等专属形式，以免设置作用于其他参与者。
 

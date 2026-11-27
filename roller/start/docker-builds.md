@@ -57,7 +57,7 @@ docker build \
   --build-arg DEBIAN_MIRROR=http://apt.example/repository/debian-proxy \
   --build-arg DEBIAN_SECURITY_MIRROR=http://apt.example/repository/debian-security-proxy \
   --build-arg NPM_REGISTRY=https://npm.example/repository/npm-proxy/ \
-  -t roller-pi:0.85.1 docker/pi
+  -t roller-pi:1.6.1 docker/pi
 ```
 
 The build checks `/etc/apt/sources.list` and the `.list` and `.sources` files under `/etc/apt/sources.list.d/`. It replaces complete official Debian repository URLs only. Distribution suites, components, and signature settings remain unchanged.
@@ -103,7 +103,7 @@ Prefer an HTTPS index with a valid certificate. If a trusted internal HTTP index
 docker build \
   --build-arg PIP_INDEX_URL=http://pypi.internal/simple \
   --build-arg PIP_TRUSTED_HOST=pypi.internal \
-  -t roller-hermes:d15ed4445207 docker/hermes
+  -t roller-hermes:8fc037444731 docker/hermes
 ```
 
 `PIP_TRUSTED_HOST` affects pip only. If the uv download host also needs relaxed connection checks, set `UV_INSECURE_HOST` separately. Neither option is enabled by default. See [pip trusted-host](https://pip.pypa.io/en/stable/cli/pip/#cmdoption-trusted-host) and [uv insecure host](https://docs.astral.sh/uv/reference/environment/#uv_insecure_host) for details.

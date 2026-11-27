@@ -333,7 +333,7 @@ The Roller schema for `thinking` accepts `off/minimal/low/medium/high/xhigh/adap
 validate levels against the selected provider/model profile; Roller only rejects advanced levels on the legacy
 `2026.3.11` runtime that is known to silently downgrade them. Codex maps valid levels to `model_reasoning_effort` and rejects
 the OpenClaw-only `adaptive` and `off`, which has no shared equivalent; other effort levels are forwarded to Codex
-and validated by the selected model and endpoint. Claude Code 2.1.222 accepts
+and validated by the selected model and endpoint. Claude Code 2.1.332 accepts
 `low/medium/high/xhigh/max/ultracode`; Roller maps `ultra` to `ultracode` and rejects
 `off/minimal/adaptive`. The available levels depend on the Harness version, model, and provider; each of them validates the value.
 The Task Agent can use OpenClaw, Codex, Claude Code, Hermes, OpenCode, DeepSeek, or Pi; the User Simulator can also select any of these seven Harnesses in its own `harness` field. Task Agent harnesses may differ between tasks; an explicit `--harness` overrides all of them. The Simulator Harness is selected independently.

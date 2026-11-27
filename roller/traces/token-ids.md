@@ -6,7 +6,7 @@ title: "Token ids and logprobs"
 
 `--token-ids` saves, for every model call of a rollout, the token ids the endpoint received, the token ids it generated, and the logprob of each generated token. The data comes from the endpoint itself, so it holds exactly the tokens the model read and sampled: no chat template is applied a second time and no text is tokenized again. `roller export --format tokens` then joins the calls of a conversation into one sequence for training.
 
-All seven Harnesses are supported. The options on this page are part of Roller 0.6.0 and later:
+All eight Harnesses are supported. The options on this page are part of Roller 0.6.0 and later (with remote sandbox support and Stirrup added in Roller 0.7.0):
 
 ```bash
 uv tool install roller-agent    # or: python -m pip install roller-agent
@@ -42,7 +42,7 @@ The Harness reads its key from `OPENAI_API_KEY` for Hermes, OpenCode, Pi Agent a
 
 | Harness | API the Harness speaks | Also needed |
 | --- | --- | --- |
-| Hermes, OpenCode, DeepSeek Harness, Pi Agent | Chat Completions | Nothing |
+| Hermes, OpenCode, DeepSeek Harness, Pi Agent, Stirrup | Chat Completions | Nothing |
 | OpenClaw | Chat Completions, for a provider whose `api` is `openai-completions` in `--model-config` | Nothing |
 | Claude Code | Messages | `--claude-chat-completions` |
 | Codex | Responses | `--codex-chat-completions` |
@@ -120,6 +120,6 @@ A subagent has its own sequences. A conversation that was compacted continues in
 
 ## 5. Scope
 
-- `--token-ids` needs `--capture-calls`. Roller 0.6.0 records token ids in Docker only. The Git version of Roller also records them in a remote sandbox (`--sandbox-provider`): install it on the collector and in the sandbox template with `pip install git+https://github.com/Valen-Team/Roller.git`, and the request recording proxy in the sandbox writes `token_ids.jsonl`.
+- `--token-ids` needs `--capture-calls`. In Roller 0.7.0 and later, `--token-ids` also works in a remote sandbox (`--sandbox-provider`): install Roller 0.7.0+ on the collector (and in the sandbox template when the proxy runs inside the sandbox), and Roller saves `token_ids.jsonl` into the sample.
 - Token ids are numbers of the tokenizer of the served model. Keep the model name and revision with the data.
 - `roller export --format hf` leaves `token_ids.jsonl` out. With `--include-runs` it copies every file of the samples, token ids included. Text redaction does not reach token ids, so add `"exclude": ["samples/*/token_ids.jsonl"]` to the `--redact-rules` file unless the tokens are meant to be published.

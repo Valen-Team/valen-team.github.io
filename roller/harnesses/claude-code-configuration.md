@@ -6,7 +6,7 @@ title: "Claude Code Harness guide"
 
 The Claude Code Harness runs tasks through Claude Code when they need terminal, file, or image tools. It connects to an Anthropic Messages-compatible service. This guide follows the order needed for a first run: image, API, Harness-specific flags, sessions, and outputs.
 
-Roller currently pins Claude Code 2.1.222. For Task fields, see [Task format reference](/roller/tasks/task-format/). For shared outputs, see [Trajectory output file guide](/roller/traces/trajectory-outputs/).
+Roller currently pins Claude Code 2.1.332. For Task fields, see [Task format reference](/roller/tasks/task-format/). For shared outputs, see [Trajectory output file guide](/roller/traces/trajectory-outputs/).
 
 For a first run, complete sections 1 through 3 and run the example command. Read the later sections on Harness-specific flags, thinking, and trajectories when those features are needed.
 
@@ -26,7 +26,7 @@ An endpoint that only supports OpenAI Chat Completions or Responses cannot be us
 No prebuilt image is published for Claude Code, because its licence does not allow redistribution. Build it locally.
 
 Roller uses [`docker/claude-code/Dockerfile`](https://github.com/Valen-Team/Roller/blob/main/docker/claude-code/Dockerfile). The base image is
-`node:22-bookworm-slim`, and the default pinned install is `@anthropic-ai/claude-code@2.1.222`. The Node 22
+`node:22-bookworm-slim`, and the default pinned install is `@anthropic-ai/claude-code@2.1.332`. The Node 22
 offline archive already used by Codex can be reused, so the base image does not need to be downloaded again.
 
 Online base image:
@@ -35,9 +35,9 @@ Online base image:
 docker pull --platform linux/amd64 node:22-bookworm-slim
 docker build \
   --platform linux/amd64 \
-  --build-arg CLAUDE_CODE_VERSION=2.1.222 \
+  --build-arg CLAUDE_CODE_VERSION=2.1.332 \
   -f docker/claude-code/Dockerfile \
-  -t roller-claude-code:2.1.222 \
+  -t roller-claude-code:2.1.332 \
   .
 ```
 
@@ -47,9 +47,9 @@ Offline base image:
 docker load -i node-22-bookworm-slim-linux-amd64.tar.gz
 docker build \
   --platform linux/amd64 \
-  --build-arg CLAUDE_CODE_VERSION=2.1.222 \
+  --build-arg CLAUDE_CODE_VERSION=2.1.332 \
   -f docker/claude-code/Dockerfile \
-  -t roller-claude-code:2.1.222 \
+  -t roller-claude-code:2.1.332 \
   .
 ```
 
@@ -60,19 +60,19 @@ When the default Debian mirrors are unreachable, pass mirror URLs:
 ```bash
 docker build \
   --platform linux/amd64 \
-  --build-arg CLAUDE_CODE_VERSION=2.1.222 \
+  --build-arg CLAUDE_CODE_VERSION=2.1.332 \
   --build-arg DEBIAN_MIRROR=http://mirrors.tuna.tsinghua.edu.cn/debian \
   --build-arg DEBIAN_SECURITY_MIRROR=http://mirrors.tuna.tsinghua.edu.cn/debian-security \
   -f docker/claude-code/Dockerfile \
-  -t roller-claude-code:2.1.222 \
+  -t roller-claude-code:2.1.332 \
   .
 ```
 
 Verify and set the default image:
 
 ```bash
-docker run --rm roller-claude-code:2.1.222 claude --version
-export ROLLER_CLAUDE_CODE_IMAGE=roller-claude-code:2.1.222
+docker run --rm roller-claude-code:2.1.332 claude --version
+export ROLLER_CLAUDE_CODE_IMAGE=roller-claude-code:2.1.332
 ```
 
 Production datasets should pin the Claude Code version. Native session fields, permission modes, and effort lists change
@@ -99,7 +99,7 @@ roller collect \
   --model model-id \
   --api-base https://api.example.com/v1/messages \
   --api-key-env ROLLER_ANTHROPIC_KEY \
-  --docker-image roller-claude-code:2.1.222 \
+  --docker-image roller-claude-code:2.1.332 \
   --limit 1 \
   --output runs \
   --run-name claude-code-demo
@@ -115,13 +115,22 @@ This table lists Claude Code-specific runtime flags only. See section 3 for API 
 
 | Flag | Default | Purpose |
 | --- | --- | --- |
-| `--docker-image` / `--claude-code-image` | `ROLLER_CLAUDE_CODE_IMAGE` or `roller-claude-code:2.1.222` | Override the Claude Code image |
+| `--docker-image` / `--claude-code-image` | `ROLLER_CLAUDE_CODE_IMAGE` or `roller-claude-code:2.1.332` | Override the Claude Code image |
 | `--claude-settings` | None | Inject a native `settings.json` into the isolated container. The run lock stores its SHA-256, and locks that hold the earlier BLAKE2b fingerprint remain resumable |
 | `--claude-max-turns` | None | Limit agent turns for each predefined user message |
 | `--claude-max-thinking-tokens` | None | Set `MAX_THINKING_TOKENS` for Claude Code |
 | `--claude-permission-mode` | `bypassPermissions` | Select the Claude Code permission mode |
 | `--claude-unique-tool-ids` | Off | Replace tool-call IDs that the API service issues more than once before Claude Code receives them, see section 9.5 |
 | `--claude-chat-completions` | Off | Translate the Messages requests of Claude Code to Chat Completions at the request recording proxy, for endpoints that serve only that API. Needed for [`--token-ids`](/roller/traces/token-ids/) |
+| `--claude-sandbox-binary` | `/opt/claude-code/bin/claude` | Path to the mounted Claude Code CLI binary inside a remote sandbox |
+| `--claude-context-window` | None | Declare the served model context window so Claude Code compacts history before the endpoint rejects a request |
+| `--claude-tool-images-inline` | Off | Keep images returned by tools inside the tool message itself instead of a following user message |
+
+### Remote sandbox execution
+
+Claude Code can run inside a remote sandbox via `--sandbox-provider NAME --sandbox-template NAME` using any provider registered under the `roller.sandbox_providers` entry point. The sandbox template mounts the Claude Code CLI binary (at `/opt/claude-code/bin/claude`, or `--claude-sandbox-binary PATH`) and holds the task workspace.
+
+For sandboxes created without egress, a provider implementing `route_http` tunnels Claude Code's model requests back through the sandbox API to Roller's local request recording proxy on the collecting host, so `--wire-trace full`, `--capture-calls`, and `--token-ids` produce the same artifacts as under Docker. `--network` and `--keep-container-on-error` apply to Docker only.
 
 A single Claude Code run can use the shared flag forms. In a mixed-Harness run, use dedicated forms such as `--claude-code-image`, `--claude-api-base`, and `--claude-api-key-env` so that the settings apply only to the intended participant.
 

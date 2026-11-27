@@ -6,7 +6,7 @@ title: "Codex Harness guide"
 
 The Codex Harness runs tasks through the Codex CLI when they require terminal, file, or image tools. It connects to a model service that supports the Responses API. This guide follows the order needed for a first run: image, API, Harness-specific flags, sessions, and outputs.
 
-Roller currently pins Codex 0.149.0. For Task fields, see [Task format reference](/roller/tasks/task-format/). For shared outputs, see [Trajectory output file guide](/roller/traces/trajectory-outputs/).
+Roller currently pins Codex 0.172.0. For Task fields, see [Task format reference](/roller/tasks/task-format/). For shared outputs, see [Trajectory output file guide](/roller/traces/trajectory-outputs/).
 
 For a first run, complete sections 1 through 3 and run the example command. Read the later sections on Harness-specific flags, thinking, and trajectories when those features are needed.
 
@@ -26,14 +26,14 @@ An endpoint that only supports Chat Completions cannot be used directly. Task me
 Pull the prebuilt image and give it the name Roller uses by default:
 
 ```bash
-docker pull ghcr.io/valen-team/roller-codex:0.149.0
-docker tag ghcr.io/valen-team/roller-codex:0.149.0 roller-codex:0.149.0
+docker pull ghcr.io/valen-team/roller-codex:0.172.0
+docker tag ghcr.io/valen-team/roller-codex:0.172.0 roller-codex:0.172.0
 ```
 
 The prebuilt image is `linux/amd64`. The rest of this section describes building it yourself.
 
 Roller uses [`docker/codex/Dockerfile`](https://github.com/Valen-Team/Roller/blob/main/docker/codex/Dockerfile). The base image is
-`node:22-bookworm-slim`, and the default pinned install is `@openai/codex@0.149.0`. The image also includes Git, ripgrep,
+`node:22-bookworm-slim`, and the default pinned install is `@openai/codex@0.172.0`. The image also includes Git, ripgrep,
 Python, curl, jq, an SSH client, and other common task tools.
 
 Online environment:
@@ -42,9 +42,9 @@ Online environment:
 docker pull --platform linux/amd64 node:22-bookworm-slim
 docker build \
   --platform linux/amd64 \
-  --build-arg CODEX_VERSION=0.149.0 \
+  --build-arg CODEX_VERSION=0.172.0 \
   -f docker/codex/Dockerfile \
-  -t roller-codex:0.149.0 \
+  -t roller-codex:0.172.0 \
   .
 ```
 
@@ -54,9 +54,9 @@ Offline base image:
 docker load -i node-22-bookworm-slim-linux-amd64.tar.gz
 docker build \
   --platform linux/amd64 \
-  --build-arg CODEX_VERSION=0.149.0 \
+  --build-arg CODEX_VERSION=0.172.0 \
   -f docker/codex/Dockerfile \
-  -t roller-codex:0.149.0 \
+  -t roller-codex:0.172.0 \
   .
 ```
 
@@ -68,32 +68,32 @@ editing the Dockerfile:
 ```bash
 docker build \
   --platform linux/amd64 \
-  --build-arg CODEX_VERSION=0.149.0 \
+  --build-arg CODEX_VERSION=0.172.0 \
   --build-arg DEBIAN_MIRROR=http://mirrors.tuna.tsinghua.edu.cn/debian \
   --build-arg DEBIAN_SECURITY_MIRROR=http://mirrors.tuna.tsinghua.edu.cn/debian-security \
   -f docker/codex/Dockerfile \
-  -t roller-codex:0.149.0 \
+  -t roller-codex:0.172.0 \
   .
 ```
 
 Verify the result:
 
 ```bash
-docker run --rm roller-codex:0.149.0 codex --version
+docker run --rm roller-codex:0.172.0 codex --version
 ```
 
 If the build machine and the collection machine do not share the same Docker daemon, export the image and load it on the target worker:
 
 ```bash
-docker save -o roller-codex-0.149.0-linux-amd64.tar roller-codex:0.149.0
-docker load -i roller-codex-0.149.0-linux-amd64.tar
+docker save -o roller-codex-0.172.0-linux-amd64.tar roller-codex:0.172.0
+docker load -i roller-codex-0.172.0-linux-amd64.tar
 ```
 
 Another already-built image can be selected through a command-line option or environment variable:
 
 ```bash
-export ROLLER_CODEX_IMAGE=roller-codex:0.149.0
-# Or: roller collect ... --docker-image roller-codex:0.149.0
+export ROLLER_CODEX_IMAGE=roller-codex:0.172.0
+# Or: roller collect ... --docker-image roller-codex:0.172.0
 ```
 
 Do not use the automatically changing `@openai/codex@latest` for a production collection. Roller writes the
@@ -120,7 +120,7 @@ roller collect \
   --model model-id \
   --api-base https://api.example.com/v1 \
   --api-key-env ROLLER_CODEX_KEY \
-  --docker-image roller-codex:0.149.0 \
+  --docker-image roller-codex:0.172.0 \
   --limit 1 \
   --output runs \
   --run-name codex-demo
@@ -136,7 +136,7 @@ This table lists Codex-specific runtime flags only. API addresses and keys are d
 
 | Flag | Default | Purpose |
 | --- | --- | --- |
-| `--docker-image` / `--codex-image` | `ROLLER_CODEX_IMAGE` or `roller-codex:0.149.0` | Override the Codex image |
+| `--docker-image` / `--codex-image` | `ROLLER_CODEX_IMAGE` or `roller-codex:0.172.0` | Override the Codex image |
 | `--codex-config` | None | Inject a native `config.toml` into the isolated container |
 | `--codex-config-set KEY=VALUE` | None | Append `-c KEY=VALUE` to every `codex exec`. Repeatable |
 | `--reasoning-summary` | Codex default | `auto`, `concise`, `detailed`, or `none` |

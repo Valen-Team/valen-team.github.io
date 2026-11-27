@@ -100,6 +100,12 @@ subdirectory:
 Run-level `sft.jsonl` aggregates only the Task Agent in the root directory. It
 does not include User Simulator SFT.
 
+### 2.4 `--training-files-only` and image deduplication
+
+`wire_trace.jsonl` and captured Calls store each image once per sample under `blobs/<sha256>.<subtype>` and reference it with `data:<mime>;base64,roller-blob:<sha256>.<subtype>`, restoring the original data URIs when read.
+
+`roller collect --training-files-only` (`training_files_only: true` in bench YAML configs) keeps only the files required for training once a sample completes and is graded: `trace_SFT.json` or `sft_segments/`, `token_ids.jsonl`, `info.json`, and `score.json`, with SFT images deduplicated once per run under the run directory's `blobs/`. Native `trace.jsonl`, `trace_ACTF.json`, `capture/`, and `wire_trace.jsonl` are removed after compaction windows are built, and run-level `sft.jsonl` is omitted. `roller export --format sft`, `--format xtuner`, and `--format tokens`, `--resume`, and `roller bench report` work normally; failed or unscored samples keep all files for `--resume`.
+
 ## 3. Data path from a run to a training set
 
 A trajectory is produced in this order:
@@ -475,10 +481,8 @@ of one sample:
 | --- | --- |
 | OpenClaw | The native session `trace.jsonl`. Its session header gets `harness: "openclaw"`, the session ID `<harness>-<model>/<index>_<task>`, the session name `<task> · <model>`, and a `roller` object with the run, sample path, task, status, and score. Every other line is unchanged |
 | Codex, Claude Code | The native session `trace.jsonl`, unchanged |
-| Hermes | A session converted from ACTF. The Git version of Roller writes one session in the format of `hermes sessions export` instead, built from the Hermes journal: `id`, `source`, `model`, `system_prompt`, `started_at`, `ended_at`, `message_count`, `tool_call_count` and the journaled `messages`, from before Hermes compressed its history, with the same `harness`, `name` and `roller` fields as the OpenClaw header |
-| OpenCode, DeepSeek, Pi | A session converted from ACTF. When ACTF is unavailable, OpenCode and DeepSeek exports keep the native journal if it exists |
-
-The Git version installs with `pip install git+https://github.com/Valen-Team/Roller.git`.
+| Hermes | One session in the format of `hermes sessions export`, built from the Hermes journal: `id`, `source`, `model`, `system_prompt`, `started_at`, `ended_at`, `message_count`, `tool_call_count` and the journaled `messages` from before Hermes compressed its history, with the same `harness`, `name` and `roller` fields as the OpenClaw header |
+| OpenCode, DeepSeek, Pi, Stirrup | A session converted from ACTF. When ACTF is unavailable, OpenCode and DeepSeek exports keep the native journal if it exists |
 
 A converted session follows Pi's
 [session format](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/session-format.md),
@@ -732,7 +736,7 @@ Full wire shows the semantic JSON forwarded to the model API, not the Harness re
 Claude Code full wire saves the Anthropic `/v1/messages` request `system`,
 `messages`, `tools`, thinking/output config, and sampling parameters. Roller
 does not rewrite Claude Code message history. The transport-only `beta=true`
-query and `anthropic-beta` header added by Claude Code 2.1.222 are removed
+query and `anthropic-beta` header added by Claude Code 2.1.332 are removed
 before forwarding. Full wire keeps the original target in `path`, records the
 actual target in `upstream_path`, and records only the removed header names in
 `dropped_request_headers`.

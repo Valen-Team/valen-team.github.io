@@ -26,14 +26,14 @@ The Hermes Harness does not currently accept images or video directly in task me
 Pull the prebuilt image and give it the name Roller uses by default:
 
 ```bash
-docker pull ghcr.io/valen-team/roller-hermes:d15ed4445207
-docker tag ghcr.io/valen-team/roller-hermes:d15ed4445207 roller-hermes:d15ed4445207
+docker pull ghcr.io/valen-team/roller-hermes:8fc037444731
+docker tag ghcr.io/valen-team/roller-hermes:8fc037444731 roller-hermes:8fc037444731
 ```
 
 The prebuilt image is `linux/amd64`. To build the image yourself instead, run this from the Roller repository root:
 
 ```bash
-docker build -t roller-hermes:d15ed4445207 docker/hermes
+docker build -t roller-hermes:8fc037444731 docker/hermes
 ```
 
 The image contains Hermes and its Python dependencies. The host does not need a separate Hermes installation or gateway. After the build, configure the API address, API key, and model ID in section 3.
@@ -65,7 +65,7 @@ roller collect \
   --model model-id \
   --api-base https://api.example.com/v1 \
   --api-key-env ROLLER_HERMES_KEY \
-  --docker-image roller-hermes:d15ed4445207 \
+  --docker-image roller-hermes:8fc037444731 \
   --limit 1 \
   --output runs \
   --run-name hermes-demo
@@ -77,7 +77,7 @@ This table lists Hermes-specific runtime flags only. See section 3 for API addre
 
 | Option | Default / behavior |
 | --- | --- |
-| `--hermes-image` | Takes precedence over the shared `--docker-image`. If neither is set, `ROLLER_HERMES_IMAGE` is used, with `roller-hermes:d15ed4445207` as the fallback |
+| `--hermes-image` | Takes precedence over the shared `--docker-image`. If neither is set, `ROLLER_HERMES_IMAGE` is used, with `roller-hermes:8fc037444731` as the fallback |
 | `--hermes-context-length` | Optional context window override, at least 64000 tokens |
 | `--hermes-max-iterations` | `12` model iterations per user turn. The total task timeout also applies |
 | `--hermes-vision` / `--no-hermes-vision` | Enables `vision_analyze` and declares that the selected model accepts image input. Enabled by default |

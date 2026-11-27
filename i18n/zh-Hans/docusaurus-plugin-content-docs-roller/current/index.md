@@ -45,13 +45,27 @@ Roller 需要 Python 3.10+。项目目前使用 Task schema <code>roller.task/v1
 | --- | --- | --- |
 | OpenClaw（默认） | OpenAI Responses 或 Chat Completions | 自定义/开源模型、多模态输入和动态 User Simulator |
 | Codex | Responses | Codex CLI 工具轨迹 |
-| Claude Code | Anthropic <code>/v1/messages</code> | Claude Code 工具和 native thinking |
+| Claude Code | Anthropic <code>/v1/messages</code> | Claude Code 工具、native thinking 和远程沙箱 |
 | Hermes | OpenAI Chat Completions | 原生请求与工具消息轨迹 |
 | OpenCode | OpenAI Chat Completions | 原生 CLI session 和文件工具 |
-| DeepSeek Harness | DeepSeek Chat Completions | 原生 SDK session 和持久 Bash |
+| DeepSeek Harness | DeepSeek Chat Completions | 原生 SDK session、持久 Bash 和 E2B 沙箱 |
 | Pi Agent | OpenAI Chat Completions | 原生 AgentSession 和编程工具 |
+| Stirrup | OpenAI Chat Completions | 宿主机 Agent 循环（`code_exec`、`view_image`、`finish`），配合离线容器或远程沙箱 |
 
-七种 Harness 使用相同的 Task、Sample、轨迹和 SFT 格式，也共用 Viewer、重试和 Resume 流程。它们的镜像、API、工具和 reasoning 参数不同。
+八种 Harness 使用相同的 Task、Sample、轨迹和 SFT 格式，也共用 Viewer、重试和 Resume 流程。它们的镜像、API、工具和 reasoning 参数不同。
+
+### 能力矩阵
+
+| Harness | Docker | 远程沙箱 | User Simulator | `--capture-calls` 与 `--token-ids` | `roller import` | 预构建镜像 |
+| --- | --- | --- | --- | --- | --- | --- |
+| OpenClaw | 支持 | — | 支持 | 支持 | — | 上游（`ghcr.io/openclaw/openclaw:2026.11.10`） |
+| Codex | 支持 | — | 支持 | 支持（`--token-ids` 需 `--codex-chat-completions`） | 支持（`~/.codex`） | `ghcr.io/valen-team/roller-codex:0.172.0` |
+| Claude Code | 支持 | 支持（`--sandbox-provider`） | 支持 | 支持（`--token-ids` 需 `--claude-chat-completions`） | 支持（`~/.claude`） | 本地构建（`docker/claude-code`） |
+| Hermes | 支持 | — | 支持 | 支持 | — | `ghcr.io/valen-team/roller-hermes:8fc037444731` |
+| OpenCode | 支持 | — | 支持 | 支持 | — | `ghcr.io/valen-team/roller-opencode:1.19.6` |
+| DeepSeek Harness | 支持 | 仅 WildClawBench（`e2b` / `roller.sandbox_providers`） | 支持 | 支持 | — | `ghcr.io/valen-team/roller-deepseek:0.2.2rc2` |
+| Pi Agent | 支持 | — | 支持 | 支持 | — | `ghcr.io/valen-team/roller-pi:1.6.1` |
+| Stirrup | 支持 | 支持（`roller.sandbox_providers`） | — | 支持 | — | 基础镜像（`python:3.13-slim`） |
 
 ## 入门步骤
 

@@ -28,18 +28,18 @@ Before collection, prepare:
 - an OpenClaw Docker image.
 - the API endpoint and credentials required by the model service.
 
-Roller defaults to the pinned official stable image `ghcr.io/openclaw/openclaw:2026.7.1-2`, which includes
+Roller defaults to the pinned official stable image `ghcr.io/openclaw/openclaw:2026.11.10`, which includes
 OpenClaw, Node.js, and Python 3. Roller runs it without source changes or a derived image.
 Pull the pinned image when online:
 
 ```bash
-docker pull --platform linux/amd64 ghcr.io/openclaw/openclaw:2026.7.1-2
+docker pull --platform linux/amd64 ghcr.io/openclaw/openclaw:2026.11.10
 ```
 
 Alternatively, load an existing archive:
 
 ```bash
-docker load -i openclaw-2026.7.1-2-linux-amd64.tar.gz
+docker load -i openclaw-2026.11.10-linux-amd64.tar.gz
 ```
 
 Another image can be selected through a command-line option or environment variable:

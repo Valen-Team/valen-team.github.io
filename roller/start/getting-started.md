@@ -58,13 +58,13 @@ OpenClaw supports both OpenAI Responses and Chat Completions.
 Pull the pinned image online:
 
 ```bash
-docker pull ghcr.io/openclaw/openclaw:2026.7.1-2
+docker pull ghcr.io/openclaw/openclaw:2026.11.10
 ```
 
 Alternatively, load an existing archive:
 
 ```bash
-docker load -i /path/to/openclaw-2026.7.1-2-linux-amd64.tar.gz
+docker load -i /path/to/openclaw-2026.11.10-linux-amd64.tar.gz
 ```
 
 To use a custom image tag, pass it with `--docker-image` or set `ROLLER_OPENCLAW_IMAGE`.

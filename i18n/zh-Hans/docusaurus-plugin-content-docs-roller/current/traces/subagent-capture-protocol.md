@@ -158,5 +158,5 @@ Roller 在关闭 recorder 后发布文件哈希；文件缺失、被修改或引
 共享验收入口：`scripts/test_subagents_e2e.py --harness HARNESS ...`（七个 Harness 均可选择）。
 测试凭据仅从指定环境变量读取。
 
-OpenCode 原生接口依据：[固定版本的插件 hook 定义](https://github.com/anomalyco/opencode/blob/v1.18.30/packages/plugin/src/index.ts)、
-[task 工具元数据](https://github.com/anomalyco/opencode/blob/v1.18.30/packages/opencode/src/tool/task.ts)。
+OpenCode 原生接口依据：[固定版本的插件 hook 定义](https://github.com/anomalyco/opencode/blob/v1.19.6/packages/plugin/src/index.ts)、
+[task 工具元数据](https://github.com/anomalyco/opencode/blob/v1.19.6/packages/opencode/src/tool/task.ts)。

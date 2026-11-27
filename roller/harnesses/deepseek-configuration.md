@@ -6,7 +6,7 @@ title: "DeepSeek Harness guide"
 
 The DeepSeek Harness runs text and file tasks through the official DeepSeek Harness. It connects to a Chat Completions service with streaming, tool calls, and DeepSeek thinking fields. This guide follows the order needed for a first run: image, API, Harness-specific flags, sessions, and outputs.
 
-Roller currently pins the official [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 0.1.5rc1 and uses the `sdk-minimal` tool configuration, which provides Bash only. For Task fields, see [Task format reference](/roller/tasks/task-format/). For shared outputs, see [Trajectory output file guide](/roller/traces/trajectory-outputs/).
+Roller currently pins the official [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 0.2.2rc2 and uses the `sdk-minimal` tool configuration, which provides Bash only. For Task fields, see [Task format reference](/roller/tasks/task-format/). For shared outputs, see [Trajectory output file guide](/roller/traces/trajectory-outputs/).
 
 For a first run, complete sections 1 through 3 and run the example command. Read the later sections on Harness-specific flags, tool limits, and trajectories when those features are needed.
 
@@ -26,14 +26,14 @@ This tool configuration has no image viewer, so it is not suitable for tasks tha
 Pull the prebuilt image and give it the name Roller uses by default:
 
 ```bash
-docker pull ghcr.io/valen-team/roller-deepseek:0.1.5rc1
-docker tag ghcr.io/valen-team/roller-deepseek:0.1.5rc1 roller-deepseek:0.1.5rc1
+docker pull ghcr.io/valen-team/roller-deepseek:0.2.2rc2
+docker tag ghcr.io/valen-team/roller-deepseek:0.2.2rc2 roller-deepseek:0.2.2rc2
 ```
 
 The prebuilt image is `linux/amd64`. To build the image yourself instead, run this from the Roller repository root:
 
 ```bash
-docker build -t roller-deepseek:0.1.5rc1 docker/deepseek
+docker build -t roller-deepseek:0.2.2rc2 docker/deepseek
 ```
 
 The image contains the official SDK and runtime. The host does not need a separate DeepSeek Harness installation. After the build, configure the API address, API key, and model ID in section 3.
@@ -74,7 +74,7 @@ roller collect \
   --model model-id \
   --api-base https://api.example.com/v1 \
   --api-key-env ROLLER_DEEPSEEK_KEY \
-  --docker-image roller-deepseek:0.1.5rc1 \
+  --docker-image roller-deepseek:0.2.2rc2 \
   --limit 1 \
   --output runs \
   --run-name deepseek-demo
@@ -86,7 +86,7 @@ This table lists DeepSeek-specific runtime flags only. See section 3 for API add
 
 | Option | Default / behavior |
 | --- | --- |
-| `--deepseek-image` | Takes precedence over `--docker-image`. If neither is set, `ROLLER_DEEPSEEK_IMAGE` is used, with `roller-deepseek:0.1.5rc1` as the fallback |
+| `--deepseek-image` | Takes precedence over `--docker-image`. If neither is set, `ROLLER_DEEPSEEK_IMAGE` is used, with `roller-deepseek:0.2.2rc2` as the fallback |
 | `--deepseek-profile NAME` | `sdk-minimal` by default, which provides Bash only. `sdk` selects the full native profile with its file, search, and shell tools |
 | `--deepseek-permission-mode MODE` | Accepts `read-only`, `workspace-write`, or `danger-full-access`, and applies inside the task container only. When unset, `sdk-minimal` keeps its own mode and every other profile runs with `danger-full-access`, because the file sandbox those profiles default to has no backend in the container |
 | `--deepseek-input-modalities` | `text` by default. `text,image` declares that the model accepts images, which lets the `read_image` tool of the `sdk` profile send them. It does not add vision to the model service |

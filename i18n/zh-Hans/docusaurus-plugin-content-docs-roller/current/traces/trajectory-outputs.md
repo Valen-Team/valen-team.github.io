@@ -93,6 +93,12 @@ OpenClaw 默认的 `actf` wire 模式会临时捕获 tools schema，写入 ACTF/
 
 Run 级 `sft.jsonl` 只汇总根目录的 Task Agent，不混入 User Simulator 的 SFT。
 
+### 2.4 `--training-files-only` 与图片去重
+
+`wire_trace.jsonl` 和捕获的 Calls 在每个 sample 的 `blobs/<sha256>.<subtype>` 中只存储一次图片，并在请求体中以 `data:<mime>;base64,roller-blob:<sha256>.<subtype>` 引用，读取时自动还原为原始 data URI。
+
+`roller collect --training-files-only`（bench YAML 配置中为 `training_files_only: true`）在 sample 执行并完成判分后只保留训练所需文件：`trace_SFT.json` 或 `sft_segments/`、`token_ids.jsonl`、`info.json` 和 `score.json`，并将 SFT 图片在整个 run 目录的 `blobs/` 中去重存储一次。原生 `trace.jsonl`、`trace_ACTF.json`、`capture/` 和 `wire_trace.jsonl` 在切分完上下文窗口后删除，run 级 `sft.jsonl` 不再写出。`roller export --format sft`、`--format xtuner`、`--format tokens`、`--resume` 与 `roller bench report` 均可照常使用；失败或未评分的 sample 保留全部文件供 `--resume` 重跑。
+
 ## 3. 从运行到训练集的数据链路
 
 一条轨迹按以下顺序生成：
@@ -398,10 +404,8 @@ Hub 把 `traces/` 下的文件识别为
 | --- | --- |
 | OpenClaw | 原生会话 `trace.jsonl`。会话头写入 `harness: "openclaw"`、会话 ID `<harness>-<model>/<index>_<task>`、会话名称 `<task> · <model>`，以及包含 run、sample 路径、task、状态和分数的 `roller` 对象；其余各行保持不变 |
 | Codex、Claude Code | 原生会话 `trace.jsonl`，不做修改 |
-| Hermes | 从 ACTF 转换的会话。Roller 的 Git 版本改为由 Hermes journal 生成一个 `hermes sessions export` 格式的会话：`id`、`source`、`model`、`system_prompt`、`started_at`、`ended_at`、`message_count`、`tool_call_count`，以及 journal 记下的 `messages`（Hermes 压缩历史之前的全部消息），另带与 OpenClaw 会话头相同的 `harness`、`name` 和 `roller` 字段 |
-| OpenCode、DeepSeek、Pi | 从 ACTF 转换的会话。ACTF 缺失时，OpenCode 和 DeepSeek 会导出已有的原生 journal |
-
-Git 版本用 `pip install git+https://github.com/Valen-Team/Roller.git` 安装。
+| Hermes | 由 Hermes journal 生成的 `hermes sessions export` 格式会话：`id`、`source`、`model`、`system_prompt`、`started_at`、`ended_at`、`message_count`、`tool_call_count`，以及 journal 记下的 `messages`（Hermes 压缩历史之前的全部消息），另带与 OpenClaw 会话头相同的 `harness`、`name` 和 `roller` 字段 |
+| OpenCode、DeepSeek、Pi、Stirrup | 从 ACTF 转换的会话。ACTF 缺失时，OpenCode 和 DeepSeek 会导出已有的原生 journal |
 
 转换得到的会话采用 Pi 的
 [会话格式](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/session-format.md)
@@ -609,7 +613,7 @@ Full wire 展示实际转发给模型 API 的语义 JSON，而不是处理前的
 
 Claude Code full wire 保存 Anthropic `/v1/messages` request 的 `system`、`messages`、
 `tools`、thinking/output config 与 sampling 参数。Roller 不改写 Claude Code 的消息历史。
-Claude Code 2.1.222 追加的 transport-only `beta=true` query 和 `anthropic-beta` header
+Claude Code 2.1.332 追加的 transport-only `beta=true` query 和 `anthropic-beta` header
 会在转发前移除。Full wire 用 `path` 保留原始目标、用 `upstream_path` 记录实际目标，
 `dropped_request_headers` 仅记录被移除的 header 名。
 

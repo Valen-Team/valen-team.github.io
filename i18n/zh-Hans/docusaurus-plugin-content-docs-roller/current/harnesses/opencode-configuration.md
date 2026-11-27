@@ -6,7 +6,7 @@ title: "OpenCode Harness 指南"
 
 OpenCode Harness 用于通过 OpenCode Agent 执行需要读写文件、运行命令或查看图片的 task。该 Harness 连接支持流式响应和工具调用的 OpenAI Chat Completions 服务。本页按照镜像、API、专属参数、session 和轨迹的顺序介绍首次使用所需内容。
 
-Roller 当前固定使用 [OpenCode](https://opencode.ai/docs/cli/) 1.18.30。Task 字段见 [Task 格式参考](/roller/tasks/task-format/)，通用产物见 [轨迹产出文件指南](/roller/traces/trajectory-outputs/)。
+Roller 当前固定使用 [OpenCode](https://opencode.ai/docs/cli/) 1.19.6。Task 字段见 [Task 格式参考](/roller/tasks/task-format/)，通用产物见 [轨迹产出文件指南](/roller/traces/trajectory-outputs/)。
 
 首次使用时，请先完成第 1 至第 3 节并运行示例命令。后续章节介绍专属参数、session和轨迹，可在需要相应功能时查阅。
 
@@ -26,14 +26,14 @@ OpenCode Harness 适合以下场景：
 拉取预构建镜像，并标记为 Roller 默认使用的名称：
 
 ```bash
-docker pull ghcr.io/valen-team/roller-opencode:1.18.30
-docker tag ghcr.io/valen-team/roller-opencode:1.18.30 roller-opencode:1.18.30
+docker pull ghcr.io/valen-team/roller-opencode:1.19.6
+docker tag ghcr.io/valen-team/roller-opencode:1.19.6 roller-opencode:1.19.6
 ```
 
 预构建镜像的平台为 `linux/amd64`。如需自行构建，在 Roller 仓库根目录执行：
 
 ```bash
-docker build -t roller-opencode:1.18.30 docker/opencode
+docker build -t roller-opencode:1.19.6 docker/opencode
 ```
 
 镜像包含固定版本的 OpenCode 及其运行依赖。宿主机无需安装 Node.js、Bun 或 OpenCode。构建完成后，在第 3 节配置 API 地址、API Key 和模型 ID。
@@ -63,7 +63,7 @@ roller collect \
   --model model-id \
   --api-base https://api.example.com/v1 \
   --api-key-env ROLLER_OPENCODE_KEY \
-  --docker-image roller-opencode:1.18.30 \
+  --docker-image roller-opencode:1.19.6 \
   --limit 1 \
   --output runs \
   --run-name opencode-demo
@@ -75,7 +75,7 @@ roller collect \
 
 | 参数 | 默认值与行为 |
 | --- | --- |
-| `--opencode-image` | 优先于 `--docker-image`。两者均未设置时使用 `ROLLER_OPENCODE_IMAGE`，该变量也未设置时使用 `roller-opencode:1.18.30` |
+| `--opencode-image` | 优先于 `--docker-image`。两者均未设置时使用 `ROLLER_OPENCODE_IMAGE`，该变量也未设置时使用 `roller-opencode:1.19.6` |
 | `--opencode-max-steps` | SkillsBench 默认为 100，其他任务默认为 12，同时受整个 task 的超时限制 |
 | `--opencode-context-length` | 模型上下文窗口，默认 128000，至少 1024，按服务实际能力设置 |
 | `--opencode-output-tokens` | 每次模型请求的输出 token 上限。SkillsBench 默认为 32768，其他任务默认为 8192。设置小于上下文窗口的正数 |

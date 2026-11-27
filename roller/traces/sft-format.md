@@ -95,9 +95,10 @@ compacted sample unavailable rather than silently changing the model input.
 ### 1.1 Multimodal records
 
 When a user message or tool result carries an image that the ACTF layer captured
-losslessly as base64 bytes, the record additionally has a top-level `images` list. The image
-is not kept inline: its position in the message text is replaced by the reserved
-placeholder `<image>`, and the normalized data URI is appended to `images`:
+losslessly as base64 bytes, that message uses a standard OpenAI multimodal content
+list containing `text` and `image_url` blocks (with canonical `data:<mime>;base64,…`
+URIs). Text-only messages keep a plain string `content`, and no top-level `images`
+field is written:
 
 ```json
 {
@@ -119,28 +120,30 @@ placeholder `<image>`, and the normalized data URI is appended to `images`:
         }
       ]
     },
-    {"role": "tool", "tool_call_id": "call-1", "content": "Image size: 2x1\n<image>"},
+    {
+      "role": "tool",
+      "tool_call_id": "call-1",
+      "content": [
+        {"type": "text", "text": "Image size: 2x1"},
+        {"type": "image_url", "image_url": {"url": "data:image/png;base64,iVBORw0KGgo…"}}
+      ]
+    },
     {"role": "assistant", "reasoning_content": "", "content": "The chart…", "tool_calls": []}
   ],
-  "tools": [],
-  "images": ["data:image/png;base64,iVBORw0KGgo…"]
+  "tools": []
 }
 ```
 
 The following rules apply:
 
-- When `messages` is scanned from first to last, the Nth `<image>` placeholder
-  corresponds to `images[N-1]`; the placeholder count therefore always equals
-  `len(images)`.
-- `images` entries are complete `data:image/png|jpeg|webp|gif;base64,…` URIs;
-  raw base64 is never stored. Identical images are not deduplicated: the list
-  records the sequence of occurrences and is not a blob store.
-- Text-only records never contain an `images` key, so existing text-only data
+- Messages without images keep plain string `content`, so existing text-only data
   and consumers remain backward compatible.
-- Collision checks cover message content, reasoning, and tool-call arguments.
-  Because `<image>` is reserved, a record with images fails conversion when
-  source text already contains a literal `<image>` that cannot be distinguished
-  from a placeholder.
+- Image blocks store complete `data:image/png|jpeg|webp|gif;base64,…` URIs; raw
+  base64 is never stored.
+- Literal `<image>` text in prompts, reasoning, or tool outputs is preserved
+  without blocking SFT export.
+- `roller export --format sft` and `--format xtuner` still upgrade legacy on-disk
+  runs written with `<image>` placeholders and a top-level `images` list.
 
 ## 2. Message rules
 
@@ -218,6 +221,7 @@ Harness can invoke vision at runtime. Image inputs are handled as follows:
 | Hermes | Roller enables the pinned profile's `vision_analyze` toolset | Preserved |
 | DeepSeek | Text-oriented Bash profile | Image content is rejected explicitly |
 | Pi | `files.attach_images` or native `read` image result with image-capable model registration | Preserved |
+| Stirrup | `view_image` tool result | Preserved |
 
 An OpenCode image attachment that only carries a remote URL or path remains in
 ACTF but cannot form multimodal SFT, because export never reads files or
@@ -258,3 +262,17 @@ roller export RUN_DIR --format sft --min-score 0.5 --output training
 ```
 
 This rebuilds the datasets and indexes from samples, retaining scores at least 0.5 and excluding unscored samples. Without `--min-score`, collection and export retain successful, training-eligible samples even at zero score. Scores use the same benchmark adapter as `roller bench report`.
+
+## XTuner export
+
+`roller export RUN_DIR --format xtuner --output DIR` writes a single merged `xtuner.jsonl` (combining unsegmented rollouts and compaction segments) alongside a line-for-line `xtuner_index.jsonl`, and supports `--min-score`:
+
+```bash
+roller export runs/my-run --format xtuner --min-score 0.5 --output training-xtuner
+```
+
+Key transformations applied during XTuner export:
+
+- Images are extracted to `<output>/media/` with EXIF-oriented `image_wh` metadata (`--inline-images` keeps base64 data URIs inline).
+- `tool_calls[].function.arguments` JSON strings are parsed into JSON objects.
+- For compaction segments, `target_start_index` is translated into per-message `"loss": false` on earlier assistant turns.

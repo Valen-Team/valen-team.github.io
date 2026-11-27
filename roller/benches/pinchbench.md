@@ -25,7 +25,7 @@ and pulls the pinned `linux/amd64` OpenClaw image. For an existing checkout, it 
 commit without changing the data. The script prints the commit for experiment records and does
 not read or write API keys. To prepare the
 environment manually, clone <https://github.com/pinchbench/skill> and pull
-`ghcr.io/openclaw/openclaw:2026.7.1-2`.
+`ghcr.io/openclaw/openclaw:2026.11.10`.
 
 OpenClaw also requires a model configuration. Save the following as `example.models.json`, then
 replace the API URL, key, and model ID with the values from the model provider:

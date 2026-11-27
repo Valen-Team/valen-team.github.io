@@ -160,5 +160,5 @@ Cross-process resume, all nested/background combinations of the seven Harnesses,
 Shared acceptance entry point: `scripts/test_subagents_e2e.py --harness HARNESS ...` (all seven Harnesses can be selected).
 Test credentials are read only from the specified environment variables.
 
-Basis for the OpenCode native interface: [plugin hook definitions of the pinned version](https://github.com/anomalyco/opencode/blob/v1.18.30/packages/plugin/src/index.ts),
-[task tool metadata](https://github.com/anomalyco/opencode/blob/v1.18.30/packages/opencode/src/tool/task.ts).
+Basis for the OpenCode native interface: [plugin hook definitions of the pinned version](https://github.com/anomalyco/opencode/blob/v1.19.6/packages/plugin/src/index.ts),
+[task tool metadata](https://github.com/anomalyco/opencode/blob/v1.19.6/packages/opencode/src/tool/task.ts).

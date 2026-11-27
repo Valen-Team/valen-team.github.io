@@ -28,20 +28,20 @@ Task 消息目前不能直接包含图片内容块。图片须先通过 `files.i
 - OpenClaw Docker 镜像。
 - 模型服务所需的 API 地址与凭证。
 
-Roller 默认使用固定版本的官方稳定镜像 `ghcr.io/openclaw/openclaw:2026.7.1-2`，其中包含
+Roller 默认使用固定版本的官方稳定镜像 `ghcr.io/openclaw/openclaw:2026.11.10`，其中包含
 OpenClaw、Node.js 与 Python 3。Roller 直接运行该镜像，无需修改 OpenClaw 源码或构建
 派生镜像。
 
 可以在线拉取固定版本镜像：
 
 ```bash
-docker pull --platform linux/amd64 ghcr.io/openclaw/openclaw:2026.7.1-2
+docker pull --platform linux/amd64 ghcr.io/openclaw/openclaw:2026.11.10
 ```
 
 也可以加载已有归档：
 
 ```bash
-docker load -i openclaw-2026.7.1-2-linux-amd64.tar.gz
+docker load -i openclaw-2026.11.10-linux-amd64.tar.gz
 ```
 
 其他镜像仍可通过参数或环境变量指定：

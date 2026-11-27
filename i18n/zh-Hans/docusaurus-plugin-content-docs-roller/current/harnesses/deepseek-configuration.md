@@ -6,7 +6,7 @@ title: "DeepSeek Harness 指南"
 
 DeepSeek Harness 用于通过官方 DeepSeek Harness 运行文本和文件类 task。该 Harness 连接支持流式响应、工具调用和 DeepSeek thinking 字段的 Chat Completions 服务。本页按照镜像、API、专属参数、session 和轨迹的顺序介绍首次使用所需内容。
 
-Roller 当前固定使用官方 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 0.1.5rc1，并使用只提供 Bash 的 `sdk-minimal` 工具配置。Task 字段见 [Task 格式参考](/roller/tasks/task-format/)，通用产物见 [轨迹产出文件指南](/roller/traces/trajectory-outputs/)。
+Roller 当前固定使用官方 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 0.2.2rc2，并使用只提供 Bash 的 `sdk-minimal` 工具配置。Task 字段见 [Task 格式参考](/roller/tasks/task-format/)，通用产物见 [轨迹产出文件指南](/roller/traces/trajectory-outputs/)。
 
 首次使用时，请先完成第 1 至第 3 节并运行示例命令。后续章节介绍专属参数、工具限制和轨迹，可在需要相应功能时查阅。
 
@@ -26,14 +26,14 @@ DeepSeek Harness 适合以下场景：
 拉取预构建镜像，并标记为 Roller 默认使用的名称：
 
 ```bash
-docker pull ghcr.io/valen-team/roller-deepseek:0.1.5rc1
-docker tag ghcr.io/valen-team/roller-deepseek:0.1.5rc1 roller-deepseek:0.1.5rc1
+docker pull ghcr.io/valen-team/roller-deepseek:0.2.2rc2
+docker tag ghcr.io/valen-team/roller-deepseek:0.2.2rc2 roller-deepseek:0.2.2rc2
 ```
 
 预构建镜像的平台为 `linux/amd64`。如需自行构建，在 Roller 仓库根目录执行：
 
 ```bash
-docker build -t roller-deepseek:0.1.5rc1 docker/deepseek
+docker build -t roller-deepseek:0.2.2rc2 docker/deepseek
 ```
 
 镜像包含官方 SDK 和运行时。宿主机无需另外安装 DeepSeek Harness。构建完成后，在第 3 节配置 API 地址、API Key 和模型 ID。
@@ -73,7 +73,7 @@ roller collect \
   --model model-id \
   --api-base https://api.example.com/v1 \
   --api-key-env ROLLER_DEEPSEEK_KEY \
-  --docker-image roller-deepseek:0.1.5rc1 \
+  --docker-image roller-deepseek:0.2.2rc2 \
   --limit 1 \
   --output runs \
   --run-name deepseek-demo
@@ -85,7 +85,7 @@ roller collect \
 
 | 参数 | 默认值与行为 |
 | --- | --- |
-| `--deepseek-image` | 优先于 `--docker-image`。两者均未设置时使用 `ROLLER_DEEPSEEK_IMAGE`，该变量也未设置时使用 `roller-deepseek:0.1.5rc1` |
+| `--deepseek-image` | 优先于 `--docker-image`。两者均未设置时使用 `ROLLER_DEEPSEEK_IMAGE`，该变量也未设置时使用 `roller-deepseek:0.2.2rc2` |
 | `--deepseek-profile NAME` | 默认 `sdk-minimal`，仅提供 Bash。`sdk` 选择完整的原生 profile，提供文件、搜索和 shell 工具 |
 | `--deepseek-permission-mode MODE` | 可选 `read-only`、`workspace-write` 或 `danger-full-access`，仅作用于 task 容器内部。不设置时，`sdk-minimal` 使用自身的权限模式，其他 profile 使用 `danger-full-access`，因为这些 profile 默认的文件沙箱在容器内没有可用后端 |
 | `--deepseek-input-modalities` | 默认 `text`。`text,image` 声明模型接受图片，`sdk` profile 的 `read_image` 工具由此可以把图片发给模型。该参数不会让模型服务获得视觉能力 |

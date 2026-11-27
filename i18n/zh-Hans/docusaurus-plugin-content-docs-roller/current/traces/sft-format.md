@@ -107,23 +107,26 @@ Roller 不会静默改写模型输入。
         }
       ]
     },
-    {"role": "tool", "tool_call_id": "call-1", "content": "Image size: 2x1\n<image>"},
+    {
+      "role": "tool",
+      "tool_call_id": "call-1",
+      "content": [
+        {"type": "text", "text": "Image size: 2x1"},
+        {"type": "image_url", "image_url": {"url": "data:image/png;base64,iVBORw0KGgo…"}}
+      ]
+    },
     {"role": "assistant", "reasoning_content": "", "content": "图表内容是……", "tool_calls": []}
   ],
-  "tools": [],
-  "images": ["data:image/png;base64,iVBORw0KGgo…"]
+  "tools": []
 }
 ```
 
 约定如下：
 
-- 从前到后扫描 `messages`，第 N 个 `<image>` 占位符对应 `images[N-1]`，因此占位符
-  数量恒等于 `len(images)`。
-- `images` 元素是完整的 `data:image/png|jpeg|webp|gif;base64,…` URI，不保存裸
-  base64。相同图片不去重：列表记录图片的出现顺序，并非 blob 存储。
-- 纯文本 record 始终不包含 `images` 键，因此现有纯文本数据和消费方保持向后兼容。
-- 冲突检查覆盖消息正文、reasoning 和工具调用参数。由于 `<image>` 是保留占位符，含图片的 record 若源文本中已出现无法与占位符区分的字面
-  `<image>`，则转换失败。
+- 纯文本消息保持字符串形式的 `content`，不写入顶层 `images` 键，现有纯文本消费方保持向后兼容。
+- 含图片的消息使用标准 OpenAI 多模态内容列表（`text` 和 `image_url` 块），其中 `image_url.url` 为规范化的 `data:image/png|jpeg|webp|gif;base64,…` URI。
+- 源文本、reasoning 或工具输出中出现的字面 `<image>` 会原样保留，不会阻断 SFT 导出。
+- `roller export --format sft` 和 `--format xtuner` 仍兼容并自动升级旧版磁盘上的 `<image>` + 顶层 `images` 格式 run。
 
 ## 2. Message 规则
 
@@ -192,6 +195,7 @@ Roller 不会静默删除内容。转换器本身不读取文件，也不访问
 | Hermes | Roller 为固定 profile 启用 `vision_analyze` 工具集 | 保留 |
 | DeepSeek | 面向文本的 Bash profile | 显式拒绝 image 内容 |
 | Pi | `files.attach_images` 或 `read` 原生图片结果，并将所选模型注册为支持图片 | 保留 |
+| Stirrup | `view_image` 工具返回的图片结果 | 保留 |
 
 OpenCode 图片附件若只有远程 URL 或文件路径，仍会保留在 ACTF 中，但无法生成多模态
 SFT，因为导出过程不读取文件，也不访问网络。该 sample 保留 raw/ACTF，并将 SFT 记录为不可用。
@@ -229,3 +233,17 @@ roller export RUN_DIR --format sft --min-score 0.5 --output training
 ```
 
 该命令从样本重建数据集及索引，仅保留得分至少 0.5 的样本，排除未评分样本。不指定 `--min-score` 时，采集和导出仍保留成功且符合训练条件的零分样本。得分由 `roller bench report` 使用的同一 benchmark adapter 计算。
+
+## XTuner 导出
+
+`roller export RUN_DIR --format xtuner --output DIR` 将未分段轨迹和上下文压缩分段合并导出为单个 `xtuner.jsonl`，并写出逐行对应的 `xtuner_index.jsonl`，支持 `--min-score`：
+
+```bash
+roller export runs/my-run --format xtuner --min-score 0.5 --output training-xtuner
+```
+
+XTuner 导出包含以下转换：
+
+- 将图片提取到 `<output>/media/` 并记录按 EXIF 方向校正的 `image_wh` 元数据（传入 `--inline-images` 则保留内联 base64 data URI）。
+- 将 `tool_calls[].function.arguments` 的 JSON 字符串解析为对象。
+- 对上下文压缩分段，将 `target_start_index` 转换为前序 assistant 轮次上的 `"loss": false`。

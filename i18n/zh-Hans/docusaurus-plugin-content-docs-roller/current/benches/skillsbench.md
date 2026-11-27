@@ -37,7 +37,7 @@ roller collect --bench skillsbench --bench-root "$SKILLSBENCH_ROOT" \
 ```
 
 `prepare-skillsbench.sh` 接受任意持久化目录。目录不存在时，脚本下载 v1.1；目录已存在时，
-脚本仅校验 commit，不改动数据。脚本还会构建 `roller-opencode:1.18.30`，且不会读取或写入
+脚本仅校验 commit，不改动数据。脚本还会构建 `roller-opencode:1.19.6`，且不会读取或写入
 API key。如需手工准备，请检出 SkillsBench 的 `v1.1` tag，再构建
 `docker/opencode`。
 

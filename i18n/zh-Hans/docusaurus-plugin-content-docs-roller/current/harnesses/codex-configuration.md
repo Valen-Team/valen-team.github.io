@@ -6,7 +6,7 @@ title: "Codex Harness 指南"
 
 Codex Harness 用于通过 Codex CLI 执行需要终端、文件或图片工具的 task。它连接支持 Responses API 的模型服务。本页按照镜像、API、专属参数、session 和轨迹的顺序介绍首次使用所需内容。
 
-Roller 当前固定使用 Codex 0.149.0。Task 字段见 [Task 格式参考](/roller/tasks/task-format/)，通用产物见 [轨迹产出文件指南](/roller/traces/trajectory-outputs/)。
+Roller 当前固定使用 Codex 0.172.0。Task 字段见 [Task 格式参考](/roller/tasks/task-format/)，通用产物见 [轨迹产出文件指南](/roller/traces/trajectory-outputs/)。
 
 首次使用时，先完成第 1 至第 3 节并运行示例命令。后续的专属参数、Thinking 和轨迹说明可在需要相应功能时查阅。
 
@@ -26,14 +26,14 @@ Codex Harness 适用于以下场景：
 拉取预构建镜像，并标记为 Roller 默认使用的名称：
 
 ```bash
-docker pull ghcr.io/valen-team/roller-codex:0.149.0
-docker tag ghcr.io/valen-team/roller-codex:0.149.0 roller-codex:0.149.0
+docker pull ghcr.io/valen-team/roller-codex:0.172.0
+docker tag ghcr.io/valen-team/roller-codex:0.172.0 roller-codex:0.172.0
 ```
 
 预构建镜像的平台为 `linux/amd64`。本节其余部分说明如何自行构建。
 
 Roller 使用 [`docker/codex/Dockerfile`](https://github.com/Valen-Team/Roller/blob/main/docker/codex/Dockerfile)，基础镜像为
-`node:22-bookworm-slim`，默认固定安装 `@openai/codex@0.149.0`。镜像还包含 Git、ripgrep、
+`node:22-bookworm-slim`，默认固定安装 `@openai/codex@0.172.0`。镜像还包含 Git、ripgrep、
 Python、curl、jq、SSH client 等常用 task 工具。
 
 在线环境：
@@ -42,9 +42,9 @@ Python、curl、jq、SSH client 等常用 task 工具。
 docker pull --platform linux/amd64 node:22-bookworm-slim
 docker build \
   --platform linux/amd64 \
-  --build-arg CODEX_VERSION=0.149.0 \
+  --build-arg CODEX_VERSION=0.172.0 \
   -f docker/codex/Dockerfile \
-  -t roller-codex:0.149.0 \
+  -t roller-codex:0.172.0 \
   .
 ```
 
@@ -54,9 +54,9 @@ docker build \
 docker load -i node-22-bookworm-slim-linux-amd64.tar.gz
 docker build \
   --platform linux/amd64 \
-  --build-arg CODEX_VERSION=0.149.0 \
+  --build-arg CODEX_VERSION=0.172.0 \
   -f docker/codex/Dockerfile \
-  -t roller-codex:0.149.0 \
+  -t roller-codex:0.172.0 \
   .
 ```
 
@@ -68,32 +68,32 @@ Dockerfile：
 ```bash
 docker build \
   --platform linux/amd64 \
-  --build-arg CODEX_VERSION=0.149.0 \
+  --build-arg CODEX_VERSION=0.172.0 \
   --build-arg DEBIAN_MIRROR=http://mirrors.tuna.tsinghua.edu.cn/debian \
   --build-arg DEBIAN_SECURITY_MIRROR=http://mirrors.tuna.tsinghua.edu.cn/debian-security \
   -f docker/codex/Dockerfile \
-  -t roller-codex:0.149.0 \
+  -t roller-codex:0.172.0 \
   .
 ```
 
 验证：
 
 ```bash
-docker run --rm roller-codex:0.149.0 codex --version
+docker run --rm roller-codex:0.172.0 codex --version
 ```
 
 若构建机与采集机不是同一个 Docker daemon，可导出镜像后在目标 worker 加载：
 
 ```bash
-docker save -o roller-codex-0.149.0-linux-amd64.tar roller-codex:0.149.0
-docker load -i roller-codex-0.149.0-linux-amd64.tar
+docker save -o roller-codex-0.172.0-linux-amd64.tar roller-codex:0.172.0
+docker load -i roller-codex-0.172.0-linux-amd64.tar
 ```
 
 可通过 CLI 参数或环境变量选择其他已构建的镜像：
 
 ```bash
-export ROLLER_CODEX_IMAGE=roller-codex:0.149.0
-# 或 roller collect ... --docker-image roller-codex:0.149.0
+export ROLLER_CODEX_IMAGE=roller-codex:0.172.0
+# 或 roller collect ... --docker-image roller-codex:0.172.0
 ```
 
 正式采集时不得使用会自动变化的 `@openai/codex@latest`。Roller 会将实际使用的
@@ -120,7 +120,7 @@ roller collect \
   --model model-id \
   --api-base https://api.example.com/v1 \
   --api-key-env ROLLER_CODEX_KEY \
-  --docker-image roller-codex:0.149.0 \
+  --docker-image roller-codex:0.172.0 \
   --limit 1 \
   --output runs \
   --run-name codex-demo
@@ -136,7 +136,7 @@ roller collect \
 
 | 参数 | 默认值 | 用途 |
 | --- | --- | --- |
-| `--docker-image` / `--codex-image` | `ROLLER_CODEX_IMAGE` 或 `roller-codex:0.149.0` | 覆盖 Codex 镜像 |
+| `--docker-image` / `--codex-image` | `ROLLER_CODEX_IMAGE` 或 `roller-codex:0.172.0` | 覆盖 Codex 镜像 |
 | `--codex-config` | 无 | 注入隔离容器的原生 `config.toml` |
 | `--codex-config-set KEY=VALUE` | 无 | 给每次 `codex exec` 追加 `-c KEY=VALUE`，可重复 |
 | `--reasoning-summary` | Codex 默认值 | `auto`、`concise`、`detailed` 或 `none` |
