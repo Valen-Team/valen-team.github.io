@@ -34,7 +34,7 @@ title: "轨迹产出文件指南"
 
 OpenClaw 默认参数是 `--cache-trace --wire-trace actf --keep-thinking`；Codex 默认关闭 web
 search，并保留 native session 中实际可见的 reasoning content 或 summary；Claude
-Code 保留 native session 中的明文 thinking block。七种 Harness 成功 run 的主要结构相同：
+Code 保留 native session 中的明文 thinking block。八种 Harness 成功 run 的主要结构相同：
 
 ```text
 <output>/<run-name>/
@@ -203,7 +203,7 @@ Sample `info.json.trajectory.raw_schema` 会分别标记 `openclaw-session-jsonl
 - 适合追查上游字段、事件顺序和转换问题；
 - 结构属于 Harness，不作为稳定训练 schema；
 - 不能单独用于验证 context compaction、tool-result pruning 或 provider 适配后的真实
-  请求；七种 Harness 都应使用 `--wire-trace full`；
+  请求；八种 Harness 都应使用 `--wire-trace full`；
 - Chat Completions 返回的 `reasoning`/`reasoning_text` 在进入 OpenClaw 前可能被等价规范化
   为 `reasoning_content`，以保证后续轮次重放；thinking 文本不变，但字段签名和上游 HTTP
   响应不再是逐字对应关系；
@@ -223,7 +223,7 @@ ACTF 顶层保存 `schema_version`、`system_prompt`、完整 `tools`、`steps` 
 - `observation`：该次调用之后的工具结果；
 - `metric`、开始/结束时间和 stop reason。
 
-七个 Harness 的 `metric.prompt_tokens_len` 都是该次调用整个 prompt 的 token 数，包含
+八个 Harness 的 `metric.prompt_tokens_len` 都是该次调用整个 prompt 的 token 数，包含
 缓存 token；`metric.completion_tokens_len` 是生成的 token 数。`cache_read_tokens` 和
 `cache_write_tokens` 是 prompt 中从缓存读取和写入缓存的部分，Codex 的字段名为
 `cache_read_tokens_len` 和 `cache_write_tokens_len`。sample `info.json` 的 `usage` 则把

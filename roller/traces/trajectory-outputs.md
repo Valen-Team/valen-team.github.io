@@ -37,7 +37,7 @@ OpenClaw defaults are `--cache-trace --wire-trace actf --keep-thinking`; Codex
 disables web search by default and keeps the reasoning content or summary that
 is visible in the native session; Claude Code keeps plaintext thinking
 blocks from the native session. The main layout of a successful run is the same
-for all seven Harnesses:
+for all eight Harnesses:
 
 ```text
 <output>/<run-name>/
@@ -233,7 +233,7 @@ Uses and limits:
 - Suitable for tracing upstream fields, event order, and conversion issues;
 - The structure belongs to the Harness and is not a stable training schema;
 - It cannot by itself verify context compaction, tool-result pruning, or the
-  real request after provider adaptation. All seven Harnesses should use
+  real request after provider adaptation. All eight Harnesses should use
   `--wire-trace full`;
 - Chat Completions `reasoning` / `reasoning_text` may be normalized to
   `reasoning_content` before they enter OpenClaw, so later turns can be replayed.
@@ -258,7 +258,7 @@ contains:
 - `observation`: tool results after those calls;
 - `metric`, start/end time, and stop reason.
 
-On all seven Harnesses, `metric.prompt_tokens_len` counts the whole prompt of the
+On all eight Harnesses, `metric.prompt_tokens_len` counts the whole prompt of the
 call, cached tokens included, and `metric.completion_tokens_len` counts the
 generated tokens. `cache_read_tokens` and `cache_write_tokens` give the part of
 the prompt read from and written to the prompt cache; Codex names them

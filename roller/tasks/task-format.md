@@ -336,7 +336,7 @@ the OpenClaw-only `adaptive` and `off`, which has no shared equivalent; other ef
 and validated by the selected model and endpoint. Claude Code 2.1.332 accepts
 `low/medium/high/xhigh/max/ultracode`; Roller maps `ultra` to `ultracode` and rejects
 `off/minimal/adaptive`. The available levels depend on the Harness version, model, and provider; each of them validates the value.
-The Task Agent can use OpenClaw, Codex, Claude Code, Hermes, OpenCode, DeepSeek, or Pi; the User Simulator can also select any of these seven Harnesses in its own `harness` field. Task Agent harnesses may differ between tasks; an explicit `--harness` overrides all of them. The Simulator Harness is selected independently.
+The Task Agent can use OpenClaw, Codex, Claude Code, Hermes, OpenCode, DeepSeek, Pi, or Stirrup; the User Simulator can also select any of these eight Harnesses in its own `harness` field. Task Agent harnesses may differ between tasks; an explicit `--harness` overrides all of them. The Simulator Harness is selected independently.
 
 ## 9. Path and format validation
 

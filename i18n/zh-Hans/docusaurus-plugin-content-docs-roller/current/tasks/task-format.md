@@ -335,7 +335,7 @@ OpenClaw 专用 `adaptive` 和没有通用等价语义的 `off`；其他档位�
 再由所选模型与服务端点验证。Claude Code 2.1.332 接受
 `low/medium/high/xhigh/max/ultracode`，Roller 将 `ultra` 映射为 `ultracode`，拒绝
 `off/minimal/adaptive`。最终可用档位仍由 Harness 版本、model 和 provider 共同校验。
-Task Agent 可以使用 OpenClaw、Codex、Claude Code、Hermes、OpenCode、DeepSeek 或 Pi；User Simulator 也可在其自身的 `harness` 字段中选择这七种 Harness。Task Agent harness 可按 task 混用，显式 `--harness` 会统一覆盖；Simulator 的 Harness 可独立选择。
+Task Agent 可以使用 OpenClaw、Codex、Claude Code、Hermes、OpenCode、DeepSeek、Pi 或 Stirrup；User Simulator 也可在其自身的 `harness` 字段中选择这八种 Harness。Task Agent harness 可按 task 混用，显式 `--harness` 会统一覆盖；Simulator 的 Harness 可独立选择。
 
 ## 9. 路径与格式校验
 
