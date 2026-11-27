@@ -48,7 +48,7 @@ roller collect \
   --run-name stirrup-demo
 ```
 
-## 4. Stirrup-specific flags
+## 4. Stirrup-specific flags {#stirrup-cli-flags}
 
 | Flag | Default | Purpose |
 | --- | --- | --- |

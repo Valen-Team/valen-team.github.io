@@ -68,7 +68,7 @@ These flags specify where Roller reads tasks and which model and Harness execute
 | `--tasks PATH` | Required | Selects a JSON or JSONL task list |
 | `--model MODEL` | task `model` | Selects a model and can be repeated for multiple models |
 | `--model-label LABEL` | Actual service model ID | Sets a safe local name for sample directories and containers without changing the upstream model ID, only for runs with one final model |
-| `--harness NAME` | task `harness` or `openclaw` | Selects `openclaw`, `codex`, `claude-code`, `hermes`, `opencode`, `deepseek`, or `pi` |
+| `--harness NAME` | task `harness` or `openclaw` | Selects `openclaw`, `codex`, `claude-code`, `hermes`, `opencode`, `deepseek`, `pi`, or `stirrup` |
 
 ### 3.2 Execution scale and task range
 
@@ -152,7 +152,7 @@ These flags select the image, Docker runtime settings, and model-service connect
 | Flag | Default | Purpose |
 | --- | --- | --- |
 | `--docker-image IMAGE` | Pinned image for the Harness | Overrides the Harness image for this run |
-| `--sandbox-provider NAME` | `docker` | Selects Docker, E2B, or an installed provider for single-agent DeepSeek WildClawBench runs |
+| `--sandbox-provider NAME` | `docker` | Selects Docker, E2B, or an installed `roller.sandbox_providers` provider; a remote provider runs a single Stirrup or Claude Code agent, or DeepSeek in WildClawBench |
 | `--sandbox-template TEMPLATE` | — | Template to use when a remote provider is selected |
 | `--container-user USER` | `0` | Sets the disposable container user, `image` keeps the image default |
 | `--docker-binary PATH` | `docker` | Selects the Docker CLI name or path |
@@ -183,7 +183,7 @@ off | minimal | low | medium | high | xhigh | adaptive | max | ultra
 
 Input `none` is normalized to `off`. Unsupported values fail before the rollout starts.
 
-For all seven Harnesses, provider/model support can be declared
+For all eight Harnesses, provider/model support can be declared
 without adding model-name rules to Roller:
 
 ```json
@@ -207,7 +207,7 @@ container or model request starts. Unmatched models retain provider-side
 validation, and Roller never silently substitutes another effort. The file's
 SHA-256 is included in the run lock.
 
-Profiles support all seven registered harnesses and validate both agent and
+Profiles support all eight registered harnesses and validate both agent and
 simulator. Unknown harnesses/fields and surrounding whitespace are rejected.
 Use logical Roller effort names (Claude `ultra`, not its wire value `ultracode`).
 OpenClaw matches the full `provider/model` name and resolves the endpoint from
@@ -244,6 +244,7 @@ Flags that belong to one Harness are documented in that Harness guide. Each guid
 | OpenCode | [OpenCode Harness guide](/roller/harnesses/opencode-configuration/#opencode-cli-flags) |
 | DeepSeek | [DeepSeek Harness guide](/roller/harnesses/deepseek-configuration/#deepseek-cli-flags) |
 | Pi Agent | [Pi Agent Harness guide](/roller/harnesses/pi-configuration/#pi-cli-flags) |
+| Stirrup | [Stirrup Harness guide](/roller/harnesses/stirrup-configuration/#stirrup-cli-flags) |
 
 For the tools each Harness exposes and the flags that select them, see [Harness tool availability](/roller/harnesses/tool-availability/).
 

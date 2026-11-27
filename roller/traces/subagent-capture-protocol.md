@@ -10,8 +10,8 @@ this protocol does not define training loss or reward.
 
 ## Enabling
 
-`roller collect ... --capture-calls` currently supports seven Harnesses: Claude Code,
-OpenCode, Codex, Hermes, OpenClaw, Pi, and DeepSeek. The original
+`roller collect ... --capture-calls` currently supports eight Harnesses: Claude Code,
+OpenCode, Codex, Hermes, OpenClaw, Pi, DeepSeek, and Stirrup. The original
 `--claude-capture-calls` is still kept. The option requires an explicitly specified API base, host networking, and wire trace enabled.
 It is off by default; OpenCode permits the native `task` subtask tool only when this option is on.
 The capture mode is written to the run configuration, and Resume cannot mix samples collected before and after it was enabled.
@@ -122,7 +122,7 @@ to view the call tree expanded by agent; the script does not generate additional
 Roller publishes the file hashes after closing the recorder; a missing file, a modified file, or a wrong reference prevents Resume
 reuse. Even when auxiliary log retention is turned off, the formal capture evidence is not cleaned up.
 
-## Execution boundaries of the seven Harnesses
+## Execution boundaries of the eight Harnesses
 
 - Claude Code: the native `-p` loop of the pinned version keeps processing background completion notifications; Roller does not append user messages to drive execution.
   Completion and the result entering context are confirmed through the notification's task/tool ID and the later response ID. An automatic notification is still user input in the main ACTF/SFT;
@@ -150,14 +150,16 @@ reuse. Even when auxiliary log retention is turned off, the formal capture evide
   to complete the actual input, and when they cannot be bound, linear SFT export is barred. The tool-ID normalization mapping comes from
   the actual output of the native resolver. Chat Completions, Responses, or Messages are decoded according to the actual request endpoint,
   and measured results state the model and protocol for each. A mismatch with the pinned image's hook raises an error.
-- Pi / DeepSeek: actual model I/O, the root participant, and integrity are recorded uniformly. Roller's built-in Pi configuration disables
-  extensions, and DeepSeek uses the sdk-minimal profile; neither has a native delegation tool. The manifest explicitly declares
+- Pi / DeepSeek / Stirrup: actual model I/O, the root participant, and integrity are recorded uniformly. Roller's built-in Pi configuration disables
+  extensions, DeepSeek uses the sdk-minimal profile, and the bundled Stirrup tool set is `code_exec`, `view_image`, and `finish`;
+  none of them has a native delegation tool. The manifest explicitly declares
   `not_available_in_bundled_profile`; subtask tests are not_applicable and are not counted as passed.
 
 Common acceptance covers a single subtask, parallelism, identical prompts, file sharing, tool errors, different tool configurations, and ordinary conversation.
-Cross-process resume, all nested/background combinations of the seven Harnesses, and compaction segment reconstruction have not yet been fully verified.
+Cross-process resume, all nested/background combinations of the eight Harnesses, and compaction segment reconstruction have not yet been fully verified.
 
-Shared acceptance entry point: `scripts/test_subagents_e2e.py --harness HARNESS ...` (all seven Harnesses can be selected).
+Shared acceptance entry point: `scripts/test_subagents_e2e.py --harness HARNESS ...` (Claude Code, OpenCode, Codex,
+Hermes, OpenClaw, Pi, and DeepSeek can be selected; Stirrup has no delegation tool to exercise).
 Test credentials are read only from the specified environment variables.
 
 Basis for the OpenCode native interface: [plugin hook definitions of the pinned version](https://github.com/anomalyco/opencode/blob/v1.19.6/packages/plugin/src/index.ts),

@@ -68,7 +68,7 @@ roller collect --tasks tasks.jsonl --model provider/model
 | `--tasks PATH` | 必填 | 指定 JSON 或 JSONL task 清单 |
 | `--model MODEL` | task `model` | 指定模型，可重复传入多个模型 |
 | `--model-label LABEL` | 实际服务模型 ID | 为 sample 目录和容器设置安全的本地名称，不改变发送给模型服务的 ID，只适用于最终只有一个模型的运行 |
-| `--harness NAME` | task `harness` 或 `openclaw` | 选择 `openclaw`、`codex`、`claude-code`、`hermes`、`opencode`、`deepseek` 或 `pi` |
+| `--harness NAME` | task `harness` 或 `openclaw` | 选择 `openclaw`、`codex`、`claude-code`、`hermes`、`opencode`、`deepseek`、`pi` 或 `stirrup` |
 
 ### 3.2 执行规模与任务范围
 
@@ -152,7 +152,7 @@ roller collect ... --retries 3 --retry-backoff 30
 | 参数 | 默认值 | 用途 |
 | --- | --- | --- |
 | `--docker-image IMAGE` | 对应 Harness 固定镜像 | 覆盖本次运行使用的 Harness 镜像 |
-| `--sandbox-provider NAME` | `docker` | 为单代理 DeepSeek WildClawBench 选择 Docker、E2B 或已安装的 provider |
+| `--sandbox-provider NAME` | `docker` | 选择 Docker、E2B 或已安装的 `roller.sandbox_providers` provider；远程 provider 运行单个 Stirrup 或 Claude Code 代理，或 WildClawBench 中的 DeepSeek |
 | `--sandbox-template TEMPLATE` | — | 选择远程 provider 时使用的模板 |
 | `--container-user USER` | `0` | 设置一次性容器用户，`image` 表示沿用镜像默认用户 |
 | `--docker-binary PATH` | `docker` | 指定 Docker CLI 的名称或路径 |
@@ -183,7 +183,7 @@ off | minimal | low | medium | high | xhigh | adaptive | max | ultra
 
 输入 `none` 会先规范化为 `off`。不受支持的值会在启动 rollout 前报错。
 
-七种 Harness 均可通过配置声明 provider/model 能力，无需在
+八种 Harness 均可通过配置声明 provider/model 能力，无需在
 Roller 代码中添加模型名规则：
 
 ```json
@@ -205,7 +205,7 @@ Roller 代码中添加模型名规则：
 档位会在启动容器和模型请求前失败。未命中的模型仍由 provider 校验，Roller 不会静默替换
 档位。文件 SHA-256 会写入 run lock。
 
-profile 支持注册的七种 harness，并检查主 Agent 与 user simulator。未知 harness、JSON 字段
+profile 支持注册的八种 harness，并检查主 Agent 与 user simulator。未知 harness、JSON 字段
 和 model/端点两侧的空白会报错。声明使用 Roller 的逻辑档位，而非协议转换后的字段值
 （例如 Claude 的 `ultra` 不写成 `ultracode`）。OpenClaw 的 model 写完整 `provider/model`，
 端点从该 provider 的 model-config `baseUrl` 解析。无法解析端点时只匹配不带端点的通用条目；
@@ -240,6 +240,7 @@ Wire trace 用于决定是否记录模型服务的实际 HTTP 请求，常规采
 | OpenCode | [OpenCode Harness 指南](/roller/harnesses/opencode-configuration/#opencode-cli-flags) |
 | DeepSeek | [DeepSeek Harness 指南](/roller/harnesses/deepseek-configuration/#deepseek-cli-flags) |
 | Pi Agent | [Pi Agent Harness 指南](/roller/harnesses/pi-configuration/#pi-cli-flags) |
+| Stirrup | [Stirrup Harness 指南](/roller/harnesses/stirrup-configuration/#stirrup-cli-flags) |
 
 各 Harness 开放的工具及对应的选择参数见 [Harness 工具开放情况](/roller/harnesses/tool-availability/)。
 

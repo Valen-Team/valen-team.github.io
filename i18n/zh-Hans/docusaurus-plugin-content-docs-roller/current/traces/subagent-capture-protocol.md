@@ -9,8 +9,8 @@ title: "Subagent 采集协议 v1"
 
 ## 开启
 
-`roller collect ... --capture-calls` 目前支持七个 Harness：Claude Code、
-OpenCode、Codex、Hermes、OpenClaw、Pi 和 DeepSeek。原有的
+`roller collect ... --capture-calls` 目前支持八个 Harness：Claude Code、
+OpenCode、Codex、Hermes、OpenClaw、Pi、DeepSeek 和 Stirrup。原有的
 `--claude-capture-calls` 仍保留。该选项要求显式指定 API base、使用 host 网络并开启 wire trace。
 默认不开启；OpenCode 仅在开启此选项时允许原生 `task` 子任务工具。
 采集模式写入 run 配置，Resume 时不能混用开启前后采集的 sample。
@@ -120,7 +120,7 @@ retained=false，以避免留下失效的文件引用。采集状态不因调试
 Roller 在关闭 recorder 后发布文件哈希；文件缺失、被修改或引用错误将阻止 Resume
 复用。即使关闭辅助日志保留，也不会清理 capture 正式证据。
 
-## 七个 Harness 的执行边界
+## 八个 Harness 的执行边界
 
 - Claude Code：固定版本 `-p` 原生循环会继续处理后台完成通知；Roller 不追加用户消息驱动执行。
   通过通知的 task/tool ID 和后续响应 ID 确认完成与结果进入上下文。自动通知在主 ACTF/SFT
@@ -148,14 +148,16 @@ Roller 在关闭 recorder 后发布文件哈希；文件缺失、被修改或引
   补全实际输入，无法绑定时禁止导出线性 SFT。工具 ID 规范化映射来自
   原生 resolver 的实际输出。支持按实际请求端点解码 Chat Completions、Responses 或 Messages，
   实测结果分别注明模型与协议。固定镜像的 hook 不匹配时会报错。
-- Pi / DeepSeek：统一记录实际模型 I/O、根参与者和完整性。Roller 内置的 Pi 配置禁用
-  扩展，DeepSeek 使用 sdk-minimal profile；二者没有原生委派工具。manifest 明确声明
+- Pi / DeepSeek / Stirrup：统一记录实际模型 I/O、根参与者和完整性。Roller 内置的 Pi 配置禁用
+  扩展，DeepSeek 使用 sdk-minimal profile，Stirrup 内置工具集为 `code_exec`、`view_image`
+  和 `finish`；三者都没有原生委派工具。manifest 明确声明
   `not_available_in_bundled_profile`，子任务测试为 not_applicable，不计为通过。
 
 共同验收覆盖单子任务、并行、相同 prompt、文件共享、工具错误、不同工具配置和普通对话。
-跨进程恢复、七个 Harness 的全部嵌套/后台组合和 compaction 分段重建仍未完成完整验证。
+跨进程恢复、八个 Harness 的全部嵌套/后台组合和 compaction 分段重建仍未完成完整验证。
 
-共享验收入口：`scripts/test_subagents_e2e.py --harness HARNESS ...`（七个 Harness 均可选择）。
+共享验收入口：`scripts/test_subagents_e2e.py --harness HARNESS ...`（可选择 Claude Code、OpenCode、Codex、
+Hermes、OpenClaw、Pi 和 DeepSeek；Stirrup 没有可演练的委派工具）。
 测试凭据仅从指定环境变量读取。
 
 OpenCode 原生接口依据：[固定版本的插件 hook 定义](https://github.com/anomalyco/opencode/blob/v1.19.6/packages/plugin/src/index.ts)、

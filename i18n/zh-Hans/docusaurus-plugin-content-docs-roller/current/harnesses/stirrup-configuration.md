@@ -48,7 +48,7 @@ roller collect \
   --run-name stirrup-demo
 ```
 
-## 4. Stirrup 专用参数
+## 4. Stirrup 专用参数 {#stirrup-cli-flags}
 
 | 参数 | 默认值 | 说明 |
 | --- | --- | --- |
